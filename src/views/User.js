@@ -27,7 +27,7 @@ class User extends Component {
     firstName: "",
     lastName: "",
     fatherName: "",
-    phoneNumber: "",
+    phoneNumber: "xyz",
     password: "xyz",
     academicDegree: "",
     workPlace: "",

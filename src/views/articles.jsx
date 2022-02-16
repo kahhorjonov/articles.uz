@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ArticleService from "../services/articleService";
+import { toast } from "react-toastify";
 import image from "../components/profile.png";
 
 import "../styles/navbar.css";
-import { toast } from "react-toastify";
 
 class Articles extends Component {
   state = {
