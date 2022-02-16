@@ -2,28 +2,35 @@
   padding-top: 20px;
   padding-right: 20px;
 }
+
 .oquvchilar .endt {
   text-align: end;
 }
+
 .btSucses button {
   font-size: 13px;
 }
+
 .oquvchilar .guruxlar a {
   text-decoration: none;
   font-size: 13px;
   color: blue;
   font-weight: 600;
 }
+
 .oquvchilar hr {
   height: 2px;
   background-color: #bdbec0;
 }
+
 .oquvchilar .guruxlar li {
   list-style: none;
 }
+
 .oquvchilar .guruxlar li {
   position: relative;
 }
+
 .oquvchilar .guruxlar .chiz::after {
   content: "";
   width: 0;

@@ -21,7 +21,6 @@ import {
 
 import mikeImg from "../assets/img/mike.jpg";
 import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
-import { toast } from "react-toastify";
 
 class User extends Component {
   state = {
@@ -29,7 +28,7 @@ class User extends Component {
     lastName: "",
     fatherName: "",
     phoneNumber: "",
-    password: "",
+    password: "xyz",
     academicDegree: "",
     workPlace: "",
     scientificWork: "",
@@ -207,7 +206,6 @@ class User extends Component {
                           <FormGroup>
                             <label>Parol</label>
                             <Input
-                              // defaultValue="Toshkent Shahar, Yunusobod tumani"
                               placeholder="parol"
                               type="text"
                               onChange={(e) =>

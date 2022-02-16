@@ -9,9 +9,9 @@ import Sidebar from "../components/Sidebar/Sidebar.js";
 
 import adminRoutes from "../routes";
 
-var ps;
-
 function Dashboard(props) {
+  let ps;
+
   const [backgroundColor, setBackgroundColor] = React.useState("black");
   const [activeColor, setActiveColor] = React.useState("info");
   const mainPanel = React.useRef();
