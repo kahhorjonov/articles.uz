@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "../styles/userEdit.css";
 // reactstrap components
 
-import mikeImg from "../assets/img/mike.jpg";
+// import mikeImg from "../assets/img/mike.jpg";
 import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
 
 import {

@@ -140,7 +140,7 @@ function Header(props) {
                   <span className="d-lg-none d-md-block">Some Actions</span>
                 </p>
               </DropdownToggle>
-              <DropdownMenu right>
+              <DropdownMenu end>
                 <DropdownItem tag="a">Action</DropdownItem>
                 <DropdownItem tag="a">Another Action</DropdownItem>
                 <DropdownItem tag="a">Something else here</DropdownItem>

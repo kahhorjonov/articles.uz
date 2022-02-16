@@ -1,9 +1,9 @@
 import React from "react";
+import NavbarHome from "./navbarHome";
 import img from "../profile.png";
 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "../../styles/homePage.css";
-import NavbarHome from "./navbarHome";
 
 class HomePage extends React.Component {
   render() {
