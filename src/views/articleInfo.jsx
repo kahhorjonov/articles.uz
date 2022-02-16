@@ -118,8 +118,6 @@ class ArticleInfo extends Component {
                         </FormGroup>
                       </Col>
                       <Col className="px-1" md="4">
-                      
-                       
                         <FormGroup>
                           <label>Category</label>
                           <Input
@@ -133,10 +131,6 @@ class ArticleInfo extends Component {
                             <option>Large</option>
                           </Input>
                         </FormGroup>
-
-                      
-                          
-                     
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
