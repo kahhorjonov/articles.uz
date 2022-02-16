@@ -1,4 +1,4 @@
-/* *,
+*,
 *::after,
 *::before {
   margin: 0;
@@ -14,7 +14,7 @@ body {
   width: 100%;
   font-size: 16px;
   box-sizing: border-box;
-} */
+}
 
 .switch {
   position: relative;
