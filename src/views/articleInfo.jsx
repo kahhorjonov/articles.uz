@@ -34,80 +34,75 @@ class ArticleInfo extends Component {
         <div className="content">
           <Row>
             <Col md="4">
-              <Card className="card-user">
-                <div className="image">
-                  <img src={damirBosnjak} alt="articlePhoto" />
-                </div>
-                <CardBody>
-                  <div className="author">
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                      {/* <img
-                      alt="..."
-                      className="avatar border-gray"
-                      src={require("assets/img/mike.jpg").default}
-                    /> */}
-                      {/* <h5 className="title">Article Haqida To'liq malumot</h5> */}
-                    </a>
-                    <p className="description">Avtor</p>
-                  </div>
-                  <p className="description text-center">
-                    Boshqa
-                    <br />
-                    Malumotlar <br />
-                    qo'shilishi mumkin
-                  </p>
-                </CardBody>
-                <CardFooter>
-                  <hr />
-                  <div className="button-container">
-                    <Row>
-                      <Col className="ml-auto" lg="3" md="6" xs="6">
-                        <h5>
-                          12 <br />
-                          <small>Files</small>
-                        </h5>
-                      </Col>
-                      <Col className="ml-auto mr-auto" lg="4" md="6" xs="6">
-                        <h5>
-                          2GB <br />
-                          <small>Used</small>
-                        </h5>
-                      </Col>
-                      <Col className="mr-auto" lg="3">
-                        <h5>
-                          24,6$ <br />
-                          <small>Spent</small>
-                        </h5>
-                      </Col>
-                    </Row>
-                  </div>
-                </CardFooter>
-              </Card>
               <Card>
-                <Table>
-                  <thead>
-                    <tr className="col-md-12">
-                      <th className="col-md-6">Admin Status</th>
-                      <th className="col-md-6">Data</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Osd</td>
-                      <td>2020-12-23</td>
-                    </tr>
-                    <tr>
-                      <td>Thornton</td>
-                      <td>2020-8-23</td>
-                    </tr>
-                    <tr>
-                      <td>the Bird</td>
-                      <td>2020-12-3</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <CardBody>
+                  <Table>
+                    <thead>
+                      <tr className="col-md-12">
+                        <th className="col-md-6">Admin Status</th>
+                        <th className="col-md-6">Data</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Osd</td>
+                        <td>2020-12-23</td>
+                      </tr>
+                      <tr>
+                        <td>Thornton</td>
+                        <td>2020-8-23</td>
+                      </tr>
+                      <tr>
+                        <td>the Bird</td>
+                        <td>2020-12-3</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </CardBody>
+              </Card>
+
+              <Card>
+                <CardBody>
+                  <Row>
+                    <Col md="6">
+                      <Form>
+                        <Input
+                          className="mb-3"
+                          style={{ height: "40px" }}
+                          type="select"
+                        >
+                          <option>Default Select</option>
+                          <option>Select</option>
+                          <option>Default</option>
+                        </Input>
+                      </Form>
+                    </Col>
+                    <Col md="6" className="mt-3">
+                      <a href="#" dowload>
+                        Download: <span>File</span>
+                      </a>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col md="12">
+                      <Label>discription</Label>
+                      <Input
+                        placeholder="discription.."
+                        style={{ height: "40px" }}
+                        type="text"
+                      />
+                    </Col>
+                    <Col md="12">
+                      <Button color="info" outline className="p-2">
+                        success
+                      </Button>
+                    </Col>
+                  </Row>
+                </CardBody>
               </Card>
             </Col>
+
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
@@ -116,44 +111,44 @@ class ArticleInfo extends Component {
                 <CardBody>
                   <Form>
                     <Row>
-                      <Col className="pr-1" md="5">
+                      <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>Title of Article</label>
-                          <Input
-                            defaultValue="Astranomiya asoslari"
-                            placeholder="Company"
-                            type="text"
-                          />
+                          <label>Title</label>
+                          <Input placeholder="Company" type="text" />
                         </FormGroup>
                       </Col>
-                      <Col className="px-1" md="3">
+                      <Col className="px-1" md="4">
+                      
+                       
                         <FormGroup>
                           <label>Category</label>
                           <Input
-                            defaultValue="Astranomiya"
-                            placeholder="Username"
-                            type="text"
-                            disabled
-                          />
+                            bsSize="lg"
+                            style={{ height: "40px" }}
+                            className="mb-3 border-radius"
+                            type="select"
+                          >
+                            <option>Large Select</option>
+                            <option>Select</option>
+                            <option>Large</option>
+                          </Input>
                         </FormGroup>
+
+                      
+                          
+                     
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label htmlFor="exampleInputEmail1">
-                            Email address (Sender)
-                          </label>
-                          <Input
-                            placeholder="Email"
-                            defaultValue={"akbarjon3028@gmail.com"}
-                            type="email"
-                          />
+                          <label htmlFor="exampleInputEmail1">Price</label>
+                          <Input placeholder="Price" type="number" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="pr-1" md="6">
+                      <Col className="pr-1" md="12">
                         <FormGroup>
-                          <label>First Name (Author)</label>
+                          <label>Author</label>
                           <Input
                             defaultValue="Akbarjon"
                             placeholder="Maqola jo'natuvchisi Ismi"
@@ -161,68 +156,66 @@ class ArticleInfo extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="6">
-                        <FormGroup>
-                          <label>Last Name (Author)</label>
-                          <Input
-                            defaultValue="Qoxorjonov"
-                            placeholder="Maqola jo'natuvchisi"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
                     </Row>
                     <Row>
-                      <Col md="12">
+                      <Col md="4">
                         <FormGroup>
-                          <label>Authors</label>
+                          <label>FirsName (Auther)</label>
                           <Input
                             defaultValue="Melbourne, Australia"
-                            placeholder="Home Address"
+                            placeholder="FirsName"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
-                    </Row>
-                    {/* <Row>
-                    <Col className="pr-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Melbourne"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Australia"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
-                      </FormGroup>
-                    </Col>
-                  </Row> */}
-                    <Row>
-                      <Col md="12">
+
+                      <Col md="4">
                         <FormGroup>
-                          <label>Maqola haqida izoh (optional)</label>
+                          <label>LastName</label>
                           <Input
-                            type="textarea"
-                            defaultValue="OTM lar uchun qo'llanma"
+                            defaultValue="Melbourne, Australia"
+                            placeholder="LastName"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col md="4">
+                        <FormGroup>
+                          <label>Phone</label>
+                          <Input
+                            defaultValue="1212"
+                            placeholder="Number"
+                            type="number"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
+
+                    <Row>
+                      <Col className="pr-1" md="6">
+                        <FormGroup>
+                          <label>Email</label>
+                          <Input
+                            defaultValue="Melbourne@gmail.com"
+                            placeholder="Email"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="px-1" md="6">
+                        <FormGroup>
+                          <label>Message</label>
+                          <Input
+                            defaultValue="Hello watsap ?"
+                            placeholder="Country"
+                            type="text"
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
                     <Row>
                       <div className="update updatess">
                         <div>
@@ -230,6 +223,9 @@ class ArticleInfo extends Component {
                             <input type="checkbox" />
                             <span className="slider round"></span>
                           </label>
+                        </div>
+                        <div>
+                          <Button color="info">Submit</Button>
                         </div>
 
                         <div>
