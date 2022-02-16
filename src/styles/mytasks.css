@@ -1,4 +1,4 @@
-/* *,
+*,
 *::after,
 *::before {
   margin: 0;
@@ -12,7 +12,7 @@ html {
 
 body {
   box-sizing: border-box !important;
-} */
+}
 
 .tebles {
   width: 100% !important;
