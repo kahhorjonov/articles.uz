@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { Component } from "react";
 // react plugin used to create charts
+
 import { Line, Pie } from "react-chartjs-2";
-// reactstrap components
+import { Chart, registerables } from "chart.js";
+
 import { toast } from "react-toastify";
+
 import {
   Card,
   CardHeader,
@@ -13,6 +16,9 @@ import {
   Row,
   Col,
 } from "reactstrap";
+
+Chart.register(...registerables);
+// reactstrap components
 
 class Dashboard extends Component {
   state = { data: {} };
