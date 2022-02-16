@@ -1,0 +1,112 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.bt button {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 9px;
+  font-weight: bolder;
+}
+
+.registerForm {
+  width: 100%;
+  padding-bottom: 20px;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-register {
+  margin-bottom: 15px;
+}
+
+.form-register input {
+  background-color: #f7f7f7;
+  width: 300px;
+  margin: auto;
+  height: 50px;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 19px;
+  margin-bottom: 20px;
+}
+.regs {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 170%;
+  color: #000000;
+}
+.form-register .butonss {
+  background-color: rgb(0, 0, 0);
+  width: 300px;
+  height: 50px;
+  margin: 0 !important;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 19px;
+  color: #ffffff !important;
+  margin-top: 20px !important;
+}
+.rever {
+  text-decoration: none;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 170%;
+  text-align: center;
+  color: #5a5a5a;
+}
+.rever:hover {
+  color: black;
+}
+.yes {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 170%;
+  text-align: center;
+  color: #5a5a5a;
+}
+.kirish {
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: SF Pro Display;
+  font-style: normal;
+}
+.kirish:hover {
+  color: black;
+}
+/* 
+@media (min-width: 575px) {
+  .registerForm{
+   
+   margin-top: 150px;
+  }
+} */

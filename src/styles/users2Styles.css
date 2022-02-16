@@ -1,0 +1,101 @@
+.oquvchilar2 {
+  padding-top: 20px;
+  padding-right: 20px;
+}
+.oquvchilar2 .btSucses2 {
+  position: absolute;
+  right: 15px;
+}
+.btSucses2 button {
+  font-size: 13px;
+}
+.oquvchilar2 .guruxlar2 a {
+  text-decoration: none;
+  font-size: 13px;
+  color: blue;
+  font-weight: 600;
+}
+.oquvchilar2 hr {
+  height: 2px;
+  background-color: #bdbec0;
+}
+.oquvchilar2 .guruxlar2 li {
+  list-style: none;
+}
+.oquvchilar2 .guruxlar2 li {
+  position: relative;
+}
+.oquvchilar2 .guruxlar2 .chiz2::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background-color: blue;
+  position: absolute;
+  transition: all 0.3s linear;
+  bottom: -12px;
+  left: 0;
+}
+
+.oquvchilar2 .guruxlar2 a:hover::after {
+  width: 100%;
+  background-color: blue;
+}
+
+/* Tables */
+
+/* users tables */
+.usersTables2 {
+  padding-top: 20px;
+}
+.usersTables2 .theades2 {
+  background-color: #f8f9fb;
+  height: 30px;
+  font-size: 14px;
+}
+.usersTables2 .tbodyes2 {
+  height: 40px;
+  font-size: 12px;
+}
+/* № */
+.usersTables2 .tbody td p:nth-child(1) {
+  width: 15px;
+}
+/* Num */
+.usersTables2 .tbodyes2 td:nth-child(1) {
+  width: 30px;
+}
+/* F I O */
+.usersTables2 .tbodyes2 td:nth-child(2) {
+  width: 200px;
+}
+/* ish joy  */
+.usersTables2 .tbodyes2 td:nth-child(3) {
+  width: 150px;
+}
+/* ish staji */
+.usersTables2 .tbodyes2 td:nth-child(4) {
+  width: 100px;
+}
+/* ilmiy daraja */
+.usersTables2 .tbodyes2 td:nth-child(5) {
+  width: 180px;
+}
+/* categorya */
+.usersTables2 .tbodyes2 td:nth-child(6) {
+  width: 115px;
+}
+/* tili */
+.usersTables2 .tbodyes2 td:nth-child(7) {
+  width: 60px;
+}
+/* password  */
+.usersTables2 .tbodyes2 td:nth-child(8) {
+  width: 100px;
+}
+/* maqolalar   */
+.usersTables2 .tbodyes2 td:nth-child(9) {
+  width: 60px;
+}
+.tbodyes2 .fatrashsh2 {
+  color: red;
+}

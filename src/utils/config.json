@@ -1,0 +1,4 @@
+{
+  "apiLocal": "http://192.168.100.27:8080/api",
+  "apiSwagger": "https://awertiu.herokuapp.com/api"
+}

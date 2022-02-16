@@ -1,0 +1,146 @@
+.oquvchilar {
+  padding-top: 20px;
+  padding-right: 20px;
+}
+.oquvchilar  .endt {
+ text-align: end;
+}
+.btSucses button {
+  font-size: 13px;
+}
+.oquvchilar .guruxlar a {
+  text-decoration: none;
+  font-size: 13px;
+  color: blue;
+  font-weight: 600;
+}
+.oquvchilar hr {
+  height: 2px;
+  background-color: #bdbec0;
+}
+.oquvchilar .guruxlar li {
+  list-style: none;
+}
+.oquvchilar .guruxlar li {
+  position: relative;
+}
+.oquvchilar .guruxlar .chiz::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background-color: blue;
+  position: absolute;
+  transition: all 0.3s linear;
+  bottom: -12px;
+  left: 0;
+}
+
+.oquvchilar .guruxlar a:hover::after {
+  width: 100%;
+  background-color: blue;
+}
+
+/* Selectlar */
+
+.selctlar .sle {
+  margin-top: 20px;
+}
+
+.selctlar select {
+  /* width: 200px; */
+  height: 30px;
+  font-size: 1.4rem;
+}
+.selctlar .ser {
+  margin-top: 20px;
+  /* margin-right: 40px; */
+}
+.selctlar .ser .ins {
+  width: 20rem;
+}
+.ser .input-group-text {
+  border-right: none;
+  background-color: white;
+  height: 30px;
+}
+.ser .input-group > input {
+  height: 30px;
+}
+
+/* users tables */
+.usersTables {
+  padding-top: 20px;
+}
+.usersTables .theades {
+  background-color: #f8f9fb;
+  height: 30px;
+  font-size: 14px;
+}
+.usersTables .tbodyes {
+  height: 30px;
+  /* font-size: 12px; */
+}
+
+/* № */
+/* .usersTables .theades th:nth-child(1) {
+  width: 15px;
+} */
+/* FIO */
+/* .usersTables .theades th:nth-child(2) {
+  width: 160px;
+} */
+
+/* Telfon */
+/* .usersTables .theades th:nth-child(3) {
+  width: 120px;
+} */
+/* email */
+/* .usersTables .theades th:nth-child(4) {
+  width: 150px;
+} */
+/* Ish joyi */
+/* .usersTables .theades th:nth-child(5) {
+  width: 140px;
+} */
+/* Ish Staji */
+/* .usersTables .theades th:nth-child(6) {
+  width: 70px;
+} */
+/* Ilmiy Darajasi */
+/* .usersTables .theades th:nth-child(7) {
+  width: 150px;
+} */
+/* Tili */
+/* .usersTables .theades th:nth-child(8) {
+  width: 50px;
+} */
+/* categorya */
+/* .usersTables .theades th:nth-child(9) {
+  width: 100px;
+} */
+/* active */
+/* .usersTables .theades th:nth-child(10) {
+  width: 65px;
+} */
+
+.tbodyes .fatrashsh {
+  color: red;
+}
+
+.iconSize {
+  font-size: 4rem;
+  color: red;
+  font-weight: bolder;
+  padding: 0;
+  margin: 0;
+}
+
+.removeBtn {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.modalCustomClass {
+  display: block !important;
+}

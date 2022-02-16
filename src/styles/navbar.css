@@ -1,0 +1,232 @@
+/* *,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 16px;
+  box-sizing: border-box;
+} */
+
+.box1 {
+  height: 100vh;
+  font-size: 1.7rem;
+  background-color: #3f4d67;
+  position: fixed;
+  color: #fff;
+}
+
+.navigation__navbar--image {
+  border-radius: 50%;
+  height: 20rem;
+}
+
+.navbar__user--name {
+  /* margin-top: 1rem; */
+  padding: 1rem;
+  /* text-align: center; */
+}
+
+/* box2       */
+
+.box2 {
+  width: 100%;
+  background-color: #f2f3f7;
+  padding: 0;
+  color: black;
+  border: 1px solid #edeef3;
+}
+
+.item {
+  width: 100%;
+  height: 50px;
+}
+.navv {
+  width: 100%;
+  height: 50px;
+  padding: 11px !important;
+}
+
+.nav-pills .navv.active {
+  background-color: #1ccacc !important;
+  color: white !important;
+}
+
+/* box 3*/
+
+.box3 {
+  background-color: #f6f7fb;
+  width: 100%;
+  height: 100vh;
+}
+
+.input {
+  margin: 0 auto;
+  width: 95%;
+  height: 30px;
+}
+
+.ArticNAme {
+  /*background-color: white!important;*/
+  overflow-wrap: break-word;
+  font-size: 14px;
+}
+
+.li {
+  margin-top: 5px;
+  background-color: white;
+}
+
+/*.tablis{*/
+/*  background-color: white;*/
+/*}*/
+
+.nav-item {
+  list-style: none;
+  color: white !important;
+}
+
+/* box4 */
+
+.box4 {
+  background-color: #f2f3f7;
+  width: 100%;
+  height: 100vh;
+}
+
+.div {
+  margin: 15px;
+}
+
+.bg {
+  background-color: #f6f7fb;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ebebec;
+}
+
+.bg2 {
+  background-color: white;
+}
+
+.images img {
+  border-radius: 50%;
+}
+
+.flex-column {
+  padding: 1rem;
+  font-size: 16px;
+}
+
+.flex-column:nth-child(2) {
+  font-size: 12px;
+}
+
+.article__div {
+  width: 100%;
+  font-size: 1.2rem;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  background-color: #1dc8ca;
+}
+
+/* Styel Chakbox */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-top: 10px;
+  margin-right: 30px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.qulf {
+  transform: translateY(12px);
+}
+
+.form-control .heightImportant {
+  height: 100% !important;
+}
+
+.navigation .badge1 {
+  border-radius: 50%;
+
+  position: absolute;
+  top: 345px;
+  right: 12px;
+}
+
+.navigation .badge2 {
+  height: 23px;
+  border-radius: 50%;
+}
+
+.activeNav {
+  background-color: #51cbce !important;
+  color: white !important;
+}
+
+.activeNav:hover {
+  background-color: #3cbec0 !important;
+  color: white !important;
+}

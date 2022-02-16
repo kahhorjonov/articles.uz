@@ -1,0 +1,194 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5% !important;
+}
+
+body {
+  box-sizing: border-box !important;
+}
+
+.tebles {
+  width: 100% !important;
+  height: auto !important;
+  border: 1px solid #dfe0e3 !important;
+}
+
+.teble-ramka {
+  margin-bottom: 0 !important;
+}
+
+.tr1 {
+  border: 1px solid #dfe0e3 !important;
+  height: 35px !important;
+  background-color: #f9fafc !important;
+  font-size: 13px !important;
+  padding-left: 7px !important;
+}
+/* .content .nav-pills {
+  font-size: 12px;
+} */
+/* .content .nav-item:nth-child(1) {
+  font-size: 8px;
+} */
+
+/* 
+.tr2 {
+  border-bottom: 1px solid #dfe0e3;
+  height: 30px;
+  background-color: white;
+  font-size: 13px;
+} */
+
+.tr3 {
+  border-bottom: 1px solid #dfe0e3 !important;
+  height: 30px !important;
+  background-color: #f9fafc !important;
+  display: flex !important;
+  align-content: center !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: gray !important;
+}
+
+.br1 {
+  width: 450px !important;
+  border-right: 1px solid #dfe0e3 !important;
+  padding-left: 10px !important;
+}
+
+.br1 p {
+  margin: 0 !important;
+  padding-top: 5px !important;
+}
+
+.br2 {
+  width: 150px !important;
+  border-right: 1px solid #dfe0e3 !important;
+}
+.content .navvs {
+  width: 100%;
+  padding: 14px 8px;
+}
+
+.br2 p {
+  margin: 0 !important;
+  padding-top: 5px !important;
+  padding-left: 10px !important;
+}
+
+.br3 {
+  width: 160px !important;
+  border-right: 1px solid #dfe0e3 !important;
+}
+
+.br3 p {
+  margin: 0 !important;
+  padding-top: 5px !important;
+  padding-left: 10px !important;
+}
+
+.br4 {
+  width: 170px !important;
+}
+
+.br4 p {
+  margin: 0 !important;
+  padding-top: 5px !important;
+  padding-left: 10px !important;
+}
+.row-tables {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row-tables1 {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.row-tables .form-control-file {
+  width: 91% !important;
+}
+
+.row-tables .form-control {
+  font-size: 9px !important;
+}
+
+.row-tables button {
+  width: 70px;
+  font-size: 9px;
+  padding: 6px;
+}
+
+/* TAbles */
+/* .table-striped {
+  font-size: 14px !important;
+} */
+/* 
+.td1 {
+  width: 449px !important;
+
+  padding-left: 7px !important;
+}
+.td2 {
+  width: 151px !important;
+
+  padding-left: 7px !important;
+}
+.td3 {
+  width: 159px !important;
+  padding-left: 7px !important;
+}
+
+.td4 {
+  width: 46.6rem !important;
+  padding-left: 7px !important;
+}
+
+.td5 {
+  width: 160px !important;
+} */
+/* 
+.tbs {
+  height: 46px !important;
+  display: flex !important;
+  background-color: #f9fafc !important;
+}
+.tbs .linkk {
+  text-decoration: none !important;
+}
+.bad {
+  border-radius: 7px !important;
+}
+
+.tbs2 {
+  height: 46px !important;
+  display: flex !important;
+}
+.tbs2 .linkk {
+  text-decoration: none !important;
+}
+
+.group-buttons {
+  padding-left: 15px !important;
+} */
+
+.activeNav {
+  background-color: #51cbce;
+  color: white;
+}
+
+.activeNav:hover {
+  background-color: #3cbec0;
+  color: white;
+}
