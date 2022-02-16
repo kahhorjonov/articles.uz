@@ -201,7 +201,7 @@ class Articles extends Component {
                                 // console.log(article);
                               }}
                             >
-                              <a data-toggle="pill">{article.titleArticle}</a>
+                              <a>{article.titleArticle}</a>
 
                               <a>Batafsil...</a>
                             </li>

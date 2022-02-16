@@ -103,6 +103,7 @@ body {
 
 .activeNav:hover {
   background-color: #3cbec0 !important;
+  color: white !important;
 }
 
 /* box4 */
