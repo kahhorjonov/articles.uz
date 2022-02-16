@@ -1,6 +1,5 @@
-import UserPage from "views/User.js";
-import Icons from "views/Icons.js";
-import ArticleForm from "components/common/articleForm";
+import UserPage from "./views/User.js";
+import ArticleForm from "./components/common/articleForm";
 
 var UserRoutes = [
   {
@@ -12,7 +11,7 @@ var UserRoutes = [
   },
 
   //   {
-  //     path: "/articles",
+  //     path: "/articles",W
   //     name: "Mening Profilim",
   //     icon: "nc-icon nc-bookmark-2",
   //     component: UserPage,

@@ -1,7 +1,6 @@
 import http from "./httpService";
 import api from "../utils/config.json";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 
 const { apiSwagger, apiLocal } = api;
 // http://192.168.100.27:8080/api/user/edit/{id}

@@ -23,7 +23,7 @@ import {
   Table,
 } from "reactstrap";
 
-import 'styles/articleForm.css'
+import "../../styles/articleForm.css";
 
 class ArticleForm extends Form {
   state = {
@@ -126,13 +126,12 @@ class ArticleForm extends Form {
                   <Row>
                     <Col lg="3">
                       <div className="selectt">
-                          {this.renderSelect(
-                        "categoryId",
-                        "Categories",
-                        this.state.categories
-                      )}
+                        {this.renderSelect(
+                          "categoryId",
+                          "Categories",
+                          this.state.categories
+                        )}
                       </div>
-                    
                     </Col>
                     <Col lg="3">{this.renderInput("author", "Author")}</Col>
                     <Col lg="3">{this.renderInput("tags", "Tags")}</Col>

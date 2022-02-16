@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ArticleService from "../services/articleService";
+import { toast } from "react-toastify";
 import image from "../components/profile.png";
 
 import "../styles/navbar.css";
-import { toast } from "react-toastify";
 
 class Articles extends Component {
   state = {
@@ -103,7 +103,7 @@ class Articles extends Component {
                   <div className="d-flex justify-content-end">
                     <div className="col-md-3 p-0 box2">
                       <ul className="nav-pills flex-column" role="tablist">
-                        <li className="nav-item">
+                        <li className="item">
                           <a
                             onClick={(e) => {
                               e.preventDefault();
@@ -122,7 +122,7 @@ class Articles extends Component {
                             Yangi qabul qilinganlar
                           </a>
                         </li>
-                        <li className="nav-item item">
+                        <li className="item">
                           <a
                             onClick={(e) => {
                               e.preventDefault();
@@ -141,7 +141,7 @@ class Articles extends Component {
                             Tahrirda
                           </a>
                         </li>
-                        <li className="nav-item item">
+                        <li className="item">
                           <a
                             onClick={(e) => {
                               e.preventDefault();
@@ -190,23 +190,20 @@ class Articles extends Component {
                           articles.map((article) => (
                             <li
                               key={article.id}
-                              className="nav-item li"
+                              className={
+                                this.state.activeArticleId === article.id
+                                  ? "nav-item activeNav"
+                                  : "nav-item"
+                              }
                               onClick={() => {
                                 this.handleActive(article.id);
                                 this.setState({ activeArticleId: article.id });
                                 // console.log(article);
                               }}
                             >
-                              <a
-                                className={
-                                  this.state.activeArticleId === article.id
-                                    ? "nav-link activeNav"
-                                    : "nav-link"
-                                }
-                                data-toggle="pill"
-                              >
-                                {article.titleArticle}
-                              </a>
+                              <a data-toggle="pill">{article.titleArticle}</a>
+
+                              <a>Batafsil...</a>
                             </li>
                           ))}
                       </ul>

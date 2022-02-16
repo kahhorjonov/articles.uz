@@ -21,15 +21,14 @@ import {
 
 import mikeImg from "../assets/img/mike.jpg";
 import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
-import { toast } from "react-toastify";
 
 class User extends Component {
   state = {
     firstName: "",
     lastName: "",
     fatherName: "",
-    phoneNumber: "",
-    password: "",
+    phoneNumber: "xyz",
+    password: "xyz",
     academicDegree: "",
     workPlace: "",
     scientificWork: "",
@@ -50,6 +49,7 @@ class User extends Component {
       .then((res) => {
         // console.log(res.data);
         this.setState({ currentUser: res.data });
+        this.setState({ phoneNumber: res.data.phoneNumber });
       })
       .catch((ex) => console.log(ex));
   };
@@ -207,7 +207,6 @@ class User extends Component {
                           <FormGroup>
                             <label>Parol</label>
                             <Input
-                              // defaultValue="Toshkent Shahar, Yunusobod tumani"
                               placeholder="parol"
                               type="text"
                               onChange={(e) =>

@@ -13,8 +13,8 @@ import ReviewerLayout from "./layouts/Reviewer.js";
 import UserLayout from "./layouts/User.js";
 import { ToastContainer } from "react-toastify";
 
-import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "react-toastify/dist/ReactToastify.css";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 class App extends Component {
   render() {

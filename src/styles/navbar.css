@@ -64,7 +64,7 @@ body {
 .box3 {
   background-color: #f6f7fb;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
 }
 
 .input {
@@ -89,8 +89,20 @@ body {
 /*}*/
 
 .nav-item {
+  display: flex;
+  justify-content: space-between;
   list-style: none;
+  color: #51cbce;
+  padding: 1rem;
+}
+
+.activeNav {
+  background-color: #51cbce !important;
   color: white !important;
+}
+
+.activeNav:hover {
+  background-color: #3cbec0 !important;
 }
 
 /* box4 */
@@ -98,7 +110,8 @@ body {
 .box4 {
   background-color: #f2f3f7;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .div {
@@ -221,14 +234,4 @@ input:checked + .slider:before {
 .navigation .badge2 {
   height: 23px;
   border-radius: 50%;
-}
-
-.activeNav {
-  background-color: #51cbce !important;
-  color: white !important;
-}
-
-.activeNav:hover {
-  background-color: #3cbec0 !important;
-  color: white !important;
 }
