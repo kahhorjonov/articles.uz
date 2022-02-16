@@ -153,7 +153,9 @@ body {
   width: 0;
   height: 0;
 }
-
+.nav-pills{
+  font-size: 14px;
+}
 .slider {
   position: absolute;
   cursor: pointer;
