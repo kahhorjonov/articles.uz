@@ -6300,3 +6300,8 @@ a,
 a:focus {
   outline: none;
 }
+
+.ps-scrollbar-x-rail,
+.ps-scrollbar-y-rail {
+  display: none !important;
+}

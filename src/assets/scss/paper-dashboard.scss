@@ -36,3 +36,8 @@
 
 // html to react differences
 @import "paper-dashboard/react/react-differences.scss";
+
+.ps-scrollbar-x-rail,
+.ps-scrollbar-y-rail {
+  display: none !important;
+}

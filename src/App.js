@@ -14,7 +14,6 @@ import UserLayout from "./layouts/User.js";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 class App extends Component {
   render() {

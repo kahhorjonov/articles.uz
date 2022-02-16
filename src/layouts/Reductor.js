@@ -9,9 +9,9 @@ import Sidebar from "../components/Sidebar/Sidebar.js";
 
 import reductorRoutes from "../reductorRoutes";
 
-function Dashboard(props) {
-  let ps;
+var ps;
 
+function Dashboard(props) {
   const [backgroundColor, setBackgroundColor] = React.useState("black");
   const [activeColor, setActiveColor] = React.useState("info");
   const mainPanel = React.useRef();
