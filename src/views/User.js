@@ -49,6 +49,7 @@ class User extends Component {
       .then((res) => {
         // console.log(res.data);
         this.setState({ currentUser: res.data });
+        this.setState({ phoneNumber: res.data.phoneNumber });
       })
       .catch((ex) => console.log(ex));
   };

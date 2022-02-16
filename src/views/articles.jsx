@@ -190,23 +190,22 @@ class Articles extends Component {
                           articles.map((article) => (
                             <li
                               key={article.id}
-                              className="nav-item li"
+                              className={
+                                this.state.activeArticleId === article.id
+                                  ? "nav-item nav-link activeNav"
+                                  : "nav-item"
+                              }
                               onClick={() => {
                                 this.handleActive(article.id);
                                 this.setState({ activeArticleId: article.id });
                                 // console.log(article);
                               }}
                             >
-                              <a
-                                className={
-                                  this.state.activeArticleId === article.id
-                                    ? "nav-link activeNav"
-                                    : "nav-link"
-                                }
-                                data-toggle="pill"
-                              >
+                              <a className="nav-link" data-toggle="pill">
                                 {article.titleArticle}
                               </a>
+
+                              <a className="nav-link">Batafsil...</a>
                             </li>
                           ))}
                       </ul>

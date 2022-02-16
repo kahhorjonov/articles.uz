@@ -89,7 +89,19 @@ body {
 /*}*/
 
 .nav-item {
+  display: flex;
+  justify-content: space-between;
   list-style: none;
+  color: white !important;
+}
+
+.activeNav {
+  background-color: #51cbce !important;
+  color: white !important;
+}
+
+.activeNav:hover {
+  background-color: #3cbec0 !important;
   color: white !important;
 }
 
@@ -220,14 +232,4 @@ input:checked + .slider:before {
 .navigation .badge2 {
   height: 23px;
   border-radius: 50%;
-}
-
-.activeNav {
-  background-color: #51cbce !important;
-  color: white !important;
-}
-
-.activeNav:hover {
-  background-color: #3cbec0 !important;
-  color: white !important;
 }
