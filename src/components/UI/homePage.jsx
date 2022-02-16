@@ -163,7 +163,7 @@ class HomePage extends React.Component {
               <img src={img} alt="" />
             </div>
 
-            <div className="d-flex row ml-0 mr-0">
+            <div className="d-flex row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
               <div className="col-md-6 p-0">
                 <h1>
                   Bizning asosiy maqsadimiz ilmiy <br /> hodimlarning ish
@@ -337,16 +337,13 @@ class HomePage extends React.Component {
                 <hr />
               </div>
 
-              <div className="foo_nex justify-content-between row">
-                <div>
-                  <div className="yerss">
-                    <p>© Articles.uz 2020</p>
-                  </div>
+              <div className="foo_nex justify-content-between d-flex">
+                <div className="yerss">
+                  <p>© Articles.uz 2020</p>
                 </div>
+
                 <div>
-                  <div>
-                    <p>OST Group</p>
-                  </div>
+                  <p>OST Group</p>
                 </div>
               </div>
             </div>
