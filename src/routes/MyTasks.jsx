@@ -90,7 +90,7 @@ class MyTasks extends Component {
           <Col md="12">
             <Card>
               <CardBody>
-                <div className="d-flex justify-content-between">
+                <div className="justify-content-between row">
                   <div className="col-md-3">
                     <ul className="nav nav-pills flex-column" role="tablist">
                       <li className="nav-item">
@@ -145,17 +145,17 @@ class MyTasks extends Component {
                             <p className="p-2">Mening vazifalarim</p>
                           </div>
                           <div className="row ml-0 mr-0">
-                            <div className="col-md-5 pr-0">
+                            <div className="col-lg-5 col-sm-3 pr-0">
                               <p>Maqola nomi</p>
                             </div>
-                            <div className="col-md-3 pr-0">
+                            <div className="col-lg-3 col-sm-3 pr-0">
                               <p>Yuborilgan sana</p>
                             </div>
-                            <div className="col-md-2 pr-0">
+                            <div className="col-lg-2 col-sm-3 pr-0">
                               <p>Dedline</p>
                             </div>
 
-                            <div className="col-md-2 pr-0">
+                            <div className="col-lg-2 col-sm-3 pr-0">
                               <p>Qabul qilasizmi?</p>
                             </div>
                           </div>
@@ -233,22 +233,22 @@ class MyTasks extends Component {
                             </td>
                           </tr>
                           <tr className="row row-tables1">
-                            <th className="col-md-3">
+                            <th className="col-lg-3 col-sm-3 ">
                               <td className="col-md-3">
                                 <p>Maqola nomi</p>
                               </td>
                             </th>
-                            <th className="col-md-3">
+                            <th className="col-lg-3 col-sm-3 ">
                               <td className="col-md-3">
                                 <p>Maqolani Tekshirish vaqti</p>
                               </td>
                             </th>
-                            <th className="col-md-3">
+                            <th className="col-lg-3 col-sm-3 ">
                               <td className="col-md-3">
                                 <p>Xulosa</p>
                               </td>
                             </th>
-                            <th className="col-md-3">
+                            <th className="col-lg-3 col-sm-3 ">
                               <td className="col-md-3">
                                 <p>File</p>
                               </td>
@@ -261,7 +261,7 @@ class MyTasks extends Component {
                             this.state.myArticles.map((article) => (
                               <tbody key={article.article.id}>
                                 <tr className="row row-tables ml-0 mr-0 pr-0 pl-0">
-                                  <td className="col-md-3">
+                                  <td className="col-lg-3 col-sm-3 ">
                                     <a
                                       href={article.article.file}
                                       download={article.article.file}
@@ -269,10 +269,10 @@ class MyTasks extends Component {
                                       {article.article.titleArticle}
                                     </a>
                                   </td>
-                                  <td className="col-md-3 d-flex align-items-center justify-content-center">
+                                  <td className="col-lg-3 col-sm-3  d-flex align-items-center justify-content-center">
                                     {article.article.deadLine} kun qoldi
                                   </td>
-                                  <td className="col-md-3">
+                                  <td className="col-lg-3 col-sm-3 ">
                                     <form>
                                       <select
                                         defaultValue="CHECK_AND_ACCEPT"
@@ -296,7 +296,7 @@ class MyTasks extends Component {
                                       </select>
                                     </form>
                                   </td>
-                                  <td className="col-md-3 d-flex">
+                                  <td className="col-lg-3 col-sm-3  d-flex">
                                     <span>
                                       <input
                                         onChange={(e) => {

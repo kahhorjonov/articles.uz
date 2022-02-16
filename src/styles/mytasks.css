@@ -192,3 +192,9 @@ body {
   background-color: #3cbec0;
   color: white;
 }
+
+@media (max-width: 576px) {
+  .row-tables1{
+    display: block !important;
+  }
+}

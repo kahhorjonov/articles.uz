@@ -56,7 +56,7 @@ class NavbarHome extends React.Component {
                   </NavLink>
                 </li>
 
-                <li className="nav-item ml-5">
+                <li className="nav-item">
                   <Link to="/login">
                     <button className="btn border btn-light buttons">
                       Tizimga kirish
