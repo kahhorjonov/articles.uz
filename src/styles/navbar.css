@@ -115,15 +115,16 @@ body {
   overflow-y: scroll;
 }
 
-.div {
-  margin: 15px;
-}
+
 
 .bg {
   background-color: #f6f7fb;
   width: 100%;
   padding: 10px;
   border: 1px solid #ebebec;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
 }
 
 .bg2 {
@@ -167,7 +168,9 @@ body {
   width: 0;
   height: 0;
 }
-
+.nav-pills {
+  font-size: 14px;
+}
 .slider {
   position: absolute;
   cursor: pointer;

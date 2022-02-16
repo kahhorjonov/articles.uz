@@ -101,7 +101,7 @@ class Articles extends Component {
                 <div className="card-header">Barcha maqolalar</div>
                 <div className="card-body">
                   <div className="d-flex justify-content-end">
-                    <div className="col-md-3 box2">
+                    <div className="col-md-3 p-0 box2">
                       <ul className="nav-pills flex-column" role="tablist">
                         <li className="item">
                           <a
