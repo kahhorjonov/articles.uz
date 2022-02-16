@@ -92,7 +92,8 @@ body {
   display: flex;
   justify-content: space-between;
   list-style: none;
-  color: white !important;
+  color: #51cbce;
+  padding: 1rem;
 }
 
 .activeNav {
@@ -102,7 +103,6 @@ body {
 
 .activeNav:hover {
   background-color: #3cbec0 !important;
-  color: white !important;
 }
 
 /* box4 */

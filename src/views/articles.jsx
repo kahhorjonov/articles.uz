@@ -103,7 +103,7 @@ class Articles extends Component {
                   <div className="d-flex justify-content-end">
                     <div className="col-md-3 box2">
                       <ul className="nav-pills flex-column" role="tablist">
-                        <li className="nav-item">
+                        <li className="item">
                           <a
                             onClick={(e) => {
                               e.preventDefault();
@@ -122,7 +122,7 @@ class Articles extends Component {
                             Yangi qabul qilinganlar
                           </a>
                         </li>
-                        <li className="nav-item item">
+                        <li className="item">
                           <a
                             onClick={(e) => {
                               e.preventDefault();
@@ -141,7 +141,7 @@ class Articles extends Component {
                             Tahrirda
                           </a>
                         </li>
-                        <li className="nav-item item">
+                        <li className="item">
                           <a
                             onClick={(e) => {
                               e.preventDefault();
@@ -192,7 +192,7 @@ class Articles extends Component {
                               key={article.id}
                               className={
                                 this.state.activeArticleId === article.id
-                                  ? "nav-item nav-link activeNav"
+                                  ? "nav-item activeNav"
                                   : "nav-item"
                               }
                               onClick={() => {
@@ -201,11 +201,9 @@ class Articles extends Component {
                                 // console.log(article);
                               }}
                             >
-                              <a className="nav-link" data-toggle="pill">
-                                {article.titleArticle}
-                              </a>
+                              <a data-toggle="pill">{article.titleArticle}</a>
 
-                              <a className="nav-link">Batafsil...</a>
+                              <a>Batafsil...</a>
                             </li>
                           ))}
                       </ul>
