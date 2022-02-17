@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ArticleService from "../services/articleService";
 import { toast } from "react-toastify";
+import Pagination from "components/common/pagination";
+import { paginate } from "utils/paginate";
 import image from "../components/profile.png";
 
 import "../styles/navbar.css";
@@ -16,6 +18,12 @@ class Articles extends Component {
     step: "null",
     activated: "",
     activeRow: null,
+
+    currentPage: 1,
+    pageSize: 10,
+
+    currentPage2: 1,
+    pageSize2: 5,
   };
 
   handleGetArticles = (step) => {
@@ -86,9 +94,26 @@ class Articles extends Component {
     // console.log("articleId:", this.state.activeArticleId);
   };
 
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
+
+  handlePageChange2 = (page) => {
+    this.setState({ currentPage2: page });
+  };
+
   render() {
-    const articles = this.state.articles;
-    const people = this.state.people;
+    const {
+      currentPage,
+      pageSize,
+      articles: allArticles,
+      currentPage2,
+      pageSize2,
+      people: allPeople,
+    } = this.state;
+
+    const articles = paginate(allArticles, currentPage, pageSize);
+    const people = paginate(allPeople, currentPage2, pageSize2);
 
     // console.log(articles);
 
@@ -207,6 +232,16 @@ class Articles extends Component {
                             </li>
                           ))}
                       </ul>
+                      <div
+                        style={{ position: "absolute", bottom: 0, right: 10 }}
+                      >
+                        <Pagination
+                          itemsCount={this.state.articles.length}
+                          pageSize={pageSize}
+                          currentPage={currentPage}
+                          onPageChange={this.handlePageChange}
+                        />
+                      </div>
                     </div>
 
                     <div className="col-md-6 box4">
@@ -302,6 +337,16 @@ class Articles extends Component {
                               ))}
                           </ul>
                         </div>
+                      </div>
+                      <div
+                        style={{ position: "absolute", bottom: 0, right: 10 }}
+                      >
+                        <Pagination
+                          itemsCount={this.state.people.length}
+                          pageSize={pageSize2}
+                          currentPage={currentPage2}
+                          onPageChange={this.handlePageChange2}
+                        />
                       </div>
                     </div>
                   </div>
