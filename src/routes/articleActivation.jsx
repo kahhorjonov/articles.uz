@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import ArticleService from "../services/articleService";
+import { toast } from "react-toastify";
+import Pagination from "components/common/pagination";
+import { paginate } from "utils/paginate";
 
 import "../styles/articleActivation.css";
-import { toast } from "react-toastify";
 
 class ArticleActivation extends Component {
   state = {
     articles: [],
+    pageSize: 7,
+    currentPage: 1,
   };
 
   componentDidMount() {
@@ -78,8 +82,14 @@ class ArticleActivation extends Component {
       });
   };
 
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
+
   render() {
-    const articles = this.state.articles;
+    const { currentPage, pageSize, articles: allArticles } = this.state;
+
+    const articles = paginate(allArticles, currentPage, pageSize);
 
     return (
       <div className="content">
@@ -88,74 +98,76 @@ class ArticleActivation extends Component {
             <div className="card">
               <div className="card-header">Artikllarni aktivlashtirish</div>
               <div className="card-body">
-                {articles &&
-                  articles.map((article) => (
-                    <div key={article.id}>
-                      <div className="row justify-content-between pt-3 align-content-center">
-                        <div className="col-lg-3 col-md-6 col-sm-6 ">
-                          <p>{article.titleArticle}</p>
-                          <p className="text-muted">
-                            {new Date(article.createdAt)
-                              .toISOString()
-                              .slice(0, 10)}
-                          </p>
-                        </div>
+                {articles.map((article) => (
+                  <div key={article.id}>
+                    <div className="row justify-content-between pt-3 align-content-center">
+                      <div className="col-lg-3 col-md-6 col-sm-6 ">
+                        <p>{article.titleArticle}</p>
+                        <p className="text-muted">
+                          {new Date(article.createdAt)
+                            .toISOString()
+                            .slice(0, 10)}
+                        </p>
+                      </div>
 
-                        <div className="col-lg-3 col-md-6 col-sm-6 ">
-                          <p className="text-muted">
-                            {article.user && article.user.firstName}{" "}
-                            {article.user && article.user.lastName}
-                          </p>
-                          <p className="text-muted">
-                            {article.authors.map((author, idx) => {
-                              if (article.authors.length - 1 !== idx) {
-                                return `${author.fullName}`;
-                              }
+                      <div className="col-lg-3 col-md-6 col-sm-6 ">
+                        <p className="text-muted">
+                          {article.user && article.user.firstName}{" "}
+                          {article.user && article.user.lastName}
+                        </p>
+                        <p className="text-muted">
+                          {article.authors.map((author, idx) => {
+                            if (article.authors.length - 1 !== idx) {
                               return `${author.fullName}`;
-                            })}
-                          </p>
-                        </div>
+                            }
+                            return `${author.fullName}`;
+                          })}
+                        </p>
+                      </div>
 
-                        <div className="col-lg-4 col-md-6 col-sm-6 ">
-                          <h5 className="bg-success text-center w-75 ml-auto mr-auto text-white p-1">
-                            {article.category.name}
-                          </h5>
-                          <div className="text-center">
-                            <a
-                              style={{
-                                cursor: "pointer",
-                              }}
-                              onClick={() =>
-                                this.handleDownload(
-                                  article.file.id,
-                                  article.file.originalName,
-                                  article.file.contentType
-                                )
-                              }
-                            >
-                              Download ⬇️
-                            </a>
-                            {/* <FontAwesomeIcon
-                        icon={faFileAlt}
-                        style={{ color: "#C0F6F7" }}
-                      /> */}
-                          </div>
-                        </div>
-
-                        <div className="col-lg-2 col-mmd6  col-sm-6 d-flex justify-content-lg-end ">
-                          <label className="switch">
-                            <input
-                              onChange={(e) => this.handleChange(e, article.id)}
-                              type="checkbox"
-                            />
-                            <span className="slider round"></span>
-                          </label>
+                      <div className="col-lg-4 col-md-6 col-sm-6 ">
+                        <h5 className="bg-success text-center w-75 ml-auto mr-auto text-white p-1">
+                          {article.category.name}
+                        </h5>
+                        <div className="text-center">
+                          <a
+                            style={{
+                              cursor: "pointer",
+                            }}
+                            onClick={() =>
+                              this.handleDownload(
+                                article.file.id,
+                                article.file.originalName,
+                                article.file.contentType
+                              )
+                            }
+                          >
+                            Download ⬇️
+                          </a>
                         </div>
                       </div>
 
-                      <hr />
+                      <div className="col-lg-2 col-mmd6  col-sm-6 d-flex justify-content-lg-end ">
+                        <label className="switch">
+                          <input
+                            onChange={(e) => this.handleChange(e, article.id)}
+                            type="checkbox"
+                          />
+                          <span className="slider round"></span>
+                        </label>
+                      </div>
                     </div>
-                  ))}
+                    <hr />
+                  </div>
+                ))}
+              </div>
+              <div className="d-flex justify-content-end pr-2">
+                <Pagination
+                  itemsCount={articles.length}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}
+                />
               </div>
             </div>
           </div>
