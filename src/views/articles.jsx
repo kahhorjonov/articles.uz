@@ -6,6 +6,7 @@ import { paginate } from "utils/paginate";
 import image from "../components/profile.png";
 
 import "../styles/navbar.css";
+import { Link } from "react-router-dom";
 
 class Articles extends Component {
   state = {
@@ -226,9 +227,20 @@ class Articles extends Component {
                                 // console.log(article);
                               }}
                             >
-                              <a>{article.titleArticle}</a>
+                              <a style={{ padding: "0.5rem" }}>
+                                {article.titleArticle}
+                              </a>
 
-                              <a>Batafsil...</a>
+                              <Link
+                                className={
+                                  this.state.activeArticleId === article.id
+                                    ? "nav-item activeNav"
+                                    : "nav-item"
+                                }
+                                to="/articleInfo"
+                              >
+                                Batafsil...
+                              </Link>
                             </li>
                           ))}
                       </ul>

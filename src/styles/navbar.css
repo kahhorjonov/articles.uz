@@ -94,16 +94,11 @@ body {
   justify-content: space-between;
   list-style: none;
   color: #51cbce;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .activeNav {
   background-color: #51cbce !important;
-  color: white !important;
-}
-
-.activeNav:hover {
-  background-color: #3cbec0 !important;
   color: white !important;
 }
 
