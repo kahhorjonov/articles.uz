@@ -9,8 +9,8 @@ import "../styles/articleActivation.css";
 class ArticleActivation extends Component {
   state = {
     articles: [],
-    pageSize: 2,
     currentPage: 1,
+    pageSize: 7,
   };
 
   componentDidMount() {
@@ -87,9 +87,11 @@ class ArticleActivation extends Component {
   };
 
   render() {
-    const { currentPage, pageSize, articles } = this.state;
+    const { currentPage, pageSize, articles: allArticles } = this.state;
 
-    // const articles = paginate(allArticles, currentPage, pageSize);
+    const articles = paginate(allArticles, currentPage, pageSize);
+
+    console.log(articles);
 
     return (
       <div className="content">
@@ -160,14 +162,14 @@ class ArticleActivation extends Component {
                     <hr />
                   </div>
                 ))}
-              </div>
-              <div className="d-flex justify-content-end mr-4">
-                <Pagination
-                  itemsCount={articles.length}
-                  pageSize={pageSize}
-                  currentPage={currentPage}
-                  onPageChange={this.handlePageChange}
-                />
+                <div className="d-flex justify-content-end mr-4">
+                  <Pagination
+                    itemsCount={this.state.articles.length}
+                    pageSize={pageSize}
+                    currentPage={currentPage}
+                    onPageChange={this.handlePageChange}
+                  />
+                </div>
               </div>
             </div>
           </div>
