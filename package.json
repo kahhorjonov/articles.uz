@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.0",
     "bootstrap": "^4.6.1",
-    "browserslist": "^4.19.1",
+    "browserslist": "^4.6.2",
     "chart.js": "^3.7.1",
     "chartjs": "^0.3.24",
     "joi-browser": "^13.4.0",
@@ -42,21 +42,20 @@
       "react-app/jest"
     ]
   },
-  "browserslist": [
-    {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
-      ],
-      "optionalDependencies": {
-        "typescript": "4.2.4"
-      },
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
-    }
-  ]
+  "resolutions": {
+    "browserslist": "4.6.2",
+    "caniuse-lite": "1.0.30000974"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
