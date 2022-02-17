@@ -10,6 +10,7 @@
     "bootstrap": "^4.6.1",
     "chart.js": "^3.7.1",
     "chartjs": "^0.3.24",
+    "create-react-app-updater": "^0.12.1",
     "joi-browser": "^13.4.0",
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
@@ -40,19 +41,21 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "optionalDependencies": {
-      "typescript": "4.2.4"
-    },
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "browserslist": [
+    {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "optionalDependencies": {
+        "typescript": "4.2.4"
+      },
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    }
+  ]
 }
