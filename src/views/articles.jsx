@@ -237,7 +237,7 @@ class Articles extends Component {
                                     ? "nav-item activeNav"
                                     : "nav-item"
                                 }
-                                to="/articleInfo"
+                                to={`/admin/articleInfo/:${article.id}`}
                               >
                                 Batafsil...
                               </Link>

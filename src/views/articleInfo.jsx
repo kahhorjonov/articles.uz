@@ -1,17 +1,14 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 import "../styles/userEdit.css";
 // reactstrap components
-
-// import mikeImg from "../assets/img/mike.jpg";
-import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
 
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardTitle,
   FormGroup,
   Form,
@@ -19,16 +16,35 @@ import {
   Label,
   Row,
   Col,
-  ListGroup,
-  ListGroupItem,
-  Badge,
-  NavLink,
   Table,
 } from "reactstrap";
 
 class ArticleInfo extends Component {
-  state = {};
+  state = {
+    articleId: "",
+    articleInfo: "",
+  };
+
+  async componentDidMount() {
+    const articleId = this.props.history.location.pathname.slice(20);
+    this.setState({ articleId: articleId });
+    console.log(articleId);
+
+    await axios
+      .get(
+        `http://192.168.100.27:8080/api/article/articleInfoForAdmin/${articleId}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ articleInfo: res.data });
+      })
+      .catch((ex) => console.log(ex));
+  }
+
   render() {
+    const article = this.state.articleInfo.article;
+    const steps = this.state.articleInfo.articleAdminInfoList;
+
     return (
       <>
         <div className="content">
@@ -39,23 +55,18 @@ class ArticleInfo extends Component {
                   <Table>
                     <thead>
                       <tr className="col-md-12">
-                        <th className="col-md-6">Admin Status</th>
+                        <th className="col-md-6">Steps</th>
                         <th className="col-md-6">Data</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Osd</td>
-                        <td>2020-12-23</td>
-                      </tr>
-                      <tr>
-                        <td>Thornton</td>
-                        <td>2020-8-23</td>
-                      </tr>
-                      <tr>
-                        <td>the Bird</td>
-                        <td>2020-12-3</td>
-                      </tr>
+                      {steps &&
+                        steps.map((step) => (
+                          <tr key={step.admin.id}>
+                            <td>{step.status}</td>
+                            <td>{step.processDate}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </CardBody>
@@ -78,7 +89,7 @@ class ArticleInfo extends Component {
                       </Form>
                     </Col>
                     <Col md="6" className="mt-3">
-                      <a href="#" dowload>
+                      <a>
                         Download: <span>File</span>
                       </a>
                     </Col>
@@ -140,9 +151,9 @@ class ArticleInfo extends Component {
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="pr-1" md="12">
+                      <Col md="12">
                         <FormGroup>
-                          <label>Author</label>
+                          <label>Authors</label>
                           <Input
                             defaultValue="Akbarjon"
                             placeholder="Maqola jo'natuvchisi Ismi"
@@ -154,9 +165,9 @@ class ArticleInfo extends Component {
                     <Row>
                       <Col md="4">
                         <FormGroup>
-                          <label>FirsName (Auther)</label>
+                          <label>FirsName (Sender)</label>
                           <Input
-                            defaultValue="Melbourne, Australia"
+                            defaultValue={article && article.user.firstName}
                             placeholder="FirsName"
                             type="text"
                           />
@@ -167,7 +178,9 @@ class ArticleInfo extends Component {
                         <FormGroup>
                           <label>LastName</label>
                           <Input
-                            defaultValue="Melbourne, Australia"
+                            defaultValue={
+                              article ? article.user.lastName : "null"
+                            }
                             placeholder="LastName"
                             type="text"
                           />

@@ -157,11 +157,20 @@ class Users extends Component {
 
     await userService
       .createUser(data)
-      .then((res) => toast.success("Yangi foydalanuvchi qo'shildi"))
+      .then((res) => {
+        toast.success("Yangi foydalanuvchi qo'shildi");
+      })
       .catch((ex) => {
         // console.log(ex.response.data.message);
         toast.error(ex.response.data.message);
       });
+
+    this.setState({ firstName: "" });
+    this.setState({ lastName: "" });
+    this.setState({ email: "" });
+    this.setState({ password: "" });
+    this.setState({ phoneNumber: "" });
+    this.setState({ roleId: null });
   };
 
   render() {
