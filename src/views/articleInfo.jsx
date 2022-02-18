@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { getCategories } from "services/getCategories";
 
 import "../styles/userEdit.css";
 // reactstrap components
@@ -21,6 +22,8 @@ import {
 
 class ArticleInfo extends Component {
   state = {
+    titleArticle: "",
+
     articleId: "",
     articleInfo: "",
   };
@@ -28,17 +31,22 @@ class ArticleInfo extends Component {
   async componentDidMount() {
     const articleId = this.props.history.location.pathname.slice(20);
     this.setState({ articleId: articleId });
-    console.log(articleId);
+
+    await this.populateCategories();
 
     await axios
       .get(
         `http://192.168.100.27:8080/api/article/articleInfoForAdmin/${articleId}`
       )
       .then((res) => {
-        console.log(res.data);
         this.setState({ articleInfo: res.data });
       })
       .catch((ex) => console.log(ex));
+  }
+
+  async populateCategories() {
+    const { data: categories } = await getCategories();
+    this.setState({ categories });
   }
 
   render() {
@@ -77,15 +85,25 @@ class ArticleInfo extends Component {
                   <Row>
                     <Col md="6">
                       <Form>
-                        <Input
-                          className="mb-3"
-                          style={{ height: "40px" }}
-                          type="select"
+                        <select
+                          style={{ fontSize: "1.4rem" }}
+                          defaultValue="CHECK_AND_ACCEPT"
+                          onChange={(e) =>
+                            this.setState({
+                              // status: e.target.value,
+                            })
+                          }
+                          name="status"
+                          className="custom-select"
                         >
-                          <option>Default Select</option>
-                          <option>Select</option>
-                          <option>Default</option>
-                        </Input>
+                          <option value="CHECK_AND_ACCEPT">Tasdiqlayman</option>
+                          <option value="CHECK_AND_CANCEL">
+                            Tasdiqlamayman
+                          </option>
+                          <option value="CHECK_AND_RECYCLE">
+                            Qayta ishlashga
+                          </option>
+                        </select>
                       </Form>
                     </Col>
                     <Col md="6" className="mt-3">
@@ -125,48 +143,117 @@ class ArticleInfo extends Component {
                       <Col className="pr-1" md="4">
                         <FormGroup>
                           <label>Title</label>
-                          <Input placeholder="Company" type="text" />
+                          <Input
+                            disabled
+                            placeholder="Title Article"
+                            type="text"
+                            defaultValue={article && article.titleArticle}
+                          />
                         </FormGroup>
                       </Col>
                       <Col className="px-1" md="4">
                         <FormGroup>
                           <label>Category</label>
-                          <Input
-                            bsSize="lg"
-                            style={{ height: "40px" }}
-                            className="mb-3 border-radius"
-                            type="select"
+                          <select
+                            disabled
+                            defaultValue={article && article.category.name}
+                            style={{ fontSize: "1.4rem" }}
+                            className="custom-select"
+                            onChange={(e) => {
+                              this.setState({
+                                categoryIdForCreate: [e.target.value],
+                              });
+                              // this.handleChooseCategory(
+                              //   e.target.value
+                              // );
+                            }}
                           >
-                            <option>Large Select</option>
-                            <option>Select</option>
-                            <option>Large</option>
-                          </Input>
+                            {/* <option value="null">Kategoriya</option> */}
+                            {this.state.categories &&
+                              this.state.categories.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                  {category.name}
+                                </option>
+                              ))}
+                          </select>
                         </FormGroup>
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
                           <label htmlFor="exampleInputEmail1">Price</label>
-                          <Input placeholder="Price" type="number" />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>Authors</label>
                           <Input
-                            defaultValue="Akbarjon"
-                            placeholder="Maqola jo'natuvchisi Ismi"
-                            type="text"
+                            disabled={true}
+                            placeholder="Price"
+                            type="number"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col md="4">
+                      <Col className="pr-1" md="5">
                         <FormGroup>
-                          <label>FirsName (Sender)</label>
+                          <label>Authors</label>
                           <Input
+                            disabled
+                            defaultValue={
+                              article &&
+                              article.authors.map(
+                                (author) => author.fullName + " "
+                              )
+                            }
+                            placeholder="Avtorlar"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col className="px-1" md="4">
+                        <FormGroup>
+                          <label>Ilmiy Ishlarni yuklash</label>
+                          <Button
+                            // disabled={
+                            //   this.state.currentUser.scientificWork
+                            //     ? false
+                            //     : true
+                            // }
+                            className="m-0"
+                            style={{ width: "100%", padding: "0.75rem" }}
+                            // onClick={() =>
+                            //   this.handleDownload(
+                            //     this.state.currentUser.scientificWork[0].id,
+
+                            //     this.state.currentUser.scientificWork[0]
+                            //       .originalName,
+
+                            //     this.state.currentUser.scientificWork[0]
+                            //       .contentType
+                            //   )
+                            // }
+                          >
+                            Ilmiy Ishlarni yuklash
+                          </Button>
+                        </FormGroup>
+                      </Col>
+
+                      <Col className="pl-1" md="3">
+                        <FormGroup>
+                          <label>Public</label>
+                          <Input
+                            disabled
+                            defaultValue={article && article.publicPrivate}
+                            placeholder="Avtorlar"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col className="pr-1" md="4">
+                        <FormGroup>
+                          <label>FirstName (Sender)</label>
+                          <Input
+                            disabled
                             defaultValue={article && article.user.firstName}
                             placeholder="FirsName"
                             type="text"
@@ -174,26 +261,26 @@ class ArticleInfo extends Component {
                         </FormGroup>
                       </Col>
 
-                      <Col md="4">
+                      <Col className="px-1" md="4">
                         <FormGroup>
                           <label>LastName</label>
                           <Input
-                            defaultValue={
-                              article ? article.user.lastName : "null"
-                            }
+                            disabled
+                            defaultValue={article && article.user.lastName}
                             placeholder="LastName"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
 
-                      <Col md="4">
+                      <Col className="pl-1" md="4">
                         <FormGroup>
                           <label>Phone</label>
                           <Input
-                            defaultValue="1212"
+                            disabled
+                            defaultValue={article && article.user.phoneNumber}
                             placeholder="Number"
-                            type="number"
+                            type="text"
                           />
                         </FormGroup>
                       </Col>
@@ -204,13 +291,14 @@ class ArticleInfo extends Component {
                         <FormGroup>
                           <label>Email</label>
                           <Input
-                            defaultValue="Melbourne@gmail.com"
+                            disabled
+                            defaultValue={article && article.user.email}
                             placeholder="Email"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="px-1" md="6">
+                      <Col className="pl-1" md="6">
                         <FormGroup>
                           <label>Message</label>
                           <Input
@@ -227,16 +315,29 @@ class ArticleInfo extends Component {
                       <div className="update updatess">
                         <div>
                           <label className="switch">
-                            <input type="checkbox" />
+                            <input
+                              defaultChecked={article && article.active}
+                              type="checkbox"
+                              onClick={(e) => console.log(e.target.checked)}
+                            />
                             <span className="slider round"></span>
                           </label>
                         </div>
-                        <div>
-                          <Button color="info">Submit</Button>
-                        </div>
+                        {/* <div>
+                          <Button
+                            color="info"
+                            onClick={() => console.log("submitted")}
+                          >
+                            Submit
+                          </Button>
+                        </div> */}
 
                         <div>
-                          <Button color="danger" outline>
+                          <Button
+                            color="danger"
+                            outline
+                            onClick={() => console.log("deleted")}
+                          >
                             Delete
                           </Button>
                         </div>

@@ -20,6 +20,8 @@ class Articles extends Component {
     activated: "",
     activeRow: null,
 
+    categories: [],
+
     currentPage: 1,
     pageSize: 10,
 
