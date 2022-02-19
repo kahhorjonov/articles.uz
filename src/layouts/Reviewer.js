@@ -4,14 +4,14 @@ import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch, useLocation } from "react-router-dom";
 
 import DemoNavbar from "../components/Navbars/DemoNavbar.js";
-import Footer from "../components/Footer/Footer.js";
+// import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 
 import reviewerRoutes from "../reviewerRoutes";
 
-var ps;
-
 function Dashboard(props) {
+  let ps;
+
   const [backgroundColor, setBackgroundColor] = React.useState("black");
   const [activeColor, setActiveColor] = React.useState("info");
   const mainPanel = React.useRef();
@@ -60,7 +60,7 @@ function Dashboard(props) {
             );
           })}
         </Switch>
-        <Footer fluid />
+        {/* <Footer fluid /> */}
       </div>
     </div>
   );

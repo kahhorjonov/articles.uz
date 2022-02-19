@@ -7,7 +7,7 @@
   border: 1px solid $medium-gray;
   border-radius: $border-radius-base;
   color: $font-color;
-  line-height: normal;
+  // line-height: normal;
   font-size: $font-size-base;
   @include transition-input-focus-color();
   @include box-shadow(none);

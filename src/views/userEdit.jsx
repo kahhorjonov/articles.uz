@@ -423,7 +423,7 @@ class UserEdit extends Component {
                             //     : true
                             // }
                             className="m-0"
-                            style={{ width: "100%" }}
+                            style={{ width: "100%", padding: "0.75rem" }}
                             // onClick={() =>
                             //   this.handleDownload(
                             //     this.state.currentUser.scientificWork[0].id,
@@ -453,7 +453,7 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col> */}
 
-                      <Col className="pl-1" md="4">
+                      <Col className="px-1" md="4">
                         <FormGroup>
                           <label>Daraja</label>
                           <Input

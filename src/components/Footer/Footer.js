@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 
 function Footer(props) {
   return (
-    <footer className={"footer" + (props.default ? " footer-default" : "")}>
-      <Container fluid={props.fluid ? true : false}>
+    // <footer className={"footer" + (props.default ? " footer-default" : "")}>
+    {
+      /* <Container fluid={props.fluid ? true : false}>
         <Row>
           <nav className="footer-nav">
             <ul>
@@ -24,8 +25,9 @@ function Footer(props) {
             </div>
           </div>
         </Row>
-      </Container>
-    </footer>
+      </Container> */
+    }
+    // </footer>
   );
 }
 

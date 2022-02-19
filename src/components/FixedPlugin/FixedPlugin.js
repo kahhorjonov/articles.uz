@@ -129,7 +129,7 @@ function FixedPlugin(props) {
           <li className="header-title">Want more components?</li>
           <li className="button-container">
             <Button
-              href="https://www.creative-tim.com/product/paper-dashboard-pro-react?ref=pdr-fixed-plugin"
+              href=""
               color="danger"
               block
               className="btn-round"

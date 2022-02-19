@@ -6,9 +6,9 @@ import PerfectScrollbar from "perfect-scrollbar";
 
 import logo from "../../logo.svg";
 
-var ps;
-
 function Sidebar(props) {
+  let ps;
+
   const sidebar = React.useRef();
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {

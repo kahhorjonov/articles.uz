@@ -1,6 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import api from "../utils/config.json";
+import httpService from "./httpService";
 
 const { apiSwagger, apiLocal } = api;
 
@@ -224,6 +225,10 @@ class ArticleService {
       bodyParametrs,
       config
     );
+  }
+
+  static async articleInfo(id) {
+    return httpService.get(`${apiLocal} + /article/articleInfoForAdmin/${id}`);
   }
 
   static async myDuties(token) {

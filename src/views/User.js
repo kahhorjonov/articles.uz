@@ -21,6 +21,7 @@ import {
 
 import mikeImg from "../assets/img/mike.jpg";
 import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
+import { toast } from "react-toastify";
 
 class User extends Component {
   state = {
@@ -60,45 +61,51 @@ class User extends Component {
 
     await profileEdit(this.state)
       .then((res) => {
-        console.log(res);
+        toast.success(res.data.message);
         this.getUserByMe();
       })
-      .catch((ex) => console.log(ex));
+      .catch((ex) => toast.error(ex.data.message));
   };
 
-  handleDownload = async (fileId, fileName, type) => {
-    // if (fileId !== null) {
-    await fetch(
-      `http://192.168.100.27:8080/api/attachment/download/${fileId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": type,
-        },
+  handleDownload = async () => {
+    const { id, originalName, contentType } = this.state.currentUser
+      .scientificWork.length
+      ? this.state.currentUser.scientificWork[0]
+      : undefined;
+
+    if (id && originalName && contentType) {
+      try {
+        await fetch(
+          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": contentType,
+            },
+          }
+        )
+          .then((response) => response.blob())
+          .then((blob) => {
+            // Create blob link to download
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", originalName);
+
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+          });
+      } catch (error) {
+        toast.error(error);
       }
-    )
-      .then((response) => response.blob())
-      .then((blob) => {
-        // Create blob link to download
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", fileName);
-
-        document.body.appendChild(link);
-
-        // Start download
-        link.click();
-
-        // Clean up and remove the link
-        link.parentNode.removeChild(link);
-      })
-      .catch((ex) => {
-        console.log(ex);
-      });
-    // } else {
-    //   toast.error("file mavjud emas");
-    // }
+    } else {
+      toast.error("file topilmadi");
+    }
   };
 
   render() {
@@ -114,7 +121,7 @@ class User extends Component {
       languages,
     } = this.state.currentUser;
 
-    console.log(this.state.currentUser);
+    console.log(scientificWork);
 
     // const { id, contentType, fileName } = this.state.currentUser.scientificWork;
 
@@ -340,23 +347,13 @@ class User extends Component {
                           <label>Ilmiy Ishlarni yuklash</label>
                           <Button
                             disabled={
-                              this.state.currentUser.scientificWork
+                              this.state.currentUser.scientificWork !== 0
                                 ? false
                                 : true
                             }
                             className="m-0"
-                            style={{ width: "100%" }}
-                            onClick={() =>
-                              this.handleDownload(
-                                this.state.currentUser.scientificWork[0].id,
-
-                                this.state.currentUser.scientificWork[0]
-                                  .originalName,
-
-                                this.state.currentUser.scientificWork[0]
-                                  .contentType
-                              )
-                            }
+                            style={{ width: "100%", padding: "0.75rem" }}
+                            onClick={() => this.handleDownload()}
                           >
                             Ilmiy Ishlarni yuklash
                           </Button>
