@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { getCategories } from "services/getCategories";
+import { toast } from "react-toastify";
 
 import "../styles/userEdit.css";
 // reactstrap components
@@ -39,6 +40,7 @@ class ArticleInfo extends Component {
         `http://192.168.100.27:8080/api/article/articleInfoForAdmin/${articleId}`
       )
       .then((res) => {
+        console.log(res);
         this.setState({ articleInfo: res.data });
       })
       .catch((ex) => console.log(ex));
@@ -49,8 +51,46 @@ class ArticleInfo extends Component {
     this.setState({ categories });
   }
 
+  handleDownload = async (fileId, fileName, type) => {
+    if (fileId && fileName && type) {
+      try {
+        await fetch(
+          `http://192.168.100.27:8080/api/attachment/download/${fileId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": type,
+            },
+          }
+        )
+          .then((response) => response.blob())
+          .then((blob) => {
+            // Create blob link to download
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", fileName);
+
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+          });
+      } catch (error) {
+        toast.error(error);
+      }
+    } else {
+      toast.error("file topilmadi");
+    }
+  };
+
   render() {
     const article = this.state.articleInfo.article;
+    console.log(article);
+
     const steps = this.state.articleInfo.articleAdminInfoList;
 
     return (
@@ -211,24 +251,19 @@ class ArticleInfo extends Component {
                         <FormGroup>
                           <label>Ilmiy Ishlarni yuklash</label>
                           <Button
-                            // disabled={
-                            //   this.state.currentUser.scientificWork
-                            //     ? false
-                            //     : true
-                            // }
                             className="m-0"
-                            style={{ width: "100%", padding: "0.75rem" }}
-                            // onClick={() =>
-                            //   this.handleDownload(
-                            //     this.state.currentUser.scientificWork[0].id,
-
-                            //     this.state.currentUser.scientificWork[0]
-                            //       .originalName,
-
-                            //     this.state.currentUser.scientificWork[0]
-                            //       .contentType
-                            //   )
-                            // }
+                            style={{
+                              width: "100%",
+                              padding: "0.75rem",
+                              cursor: "pointer",
+                            }}
+                            onClick={() =>
+                              this.handleDownload(
+                                article.file && article.file.id,
+                                article.file && article.file.originalName,
+                                article.file && article.file.contentType
+                              )
+                            }
                           >
                             Ilmiy Ishlarni yuklash
                           </Button>

@@ -555,7 +555,13 @@ class Users extends Component {
                                     className="removeBtn"
                                     onClick={() => this.handleRemove(user.id)}
                                   >
-                                    <i className="nc-icon nc-simple-remove iconSize" />
+                                    <i
+                                      style={{
+                                        fontSize: "4rem",
+                                        paddingTop: "1rem",
+                                      }}
+                                      className="nc-icon nc-simple-remove iconSize"
+                                    />
                                   </button>
                                 </td>
                               </tr>

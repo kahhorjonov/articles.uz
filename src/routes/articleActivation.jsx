@@ -28,35 +28,39 @@ class ArticleActivation extends Component {
   };
 
   handleDownload = async (fileId, fileName, type) => {
-    await fetch(
-      `http://192.168.100.27:8080/api/attachment/download/${fileId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": type,
-        },
+    if (fileId && fileName && type) {
+      try {
+        await fetch(
+          `http://192.168.100.27:8080/api/attachment/download/${fileId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": type,
+            },
+          }
+        )
+          .then((response) => response.blob())
+          .then((blob) => {
+            // Create blob link to download
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", fileName);
+
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+          });
+      } catch (error) {
+        toast.error(error);
       }
-    )
-      .then((response) => response.blob())
-      .then((blob) => {
-        // Create blob link to download
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", fileName);
-
-        document.body.appendChild(link);
-
-        // Start download
-        link.click();
-
-        // Clean up and remove the link
-        link.parentNode.removeChild(link);
-      })
-      .catch((ex) => {
-        console.log(ex);
-        // toast.error(ex.response.data.message);
-      });
+    } else {
+      toast.error("file topilmadi");
+    }
   };
 
   handleChange = (e, id) => {
@@ -138,9 +142,9 @@ class ArticleActivation extends Component {
                             }}
                             onClick={() =>
                               this.handleDownload(
-                                article.file.id,
-                                article.file.originalName,
-                                article.file.contentType
+                                article.file && article.file.id,
+                                article.file && article.file.originalName,
+                                article.file && article.file.contentType
                               )
                             }
                           >
