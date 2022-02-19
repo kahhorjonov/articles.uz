@@ -108,13 +108,13 @@ class ArticleInfo extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {steps &&
+                      {/* {steps &&
                         steps.map((step) => (
                           <tr key={step.admin.id}>
                             <td>{step.status}</td>
                             <td>{step.processDate}</td>
                           </tr>
-                        ))}
+                        ))} */}
                     </tbody>
                   </Table>
                 </CardBody>
@@ -335,9 +335,9 @@ class ArticleInfo extends Component {
                       </Col>
                       <Col className="pl-1" md="6">
                         <FormGroup>
-                          <label>Message</label>
+                          <label>Description</label>
                           <Input
-                            defaultValue="Hello watsap ?"
+                            defaultValue={article && article.description}
                             placeholder="Country"
                             type="text"
                             disabled
@@ -388,79 +388,45 @@ class ArticleInfo extends Component {
             <Col md="12">
               <Card>
                 <CardHeader className="text-center">
-                  <CardTitle tag="h4">Redactor</CardTitle>
+                  <CardTitle tag="h4">Actions</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table hover>
                     <thead>
-                      <tr className="col-md-12">
-                        <th className="col-md-1">№</th>
-                        <th className="col-md-3">Biriktiruvchi revyu</th>
-                        <th className="col-md-2">Status</th>
-                        <th className="col-md-3">Izoh</th>
-                        <th className="col-md-2">File</th>
+                      <tr className="col-md-12 col-sm-12">
+                        <th className="col-md-1 col-sm-1">№</th>
+                        <th className="col-md-3 col-sm-3">Person</th>
+                        <th className="col-md-3 col-sm-3">Status</th>
+                        <th className="col-md-3 col-sm-3">Izoh</th>
+                        <th className="col-md-2 col-sm-2">File</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th>1</th>
-                        {/* <td>Axborot Xafsizligi</td> */}
-                        <td>
-                          <div
-                            className="avatar w-100  d-flex m-0 mr-0"
-                            style={{ overflow: "unset" }}
-                          >
-                            <div className="pl-3">
-                              NDT <br />
-                              <span className="text-success m-2">
-                                <small>Reductor</small>
-                              </span>
-                              <br />
-                              {/* <span>ilon Musk</span>
-                            <p className="text-muted">roul</p> */}
-                            </div>
-                          </div>
-                        </td>
-                        <td>sds</td>
-                        <td>Nashrga tayyor</td>
-                        <td>
-                          <a href="#">File:</a>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <th>2</th>
-                        {/* <td>Axborot Xafsizligi</td> */}
-                        <td>
-                          <div
-                            className="avatar w-100  d-flex m-0 mr-0"
-                            style={{ overflow: "unset" }}
-                          >
-                            {/* <img
-                            alt="..."
-                            className="img-circle img-no-padding img-responsive"
-                            src={
-                              require("assets/img/faces/ayo-ogunseinde-2.jpg")
-                                .default
-                            }
-                          /> */}
-                            <div className="pl-3">
-                              Jeff Bezos <br />
-                              <span className="text-success m-2">
-                                <small>Reviewer</small>
-                              </span>
-                              <br />
-                              {/* <span>ilon Musk</span>
-                            <p className="text-muted">roul</p> */}
-                            </div>
-                          </div>
-                        </td>
-                        <td>sds</td>
-                        <td>Nashrga tayyor</td>
-                        <td>
-                          <a href="">File:</a>
-                        </td>
-                      </tr>
+                      {steps &&
+                        steps.map((step, idx) => (
+                          <tr key={idx}>
+                            <th>{idx + 1}</th>
+                            <td>
+                              <div
+                                className="avatar w-100  d-flex m-0 mr-0"
+                                style={{ overflow: "unset" }}
+                              >
+                                <div>
+                                  {step.fullName} <br />
+                                  <span className="text-success m-2">
+                                    <small>Reviewer</small>
+                                  </span>
+                                  <br />
+                                </div>
+                              </div>
+                            </td>
+                            <td>{step.status}</td>
+                            <td>{step.comment}</td>
+                            <td>
+                              <a href="">File:</a>
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </CardBody>

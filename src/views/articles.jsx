@@ -3,10 +3,10 @@ import ArticleService from "../services/articleService";
 import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
+import { Link } from "react-router-dom";
 import image from "../components/profile.png";
 
 import "../styles/navbar.css";
-import { Link } from "react-router-dom";
 
 class Articles extends Component {
   state = {
