@@ -14,6 +14,9 @@ import UserLayout from "./layouts/User.js";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import Home2 from "components/UI/homepages2/home2";
+import nashirShartlari from "components/UI/homepages2/nashirShartlari";
+import NashirShartlari from "components/UI/homepages2/nashirShartlari";
 
 class App extends Component {
   render() {
@@ -109,6 +112,9 @@ class App extends Component {
         {/* <Users/> */}
         {/* <Users2/> */}
         {/* <JurnallarRoyxati/> */}
+        {/* <Home2/> */}
+
+        {/* <NashirShartlari /> */}
       </>
     );
   }

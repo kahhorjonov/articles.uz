@@ -1,0 +1,141 @@
+.nashir {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.w1 {
+  padding-top: 80px;
+}
+.nashir h1 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 130%;
+}
+
+.nashir .flex-column {
+  position: sticky;
+  top: 20px;
+}
+p {
+  white-space: pre;
+}
+.nashir .nav-pills .nav-link {
+  color: #5a5a5a;
+  padding: 0;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 20px;
+}
+.nashir .nav-pills .nav-link.active {
+  background-color: white;
+  color: black;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 20px;
+}
+
+.nashir .col-lg-8 h1 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 130%;
+}
+.nashir .col-lg-8 p {
+  width: 100%;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+}
+
+.nashirNarxi .maqolas {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+}
+.colapss h4 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 130%;
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+.colapss .list-group-item {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+  padding: 20px 0;
+}
+.colapss .lik {
+  text-decoration: none;
+}
+.colapss .lik li {
+  border: none !important;
+  text-decoration: none;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+  color: #282828;
+}
+.colapss .lik div {
+  text-decoration: none;
+  color: black;
+}
+.colapss .lik i:hover {
+  transition: 2ms all linear;
+  transform: rotate(90deg) !important;
+}
+.Data {
+  padding-top: 80px;
+}
+
+.Data h4 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 130%;
+}
+.Data .datta {
+  text-decoration: none;
+}
+.Data .datta li {
+  height: 55px;
+  color: black;
+  background: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+}
+.Data .datta div {
+  color: black;
+}
+
+.Data  .pp {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px !important;
+  line-height: 140%;
+  padding-top: 10px !important;
+  color: #5A5A5A;
+}
