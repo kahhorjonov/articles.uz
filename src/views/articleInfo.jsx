@@ -51,6 +51,28 @@ class ArticleInfo extends Component {
     this.setState({ categories });
   }
 
+  changeActivityOfArticle = async (bool) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const bodyParametrs = {};
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+
+      return axios
+        .post(
+          `http://192.168.100.27:8080/api/articleStatus/changeActiveAndFalse/${this.state.articleId}/${bool}`,
+          bodyParametrs,
+          config
+        )
+        .then((res) => toast.success(res.data.message));
+    } catch (ex) {
+      toast.success(ex.data.message);
+    }
+  };
+
   handleDownload = async (fileId, fileName, type) => {
     if (fileId && fileName && type) {
       try {
@@ -89,7 +111,6 @@ class ArticleInfo extends Component {
 
   render() {
     const article = this.state.articleInfo.article;
-    console.log(article);
 
     const steps = this.state.articleInfo.articleAdminInfoList;
 
@@ -123,8 +144,9 @@ class ArticleInfo extends Component {
               <Card>
                 <CardBody>
                   <Row>
-                    <Col md="6">
+                    <Col md="5">
                       <Form>
+                        <label>Xulosa</label>
                         <select
                           style={{ fontSize: "1.4rem" }}
                           defaultValue="CHECK_AND_ACCEPT"
@@ -146,16 +168,17 @@ class ArticleInfo extends Component {
                         </select>
                       </Form>
                     </Col>
-                    <Col md="6" className="mt-3">
-                      <a>
-                        Download: <span>File</span>
-                      </a>
+                    <Col md="7">
+                      <div className="form-group">
+                        <label>File yuklash ⬆️</label>
+                        <Input type="file" className="form-control p-0" />
+                      </div>
                     </Col>
                   </Row>
 
                   <Row>
                     <Col md="12">
-                      <Label>discription</Label>
+                      <Label>description</Label>
                       <Input
                         placeholder="discription.."
                         style={{ height: "40px" }}
@@ -353,7 +376,9 @@ class ArticleInfo extends Component {
                             <input
                               defaultChecked={article && article.active}
                               type="checkbox"
-                              onClick={(e) => console.log(e.target.checked)}
+                              onClick={(e) =>
+                                this.changeActivityOfArticle(e.target.checked)
+                              }
                             />
                             <span className="slider round"></span>
                           </label>
@@ -423,7 +448,18 @@ class ArticleInfo extends Component {
                             <td>{step.status}</td>
                             <td>{step.comment}</td>
                             <td>
-                              <a href="">File:</a>
+                              <a
+                                className="btn btn-success"
+                                onClick={() =>
+                                  this.handleDownload(
+                                    step.file && step.file.id,
+                                    step.file && step.file.originalName,
+                                    step.file && step.file.contentType
+                                  )
+                                }
+                              >
+                                Download File
+                              </a>
                             </td>
                           </tr>
                         ))}
