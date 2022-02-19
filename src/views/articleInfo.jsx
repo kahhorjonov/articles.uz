@@ -170,7 +170,7 @@ class ArticleInfo extends Component {
                     </Col>
                     <Col md="7">
                       <div className="form-group">
-                        <label>File yuklash ⬆️</label>
+                        <label>File upload ⬆️</label>
                         <Input type="file" className="form-control p-0" />
                       </div>
                     </Col>
@@ -180,8 +180,8 @@ class ArticleInfo extends Component {
                     <Col md="12">
                       <Label>description</Label>
                       <Input
-                        placeholder="discription.."
-                        style={{ height: "40px" }}
+                        placeholder="description.."
+                        // style={{ height: "40px" }}
                         type="text"
                       />
                     </Col>
@@ -295,7 +295,7 @@ class ArticleInfo extends Component {
 
                       <Col className="pl-1" md="3">
                         <FormGroup>
-                          <label>Public</label>
+                          <label>For Everyone?</label>
                           <Input
                             disabled
                             defaultValue={article && article.publicPrivate}
@@ -421,9 +421,9 @@ class ArticleInfo extends Component {
                       <tr className="col-md-12 col-sm-12">
                         <th className="col-md-1 col-sm-1">№</th>
                         <th className="col-md-3 col-sm-3">Person</th>
-                        <th className="col-md-3 col-sm-3">Status</th>
+                        <th className="col-md-3 col-sm-2">Status</th>
                         <th className="col-md-3 col-sm-3">Izoh</th>
-                        <th className="col-md-2 col-sm-2">File</th>
+                        <th className="col-md-2 col-sm-3">File</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -432,20 +432,21 @@ class ArticleInfo extends Component {
                           <tr key={idx}>
                             <th>{idx + 1}</th>
                             <td>
-                              <div
-                                className="avatar w-100  d-flex m-0 mr-0"
-                                style={{ overflow: "unset" }}
-                              >
-                                <div>
-                                  {step.fullName} <br />
-                                  <span className="text-success m-2">
-                                    <small>Reviewer</small>
-                                  </span>
-                                  <br />
-                                </div>
-                              </div>
+                              {step.fullName}
+                              <br />
+                              <span className="text-success">
+                                {step.role.slice(5)}
+                              </span>
                             </td>
-                            <td>{step.status}</td>
+                            <td>
+                              {step.status}
+                              <span>
+                                <br />
+                                <small className="text-succes">
+                                  {step.processDate}
+                                </small>
+                              </span>
+                            </td>
                             <td>{step.comment}</td>
                             <td>
                               <a
