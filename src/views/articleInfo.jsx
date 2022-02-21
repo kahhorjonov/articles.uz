@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
+import articleService from "services/articleService";
 
 import "../styles/userEdit.css";
 // reactstrap components
@@ -20,7 +21,6 @@ import {
   Col,
   Table,
 } from "reactstrap";
-import articleService from "services/articleService";
 
 class ArticleInfo extends Component {
   state = {
@@ -165,7 +165,7 @@ class ArticleInfo extends Component {
                     </Col>
                     <Col md="7">
                       <div className="form-group">
-                        <label>File upload ⬆️</label>
+                        <label>File upload ⬆️ (optional)</label>
                         <Input
                           type="file"
                           className="form-control p-0"

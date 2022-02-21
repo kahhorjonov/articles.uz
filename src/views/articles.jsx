@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import ArticleService from "../services/articleService";
 import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { Link } from "react-router-dom";
 import image from "../components/profile.png";
+import articleService from "services/articleService";
 
 import "../styles/navbar.css";
 
@@ -30,21 +30,21 @@ class Articles extends Component {
   };
 
   handleGetArticles = (step) => {
-    const token = localStorage.getItem("token");
-    // console.log(step);
-
-    ArticleService.newMyArticles(token, step)
-      .then((res) => {
-        this.setState({ articles: res.object });
-      })
-      .catch((ex) => toast.error(ex.response.data.message));
+    try {
+      articleService.newMyArticles(step).then((res) => {
+        this.setState({ articles: res.data.object });
+      });
+      // .catch((ex) => toast.error(ex.response.data.message));
+    } catch (ex) {
+      toast.error(ex);
+    }
   };
 
   handleActive = async (id) => {
     const role = this.state.role;
     this.setState({ id: id });
     try {
-      const people = await ArticleService.getRedactorsAndReviewers(id, role);
+      const people = await articleService.getRedactorsAndReviewers(id, role);
       // console.log(people);
       this.setState({ people: people.object });
       // console.log(this.state);
@@ -63,8 +63,6 @@ class Articles extends Component {
   };
 
   handleClick = (step) => {
-    // this.forceUpdate();
-    // await this.setState({ step: step });
     this.setState({ people: [] });
     this.handleGetArticles(step);
   };
@@ -81,12 +79,8 @@ class Articles extends Component {
     const articleId = this.state.activeArticleId;
     const deadline = this.state.deadline;
 
-    await ArticleService.confirmForUsers(
-      target.checked,
-      articleId,
-      userId,
-      deadline
-    )
+    await articleService
+      .confirmForUsers(target.checked, articleId, userId, deadline)
       .then((res) => toast.success(res.data.message))
       .catch((ex) => console.log(ex));
 
@@ -250,7 +244,9 @@ class Articles extends Component {
                         style={{ position: "absolute", bottom: 0, right: 10 }}
                       >
                         <Pagination
-                          itemsCount={this.state.articles.length}
+                          itemsCount={
+                            this.state.articles && this.state.articles.length
+                          }
                           pageSize={pageSize}
                           currentPage={currentPage}
                           onPageChange={this.handlePageChange}

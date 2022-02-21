@@ -18,13 +18,16 @@ class ArticleActivation extends Component {
   }
 
   getArticles = () => {
-    ArticleService.getNewAllArticles()
-      .then((res) => {
+    try {
+      ArticleService.getNewAllArticles().then((res) => {
         this.setState({ articles: res.object });
-      })
-      .catch((ex) => {
-        toast.info("Server bilan aloqa yo'q");
       });
+      // .catch((ex) => {
+      //   toast.info("Server bilan aloqa yo'q");
+      // });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   handleDownload = async (fileId, fileName, type) => {

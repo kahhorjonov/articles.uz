@@ -5,82 +5,82 @@ import httpService from "./httpService";
 
 const { apiSwagger, apiLocal } = api;
 
-class ArticleService {
-  token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
-  static async addArticle(data) {
-    const bodyFormData = new FormData();
+export function addArticle(data) {
+  const bodyFormData = new FormData();
 
-    const token = jwtDecode(localStorage.getItem("token"));
+  const token = jwtDecode(localStorage.getItem("token"));
 
-    bodyFormData.append("author", data.author);
-    bodyFormData.append("categoryId", data.categoryId);
-    bodyFormData.append("description", data.description);
-    bodyFormData.append("firstName", data.firstName);
-    bodyFormData.append("lastName", data.lastName);
-    bodyFormData.append("tags", data.tags);
-    bodyFormData.append("titleArticle", data.titleArticle);
-    bodyFormData.append("publicOrPrivate", false);
-    bodyFormData.append("userId", token.sub);
-    bodyFormData.append("file", data.file);
+  bodyFormData.append("author", data.author);
+  bodyFormData.append("categoryId", data.categoryId);
+  bodyFormData.append("description", data.description);
+  bodyFormData.append("firstName", data.firstName);
+  bodyFormData.append("lastName", data.lastName);
+  bodyFormData.append("tags", data.tags);
+  bodyFormData.append("titleArticle", data.titleArticle);
+  bodyFormData.append("publicOrPrivate", false);
+  bodyFormData.append("userId", token.sub);
+  bodyFormData.append("file", data.file);
 
-    // for (var pair of bodyFormData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
+  // for (var pair of bodyFormData.entries()) {
+  //   console.log(pair[0] + ", " + pair[1]);
+  // }
 
-    try {
-      const result = await axios({
-        method: "post",
-        url: apiLocal + "/article/addArticle",
-        // url: apiSwagger + "/article/addArticle",
-        data: bodyFormData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("result", result);
-      // if (result) reset();
-    } catch (err) {
-      alert(err.message);
-    }
+  try {
+    const result = axios({
+      method: "post",
+      url: apiLocal + "/article/addArticle",
+      // url: apiSwagger + "/article/addArticle",
+      data: bodyFormData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log("result", result);
+    // if (result) reset();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+export function sendWork(articleId, status, file) {
+  const userId = jwtDecode(localStorage.getItem("token")).sub;
+
+  console.log(userId);
+
+  const bodyFormData = new FormData();
+
+  bodyFormData.append("articleId", articleId);
+  bodyFormData.append("status", status);
+  bodyFormData.append("file", file ? file : null);
+  bodyFormData.append("userId", userId);
+
+  for (var pair of bodyFormData.entries()) {
+    console.log(pair[0] + ", " + pair[1]);
   }
 
-  static async sendWork(articleId, status, file) {
-    const userId = jwtDecode(localStorage.getItem("token")).sub;
-
-    console.log(userId);
-
-    const bodyFormData = new FormData();
-
-    bodyFormData.append("articleId", articleId);
-    bodyFormData.append("status", status);
-    bodyFormData.append("file", file ? file : null);
-    bodyFormData.append("userId", userId);
-
-    for (var pair of bodyFormData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-
-    try {
-      const result = await axios({
-        method: "post",
-        url: "http://192.168.100.27:8080/api/article/givenStatus",
-        // url: apiSwagger + "/article/addArticle",
-        data: bodyFormData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      return result;
-    } catch (err) {
-      alert(err.message);
-    }
+  try {
+    const result = axios({
+      method: "post",
+      url: "http://192.168.100.27:8080/api/article/givenStatus",
+      // url: apiSwagger + "/article/addArticle",
+      data: bodyFormData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return result;
+  } catch (err) {
+    alert(err.message);
   }
+}
 
-  static async getAllArticles() {
-    let articles = [];
+export function getAllArticles() {
+  let articles = [];
 
-    await axios
+  return (
+    axios
       .get(apiLocal + "/article/newMyArticle")
       // .get(apiSwagger + "/article/newMyArticle")
       .then((res) => {
@@ -88,14 +88,15 @@ class ArticleService {
       })
       .catch((res) => {
         articles = [];
-      });
-    return articles;
-  }
+      })
+  );
+}
 
-  static async getNewAllArticles() {
-    let articles = [];
+export function getNewAllArticles() {
+  let articles = [];
 
-    await axios
+  return (
+    axios
       .get(apiLocal + "/article/getNewAllArticle")
       // .get(apiSwagger + "/article/getNewAllArticle")
       .then((res) => {
@@ -103,178 +104,126 @@ class ArticleService {
       })
       .catch((res) => {
         articles = [];
-      });
-    return articles;
-  }
-
-  static async newMyArticles(token, step) {
-    let articles = [];
-
-    // console.log(step);
-
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
-    const bodyParametrs = {
-      status: step,
-    };
-
-    await axios
-      .post(apiLocal + "/article/newMyArticle", bodyParametrs, config)
-      // .post(apiSwagger + "/article/newMyArticle", bodyParametrs, config)
-      .then((res) => {
-        articles = res.data;
-        // console.log(res);
       })
-      .catch((res) => {
-        articles = [];
-      });
+  );
+}
 
-    return articles;
-  }
+export function newMyArticles(step) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-  static async myNewArticles(token) {
-    let articles = [];
+  const bodyParametrs = {
+    status: step,
+  };
 
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+  return axios.post(apiLocal + "/article/newMyArticle", bodyParametrs, config);
+}
 
-    const bodyParametrs = {
-      key: "value",
-    };
+export function myNewArticles(token) {
+  let articles = [];
 
-    await axios
-      .post(apiLocal + "/article/myNewArticles", bodyParametrs, config)
-      // .post(apiSwagger + "/article/myNewArticles", bodyParametrs, config)
-      .then((res) => {
-        articles = res.data;
-        // console.log(res);
-      })
-      .catch((res) => {
-        articles = [];
-      });
-    return articles;
-  }
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-  static async reviewerActionForArticle(token, action, articleId) {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+  const bodyParametrs = {
+    key: "value",
+  };
 
-    const bodyParametrs = {
-      articleStatus: action,
-      articleId: articleId,
-    };
+  return axios.post(apiLocal + "/article/myNewArticles", bodyParametrs, config);
+  // .post(apiSwagger + "/article/myNewArticles", bodyParametrs, config)
+  // .then((res) => {
+  //   articles = res.data;
+  //   // console.log(res);
+  // })
+  // .catch((res) => {
+  //   articles = [];
+  // })
+}
 
-    await axios
-      .post(
-        apiLocal + "/article/reviewerAcceptTheArticle",
-        bodyParametrs,
-        config
-      )
-      // .post(apiSwagger + "/article/reviewerAcceptTheArticle", bodyParametrs, config)
-      .then((res) => {
-        return res;
-      })
-      .catch((res) => {
-        console.error(res);
-      });
-  }
+export function reviewerActionForArticle(token, action, articleId) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-  static async confirmArticle(token, bool, articleId) {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+  const bodyParametrs = {
+    articleStatus: action,
+    articleId: articleId,
+  };
 
-    const bodyParametrs = {
-      confirm: bool,
-      articleId: articleId,
-    };
+  return axios.post(
+    apiLocal + "/article/reviewerAcceptTheArticle",
+    bodyParametrs,
+    config
+  );
+}
 
-    await axios
-      .post(apiLocal + "/articleStatus/confirm", bodyParametrs, config)
-      // .post(apiSwagger + "/articleStatus/confirm", bodyParametrs, config)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((res) => {
-        console.error(res);
-      });
-    // return console.log();;
-  }
+export function confirmArticle(token, bool, articleId) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-  static async confirmForUsers(bool, articleId, userId, deadline) {
-    const token = localStorage.getItem("token");
+  const bodyParametrs = {
+    confirm: bool,
+    articleId: articleId,
+  };
 
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+  return axios.post(apiLocal + "/articleStatus/confirm", bodyParametrs, config);
+}
 
-    const bodyParametrs = {
-      addAndRemove: bool,
-      article: articleId,
-      redactorsAndReviewer: userId,
-      deadline: deadline,
-    };
+export function confirmForUsers(bool, articleId, userId, deadline) {
+  const token = localStorage.getItem("token");
 
-    return await axios.post(
-      apiLocal + "/article/addAndRemoveRedactor",
-      // apiSwagger + "/article/addAndRemoveRedactor",
-      bodyParametrs,
-      config
-    );
-  }
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-  static async articleInfo(id) {
-    return httpService.get(`${apiLocal} + /article/articleInfoForAdmin/${id}`);
-  }
+  const bodyParametrs = {
+    addAndRemove: bool,
+    article: articleId,
+    redactorsAndReviewer: userId,
+    deadline: deadline,
+  };
 
-  static async myDuties(token) {
-    let articles = [];
+  return axios.post(
+    apiLocal + "/article/addAndRemoveRedactor",
+    // apiSwagger + "/article/addAndRemoveRedactor",
+    bodyParametrs,
+    config
+  );
+}
 
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+export function articleInfo(id) {
+  return httpService.get(`${apiLocal} + /article/articleInfoForAdmin/${id}`);
+}
 
-    const bodyParametrs = {};
+export function myDuties(token) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-    await axios
-      .post(
-        "http://192.168.100.27:8080/api/article/myDuties",
-        bodyParametrs,
-        config
-      )
-      // .post(apiSwagger + "/article/myDuties", bodyParametrs, config)
-      .then((res) => {
-        // articles = res;
-        // return articles;
-      })
-      .catch((res) => {
-        // console.error(res);
-        // return articles;
-      });
-  }
+  const bodyParametrs = {};
 
-  static async getRedactorsAndReviewers(id, role) {
-    let people = [];
+  return axios.post(
+    "http://192.168.100.27:8080/api/article/myDuties",
+    bodyParametrs,
+    config
+  );
+}
 
-    await axios
-      .post(apiLocal + "/article/getReviewerAndRedactorRandom", {
-        // .post(apiSwagger + "/article/getReviewerAndRedactorRandom", {
-        articleId: `${id}`,
-        roleId: `${role}`,
-      })
-      .then((res) => {
-        people = res.data;
-      })
-      .catch((res) => {
-        people = [];
-      });
+export function getRedactorsAndReviewers(id, role) {
+  let people = [];
 
-    return people;
-  }
+  return axios
+    .post(apiLocal + "/article/getReviewerAndRedactorRandom", {
+      // .post(apiSwagger + "/article/getReviewerAndRedactorRandom", {
+      articleId: `${id}`,
+      roleId: `${role}`,
+    })
+    .then((res) => {
+      people = res.data;
+    });
 }
 
 export function editArticleByAdmin(data) {
@@ -296,9 +245,23 @@ export function editArticleByAdmin(data) {
     data: bodyFormData,
     headers: {
       "Content-Type": "multipart/form-data",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 }
 
-export default { ArticleService, editArticleByAdmin };
+export default {
+  editArticleByAdmin,
+  getRedactorsAndReviewers,
+  myDuties,
+  articleInfo,
+  confirmForUsers,
+  confirmArticle,
+  newMyArticles,
+  reviewerActionForArticle,
+  myNewArticles,
+  getNewAllArticles,
+  getAllArticles,
+  sendWork,
+  addArticle,
+};
