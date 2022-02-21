@@ -45,9 +45,7 @@ export function addArticle(data) {
 }
 
 export function sendWork(articleId, status, file) {
-  const userId = jwtDecode(localStorage.getItem("token")).sub;
-
-  console.log(userId);
+  const userId = jwtDecode(token).sub;
 
   const bodyFormData = new FormData();
 
@@ -56,24 +54,19 @@ export function sendWork(articleId, status, file) {
   bodyFormData.append("file", file ? file : null);
   bodyFormData.append("userId", userId);
 
-  for (var pair of bodyFormData.entries()) {
-    console.log(pair[0] + ", " + pair[1]);
-  }
+  // for (var pair of bodyFormData.entries()) {
+  //   console.log(pair[0] + ", " + pair[1]);
+  // }
 
-  try {
-    const result = axios({
-      method: "post",
-      url: "http://192.168.100.27:8080/api/article/givenStatus",
-      // url: apiSwagger + "/article/addArticle",
-      data: bodyFormData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return result;
-  } catch (err) {
-    alert(err.message);
-  }
+  return axios({
+    method: "post",
+    url: "http://192.168.100.27:8080/api/article/givenStatus",
+    // url: apiSwagger + "/article/addArticle",
+    data: bodyFormData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 }
 
 export function getAllArticles() {
@@ -93,19 +86,7 @@ export function getAllArticles() {
 }
 
 export function getNewAllArticles() {
-  let articles = [];
-
-  return (
-    axios
-      .get(apiLocal + "/article/getNewAllArticle")
-      // .get(apiSwagger + "/article/getNewAllArticle")
-      .then((res) => {
-        articles = res.data;
-      })
-      .catch((res) => {
-        articles = [];
-      })
-  );
+  return axios.get(apiLocal + "/article/getNewAllArticle");
 }
 
 export function newMyArticles(step) {
@@ -120,7 +101,7 @@ export function newMyArticles(step) {
   return axios.post(apiLocal + "/article/newMyArticle", bodyParametrs, config);
 }
 
-export function myNewArticles(token) {
+export function myNewArticles() {
   let articles = [];
 
   const config = {
@@ -132,17 +113,9 @@ export function myNewArticles(token) {
   };
 
   return axios.post(apiLocal + "/article/myNewArticles", bodyParametrs, config);
-  // .post(apiSwagger + "/article/myNewArticles", bodyParametrs, config)
-  // .then((res) => {
-  //   articles = res.data;
-  //   // console.log(res);
-  // })
-  // .catch((res) => {
-  //   articles = [];
-  // })
 }
 
-export function reviewerActionForArticle(token, action, articleId) {
+export function reviewerActionForArticle(action, articleId) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -163,6 +136,8 @@ export function confirmArticle(token, bool, articleId) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
+
+  console.log(token, bool, articleId);
 
   const bodyParametrs = {
     confirm: bool,
@@ -198,7 +173,7 @@ export function articleInfo(id) {
   return httpService.get(`${apiLocal} + /article/articleInfoForAdmin/${id}`);
 }
 
-export function myDuties(token) {
+export function myDuties() {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };

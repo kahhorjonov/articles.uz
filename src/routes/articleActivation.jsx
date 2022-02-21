@@ -20,11 +20,8 @@ class ArticleActivation extends Component {
   getArticles = () => {
     try {
       ArticleService.getNewAllArticles().then((res) => {
-        this.setState({ articles: res.object });
+        this.setState({ articles: res.data.object });
       });
-      // .catch((ex) => {
-      //   toast.info("Server bilan aloqa yo'q");
-      // });
     } catch (error) {
       toast.error(error);
     }

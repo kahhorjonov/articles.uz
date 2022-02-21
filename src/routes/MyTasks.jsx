@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ArticleService from "./../services/articleService";
+import articleService from "./../services/articleService";
 import { Card, CardBody, Row, Col } from "reactstrap";
+import { toast } from "react-toastify";
 
-// import "../styles/myTask2.css";
 import "../styles/mytasks.css";
 
 class MyTasks extends Component {
@@ -16,49 +16,38 @@ class MyTasks extends Component {
   };
 
   async componentDidMount() {
-    const token = localStorage.getItem("token");
-
-    await this.newMyArticles(token);
+    await this.newMyArticles();
   }
 
-  newMyArticles = async (token) => {
-    await ArticleService.myNewArticles(token).then((res) => {
-      this.setState({ articles: res });
-    });
+  newMyArticles = async () => {
+    try {
+      await articleService.myNewArticles().then((res) => {
+        this.setState({ articles: res.data });
+      });
+    } catch (ex) {
+      toast.error(ex);
+    }
   };
 
-  async getAcceptedArticles(token) {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
-    const bodyParametrs = {};
-
-    await axios
-      .post(
-        "http://192.168.100.27:8080/api/article/myDuties",
-        bodyParametrs,
-        config
-      )
-      // .post(apiSwagger + "/article/myDuties", bodyParametrs, config)
-      .then((res) => {
-        this.setState({ myArticles: res.data.object });
-      })
-      .catch((res) => {
-        console.error(res);
-      });
+  async getAcceptedArticles() {
+    try {
+      await articleService
+        .myDuties()
+        .then((res) => this.setState({ myArticles: res.data.object }));
+    } catch (ex) {
+      toast.error(ex);
+    }
   }
 
   handleAction = async (action, id) => {
-    console.log(id);
-
-    const token = localStorage.getItem("token");
-
-    await ArticleService.reviewerActionForArticle(token, action, id)
-      .then((res) => res)
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await articleService
+        .reviewerActionForArticle(action, id)
+        .then((res) => console.log(res));
+    } catch (ex) {
+      console.log(ex);
+      // toast.error(ex.response.message);
+    }
   };
 
   handleClick = async (text) => {
@@ -74,16 +63,18 @@ class MyTasks extends Component {
   };
 
   handleSubmit = async (id) => {
-    const { status, file } = this.state;
+    try {
+      const { status, file } = this.state;
 
-    await ArticleService.sendWork(id, status, file)
-      .then((res) => console.log(res))
-      .catch((ex) => console.log(ex));
+      await articleService
+        .sendWork(id, status, file)
+        .then((res) => toast.success(res.data.message));
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
   };
 
   render() {
-    console.log(this.state.myArticles);
-
     return (
       <div className="content">
         <Row>
@@ -122,7 +113,7 @@ class MyTasks extends Component {
                             this.setState({
                               step: "PREPARING_FOR_PUBLICATION",
                             });
-                            console.log("tahrirda");
+                            // console.log("tahrirda");
                           }}
                           to=""
                           className={

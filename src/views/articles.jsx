@@ -61,14 +61,17 @@ class Articles extends Component {
     this.handleGetArticles(step);
   };
 
-  handleSubmit = async ({ target }, userId) => {
+  handleSubmit = async (bool, userId) => {
     try {
       const articleId = this.state.activeArticleId;
       const deadline = this.state.deadline;
 
       await articleService
-        .confirmForUsers(target.checked, articleId, userId, deadline)
-        .then((res) => toast.success(res.data.message));
+        .confirmForUsers(bool, articleId, userId, deadline)
+        .then((res) => {
+          console.log(res);
+          toast.success(res.data.message);
+        });
       this.handleActive(this.state.activeArticleId);
     } catch (ex) {
       toast.error(ex);
@@ -110,7 +113,6 @@ class Articles extends Component {
                         <li className="item">
                           <a
                             onClick={(e) => {
-                              e.preventDefault();
                               this.handleClick("START");
                               this.setState({ activeRow: 1 });
                               //   this.setState({ step: "START" });
@@ -316,9 +318,13 @@ class Articles extends Component {
                                     <label className="switch">
                                       <input
                                         checked={person.confirm}
-                                        onChange={(e) =>
-                                          this.handleSubmit(e, person.user.id)
-                                        }
+                                        onChange={(e) => {
+                                          console.log(e.target.checked);
+                                          this.handleSubmit(
+                                            e.target.checked,
+                                            person.user.id
+                                          );
+                                        }}
                                         type="checkbox"
                                       />
                                       <span className="slider round"></span>
