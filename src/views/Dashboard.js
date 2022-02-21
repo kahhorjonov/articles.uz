@@ -48,6 +48,26 @@ class Dashboard extends Component {
       numberOfNewAndPayFalse,
     } = this.state.data;
 
+    const numberOfUsers = (
+      this.state.data &&
+      this.state.data.numberOfUsers +
+        this.state.data.numberOfReviewers +
+        this.state.data.numberOfRedactors +
+        this.state.data.numberOfAdmins
+    ).toString();
+
+    const numberOfArticles = (
+      +numberOfFreeAndPublishedArticles +
+      numberOfNewArticles +
+      numberOfPaidAndPublishedArticles +
+      numberOfReadyOfPublicationArticles +
+      numberOfRejectedArticles +
+      numberOfRecycleArticles +
+      numberOfInReviewArticles +
+      numberOfIsBeingEditedArticles +
+      numberOfNewAndPayFalse
+    ).toString();
+
     return (
       <>
         <div className="content">
@@ -107,19 +127,13 @@ class Dashboard extends Component {
                     </Col>
                     <Col md="4" xs="4">
                       <CardTitle tag="p">
-                        {numberOfFreeAndPublishedArticles +
-                          numberOfNewArticles +
-                          numberOfPaidAndPublishedArticles +
-                          numberOfReadyOfPublicationArticles +
-                          numberOfRejectedArticles +
-                          numberOfRecycleArticles +
-                          numberOfInReviewArticles +
-                          numberOfIsBeingEditedArticles +
-                          numberOfNewAndPayFalse}
+                        <span>{numberOfArticles && numberOfArticles}</span>
                       </CardTitle>
                     </Col>
                     <Col md="4" xs="4">
-                      <CardTitle tag="p">+{numberOfNewArticles}</CardTitle>
+                      <CardTitle tag="p">
+                        <span>+{this.state.data && numberOfNewArticles}</span>
+                      </CardTitle>
                     </Col>
                   </Row>
                 </CardFooter>
@@ -150,14 +164,20 @@ class Dashboard extends Component {
 
                     <Col md="4" xs="4">
                       <CardTitle tag="p">
-                        {numberOfPaidAndPublishedArticles +
-                          numberOfFreeAndPublishedArticles}
+                        <span>
+                          {numberOfPaidAndPublishedArticles &&
+                            numberOfPaidAndPublishedArticles +
+                              numberOfFreeAndPublishedArticles}
+                        </span>
                       </CardTitle>
                     </Col>
 
                     <Col md="4" xs="4">
                       <CardTitle tag="p">
-                        {numberOfReadyOfPublicationArticles}
+                        <span>
+                          {this.state.data &&
+                            numberOfReadyOfPublicationArticles}
+                        </span>
                       </CardTitle>
                     </Col>
                   </Row>
@@ -186,11 +206,19 @@ class Dashboard extends Component {
                   <hr />
                   <Row>
                     <Col md="4" xs="4" className="offset-4">
-                      <CardTitle tag="p">{numberOfRecycleArticles}</CardTitle>
+                      <CardTitle tag="p">
+                        <span>
+                          {this.state.data && numberOfRecycleArticles}
+                        </span>
+                      </CardTitle>
                     </Col>
 
                     <Col md="4" xs="4">
-                      <CardTitle tag="p">{numberOfRejectedArticles}</CardTitle>
+                      <CardTitle tag="p">
+                        <span>
+                          {this.state.data && numberOfRejectedArticles}
+                        </span>
+                      </CardTitle>
                     </Col>
                   </Row>
                 </CardFooter>
@@ -282,11 +310,11 @@ class Dashboard extends Component {
                   </div>
                   <hr />
                   <div className="stats">
-                    <i className="fa fa-calendar" /> Number of users :{" "}
-                    {this.state.data.numberOfUsers +
-                      this.state.data.numberOfReviewers +
-                      this.state.data.numberOfRedactors +
-                      this.state.data.numberOfAdmins}
+                    <i className="fa fa-calendar" />
+                    <span>
+                      Number of users :{" "}
+                      {numberOfUsers && numberOfUsers.toString()}
+                    </span>
                   </div>
                 </CardFooter>
               </Card>

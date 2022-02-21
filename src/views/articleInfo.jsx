@@ -121,28 +121,6 @@ class ArticleInfo extends Component {
             <Col md="4">
               <Card>
                 <CardBody>
-                  <Table>
-                    <thead>
-                      <tr className="col-md-12">
-                        <th className="col-md-6">Steps</th>
-                        <th className="col-md-6">Data</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {/* {steps &&
-                        steps.map((step) => (
-                          <tr key={step.admin.id}>
-                            <td>{step.status}</td>
-                            <td>{step.processDate}</td>
-                          </tr>
-                        ))} */}
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-
-              <Card>
-                <CardBody>
                   <Row>
                     <Col md="5">
                       <Form>
@@ -191,6 +169,28 @@ class ArticleInfo extends Component {
                       </Button>
                     </Col>
                   </Row>
+                </CardBody>
+              </Card>
+
+              <Card>
+                <CardBody>
+                  <Table>
+                    <thead>
+                      <tr className="col-md-12">
+                        <th className="col-md-6">Steps</th>
+                        <th className="col-md-6">Data</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {/* {steps &&
+                        steps.map((step) => (
+                          <tr key={step.admin.id}>
+                            <td>{step.status}</td>
+                            <td>{step.processDate}</td>
+                          </tr>
+                        ))} */}
+                    </tbody>
+                  </Table>
                 </CardBody>
               </Card>
             </Col>
@@ -449,18 +449,20 @@ class ArticleInfo extends Component {
                             </td>
                             <td>{step.comment}</td>
                             <td>
-                              <a
-                                className="btn btn-success"
-                                onClick={() =>
-                                  this.handleDownload(
-                                    step.file && step.file.id,
-                                    step.file && step.file.originalName,
-                                    step.file && step.file.contentType
-                                  )
-                                }
-                              >
-                                Download File
-                              </a>
+                              {step.file && (
+                                <a
+                                  className="btn btn-success"
+                                  onClick={() =>
+                                    this.handleDownload(
+                                      step.file && step.file.id,
+                                      step.file && step.file.originalName,
+                                      step.file && step.file.contentType
+                                    )
+                                  }
+                                >
+                                  Download File
+                                </a>
+                              )}
                             </td>
                           </tr>
                         ))}
