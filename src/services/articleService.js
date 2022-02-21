@@ -213,17 +213,11 @@ export function myDuties(token) {
 }
 
 export function getRedactorsAndReviewers(id, role) {
-  let people = [];
-
-  return axios
-    .post(apiLocal + "/article/getReviewerAndRedactorRandom", {
-      // .post(apiSwagger + "/article/getReviewerAndRedactorRandom", {
-      articleId: `${id}`,
-      roleId: `${role}`,
-    })
-    .then((res) => {
-      people = res.data;
-    });
+  return axios.post(apiLocal + "/article/getReviewerAndRedactorRandom", {
+    // .post(apiSwagger + "/article/getReviewerAndRedactorRandom", {
+    articleId: `${id}`,
+    roleId: `${role}`,
+  });
 }
 
 export function editArticleByAdmin(data) {

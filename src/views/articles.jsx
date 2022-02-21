@@ -29,37 +29,31 @@ class Articles extends Component {
     pageSize2: 5,
   };
 
-  handleGetArticles = (step) => {
+  handleGetArticles = async (step) => {
     try {
-      articleService.newMyArticles(step).then((res) => {
+      await articleService.newMyArticles(step).then((res) => {
         this.setState({ articles: res.data.object });
       });
-      // .catch((ex) => toast.error(ex.response.data.message));
     } catch (ex) {
       toast.error(ex);
     }
   };
 
   handleActive = async (id) => {
-    const role = this.state.role;
     this.setState({ id: id });
+
     try {
-      const people = await articleService.getRedactorsAndReviewers(id, role);
-      // console.log(people);
-      this.setState({ people: people.object });
-      // console.log(this.state);
+      await articleService
+        .getRedactorsAndReviewers(id, this.state.role)
+        .then((res) => this.setState({ people: res.data.object }));
     } catch (ex) {
-      if (ex.response && ex.response.status === 400)
-        console.error("Redaktor va Reviewerlar yo'q");
+      toast.info("Redaktor va Reviewerlar yo'q");
       this.setState({ people: [] });
-      //   this.setState({ activeArticleId: id });
     }
   };
 
-  handleChange = (e) => {
-    this.setState({ role: e.target.value });
-    // console.log(this.state.role);
-    this.handleActive(this.state.id, e.target.value);
+  handleChange = () => {
+    this.handleActive(this.state.id, this.state.role);
   };
 
   handleClick = (step) => {
@@ -68,27 +62,17 @@ class Articles extends Component {
   };
 
   handleSubmit = async ({ target }, userId) => {
-    // let bool = null;
+    try {
+      const articleId = this.state.activeArticleId;
+      const deadline = this.state.deadline;
 
-    // if (target.value === "on") {
-    //   bool = true;
-    // } else {
-    //   bool = false;
-    // }
-
-    const articleId = this.state.activeArticleId;
-    const deadline = this.state.deadline;
-
-    await articleService
-      .confirmForUsers(target.checked, articleId, userId, deadline)
-      .then((res) => toast.success(res.data.message))
-      .catch((ex) => console.log(ex));
-
-    this.handleActive(this.state.activeArticleId);
-    // console.log(res);
-    // console.log("boolean:", target.value);
-    // console.log("userId:", userId);
-    // console.log("articleId:", this.state.activeArticleId);
+      await articleService
+        .confirmForUsers(target.checked, articleId, userId, deadline)
+        .then((res) => toast.success(res.data.message));
+      this.handleActive(this.state.activeArticleId);
+    } catch (ex) {
+      toast.error(ex);
+    }
   };
 
   handlePageChange = (page) => {
@@ -111,8 +95,6 @@ class Articles extends Component {
 
     const articles = paginate(allArticles, currentPage, pageSize);
     const people = paginate(allPeople, currentPage2, pageSize2);
-
-    // console.log(articles);
 
     return (
       <>
@@ -220,7 +202,6 @@ class Articles extends Component {
                               onClick={() => {
                                 this.handleActive(article.id);
                                 this.setState({ activeArticleId: article.id });
-                                // console.log(article);
                               }}
                             >
                               <a style={{ padding: "0.5rem" }}>
@@ -287,7 +268,7 @@ class Articles extends Component {
                                 className="form-select form-control h-100 border-0"
                                 defaultValue={777}
                                 onChange={(e) => {
-                                  this.handleChange(e);
+                                  this.handleChange(e.target.value);
                                   this.setState({ role: e.target.value });
                                 }}
                               >
