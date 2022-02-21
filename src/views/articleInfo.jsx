@@ -20,10 +20,15 @@ import {
   Col,
   Table,
 } from "reactstrap";
+import articleService from "services/articleService";
 
 class ArticleInfo extends Component {
   state = {
     titleArticle: "",
+
+    status: "CHECK_AND_ACCEPT",
+    file: [],
+    description: "",
 
     articleId: "",
     articleInfo: "",
@@ -40,7 +45,7 @@ class ArticleInfo extends Component {
         `http://192.168.100.27:8080/api/article/articleInfoForAdmin/${articleId}`
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         this.setState({ articleInfo: res.data });
       })
       .catch((ex) => console.log(ex));
@@ -70,6 +75,18 @@ class ArticleInfo extends Component {
         .then((res) => toast.success(res.data.message));
     } catch (ex) {
       toast.success(ex.data.message);
+    }
+  };
+
+  handleEdit = async () => {
+    // const { status, file, description, articleId } = this.state;
+
+    try {
+      await articleService
+        .editArticleByAdmin(this.state)
+        .then((res) => toast.success(res.data.message));
+    } catch (ex) {
+      toast.error("Server bilan aloqa yo'q 🤨");
     }
   };
 
@@ -130,7 +147,7 @@ class ArticleInfo extends Component {
                           defaultValue="CHECK_AND_ACCEPT"
                           onChange={(e) =>
                             this.setState({
-                              // status: e.target.value,
+                              status: e.target.value,
                             })
                           }
                           name="status"
@@ -149,7 +166,13 @@ class ArticleInfo extends Component {
                     <Col md="7">
                       <div className="form-group">
                         <label>File upload ⬆️</label>
-                        <Input type="file" className="form-control p-0" />
+                        <Input
+                          type="file"
+                          className="form-control p-0"
+                          onChange={(e) =>
+                            this.setState({ file: e.target.files[0] })
+                          }
+                        />
                       </div>
                     </Col>
                   </Row>
@@ -158,14 +181,22 @@ class ArticleInfo extends Component {
                     <Col md="12">
                       <Label>description</Label>
                       <Input
-                        placeholder="description.."
-                        // style={{ height: "40px" }}
+                        placeholder="description..."
+                        style={{ height: "40px" }}
                         type="text"
+                        onChange={(e) =>
+                          this.setState({ description: e.target.value })
+                        }
                       />
                     </Col>
                     <Col md="12">
-                      <Button color="info" outline className="p-2">
-                        success
+                      <Button
+                        color="info"
+                        outline
+                        className="p-2"
+                        onClick={() => this.handleEdit()}
+                      >
+                        Edit
                       </Button>
                     </Col>
                   </Row>

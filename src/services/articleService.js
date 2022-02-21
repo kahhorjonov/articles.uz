@@ -277,4 +277,28 @@ class ArticleService {
   }
 }
 
-export default ArticleService;
+export function editArticleByAdmin(data) {
+  const token = localStorage.getItem("token");
+
+  // const config = {
+  //   headers: { Authorization: `Bearer ${token}` },
+  // };
+
+  const bodyFormData = new FormData();
+
+  bodyFormData.append("articleId", data.articleId);
+  bodyFormData.append("description", data.description);
+  bodyFormData.append("file", data.file);
+
+  return axios({
+    method: "post",
+    url: apiLocal + "/article/giveStatus",
+    data: bodyFormData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Authorization": `Bearer ${token}`,
+    },
+  });
+}
+
+export default { ArticleService, editArticleByAdmin };
