@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Accordion } from "reactstrap";
+import Foooter from "./foooter";
 
 import "../../../styles/nashirShartlar.css";
-import img from "../../profile.png";
-import Foooter from "../foooter";
 
 class NashirShartlar extends Component {
   state = {};

@@ -37,7 +37,7 @@ class NavbarHome extends React.Component {
                   </NavLink>
                 </li>
                 <li className="nav-item itemss ">
-                  <NavLink className="nav-link links" to="/magazines">
+                  <NavLink className="nav-link links" to="/login">
                     Maqola yuborish
                   </NavLink>
                 </li>

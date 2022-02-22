@@ -1,6 +1,6 @@
 import React from "react";
 
-import Foooter from "../foooter";
+import Foooter from "./foooter";
 
 import img from "../../profile.png";
 

@@ -1,12 +1,11 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import NavbarHome from "./navbarHome";
 import Asosiy from "./asosiy";
 import JurnallarRoyxati from "./jurnallarRo'yhati";
 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "../../styles/homePage.css";
-import BrowserRouter from "react-router-dom/BrowserRouter";
 
 class HomePage extends React.Component {
   render() {
@@ -20,6 +19,11 @@ class HomePage extends React.Component {
               path="/"
               exact
               component={(props) => <Asosiy {...props} />}
+            />
+            <Route
+              path="/listOfMagazines"
+              // exact
+              component={(props) => <JurnallarRoyxati {...props} />}
             />
 
             <Route
