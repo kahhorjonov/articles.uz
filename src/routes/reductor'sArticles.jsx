@@ -44,7 +44,7 @@ class ReductorsArticles extends Component {
 
   handleChange = async (e) => {
     // this.forceUpdate();
-    await this.setState({ role: e.target.value });
+    this.setState({ role: e.target.value });
     // console.log(this.state.role);
     await this.handleActive(this.state.id, e.target.value);
   };
