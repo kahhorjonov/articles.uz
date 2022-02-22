@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/homePage.css";
+import "styles/homePage.css";
 
 class Foooter extends React.Component {
   render() {

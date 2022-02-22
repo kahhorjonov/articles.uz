@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Foooter from "./foooter";
 
-import "../../../styles/nashirShartlar.css";
+import "styles/nashirShartlar.css";
 
-class NashirShartlar extends Component {
+class NashrShartlar extends Component {
   state = {};
   render() {
     return (
@@ -570,4 +570,4 @@ class NashirShartlar extends Component {
   }
 }
 
-export default NashirShartlar;
+export default NashrShartlar;
