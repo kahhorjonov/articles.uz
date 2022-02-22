@@ -95,8 +95,6 @@ class ArticleActivation extends Component {
 
     const articles = paginate(allArticles, currentPage, pageSize);
 
-    console.log(articles);
-
     return (
       <div className="content">
         <div className="row">

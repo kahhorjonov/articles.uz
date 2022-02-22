@@ -43,10 +43,10 @@ class MyTasks extends Component {
     try {
       await articleService
         .reviewerActionForArticle(action, id)
-        .then((res) => console.log(res));
+        .then((res) => toast.success(res.data.message));
     } catch (ex) {
-      console.log(ex);
-      // toast.error(ex.response.message);
+      // console.log(ex);
+      toast.error(ex.response.data.message);
     }
   };
 

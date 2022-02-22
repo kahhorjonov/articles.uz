@@ -39,11 +39,12 @@ class Users extends Component {
     email: "",
     password: "",
     phoneNumber: "",
-    roleId: null,
+    roleId: "null",
   };
 
   async componentDidMount() {
     await this.populateCategories();
+    await this.handleChooseRole(null);
     // await this.populateArticles();
   }
 
@@ -87,8 +88,6 @@ class Users extends Component {
       roles_id: role,
       enabled: this.state.activity,
     };
-
-    // console.log(this.state.roleUser);
 
     await userService
       .searchUser(data)
@@ -175,7 +174,6 @@ class Users extends Component {
 
   render() {
     const { users } = this.state;
-    console.log(this.state.users);
 
     return (
       <div className="content">
