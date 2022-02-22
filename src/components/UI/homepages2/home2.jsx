@@ -1,20 +1,11 @@
 import React from "react";
-// import {
-//   Accordion,
-//   AccordionHeader,
-//   AccordionItem,
-//   Button,
-//   Card,
-//   CardBody,
-//   UncontrolledCollapse,
-// } from "reactstrap";
 
-import "../../../styles/home2.css";
+import Foooter from "../foooter";
+
 import img from "../../profile.png";
 
-import "react-accessible-accordion/dist/fancy-example.css";
-import { AccordionHeader } from "reactstrap";
-import Foooter from "../foooter";
+import "../../../styles/home2.css";
+
 const Home2 = () => {
   return (
     <>
@@ -585,37 +576,52 @@ const Home2 = () => {
                     </div>
                     <div className="col-lg-9 pr-0">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Maqola nashr qilish
-                          <span>150 000 so’m</span></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Bosma jurnal (nusxasi uchun)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Maqola nashr qilish
+                          <span>150 000 so’m</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Bosma jurnal (nusxasi uchun)
                           <span>120 000 so’m</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Chop etilgan bosma (nusxasi uchun)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Chop etilgan bosma (nusxasi uchun)
                           <span>135 000 so’m</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Maqolani nashrga qabul qilish to'g'risidagi elektron ma'lumotnoma
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Maqolani nashrga qabul qilish to'g'risidagi elektron
+                          ma'lumotnoma
                           <span>BEPUL</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Bosma jurnalni yetkazib berish xizmati (Toshkent shahar)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Bosma jurnalni yetkazib berish xizmati (Toshkent
+                          shahar)
                           <span>30 000 so’m</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Bosma jurnalni yetkazib berish xizmati (O’zbekiston Respublikasi)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Bosma jurnalni yetkazib berish xizmati (O’zbekiston
+                          Respublikasi)
                           <span>80 000 so’m</span>
                         </li>
-                        <li class="list-group-item disable">Qo'shimcha xizmatlar narxi:
-                          
+                        <li class="list-group-item disable">
+                          Qo'shimcha xizmatlar narxi:
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Matnni tuzatish
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Matnni tuzatish
                           <span>6 000 so’m / 1 sahifasi</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Matnni tahrir qilish
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Matnni tahrir qilish
                           <span>12 000 so’m / 1 sahifasi</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Adabiyotlar ro'yxatini tahrirlash
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Adabiyotlar ro'yxatini tahrirlash
                           <span>12 000 so’m / 1 sahifasi</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Maqolaning nomi, muallifning ismi, regaliy, ish joyi, annotatsiya <br />
-                        <span>60 so’m / (+ probel).</span>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Maqolaning nomi, muallifning ismi, regaliy, ish joyi,
+                          annotatsiya <br />
+                          <span>60 so’m / (+ probel).</span>
                         </li>
                       </ul>
                     </div>
@@ -626,8 +632,7 @@ const Home2 = () => {
           </div>
         </div>
       </div>
-<Foooter/>
-      
+      <Foooter />
     </>
   );
 };
