@@ -15,7 +15,9 @@ body {
   font-size: 16px;
   box-sizing: border-box;
 }
-
+.homeNavbar {
+ 
+}
 .buttons {
   /* height: 40px; */
   border: 1px solid #282828;
@@ -529,7 +531,7 @@ body {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 350px) {
   .navbar {
     padding: 0 15px !important;
   }
