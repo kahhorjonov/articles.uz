@@ -166,6 +166,49 @@ class Articles extends Component {
                             Taqrizda
                           </a>
                         </li>
+                        <li className="item">
+                          <a
+                            onClick={(e) => {
+                              e.preventDefault();
+                              this.handleClick("BEGIN_CHECK2");
+                              this.setState({ activeRow: 4});
+                              //   this.setState({ step: "BEGIN_CHECK" });
+                              //   console.log("taqrizda");
+                            }}
+                            className={
+                              this.state.activeRow === 4
+                                ? "nav-link navv active"
+                                : "nav-link navv"
+                            }
+                            data-toggle="pill"
+                          >
+                            new 4
+                          </a>
+                        </li>
+
+
+
+                        <li className="item">
+                          <a
+                            onClick={(e) => {
+                              e.preventDefault();
+                              this.handleClick("BEGIN_CHECK5");
+                              this.setState({ activeRow: 5});
+                              //   this.setState({ step: "BEGIN_CHECK" });
+                              //   console.log("taqrizda");
+                            }}
+                            className={
+                              this.state.activeRow === 5
+                                ? "nav-link navv active"
+                                : "nav-link navv"
+                            }
+                            data-toggle="pill"
+                          >
+                            new 5
+                          </a>
+                        </li>
+                
+                        
                       </ul>
                     </div>
 
