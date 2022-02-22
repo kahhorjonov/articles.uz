@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Accordion } from "reactstrap";
+import Foooter from "./foooter";
 
-import "../../../styles/nashirShartlar.css";
-import img from "../../profile.png";
-import Foooter from "../foooter";
+import "styles/nashirShartlar.css";
 
-class NashirShartlar extends Component {
+class NashrShartlar extends Component {
   state = {};
   render() {
     return (
@@ -573,4 +570,4 @@ class NashirShartlar extends Component {
   }
 }
 
-export default NashirShartlar;
+export default NashrShartlar;

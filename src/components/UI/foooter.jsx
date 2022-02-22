@@ -1,11 +1,11 @@
 import React from "react";
-import img from "../profile.png";
-import "../../styles/homePage.css";
 
+import "styles/homePage.css";
 
 class Foooter extends React.Component {
   render() {
-    return <>
+    return (
+      <>
         <div className="footer">
           <div className="container p-0">
             <h1>Biz bilan bog’lanish</h1>
@@ -95,8 +95,8 @@ class Foooter extends React.Component {
             </div>
           </div>
         </div>
-    </>
-
+      </>
+    );
   }
 }
-export default Foooter
+export default Foooter;

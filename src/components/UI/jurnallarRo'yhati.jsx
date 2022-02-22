@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "../styles/jurnallarRoyhati.css";
-import img from "../routes/books.png";
-import img2 from "../routes/img.png";
+import img from "routes/books.png";
+
+import "styles/jurnallarRoyhati.css";
 
 class JurnallarRoyxati extends Component {
   render() {
