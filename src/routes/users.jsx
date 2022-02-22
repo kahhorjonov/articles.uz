@@ -59,9 +59,6 @@ class Users extends Component {
         console.log(ex);
         toast.error(ex.res.data.message);
       });
-
-    // console.log(userId);
-    // console.log(activity);
   };
 
   handleChange = async (text) => {

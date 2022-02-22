@@ -26,6 +26,7 @@ import {
 
 import mikeImg from "../assets/img/mike.jpg";
 import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
+import { toast } from "react-toastify";
 
 class UserEdit extends Component {
   state = {
@@ -55,21 +56,6 @@ class UserEdit extends Component {
     didNotAccepteds: "",
   };
 
-  // firstName: res.data.object.firstName,
-  //         lastName: res.data.object.lastName,
-  //         academicDegree: res.data.object.academicDegree,
-  //         categories: res.data.object.categories,
-  //         createdAt: res.data.object.createdAt,
-  //         email: res.data.object.email,
-  //         enabled: res.data.object.enabled,
-  //         fatherName: res.data.object.fatherName,
-  //         languages: res.data.object.languages,
-  //         phoneNumber: res.data.object.phoneNumber,
-  //         photos: res.data.object.photos,
-  //         scientificWork: res.data.object.scientificWork,
-  //         workExperience: res.data.object.workExperience,
-  //         workPlace: res.data.object.workPlace,
-
   async componentDidMount() {
     const userId = this.props.history.location.pathname.slice(17);
     this.setState({ userId: userId });
@@ -79,7 +65,6 @@ class UserEdit extends Component {
       .getUserForEdit(userId)
       .then((res) => {
         this.setState({ userData: res.data.object });
-        // console.log(res.data.object);
       })
       .catch((ex) => console.log(ex));
 
@@ -100,8 +85,8 @@ class UserEdit extends Component {
   updateProfileByAdmin = async () => {
     await userService
       .profileEditFromAdmin(this.state)
-      .then((res) => console.log(res))
-      .catch((ex) => console.log(ex));
+      .then((res) => toast.success(res.data.message))
+      .catch((ex) => toast.error(ex.response.data.message));
   };
 
   render() {
@@ -112,18 +97,12 @@ class UserEdit extends Component {
       categories,
       createdAt,
       email,
-      // enabled,
-      // fatherName,
       languages,
       phoneNumber,
-      // photos,
       scientificWork,
       workExperience,
       workPlace,
     } = this.state.userData;
-
-    // console.log(this.state.userData && this.state.userData);
-    // console.log(this.state.articleStatistics && this.state.articleStatistics);
 
     const {
       accepteds,
@@ -132,8 +111,6 @@ class UserEdit extends Component {
       checkAndRecycles,
       didNotAccepteds,
     } = this.state;
-
-    // console.log(this.state.userData);
 
     return (
       <>
@@ -206,11 +183,11 @@ class UserEdit extends Component {
                               defaultValue={phoneNumber}
                               placeholder="telefon nomer"
                               type="text"
-                              // onChange={(e) =>
-                              //   this.setState({
-                              //     phoneNumber: e.target.value,
-                              //   })
-                              // }
+                              onChange={(e) =>
+                                this.setState({
+                                  phoneNumber: e.target.value,
+                                })
+                              }
                             />
                           </FormGroup>
                         </Col>
@@ -222,14 +199,13 @@ class UserEdit extends Component {
                           <FormGroup>
                             <label>Parol</label>
                             <Input
-                              // defaultValue="Toshkent Shahar, Yunusobod tumani"
                               placeholder="parol"
                               type="text"
-                              // onChange={(e) =>
-                              //   this.setState({
-                              //     password: e.target.value,
-                              //   })
-                              // }
+                              onChange={(e) =>
+                                this.setState({
+                                  password: e.target.value,
+                                })
+                              }
                             />
                           </FormGroup>
                         </Col>
