@@ -69,13 +69,13 @@ var adminRoutes = [
     layout: "/admin",
   },
 
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "nc-icon nc-diamond",
-  //   component: Icons,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/icons",
+    name: "Icons",
+    icon: "nc-icon nc-diamond",
+    component: Icons,
+    layout: "/admin",
+  },
 
   // {
   //   path: "/maps",

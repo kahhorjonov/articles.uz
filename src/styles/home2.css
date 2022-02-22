@@ -1,0 +1,233 @@
+body {
+  height: auto;
+}
+.jurnalRoyxat h1 {
+  padding-top: 100px;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 130%;
+  margin-bottom: 0;
+}
+
+.jurnalRoyxat p {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 170%;
+  color: #5a5a5a;
+  padding-top: 15px;
+}
+.jurnalRoyxat .col-lg-8 p {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+  margin-bottom: 0;
+}
+.jurnalRoyxat .col-lg-4 h3 {
+  margin-top: 40px;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+.jurnalRoyxat .row {
+  margin-top: 80px;
+}
+.jurnalRoyxat .col-lg-4 img {
+  width: auto;
+  height: 460px;
+}
+
+.jurnalRoyxat .col-lg-4 p {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  padding-top: 40px;
+}
+/* --------------- gren maqola */
+
+.gernMaqola {
+  width: 100%;
+  height: 419px;
+  background-color: #f7f7f7;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.gernMaqola .container p {
+  padding-top: 100px;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 100%;
+  color: #777777;
+}
+.gernMaqola .container h3 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 120%;
+  padding-top: 15px;
+}
+.gernMaqola .container button {
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 64px;
+  background: #282828;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 20px;
+}
+
+/* jurnalArxive */
+
+.jurnalArxiv {
+  margin-bottom: 100px;
+}
+.jurnalArxiv .nav-item {
+  padding-bottom: 60px !important;
+}
+.jurnalArxiv .nav-link {
+  width: 215px;
+  height: 59px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-pills .navLincks.active {
+  background-color: black !important;
+
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  text-transform: uppercase;
+}
+
+.numberss .nav-item {
+  padding-top: 40px;
+  padding-left: 0;
+  padding-right: 50px !important;
+}
+.numberss .nav-link {
+  width: 44px;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+.numberss .nav-pills .nav-link {
+  color: #777777;
+}
+
+.numberss .nav-pills .nav-link.active {
+  background-color: white;
+  color: black;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ichmaich .col-lg-3 {
+  padding-left: 0;
+}
+.ichmaich .col-lg-3 img {
+  width: 270px;
+  height: 340px;
+}
+.ichmaich .col-lg-3 h5 {
+  padding-top: 30px;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #282828;
+}
+.ichmaich .col-lg-3 span {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #5a5a5a;
+}
+
+.numberss h3 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 130%;
+}
+
+.nazoratMudat .list-group-item {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+  padding: 25px 0;
+}
+.nazoratMudat .list-group-item p {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+}
+.nazoratMudat .list-group-item h6 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+}
+.numberss .tab-pane br {
+  padding: 10px 0;
+}
+
+.nashirShart .col-lg-3 h3 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+  text-transform: capitalize;
+}
+.nashirShart .row {
+  padding-top: 60px;
+}
+.nashirShart .col-lg-9 .align-items-center {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+}
+.nashirShart .col-lg-9  span {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 130%;
+  text-align: right;
+  
+color: #282828;
+}
