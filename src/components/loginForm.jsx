@@ -67,6 +67,7 @@ class LoginForm extends Form {
 
   render() {
     this.autoRedirect();
+    console.log(this.props.location.pathname);
 
     // if (auth.getCurrentUser()) return <Redirect to="/" />;
 

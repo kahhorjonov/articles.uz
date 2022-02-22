@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import "../../styles/homePage.css";
 
@@ -53,7 +53,13 @@ class NavbarHome extends React.Component {
                 </li>
 
                 <li className="nav-item">
-                  <Link to="/login">
+                  <Link
+                    // to="/login"
+                    onClick={() => {
+                      // console.log((window.location.push = "/login"));
+                      window.location = "/login";
+                    }}
+                  >
                     <button className="btn border btn-light buttons">
                       Tizimga kirish
                     </button>
