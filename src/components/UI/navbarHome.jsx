@@ -22,10 +22,6 @@ class NavbarHome extends React.Component {
               data-target="#collapsibleNavbar"
             >
               <i className="nc-icon nc-bullet-list-67" />
-              {/* <FontAwesomeIcon
-                icon={faAlignRight}
-                style={({ color: "#C0F6F7" }, { fontSize: "20px" })}
-              /> */}
             </button>
 
             <div className="collapse navbar-collapse" id="collapsibleNavbar">
@@ -67,21 +63,11 @@ class NavbarHome extends React.Component {
                 <li className="nav-item ">
                   <div className="d-flex pos">
                     <div>
-                      {/* <FontAwesomeIcon
-                        icon={faEnvelope}
-                        style={({ color: "#4f4f4f" }, { fontSize: "16px" })}
-                        className="sms"
-                      /> */}
                       <span className="text-muted pl-2">
                         ost.info10@gmail.com
                       </span>
                     </div>
                     <div className="ml-4">
-                      {/* <FontAwesomeIcon
-                        icon={faPhone}
-                        style={({ color: "white" }, { fontSize: "16px" })}
-                        className="phone"
-                      /> */}
                       <span className="text-muted pl-2">(71) 224-20-30</span>
                     </div>
                   </div>

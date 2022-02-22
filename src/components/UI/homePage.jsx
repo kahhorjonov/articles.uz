@@ -1,10 +1,8 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import NavbarHome from "./navbarHome";
-import Mainpageshome from "./mainpagehome";
-import Section from "./section";
-import Mainhome2 from "./mainhome2";
-import Foooter from "./foooter";
-import Listhome from "./listhome";
+import Asosiy from "./asosiy";
+import JurnallarRoyxati from "./jurnallarRo'yhati";
 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "../../styles/homePage.css";
@@ -14,21 +12,18 @@ class HomePage extends React.Component {
     return (
       <>
         <NavbarHome />
-
-        <Mainpageshome />
-
-        {/* gren Rrtecles */}
-
-        <Section />
-
-        {/* bg  */}
-
-        <Mainhome2 />
-        {/* list  */}
-        <Listhome />
-
-        {/* footer */}
-        <Foooter />
+        <Switch>
+          <Route
+            path="/main"
+            // exact
+            component={(props) => <Asosiy {...props} />}
+          />
+          <Route
+            path="/listOfMagazines"
+            // exact
+            component={(props) => <JurnallarRoyxati {...props} />}
+          />
+        </Switch>
       </>
     );
   }

@@ -1,14 +1,18 @@
 import React from "react";
+import Section from "./section";
+import Mainhome2 from "./mainhome2";
+import Listhome from "./listhome";
+import Footer from "components/Footer/Footer";
+
 import img from "../profile.png";
+
 import "../../styles/homePage.css";
 
-
-
-class Mainpageshome extends React.Component {
+class Asosiy extends React.Component {
   render() {
-    return <>
-    
-    <div className="mainPages">
+    return (
+      <>
+        <div className="mainPages">
           <div className="container">
             <div className="col-md-10 pl-0  maqola_nashir">
               <h1>
@@ -111,8 +115,12 @@ class Mainpageshome extends React.Component {
             </a>
           </div>
         </div>
-
-    </>;
+        <Section />
+        <Mainhome2 />
+        <Listhome />
+        {/* <Footer /> */}
+      </>
+    );
   }
 }
-export default Mainpageshome
+export default Asosiy;

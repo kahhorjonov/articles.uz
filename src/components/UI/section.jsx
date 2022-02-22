@@ -1,13 +1,12 @@
 import React from "react";
-import img from "../profile.png";
-import "../../styles/homePage.css";
 
+import "../../styles/homePage.css";
 
 class Section extends React.Component {
   render() {
-    return <>
-    
-    <div className="sections">
+    return (
+      <>
+        <div className="sections">
           <div className="container p-0">
             <div className="row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
               <div className="col-md-6">
@@ -44,7 +43,8 @@ class Section extends React.Component {
             </div>
           </div>
         </div>
-    </>;
+      </>
+    );
   }
 }
-export default Section
+export default Section;
