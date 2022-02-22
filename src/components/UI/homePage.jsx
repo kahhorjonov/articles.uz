@@ -5,8 +5,8 @@ import Asosiy from "./asosiy";
 import JurnallarRoyxati from "./jurnallarRo'yhati";
 import NashrShartlari from "components/UI/nashrShartlari";
 
-import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "../../styles/homePage.css";
+import LoginForm from "./../loginForm";
 
 class HomePage extends React.Component {
   render() {
@@ -14,17 +14,23 @@ class HomePage extends React.Component {
       <BrowserRouter>
         <>
           <NavbarHome />
-
           <Switch>
             <Route
               path="/"
               exact
               component={(props) => <Asosiy {...props} />}
             />
+
             <Route
               path="/listOfMagazines"
               exact
               component={(props) => <JurnallarRoyxati {...props} />}
+            />
+
+            <Route
+              path="/termsOfPublication"
+              exact
+              component={(props) => <NashrShartlari {...props} />}
             />
 
             <Route

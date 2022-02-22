@@ -5,16 +5,18 @@ import RegisterForm from "./components/registerForm";
 import ProtectedRoute from "./components/protectedRoute";
 import ReviewerRegisterForm from "./components/reviewerRegisterForm";
 
-import HomePage from "./components/UI/homePage";
 import Logout from "./components/logout";
 import AdminLayout from "./layouts/Admin.js";
 import ReductorLayout from "./layouts/Reductor.js";
 import ReviewerLayout from "./layouts/Reviewer.js";
 import UserLayout from "./layouts/User.js";
 import { ToastContainer } from "react-toastify";
+import HomePage from "./components/UI/homePage";
+import Asosiy from "./components/UI/asosiy";
+import JurnallarRoyxati from "components/UI/jurnallarRo'yhati";
+import NashrShartlari from "components/UI/nashrShartlari";
 
 import "react-toastify/dist/ReactToastify.css";
-import JurnallarRoyxati from "components/UI/jurnallarRo'yhati";
 
 class App extends Component {
   render() {
@@ -31,7 +33,6 @@ class App extends Component {
 
           <Route
             path="/login"
-            exact
             component={(props) => <LoginForm {...props} />}
           />
 
@@ -51,6 +52,20 @@ class App extends Component {
             path="/reviewerRegister"
             exact
             component={ReviewerRegisterForm}
+          />
+
+          <Route path="/" exact component={(props) => <Asosiy {...props} />} />
+
+          <Route
+            path="/listOfMagazines"
+            exact
+            component={(props) => <JurnallarRoyxati {...props} />}
+          />
+
+          <Route
+            path="/termsOfPublication"
+            exact
+            component={(props) => <NashrShartlari {...props} />}
           />
 
           {/* <Route path="/not-found" component={NotFound} /> */}
