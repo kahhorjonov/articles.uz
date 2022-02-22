@@ -4,8 +4,9 @@ import "../../styles/homePage.css";
 
 class Listhome extends React.Component {
   render() {
-    return <>
-     <div className="mualif container">
+    return (
+      <>
+        <div className="mualif container">
           <div className="row ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 ml-0 mr-0">
             <h2>
               Biz mualliflarga eng qulay ish sharoitlarini <br />
@@ -28,7 +29,8 @@ class Listhome extends React.Component {
             </ul>
           </div>
         </div>
-    </>;
+      </>
+    );
   }
 }
-export default Listhome
+export default Listhome;

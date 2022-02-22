@@ -2,11 +2,11 @@ import React from "react";
 import img from "../profile.png";
 import "../../styles/homePage.css";
 
-
 class Mainhome2 extends React.Component {
   render() {
-    return <>
-           <div className="container p-0">
+    return (
+      <>
+        <div className="container p-0">
           <div className="img-bg">
             <div className="col-md-12 p-0">
               <img src={img} alt="" />
@@ -82,12 +82,9 @@ class Mainhome2 extends React.Component {
           </div>
         </div>
 
-
-
-
         {/* bizning mualif eng qulay... */}
-       
-    </>
+      </>
+    );
   }
 }
-export default Mainhome2
+export default Mainhome2;

@@ -8,24 +8,7 @@ import { toast } from "react-toastify";
 import authService from "../services/authService";
 import jwtDecode from "jwt-decode";
 
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Badge,
-  NavLink,
-  Table,
-} from "reactstrap";
+import { Card, CardBody, Row, Col } from "reactstrap";
 
 import "../styles/registerStyles.css";
 
@@ -73,7 +56,6 @@ class ReviewerRegisterForm extends Form {
 
   async componentDidMount() {
     await this.populateCategories();
-    // await this.populateArticles();
   }
 
   doSubmit = async () => {

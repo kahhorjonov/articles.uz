@@ -4,7 +4,6 @@ import NavbarHome from "./navbarHome";
 import Asosiy from "./asosiy";
 import JurnallarRoyxati from "./jurnallarRo'yhati";
 import NashrShartlari from "components/UI/nashrShartlari";
-import ReductorsArticles from "routes/reductor'sArticles";
 
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "../../styles/homePage.css";
@@ -16,8 +15,6 @@ class HomePage extends React.Component {
         <>
           <NavbarHome />
 
-          <ReductorsArticles />
-
           <Switch>
             <Route
               path="/"
@@ -26,13 +23,13 @@ class HomePage extends React.Component {
             />
             <Route
               path="/listOfMagazines"
-              // exact
+              exact
               component={(props) => <JurnallarRoyxati {...props} />}
             />
 
             <Route
               path="/termsOfPublication"
-              // exact
+              exact
               component={(props) => <NashrShartlari {...props} />}
             />
           </Switch>
