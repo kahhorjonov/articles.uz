@@ -27,12 +27,12 @@ class NavbarHome extends React.Component {
             <div className="collapse navbar-collapse" id="collapsibleNavbar">
               <ul className="navbar-nav">
                 <li className="nav-item itemss ">
-                  <NavLink className="nav-link links" to="/main">
+                  <NavLink className="nav-link links" to="/">
                     Asosiy
                   </NavLink>
                 </li>
                 <li className="nav-item itemss ">
-                  <NavLink className="nav-link links" to="/magazines">
+                  <NavLink className="nav-link links" to="/listOfMagazines">
                     Jurnallar ro'yxati
                   </NavLink>
                 </li>

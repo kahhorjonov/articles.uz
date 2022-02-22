@@ -14,6 +14,7 @@ import UserLayout from "./layouts/User.js";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import JurnallarRoyxati from "components/UI/jurnallarRo'yhati";
 
 class App extends Component {
   render() {
