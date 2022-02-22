@@ -65,7 +65,7 @@
   font-weight: 600;
   font-size: 36px;
   line-height: 130%;
-  padding-top: 80px;
+
   padding-bottom: 40px;
 }
 .colapss .list-group-item {
@@ -97,9 +97,7 @@
   transition: 2ms all linear;
   transform: rotate(90deg) !important;
 }
-.Data {
-  padding-top: 80px;
-}
+
 
 .Data h4 {
   font-family: SF Pro Display;
