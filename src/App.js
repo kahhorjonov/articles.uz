@@ -70,9 +70,9 @@ class App extends Component {
             component={ReviewerRegisterForm}
           />
 
-          <Route path="*">
+          {/* <Route path="*">
             <NotFound />
-          </Route>
+          </Route> */}
 
           {/* <Route path="/not-found" component={NotFound} /> */}
           {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
