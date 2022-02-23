@@ -54,11 +54,10 @@ class NavbarHome extends React.Component {
 
                 <li className="nav-item">
                   <Link
-                    // to="/login"
-                    onClick={() => {
-                      // console.log((window.location.push = "/login"));
-                      window.location = "/login";
-                    }}
+                    to="/login"
+                    // onClick={() => {
+                    //   window.location = "/login";
+                    // }}
                   >
                     <button className="btn border btn-light buttons">
                       Tizimga kirish

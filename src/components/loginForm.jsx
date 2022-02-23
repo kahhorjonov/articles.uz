@@ -67,7 +67,6 @@ class LoginForm extends Form {
 
   render() {
     this.autoRedirect();
-    console.log(this.props.location.pathname);
 
     // if (auth.getCurrentUser()) return <Redirect to="/" />;
 
@@ -75,7 +74,6 @@ class LoginForm extends Form {
       <div className="login__div">
         <div className="login-form">
           <h1 className="log-in">Login Form</h1>
-          {/* <h1 className="log-in">Royhatdan otish</h1> */}
           <form className="form-login" onSubmit={this.handleSubmit}>
             {this.renderInput("phoneNumber", "Telefon raqami")}
             {this.renderInput("password", "Password", "password")}
