@@ -5,29 +5,29 @@ import PropTypes from "prop-types";
 
 function Footer(props) {
   return (
-    // <footer className={"footer" + (props.default ? " footer-default" : "")}>
-    {
-      /* <Container fluid={props.fluid ? true : false}>
-        <Row>
-          <nav className="footer-nav">
-            <ul>
-              <li>
-                <a href="https://t.me/kahhorjonov" target="_blank">
-                  Next Developers Team
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div className="credits ml-auto">
-            <div className="copyright">
-              &copy; {1900 + new Date().getYear()}, made with
-              <i className="fa fa-heart heart" /> by NDT
+    <footer className={"footer" + (props.default ? " footer-default" : "")}>
+      {
+        <Container fluid={props.fluid ? true : false}>
+          <Row>
+            <nav className="footer-nav">
+              <ul>
+                <li>
+                  <a href="https://t.me/kahhorjonov" target="_blank">
+                    Next Developers Team
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <div className="credits ml-auto">
+              <div className="copyright">
+                &copy; {1900 + new Date().getYear()}, made with
+                <i className="fa fa-heart heart" /> by NDT
+              </div>
             </div>
-          </div>
-        </Row>
-      </Container> */
-    }
-    // </footer>
+          </Row>
+        </Container>
+      }
+    </footer>
   );
 }
 

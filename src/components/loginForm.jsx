@@ -4,8 +4,6 @@ import Form from "./common/form";
 import auth from "../services/authService";
 import { Link } from "react-router-dom";
 
-import "../styles/loginFormStyle.css";
-
 class LoginForm extends Form {
   state = {
     data: {
@@ -68,27 +66,19 @@ class LoginForm extends Form {
   render() {
     this.autoRedirect();
 
-    // if (auth.getCurrentUser()) return <Redirect to="/" />;
-
     return (
-      <div className="login__div">
-        <div className="login-form">
-          <h1 className="log-in">Login Form</h1>
-          <form className="form-login" onSubmit={this.handleSubmit}>
+      <div className="registerForm">
+        <div>
+          <h1 className="regs">Login Form</h1>
+          <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderInput("phoneNumber", "Telefon raqami")}
             {this.renderInput("password", "Password", "password")}
             {this.renderButton("Login")}
           </form>
 
-          <Link className="lin-k" style={{ fontSize: "2rem" }} to="/register">
+          <Link className="rever" style={{ fontSize: "2rem" }} to="/register">
             Ro'yxatdan o'tish
           </Link>
-
-          <p>
-            <Link className="lin-k" style={{ fontSize: "2rem" }} to="/">
-              Home ⬅️
-            </Link>
-          </p>
         </div>
       </div>
     );

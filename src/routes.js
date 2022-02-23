@@ -70,13 +70,13 @@ var adminRoutes = [
     layout: "/admin",
   },
 
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Notification,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Notification,
+  //   layout: "/admin",
+  // },
 
   {
     path: "/user-page",

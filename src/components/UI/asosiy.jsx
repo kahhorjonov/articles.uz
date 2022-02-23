@@ -2,7 +2,7 @@ import React from "react";
 import Section from "./section";
 import Mainhome2 from "./mainhome2";
 import Listhome from "./listhome";
-import Footer from "components/Footer/Footer";
+import Foooter from "./foooter";
 
 import img from "../profile.png";
 
@@ -131,7 +131,7 @@ class Asosiy extends React.Component {
         <Section />
         <Mainhome2 />
         <Listhome />
-        {/* <Footer /> */}
+        <Foooter />
       </>
     );
   }
