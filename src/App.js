@@ -4,6 +4,8 @@ import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import ProtectedRoute from "./components/protectedRoute";
 import ReviewerRegisterForm from "./components/reviewerRegisterForm";
+import DemoNavbar from "components/Navbars/DemoNavbar";
+import Header from "./components/Navbars/homeNavbar";
 
 import Logout from "./components/logout";
 import AdminLayout from "./layouts/Admin.js";
@@ -19,14 +21,15 @@ class App extends Component {
   render() {
     return (
       <>
+        <DemoNavbar />
         <ToastContainer />
 
         <Switch>
-          <Route
+          {/* <Route
             path="/"
             exact
             component={(props) => <HomePage {...props} />}
-          />
+          /> */}
 
           <Route
             path="/login"
@@ -63,7 +66,7 @@ class App extends Component {
           <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
           <Redirect from="/user" exact to="/user/user-page" /> */}
 
-          <Redirect to="/not-found" />
+          {/* <Redirect to="/not-found" /> */}
 
           <ProtectedRoute
             path="/admin"
