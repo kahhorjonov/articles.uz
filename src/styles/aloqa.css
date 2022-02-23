@@ -1,0 +1,15 @@
+.aloqa {
+  margin-top: 100px;
+}
+.aloqa .row img {
+  border-radius: 50%;
+}
+
+.aloqa .row h5 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 160%;
+  margin-bottom: 0;
+}

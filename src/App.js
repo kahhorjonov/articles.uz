@@ -17,6 +17,7 @@ import JurnallarRoyxati from "components/UI/jurnallarRo'yhati";
 import NashrShartlari from "components/UI/nashrShartlari";
 
 import "react-toastify/dist/ReactToastify.css";
+import Aloqa from "components/UI/Aloq";
 
 class App extends Component {
   render() {
@@ -54,7 +55,7 @@ class App extends Component {
             component={ReviewerRegisterForm}
           />
 
-          <Route path="/" exact component={(props) => <Asosiy {...props} />} />
+          {/* <Route path="/" exact component={(props) => <Asosiy {...props} />} /> */}
 
           <Route
             path="/listOfMagazines"
@@ -101,6 +102,8 @@ class App extends Component {
             render={(props) => <UserLayout {...props} />}
           />
         </Switch>
+
+        {/* <Aloqa/> */}
       </>
     );
   }
