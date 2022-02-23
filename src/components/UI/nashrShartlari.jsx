@@ -106,62 +106,72 @@ class NashrShartlari extends Component {
                       muddati haqida ma'lumot beradi.
                     </div>
 
-                    <div className="nashirNarxi">
-                      <h4>Nashr narxlari</h4>
+              
+                  </div>
 
-                      <ul className="list-group list-group-flush">
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Maqola nashr qilish
-                          <span>150 000 so’m</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Bosma jurnal (nusxasi uchun)
-                          <span>120 000 so’m</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Chop etilgan bosma (nusxasi uchun)
-                          <span>135 000 so’m</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Maqolani nashrga qabul qilish to'g'risidagi elektron
-                          ma'lumotnoma
-                          <span>BEPUL</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Bosma jurnalni yetkazib berish xizmati (Toshkent
-                          shahar)
-                          <span>30 000 so’m</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Bosma jurnalni yetkazib berish xizmati (O’zbekiston
-                          Respublikasi)
-                          <span>80 000 so’m</span>
-                        </li>
-                        <li className="list-group-item disable">
-                          Qo'shimcha xizmatlar narxi:
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Matnni tuzatish
-                          <span>6 000 so’m / 1 sahifasi</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Matnni tahrir qilish
-                          <span>12 000 so’m / 1 sahifasi</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Adabiyotlar ro'yxatini tahrirlash
-                          <span>12 000 so’m / 1 sahifasi</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Maqolaning nomi, muallifning ismi, regaliy, ish joyi,
-                          annotatsiya <br /> va kalit so'zlarni tarjima qilish
-                          <br />
-                          <span>60 so’m / (+ probel).</span>
-                        </li>
-                      </ul>
 
-                      <div className="Data">
-                        <h4>Nazorat muddati</h4>
+                  <div className="tab-pane container nashirNarxi fade" id="menu1">
+                  <div className="nashirNarxi">
+                        <h4 className="mt-0">Nashr narxlari</h4>
+
+                        <ul className="list-group list-group-flush">
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Maqola nashr qilish
+                            <span>150 000 so’m</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Bosma jurnal (nusxasi uchun)
+                            <span>120 000 so’m</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Chop etilgan bosma (nusxasi uchun)
+                            <span>135 000 so’m</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Maqolani nashrga qabul qilish to'g'risidagi elektron
+                            ma'lumotnoma
+                            <span>BEPUL</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Bosma jurnalni yetkazib berish xizmati (Toshkent
+                            shahar)
+                            <span>30 000 so’m</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Bosma jurnalni yetkazib berish xizmati (O’zbekiston
+                            Respublikasi)
+                            <span>80 000 so’m</span>
+                          </li>
+                          <li className="list-group-item disable">
+                            Qo'shimcha xizmatlar narxi:
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Matnni tuzatish
+                            <span>6 000 so’m / 1 sahifasi</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Matnni tahrir qilish
+                            <span>12 000 so’m / 1 sahifasi</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Adabiyotlar ro'yxatini tahrirlash
+                            <span>12 000 so’m / 1 sahifasi</span>
+                          </li>
+                          <li className="list-group-item d-flex justify-content-between align-items-center">
+                            Maqolaning nomi, muallifning ismi, regaliy, ish
+                            joyi, annotatsiya <br /> va kalit so'zlarni tarjima
+                            qilish
+                            <br />
+                            <span>60 so’m / (+ probel).</span>
+                          </li>
+                        </ul>
+                      </div>
+                  </div>
+
+
+                  <div className="tab-pane container nazoratmudati fade" id="menu2">
+                  <div className="Data">
+                        <h4 className="mt-0">Nazorat muddati</h4>
                         <a
                           className="datta"
                           data-toggle="collapse"
@@ -169,7 +179,7 @@ class NashrShartlari extends Component {
                         >
                           <li className="list-group-item d-flex justify-content-between align-items-center">
                             Jurnalni tanlang...
-                            <i className="nc-icon nc-minimal-right" />
+                            <i id="strel" className="nc-icon nc-minimal-right" />
                           </li>
 
                           <div
@@ -200,64 +210,73 @@ class NashrShartlari extends Component {
                           tekshirish va yangi sonini nashr qilish muddatlari
                         </p>
                       </div>
+                  </div>
 
-                      <h4>Maqola uchun talablar</h4>
-                      <div className="maqolas">
-                        1. Ushbu maqola ilgari nashr qilinmagan va boshqa
-                        jurnalda ko'rib chiqish va chop etish uchun taqdim
-                        etilmagan. <hr className="border-0" />
-                        2. Nashrga kamida 5 bet matnli maqolalar qabul qilinadi.
-                        <hr className="border-0" />
-                        3. Matn, formulalar va jadvallarni yozish uchun Windows
-                        uchun Microsoft Word muharriri ishlatilishi kerak. Matn
-                        yozishdan oldin quyidagi matn muharriri parametrlarini
-                        sozlang: sahifa formati:A4( 210x297 mm), 2 sm gacha
-                        bo'lgan joylar; Times New Roman shrifti, o'lchami 14;
-                        satr oralig'i – 1,5; kenglik bo'yicha hizalama; 1 sm
-                        xatboshi; varaqning yo'nalishi – kitob. Maqolada
-                        ishlatiladigan tasvirlar format bo'lishi kerak: jpg,
-                        gif, bmp, MS Wordda yaratilgan tasvirlar qabul
-                        qilinmaydi. Barcha chizmalar va jadvallar raqamlangan
-                        bo'lishi kerak va nomlar yoki chizilgan imzolar bilan
-                        jihozlangan bo'lishi kerak va matn mazmunida (hujjatning
-                        oxirida emas) talab qilinadigan matnda joylashgan
-                        bo'lishi kerak.
-                        <hr className="border-0" />
-                        4. Sarlavha rus tilida: (kichik, qalin harflar bilan,
-                        satrning markazida hizalanish) maqolaning nomi; keyingi
-                        satrda (shrift qalin kursiv, o'ng tomondagi hizalama) –
-                        maqolaning muallifi to'liq nomi; keyingi satrda (kursiv
-                        shrift, o'ng tomondagi hizalama) – ilmiy daraja, ilmiy
-                        unvon, lavozim, universitet nomi, mamlakat, shahar;
-                        keyingi qatorda (kursiv shrifti, o'ng tomondagi
-                        hizalama) – kontaktlar uchun elektron pochta. Agar bir
-                        nechta maqola muallifi bo'lsa, unda har bir muallif
-                        uchun ma'lumot takrorlanadi.
-                        <hr className="border-0" />
-                        5. Ingliz tilida sarlavha, ism va lavozimni ro'yxatdan
-                        o'tkazish: 4-banddan olingan ma'lumotlar. ingliz tilida
-                        takrorlanadi.
-                        <hr className="border-0" />
-                        6. 1 liniyasi orqali-annotatsiya rus va ingliz
-                        tillarida.
-                        <hr className="border-0" />
-                        7. Kalit so'zlar (rus va ingliz tillarida berilgan)
-                        bir-biridan vergul bilan ajralib turadi.
-                        <hr className="border-0" />
-                        8. 1 liniyasi orqali-maqola matni.
-                        <hr className="border-0" />
-                        9. 1 satr orqali - "adabiyotlar ro'yxati"yozuvi. Shundan
-                        so'ng, GOST r 7.0.5 – 2008 ga muvofiq ishlab chiqilgan
-                        raqamlash bilan alifbo tartibida adabiyotlar ro'yxati
-                        berilgan. Adabiyot ro'yxatidan tegishli manbaga matndagi
-                        ishoratlar kvadrat qavs ichida amalga oshiriladi,
-                        masalan: [1, p. 277]. Avtomatik sahifa havolalaridan
-                        foydalanishga yo'l qo'yilmaydi.
-                        <hr className="border-0" />
+
+                  <div className="tab-pane container maqollarUchun fade" id="menu3">
+                  <div className="maqolalar">
+                        <h4 className="mt-0">Maqola uchun talablar</h4>
+                        <div className="maqolas">
+                          1. Ushbu maqola ilgari nashr qilinmagan va boshqa
+                          jurnalda ko'rib chiqish va chop etish uchun taqdim
+                          etilmagan. <hr className="border-0" />
+                          2. Nashrga kamida 5 bet matnli maqolalar qabul
+                          qilinadi.
+                          <hr className="border-0" />
+                          3. Matn, formulalar va jadvallarni yozish uchun
+                          Windows uchun Microsoft Word muharriri ishlatilishi
+                          kerak. Matn yozishdan oldin quyidagi matn muharriri
+                          parametrlarini sozlang: sahifa formati:A4( 210x297
+                          mm), 2 sm gacha bo'lgan joylar; Times New Roman
+                          shrifti, o'lchami 14; satr oralig'i – 1,5; kenglik
+                          bo'yicha hizalama; 1 sm xatboshi; varaqning yo'nalishi
+                          – kitob. Maqolada ishlatiladigan tasvirlar format
+                          bo'lishi kerak: jpg, gif, bmp, MS Wordda yaratilgan
+                          tasvirlar qabul qilinmaydi. Barcha chizmalar va
+                          jadvallar raqamlangan bo'lishi kerak va nomlar yoki
+                          chizilgan imzolar bilan jihozlangan bo'lishi kerak va
+                          matn mazmunida (hujjatning oxirida emas) talab
+                          qilinadigan matnda joylashgan bo'lishi kerak.
+                          <hr className="border-0" />
+                          4. Sarlavha rus tilida: (kichik, qalin harflar bilan,
+                          satrning markazida hizalanish) maqolaning nomi;
+                          keyingi satrda (shrift qalin kursiv, o'ng tomondagi
+                          hizalama) – maqolaning muallifi to'liq nomi; keyingi
+                          satrda (kursiv shrift, o'ng tomondagi hizalama) –
+                          ilmiy daraja, ilmiy unvon, lavozim, universitet nomi,
+                          mamlakat, shahar; keyingi qatorda (kursiv shrifti,
+                          o'ng tomondagi hizalama) – kontaktlar uchun elektron
+                          pochta. Agar bir nechta maqola muallifi bo'lsa, unda
+                          har bir muallif uchun ma'lumot takrorlanadi.
+                          <hr className="border-0" />
+                          5. Ingliz tilida sarlavha, ism va lavozimni ro'yxatdan
+                          o'tkazish: 4-banddan olingan ma'lumotlar. ingliz
+                          tilida takrorlanadi.
+                          <hr className="border-0" />
+                          6. 1 liniyasi orqali-annotatsiya rus va ingliz
+                          tillarida.
+                          <hr className="border-0" />
+                          7. Kalit so'zlar (rus va ingliz tillarida berilgan)
+                          bir-biridan vergul bilan ajralib turadi.
+                          <hr className="border-0" />
+                          8. 1 liniyasi orqali-maqola matni.
+                          <hr className="border-0" />
+                          9. 1 satr orqali - "adabiyotlar ro'yxati"yozuvi.
+                          Shundan so'ng, GOST r 7.0.5 – 2008 ga muvofiq ishlab
+                          chiqilgan raqamlash bilan alifbo tartibida adabiyotlar
+                          ro'yxati berilgan. Adabiyot ro'yxatidan tegishli
+                          manbaga matndagi ishoratlar kvadrat qavs ichida amalga
+                          oshiriladi, masalan: [1, p. 277]. Avtomatik sahifa
+                          havolalaridan foydalanishga yo'l qo'yilmaydi.
+                          <hr className="border-0" />
+                        </div>
                       </div>
+                  </div>
 
-                      <div className="colapss" id="accordion">
-                        <h4>Ilmiy yo’nalishlar</h4>
+
+                  <div className="tab-pane container ilmiyYonalish fade" id="menu4">
+                  <div className="colapss" id="accordion">
+                        <h4 className="mt-0">Ilmiy yo’nalishlar</h4>
 
                         <ul className="list-group list-group-flush">
                           <hr />
@@ -544,19 +563,6 @@ class NashrShartlari extends Component {
                           <hr />
                         </ul>
                       </div>
-                    </div>
-                  </div>
-                  <div className="tab-pane container fade" id="menu1">
-                    2
-                  </div>
-                  <div className="tab-pane container fade" id="menu2">
-                    3
-                  </div>
-                  <div className="tab-pane container fade" id="menu3">
-                    4
-                  </div>
-                  <div className="tab-pane container fade" id="menu4">
-                    .5
                   </div>
                 </div>
               </div>

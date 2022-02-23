@@ -10,7 +10,7 @@ class NavbarHome extends React.Component {
         <div className="container home_pages p-0">
           <div className="col-md-12 rel"></div>
 
-          <nav className="navbar navbar-expand-md">
+          <nav className="navbar homeNavbar navbar-expand-md">
             <NavLink className="navbar-brand brands" to="/">
               <h1 className="text-dark mb-0">ARTICLES.UZ</h1>
             </NavLink>

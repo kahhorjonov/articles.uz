@@ -104,6 +104,8 @@ class App extends Component {
             render={(props) => <UserLayout {...props} />}
           />
         </Switch>
+
+        {/* <Aloqa/> */}
       </>
     );
   }

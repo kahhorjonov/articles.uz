@@ -139,6 +139,48 @@ class ArticleForm extends Form {
                       {this.renderFileInput("file", "File", "file")}
                     </Col>
                   </Row>
+                  <Row>
+                    <Col lg="2">
+                      <div className="selectt">
+                        <Label for="exampleEmail">Sahifa soni</Label>
+                        <Input className="form-control h-100" />
+                      </div>
+                    </Col>
+                    <Col lg="3">
+                      <div className="selectt">
+                        <Label for="exampleEmail">
+                          Bitta jurnalda jop etish soni
+                        </Label>
+                        <Input className="form-control h-100" />
+                      </div>
+                    </Col>
+                    <Col lg="2">
+                      <div className="selectt">
+                        <Label for="exampleEmails">
+                          Bitta bosma jurnal soni
+                        </Label>
+                        <Input className="form-control h-100" />
+                      </div>
+                    </Col>
+                    <Col lg="3">
+                      <div className="selectt">
+                        <Label for="exampleEmail">bitta Sertifikat soni</Label>
+                        <Input className="form-control h-100" />
+                      </div>
+                    </Col>
+                    <Col lg="2">
+                    <div className="selectt">
+                    <Label for="exampleEmail">Boolen</Label>
+                      <Input className="form-control h-100" type="select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </Input>
+                      </div>
+                    </Col>
+                  </Row>
 
                   <div className="savee">{this.renderButton("Save")}</div>
                 </form>
