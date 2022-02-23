@@ -70,10 +70,6 @@ class App extends Component {
             component={ReviewerRegisterForm}
           />
 
-          {/* <Route path="*">
-            <NotFound />
-          </Route> */}
-
           {/* <Route path="/not-found" component={NotFound} /> */}
           {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
           {/* <ProtectedRoute path="/admin" component={AdminPage} /> */}
@@ -81,10 +77,10 @@ class App extends Component {
           {/* <ProtectedRoute path="/reviewer" component={ReviewerPage} /> */}
           {/* <ProtectedRoute path="/user" component={UserPage} /> */}
 
-          {/* <Redirect from="/admin" exact to="/admin/dashboard" />
+          <Redirect from="/admin" exact to="/admin/dashboard" />
           <Redirect from="/reductor" exact to="/reductor/myTasks" />
           <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
-          <Redirect from="/user" exact to="/user/user-page" /> */}
+          <Redirect from="/user" exact to="/user/user-page" />
 
           {/* <Redirect to="/not-found" /> */}
 
