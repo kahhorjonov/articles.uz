@@ -1,6 +1,9 @@
 .jurnallar {
   padding-top: 100px;
 }
+.jurnal_articles .border-0{
+  box-shadow: none;
+}
 
 .jurnallar h1 {
   font-family: SF Pro Display;
@@ -10,6 +13,10 @@
   line-height: 130%;
   color: #000000;
   text-align: left;
+}
+.jurnallar h4 a{
+  text-decoration: none;
+  color: black;
 }
 .jurnallar .nav-item {
   padding: 0 10px;
@@ -27,7 +34,7 @@
   font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px !important;
+  font-size: 19px !important;
   line-height: 170%;
   color: #000000 !important;
 }

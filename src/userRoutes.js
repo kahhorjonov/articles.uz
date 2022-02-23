@@ -1,6 +1,7 @@
 import UserPage from "./views/User.js";
 import ArticleForm from "./components/common/articleForm";
 
+
 var UserRoutes = [
   {
     path: "/user-page",
@@ -25,6 +26,8 @@ var UserRoutes = [
     component: ArticleForm,
     layout: "/user",
   },
+
+ 
 
   {
     path: "/notifications",

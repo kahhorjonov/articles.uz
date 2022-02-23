@@ -182,6 +182,14 @@ class ArticleForm extends Form {
                     </Col>
                   </Row>
 
+                  <Row>
+                    <Col lg="3">
+                      <div className="selectt">
+                        <Label for="exampleEmail">Narxi</Label>
+                        <Input disabled className="form-control h-100" placeholder="1000 som" />
+                      </div>
+                    </Col>
+                    </Row>
                   <div className="savee">{this.renderButton("Save")}</div>
                 </form>
               </CardBody>

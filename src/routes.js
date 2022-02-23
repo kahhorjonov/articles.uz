@@ -5,6 +5,7 @@ import Icons from "./views/Icons.js";
 import TableList from "./views/Tables.js";
 // import Maps from "views/Map.js";
 import UserPage from "./views/User.js";
+
 import Articles from "./views/articles";
 import ArticleActivation from "./routes/articleActivation";
 import MyTasks from "./routes/MyTasks";

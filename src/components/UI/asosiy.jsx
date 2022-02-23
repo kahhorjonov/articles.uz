@@ -7,6 +7,7 @@ import Footer from "components/Footer/Footer";
 import img from "../profile.png";
 
 import "../../styles/homePage.css";
+import { Link } from 'react-router-dom';
 
 class Asosiy extends React.Component {
   render() {
@@ -27,7 +28,9 @@ class Asosiy extends React.Component {
                 <div className="border-0">
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
-                    <h4 className="card_title">Tibbiyot va farmakologiya</h4>
+                    <h4 className="card_title"> <Link to='#'>
+                    Tibbiyot va farmakologiya
+                    </Link> </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
                       01.09.2020 gacha
@@ -40,7 +43,9 @@ class Asosiy extends React.Component {
                 <div className="border-0">
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
-                    <h4 className="card_title">Tibbiyot va farmakologiya</h4>
+                    <h4 className="card_title"> <Link to='#'>
+                    Tibbiyot va farmakologiya
+                    </Link> </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
                       01.09.2020 gacha
@@ -53,7 +58,9 @@ class Asosiy extends React.Component {
                 <div className="border-0">
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
-                    <h4 className="card_title">Tibbiyot va farmakologiya</h4>
+                    <h4 className="card_title"> <Link to='#'>
+                    Tibbiyot va farmakologiya
+                    </Link> </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
                       01.09.2020 gacha
@@ -66,7 +73,9 @@ class Asosiy extends React.Component {
                 <div className="border-0">
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
-                    <h4 className="card_title">Tibbiyot va farmakologiya</h4>
+                    <h4 className="card_title"> <Link to='#'>
+                    Tibbiyot va farmakologiya
+                    </Link> </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
                       01.09.2020 gacha
@@ -79,7 +88,9 @@ class Asosiy extends React.Component {
                 <div className="border-0">
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
-                    <h4 className="card_title">Tibbiyot va farmakologiya</h4>
+                    <h4 className="card_title"> <Link to='#'>
+                    Tibbiyot va farmakologiya
+                    </Link> </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
                       01.09.2020 gacha
@@ -92,7 +103,9 @@ class Asosiy extends React.Component {
                 <div className="border-0">
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
-                    <h4 className="card_title">Tibbiyot va farmakologiya</h4>
+                    <h4 className="card_title"> <Link to='#'>
+                    Tibbiyot va farmakologiya
+                    </Link> </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
                       01.09.2020 gacha

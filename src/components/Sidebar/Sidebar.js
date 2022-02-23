@@ -68,6 +68,7 @@ function Sidebar(props) {
                   <p>{prop.name}</p>
                 </NavLink>
               </li>
+             
             );
           })}
         </Nav>
