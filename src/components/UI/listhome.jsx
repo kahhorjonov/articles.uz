@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../profile.png";
+
 import "../../styles/homePage.css";
 
 class Listhome extends React.Component {

@@ -15,9 +15,10 @@ import { ToastContainer } from "react-toastify";
 import Asosiy from "./components/UI/asosiy";
 import JurnallarRoyxati from "./components/UI/jurnallarRo'yhati";
 import NashrShartlari from "./components/UI/nashrShartlari";
+import NotFound from "./components/common/notFound";
 
 import "react-toastify/dist/ReactToastify.css";
-import NotFound from "./components/common/notFound";
+import Aloqa from "./components/UI/aloqa";
 
 class App extends Component {
   render() {
@@ -45,6 +46,12 @@ class App extends Component {
             path="/termsOfPublication"
             exact
             component={(props) => <NashrShartlari {...props} />}
+          />
+
+          <Route
+            path="/contact"
+            exact
+            component={(props) => <Aloqa {...props} />}
           />
 
           <Route
@@ -76,29 +83,23 @@ class App extends Component {
           {/* <ProtectedRoute path="/reductor" component={ReductorPage} /> */}
           {/* <ProtectedRoute path="/reviewer" component={ReviewerPage} /> */}
           {/* <ProtectedRoute path="/user" component={UserPage} /> */}
-
           <Redirect from="/admin" exact to="/admin/dashboard" />
           <Redirect from="/reductor" exact to="/reductor/myTasks" />
           <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
           <Redirect from="/user" exact to="/user/user-page" />
-
           {/* <Redirect to="/not-found" /> */}
-
           <ProtectedRoute
             path="/admin"
             render={(props) => <AdminLayout {...props} />}
           />
-
           <ProtectedRoute
             path="/reductor"
             render={(props) => <ReductorLayout {...props} />}
           />
-
           <ProtectedRoute
             path="/reviewer"
             render={(props) => <ReviewerLayout {...props} />}
           />
-
           <ProtectedRoute
             path="/user"
             render={(props) => <UserLayout {...props} />}

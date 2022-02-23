@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../profile.png";
+
 import "../../styles/homePage.css";
 
 class Mainhome2 extends React.Component {

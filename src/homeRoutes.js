@@ -2,6 +2,7 @@ import Asosiy from "components/UI/asosiy";
 import JurnallarRoyxati from "components/UI/jurnallarRo'yhati";
 import NashrShartlari from "components/UI/nashrShartlari";
 import LoginForm from "./components/loginForm";
+import Aloqa from "./components/UI/aloqa";
 
 var HomeRoutes = [
   {
@@ -33,6 +34,14 @@ var HomeRoutes = [
     name: "Nashr Shartlari",
     icon: "nc-icon nc-bank",
     component: NashrShartlari,
+    layout: "/",
+  },
+
+  {
+    path: "/contact",
+    name: "Aloqa",
+    icon: "nc-icon nc-bank",
+    component: Aloqa,
     layout: "/",
   },
 ];

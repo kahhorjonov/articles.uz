@@ -43,12 +43,6 @@ function Header(props) {
 
   const getBrand = () => {
     let brandName = "NDT TEAM";
-    routes.map((prop, key) => {
-      if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-        brandName = prop.name;
-      }
-      return null;
-    });
     return brandName;
   };
 
@@ -79,8 +73,6 @@ function Header(props) {
       sidebarToggle.current.classList.toggle("toggled");
     }
   }, [location]);
-
-  // console.log(window.location.pathname.slice(0, 9));
 
   if (
     window.location.pathname.slice(0, 6) === "/admin" ||
@@ -120,7 +112,7 @@ function Header(props) {
                   <span className="navbar-toggler-bar bar3" />
                 </button>
               </div>
-              <NavbarBrand href="/">{getBrand()}</NavbarBrand>
+              <NavbarBrand href="/">{"NDT TEAM"}</NavbarBrand>
             </div>
             <NavbarToggler onClick={toggle}>
               <span className="navbar-toggler-bar navbar-kebab" />

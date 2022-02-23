@@ -57,7 +57,7 @@ class RegisterForm extends Form {
 
           <Link
             style={{ fontSize: "2rem" }}
-            to="/reviewerRegister"
+            to="/registerReviewer"
             className="rever"
           >
             Reviewer sifatida ro'yxatdan o'tish
