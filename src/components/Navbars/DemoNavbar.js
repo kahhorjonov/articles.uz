@@ -82,19 +82,19 @@ function Header(props) {
     return (
       <>
         <Navbar
-          color={
-            props.location &&
-            props.location.pathname.indexOf("full-screen-maps") !== -1
-              ? "dark"
-              : color
-          }
+          color="white"
+          // color={
+          //   props.location &&
+          //   props.location.pathname.indexOf("full-screen-maps") !== -1
+          //     ? "dark"
+          //     : color
+          // }
           expand="lg"
           className={
             props.location &&
             props.location.pathname.indexOf("full-screen-maps") !== -1
               ? "navbar-absolute fixed-top"
-              : "navbar-absolute fixed-top " +
-                (color === "transparent" ? "navbar-transparent " : "")
+              : "navbar-absolute fixed-top "
           }
         >
           <Container fluid>
