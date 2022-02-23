@@ -3,7 +3,7 @@ import Foooter from "./foooter";
 
 import "styles/nashirShartlar.css";
 
-class NashrShartlar extends Component {
+class NashrShartlari extends Component {
   state = {};
   render() {
     return (
@@ -570,4 +570,4 @@ class NashrShartlar extends Component {
   }
 }
 
-export default NashrShartlar;
+export default NashrShartlari;

@@ -5,7 +5,6 @@ import RegisterForm from "./components/registerForm";
 import ProtectedRoute from "./components/protectedRoute";
 import ReviewerRegisterForm from "./components/reviewerRegisterForm";
 import DemoNavbar from "components/Navbars/DemoNavbar";
-import Header from "./components/Navbars/homeNavbar";
 
 import Logout from "./components/logout";
 import AdminLayout from "./layouts/Admin.js";
@@ -13,9 +12,12 @@ import ReductorLayout from "./layouts/Reductor.js";
 import ReviewerLayout from "./layouts/Reviewer.js";
 import UserLayout from "./layouts/User.js";
 import { ToastContainer } from "react-toastify";
-import HomePage from "./components/UI/homePage";
+import Asosiy from "./components/UI/asosiy";
+import JurnallarRoyxati from "./components/UI/jurnallarRo'yhati";
+import NashrShartlari from "./components/UI/nashrShartlari";
 
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./components/common/notFound";
 
 class App extends Component {
   render() {
@@ -25,11 +27,25 @@ class App extends Component {
         <ToastContainer />
 
         <Switch>
-          {/* <Route
-            path="/"
+          <Route path="/" exact component={(props) => <Asosiy {...props} />} />
+
+          <Route
+            path="/main"
             exact
-            component={(props) => <HomePage {...props} />}
-          /> */}
+            component={(props) => <Asosiy {...props} />}
+          />
+
+          <Route
+            path="/listOfMagazines"
+            exact
+            component={(props) => <JurnallarRoyxati {...props} />}
+          />
+
+          <Route
+            path="/termsOfPublication"
+            exact
+            component={(props) => <NashrShartlari {...props} />}
+          />
 
           <Route
             path="/login"
@@ -49,10 +65,14 @@ class App extends Component {
           />
 
           <Route
-            path="/reviewerRegister"
+            path="/registerReviewer"
             exact
             component={ReviewerRegisterForm}
           />
+
+          <Route path="*">
+            <NotFound />
+          </Route>
 
           {/* <Route path="/not-found" component={NotFound} /> */}
           {/* <Redirect from="/admin" to="/admin/dashboard" /> */}

@@ -21,7 +21,7 @@ var HomeRoutes = [
   },
 
   {
-    path: "/uploadArticle",
+    path: "/login",
     name: "Maqola yuborish",
     icon: "nc-icon nc-bank",
     component: JurnallarRoyxati,
@@ -33,14 +33,6 @@ var HomeRoutes = [
     name: "Nashr Shartlari",
     icon: "nc-icon nc-bank",
     component: NashrShartlari,
-    layout: "/",
-  },
-
-  {
-    path: "/login",
-    name: "Tizimga Kirish",
-    icon: "nc-icon nc-bank",
-    component: LoginForm,
     layout: "/",
   },
 ];
