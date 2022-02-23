@@ -18,7 +18,6 @@ import {
   Input,
 } from "reactstrap";
 
-import routes from "routes";
 import HomeRoutes from "homeRoutes";
 
 function Header(props) {
@@ -175,10 +174,16 @@ function Header(props) {
           <div className="col-md-12 rel"></div>
           <nav className="navbar navbar-expand-md mb-0">
             <NavLink className="navbar-brand brands" to="/">
-              <h1 className="text-dark mb-0">ARTICLES.UZ</h1>
+              <h1
+                style={{ fontSize: "2.5rem", margin: "1rem" }}
+                className="text-dark "
+              >
+                ARTICLES.UZ
+              </h1>
             </NavLink>
 
             <button
+              style={{ fontSize: "2.5rem", margin: "1rem" }}
               className="navbar-toggler"
               type="button"
               data-toggle="collapse"

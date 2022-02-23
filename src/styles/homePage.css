@@ -15,9 +15,7 @@ body {
   font-size: 16px;
   box-sizing: border-box;
 }
-.homeNavbar {
- 
-}
+
 .buttons {
   /* height: 40px; */
   border: 1px solid #282828;
@@ -37,6 +35,7 @@ body {
 }
 .navbar .brands h1 {
   font-size: 15px;
+  font-weight: bolder;
 }
 
 .navbar-nav .nav-link {
@@ -457,7 +456,7 @@ body {
 .foo_nex {
   width: 100%;
 }
-.foo_nex .endd{
+.foo_nex .endd {
   text-align: end;
 }
 /* Media */
@@ -568,7 +567,7 @@ body {
   }
   .img-bg .col-md-12 img {
     padding: 0 20px;
-    
+
     height: 219px;
   }
   .mainPages h1 {
@@ -606,8 +605,8 @@ body {
   .art_uz p {
     padding: 0 30px;
   }
-  .art_uz2 img{
-    padding: 0 30px
+  .art_uz2 img {
+    padding: 0 30px;
   }
   .mualif h2 {
     font-family: SF Pro Display;
@@ -636,11 +635,10 @@ body {
     display: grid;
   }
 
-  .footer .foo_nex{
+  .footer .foo_nex {
     text-align: center;
   }
-  .footer .foo_nex .endd{
+  .footer .foo_nex .endd {
     text-align: center;
   }
-
 }
