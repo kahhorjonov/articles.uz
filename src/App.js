@@ -16,9 +16,9 @@ import Asosiy from "./components/UI/asosiy";
 import JurnallarRoyxati from "./components/UI/jurnallarRo'yhati";
 import NashrShartlari from "./components/UI/nashrShartlari";
 import NotFound from "./components/common/notFound";
+import Aloqa from "./components/UI/aloqa";
 
 import "react-toastify/dist/ReactToastify.css";
-import Aloqa from "./components/UI/aloqa";
 
 class App extends Component {
   render() {
