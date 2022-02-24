@@ -242,49 +242,7 @@ class JurnallarRoyxati extends Component {
                               <hr />
                             </div>
 
-                            <Carousel>
-                              <div
-                                style={{
-                                  width: "5rem",
-                                  height: "5rem",
-                                  backgroundColor: "black",
-                                  color: "white",
-                                }}
-                              >
-                                Card
-                              </div>
-                              <div
-                                style={{
-                                  width: "5rem",
-                                  height: "5rem",
-                                  backgroundColor: "black",
-                                  color: "white",
-                                }}
-                              >
-                                Card
-                              </div>
-                              <div
-                                style={{
-                                  width: "5rem",
-                                  height: "5rem",
-                                  backgroundColor: "black",
-                                  color: "white",
-                                }}
-                              >
-                                Card
-                              </div>
-                              <div
-                                style={{
-                                  width: "5rem",
-                                  height: "5rem",
-                                  backgroundColor: "black",
-                                  color: "white",
-                                }}
-                              >
-                                Card
-                              </div>
-                            </Carousel>
-
+                     
                             {/* <div className="col-md-8">
                   <div
                     id="carouselExampleIndicators"
