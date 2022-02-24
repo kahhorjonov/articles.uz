@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+// import { Carousel } from '@trendyol-js/react-carousel';
+// import { Carousel } from "reactstrap";
+import { Carousel } from "bootstrap";
 import img from "routes/books.png";
 
 import "styles/jurnallarRoyhati.css";
@@ -238,6 +241,49 @@ class JurnallarRoyxati extends Component {
                               </p>
                               <hr />
                             </div>
+
+                            <Carousel>
+                              <div
+                                style={{
+                                  width: "5rem",
+                                  height: "5rem",
+                                  backgroundColor: "black",
+                                  color: "white",
+                                }}
+                              >
+                                Card
+                              </div>
+                              <div
+                                style={{
+                                  width: "5rem",
+                                  height: "5rem",
+                                  backgroundColor: "black",
+                                  color: "white",
+                                }}
+                              >
+                                Card
+                              </div>
+                              <div
+                                style={{
+                                  width: "5rem",
+                                  height: "5rem",
+                                  backgroundColor: "black",
+                                  color: "white",
+                                }}
+                              >
+                                Card
+                              </div>
+                              <div
+                                style={{
+                                  width: "5rem",
+                                  height: "5rem",
+                                  backgroundColor: "black",
+                                  color: "white",
+                                }}
+                              >
+                                Card
+                              </div>
+                            </Carousel>
 
                             {/* <div className="col-md-8">
                   <div
