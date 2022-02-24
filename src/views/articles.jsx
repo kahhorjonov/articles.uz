@@ -14,7 +14,7 @@ class Articles extends Component {
     deadline: "",
     articles: [],
     people: [],
-    role: 777,
+    role: "777",
     id: null,
     activated: "",
 
@@ -96,6 +96,8 @@ class Articles extends Component {
 
     const articles = paginate(allArticles, currentPage, pageSize);
     const people = paginate(allPeople, currentPage2, pageSize2);
+
+    console.log(people);
 
     return (
       <>
