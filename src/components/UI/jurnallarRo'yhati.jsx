@@ -34,10 +34,10 @@ class JurnallarRoyxati extends Component {
     const CustomRightArrow = ({ onClick, ...rest }) => {
       const {
         onMove,
-        carouselState: { currentSlide, deviceType }
+        carouselState: { currentSlide, deviceType },
       } = rest;
       // onMove means if dragging or swiping in progress.
-      return <button onClick={() => onClick()}  />;
+      return <button onClick={() => onClick()} />;
     };
 
     return (
@@ -257,7 +257,7 @@ class JurnallarRoyxati extends Component {
                   swipeable={false}
                   draggable={false}
                   // customRightArrow={<CustomRightArrow />}
-                  showDots={true}
+                  showDots={false}
                   responsive={responsive}
                   ssr={true} // means to render carousel on server-side.
                   infinite={true}
@@ -274,7 +274,7 @@ class JurnallarRoyxati extends Component {
                 >
                   {/* <div className="row mx-0"> */}
 
-                  <Col lg="10" className='px-0 mx-0'>
+                  <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
                       <img src={img} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
@@ -290,7 +290,7 @@ class JurnallarRoyxati extends Component {
                     </div>
                   </Col>
 
-                  <Col lg='10' className='px-0 mx-0'>
+                  <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
                       <img src={img1} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
@@ -306,7 +306,7 @@ class JurnallarRoyxati extends Component {
                     </div>
                   </Col>
 
-                  <Col lg='10' className='px-0 mx-0'>
+                  <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
                       <img src={img2} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
@@ -321,8 +321,6 @@ class JurnallarRoyxati extends Component {
                       </div>
                     </div>
                   </Col>
-
-     
                 </Carousel>
               </div>
             </div>
