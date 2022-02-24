@@ -16,9 +16,7 @@ class Articles extends Component {
     people: [],
     role: 777,
     id: null,
-    step: "null",
     activated: "",
-    activeRow: null,
 
     categories: [],
 
@@ -69,10 +67,10 @@ class Articles extends Component {
       await articleService
         .confirmForUsers(bool, articleId, userId, deadline)
         .then((res) => {
-          console.log(res);
           toast.success(res.data.message);
+          this.handleActive(this.state.activeArticleId);
         });
-      this.handleActive(this.state.activeArticleId);
+      console.log(this.state.people);
     } catch (ex) {
       toast.error(ex);
     }
@@ -109,100 +107,61 @@ class Articles extends Component {
                 <div className="card-body">
                   <div className="d-flex justify-content-end">
                     <div className="col-md-3 p-0 box2">
-                      <ul className="nav-pills flex-column" role="tablist">
-                        <li className="item">
+                      <ul className="nav nav-pills flex-column" role="tablist">
+                        <li className="nav-item item">
                           <a
-                            onClick={(e) => {
+                            onClick={() => {
                               this.handleClick("START");
-                              this.setState({ activeRow: 1 });
-                              //   this.setState({ step: "START" });
-                              //   this.render(this.setState({ step: "START" }));
                             }}
-                            className={
-                              this.state.activeRow === 1
-                                ? "nav-link navv active"
-                                : "nav-link navv"
-                            }
+                            className="nav-link navv"
                             data-toggle="pill"
                           >
                             Yangi qabul qilinganlar
                           </a>
                         </li>
-                        <li className="item">
+                        <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              e.preventDefault();
                               this.handleClick("PREPARING_FOR_PUBLICATION");
-                              this.setState({ activeRow: 2 });
-                              //   this.setState({ step: "PREPARING_FOR_PUBLICATION" });
-                              //   console.log("tahrirda");
                             }}
-                            className={
-                              this.state.activeRow === 2
-                                ? "nav-link navv active"
-                                : "nav-link navv"
-                            }
+                            className="nav-link navv"
                             data-toggle="pill"
                           >
                             Tahrirda
                           </a>
                         </li>
-                        <li className="item">
+                        <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              e.preventDefault();
                               this.handleClick("BEGIN_CHECK");
-                              this.setState({ activeRow: 3 });
-                              //   this.setState({ step: "BEGIN_CHECK" });
-                              //   console.log("taqrizda");
                             }}
-                            className={
-                              this.state.activeRow === 3
-                                ? "nav-link navv active"
-                                : "nav-link navv"
-                            }
+                            className="nav-link navv"
                             data-toggle="pill"
                           >
                             Taqrizda
                           </a>
                         </li>
-                        <li className="item">
+                        <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              e.preventDefault();
-                              this.handleClick("BEGIN_CHECK2");
-                              this.setState({ activeRow: 4 });
-                              //   this.setState({ step: "BEGIN_CHECK" });
-                              //   console.log("taqrizda");
+                              this.handleClick("PREPARED_FOR_PUBLICATION");
                             }}
-                            className={
-                              this.state.activeRow === 4
-                                ? "nav-link navv active"
-                                : "nav-link navv"
-                            }
+                            className="nav-link navv"
                             data-toggle="pill"
                           >
-                            new 4
+                            Chop etishda
                           </a>
                         </li>
 
-                        <li className="item">
+                        <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              e.preventDefault();
-                              this.handleClick("BEGIN_CHECK5");
-                              this.setState({ activeRow: 5 });
-                              //   this.setState({ step: "BEGIN_CHECK" });
-                              //   console.log("taqrizda");
+                              this.handleClick("PUBLISHED");
                             }}
-                            className={
-                              this.state.activeRow === 5
-                                ? "nav-link navv active"
-                                : "nav-link navv"
-                            }
+                            className="nav-link navv"
                             data-toggle="pill"
                           >
-                            new 5
+                            Chop etilganlar
                           </a>
                         </li>
                       </ul>
@@ -227,10 +186,7 @@ class Articles extends Component {
                         </div>
                       </div>
 
-                      <ul
-                      // role="tablist"
-                      // className="tablis p-0 nav-pills flex-column"
-                      >
+                      <ul>
                         {articles &&
                           articles.map((article) => (
                             <li
