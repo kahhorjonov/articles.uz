@@ -97,6 +97,8 @@ class Articles extends Component {
     const articles = paginate(allArticles, currentPage, pageSize);
     const people = paginate(allPeople, currentPage2, pageSize2);
 
+    console.log(people);
+
     return (
       <>
         <div className="content">
