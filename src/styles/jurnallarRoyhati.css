@@ -1,7 +1,7 @@
 .jurnallar {
   padding-top: 100px;
 }
-.jurnal_articles .border-0{
+.jurnal_articles .border-0 {
   box-shadow: none;
 }
 
@@ -14,7 +14,7 @@
   color: #000000;
   text-align: left;
 }
-.jurnallar h4 a{
+.jurnallar h4 a {
   text-decoration: none;
   color: black;
 }
@@ -43,16 +43,12 @@
   padding-top: 80px;
 }
 
-
-
 .jurnal_articles {
   padding-top: 60px;
 }
 .jurnallar .a1 {
   margin-top: 100px;
 }
-
-
 
 .maqolaQabul {
   width: 100%;
@@ -103,4 +99,28 @@
   height: 2px;
   color: black !important;
   margin-top: 0;
+}
+
+.colap .col-lg-10 h4 {
+  margin-top: 0;
+  padding-top: 25px;
+  margin-bottom: 0;
+}
+.colap .col-lg-10 p {
+  padding-top: 20px;
+}
+.colap .col-lg-4 {
+  position: relative;
+  z-index: -1;
+}
+.colap  .react-multiple-carousel__arrow--left {
+  position: absolute !important;
+  left: calc(-46% + -22px) !important;
+}
+.colap .react-multiple-carousel__arrow--right{
+  position: absolute;
+  right: calc(124% + 1px) !important;;
+}
+.react-multi-carousel-list {
+  position: initial;
 }
