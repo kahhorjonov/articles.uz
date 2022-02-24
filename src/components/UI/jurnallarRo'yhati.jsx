@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import img from "routes/books.png";
 
 import "styles/jurnallarRoyhati.css";
 
@@ -205,96 +204,6 @@ class JurnallarRoyxati extends Component {
 
         <div className="maqolaQabul">
           <h1>Maqolalar qabul qilinayotgan jurnallar</h1>
-
-          <div className="carousel">
-            <div className="row mt-5">
-              <div className="col-md-3">
-                <h4>Barcha turdagi maqolalar qabul qilinuchi jurnallar</h4>
-                <p className="text-muted">
-                  <a href="#" className="text-decaration-none">
-                    Barchasini ko’rish
-                  </a>
-                </p>
-                <hr />
-              </div>
-
-              <div className="col-md-9">
-                <div
-                  id="carouselExampleIndicators"
-                  className="carousel slide"
-                  data-bs-ride="carousel"
-                >
-                  <div className="carousel-indicators">
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleIndicators"
-                      data-bs-slide-to="0"
-                      className="active"
-                      aria-current="true"
-                      aria-label="Slide 1"
-                    ></button>
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleIndicators"
-                      data-bs-slide-to="1"
-                      aria-label="Slide 2"
-                    ></button>
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleIndicators"
-                      data-bs-slide-to="2"
-                      aria-label="Slide 3"
-                    ></button>
-                  </div>
-                  <div className="carousel-inner">
-                    <div className="carousel-item active">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src={img}
-                          alt="Card image"
-                        />
-                        <div className="card-body">
-                          <h4 className="card-title">John Doe</h4>
-                          <p className="card-text">Some example text.</p>
-                          <a href="#" className="btn btn-primary">
-                            See Profile
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="carousel-item"></div>
-                    <div className="carousel-item"></div>
-                  </div>
-
-                  <button
-                    className="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev"
-                  >
-                    <span
-                      className="carousel-control-prev-icon"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="visually-hidden">Previous</span>
-                  </button>
-                  <button
-                    className="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next"
-                  >
-                    <span
-                      className="carousel-control-next-icon"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     );
