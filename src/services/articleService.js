@@ -173,6 +173,13 @@ export function articleInfo(id) {
   return httpService.get(`${apiLocal} + /article/articleInfoForAdmin/${id}`);
 }
 
+export function getPrice(data) {
+  return httpService.get(
+    "http://192.168.100.27:8080/api/prices/getPrices",
+    data
+  );
+}
+
 export function myDuties() {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -233,4 +240,5 @@ export default {
   getAllArticles,
   sendWork,
   addArticle,
+  getPrice,
 };

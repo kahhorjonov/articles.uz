@@ -1,27 +1,11 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./form";
-import ArticleService from "../../services/articleService";
+import articleService from "../../services/articleService";
 import { getCategories } from "../../services/getCategories";
 
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-  Col,
-  ListGro,
-  ListGroupItem,
-  Badge,
-  NavLink,
-  Table,
-} from "reactstrap";
+import { toast } from "react-toastify";
+import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
 
 import "../../styles/articleForm.css";
 
@@ -37,8 +21,15 @@ class ArticleForm extends Form {
       categoryId: "",
       file: [],
     },
+
     categories: [],
     errors: {},
+
+    numberOfPages: "0",
+    numberOfPrints: "0",
+    numberOfPrintedMagazines: "0",
+    numberOfLicences: "0",
+    doi: false,
   };
 
   schema = {
@@ -85,9 +76,26 @@ class ArticleForm extends Form {
   //   };
   // }
 
+  getPrice = async () => {
+    try {
+      const data = {
+        sahifaSoni: this.state.numberOfPages,
+        JurnaldaChopEtishSoni: this.state.numberOfPrints,
+        BosmaJurnalSoni: this.state.numberOfPrintedMagazines,
+        SertifikatSoni: this.state.numberOfLicences,
+        doi: this.state.doi,
+      };
+
+      const res = await articleService.getPrice(data);
+      console.log(res);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
   doSubmit = async () => {
-    await ArticleService.addArticle(this.state.data);
-    console.log(this.state.data);
+    await articleService.addArticle(this.state.data);
+    // console.log(this.state.data);
     // this.props.history.push("/article");
   };
 
@@ -125,13 +133,11 @@ class ArticleForm extends Form {
 
                   <Row>
                     <Col lg="3">
-                      <div className="selectt">
-                        {this.renderSelect(
-                          "categoryId",
-                          "Categories",
-                          this.state.categories
-                        )}
-                      </div>
+                      {this.renderSelect(
+                        "categoryId",
+                        "Categories",
+                        this.state.categories
+                      )}
                     </Col>
                     <Col lg="3">{this.renderInput("author", "Author")}</Col>
                     <Col lg="3">{this.renderInput("tags", "Tags")}</Col>
@@ -141,43 +147,80 @@ class ArticleForm extends Form {
                   </Row>
                   <Row>
                     <Col lg="2">
-                      <div className="selectt">
-                        <Label for="exampleEmail">Sahifa soni</Label>
-                        <Input className="form-control h-100" />
+                      <div className="form-group">
+                        <label>Sahifa soni</label>
+                        <input
+                          defaultValue={0}
+                          className="form-control"
+                          onChange={(e) => {
+                            e.preventDefault();
+                            this.setState({ numberOfPages: e.target.value });
+                            this.getPrice();
+                          }}
+                        />
                       </div>
                     </Col>
                     <Col lg="3">
-                      <div className="selectt">
-                        <Label for="exampleEmail">
-                          Bitta jurnalda jop etish soni
-                        </Label>
-                        <Input className="form-control h-100" />
+                      <div className="form-group">
+                        <Label> Chop etiladigan jurnallar soni</Label>
+                        <Input
+                          defaultValue={0}
+                          className="form-control h-100"
+                          type="select"
+                          onChange={(e) => {
+                            e.preventDefault();
+                            this.setState({
+                              numberOfPrintedMagazines: e.target.value,
+                            });
+                            this.getPrice();
+                          }}
+                        >
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </Input>
                       </div>
                     </Col>
                     <Col lg="2">
-                      <div className="selectt">
-                        <Label for="exampleEmails">
-                          Bitta bosma jurnal soni
-                        </Label>
-                        <Input className="form-control h-100" />
-                      </div>
+                      <Label>Bosma jurnal soni</Label>
+                      <input
+                        className="form-control"
+                        onChange={(e) => {
+                          e.preventDefault();
+                          this.setState({ numberOfPrints: e.target.value });
+                          this.getPrice();
+                        }}
+                      />
                     </Col>
                     <Col lg="3">
-                      <div className="selectt">
-                        <Label for="exampleEmail">bitta Sertifikat soni</Label>
-                        <Input className="form-control h-100" />
-                      </div>
+                      <Label>Sertifikat soni</Label>
+                      <input
+                        className="form-control"
+                        onChange={(e) => {
+                          e.preventDefault();
+                          this.setState({ numberOfLicences: e.target.value });
+                          this.getPrice();
+                        }}
+                      />
                     </Col>
                     <Col lg="2">
-                    <div className="selectt">
-                    <Label for="exampleEmail">Boolen</Label>
-                      <Input className="form-control h-100" type="select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </Input>
+                      <div className="select">
+                        <Label for="exampleEmail">Boolen</Label>
+                        <Input
+                          className="form-control"
+                          type="select"
+                          onChange={(e) => {
+                            e.preventDefault();
+                            this.setState({ doi: e.target.value });
+                            this.getPrice();
+                          }}
+                        >
+                          <option>True</option>
+                          <option>False</option>
+                        </Input>
                       </div>
                     </Col>
                   </Row>
@@ -186,10 +229,14 @@ class ArticleForm extends Form {
                     <Col lg="3">
                       <div className="selectt">
                         <Label for="exampleEmail">Narxi</Label>
-                        <Input disabled className="form-control h-100" placeholder="1000 som" />
+                        <Input
+                          disabled
+                          className="form-control h-100"
+                          placeholder="1000 som"
+                        />
                       </div>
                     </Col>
-                    </Row>
+                  </Row>
                   <div className="savee">{this.renderButton("Save")}</div>
                 </form>
               </CardBody>

@@ -119,7 +119,6 @@ class Form extends Component {
 
   renderFileInput(name, label, type = "file") {
     const { data, errors } = this.state;
-    console.log(data);
 
     return (
       <Input
@@ -136,7 +135,6 @@ class Form extends Component {
 
   renderPassportInput(name, label, type = "file") {
     const { data, errors } = this.state;
-    // console.log(data);
 
     return (
       <Input
