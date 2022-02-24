@@ -4,8 +4,9 @@ import Form from "./form";
 import articleService from "../../services/articleService";
 import { getCategories } from "../../services/getCategories";
 
-import { toast } from "react-toastify";
 import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
+
+import { toast } from "react-toastify";
 
 import "../../styles/articleForm.css";
 
@@ -61,6 +62,25 @@ class ArticleForm extends Form {
   //   }
   // }
 
+  getPrice = async () => {
+    try {
+      const data = {
+        sahifaSoni: this.state.numberOfPages,
+        JurnaldaChopEtishSoni: this.state.numberOfPrints,
+        BosmaJurnalSoni: this.state.numberOfPrintedMagazines,
+        SertifikatSoni: this.state.numberOfLicences,
+        doi: this.state.doi,
+      };
+
+      console.log(data);
+
+      // const res = await articleService.getPrice(data);
+      // console.log(res);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
   async componentDidMount() {
     await this.populateCategories();
     // await this.populateArticles();
@@ -75,23 +95,6 @@ class ArticleForm extends Form {
   //     dailyRentalRate: movie.dailyRentalRate,
   //   };
   // }
-
-  getPrice = async () => {
-    try {
-      const data = {
-        sahifaSoni: this.state.numberOfPages,
-        JurnaldaChopEtishSoni: this.state.numberOfPrints,
-        BosmaJurnalSoni: this.state.numberOfPrintedMagazines,
-        SertifikatSoni: this.state.numberOfLicences,
-        doi: this.state.doi,
-      };
-
-      const res = await articleService.getPrice(data);
-      console.log(res);
-    } catch (ex) {
-      console.log(ex);
-    }
-  };
 
   doSubmit = async () => {
     await articleService.addArticle(this.state.data);
@@ -150,7 +153,7 @@ class ArticleForm extends Form {
                       <div className="form-group">
                         <label>Sahifa soni</label>
                         <input
-                          defaultValue={0}
+                          placeholder="0"
                           className="form-control"
                           onChange={(e) => {
                             e.preventDefault();
