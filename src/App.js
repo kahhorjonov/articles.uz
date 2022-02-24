@@ -26,7 +26,6 @@ class App extends Component {
       <>
         <DemoNavbar />
         <ToastContainer />
-
         <Switch>
           <Route path="/" exact component={(props) => <Asosiy {...props} />} />
 
@@ -105,8 +104,6 @@ class App extends Component {
             render={(props) => <UserLayout {...props} />}
           />
         </Switch>
-
-        {/* <Aloqa/> */}
       </>
     );
   }

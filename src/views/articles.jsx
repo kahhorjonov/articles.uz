@@ -14,7 +14,7 @@ class Articles extends Component {
     deadline: "",
     articles: [],
     people: [],
-    role: 777,
+    role: "777",
     id: null,
     activated: "",
 
