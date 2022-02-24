@@ -63,27 +63,21 @@ class ArticleForm extends Form {
   // }
 
   getPrice = async () => {
-    try {
-      const data = {
-        sahifaSoni: this.state.numberOfPages,
-        JurnaldaChopEtishSoni: this.state.numberOfPrints,
-        BosmaJurnalSoni: this.state.numberOfPrintedMagazines,
-        SertifikatSoni: this.state.numberOfLicences,
-        doi: this.state.doi,
-      };
+    const data = {
+      sahifaSoni: "5",
+      JurnaldaChopEtishSoni: "7",
+      BosmaJurnalSoni: "9",
+      SertifikatSoni: "10",
+      doi: "false",
+    };
 
-      console.log(data);
+    console.log(data);
 
-      // const res = await articleService.getPrice(data);
-      // console.log(res);
-    } catch (ex) {
-      console.log(ex);
-    }
+    await articleService.getPrice(data).then((res) => console.log(res));
   };
 
   async componentDidMount() {
     await this.populateCategories();
-    // await this.populateArticles();
   }
 
   // mapToViewModel(article) {
@@ -95,6 +89,13 @@ class ArticleForm extends Form {
   //     dailyRentalRate: movie.dailyRentalRate,
   //   };
   // }
+
+  getPrice = async () => {
+    await articleService
+      .getPrice()
+      .then((res) => console.log(res))
+      .catch((ex) => console.log(ex));
+  };
 
   doSubmit = async () => {
     await articleService.addArticle(this.state.data);
