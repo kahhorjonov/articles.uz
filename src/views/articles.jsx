@@ -7,6 +7,7 @@ import image from "../components/profile.png";
 import articleService from "services/articleService";
 
 import "../styles/navbar.css";
+import { Input } from "reactstrap";
 
 class Articles extends Component {
   state = {
@@ -96,8 +97,6 @@ class Articles extends Component {
 
     const articles = paginate(allArticles, currentPage, pageSize);
     const people = paginate(allPeople, currentPage2, pageSize2);
-
-    console.log(people);
 
     return (
       <>
@@ -238,15 +237,16 @@ class Articles extends Component {
                       <div className="div">
                         <div className="bg">
                           <div className="input-group">
-                            <input
-                              type="text"
+                            <Input
+                              style={{ padding: "0.375rem 0.75rem" }}
                               placeholder="Search"
-                              className="form-control border-0"
-                              aria-label="Text input with dropdown button"
+                              className="border"
                             />
 
                             <div className="input-group-append">
-                              <select
+                              <Input
+                                style={{ padding: "0.375rem 0.75rem" }}
+                                type="select"
                                 name="cars"
                                 className="form-control h-100 border"
                                 onChange={(e) =>
@@ -261,10 +261,12 @@ class Articles extends Component {
                                 <option value={5}>5 kun</option>
                                 <option value={6}>6 kun</option>
                                 <option value={7}>7 kun</option>
-                              </select>
+                              </Input>
 
-                              <select
-                                className="form-select form-control h-100 border-0"
+                              <Input
+                                type="select"
+                                style={{ padding: "0.375rem 0.75rem" }}
+                                className="form-control h-100 border-0"
                                 defaultValue={777}
                                 onChange={(e) => {
                                   this.handleChange(e.target.value);
@@ -274,7 +276,8 @@ class Articles extends Component {
                                 <option value={777}>Auto</option>
                                 <option value={3}>Reviewer</option>
                                 <option value={2}>Reductor</option>
-                              </select>
+                              </Input>
+
                               <div className="dropdown-menu">
                                 <a className="dropdown-item">Redactor</a>
                                 <a className="dropdown-item">Reviewer</a>

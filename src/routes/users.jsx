@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import userService from "../services/userService";
-import { getCategories } from "../services/getCategories";
+import userService from "services/userService";
+import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
 
 import {
@@ -21,7 +21,7 @@ import {
   InputGroup,
 } from "reactstrap";
 
-import "../styles/usersStyles.css";
+import "styles/usersStyles.css";
 import "react-toastify/dist/ReactToastify.css";
 
 class Users extends Component {

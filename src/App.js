@@ -15,8 +15,8 @@ import { ToastContainer } from "react-toastify";
 import Asosiy from "./components/UI/asosiy";
 import JurnallarRoyxati from "./components/UI/jurnallarRo'yhati";
 import NashrShartlari from "./components/UI/nashrShartlari";
-import NotFound from "./components/common/notFound";
 import Aloqa from "./components/UI/aloqa";
+import NotFound from "./components/common/notFound";
 
 import "react-toastify/dist/ReactToastify.css";
 
