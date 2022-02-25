@@ -67,9 +67,9 @@ class ArticleForm extends Form {
   getPriceFromPages = async (pageSize) => {
     const data = {
       sahifaSoni: pageSize,
-      jurnaldaChopEtishSoni: this.state.numberOfPrints,
-      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
-      sertifikatSoni: this.state.numberOfLicences,
+      jurnaldaChopEtishSoni: this.state.jurnaldaChopEtishSoni,
+      bosmaJurnalSoni: this.state.bosmaJurnalSoni,
+      sertifikatSoni: this.state.sertifikatSoni,
       doi: this.state.doi,
     };
 
@@ -80,14 +80,12 @@ class ArticleForm extends Form {
 
   getPriceNumberOfPrints = async (numberOfPrints) => {
     const data = {
-      sahifaSoni: this.state.numberOfPages,
+      sahifaSoni: this.state.sahifaSoni,
       jurnaldaChopEtishSoni: numberOfPrints,
-      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
-      sertifikatSoni: this.state.numberOfLicences,
+      bosmaJurnalSoni: this.state.bosmaJurnalSoni,
+      sertifikatSoni: this.state.sertifikatSoni,
       doi: this.state.doi,
     };
-
-    console.log(data.jurnaldaChopEtishSoni);
 
     await articleService.getPrice(data).then((res) => {
       this.setState({ price: res.data.object });
@@ -96,14 +94,12 @@ class ArticleForm extends Form {
 
   getPriceFromNumberOfPrintedMagazines = async (numberOfPrintedMagazines) => {
     const data = {
-      sahifaSoni: this.state.numberOfPages,
-      jurnaldaChopEtishSoni: this.state.numberOfPrints,
+      sahifaSoni: this.state.sahifaSoni,
+      jurnaldaChopEtishSoni: this.state.jurnaldaChopEtishSoni,
       bosmaJurnalSoni: numberOfPrintedMagazines,
-      sertifikatSoni: this.state.numberOfLicences,
+      sertifikatSoni: this.state.sertifikatSoni,
       doi: this.state.doi,
     };
-
-    console.log(data);
 
     await articleService.getPrice(data).then((res) => {
       this.setState({ price: res.data.object });
@@ -112,9 +108,9 @@ class ArticleForm extends Form {
 
   getPriceFromNumberOfLicences = async (numberOfLicences) => {
     const data = {
-      sahifaSoni: this.state.numberOfPages,
-      jurnaldaChopEtishSoni: this.state.numberOfPrints,
-      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
+      sahifaSoni: this.state.sahifaSoni,
+      jurnaldaChopEtishSoni: this.state.numbjurnaldaChopEtishSonierOfPrints,
+      bosmaJurnalSoni: this.state.bosmaJurnalSoni,
       sertifikatSoni: numberOfLicences,
       doi: this.state.doi,
     };
@@ -154,13 +150,10 @@ class ArticleForm extends Form {
 
   doSubmit = async () => {
     await articleService.addArticle(this.state.data);
-    // console.log(this.state.data);
     // this.props.history.push("/article");
   };
 
   render() {
-    console.log(this.state.numberOfPrintedMagazines);
-
     const price = this.state.price && this.state.price;
 
     return (
@@ -217,7 +210,7 @@ class ArticleForm extends Form {
                           placeholder="0"
                           className="form-control"
                           onChange={(e) => {
-                            this.setState({ numberOfPages: e.target.value });
+                            this.setState({ sahifaSoni: e.target.value });
                             this.getPriceFromPages(e.target.value);
                           }}
                         />
@@ -227,11 +220,13 @@ class ArticleForm extends Form {
                       <div>
                         <Label> Chop etiladigan jurnallar soni</Label>
                         <input
+                          min="0"
+                          type={"number"}
                           className="form-control"
                           defaultValue={0}
                           onChange={(e) => {
                             this.setState({
-                              numberOfPrintedMagazines: e.target.value,
+                              jurnaldaChopEtishSoni: e.target.value,
                             });
                             this.getPriceNumberOfPrints(e.target.value);
                           }}
@@ -241,9 +236,11 @@ class ArticleForm extends Form {
                     <Col lg="2">
                       <Label>Bosma jurnal soni</Label>
                       <input
+                        min="0"
+                        type={"number"}
                         className="form-control"
                         onChange={(e) => {
-                          this.setState({ numberOfPrints: e.target.value });
+                          this.setState({ bosmaJurnalSoni: e.target.value });
                           this.getPriceFromNumberOfPrintedMagazines(
                             e.target.value
                           );
@@ -253,9 +250,11 @@ class ArticleForm extends Form {
                     <Col lg="3">
                       <Label>Sertifikat soni</Label>
                       <input
+                        min="0"
+                        type={"number"}
                         className="form-control"
                         onChange={(e) => {
-                          this.setState({ numberOfLicences: e.target.value });
+                          this.setState({ sertifikatSoni: e.target.value });
                           this.getPriceFromNumberOfLicences(e.target.value);
                         }}
                       />
