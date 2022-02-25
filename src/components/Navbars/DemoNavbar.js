@@ -128,14 +128,14 @@ function Header(props) {
                 </InputGroup>
               </form>
               <Nav navbar>
-                <NavItem>
+                {/* <NavItem>
                   <Link to="" className="nav-link btn-magnify">
                     <i className="nc-icon nc-layout-11" />
                     <p>
                       <span className="d-lg-none d-md-block">Stats</span>
                     </p>
                   </Link>
-                </NavItem>
+                </NavItem> */}
                 <Dropdown
                   nav
                   isOpen={dropdownOpen}
