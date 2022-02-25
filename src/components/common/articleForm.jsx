@@ -4,7 +4,7 @@ import Form from "./form";
 import articleService from "../../services/articleService";
 import { getCategories } from "../../services/getCategories";
 
-import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
+import { Card, CardBody, Input, Label, Row, Col, Toast } from "reactstrap";
 
 import { toast } from "react-toastify";
 
@@ -26,11 +26,13 @@ class ArticleForm extends Form {
     categories: [],
     errors: {},
 
-    numberOfPages: "0",
-    numberOfPrints: "0",
-    numberOfPrintedMagazines: "0",
-    numberOfLicences: "0",
+    sahifaSoni: "0",
+    jurnaldaChopEtishSoni: "0",
+    bosmaJurnalSoni: "0",
+    sertifikatSoni: "0",
     doi: false,
+
+    price: 0,
   };
 
   schema = {
@@ -62,18 +64,78 @@ class ArticleForm extends Form {
   //   }
   // }
 
-  getPrice = async () => {
+  getPriceFromPages = async (pageSize) => {
     const data = {
-      sahifaSoni: "5",
-      JurnaldaChopEtishSoni: "7",
-      BosmaJurnalSoni: "9",
-      SertifikatSoni: "10",
-      doi: "false",
+      sahifaSoni: pageSize,
+      jurnaldaChopEtishSoni: this.state.numberOfPrints,
+      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
+      sertifikatSoni: this.state.numberOfLicences,
+      doi: this.state.doi,
+    };
+
+    await articleService.getPrice(data).then((res) => {
+      this.setState({ price: res.data.object });
+    });
+  };
+
+  getPriceNumberOfPrints = async (numberOfPrints) => {
+    const data = {
+      sahifaSoni: this.state.numberOfPages,
+      jurnaldaChopEtishSoni: numberOfPrints,
+      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
+      sertifikatSoni: this.state.numberOfLicences,
+      doi: this.state.doi,
+    };
+
+    console.log(data.jurnaldaChopEtishSoni);
+
+    await articleService.getPrice(data).then((res) => {
+      this.setState({ price: res.data.object });
+    });
+  };
+
+  getPriceFromNumberOfPrintedMagazines = async (numberOfPrintedMagazines) => {
+    const data = {
+      sahifaSoni: this.state.numberOfPages,
+      jurnaldaChopEtishSoni: this.state.numberOfPrints,
+      bosmaJurnalSoni: numberOfPrintedMagazines,
+      sertifikatSoni: this.state.numberOfLicences,
+      doi: this.state.doi,
     };
 
     console.log(data);
 
-    await articleService.getPrice(data).then((res) => console.log(res));
+    await articleService.getPrice(data).then((res) => {
+      this.setState({ price: res.data.object });
+    });
+  };
+
+  getPriceFromNumberOfLicences = async (numberOfLicences) => {
+    const data = {
+      sahifaSoni: this.state.numberOfPages,
+      jurnaldaChopEtishSoni: this.state.numberOfPrints,
+      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
+      sertifikatSoni: numberOfLicences,
+      doi: this.state.doi,
+    };
+
+    await articleService.getPrice(data).then((res) => {
+      this.setState({ price: res.data.object });
+    });
+  };
+
+  getPriceFromDoi = async (doi) => {
+    const data = {
+      sahifaSoni: this.state.numberOfPages,
+      jurnaldaChopEtishSoni: this.state.numberOfPrints,
+      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
+      sertifikatSoni: this.state.numberOfLicences,
+      doi: doi,
+    };
+
+    await articleService.getPrice(data).then((res) => {
+      this.setState({ price: res.data.object });
+    });
   };
 
   async componentDidMount() {
@@ -90,13 +152,6 @@ class ArticleForm extends Form {
   //   };
   // }
 
-  getPrice = async () => {
-    await articleService
-      .getPrice()
-      .then((res) => console.log(res))
-      .catch((ex) => console.log(ex));
-  };
-
   doSubmit = async () => {
     await articleService.addArticle(this.state.data);
     // console.log(this.state.data);
@@ -104,6 +159,10 @@ class ArticleForm extends Form {
   };
 
   render() {
+    console.log(this.state.numberOfPrintedMagazines);
+
+    const price = this.state.price && this.state.price;
+
     return (
       <div className="content">
         <Row>
@@ -151,41 +210,32 @@ class ArticleForm extends Form {
                   </Row>
                   <Row>
                     <Col lg="2">
-                      <div className="form-group">
+                      <div>
                         <label>Sahifa soni</label>
                         <input
+                          className="form-control"
                           placeholder="0"
                           className="form-control"
                           onChange={(e) => {
-                            e.preventDefault();
                             this.setState({ numberOfPages: e.target.value });
-                            this.getPrice();
+                            this.getPriceFromPages(e.target.value);
                           }}
                         />
                       </div>
                     </Col>
                     <Col lg="3">
-                      <div className="form-group">
+                      <div>
                         <Label> Chop etiladigan jurnallar soni</Label>
-                        <Input
+                        <input
+                          className="form-control"
                           defaultValue={0}
-                          className="form-control h-100"
-                          type="select"
                           onChange={(e) => {
-                            e.preventDefault();
                             this.setState({
                               numberOfPrintedMagazines: e.target.value,
                             });
-                            this.getPrice();
+                            this.getPriceNumberOfPrints(e.target.value);
                           }}
-                        >
-                          <option>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </Input>
+                        />
                       </div>
                     </Col>
                     <Col lg="2">
@@ -193,9 +243,10 @@ class ArticleForm extends Form {
                       <input
                         className="form-control"
                         onChange={(e) => {
-                          e.preventDefault();
                           this.setState({ numberOfPrints: e.target.value });
-                          this.getPrice();
+                          this.getPriceFromNumberOfPrintedMagazines(
+                            e.target.value
+                          );
                         }}
                       />
                     </Col>
@@ -204,22 +255,21 @@ class ArticleForm extends Form {
                       <input
                         className="form-control"
                         onChange={(e) => {
-                          e.preventDefault();
                           this.setState({ numberOfLicences: e.target.value });
-                          this.getPrice();
+                          this.getPriceFromNumberOfLicences(e.target.value);
                         }}
                       />
                     </Col>
                     <Col lg="2">
-                      <div className="select">
-                        <Label for="exampleEmail">Boolen</Label>
+                      <div>
+                        <Label>Doi</Label>
                         <Input
+                          style={{ height: "3rem" }}
                           className="form-control"
                           type="select"
                           onChange={(e) => {
-                            e.preventDefault();
                             this.setState({ doi: e.target.value });
-                            this.getPrice();
+                            this.getPriceFromDoi(e.target.value);
                           }}
                         >
                           <option>True</option>
@@ -231,12 +281,12 @@ class ArticleForm extends Form {
 
                   <Row>
                     <Col lg="3">
-                      <div className="selectt">
+                      <div>
                         <Label for="exampleEmail">Narxi</Label>
                         <Input
                           disabled
                           className="form-control h-100"
-                          placeholder="1000 som"
+                          placeholder={`${price} so'm`}
                         />
                       </div>
                     </Col>

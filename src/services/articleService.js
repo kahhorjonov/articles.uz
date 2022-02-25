@@ -173,14 +173,8 @@ export function articleInfo(id) {
   return httpService.get(`${apiLocal} + /article/articleInfoForAdmin/${id}`);
 }
 
-export function getPrice() {
-  return axios.post("http://192.168.100.27:8080/api/prices/getPrices", {
-    sahifaSoni: "2",
-    JurnaldaChopEtishSoni: "3",
-    BosmaJurnalSoni: "4",
-    SertifikatSoni: "7",
-    doi: "false",
-  });
+export function getPrice(data) {
+  return axios.post("http://192.168.100.27:8080/api/prices/getPrices", data);
 }
 
 export function myDuties() {
