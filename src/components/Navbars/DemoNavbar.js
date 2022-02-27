@@ -23,13 +23,13 @@ import HomeRoutes from "homeRoutes";
 function Header(props) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
-  const [color, setColor] = React.useState("transparent");
+  const [color, setColor] = React.useState("white");
   const sidebarToggle = React.useRef();
   const location = useLocation();
 
   const toggle = () => {
     if (isOpen) {
-      setColor("transparent");
+      setColor("white");
     } else {
       setColor("dark");
     }
@@ -55,7 +55,7 @@ function Header(props) {
     if (window.innerWidth < 993 && isOpen) {
       setColor("dark");
     } else {
-      setColor("transparent");
+      setColor("white");
     }
   };
 
@@ -83,6 +83,7 @@ function Header(props) {
       <>
         <Navbar
           color="white"
+          // style={{ color: "#616161" }}
           // color={
           //   props.location &&
           //   props.location.pathname.indexOf("full-screen-maps") !== -1
@@ -122,9 +123,11 @@ function Header(props) {
               <form>
                 <InputGroup className="no-border">
                   <Input placeholder="Search..." />
+                  {/* <InputGroupAddon addonType="append"> */}
                   <InputGroupText>
                     <i className="nc-icon nc-zoom-split" />
                   </InputGroupText>
+                  {/* </InputGroupAddon> */}
                 </InputGroup>
               </form>
               <Nav navbar>
@@ -143,9 +146,9 @@ function Header(props) {
                 >
                   <DropdownToggle caret nav>
                     <i className="nc-icon nc-bell-55" />
-                    <p>
+                    {/* <p>
                       <span className="d-lg-none d-md-block">Some Actions</span>
-                    </p>
+                    </p> */}
                   </DropdownToggle>
                   <DropdownMenu end style={{ margin: 0 }}>
                     <DropdownItem tag="a">Action</DropdownItem>
@@ -156,9 +159,9 @@ function Header(props) {
                 <NavItem>
                   <Link to="" className="nav-link btn-rotate">
                     <i className="nc-icon nc-settings-gear-65" />
-                    <p>
+                    {/* <p>
                       <span className="d-lg-none d-md-block">Account</span>
-                    </p>
+                    </p> */}
                   </Link>
                 </NavItem>
               </Nav>

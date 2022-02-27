@@ -209,7 +209,7 @@ class Users extends Component {
                               <Row>
                                 <Col className="pr-1" md="6">
                                   <FormGroup>
-                                    <label>Ism</label>
+                                    <Label>Ism</Label>
                                     <Input
                                       required
                                       placeholder="Ism"
@@ -224,7 +224,7 @@ class Users extends Component {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                   <FormGroup>
-                                    <label>Familiya</label>
+                                    <Label>Familiya</Label>
                                     <Input
                                       required
                                       onChange={(e) =>
@@ -241,7 +241,7 @@ class Users extends Component {
                               <Row>
                                 <Col className="pr-className1" md="6">
                                   <FormGroup>
-                                    <label>Telfon</label>
+                                    <Label>Telfon</Label>
                                     <InputGroup>
                                       <InputGroupText
                                         style={{ fontSize: "1.4rem" }}
@@ -292,9 +292,6 @@ class Users extends Component {
                                         this.setState({
                                           categoryIdForCreate: [e.target.value],
                                         });
-                                        // this.handleChooseCategory(
-                                        //   e.target.value
-                                        // );
                                       }}
                                     >
                                       <option value="null">Kategoriya</option>
@@ -317,7 +314,6 @@ class Users extends Component {
                                 <Col className="pr-1" md="5">
                                   <FormGroup>
                                     <label>Type</label>
-                                    {/* <p>Ilmiy ishlarni yuklash</p> */}
                                     <select
                                       required
                                       onChange={(e) =>
@@ -327,12 +323,6 @@ class Users extends Component {
                                       }
                                       style={{ fontSize: "1.4rem" }}
                                       className="custom-select"
-                                      // onChange={(e) => {
-                                      //   this.setState({
-                                      //     roleUser: e.target.value,
-                                      //   });
-                                      //   this.handleChooseRole(e.target.value);
-                                      // }}
                                     >
                                       <option value="null">
                                         Foydalanuvchi roli
@@ -359,16 +349,6 @@ class Users extends Component {
                                     />
                                   </FormGroup>
                                 </Col>
-                                {/* <Col className="pl-1" md="4">
-                                  <FormGroup>
-                                    <label>Work Experience</label>
-                                    <Input
-                                      min={0}
-                                      placeholder="Ish tajribangiz"
-                                      type="number"
-                                    />
-                                  </FormGroup>
-                                </Col> */}
                               </Row>
 
                               <Row>
@@ -384,7 +364,6 @@ class Users extends Component {
                                   <Button
                                     className="btn-round"
                                     color="primary"
-                                    // type="button"
                                     onClick={() => this.createUser()}
                                   >
                                     Create Profile
@@ -396,7 +375,6 @@ class Users extends Component {
                         </Card>
                       </div>
                     </div>
-                    {/* </div> */}
                   </div>
 
                   <div className="guruxlar col-md-12 pt-3">
