@@ -6,6 +6,8 @@ import * as userService from "../services/userService";
 import auth from "../services/authService";
 import jwtDecode from "jwt-decode";
 
+import firebase from "./firebase";
+
 import "../styles/registerStyles.css";
 
 class RegisterForm extends Form {
@@ -15,8 +17,21 @@ class RegisterForm extends Form {
       phoneNumber: "",
       // role: "",
     },
+    notificationToken: "",
     errors: {},
   };
+
+  componentDidMount() {
+    const msg = firebase.messaging();
+    msg
+      .requestPermission()
+      .then(() => {
+        return msg.getToken();
+      })
+      .then((data) => {
+        this.setState({ notificationToken: data });
+      });
+  }
 
   schema = {
     phoneNumber: Joi.string().required().label("Telefon raqami"),
