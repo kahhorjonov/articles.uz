@@ -1,5 +1,5 @@
 .navbar {
-  overflow: hidden;
+  // overflow: hidden;
   padding-top: $navbar-padding-base;
   padding-bottom: $navbar-padding-base;
   min-height: 53px;
@@ -70,7 +70,7 @@
   }
 
   &.navbar-absolute {
-    position: absolute;
+    // position: absolute;
     width: 100%;
     padding-top: 10px;
     z-index: 1029;
