@@ -147,7 +147,7 @@ function Header(props) {
                       <span className="d-lg-none d-md-block">Some Actions</span>
                     </p>
                   </DropdownToggle>
-                  <DropdownMenu end>
+                  <DropdownMenu end style={{ margin: 0 }}>
                     <DropdownItem tag="a">Action</DropdownItem>
                     <DropdownItem tag="a">Another Action</DropdownItem>
                     <DropdownItem tag="a">Something else here</DropdownItem>
