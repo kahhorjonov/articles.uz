@@ -6,7 +6,7 @@ import * as userService from "../services/userService";
 import auth from "../services/authService";
 import jwtDecode from "jwt-decode";
 
-import firebase from "./firebase";
+import firebase from "../firebase";
 
 import "../styles/registerStyles.css";
 
@@ -60,6 +60,8 @@ class RegisterForm extends Form {
   };
 
   render() {
+    console.log(this.state.notificationToken);
+
     return (
       <div className="registerForm">
         <div>
