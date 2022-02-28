@@ -18,6 +18,7 @@ var adminRoutes = [
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin",
+    visible: true,
   },
 
   {
@@ -26,6 +27,7 @@ var adminRoutes = [
     icon: "nc-icon nc-book-bookmark",
     component: ArticleActivation,
     layout: "/admin",
+    visible: true,
   },
 
   {
@@ -34,6 +36,7 @@ var adminRoutes = [
     icon: "nc-icon nc-bookmark-2",
     component: Articles,
     layout: "/admin",
+    visible: true,
   },
 
   // {
@@ -50,15 +53,17 @@ var adminRoutes = [
     icon: "nc-icon nc-single-02",
     component: Users,
     layout: "/admin",
+    visible: true,
   },
 
-  // {
-  //   path: "/userEdit",
-  //   name: "Foydalanuvchi",
-  //   icon: "nc-icon nc-single-02",
-  //   component: UserEdit,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/userEdit",
+    name: "Foydalanuvchi",
+    icon: "nc-icon nc-single-02",
+    component: UserEdit,
+    layout: "/admin",
+    visible: false,
+  },
 
   // {
   //   path: "/notifications",
@@ -74,6 +79,7 @@ var adminRoutes = [
     icon: "nc-icon nc-single-02",
     component: UserPage,
     layout: "/admin",
+    visible: true,
   },
 
   {
@@ -82,6 +88,7 @@ var adminRoutes = [
     icon: "nc-icon nc-single-copy-04",
     component: ArticleInfo,
     layout: "/admin",
+    visible: false,
   },
 
   // {
@@ -106,6 +113,7 @@ var adminRoutes = [
     icon: "nc-icon nc-button-power",
     component: TableList,
     layout: "",
+    visible: true,
   },
 ];
 

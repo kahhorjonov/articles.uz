@@ -53,7 +53,24 @@ function Sidebar(props) {
         <Nav>
           {props.routes.map((prop, key) => {
             return (
+              // <li
+              //   className={
+              //     activeRoute(prop.path) + (prop.pro ? " active-pro" : "")
+              //   }
+              //   key={key}
+              // >
+              //   <NavLink
+              //     to={prop.layout + prop.path}
+              //     className="nav-link"
+              //     activeClassName="active"
+              //   >
+              //     <i className={prop.icon.toString()} />
+              //     <p>{prop.name}</p>
+              //   </NavLink>
+              // </li>
+
               <li
+                style={{ display: prop.visible ? "auto" : "none" }}
                 className={
                   activeRoute(prop.path) + (prop.pro ? " active-pro" : "")
                 }
