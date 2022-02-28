@@ -79,9 +79,6 @@ function Header(props) {
     window.location.pathname.slice(0, 9) === "/reviewer" ||
     window.location.pathname.slice(0, 5) === "/user"
   ) {
-
-
-    
     return (
       <>
         <Navbar
@@ -149,10 +146,18 @@ function Header(props) {
                 >
                   <DropdownToggle caret nav>
                     <i className="nc-icon nc-bell-55" />
-                    <span className="badge badge-info"
-                    
-                    style={{position: 'absolute', top: '3px', left: '23px', borderRadius: '50%', padding: '3px'}}
-                    >12</span>
+                    <span
+                      className="badge badge-info"
+                      style={{
+                        position: "absolute",
+                        top: "3px",
+                        left: "23px",
+                        borderRadius: "50%",
+                        padding: "3px",
+                      }}
+                    >
+                      12
+                    </span>
                     {/* <p>
                       <span className="d-lg-none d-md-block">Some Actions</span>
                     </p> */}
