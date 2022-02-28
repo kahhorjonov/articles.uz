@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "../../styles/chopetilgan.css";
 import { Link } from "react-router-dom";
+
+import "../../styles/chopetilgan.css";
 
 class Chopetilgan extends Component {
   state = {};
@@ -12,10 +13,11 @@ class Chopetilgan extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="card">
+                <div className="card-header">
+                  <h2 className="m-0">Chop etilgan maqolalarim</h2>
+                </div>
                 <div className="card-body">
                   <div className="divs mt-5">
-                    <h1>Chop etilgan maqolalarim</h1>
-
                     <div id="accordion">
                       <ul className="list-group list-group-flush">
                         <li className="list-group-item  border-0">
