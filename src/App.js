@@ -20,10 +20,10 @@ import NotFound from "./components/common/notFound";
 import Chopetilgan from "components/UI/chopetilgan";
 import Chopetilganinfo from "components/UI/chopetilganInfo";
 import Tekshirish from "components/UI/tekshirish";
-
-import "react-toastify/dist/ReactToastify.css";
 import Chopetish from "components/UI/chopetish";
 import Radetish from "components/UI/radetish";
+
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   render() {
@@ -114,7 +114,7 @@ class App extends Component {
           />
         </Switch>
         {/* <Chopetilgan/> */}
-        
+
         {/* <Chopetilganinfo/> */}
         {/* <Tekshirish/> */}
         {/* <Chopetish/> */}

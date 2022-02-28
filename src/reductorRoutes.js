@@ -13,6 +13,7 @@ var reductorRoutes = [
     icon: "nc-icon nc-bookmark-2",
     component: Articles,
     layout: "/reductor",
+    visible: true,
   },
 
   {
@@ -21,6 +22,7 @@ var reductorRoutes = [
     icon: "nc-icon nc-briefcase-24",
     component: MyTasks,
     layout: "/reductor",
+    visible: true,
   },
   {
     path: "/messages",
@@ -28,6 +30,7 @@ var reductorRoutes = [
     icon: "nc-icon nc-chat-33",
     component: Dashboard,
     layout: "/reductor",
+    visible: true,
   },
 
   {
@@ -36,6 +39,7 @@ var reductorRoutes = [
     icon: "nc-icon nc-bell-55",
     component: Articles,
     layout: "/reductor",
+    visible: true,
   },
 
   {
@@ -44,6 +48,7 @@ var reductorRoutes = [
     icon: "nc-icon nc-single-02",
     component: UserPage,
     layout: "/reductor",
+    visible: true,
   },
 
   // {
@@ -59,6 +64,7 @@ var reductorRoutes = [
     icon: "nc-icon nc-button-power",
     component: TableList,
     layout: "",
+    visible: true,
   },
 ];
 

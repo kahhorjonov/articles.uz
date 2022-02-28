@@ -11,6 +11,7 @@ var reviewerRoutes = [
     icon: "nc-icon nc-bookmark-2",
     component: Articles,
     layout: "/reviewer",
+    visible: true,
   },
 
   {
@@ -19,6 +20,7 @@ var reviewerRoutes = [
     icon: "nc-icon nc-briefcase-24",
     component: MyTasks,
     layout: "/reviewer",
+    visible: true,
   },
   {
     path: "/messages",
@@ -26,6 +28,7 @@ var reviewerRoutes = [
     icon: "nc-icon nc-chat-33",
     component: Articles,
     layout: "/reviewer",
+    visible: true,
   },
 
   {
@@ -34,6 +37,7 @@ var reviewerRoutes = [
     icon: "nc-icon nc-bell-55",
     component: Articles,
     layout: "/reviewer",
+    visible: true,
   },
 
   {
@@ -42,6 +46,7 @@ var reviewerRoutes = [
     icon: "nc-icon nc-single-02",
     component: UserPage,
     layout: "/reviewer",
+    visible: true,
   },
 
   {
@@ -50,6 +55,7 @@ var reviewerRoutes = [
     icon: "nc-icon nc-button-power",
     component: TableList,
     layout: "",
+    visible: true,
   },
 ];
 

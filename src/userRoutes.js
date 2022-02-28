@@ -3,7 +3,6 @@ import ArticleForm from "./components/common/articleForm";
 import Chopetilgan from "components/UI/chopetilgan.jsx";
 import Chopetilganinfo from "components/UI/chopetilganInfo.jsx";
 
-
 var UserRoutes = [
   {
     path: "/myPrintedArticles",
@@ -11,6 +10,7 @@ var UserRoutes = [
     icon: "nc-icon nc-single-02",
     component: Chopetilgan,
     layout: "/user",
+    visible: true,
   },
 
   {
@@ -19,6 +19,7 @@ var UserRoutes = [
     icon: "nc-icon nc-single-02",
     component: UserPage,
     layout: "/user",
+    visible: true,
   },
 
   //   {
@@ -35,6 +36,7 @@ var UserRoutes = [
     icon: "nc-icon nc-briefcase-24",
     component: ArticleForm,
     layout: "/user",
+    visible: true,
   },
 
   {
@@ -43,6 +45,7 @@ var UserRoutes = [
     icon: "nc-icon nc-bell-55",
     component: UserPage,
     layout: "/user",
+    visible: true,
   },
 
   {
@@ -51,6 +54,7 @@ var UserRoutes = [
     icon: "nc-icon nc-button-power",
     component: "",
     layout: "",
+    visible: true,
   },
 ];
 
