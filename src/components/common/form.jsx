@@ -65,7 +65,7 @@ class Form extends Component {
       data[input.name] = input.value;
       this.setState({ data, errors });
 
-      console.log((data[input.name] = input.value));
+      // console.log((data[input.name] = input.value));
     }
     if (type === "file") {
       const errors = { ...this.state.errors };
