@@ -53,14 +53,14 @@ var UserRoutes = [
     visible: true,
   },
 
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-bell-55",
-    component: Icons,
-    layout: "/user",
-    visible: true,
-  },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Icons,
+  //   layout: "/user",
+  //   visible: true,
+  // },
 
   //   {
   //     path: "/articles",W
