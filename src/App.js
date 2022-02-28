@@ -19,6 +19,7 @@ import Aloqa from "./components/UI/aloqa";
 import NotFound from "./components/common/notFound";
 
 import "react-toastify/dist/ReactToastify.css";
+import UserEdit from "./views/userEdit";
 
 class App extends Component {
   render() {
@@ -87,18 +88,22 @@ class App extends Component {
           <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
           <Redirect from="/user" exact to="/user/user-page" />
           {/* <Redirect to="/not-found" /> */}
+
           <ProtectedRoute
             path="/admin"
             render={(props) => <AdminLayout {...props} />}
           />
+
           <ProtectedRoute
             path="/reductor"
             render={(props) => <ReductorLayout {...props} />}
           />
+
           <ProtectedRoute
             path="/reviewer"
             render={(props) => <ReviewerLayout {...props} />}
           />
+
           <ProtectedRoute
             path="/user"
             render={(props) => <UserLayout {...props} />}

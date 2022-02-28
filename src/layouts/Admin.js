@@ -48,7 +48,6 @@ function Dashboard(props) {
         activeColor={activeColor}
       />
       <div className="main-panel" ref={mainPanel}>
-        {/* <DemoNavbar {...props} /> */}
         <Switch>
           {adminRoutes.map((prop, key) => {
             return (

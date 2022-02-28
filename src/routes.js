@@ -7,7 +7,6 @@ import UserPage from "./views/User.js";
 
 import Articles from "./views/articles";
 import ArticleActivation from "./routes/articleActivation";
-import MyTasks from "./routes/MyTasks";
 import Users from "./routes/users";
 import UserEdit from "./views/userEdit";
 import ArticleInfo from "./views/articleInfo";
@@ -37,14 +36,6 @@ var adminRoutes = [
     layout: "/admin",
   },
 
-  {
-    path: "/myTasks",
-    name: "Mening vazifalarim",
-    icon: "nc-icon nc-briefcase-24",
-    component: MyTasks,
-    layout: "/admin",
-  },
-
   // {
   //   path: "/messages",
   //   name: "Xabarlar",
@@ -61,13 +52,13 @@ var adminRoutes = [
     layout: "/admin",
   },
 
-  {
-    path: "/userEdit",
-    name: "Foydalanuvchi",
-    icon: "nc-icon nc-single-02",
-    component: UserEdit,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/userEdit",
+  //   name: "Foydalanuvchi",
+  //   icon: "nc-icon nc-single-02",
+  //   component: UserEdit,
+  //   layout: "/admin",
+  // },
 
   // {
   //   path: "/notifications",
