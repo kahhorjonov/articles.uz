@@ -11,6 +11,7 @@ var HomeRoutes = [
     icon: "nc-icon nc-bank",
     component: Asosiy,
     layout: "/",
+    visible: true,
   },
 
   {
@@ -19,6 +20,7 @@ var HomeRoutes = [
     icon: "nc-icon nc-bank",
     component: JurnallarRoyxati,
     layout: "/",
+    visible: true,
   },
 
   {
@@ -27,6 +29,7 @@ var HomeRoutes = [
     icon: "nc-icon nc-bank",
     component: JurnallarRoyxati,
     layout: "/",
+    visible: true,
   },
 
   {
@@ -35,6 +38,7 @@ var HomeRoutes = [
     icon: "nc-icon nc-bank",
     component: NashrShartlari,
     layout: "/",
+    visible: true,
   },
 
   {
@@ -43,6 +47,7 @@ var HomeRoutes = [
     icon: "nc-icon nc-bank",
     component: Aloqa,
     layout: "/",
+    visible: true,
   },
 ];
 
