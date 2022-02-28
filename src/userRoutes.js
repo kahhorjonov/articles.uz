@@ -1,8 +1,18 @@
 import UserPage from "./views/User.js";
 import ArticleForm from "./components/common/articleForm";
+import Chopetilgan from "components/UI/chopetilgan.jsx";
+import Chopetilganinfo from "components/UI/chopetilganInfo.jsx";
 
 
 var UserRoutes = [
+  {
+    path: "/myPrintedArticles",
+    name: "Mening Profilim",
+    icon: "nc-icon nc-single-02",
+    component: Chopetilgan,
+    layout: "/user",
+  },
+
   {
     path: "/user-page",
     name: "Mening Profilim",
@@ -26,8 +36,6 @@ var UserRoutes = [
     component: ArticleForm,
     layout: "/user",
   },
-
- 
 
   {
     path: "/notifications",
