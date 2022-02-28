@@ -4,6 +4,8 @@ import userService from "services/userService";
 import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
 
+import firebase from "../firebase";
+
 import {
   Button,
   Card,
@@ -40,11 +42,29 @@ class Users extends Component {
     password: "",
     phoneNumber: "",
     roleId: "null",
+
+    notificationToken: "",
   };
 
   async componentDidMount() {
     await this.populateCategories();
     await this.handleChooseRole(null);
+
+    try {
+      const msg = firebase.messaging();
+      msg
+        .requestPermission()
+        .then(() => {
+          return msg.getToken();
+        })
+        .then((data) => {
+          this.setState({ notificationToken: data });
+        });
+    } catch (ex) {
+      toast.info(
+        "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
+      );
+    }
     // await this.populateArticles();
   }
 

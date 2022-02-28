@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import authService from "../services/authService";
 import jwtDecode from "jwt-decode";
 
+import firebase from "../firebase";
+
 import { Card, CardBody, Row, Col } from "reactstrap";
 
 import "../styles/registerStyles.css";
@@ -29,9 +31,30 @@ class ReviewerRegisterForm extends Form {
       passport: [],
       scientificWork: [],
     },
+
     categories: [],
     errors: {},
+
+    notificationToken: "",
   };
+
+  componentDidMount() {
+    try {
+      const msg = firebase.messaging();
+      msg
+        .requestPermission()
+        .then(() => {
+          return msg.getToken();
+        })
+        .then((data) => {
+          this.setState({ notificationToken: data });
+        });
+    } catch (ex) {
+      toast.info(
+        "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
+      );
+    }
+  }
 
   schema = {
     firstName: Joi.string().required().label("Ismi"),

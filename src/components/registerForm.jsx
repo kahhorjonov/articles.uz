@@ -7,6 +7,7 @@ import auth from "../services/authService";
 import jwtDecode from "jwt-decode";
 
 import firebase from "../firebase";
+import { toast } from "react-toastify";
 
 import "../styles/registerStyles.css";
 
@@ -22,15 +23,21 @@ class RegisterForm extends Form {
   };
 
   componentDidMount() {
-    const msg = firebase.messaging();
-    msg
-      .requestPermission()
-      .then(() => {
-        return msg.getToken();
-      })
-      .then((data) => {
-        this.setState({ notificationToken: data });
-      });
+    try {
+      const msg = firebase.messaging();
+      msg
+        .requestPermission()
+        .then(() => {
+          return msg.getToken();
+        })
+        .then((data) => {
+          this.setState({ notificationToken: data });
+        });
+    } catch (ex) {
+      toast.info(
+        "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
+      );
+    }
   }
 
   schema = {
