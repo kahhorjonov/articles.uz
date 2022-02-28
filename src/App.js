@@ -17,9 +17,10 @@ import JurnallarRoyxati from "./components/UI/jurnallarRo'yhati";
 import NashrShartlari from "./components/UI/nashrShartlari";
 import Aloqa from "./components/UI/aloqa";
 import NotFound from "./components/common/notFound";
+import Chopetilgan from "components/UI/chopetilgan";
+import Chopetilganinfo from "components/UI/chopetilganInfo";
 
 import "react-toastify/dist/ReactToastify.css";
-import UserEdit from "./views/userEdit";
 
 class App extends Component {
   render() {
@@ -109,6 +110,8 @@ class App extends Component {
             render={(props) => <UserLayout {...props} />}
           />
         </Switch>
+        {/* <Chopetilgan/> */}
+        {/* <Chopetilganinfo/> */}
       </>
     );
   }
