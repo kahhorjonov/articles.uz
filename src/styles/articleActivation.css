@@ -1,3 +1,8 @@
+@font-face {
+  font-family: sfProRegular;
+  src: url(../assets/fonts/SFPRODISPLAYREGULAR.OTF) format("otf");
+}
+
 *,
 *::after,
 *::before {
@@ -13,6 +18,7 @@ html {
 body {
   font-size: 16px;
   box-sizing: border-box;
+  font-family: sfProRegular;
 }
 
 .switch {

@@ -4,7 +4,6 @@ body {
 
 .jurnalRoyxat h1 {
   padding-top: 100px;
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 48px;
@@ -13,7 +12,6 @@ body {
 }
 
 .jurnalRoyxat p {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -22,7 +20,6 @@ body {
   padding-top: 15px;
 }
 .jurnalRoyxat .col-lg-8 p {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -31,7 +28,7 @@ body {
 }
 .jurnalRoyxat .col-lg-4 h3 {
   margin-top: 40px;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -47,7 +44,6 @@ body {
 }
 
 .jurnalRoyxat .col-lg-4 p {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -64,7 +60,7 @@ body {
 }
 .gernMaqola .container p {
   padding-top: 100px;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -72,7 +68,6 @@ body {
   color: #777777;
 }
 .gernMaqola .container h3 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
@@ -84,7 +79,7 @@ body {
   align-items: center;
   padding: 20px 64px;
   background: #282828;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: 600;
   font-size: 17px;
@@ -110,7 +105,6 @@ body {
 .nav-pills .navLincks.active {
   background-color: black !important;
 
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -150,7 +144,7 @@ body {
 }
 .ichmaich .col-lg-3 h5 {
   padding-top: 30px;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -158,7 +152,6 @@ body {
   color: #282828;
 }
 .ichmaich .col-lg-3 span {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -167,7 +160,6 @@ body {
 }
 
 .numberss h3 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 48px;
@@ -175,7 +167,6 @@ body {
 }
 
 .nazoratMudat .list-group-item {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -183,14 +174,12 @@ body {
   padding: 25px 0;
 }
 .nazoratMudat .list-group-item p {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 140%;
 }
 .nazoratMudat .list-group-item h6 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -201,7 +190,6 @@ body {
 }
 
 .nashirShart .col-lg-3 h3 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 36px;
@@ -213,14 +201,12 @@ body {
   padding-top: 60px;
 }
 .nashirShart .col-lg-9 .align-items-center {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   line-height: 130%;
 }
 .nashirShart .col-lg-9 span {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;

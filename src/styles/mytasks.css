@@ -194,7 +194,7 @@ body {
 }
 
 @media (max-width: 576px) {
-  .row-tables1{
+  .row-tables1 {
     display: block !important;
   }
 }

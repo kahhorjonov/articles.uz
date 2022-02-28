@@ -8,7 +8,6 @@
   color: black;
 }
 .covid19 h1 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 48px;
@@ -19,7 +18,6 @@
   text-align: center;
 }
 .covid19 p {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -31,6 +29,6 @@
 .covid19 .image {
   padding-top: 60px;
 }
-.covid19 .text{
-    margin-bottom: 100px;
+.covid19 .text {
+  margin-bottom: 100px;
 }

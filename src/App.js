@@ -32,7 +32,7 @@ class App extends Component {
         <DemoNavbar />
         <ToastContainer />
         <Switch>
-          {/* <Route path="/" exact component={(props) => <Asosiy {...props} />} /> */}
+          <Route path="/" exact component={(props) => <Asosiy {...props} />} />
 
           <Route
             path="/main"

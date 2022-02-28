@@ -43,7 +43,6 @@ body {
   width: 300px;
   margin: auto;
   height: 50px;
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -51,7 +50,6 @@ body {
   margin-bottom: 20px;
 }
 .regs {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -63,7 +61,7 @@ body {
   width: 300px;
   height: 50px;
   margin: 0 !important;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -73,7 +71,7 @@ body {
 }
 .rever {
   text-decoration: none;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -85,7 +83,6 @@ body {
   color: black;
 }
 .yes {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -97,7 +94,7 @@ body {
   color: black;
   font-weight: 700;
   text-decoration: none;
-  font-family: SF Pro Display;
+
   font-style: normal;
 }
 .kirish:hover {
