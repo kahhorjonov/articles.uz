@@ -10,6 +10,8 @@ import "react-multi-carousel/lib/styles.css";
 
 import "styles/jurnallarRoyhati.css";
 import { Col } from "reactstrap";
+import Listhome from "./listhome";
+import Foooter from "./foooter";
 
 class JurnallarRoyxati extends Component {
   render() {
@@ -34,10 +36,10 @@ class JurnallarRoyxati extends Component {
     const CustomRightArrow = ({ onClick, ...rest }) => {
       const {
         onMove,
-        carouselState: { currentSlide, deviceType }
+        carouselState: { currentSlide, deviceType },
       } = rest;
       // onMove means if dragging or swiping in progress.
-      return <button onClick={() => onClick()}  />;
+      return <button onClick={() => onClick()} />;
     };
 
     return (
@@ -249,7 +251,7 @@ class JurnallarRoyxati extends Component {
                     Barchasini ko’rish
                   </a>
                 </p>
-                <hr />
+                <hr className="hrrr" />
               </div>
 
               <div className="col-lg-8 colap">
@@ -257,7 +259,7 @@ class JurnallarRoyxati extends Component {
                   swipeable={false}
                   draggable={false}
                   // customRightArrow={<CustomRightArrow />}
-                  showDots={true}
+                  showDots={false}
                   responsive={responsive}
                   ssr={true} // means to render carousel on server-side.
                   infinite={true}
@@ -274,7 +276,7 @@ class JurnallarRoyxati extends Component {
                 >
                   {/* <div className="row mx-0"> */}
 
-                  <Col lg="10" className='px-0 mx-0'>
+                  <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
                       <img src={img} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
@@ -290,7 +292,7 @@ class JurnallarRoyxati extends Component {
                     </div>
                   </Col>
 
-                  <Col lg='10' className='px-0 mx-0'>
+                  <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
                       <img src={img1} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
@@ -306,7 +308,7 @@ class JurnallarRoyxati extends Component {
                     </div>
                   </Col>
 
-                  <Col lg='10' className='px-0 mx-0'>
+                  <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
                       <img src={img2} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
@@ -321,13 +323,97 @@ class JurnallarRoyxati extends Component {
                       </div>
                     </div>
                   </Col>
+                </Carousel>
+              </div>
+            </div>
+            <hr className="hr2" />
+            <div className="row mt-5 mx-0">
+              <div className="col-lg-4">
+                <h4>Filologiya va san'atshunoslik</h4>
+                <p className="text-muted">
+                  <a href="#" className="text-decaration-none">
+                    Barchasini ko’rish
+                  </a>
+                </p>
+                <hr className="hrrr" />
+              </div>
 
-     
+              <div className="col-lg-8 colap">
+                <Carousel
+                  swipeable={false}
+                  draggable={false}
+                  // customRightArrow={<CustomRightArrow />}
+                  showDots={false}
+                  responsive={responsive}
+                  ssr={true} // means to render carousel on server-side.
+                  infinite={true}
+                  autoPlay={this.props.deviceType !== "mobile" ? true : false}
+                  autoPlaySpeed={1000}
+                  keyBoardControl={true}
+                  customTransition="all .5"
+                  transitionDuration={2000}
+                  containerClass="carousel-container"
+                  removeArrowOnDeviceType={["tablet", "mobile"]}
+                  deviceType={this.props.deviceType}
+                  dotListClass="custom-dot-list-style"
+                  itemClass="carousel-item-padding-10-px"
+                >
+                  {/* <div className="row mx-0"> */}
+
+                  <Col lg="10" className="px-0 mx-0">
+                    <div className="border-0">
+                      <img src={img} width="360px" height="460px" alt="123" />
+                      <div className="card-body p-0">
+                        <h4 className="card_title">
+                          {" "}
+                          <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                        </h4>
+                        <p className="card_text">
+                          Maqolalar qabul qilish muddati <br />
+                          01.09.2020 gacha
+                        </p>
+                      </div>
+                    </div>
+                  </Col>
+
+                  <Col lg="10" className="px-0 mx-0">
+                    <div className="border-0">
+                      <img src={img1} width="360px" height="460px" alt="123" />
+                      <div className="card-body p-0">
+                        <h4 className="card_title">
+                          {" "}
+                          <Link to="#">Sport</Link>{" "}
+                        </h4>
+                        <p className="card_text">
+                          Maqolalar qabul qilish muddati <br />
+                          01.09.2020 gacha
+                        </p>
+                      </div>
+                    </div>
+                  </Col>
+
+                  <Col lg="10" className="px-0 mx-0">
+                    <div className="border-0">
+                      <img src={img2} width="360px" height="460px" alt="123" />
+                      <div className="card-body p-0">
+                        <h4 className="card_title">
+                          {" "}
+                          <Link to="#">Fizika</Link>{" "}
+                        </h4>
+                        <p className="card_text">
+                          Maqolalar qabul qilish muddati <br />
+                          01.09.2020 gacha
+                        </p>
+                      </div>
+                    </div>
+                  </Col>
                 </Carousel>
               </div>
             </div>
           </div>
         </div>
+        <Listhome />
+        <Foooter/>
       </div>
     );
   }

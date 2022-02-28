@@ -19,6 +19,8 @@ import NotFound from "./components/common/notFound";
 import Aloqa from "./components/UI/aloqa";
 
 import "react-toastify/dist/ReactToastify.css";
+import Chopetilgan from "components/UI/chopetilgan";
+import Chopetilganinfo from "components/UI/chopetilganInfo";
 
 class App extends Component {
   render() {
@@ -104,6 +106,8 @@ class App extends Component {
             render={(props) => <UserLayout {...props} />}
           />
         </Switch>
+        {/* <Chopetilgan/> */}
+        {/* <Chopetilganinfo/> */}
       </>
     );
   }

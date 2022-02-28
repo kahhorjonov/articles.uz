@@ -37,7 +37,7 @@ body {
   font-size: 15px;
   font-weight: bolder;
 }
-.card-articles .card-body h4  a{
+.card-articles .card-body h4 a {
   text-decoration: none;
   color: black;
 }
@@ -611,6 +611,8 @@ body {
   .art_uz2 img {
     padding: 0 30px;
   }
+
+
   .mualif h2 {
     font-family: SF Pro Display;
     font-style: normal;

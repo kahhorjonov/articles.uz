@@ -1,0 +1,73 @@
+  .divs h1 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 130%;
+  margin-top: 100px;
+}
+.divs {
+  margin-bottom: 190px;
+}
+
+
+/* .divs .list-group-item i:link{
+  transform: rotate(45deg)
+} */
+
+.divs .d-flex .pl-4,
+.num {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 140%;
+  /* padding: 24px 0; */
+}
+
+.card-body h6 {
+  /* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 160%;
+  padding-left: 13px;
+  text-transform: initial;
+}
+.card-body h6 span {
+  /* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+  text-transform: initial;
+}
+.card-body h5 {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 120%;
+  text-decoration-line: underline;
+  padding-left: 13px;
+  text-decoration: none;
+  padding-top: 10px;
+}
+
+.card-body h5 a {
+  color: #777777;
+}
+.divs .yanakorish {
+  padding-top: 40px;
+}
+.divs button {
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  padding: 16px 32px;
+}
