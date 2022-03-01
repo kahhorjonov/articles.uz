@@ -121,7 +121,7 @@ class User extends Component {
       languages,
     } = this.state.currentUser;
 
-    console.log(scientificWork);
+    // console.log(scientificWork);
 
     // const { id, contentType, fileName } = this.state.currentUser.scientificWork;
 

@@ -1,12 +1,13 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import { Switch, useLocation } from "react-router-dom";
+import { Redirect, Switch, useLocation } from "react-router-dom";
 
 import Footer from "./../components/Footer/Footer";
-// import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import ProtectedRoute from "./../components/protectedRoute";
+
+import auth from "services/authService";
 
 import adminRoutes from "../routes";
 
@@ -22,6 +23,7 @@ function Dashboard(props) {
       ps = new PerfectScrollbar(mainPanel.current);
       document.body.classList.toggle("perfect-scrollbar-on");
     }
+
     return function cleanup() {
       if (navigator.platform.indexOf("Win") > -1) {
         ps.destroy();
@@ -54,8 +56,8 @@ function Dashboard(props) {
             return (
               <ProtectedRoute
                 path={prop.layout + prop.path}
-                render={(props) => <prop.component {...props} />}
-                // component={prop.component}
+                // render={(props) => <prop.component {...props} />}
+                component={prop.component}
                 key={key}
               />
             );

@@ -1,11 +1,14 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Switch, useLocation } from "react-router-dom";
 
 import DemoNavbar from "../components/Navbars/DemoNavbar.js";
-// import Footer from "../components/Footer/Footer.js";
+import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
+import ProtectedRoute from "./../components/protectedRoute";
+
+import auth from "services/authService";
 
 import reviewerRoutes from "../reviewerRoutes";
 
@@ -52,15 +55,16 @@ function Dashboard(props) {
         <Switch>
           {reviewerRoutes.map((prop, key) => {
             return (
-              <Route
+              <ProtectedRoute
                 path={prop.layout + prop.path}
+                // render={(props) => <prop.component {...props} />}
                 component={prop.component}
                 key={key}
               />
             );
           })}
         </Switch>
-        {/* <Footer fluid /> */}
+        <Footer fluid />
       </div>
     </div>
   );

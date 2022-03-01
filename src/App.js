@@ -87,28 +87,32 @@ class App extends Component {
 
           <ProtectedRoute
             path="/admin"
-            render={(props) => <AdminLayout {...props} />}
+            component={AdminLayout}
+            // render={(props) => <AdminLayout {...props} />}
           />
 
           <Redirect from="/reductor" exact to="/reductor/myTasks" />
 
           <ProtectedRoute
             path="/reductor"
-            render={(props) => <ReductorLayout {...props} />}
+            component={ReductorLayout}
+            // render={(props) => <ReductorLayout {...props} />}
           />
 
           <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
 
           <ProtectedRoute
             path="/reviewer"
-            render={(props) => <ReviewerLayout {...props} />}
+            component={ReviewerLayout}
+            // render={(props) => <ReviewerLayout {...props} />}
           />
 
           <Redirect from="/user" exact to="/user/user-page" />
 
           <ProtectedRoute
             path="/user"
-            render={(props) => <UserLayout {...props} />}
+            component={UserLayout}
+            // render={(props) => <UserLayout {...props} />}
           />
 
           <Redirect to="/not-found" />
