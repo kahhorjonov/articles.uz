@@ -62,7 +62,9 @@ class Tekshirish extends Component {
                                 Nashr etilgan sana:<span>13.09.2020</span>
                               </h6>
                               <h5>
-                                <Link to="#">Maqolani ko’rish</Link>
+                                <Link to="/user/articleInfo/:id">
+                                  Maqolani ko’rish
+                                </Link>
                               </h5>
                             </div>
                           </div>
@@ -73,64 +75,12 @@ class Tekshirish extends Component {
                       <ul
                         className="list-group list-group-flush"
                         data-toggle="collapse"
-                        href="#collapse2"
+                        href="#collapse3"
                       >
                         <li className="list-group-item  border-0">
                           <div className="d-flex  justify-content-between">
                             <div className="d-flex">
                               <div className="num">2</div>
-                              <div className="pl-4">
-                                Zamonaviy tibbiyotda xalq tabobatining o’rni
-                              </div>
-                            </div>
-                            <i className="nc-icon nc-minimal-right" />
-                          </div>
-                          <div
-                            id="collapse2"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            <div className="card-body">Lorem ipsum..</div>
-                          </div>
-                        </li>
-                        <hr />
-                      </ul>
-
-                      <ul
-                        className="list-group list-group-flush"
-                        data-toggle="collapse"
-                        href="#collapse3"
-                      >
-                        <li className="list-group-item  border-0">
-                          <div className="d-flex  justify-content-between">
-                            <div className="d-flex">
-                              <div className="num">3</div>
-                              <div className="pl-4">
-                                Zamonaviy tibbiyotda xalq tabobatining o’rni
-                              </div>
-                            </div>
-                            <i className="nc-icon nc-minimal-right" />
-                          </div>
-                          <div
-                            id="collapse3"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            <div className="card-body">Lorem ipsum..</div>
-                          </div>
-                        </li>
-                        <hr />
-                      </ul>
-
-                      <ul
-                        className="list-group list-group-flush"
-                        data-toggle="collapse"
-                        href="#collapse3"
-                      >
-                        <li className="list-group-item  border-0">
-                          <div className="d-flex  justify-content-between">
-                            <div className="d-flex">
-                              <div className="num">3</div>
                               <div className="pl-4">
                                 Zamonaviy tibbiyotda xalq tabobatining o’rni
                               </div>

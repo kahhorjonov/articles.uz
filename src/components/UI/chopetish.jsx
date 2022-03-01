@@ -63,7 +63,7 @@ class Chopetish extends Component {
                                 Nashr etilgan sana:<span>13.09.2020</span>
                               </h6>
                               <h5>
-                                <Link to="#">Maqolani ko’rish</Link>
+                                <Link to="/user/articleInfo/:id">Maqolani ko’rish</Link>
                               </h5>
                             </div>
                           </div>
