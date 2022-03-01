@@ -6,6 +6,7 @@ import Chopetilganinfo from "components/UI/chopetilganInfo.jsx";
 import Tekshirish from "components/UI/tekshirish.jsx";
 import Chopetish from "components/UI/chopetish.jsx";
 import Radetish from "components/UI/radetish.jsx";
+import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 
 var UserRoutes = [
   {
@@ -21,7 +22,7 @@ var UserRoutes = [
     path: "/allArticles",
     name: "Barcha maqolalarim",
     icon: "nc-icon nc-briefcase-24",
-    component: UserPage,
+    component: BarchaMaqolalarim,
     layout: "/user",
     visible: true,
   },
