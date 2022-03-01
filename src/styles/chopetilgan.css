@@ -1,5 +1,4 @@
-  .divs h1 {
-  font-family: SF Pro Display;
+.divs h1 {
   font-style: normal;
   font-weight: 600;
   font-size: 48px;
@@ -10,14 +9,12 @@
   margin-bottom: 190px;
 }
 
-
 /* .divs .list-group-item i:link{
   transform: rotate(45deg)
 } */
 
 .divs .d-flex .pl-4,
 .num {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -26,7 +23,7 @@
 }
 
 .card-body h6 {
-  /* font-family: SF Pro Display; */
+  /*  */
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
@@ -35,7 +32,7 @@
   text-transform: initial;
 }
 .card-body h6 span {
-  /* font-family: SF Pro Display; */
+  /*  */
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -43,7 +40,6 @@
   text-transform: initial;
 }
 .card-body h5 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -64,7 +60,7 @@
   border: 1px solid black;
   background-color: white;
   color: black;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: 500;
   font-size: 16px;

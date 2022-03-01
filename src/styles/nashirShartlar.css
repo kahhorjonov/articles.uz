@@ -6,7 +6,6 @@
   padding-top: 80px;
 }
 .nashir h1 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 48px;
@@ -20,7 +19,7 @@
 .nashir .nav-pills .nav-link {
   color: #5a5a5a;
   padding: 0;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -29,7 +28,7 @@
 .nashir .nav-pills .nav-link.active {
   background-color: white;
   color: black;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -37,7 +36,6 @@
 }
 
 .nashir .col-lg-8 h1 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 36px;
@@ -45,7 +43,7 @@
 }
 .nashir .col-lg-8 p {
   width: 100%;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -53,14 +51,12 @@
 }
 
 .nashirNarxi .maqolas {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 140%;
 }
 .colapss h4 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 36px;
@@ -69,7 +65,6 @@
   padding-bottom: 40px;
 }
 .colapss .list-group-item {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -82,7 +77,7 @@
 .colapss .lik li {
   border: none !important;
   text-decoration: none;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -99,7 +94,6 @@
 }
 
 .Data h4 {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 600;
   font-size: 36px;
@@ -114,7 +108,7 @@
   background: #f7f7f7;
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
-  font-family: SF Pro Display;
+
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -125,7 +119,6 @@
 }
 
 .Data .pp {
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: normal;
   font-size: 16px !important;
