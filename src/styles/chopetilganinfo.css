@@ -17,18 +17,3 @@
   margin-bottom: 0;
   text-align: center;
 }
-.covid19 p {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 170%;
-  padding-left: 120px;
-  padding-top: 10px;
-  color: #aaaaaa;
-}
-.covid19 .image {
-  padding-top: 60px;
-}
-.covid19 .text {
-  margin-bottom: 100px;
-}

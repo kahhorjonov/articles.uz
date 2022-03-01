@@ -1,7 +1,6 @@
 import Dashboard from "./views/Dashboard.js";
 // import Notifications from "views/Notifications.js";
-import Icons from "./views/Icons.js";
-// import Typography from "views/Typography.js";
+// import Icons from "./views/Icons.js";
 import TableList from "./views/Tables.js";
 import UserPage from "./views/User.js";
 
@@ -73,14 +72,14 @@ var adminRoutes = [
   //   layout: "/admin",
   // },
 
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-bell-55",
-    component: Icons,
-    layout: "/admin",
-    visible: true,
-  },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Icons,
+  //   layout: "/admin",
+  //   visible: true,
+  // },
 
   {
     path: "/user-page",

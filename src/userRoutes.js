@@ -1,5 +1,5 @@
 import UserPage from "./views/User.js";
-import Icons from "views/Icons.js";
+// import Icons from "views/Icons.js";
 import ArticleForm from "./components/common/articleForm";
 import Chopetilgan from "components/UI/chopetilgan.jsx";
 import Chopetilganinfo from "components/UI/chopetilganInfo.jsx";
@@ -8,6 +8,24 @@ import Chopetish from "components/UI/chopetish.jsx";
 import Radetish from "components/UI/radetish.jsx";
 
 var UserRoutes = [
+  {
+    path: "/uploadArticle",
+    name: "Maqola Yuklash",
+    icon: "nc-icon nc-cloud-upload-94",
+    component: ArticleForm,
+    layout: "/user",
+    visible: true,
+  },
+
+  {
+    path: "/allArticles",
+    name: "Barcha maqolalarim",
+    icon: "nc-icon nc-briefcase-24",
+    component: UserPage,
+    layout: "/user",
+    visible: true,
+  },
+
   {
     path: "/myPrintedArticles",
     name: "Chop etilgan maqolalarim",
@@ -45,6 +63,15 @@ var UserRoutes = [
   },
 
   {
+    path: "/articleInfo",
+    name: "Article Info",
+    icon: "nc-icon nc-tile-56",
+    component: Chopetilganinfo,
+    layout: "/user",
+    visible: false,
+  },
+
+  {
     path: "/user-page",
     name: "Mening Profilim",
     icon: "nc-icon nc-settings-gear-65",
@@ -69,15 +96,6 @@ var UserRoutes = [
   //     component: UserPage,
   //     layout: "/user",
   //   },
-
-  {
-    path: "/uploadArticle",
-    name: "Maqola Yuklash",
-    icon: "nc-icon nc-briefcase-24",
-    component: ArticleForm,
-    layout: "/user",
-    visible: true,
-  },
 
   // {
   //   path: "/notifications",

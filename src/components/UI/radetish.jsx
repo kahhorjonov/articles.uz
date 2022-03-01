@@ -12,7 +12,7 @@ class Radetish extends Component {
             <div className="col-md-12">
               <div className="card">
                 <div className="card-header">
-                  <h2 className="m-0">Chop etilgan maqolalarim</h2>
+                  <h2 className="m-0">Rad etilgan maqolalarim</h2>
                 </div>
                 <div className="card-body">
                   <div className="divs mt-5">
@@ -151,7 +151,7 @@ class Radetish extends Component {
                     </div>
 
                     <div className="d-flex yanakorish justify-content-center">
-                      <button type="button" class="btn  btn-outline-dark">
+                      <button type="button" className="btn  btn-outline-dark">
                         Yana maqolalarni yuklash
                       </button>
                     </div>

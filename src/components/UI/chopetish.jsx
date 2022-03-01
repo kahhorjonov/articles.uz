@@ -151,7 +151,7 @@ class Chopetish extends Component {
                     </div>
 
                     <div className="d-flex yanakorish justify-content-center">
-                      <button type="button" class="btn  btn-outline-dark">
+                      <button type="button" className="btn  btn-outline-dark">
                         Yana maqolalarni yuklash
                       </button>
                     </div>
