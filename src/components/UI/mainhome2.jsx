@@ -9,19 +9,19 @@ class Mainhome2 extends React.Component {
       <>
         <div className="container p-0">
           <div className="img-bg">
-            <div className="col-md-12 p-0">
+            <div className="col-md-12">
               <img src={img} alt="" />
             </div>
 
             <div className="d-flex row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
-              <div className="col-md-6 p-0">
+              <div className="col-md-6">
                 <h1>
                   Bizning asosiy maqsadimiz ilmiy <br /> hodimlarning ish
                   unumdorligi oshirish
                 </h1>
               </div>
 
-              <div className="col-md-6 p-0">
+              <div className="col-md-6">
                 <p className="text-left">
                   Maqolalar chop etish uchun ilmiy jurnallar tadqiqot
                   faoliyatida samarali yordamchilardir. Ilmiy va texnologik
@@ -47,7 +47,7 @@ class Mainhome2 extends React.Component {
         <div className="bgGren2">
           <div className="container p-0">
             <div className="row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
-              <div className="col-md-6 p-0">
+              <div className="col-md-6">
                 <div className="art_uz">
                   <h1>Articles.uz</h1>
                   <p>

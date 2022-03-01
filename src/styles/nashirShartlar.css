@@ -98,7 +98,6 @@
   transform: rotate(90deg) !important;
 }
 
-
 .Data h4 {
   font-family: SF Pro Display;
   font-style: normal;
@@ -133,4 +132,23 @@
   line-height: 140%;
   padding-top: 10px !important;
   color: #5a5a5a;
+}
+
+@media (max-width: 600px) {
+  .nashir h1 {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 130%;
+    text-align: center;
+  }
+  .nashir .nav-item{
+    display: flex;
+    justify-content: center;
+    padding-bottom:  20px;
+  }
+  .nashir .nav-pills{
+    margin-bottom: 20px;
+  }
 }

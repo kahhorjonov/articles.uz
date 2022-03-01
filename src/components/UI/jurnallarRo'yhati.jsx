@@ -51,7 +51,7 @@ class JurnallarRoyxati extends Component {
             </h1>
           </div>
 
-          <div className="row">
+          <div className="row mx-0 mx-sm-0">
             <div className="col-md-12">
               <ul className="nav navpils">
                 <li className="nav-item">
@@ -98,7 +98,7 @@ class JurnallarRoyxati extends Component {
             </div>
           </div>
 
-          <div className="row jurnal_articles">
+          <div className="row mx-0 mx-sm-0 jurnal_articles">
             <div className="col-md-4 ">
               <div className="card  border-0">
                 <img className="card-img-top" src={img} alt="Card image" />
@@ -201,7 +201,7 @@ class JurnallarRoyxati extends Component {
 
         <div className="sections a1">
           <div className="container p-0">
-            <div className="row">
+            <div className="row mx-0 mx-sm-0">
               <div className="col-md-6">
                 <div className="article-chap">
                   <p className="jurnal-haqida">Jurnal haqida</p>
@@ -243,7 +243,7 @@ class JurnallarRoyxati extends Component {
           <h1>Maqolalar qabul qilinayotgan jurnallar</h1>
 
           <div className="carousel">
-            <div className="row mt-5 mx-0">
+            <div className="row mx-0 mx-sm-0 mt-5 mx-0">
               <div className="col-lg-4">
                 <h4>Barcha turdagi maqolalar qabul qilinuchi jurnallar</h4>
                 <p className="text-muted">
@@ -281,7 +281,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          {" "}
+                         
                           <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
                         </h4>
                         <p className="card_text">
@@ -297,7 +297,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img1} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          {" "}
+                          
                           <Link to="#">Sport</Link>{" "}
                         </h4>
                         <p className="card_text">
@@ -327,7 +327,7 @@ class JurnallarRoyxati extends Component {
               </div>
             </div>
             <hr className="hr2" />
-            <div className="row mt-5 mx-0">
+            <div className="row mx-0 mx-sm-0 mt-5 mx-0">
               <div className="col-lg-4">
                 <h4>Filologiya va san'atshunoslik</h4>
                 <p className="text-muted">
