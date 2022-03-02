@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Card, CardBody, Label, Input } from "reactstrap";
+import { Row, Col, Card, CardBody, Label, Input, CardHeader } from "reactstrap";
 
 class JurnalQoshish extends Component {
   state = {};
@@ -10,8 +10,10 @@ class JurnalQoshish extends Component {
           <Row>
             <Col md="12">
               <Card>
+                <CardHeader>
+                  <h3>Jurnal Qoshish</h3>
+                </CardHeader>
                 <CardBody>
-                  <h1>Jurnal Qoshish</h1>
                   <form>
                     <Row className="my-4">
                       <Col lg="3">
@@ -23,24 +25,32 @@ class JurnalQoshish extends Component {
                       <Col lg="3">
                         <div>
                           <label>publishedDate</label>
-                          <input type='number' className="form-control" placeholder="data" />
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="data"
+                          />
                         </div>
                       </Col>
                       <Col lg="3">
                         <div>
                           <label>receivedDate</label>
-                          <input type='number' className="form-control" placeholder="data" />
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="data"
+                          />
                         </div>
                       </Col>
                       <Col lg="3">
                         <div>
                           <label>maqolaJurnaldaNechaKundaChiqishi</label>
-                          <input  className="form-control" placeholder="kun" />
+                          <input className="form-control" placeholder="kun" />
                         </div>
                       </Col>
                     </Row>
 
-                    <Row  className="my-4">
+                    <Row className="my-4">
                       <Col lg="4">
                         <div>
                           <label>jurnalNechaKundaChiqishi</label>
@@ -61,7 +71,7 @@ class JurnalQoshish extends Component {
                       </Col>
                     </Row>
 
-                    <Row  className="my-4">
+                    <Row className="my-4">
                       <Col lg="4">
                         <div>
                           <label>journalsStatus</label>
@@ -84,11 +94,7 @@ class JurnalQoshish extends Component {
                       <Col lg="4">
                         <div>
                           <Label>photoJournals</Label>
-                          <input
-                            min="0"
-                            type="urls"
-                            className="form-control"
-                          />
+                          <input min="0" type="urls" className="form-control" />
                         </div>
                       </Col>
                     </Row>

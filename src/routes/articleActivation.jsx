@@ -100,7 +100,9 @@ class ArticleActivation extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="card">
-              <div className="card-header">Artikllarni aktivlashtirish</div>
+              <div className="card-header">
+                <h3>Artikllarni aktivlashtirish</h3>
+              </div>
               <div className="card-body">
                 {articles.map((article) => (
                   <div key={article.id}>

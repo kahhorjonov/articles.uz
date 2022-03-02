@@ -104,7 +104,9 @@ class Articles extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="card">
-                <div className="card-header">Barcha maqolalar</div>
+                <div className="card-header">
+                  <h3>Barcha maqolalar</h3>
+                </div>
                 <div className="card-body">
                   <div className="d-flex justify-content-end">
                     <div className="col-md-3 p-0 box2">
