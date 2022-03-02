@@ -9,6 +9,8 @@ import ArticleActivation from "./routes/articleActivation";
 import Users from "./routes/users";
 import UserEdit from "./views/userEdit";
 import ArticleInfo from "./views/articleInfo";
+import JurnalQoshish from './components/UI/jurnalQoshish';
+import AdminJurnallar from './components/UI/adminJurnallar';
 
 var adminRoutes = [
   {
@@ -16,6 +18,24 @@ var adminRoutes = [
     name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: Dashboard,
+    layout: "/admin",
+    visible: true,
+  },
+
+  {
+    path: "/adminJurnallar",
+    name: "jurnallar",
+    icon: "nc-icon nc-bank",
+    component: AdminJurnallar,
+    layout: "/admin",
+    visible: true,
+  },
+
+  {
+    path: "/jurnalQoshish",
+    name: "jurnall Qoshish",
+    icon: "nc-icon nc-bank",
+    component: JurnalQoshish,
     layout: "/admin",
     visible: true,
   },
