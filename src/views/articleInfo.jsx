@@ -129,6 +129,8 @@ class ArticleInfo extends Component {
   render() {
     const article = this.state.articleInfo.article;
 
+    console.log(article);
+
     const steps = this.state.articleInfo.articleAdminInfoList;
 
     return (
@@ -274,10 +276,12 @@ class ArticleInfo extends Component {
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label htmlFor="exampleInputEmail1">Price</label>
+                          <label>Price</label>
                           <Input
                             disabled={true}
-                            placeholder="Price"
+                            placeholder={
+                              article && `${article.price.price} so'm`
+                            }
                             type="number"
                           />
                         </FormGroup>
@@ -289,13 +293,23 @@ class ArticleInfo extends Component {
                           <label>Authors</label>
                           <Input
                             disabled
-                            defaultValue={
+                            // defaultValue={
+                            //   article &&
+                            //   article.authors.map(
+                            //     (author) => author.fullName + " "
+                            //   )
+                            // }
+
+                            placeholder={
                               article &&
-                              article.authors.map(
-                                (author) => author.fullName + " "
-                              )
+                              article.authors.map((author, idx2) => {
+                                if (article.authors.length - 1 !== idx2) {
+                                  return `${author.fullname}, `;
+                                }
+                                return `${author.fullname}`;
+                              })
                             }
-                            placeholder="Avtorlar"
+                            // placeholder={authors && authors}
                             type="text"
                           />
                         </FormGroup>

@@ -1,7 +1,6 @@
 import Dashboard from "./views/Dashboard.js";
 // import Notifications from "views/Notifications.js";
 // import Icons from "./views/Icons.js";
-import TableList from "./views/Tables.js";
 import UserPage from "./views/User.js";
 
 import Articles from "./views/articles";
@@ -9,6 +8,7 @@ import ArticleActivation from "./routes/articleActivation";
 import Users from "./routes/users";
 import UserEdit from "./views/userEdit";
 import ArticleInfo from "./views/articleInfo";
+import Logout from "components/logout.jsx";
 
 var adminRoutes = [
   {
@@ -119,7 +119,7 @@ var adminRoutes = [
     path: "/logout",
     name: "Profildan chiqish",
     icon: "nc-icon nc-button-power",
-    component: TableList,
+    component: Logout,
     layout: "",
     visible: true,
   },

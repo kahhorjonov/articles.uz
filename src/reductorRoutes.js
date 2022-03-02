@@ -1,10 +1,8 @@
 import Dashboard from "./views/Dashboard.js";
-// import Notifications from "views/Notifications.js";
-import Icons from "./views/Icons.js";
-import TableList from "./views/Tables.js";
 import UserPage from "./views/User.js";
 import Articles from "./views/articles";
 import MyTasks from "./routes/MyTasks";
+import Logout from "./components/logout";
 
 var reductorRoutes = [
   {
@@ -62,7 +60,7 @@ var reductorRoutes = [
     path: "/logout",
     name: "Profildan chiqish",
     icon: "nc-icon nc-button-power",
-    component: TableList,
+    component: Logout,
     layout: "",
     visible: true,
   },
