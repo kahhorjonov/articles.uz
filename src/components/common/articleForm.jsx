@@ -9,6 +9,7 @@ import { Card, CardBody, Input, Label, Row, Col, Toast } from "reactstrap";
 import { toast } from "react-toastify";
 
 import "../../styles/articleForm.css";
+import "../../styles/multipleTags.scss";
 
 class ArticleForm extends Form {
   state = {
@@ -17,11 +18,12 @@ class ArticleForm extends Form {
       lastName: "",
       titleArticle: "",
       description: "",
-      author: "",
-      tags: "",
       categoryId: "",
       file: [],
+      publicOrPrivate: "",
     },
+
+    tags: [],
 
     categories: [],
     errors: {},
@@ -41,15 +43,27 @@ class ArticleForm extends Form {
     titleArticle: Joi.string().required().label("Article Title"),
     categoryId: Joi.string().required().label("Category Id"),
     description: Joi.string().required().min(0).max(200).label("Description"),
-    author: Joi.string().required().label("Authors"),
-    tags: Joi.string().required().label("Tags"),
     file: Joi.required().label("File"),
+    publicOrPrivate: Joi.required().label("publicOrPrivate"),
   };
 
   async populateCategories() {
     const { data: categories } = await getCategories();
     this.setState({ categories });
   }
+
+  removeTags = (indexToRemove) => {
+    this.setState({
+      tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
+    });
+  };
+
+  addTags = (value) => {
+    if (value !== "") {
+      this.setState({ tags: [...this.state.tags, value] });
+      value = "";
+    }
+  };
 
   // async populateArticles() {
   //   try {
@@ -129,11 +143,9 @@ class ArticleForm extends Form {
       doi: doi,
     };
 
-    console.log(data);
-
-    // await articleService.getPrice(data).then((res) => {
-    //   this.setState({ price: res.data.object });
-    // });
+    await articleService.getPrice(data).then((res) => {
+      this.setState({ price: res.data.object });
+    });
   };
 
   async componentDidMount() {
@@ -151,8 +163,14 @@ class ArticleForm extends Form {
   // }
 
   doSubmit = async () => {
-    await articleService.addArticle(this.state.data);
-    // this.props.history.push("/article");
+    try {
+      await articleService.addArticle(this.state).then((res) => {
+        console.log(res);
+        toast.success(res.data.message);
+      });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   render() {
@@ -190,27 +208,41 @@ class ArticleForm extends Form {
                   </Row>
 
                   <Row>
-                    <Col lg="3">
+                    <Col md="4" lg="4">
                       {this.renderSelect(
                         "categoryId",
                         "Categories",
                         this.state.categories
                       )}
                     </Col>
-                    <Col lg="3">{this.renderInput("author", "Author")}</Col>
-                    <Col lg="3">{this.renderInput("tags", "Tags")}</Col>
-                    <Col lg="3">
+                    {/* <Col lg="3">{this.renderInput("author", "Author")}</Col> */}
+                    <Col sm="4" md="4" lg="4">
+                      <div>
+                        <label>PublicOrPrivate</label>
+                        <Input
+                          type="select"
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          onChange={(e) =>
+                            this.setState({ publicOrPrivate: e.target.value })
+                          }
+                        >
+                          <option value="true">True</option>
+                          <option value="false">False</option>
+                        </Input>
+                      </div>
+                    </Col>
+                    <Col sm="4" md="4" lg="4">
                       {this.renderFileInput("file", "File", "file")}
                     </Col>
                   </Row>
                   <Row>
-                    <Col lg="2">
+                    <Col sm="2" md="2" lg="2">
                       <div>
                         <label>Sahifa soni</label>
-                        <input
+                        <Input
                           className="form-control"
                           placeholder="0"
-                          className="form-control"
                           onChange={(e) => {
                             this.setState({ sahifaSoni: e.target.value });
                             this.getPriceFromPages(e.target.value);
@@ -218,14 +250,14 @@ class ArticleForm extends Form {
                         />
                       </div>
                     </Col>
-                    <Col lg="3">
+                    <Col sm="3" md="3" lg="3">
                       <div>
                         <Label> Chop etiladigan jurnallar soni</Label>
-                        <input
+                        <Input
                           min="0"
                           type={"number"}
                           className="form-control"
-                          defaultValue={0}
+                          placeholder="0"
                           onChange={(e) => {
                             this.setState({
                               jurnaldaChopEtishSoni: e.target.value,
@@ -235,9 +267,9 @@ class ArticleForm extends Form {
                         />
                       </div>
                     </Col>
-                    <Col lg="2">
+                    <Col sm="2" md="2" lg="2">
                       <Label>Bosma jurnal soni</Label>
-                      <input
+                      <Input
                         min="0"
                         type={"number"}
                         className="form-control"
@@ -249,7 +281,7 @@ class ArticleForm extends Form {
                         }}
                       />
                     </Col>
-                    <Col lg="3">
+                    <Col sm="3" md="3" lg="3">
                       <Label>Sertifikat soni</Label>
                       <input
                         min="0"
@@ -261,7 +293,7 @@ class ArticleForm extends Form {
                         }}
                       />
                     </Col>
-                    <Col lg="2">
+                    <Col sm="2" md="2" lg="2">
                       <div>
                         <Label>Doi</Label>
                         <Input
@@ -281,13 +313,42 @@ class ArticleForm extends Form {
                   </Row>
 
                   <Row>
-                    <Col lg="3">
+                    <Col sm="3" md="3" lg="3">
                       <div>
                         <Label for="exampleEmail">Narxi</Label>
                         <Input
                           disabled
                           className="form-control h-100"
                           placeholder={`${price} so'm`}
+                        />
+                      </div>
+                    </Col>
+                    <Col sm="9" md="9" lg="9">
+                      <Label for="exampleEmail">Authors ID</Label>
+                      <div className="tags-input ">
+                        <ul id="tags">
+                          {this.state.tags &&
+                            this.state.tags.map((tag, index) => (
+                              <li key={index} className="tag">
+                                <span className="tag-title">{tag}</span>
+                                <span
+                                  className="tag-close-icon"
+                                  onClick={() => this.removeTags(index)}
+                                >
+                                  x
+                                </span>
+                              </li>
+                            ))}
+                        </ul>
+                        <input
+                          className="col-sm-9 col-lg-9 col-md-9"
+                          type="text"
+                          onKeyUp={(e) =>
+                            e.key === "ArrowUp"
+                              ? this.addTags(e.target.value)
+                              : null
+                          }
+                          placeholder="Press Up Arrow to add tags"
                         />
                       </div>
                     </Col>
