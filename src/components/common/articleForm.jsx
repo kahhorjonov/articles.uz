@@ -64,9 +64,9 @@ class ArticleForm extends Form {
   //   }
   // }
 
-  getPriceFromPages = async (pageSize) => {
+  getPriceFromPages = async (sahifaSoni) => {
     const data = {
-      sahifaSoni: pageSize,
+      sahifaSoni: sahifaSoni,
       jurnaldaChopEtishSoni: this.state.jurnaldaChopEtishSoni,
       bosmaJurnalSoni: this.state.bosmaJurnalSoni,
       sertifikatSoni: this.state.sertifikatSoni,
@@ -92,11 +92,11 @@ class ArticleForm extends Form {
     });
   };
 
-  getPriceFromNumberOfPrintedMagazines = async (numberOfPrintedMagazines) => {
+  getPriceFromNumberOfPrintedMagazines = async (bosmaJurnalSoni) => {
     const data = {
       sahifaSoni: this.state.sahifaSoni,
       jurnaldaChopEtishSoni: this.state.jurnaldaChopEtishSoni,
-      bosmaJurnalSoni: numberOfPrintedMagazines,
+      bosmaJurnalSoni: bosmaJurnalSoni,
       sertifikatSoni: this.state.sertifikatSoni,
       doi: this.state.doi,
     };
@@ -106,12 +106,12 @@ class ArticleForm extends Form {
     });
   };
 
-  getPriceFromNumberOfLicences = async (numberOfLicences) => {
+  getPriceFromNumberOfLicences = async (sertifikatSoni) => {
     const data = {
       sahifaSoni: this.state.sahifaSoni,
-      jurnaldaChopEtishSoni: this.state.numbjurnaldaChopEtishSonierOfPrints,
+      jurnaldaChopEtishSoni: this.state.jurnaldaChopEtishSoni,
       bosmaJurnalSoni: this.state.bosmaJurnalSoni,
-      sertifikatSoni: numberOfLicences,
+      sertifikatSoni: sertifikatSoni,
       doi: this.state.doi,
     };
 
@@ -122,16 +122,18 @@ class ArticleForm extends Form {
 
   getPriceFromDoi = async (doi) => {
     const data = {
-      sahifaSoni: this.state.numberOfPages,
-      jurnaldaChopEtishSoni: this.state.numberOfPrints,
-      bosmaJurnalSoni: this.state.numberOfPrintedMagazines,
-      sertifikatSoni: this.state.numberOfLicences,
+      sahifaSoni: this.state.sahifaSoni,
+      jurnaldaChopEtishSoni: this.state.jurnaldaChopEtishSoni,
+      bosmaJurnalSoni: this.state.bosmaJurnalSoni,
+      sertifikatSoni: this.state.sertifikatSoni,
       doi: doi,
     };
 
-    await articleService.getPrice(data).then((res) => {
-      this.setState({ price: res.data.object });
-    });
+    console.log(data);
+
+    // await articleService.getPrice(data).then((res) => {
+    //   this.setState({ price: res.data.object });
+    // });
   };
 
   async componentDidMount() {
