@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import auth from "../services/authService";
 
 const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
-  const user = auth.getCurrentUser().roles[0];
+  const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
   return (
     <Route
       {...rest}
