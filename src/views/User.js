@@ -155,6 +155,8 @@ class User extends Component {
                   <p className="description text-center">
                     {`Academic Degree: ${academicDegree}`}
                   </p>
+
+                  <h6 className="pl-5 pt-4">ID:122112</h6>
                 </CardBody>
                 <CardFooter>
                   <hr />

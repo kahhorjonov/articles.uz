@@ -8,6 +8,9 @@ import ArticleActivation from "./routes/articleActivation";
 import Users from "./routes/users";
 import UserEdit from "./views/userEdit";
 import ArticleInfo from "./views/articleInfo";
+import JurnalQoshish from "./components/UI/jurnalQoshish";
+import AdminJurnallar from "./components/UI/adminJurnallar";
+import Category from "./components/UI/category";
 import Logout from "components/logout.jsx";
 
 var adminRoutes = [
@@ -16,6 +19,33 @@ var adminRoutes = [
     name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: Dashboard,
+    layout: "/admin",
+    visible: true,
+  },
+
+  {
+    path: "/category",
+    name: "Category",
+    icon: "nc-icon nc-bank",
+    component: Category,
+    layout: "/admin",
+    visible: true,
+  },
+
+  {
+    path: "/adminJurnallar",
+    name: "Jurnallar",
+    icon: "nc-icon nc-bank",
+    component: AdminJurnallar,
+    layout: "/admin",
+    visible: true,
+  },
+
+  {
+    path: "/jurnalQoshish",
+    name: "Jurnall Qoshish",
+    icon: "nc-icon nc-bank",
+    component: JurnalQoshish,
     layout: "/admin",
     visible: true,
   },
@@ -98,22 +128,6 @@ var adminRoutes = [
     layout: "/admin",
     visible: false,
   },
-
-  // {
-  //   path: "/tables",
-  //   name: "Table List",
-  //   icon: "nc-icon nc-tile-56",
-  //   component: TableList,
-  //   layout: "/admin",
-  // },
-
-  // {
-  //   path: "/typography",
-  //   name: "Typography",
-  //   icon: "nc-icon nc-caps-small",
-  //   component: Typography,
-  //   layout: "/admin",
-  // },
 
   {
     path: "/logout",

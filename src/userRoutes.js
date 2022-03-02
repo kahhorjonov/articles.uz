@@ -7,8 +7,18 @@ import Tekshirish from "components/UI/tekshirish.jsx";
 import Chopetish from "components/UI/chopetish.jsx";
 import Radetish from "components/UI/radetish.jsx";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
+import Jurnallar from "components/UI/jurnallar.jsx";
 
 var UserRoutes = [
+  {
+    path: "/jurnallar",
+    name: "Jurnallar",
+    icon: "nc-icon nc-cloud-upload-94",
+    component: Jurnallar,
+    layout: "/user",
+    visible: true,
+  },
+
   {
     path: "/uploadArticle",
     name: "Maqola Yuklash",
