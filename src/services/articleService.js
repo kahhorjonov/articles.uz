@@ -10,38 +10,36 @@ const token = localStorage.getItem("token");
 export function addArticle(data) {
   const bodyFormData = new FormData();
 
-  const token = jwtDecode(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
 
-  bodyFormData.append("author", data.author);
-  bodyFormData.append("categoryId", data.categoryId);
-  bodyFormData.append("description", data.description);
-  bodyFormData.append("firstName", data.firstName);
-  bodyFormData.append("lastName", data.lastName);
-  bodyFormData.append("tags", data.tags);
-  bodyFormData.append("titleArticle", data.titleArticle);
-  bodyFormData.append("publicOrPrivate", false);
-  bodyFormData.append("userId", token.sub);
-  bodyFormData.append("file", data.file);
+  bodyFormData.append("categoryId", data.data.categoryId);
+  bodyFormData.append("description", data.data.description);
+  bodyFormData.append("firstName", data.data.firstName);
+  bodyFormData.append("lastName", data.data.lastName);
+  bodyFormData.append("authorsList", data.tags);
+  bodyFormData.append("titleArticle", data.data.titleArticle);
+  bodyFormData.append("publicOrPrivate", data.data.publicOrPrivate);
+  bodyFormData.append("file", data.data.file);
+  bodyFormData.append("sahifaSoni", data.sahifaSoni);
+  bodyFormData.append("jurnaldaChopEtishSoni", data.jurnaldaChopEtishSoni);
+  bodyFormData.append("bosmaJurnalSoni", data.bosmaJurnalSoni);
+  bodyFormData.append("sertifikatSoni", data.sertifikatSoni);
+  bodyFormData.append("doi", data.doi);
+  bodyFormData.append("price", data.price);
 
   // for (var pair of bodyFormData.entries()) {
   //   console.log(pair[0] + ", " + pair[1]);
   // }
 
-  try {
-    const result = axios({
-      method: "post",
-      url: apiLocal + "/article/addArticle",
-      // url: apiSwagger + "/article/addArticle",
-      data: bodyFormData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log("result", result);
-    // if (result) reset();
-  } catch (err) {
-    alert(err.message);
-  }
+  return axios({
+    method: "post",
+    url: apiLocal + "/article/addArticle",
+    data: bodyFormData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 export function sendWork(articleId, status, file) {
@@ -61,7 +59,6 @@ export function sendWork(articleId, status, file) {
   return axios({
     method: "post",
     url: "http://192.168.100.27:8080/api/article/givenStatus",
-    // url: apiSwagger + "/article/addArticle",
     data: bodyFormData,
     headers: {
       "Content-Type": "multipart/form-data",
