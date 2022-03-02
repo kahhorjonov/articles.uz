@@ -20,27 +20,22 @@ class LoginForm extends Form {
   };
 
   autoRedirect = () => {
-    const admin = "ROLE_ADMINISTRATOR";
-    const reductor = "ROLE_REDACTOR";
-    const reviewer = "ROLE_REVIEWER";
-    const user = "ROLE_USER";
-
     if (auth.getCurrentUser()) {
       const token = auth.getCurrentUser();
-      const roleName = token.roles[0].roleName;
+      const roleName = token.roles[0].id;
 
-      if (roleName === admin) {
+      if (roleName === 1) {
         window.location = "/admin";
       }
 
-      if (roleName === reductor) {
+      if (roleName === 2) {
         window.location = "/reductor";
       }
 
-      if (roleName === reviewer) {
+      if (roleName === 3) {
         window.location = "/reviewer";
       }
-      if (roleName === user) {
+      if (roleName === 4) {
         window.location = "/user/user-page";
       }
     }

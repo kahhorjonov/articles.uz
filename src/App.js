@@ -17,104 +17,326 @@ import JurnallarRoyxati from "./components/UI/jurnallarRo'yhati";
 import NashrShartlari from "./components/UI/nashrShartlari";
 import Aloqa from "./components/UI/aloqa";
 import NotFound from "./components/common/notFound";
+import auth from "services/authService.js";
 
 import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   render() {
-    return (
-      <>
-        <DemoNavbar />
-        <ToastContainer />
-        <Switch>
-          <Route path="/" exact component={(props) => <Asosiy {...props} />} />
+    const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
+    // console.log(window.location.pathname);
 
-          <Route
-            path="/main"
-            exact
-            component={(props) => <Asosiy {...props} />}
-          />
+    if (user && user) {
+      if (user.id === 1)
+        return (
+          <>
+            <DemoNavbar />
+            <ToastContainer />
+            <Switch>
+              <Route
+                path="/"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/main"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/listOfMagazines"
+                exact
+                component={(props) => <JurnallarRoyxati {...props} />}
+              />
+              <Route
+                path="/termsOfPublication"
+                exact
+                component={(props) => <NashrShartlari {...props} />}
+              />
+              <Route
+                path="/contact"
+                exact
+                component={(props) => <Aloqa {...props} />}
+              />
+              <Route
+                path="/login"
+                component={(props) => <LoginForm {...props} />}
+              />
+              <Route
+                path="/logout"
+                exact
+                component={(props) => <Logout {...props} />}
+              />
+              <Route
+                path="/register"
+                exact
+                component={(props) => <RegisterForm {...props} />}
+              />
+              <Route
+                path="/registerReviewer"
+                exact
+                component={ReviewerRegisterForm}
+              />
+              <Redirect from="/admin" exact to="/admin/dashboard" />
+              <ProtectedRoute
+                path="/admin"
+                component={AdminLayout}
+                // render={(props) => <AdminLayout {...props} />}
+              />
+              <Redirect to="/not-found" />
+            </Switch>
+          </>
+        );
+      if (user.id === 2)
+        return (
+          <>
+            <DemoNavbar />
+            <ToastContainer />
+            <Switch>
+              <Route
+                path="/"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/main"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/listOfMagazines"
+                exact
+                component={(props) => <JurnallarRoyxati {...props} />}
+              />
+              <Route
+                path="/termsOfPublication"
+                exact
+                component={(props) => <NashrShartlari {...props} />}
+              />
+              <Route
+                path="/contact"
+                exact
+                component={(props) => <Aloqa {...props} />}
+              />
+              <Route
+                path="/login"
+                component={(props) => <LoginForm {...props} />}
+              />
+              <Route
+                path="/logout"
+                exact
+                component={(props) => <Logout {...props} />}
+              />
+              <Route
+                path="/register"
+                exact
+                component={(props) => <RegisterForm {...props} />}
+              />
+              <Route
+                path="/registerReviewer"
+                exact
+                component={ReviewerRegisterForm}
+              />
+              <Redirect from="/reductor" exact to="/reductor/myTasks" />
+              <ProtectedRoute
+                path="/reductor"
+                component={ReductorLayout}
+                // render={(props) => <ReductorLayout {...props} />}
+              />
+              <Redirect to="/not-found" />
+            </Switch>
+          </>
+        );
+      if (user.id === 3)
+        return (
+          <>
+            <DemoNavbar />
+            <ToastContainer />
+            <Switch>
+              <Route
+                path="/"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/main"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/listOfMagazines"
+                exact
+                component={(props) => <JurnallarRoyxati {...props} />}
+              />
+              <Route
+                path="/termsOfPublication"
+                exact
+                component={(props) => <NashrShartlari {...props} />}
+              />
+              <Route
+                path="/contact"
+                exact
+                component={(props) => <Aloqa {...props} />}
+              />
+              <Route
+                path="/login"
+                component={(props) => <LoginForm {...props} />}
+              />
+              <Route
+                path="/logout"
+                exact
+                component={(props) => <Logout {...props} />}
+              />
+              <Route
+                path="/register"
+                exact
+                component={(props) => <RegisterForm {...props} />}
+              />
+              <Route
+                path="/registerReviewer"
+                exact
+                component={ReviewerRegisterForm}
+              />
+              <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
+              <ProtectedRoute
+                path="/reviewer"
+                component={ReviewerLayout}
+                // render={(props) => <ReviewerLayout {...props} />}
+              />
+              <Redirect to="/not-found" />
+            </Switch>
+          </>
+        );
+      if (user.id === 4)
+        return (
+          <>
+            <DemoNavbar />
+            <ToastContainer />
+            <Switch>
+              <Route
+                path="/"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/main"
+                exact
+                component={(props) => <Asosiy {...props} />}
+              />
+              <Route
+                path="/listOfMagazines"
+                exact
+                component={(props) => <JurnallarRoyxati {...props} />}
+              />
+              <Route
+                path="/termsOfPublication"
+                exact
+                component={(props) => <NashrShartlari {...props} />}
+              />
+              <Route
+                path="/contact"
+                exact
+                component={(props) => <Aloqa {...props} />}
+              />
+              <Route
+                path="/login"
+                component={(props) => <LoginForm {...props} />}
+              />
+              <Route
+                path="/logout"
+                exact
+                component={(props) => <Logout {...props} />}
+              />
+              <Route
+                path="/register"
+                exact
+                component={(props) => <RegisterForm {...props} />}
+              />
+              <Route
+                path="/registerReviewer"
+                exact
+                component={ReviewerRegisterForm}
+              />
+              <Redirect from="/user" exact to="/user/user-page" />
+              <ProtectedRoute
+                path="/user"
+                component={UserLayout}
+                // render={(props) => <UserLayout {...props} />}
+              />
+              <Redirect to="/not-found" />
+            </Switch>
+          </>
+        );
+    } else if (!user)
+      return (
+        <>
+          <DemoNavbar />
+          <ToastContainer />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={(props) => <Asosiy {...props} />}
+            />
 
-          <Route
-            path="/listOfMagazines"
-            exact
-            component={(props) => <JurnallarRoyxati {...props} />}
-          />
+            <Route
+              path="/main"
+              exact
+              component={(props) => <Asosiy {...props} />}
+            />
 
-          <Route
-            path="/termsOfPublication"
-            exact
-            component={(props) => <NashrShartlari {...props} />}
-          />
+            <Route
+              path="/listOfMagazines"
+              exact
+              component={(props) => <JurnallarRoyxati {...props} />}
+            />
 
-          <Route
-            path="/contact"
-            exact
-            component={(props) => <Aloqa {...props} />}
-          />
+            <Route
+              path="/termsOfPublication"
+              exact
+              component={(props) => <NashrShartlari {...props} />}
+            />
 
-          <Route
-            path="/login"
-            component={(props) => <LoginForm {...props} />}
-          />
+            <Route
+              path="/contact"
+              exact
+              component={(props) => <Aloqa {...props} />}
+            />
 
-          <Route
-            path="/logout"
-            exact
-            component={(props) => <Logout {...props} />}
-          />
+            <Route
+              path="/login"
+              component={(props) => <LoginForm {...props} />}
+            />
 
-          <Route
-            path="/register"
-            exact
-            component={(props) => <RegisterForm {...props} />}
-          />
+            <Route
+              path="/logout"
+              exact
+              component={(props) => <Logout {...props} />}
+            />
 
-          <Route
-            path="/registerReviewer"
-            exact
-            component={ReviewerRegisterForm}
-          />
+            <Route
+              path="/register"
+              exact
+              component={(props) => <RegisterForm {...props} />}
+            />
 
-          <Route path="/not-found" component={NotFound} />
-          {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
-          {/* <ProtectedRoute path="/admin" component={AdminPage} /> */}
-          {/* <ProtectedRoute path="/reductor" component={ReductorPage} /> */}
-          {/* <ProtectedRoute path="/reviewer" component={ReviewerPage} /> */}
-          {/* <ProtectedRoute path="/user" component={UserPage} /> */}
+            <Route
+              path="/registerReviewer"
+              exact
+              component={ReviewerRegisterForm}
+            />
 
-          <Redirect from="/admin" exact to="/admin/dashboard" />
+            <Route path="/not-found" component={NotFound} />
+            {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
+            {/* <ProtectedRoute path="/admin" component={AdminPage} /> */}
+            {/* <ProtectedRoute path="/reductor" component={ReductorPage} /> */}
+            {/* <ProtectedRoute path="/reviewer" component={ReviewerPage} /> */}
+            {/* <ProtectedRoute path="/user" component={UserPage} /> */}
 
-          <ProtectedRoute
-            path="/admin"
-            render={(props) => <AdminLayout {...props} />}
-          />
-
-          <Redirect from="/reductor" exact to="/reductor/myTasks" />
-
-          <ProtectedRoute
-            path="/reductor"
-            render={(props) => <ReductorLayout {...props} />}
-          />
-
-          <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
-
-          <ProtectedRoute
-            path="/reviewer"
-            render={(props) => <ReviewerLayout {...props} />}
-          />
-
-          <Redirect from="/user" exact to="/user/user-page" />
-
-          <ProtectedRoute
-            path="/user"
-            render={(props) => <UserLayout {...props} />}
-          />
-
-          <Redirect to="/not-found" />
-        </Switch>
-      </>
-    );
+            <Redirect to="/not-found" />
+          </Switch>
+        </>
+      );
   }
 }
 
