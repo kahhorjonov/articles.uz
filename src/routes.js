@@ -11,6 +11,7 @@ import UserEdit from "./views/userEdit";
 import ArticleInfo from "./views/articleInfo";
 import JurnalQoshish from './components/UI/jurnalQoshish';
 import AdminJurnallar from './components/UI/adminJurnallar';
+import Category from './components/UI/category';
 
 var adminRoutes = [
   {
@@ -22,9 +23,19 @@ var adminRoutes = [
     visible: true,
   },
 
+
+  {
+    path: "/category",
+    name: "Category",
+    icon: "nc-icon nc-bank",
+    component: Category,
+    layout: "/admin",
+    visible: true,
+  },
+
   {
     path: "/adminJurnallar",
-    name: "jurnallar",
+    name: "Jurnallar",
     icon: "nc-icon nc-bank",
     component: AdminJurnallar,
     layout: "/admin",
@@ -33,7 +44,7 @@ var adminRoutes = [
 
   {
     path: "/jurnalQoshish",
-    name: "jurnall Qoshish",
+    name: "Jurnall Qoshish",
     icon: "nc-icon nc-bank",
     component: JurnalQoshish,
     layout: "/admin",
