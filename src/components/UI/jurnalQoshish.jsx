@@ -1,8 +1,38 @@
 import React, { Component } from "react";
+import { getCategories } from "services/getCategories";
+
 import { Row, Col, Card, CardBody, Label, Input, CardHeader } from "reactstrap";
 
 class JurnalQoshish extends Component {
-  state = {};
+  state = {
+    categoryId: "",
+    issn: "",
+    isbn: "",
+    deadline: "",
+    certificateNumber: "",
+    title: "",
+    createdDate: "",
+    file: [],
+    cover: [],
+    magazineNumber: "",
+
+    categories: [],
+  };
+
+  async componentDidMount() {
+    await this.populateCategories();
+  }
+
+  async populateCategories() {
+    const { data: categories } = await getCategories();
+    this.setState({ categories });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   render() {
     return (
       <>
@@ -11,104 +41,166 @@ class JurnalQoshish extends Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <h3>Jurnal Qoshish</h3>
+                  <h3>Jurnal Qo'shish</h3>
                 </CardHeader>
                 <CardBody>
                   <form>
                     <Row className="my-4">
-                      <Col lg="3">
+                      <Col md="3" sm="3" lg="3">
                         <div>
-                          <label>name</label>
-                          <input className="form-control" placeholder="Name" />
-                        </div>
-                      </Col>
-                      <Col lg="3">
-                        <div>
-                          <label>publishedDate</label>
+                          <label>Title</label>
                           <input
-                            type="number"
+                            placeholder="Article Title"
+                            onChange={(e) =>
+                              this.setState({ title: e.target.value })
+                            }
                             className="form-control"
-                            placeholder="data"
                           />
                         </div>
                       </Col>
-                      <Col lg="3">
+
+                      <Col md="3" sm="3" lg="3">
                         <div>
-                          <label>receivedDate</label>
+                          <label>Created Date</label>
                           <input
-                            type="number"
+                            onChange={(e) =>
+                              this.setState({ createdDate: e.target.value })
+                            }
+                            type="date"
                             className="form-control"
-                            placeholder="data"
                           />
                         </div>
                       </Col>
-                      <Col lg="3">
+
+                      <Col md="3" sm="3" lg="3">
                         <div>
-                          <label>maqolaJurnaldaNechaKundaChiqishi</label>
-                          <input className="form-control" placeholder="kun" />
+                          <label>File</label>
+                          <input
+                            onChange={(e) =>
+                              this.setState({ file: e.target.files[0] })
+                            }
+                            type="file"
+                            className="form-control"
+                          />
+                        </div>
+                      </Col>
+
+                      <Col md="3" sm="3" lg="3">
+                        <div>
+                          <label>Jurnal muqovasi</label>
+                          <input
+                            onChange={(e) =>
+                              this.setState({ cover: e.target.files[0] })
+                            }
+                            type="file"
+                            className="form-control"
+                          />
                         </div>
                       </Col>
                     </Row>
 
                     <Row className="my-4">
-                      <Col lg="4">
+                      <Col sm="2" md="2" lg="2">
                         <div>
-                          <label>jurnalNechaKundaChiqishi</label>
-                          <input className="form-control" placeholder="kun" />
+                          <label>Maqola qabul qilish oxirgi sanasi</label>
+                          <input
+                            onChange={(e) =>
+                              this.setState({ deadline: e.target.value })
+                            }
+                            type="date"
+                            className="form-control"
+                            placeholder="deadline"
+                          />
                         </div>
                       </Col>
-                      <Col lg="4">
-                        <div>
-                          <label>ISSN</label>
-                          <input className="form-control" placeholder="kun" />
-                        </div>
-                      </Col>
-                      <Col lg="4">
-                        <div>
-                          <label>jurnalSertificat</label>
-                          <input className="form-control" placeholder="kun" />
-                        </div>
-                      </Col>
-                    </Row>
 
-                    <Row className="my-4">
-                      <Col lg="4">
+                      <Col sm="1" md="1" lg="1">
                         <div>
-                          <label>journalsStatus</label>
-                          <input className="form-control" placeholder="kun" />
+                          <label>Jurnal soni</label>
+                          <input
+                            onChange={(e) =>
+                              this.setState({ magazineNumber: e.target.value })
+                            }
+                            className="form-control"
+                            placeholder="0"
+                          />
                         </div>
                       </Col>
-                      <Col lg="4">
+
+                      <Col sm="3" md="3" lg="3">
                         <div>
-                          <Label>Category</Label>
+                          <Label>Categories</Label>
                           <Input
+                            onChange={(e) =>
+                              this.setState({ categoryId: e.target.value })
+                            }
                             style={{ height: "3rem" }}
                             className="form-control"
                             type="select"
                           >
-                            <option>True</option>
-                            <option>False</option>
+                            {this.state.categories &&
+                              this.state.categories.map((option) => (
+                                <option key={option.id} value={option.id}>
+                                  {option.name}
+                                </option>
+                              ))}
                           </Input>
                         </div>
                       </Col>
-                      <Col lg="4">
+
+                      <Col sm="2" md="2" lg="2">
                         <div>
-                          <Label>photoJournals</Label>
-                          <input min="0" type="urls" className="form-control" />
+                          <Label>Sertifikat raqami</Label>
+                          <input
+                            placeholder="ex: № FS77-54438"
+                            onChange={(e) =>
+                              this.setState({
+                                certificateNumber: e.target.value,
+                              })
+                            }
+                            min={0}
+                            className="form-control"
+                          />
+                        </div>
+                      </Col>
+
+                      <Col sm="2" md="2" lg="2">
+                        <div>
+                          <Label>ISBN</Label>
+                          <input
+                            onChange={(e) =>
+                              this.setState({ isbn: e.target.value })
+                            }
+                            min="0"
+                            placeholder="ex: 2311-6099"
+                            className="form-control"
+                          />
+                        </div>
+                      </Col>
+
+                      <Col sm="2" md="2" lg="2">
+                        <div>
+                          <Label>ISSN</Label>
+                          <input
+                            onChange={(e) =>
+                              this.setState({ issn: e.target.value })
+                            }
+                            min="0"
+                            placeholder="ex: 2311-6099"
+                            className="form-control"
+                          />
                         </div>
                       </Col>
                     </Row>
 
                     <Row>
-                      <Col lg="3">
-                        <div>
-                          <Label for="exampleEmail">Narxi</Label>
-                          <Input
-                            disabled
-                            className="form-control h-100"
-                            placeholder="100 som"
-                          />
-                        </div>
+                      <Col sm="12" md="12" lg="12">
+                        <button
+                          className="btn btn-primary"
+                          onClick={(e) => this.handleSubmit(e)}
+                        >
+                          Create
+                        </button>
                       </Col>
                     </Row>
                   </form>

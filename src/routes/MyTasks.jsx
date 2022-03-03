@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import articleService from "./../services/articleService";
 import { Card, CardBody, Row, Col } from "reactstrap";
 import { toast } from "react-toastify";
