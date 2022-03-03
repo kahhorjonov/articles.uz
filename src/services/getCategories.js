@@ -26,7 +26,7 @@ export function createOrEditCategories(data) {
 
 export default {
   getCategories,
-  getCategoriesForMagazine
+  getCategoriesForMagazine,
   changeActivityOfCategory,
   deleteCategories,
   createOrEditCategories,
