@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import notificationServices from "services/notificationService";
 
 import {
   Collapse,
@@ -19,13 +20,33 @@ import {
 } from "reactstrap";
 
 import HomeRoutes from "homeRoutes";
+import { toast } from "react-toastify";
 
 function Header(props) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [notifications, setNotifications] = React.useState([]);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const [color, setColor] = React.useState("white");
   const sidebarToggle = React.useRef();
   const location = useLocation();
+
+  const token = localStorage.getItem("token");
+
+  const getNotifications = async () => {
+    try {
+      await notificationServices
+        .getNotifications()
+        .then((res) => setNotifications(res.data));
+
+      getNotifications();
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  useEffect(() => {
+    token && getNotifications();
+  }, []);
 
   const toggle = () => {
     if (isOpen) {
@@ -59,11 +80,19 @@ function Header(props) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", updateColor.bind(this));
   });
 
-  React.useEffect(() => {
+  const handleDeleteNotification = async (id) => {
+    try {
+      await notificationServices.deleteNotification(id);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  useEffect(() => {
     if (
       window.innerWidth < 993 &&
       document.documentElement.className.indexOf("nav-open") !== -1
@@ -153,19 +182,30 @@ function Header(props) {
                         top: "3px",
                         left: "23px",
                         borderRadius: "50%",
-                        padding: "3px",
+                        padding: "0.3rem 0.6rem",
                       }}
                     >
-                      12
+                      {notifications.length}
+                      {/* {here} */}
                     </span>
                     {/* <p>
                       <span className="d-lg-none d-md-block">Some Actions</span>
                     </p> */}
                   </DropdownToggle>
                   <DropdownMenu end style={{ margin: 0 }}>
-                    <DropdownItem tag="a">Action </DropdownItem>
-                    <DropdownItem tag="a">Another Action</DropdownItem>
-                    <DropdownItem tag="a">Something else here</DropdownItem>
+                    {/* <DropdownItem tag="a">Action </DropdownItem> */}
+                    {notifications &&
+                      notifications.map((notification) => (
+                        <DropdownItem
+                          key={notification.id}
+                          tag="a"
+                          onClick={() =>
+                            handleDeleteNotification(notification.id)
+                          }
+                        >
+                          {notification.notificationName}
+                        </DropdownItem>
+                      ))}
                   </DropdownMenu>
                 </Dropdown>
                 <NavItem>
