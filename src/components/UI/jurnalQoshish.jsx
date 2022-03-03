@@ -118,6 +118,8 @@ class JurnalQoshish extends Component {
                         <div>
                           <label>Jurnal soni</label>
                           <input
+                            min={0}
+                            type="number"
                             onChange={(e) =>
                               this.setState({ magazineNumber: e.target.value })
                             }

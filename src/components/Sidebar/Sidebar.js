@@ -5,6 +5,7 @@ import { Nav } from "reactstrap";
 import PerfectScrollbar from "perfect-scrollbar";
 
 import logo from "../../logo.svg";
+import AticleLogo from "assets/img/Logo 3.png";
 
 function Sidebar(props) {
   let ps;
@@ -27,6 +28,7 @@ function Sidebar(props) {
       }
     };
   });
+
   return (
     <div
       className="sidebar"
@@ -34,20 +36,16 @@ function Sidebar(props) {
       data-active-color={props.activeColor}
     >
       <div className="logo">
-        <a
-          href="https://www.t.me/kahhorjonov"
-          className="simple-text logo-mini"
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          className="logo-img"
         >
-          <div className="logo-img">
-            <img src={logo} alt="react-logo" />
-          </div>
-        </a>
-        <a
-          href="https://www.t.me/kahhorjonov"
-          className="simple-text logo-normal"
-        >
-          ARTICLE.UZ
-        </a>
+          <img style={{ maxWidth: "50%" }} src={AticleLogo} alt="react-logo" />
+        </div>
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
