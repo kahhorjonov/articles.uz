@@ -1,16 +1,16 @@
-import Dashboard from "./views/Dashboard.js";
+import Dashboard from "views/Dashboard.js";
 // import Notifications from "views/Notifications.js";
 // import Icons from "./views/Icons.js";
-import UserPage from "./views/User.js";
+import UserPage from "views/User.js";
 
-import Articles from "./views/articles";
-import ArticleActivation from "./routes/articleActivation";
-import Users from "./routes/users";
-import UserEdit from "./views/userEdit";
-import ArticleInfo from "./views/articleInfo";
-import JurnalQoshish from "./components/UI/jurnalQoshish";
-import AdminJurnallar from "./components/UI/adminJurnallar";
-import Category from "./components/UI/category";
+import Articles from "views/articles";
+import ArticleActivation from "views/articleActivation";
+import Users from "views/users";
+import UserEdit from "views/userEdit";
+import ArticleInfo from "views/articleInfo";
+import JurnalQoshish from "components/UI/jurnalQoshish";
+import AdminJurnallar from "components/UI/adminJurnallar";
+import Category from "components/UI/category";
 import Logout from "components/logout.jsx";
 
 var adminRoutes = [
@@ -35,6 +35,15 @@ var adminRoutes = [
   {
     path: "/adminJurnallar",
     name: "Jurnallar",
+    icon: "nc-icon nc-bank",
+    component: AdminJurnallar,
+    layout: "/admin",
+    visible: true,
+  },
+
+  {
+    path: "/editMagazine",
+    name: "Edit Magazine",
     icon: "nc-icon nc-bank",
     component: AdminJurnallar,
     layout: "/admin",

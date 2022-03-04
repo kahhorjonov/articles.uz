@@ -10,7 +10,7 @@ import ProtectedRoute from "./../components/protectedRoute";
 
 import auth from "services/authService";
 
-import reviewerRoutes from "../reviewerRoutes";
+import reviewerRoutes from "routes/reviewerRoutes";
 
 function Dashboard(props) {
   let ps;

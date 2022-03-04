@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getCategories } from "services/getCategories";
+import { getParentCategories } from "services/getCategories";
 
 import magazineService from "services/magazineService";
 
@@ -52,7 +52,7 @@ class JurnalQoshish extends Component {
     //   file: this.state.file,
     // };
 
-    // console.log(this.state.createdDate);
+    console.log(this.state.cover);
 
     try {
       await magazineService
@@ -64,7 +64,7 @@ class JurnalQoshish extends Component {
   };
 
   async populateCategories() {
-    const { data: categories } = await getCategories();
+    const { data: categories } = await getParentCategories();
     this.setState({ categories });
     this.setState({ categoryId: categories[0].id });
   }
@@ -75,8 +75,6 @@ class JurnalQoshish extends Component {
   // };
 
   render() {
-    console.log(this.state.categories[0] && this.state.categories[0].id);
-
     return (
       <>
         <div className="content">
@@ -84,7 +82,7 @@ class JurnalQoshish extends Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <h3>Jurnal Qo'shish</h3>
+                  <h3 className="mr-0">Jurnal Qo'shish</h3>
                 </CardHeader>
                 <CardBody>
                   <form>
@@ -143,7 +141,7 @@ class JurnalQoshish extends Component {
                     </Row>
 
                     <Row className="my-4">
-                      <Col sm="2" md="2" lg="2">
+                      <Col sm="3" md="3" lg="3">
                         <div>
                           <label>Maqola qabul qilish oxirgi sanasi</label>
                           <input
@@ -157,7 +155,7 @@ class JurnalQoshish extends Component {
                         </div>
                       </Col>
 
-                      <Col sm="1" md="1" lg="1">
+                      {/* <Col sm="1" md="1" lg="1">
                         <div>
                           <label>Jurnal soni</label>
                           <input
@@ -170,7 +168,7 @@ class JurnalQoshish extends Component {
                             placeholder="0"
                           />
                         </div>
-                      </Col>
+                      </Col> */}
 
                       <Col sm="3" md="3" lg="3">
                         <div>

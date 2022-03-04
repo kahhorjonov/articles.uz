@@ -1,6 +1,6 @@
-import UserPage from "./views/User.js";
+import UserPage from "views/User.js";
 // import Icons from "views/Icons.js";
-import ArticleForm from "./components/common/articleForm";
+import ArticleForm from "components/common/articleForm";
 import Chopetilgan from "components/UI/chopetilgan.jsx";
 import Chopetilganinfo from "components/UI/chopetilganInfo.jsx";
 import Tekshirish from "components/UI/tekshirish.jsx";

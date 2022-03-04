@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import articleService from "./../services/articleService";
+import articleService from "../services/articleService";
 import { Card, CardBody, Row, Col } from "reactstrap";
 import { toast } from "react-toastify";
 

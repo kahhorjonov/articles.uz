@@ -9,7 +9,7 @@ import Sidebar from "../components/Sidebar/Sidebar.js";
 
 import auth from "services/authService.js";
 
-import reductorRoutes from "../reductorRoutes";
+import reductorRoutes from "routes/reductorRoutes";
 import ProtectedRoute from "./../components/protectedRoute";
 
 function Dashboard(props) {
