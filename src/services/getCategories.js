@@ -24,10 +24,15 @@ export function createOrEditCategories(data) {
   return http.post(apiLocal + `/category/saveOrEdit`, data);
 }
 
+export function getParentCategories(data) {
+  return http.get(apiLocal + `/category/allParentCategory`, data);
+}
+
 export default {
   getCategories,
   getCategoriesForMagazine,
   changeActivityOfCategory,
   deleteCategories,
   createOrEditCategories,
+  getParentCategories,
 };
