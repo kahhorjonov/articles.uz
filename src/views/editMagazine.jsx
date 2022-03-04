@@ -18,11 +18,25 @@ import {
 } from "reactstrap";
 
 class EditMagazine extends Component {
-  state = { title: "", deadline: "", printDate: "", category: "" };
+  state = {
+    title: "",
+    deadline: "",
+    printDay: "",
+    category: "",
+    file: [],
+    certificateNumber: "",
+    isbn: "",
+    issn: "",
+    cover: [],
+    status: "",
+    description: "",
+  };
 
   async componentDidMount() {}
 
-  handleSubmit = async (e) => {};
+  handleSubmit = async (e) => {
+    e.preventDefault();
+  };
 
   handleDownload = async () => {
     const { id, originalName, contentType } = this.state.currentUser
@@ -99,7 +113,7 @@ class EditMagazine extends Component {
                             placeholder="Title Magazine"
                             type="text"
                             onChange={(e) =>
-                              this.setState({ workPlace: e.target.value })
+                              this.setState({ title: e.target.value })
                             }
                           />
                         </FormGroup>
@@ -115,7 +129,7 @@ class EditMagazine extends Component {
                             placeholder="Maqola qabul qilish oxirgi sanasi"
                             type="date"
                             onChange={(e) =>
-                              this.setState({ username: e.target.value })
+                              this.setState({ deadline: e.target.value })
                             }
                           />
                         </FormGroup>
@@ -130,7 +144,7 @@ class EditMagazine extends Component {
                               .slice(0, 10)}`}
                             type="email"
                             onChange={(e) =>
-                              this.setState({ email: e.target.value })
+                              this.setState({ printDay: e.target.value })
                             }
                           />
                         </FormGroup>
@@ -138,7 +152,7 @@ class EditMagazine extends Component {
 
                       <Col className="pl-1" md="3">
                         <FormGroup>
-                          <label>Category</label>
+                          <label>Status</label>
                           <Input
                             defaultValue="NEW_JOURNALS"
                             style={{ height: "3rem" }}
@@ -177,7 +191,9 @@ class EditMagazine extends Component {
                             placeholder="ex: № FS77-54438"
                             type="text"
                             onChange={(e) =>
-                              this.setState({ lastName: e.target.value })
+                              this.setState({
+                                certificateNumber: e.target.value,
+                              })
                             }
                           />
                         </FormGroup>
@@ -190,7 +206,7 @@ class EditMagazine extends Component {
                             placeholder="ex: 2311-6099"
                             type="text"
                             onChange={(e) =>
-                              this.setState({ lastName: e.target.value })
+                              this.setState({ isbn: e.target.value })
                             }
                           />
                         </FormGroup>
@@ -204,7 +220,7 @@ class EditMagazine extends Component {
                             placeholder="ex: 2311-6099"
                             type="text"
                             onChange={(e) =>
-                              this.setState({ lastName: e.target.value })
+                              this.setState({ issn: e.target.value })
                             }
                           />
                         </FormGroup>
@@ -235,13 +251,13 @@ class EditMagazine extends Component {
                             type="file"
                             onChange={(e) =>
                               this.setState({
-                                // academicDegree: e.target.value,
+                                cover: e.target.files[0],
                               })
                             }
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="4">
+                      {/* <Col className="pl-1" md="4">
                         <FormGroup>
                           <label>Status</label>
                           <Input
@@ -257,7 +273,7 @@ class EditMagazine extends Component {
                             <option value="PUBLISHED">Published</option>
                           </Input>
                         </FormGroup>
-                      </Col>
+                      </Col> */}
                     </Row>
                     <Row>
                       <Col md="12">
@@ -272,7 +288,7 @@ class EditMagazine extends Component {
                             type="textarea"
                             // defaultValue={languages}
                             onChange={(e) =>
-                              this.setState({ languages: e.target.value })
+                              this.setState({ description: e.target.value })
                             }
                           />
                         </FormGroup>
