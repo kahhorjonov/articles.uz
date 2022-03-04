@@ -18,6 +18,7 @@ class JurnalQoshish extends Component {
     createdDate: "",
     file: [],
     cover: [],
+    status: "NEW_JOURNALS",
     magazineNumber: "",
     description: "",
     printedDate: "",
@@ -241,7 +242,7 @@ class JurnalQoshish extends Component {
                     </Row>
 
                     <Row>
-                      <Col sm="6" md="6" lg="6">
+                      <Col sm="5" md="5" lg="5">
                         <label>Description</label>
                         <Input
                           onChange={(e) =>
@@ -251,18 +252,34 @@ class JurnalQoshish extends Component {
                       </Col>
 
                       <Col sm="2" md="2" lg="2">
-                        <label>Printed Date</label>
+                        <label>Status</label>
                         <Input
+                          defaultValue="NEW_JOURNALS"
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          type="select"
+                          onChange={(e) =>
+                            this.setState({ status: e.target.value })
+                          }
+                        >
+                          <option value="NEW_JOURNALS">New</option>
+                          <option value="PUBLISHED">Published</option>
+                        </Input>
+                      </Col>
+                      <Col sm="1" md="1" lg="1">
+                        <label>Print Date</label>
+                        <Input
+                          min="0"
                           onChange={(e) =>
                             this.setState({ printedDate: e.target.value })
                           }
                           type="number"
                         />
                       </Col>
-
                       <Col sm="2" md="2" lg="2">
                         <label>Release Number Of This Year</label>
                         <Input
+                          min="0"
                           onChange={(e) =>
                             this.setState({
                               releaseNumberOfThisYear: e.target.value,
@@ -271,7 +288,6 @@ class JurnalQoshish extends Component {
                           type="number"
                         />
                       </Col>
-
                       <Col sm="2" md="2" lg="2">
                         <label>All Releases Number</label>
                         <Input

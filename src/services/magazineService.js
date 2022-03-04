@@ -24,6 +24,7 @@ export function createMagazine(data) {
   bodyFormData.append("printedDate", data.printedDate);
   bodyFormData.append("categoryId", data.categoryId);
   bodyFormData.append("file", data.file);
+  bodyFormData.append("status", data.status);
 
   // for (var pair of bodyFormData.entries()) {
   //   console.log(pair[0] + ", " + pair[1]);
