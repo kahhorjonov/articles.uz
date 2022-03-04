@@ -11,8 +11,8 @@ export function createMagazine(data) {
 
   bodyFormData.append("id", data.id);
   bodyFormData.append("title", data.title);
-  bodyFormData.append("releaseNumberOfThisYear", data.releaseNumberOfThisYear);
-  bodyFormData.append("allReleasesNumber", data.allReleasesNumber);
+//   bodyFormData.append("releaseNumberOfThisYear", data.releaseNumberOfThisYear);
+//   bodyFormData.append("allReleasesNumber", data.allReleasesNumber);
   bodyFormData.append("deadline", data.deadline);
   bodyFormData.append("parentId", data.parentId);
   bodyFormData.append("description", data.description);

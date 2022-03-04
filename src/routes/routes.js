@@ -3,6 +3,7 @@ import Dashboard from "views/Dashboard.js";
 // import Icons from "./views/Icons.js";
 import UserPage from "views/User.js";
 
+import EditMagazine from "./../views/editMagazine";
 import Articles from "views/articles";
 import ArticleActivation from "views/articleActivation";
 import Users from "views/users";
@@ -45,7 +46,7 @@ var adminRoutes = [
     path: "/editMagazine",
     name: "Edit Magazine",
     icon: "nc-icon nc-bank",
-    component: AdminJurnallar,
+    component: EditMagazine,
     layout: "/admin",
     visible: true,
   },

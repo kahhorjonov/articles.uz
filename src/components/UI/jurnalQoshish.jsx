@@ -276,7 +276,7 @@ class JurnalQoshish extends Component {
                           type="number"
                         />
                       </Col>
-                      <Col sm="2" md="2" lg="2">
+                      {/* <Col sm="2" md="2" lg="2">
                         <label>Release Number Of This Year</label>
                         <Input
                           min="0"
@@ -287,8 +287,8 @@ class JurnalQoshish extends Component {
                           }
                           type="number"
                         />
-                      </Col>
-                      <Col sm="2" md="2" lg="2">
+                      </Col> */}
+                      {/* <Col sm="2" md="2" lg="2">
                         <label>All Releases Number</label>
                         <Input
                           onChange={(e) =>
@@ -296,7 +296,7 @@ class JurnalQoshish extends Component {
                           }
                           type="number"
                         />
-                      </Col>
+                      </Col> */}
                     </Row>
 
                     <Row>
