@@ -3,7 +3,6 @@ import {
   getParentCategories,
   getParentMagazines,
 } from "services/getCategories";
-
 import magazineService from "services/magazineService";
 
 import {
@@ -201,6 +200,8 @@ class JurnalQoshish extends Component {
                             className="form-control"
                             type="select"
                           >
+                            <option value={null}></option>
+
                             {this.state.categories &&
                               this.state.categories.map((option) => (
                                 <option key={option.id} value={option.id}>
