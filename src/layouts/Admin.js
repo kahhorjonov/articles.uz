@@ -9,7 +9,7 @@ import ProtectedRoute from "./../components/protectedRoute";
 
 import auth from "services/authService";
 
-import adminRoutes from "../routes";
+import adminRoutes from "routes/routes";
 
 function Dashboard(props) {
   let ps;

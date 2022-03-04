@@ -9,8 +9,8 @@ import Sidebar from "../components/Sidebar/Sidebar.js";
 
 import auth from "services/authService";
 
-import userRoutes from "../userRoutes.js";
-import ProtectedRoute from "./../components/protectedRoute";
+import userRoutes from "routes/userRoutes";
+import ProtectedRoute from "../components/protectedRoute";
 
 function Dashboard(props) {
   let ps;

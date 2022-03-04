@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getCategories } from "services/getCategories";
+import { getParentCategories } from "services/getCategories";
 
 import magazineService from "services/magazineService";
 
@@ -18,6 +18,7 @@ class JurnalQoshish extends Component {
     createdDate: "",
     file: [],
     cover: [],
+    status: "NEW_JOURNALS",
     magazineNumber: "",
     description: "",
     printedDate: "",
@@ -52,7 +53,7 @@ class JurnalQoshish extends Component {
     //   file: this.state.file,
     // };
 
-    // console.log(this.state.createdDate);
+    console.log(this.state.cover);
 
     try {
       await magazineService
@@ -64,7 +65,7 @@ class JurnalQoshish extends Component {
   };
 
   async populateCategories() {
-    const { data: categories } = await getCategories();
+    const { data: categories } = await getParentCategories();
     this.setState({ categories });
     this.setState({ categoryId: categories[0].id });
   }
@@ -75,8 +76,6 @@ class JurnalQoshish extends Component {
   // };
 
   render() {
-    console.log(this.state.categories[0] && this.state.categories[0].id);
-
     return (
       <>
         <div className="content">
@@ -84,7 +83,7 @@ class JurnalQoshish extends Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <h3>Jurnal Qo'shish</h3>
+                  <h3 className="mr-0">Jurnal Qo'shish</h3>
                 </CardHeader>
                 <CardBody>
                   <form>
@@ -143,7 +142,7 @@ class JurnalQoshish extends Component {
                     </Row>
 
                     <Row className="my-4">
-                      <Col sm="2" md="2" lg="2">
+                      <Col sm="3" md="3" lg="3">
                         <div>
                           <label>Maqola qabul qilish oxirgi sanasi</label>
                           <input
@@ -157,7 +156,7 @@ class JurnalQoshish extends Component {
                         </div>
                       </Col>
 
-                      <Col sm="1" md="1" lg="1">
+                      {/* <Col sm="1" md="1" lg="1">
                         <div>
                           <label>Jurnal soni</label>
                           <input
@@ -170,7 +169,7 @@ class JurnalQoshish extends Component {
                             placeholder="0"
                           />
                         </div>
-                      </Col>
+                      </Col> */}
 
                       <Col sm="3" md="3" lg="3">
                         <div>
@@ -243,7 +242,7 @@ class JurnalQoshish extends Component {
                     </Row>
 
                     <Row>
-                      <Col sm="6" md="6" lg="6">
+                      <Col sm="5" md="5" lg="5">
                         <label>Description</label>
                         <Input
                           onChange={(e) =>
@@ -253,18 +252,34 @@ class JurnalQoshish extends Component {
                       </Col>
 
                       <Col sm="2" md="2" lg="2">
-                        <label>Printed Date</label>
+                        <label>Status</label>
                         <Input
+                          defaultValue="NEW_JOURNALS"
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          type="select"
+                          onChange={(e) =>
+                            this.setState({ status: e.target.value })
+                          }
+                        >
+                          <option value="NEW_JOURNALS">New</option>
+                          <option value="PUBLISHED">Published</option>
+                        </Input>
+                      </Col>
+                      <Col sm="1" md="1" lg="1">
+                        <label>Print Date</label>
+                        <Input
+                          min="0"
                           onChange={(e) =>
                             this.setState({ printedDate: e.target.value })
                           }
                           type="number"
                         />
                       </Col>
-
-                      <Col sm="2" md="2" lg="2">
+                      {/* <Col sm="2" md="2" lg="2">
                         <label>Release Number Of This Year</label>
                         <Input
+                          min="0"
                           onChange={(e) =>
                             this.setState({
                               releaseNumberOfThisYear: e.target.value,
@@ -272,9 +287,8 @@ class JurnalQoshish extends Component {
                           }
                           type="number"
                         />
-                      </Col>
-
-                      <Col sm="2" md="2" lg="2">
+                      </Col> */}
+                      {/* <Col sm="2" md="2" lg="2">
                         <label>All Releases Number</label>
                         <Input
                           onChange={(e) =>
@@ -282,7 +296,7 @@ class JurnalQoshish extends Component {
                           }
                           type="number"
                         />
-                      </Col>
+                      </Col> */}
                     </Row>
 
                     <Row>

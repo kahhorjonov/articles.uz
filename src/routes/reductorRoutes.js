@@ -1,16 +1,16 @@
-// import Notifications from "views/Notifications.js";
-import UserPage from "./views/User.js";
-import Articles from "./views/articles";
-import MyTasks from "./routes/MyTasks";
-import Logout from "./components/logout";
+import Dashboard from "views/Dashboard.js";
+import UserPage from "views/User.js";
+import Articles from "views/articles";
+import MyTasks from "views/MyTasks";
+import Logout from "components/logout";
 
-var reviewerRoutes = [
+var reductorRoutes = [
   {
     path: "/articles",
     name: "Maqolalar",
     icon: "nc-icon nc-bookmark-2",
     component: Articles,
-    layout: "/reviewer",
+    layout: "/reductor",
     visible: true,
   },
 
@@ -19,15 +19,15 @@ var reviewerRoutes = [
     name: "Mening vazifalarim",
     icon: "nc-icon nc-briefcase-24",
     component: MyTasks,
-    layout: "/reviewer",
+    layout: "/reductor",
     visible: true,
   },
   {
     path: "/messages",
     name: "Xabarlar",
     icon: "nc-icon nc-chat-33",
-    component: Articles,
-    layout: "/reviewer",
+    component: Dashboard,
+    layout: "/reductor",
     visible: true,
   },
 
@@ -36,7 +36,7 @@ var reviewerRoutes = [
     name: "Notifications",
     icon: "nc-icon nc-bell-55",
     component: Articles,
-    layout: "/reviewer",
+    layout: "/reductor",
     visible: true,
   },
 
@@ -45,10 +45,17 @@ var reviewerRoutes = [
     name: "User Profile",
     icon: "nc-icon nc-single-02",
     component: UserPage,
-    layout: "/reviewer",
+    layout: "/reductor",
     visible: true,
   },
 
+  // {
+  //   path: "/typography",
+  //   name: "Typography",
+  //   icon: "nc-icon nc-caps-small",
+  //   component: Typography,
+  //   layout: "/reductor",
+  // },
   {
     path: "/logout",
     name: "Profildan chiqish",
@@ -59,4 +66,4 @@ var reviewerRoutes = [
   },
 ];
 
-export default reviewerRoutes;
+export default reductorRoutes;
