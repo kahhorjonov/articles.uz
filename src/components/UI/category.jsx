@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import categoryServices from "services/getCategories";
 
-import axios from "axios";
 import { toast } from "react-toastify";
 
 import { Col, Row } from "reactstrap";
 
-import "../../styles/category.css";
+import "styles/category.css";
 
 class Category extends Component {
   state = {
@@ -294,7 +293,7 @@ class Category extends Component {
                       type="button"
                       className="btn btn-danger"
                     >
-                      Delate
+                      Delete
                     </button>
                   </div>
                 </td>

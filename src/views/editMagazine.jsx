@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 
 class EditMagazine extends Component {
-  state = {};
+  state = { title: "", deadline: "", printDate: "", category: "" };
 
   async componentDidMount() {}
 
@@ -91,7 +91,7 @@ class EditMagazine extends Component {
                 <CardBody>
                   <Form>
                     <Row>
-                      <Col className="pr-1" md="5">
+                      <Col className="pr-1" md="3">
                         <FormGroup>
                           <label>Title</label>
                           <Input
@@ -120,12 +120,14 @@ class EditMagazine extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="4">
+                      <Col className="pl-1 pr-1" md="3">
                         <FormGroup>
                           <label>Print Day</label>
                           <Input
                             // defaultValue={email}
-                            placeholder={`ex: ${new Date().toISOString().slice()}`}
+                            placeholder={`ex: ${new Date()
+                              .toISOString()
+                              .slice(0, 10)}`}
                             type="email"
                             onChange={(e) =>
                               this.setState({ email: e.target.value })
@@ -133,27 +135,73 @@ class EditMagazine extends Component {
                           />
                         </FormGroup>
                       </Col>
+
+                      <Col className="pl-1" md="3">
+                        <FormGroup>
+                          <label>Category</label>
+                          <Input
+                            defaultValue="NEW_JOURNALS"
+                            style={{ height: "3rem" }}
+                            className="form-control"
+                            type="select"
+                            onChange={(e) =>
+                              this.setState({ status: e.target.value })
+                            }
+                          >
+                            <option value="NEW_JOURNALS">New</option>
+                            <option value="PUBLISHED">Published</option>
+                          </Input>
+                        </FormGroup>
+                      </Col>
                     </Row>
                     <Row>
-                      <Col className="pr-1" md="6">
+                      <Col className="pr-1" md="3">
                         <FormGroup>
-                          <label>First Name</label>
+                          <label>Pdf file of Magazine</label>
                           <Input
+                            style={{ padding: "0" }}
                             // defaultValue={firstName}
-                            placeholder="Ismingiz"
-                            type="text"
+                            placeholder="Final version of Magazine"
+                            type="file"
                             onChange={(e) =>
                               this.setState({ firstName: e.target.value })
                             }
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="6">
+                      <Col className="pl-1 pr-1" md="3">
                         <FormGroup>
-                          <label>Last Name</label>
+                          <label>Certificate Number</label>
                           <Input
                             // defaultValue={lastName}
-                            placeholder="Familiyangiz"
+                            placeholder="ex: № FS77-54438"
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ lastName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pl-1" md="3">
+                        <FormGroup>
+                          <label>ISBN</label>
+                          <Input
+                            // defaultValue={lastName}
+                            placeholder="ex: 2311-6099"
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ lastName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col className="pl-1" md="3">
+                        <FormGroup>
+                          <label>ISSN</label>
+                          <Input
+                            // defaultValue={lastName}
+                            placeholder="ex: 2311-6099"
                             type="text"
                             onChange={(e) =>
                               this.setState({ lastName: e.target.value })
@@ -166,7 +214,7 @@ class EditMagazine extends Component {
                     <Row>
                       <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>Ilmiy Ishlarni yuklash</label>
+                          <label>Download Magazine</label>
                           <Button
                             className="m-0"
                             style={{ width: "100%", padding: "0.75rem" }}
@@ -179,11 +227,12 @@ class EditMagazine extends Component {
 
                       <Col className="px-1" md="4">
                         <FormGroup>
-                          <label>Daraja</label>
+                          <label>Cover</label>
                           <Input
+                            style={{ padding: "0" }}
                             // defaultValue={academicDegree}
                             placeholder="Daraja"
-                            type="text"
+                            type="file"
                             onChange={(e) =>
                               this.setState({
                                 // academicDegree: e.target.value,
@@ -194,18 +243,19 @@ class EditMagazine extends Component {
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Work Experience (year)</label>
+                          <label>Status</label>
                           <Input
-                            // defaultValue={workExperience}
-                            placeholder="Ish tajribangiz"
-                            min={0}
-                            type="number"
+                            defaultValue="NEW_JOURNALS"
+                            style={{ height: "3rem" }}
+                            className="form-control"
+                            type="select"
                             onChange={(e) =>
-                              this.setState({
-                                // workExperience: e.target.value,
-                              })
+                              this.setState({ status: e.target.value })
                             }
-                          />
+                          >
+                            <option value="NEW_JOURNALS">New</option>
+                            <option value="PUBLISHED">Published</option>
+                          </Input>
                         </FormGroup>
                       </Col>
                     </Row>
