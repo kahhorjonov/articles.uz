@@ -12,13 +12,16 @@ class Category extends Component {
   state = {
     name: "",
     active: "",
+    parent: [],
+    activeParent: "",
     activeId: "",
-
     categories: [],
   };
 
   componentDidMount() {
     this.handleGetCategories();
+
+    this.handleGetParent();
   }
 
   handleGetCategories = async () => {
@@ -41,6 +44,16 @@ class Category extends Component {
     }
   };
 
+  handleGetParent = async () => {
+    try {
+      await categoryServices.getParentCategories().then((res) => {
+        this.setState({ parent: res.data });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   handleDelete = async (id) => {
     try {
       await categoryServices.deleteCategories(id).then((res) => {
@@ -54,10 +67,12 @@ class Category extends Component {
 
   submitHandler = async (e) => {
     e.preventDefault();
+
     try {
       await categoryServices
         .createOrEditCategories({
           name: this.state.name,
+          parent: this.state.activeParent,
           active: this.state.active,
           id: this.state.activeId,
         })
@@ -67,6 +82,7 @@ class Category extends Component {
           this.setState({ name: "" });
           this.setState({ active: "" });
           this.setState({ activeId: "" });
+          this.setState({ activeParent: "" });
         });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -94,9 +110,6 @@ class Category extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h4 className="modal-title">Modal Heading</h4>
-                <button type="button" className="close" data-dismiss="modal">
-                  &times;
-                </button>
               </div>
 
               <div className="modal-body">
@@ -114,6 +127,7 @@ class Category extends Component {
                         />
                       </div>
                     </Col>
+
                     <Col lg="12">
                       <div>
                         <select
@@ -126,6 +140,23 @@ class Category extends Component {
                         >
                           <option value="true">True</option>
                           <option value="false">False</option>
+                        </select>
+                      </div>
+                    </Col>
+                    <Col lg="12">
+                      <div>
+                        <select
+                          onChange={(e) =>
+                            this.setState({ activeParent: e.target.value })
+                          }
+                          className="form-control mt-3"
+                        >
+                          {this.state.parent &&
+                            this.state.parent.map((option) => (
+                              <option key={option.id} value={option.id}>
+                                {option.name}
+                              </option>
+                            ))}
                         </select>
                       </div>
                     </Col>
@@ -159,9 +190,6 @@ class Category extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h4 className="modal-title">Modal Heading</h4>
-                <button type="button" className="close" data-dismiss="modal">
-                  &times;
-                </button>
               </div>
 
               <div className="modal-body">
@@ -234,7 +262,7 @@ class Category extends Component {
               <tr key={category.id}>
                 <td>{category.id}</td>
                 <td>{category.name}</td>
-                <td>Cart1</td>
+                <td>{/* {category.parent} */}</td>
                 <td>
                   <label className="switch">
                     <input
@@ -255,6 +283,7 @@ class Category extends Component {
                       onClick={() => {
                         this.setState({ name: category.name });
                         this.setState({ active: category.active });
+                        // this.setState({ parent: category.parent });
                         this.setState({ activeId: category.id });
                       }}
                     >
