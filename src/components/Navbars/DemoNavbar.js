@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import notificationServices from "services/notificationService";
+
+import HomeRoutes from "homeRoutes";
+import { toast } from "react-toastify";
 
 import {
   Collapse,
@@ -19,15 +22,12 @@ import {
   Input,
 } from "reactstrap";
 
-import HomeRoutes from "homeRoutes";
-import { toast } from "react-toastify";
-
 function Header(props) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [notifications, setNotifications] = React.useState([]);
-  const [dropdownOpen, setDropdownOpen] = React.useState(false);
-  const [color, setColor] = React.useState("white");
-  const sidebarToggle = React.useRef();
+  const [isOpen, setIsOpen] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [color, setColor] = useState("white");
+  const sidebarToggle = useRef();
   const location = useLocation();
 
   const token = localStorage.getItem("token");
@@ -37,8 +37,6 @@ function Header(props) {
       await notificationServices
         .getNotifications()
         .then((res) => setNotifications(res.data));
-
-      getNotifications();
     } catch (ex) {
       console.log(ex);
     }

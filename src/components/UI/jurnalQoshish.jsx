@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { getCategories } from "services/getCategories";
 
+import magazineService from "services/magazineService";
+
 import { Row, Col, Card, CardBody, Label, Input, CardHeader } from "reactstrap";
 
 class JurnalQoshish extends Component {
   state = {
+    id: "",
+    parentId: "",
     categoryId: "",
     issn: "",
     isbn: "",
@@ -15,6 +19,10 @@ class JurnalQoshish extends Component {
     file: [],
     cover: [],
     magazineNumber: "",
+    description: "",
+    printedDate: "",
+    releaseNumberOfThisYear: "",
+    allReleasesNumber: "",
 
     categories: [],
   };
@@ -23,17 +31,52 @@ class JurnalQoshish extends Component {
     await this.populateCategories();
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // const data = {
+    //   id: "",
+    //   title: this.state.title,
+    //   releaseNumberOfThisYear: this.state.releaseNumberOfThisYear,
+    //   allReleasesNumber: this.state.allReleasesNumber,
+    //   deadline: this.state.deadline,
+    //   parentId: this.state.parentId,
+    //   description: this.state.description,
+    //   printedDate: this.state.printedDate,
+    //   cover: this.state.cover,
+    //   certificateNumber: this.state.certificateNumber,
+    //   issn: this.state.issn,
+    //   isbn: this.state.isbn,
+    //   printedDate: this.state.printedDate,
+    //   categoryId: this.state.categoryId,
+    //   file: this.state.file,
+    // };
+
+    // console.log(this.state.createdDate);
+
+    try {
+      await magazineService
+        .createMagazine(this.state)
+        .then((res) => console.log(res));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   async populateCategories() {
     const { data: categories } = await getCategories();
     this.setState({ categories });
+    this.setState({ categoryId: categories[0].id });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-  };
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(this.state);
+  // };
 
   render() {
+    console.log(this.state.categories[0] && this.state.categories[0].id);
+
     return (
       <>
         <div className="content">
@@ -133,6 +176,10 @@ class JurnalQoshish extends Component {
                         <div>
                           <Label>Categories</Label>
                           <Input
+                            defaultValue={
+                              this.state.categories[0] &&
+                              this.state.categories[0].id
+                            }
                             onChange={(e) =>
                               this.setState({ categoryId: e.target.value })
                             }
@@ -192,6 +239,49 @@ class JurnalQoshish extends Component {
                             className="form-control"
                           />
                         </div>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm="6" md="6" lg="6">
+                        <label>Description</label>
+                        <Input
+                          onChange={(e) =>
+                            this.setState({ description: e.target.value })
+                          }
+                        />
+                      </Col>
+
+                      <Col sm="2" md="2" lg="2">
+                        <label>Printed Date</label>
+                        <Input
+                          onChange={(e) =>
+                            this.setState({ printedDate: e.target.value })
+                          }
+                          type="number"
+                        />
+                      </Col>
+
+                      <Col sm="2" md="2" lg="2">
+                        <label>Release Number Of This Year</label>
+                        <Input
+                          onChange={(e) =>
+                            this.setState({
+                              releaseNumberOfThisYear: e.target.value,
+                            })
+                          }
+                          type="number"
+                        />
+                      </Col>
+
+                      <Col sm="2" md="2" lg="2">
+                        <label>All Releases Number</label>
+                        <Input
+                          onChange={(e) =>
+                            this.setState({ allReleasesNumber: e.target.value })
+                          }
+                          type="number"
+                        />
                       </Col>
                     </Row>
 
