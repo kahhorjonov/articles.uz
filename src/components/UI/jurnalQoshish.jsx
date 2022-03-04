@@ -1,9 +1,21 @@
 import React, { Component } from "react";
-import { getParentCategories } from "services/getCategories";
+import {
+  getParentCategories,
+  getParentMagazines,
+} from "services/getCategories";
 
 import magazineService from "services/magazineService";
 
-import { Row, Col, Card, CardBody, Label, Input, CardHeader } from "reactstrap";
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Label,
+  Input,
+  CardHeader,
+  FormGroup,
+} from "reactstrap";
 
 class JurnalQoshish extends Component {
   state = {
@@ -24,12 +36,16 @@ class JurnalQoshish extends Component {
     printedDate: "",
     releaseNumberOfThisYear: "",
     allReleasesNumber: "",
+    parentCategoryId: "",
 
     categories: [],
+    parentMagazines: [],
   };
 
   async componentDidMount() {
     await this.populateCategories();
+
+    await this.populateMagazines();
   }
 
   handleSubmit = async (e) => {
@@ -67,13 +83,12 @@ class JurnalQoshish extends Component {
   async populateCategories() {
     const { data: categories } = await getParentCategories();
     this.setState({ categories });
-    this.setState({ categoryId: categories[0].id });
   }
 
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(this.state);
-  // };
+  async populateMagazines() {
+    const { data: parentMagazines } = await getParentMagazines();
+    this.setState({ parentMagazines });
+  }
 
   render() {
     return (
@@ -243,12 +258,20 @@ class JurnalQoshish extends Component {
 
                     <Row>
                       <Col sm="5" md="5" lg="5">
-                        <label>Description</label>
-                        <Input
-                          onChange={(e) =>
-                            this.setState({ description: e.target.value })
-                          }
-                        />
+                        <FormGroup>
+                          <label>Description</label>
+                          <Input
+                            style={{
+                              overscrollBehaviorY: "none",
+                              padding: "1rem",
+                              height: "10rem",
+                            }}
+                            type="textarea"
+                            onChange={(e) =>
+                              this.setState({ description: e.target.value })
+                            }
+                          />
+                        </FormGroup>
                       </Col>
 
                       <Col sm="2" md="2" lg="2">
@@ -276,6 +299,29 @@ class JurnalQoshish extends Component {
                           type="number"
                         />
                       </Col>
+
+                      <Col sm="4" md="4" lg="4">
+                        <label>Parent Category (optional)</label>
+                        <Input
+                          defaultValue=" "
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          type="select"
+                          onChange={(e) =>
+                            this.setState({ parentCategoryId: e.target.value })
+                          }
+                        >
+                          <option value=""></option>
+
+                          {this.state.parentMagazines &&
+                            this.state.parentMagazines.map((option) => (
+                              <option key={option.id} value={option.id}>
+                                {option.title}
+                              </option>
+                            ))}
+                        </Input>
+                      </Col>
+
                       {/* <Col sm="2" md="2" lg="2">
                         <label>Release Number Of This Year</label>
                         <Input

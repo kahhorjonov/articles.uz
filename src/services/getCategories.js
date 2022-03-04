@@ -24,8 +24,12 @@ export function createOrEditCategories(data) {
   return http.post(apiLocal + `/category/saveOrEdit`, data);
 }
 
-export function getParentCategories(data) {
-  return http.get(apiLocal + `/category/allParentCategory`, data);
+export function getParentCategories() {
+  return http.get(apiLocal + `/category/allParentCategory`);
+}
+
+export function getParentMagazines() {
+  return http.get(apiLocal + `/journals/getParentJournals`);
 }
 
 export default {
@@ -35,4 +39,5 @@ export default {
   deleteCategories,
   createOrEditCategories,
   getParentCategories,
+  getParentMagazines,
 };

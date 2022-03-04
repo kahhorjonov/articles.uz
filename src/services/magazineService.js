@@ -11,10 +11,10 @@ export function createMagazine(data) {
 
   bodyFormData.append("id", data.id);
   bodyFormData.append("title", data.title);
-//   bodyFormData.append("releaseNumberOfThisYear", data.releaseNumberOfThisYear);
-//   bodyFormData.append("allReleasesNumber", data.allReleasesNumber);
+  //   bodyFormData.append("releaseNumberOfThisYear", data.releaseNumberOfThisYear);
+  //   bodyFormData.append("allReleasesNumber", data.allReleasesNumber);
   bodyFormData.append("deadline", data.deadline);
-  bodyFormData.append("parentId", data.parentId);
+  bodyFormData.append("parentId", data.parentCategoryId);
   bodyFormData.append("description", data.description);
   bodyFormData.append("printedDate", data.printedDate);
   bodyFormData.append("cover", data.cover);

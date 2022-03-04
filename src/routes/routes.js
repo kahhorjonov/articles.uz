@@ -1,6 +1,6 @@
 import Dashboard from "views/Dashboard.js";
 // import Notifications from "views/Notifications.js";
-// import Icons from "./views/Icons.js";
+import Icons from "views/Icons.js";
 import UserPage from "views/User.js";
 
 import EditMagazine from "./../views/editMagazine";
@@ -27,7 +27,7 @@ var adminRoutes = [
   {
     path: "/category",
     name: "Category",
-    icon: "nc-icon nc-bank",
+    icon: "nc-icon nc-bullet-list-67",
     component: Category,
     layout: "/admin",
     visible: true,
@@ -36,7 +36,7 @@ var adminRoutes = [
   {
     path: "/adminJurnallar",
     name: "Jurnallar",
-    icon: "nc-icon nc-bank",
+    icon: "nc-icon nc-map-big",
     component: AdminJurnallar,
     layout: "/admin",
     visible: true,
@@ -45,7 +45,7 @@ var adminRoutes = [
   {
     path: "/editMagazine",
     name: "Edit Magazine",
-    icon: "nc-icon nc-bank",
+    icon: "nc-icon nc-ruler-pencil",
     component: EditMagazine,
     layout: "/admin",
     visible: true,
@@ -53,8 +53,8 @@ var adminRoutes = [
 
   {
     path: "/jurnalQoshish",
-    name: "Jurnall Qoshish",
-    icon: "nc-icon nc-bank",
+    name: "Jurnal Qoshish",
+    icon: "nc-icon nc-box",
     component: JurnalQoshish,
     layout: "/admin",
     visible: true,
@@ -112,14 +112,14 @@ var adminRoutes = [
   //   layout: "/admin",
   // },
 
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Icons,
-  //   layout: "/admin",
-  //   visible: true,
-  // },
+  {
+    path: "/icons",
+    name: "Icons",
+    icon: "nc-icon nc-bell-55",
+    component: Icons,
+    layout: "/admin",
+    visible: true,
+  },
 
   {
     path: "/user-page",
