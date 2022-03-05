@@ -14,11 +14,11 @@ export function addArticle(data) {
 
   bodyFormData.append("categoryId", data.data.categoryId);
   bodyFormData.append("description", data.data.description);
-  bodyFormData.append("firstName", data.data.firstName);
-  bodyFormData.append("lastName", data.data.lastName);
+  // bodyFormData.append("firstName", data.data.firstName);
+  // bodyFormData.append("lastName", data.data.lastName);
   bodyFormData.append("authorsList", data.tags);
   bodyFormData.append("titleArticle", data.data.titleArticle);
-  bodyFormData.append("publicOrPrivate", data.data.publicOrPrivate);
+  bodyFormData.append("publicOrPrivate", data.publicOrPrivate);
   bodyFormData.append("file", data.data.file);
   bodyFormData.append("sahifaSoni", data.sahifaSoni);
   bodyFormData.append("jurnaldaChopEtishSoni", data.jurnaldaChopEtishSoni);
@@ -26,6 +26,7 @@ export function addArticle(data) {
   bodyFormData.append("sertifikatSoni", data.sertifikatSoni);
   bodyFormData.append("doi", data.doi);
   bodyFormData.append("price", data.price);
+  bodyFormData.append("journalsId", data.parentCategoryId);
 
   // for (var pair of bodyFormData.entries()) {
   //   console.log(pair[0] + ", " + pair[1]);

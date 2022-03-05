@@ -4,6 +4,7 @@ import {
   getParentMagazines,
 } from "services/getCategories";
 import magazineService from "services/magazineService";
+import { toast } from "react-toastify";
 
 import {
   Row,
@@ -50,30 +51,10 @@ class JurnalQoshish extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const data = {
-    //   id: "",
-    //   title: this.state.title,
-    //   releaseNumberOfThisYear: this.state.releaseNumberOfThisYear,
-    //   allReleasesNumber: this.state.allReleasesNumber,
-    //   deadline: this.state.deadline,
-    //   parentId: this.state.parentId,
-    //   description: this.state.description,
-    //   printedDate: this.state.printedDate,
-    //   cover: this.state.cover,
-    //   certificateNumber: this.state.certificateNumber,
-    //   issn: this.state.issn,
-    //   isbn: this.state.isbn,
-    //   printedDate: this.state.printedDate,
-    //   categoryId: this.state.categoryId,
-    //   file: this.state.file,
-    // };
-
-    console.log(this.state.cover);
-
     try {
       await magazineService
         .createMagazine(this.state)
-        .then((res) => console.log(res));
+        .then((res) => toast.success(res.data.message));
     } catch (error) {
       console.log(error);
     }

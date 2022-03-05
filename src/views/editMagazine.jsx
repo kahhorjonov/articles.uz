@@ -33,12 +33,12 @@ class EditMagazine extends Component {
     status: "",
     description: "",
 
-    base64: [],
+    thisMagazineId: "0c9be012-ae13-4dca-b076-6c351fc741f2",
     magazineInfo: [],
   };
 
   async componentDidMount() {
-    const magazineId = "9b6402bf-ae25-44b7-99d3-85aa15bbe384";
+    const magazineId = "0c9be012-ae13-4dca-b076-6c351fc741f2";
     await this.getMagazinesById(magazineId);
 
     this.state.magazineInfo && this.getImage(this.state.magazineInfo.cover.id);
@@ -72,7 +72,8 @@ class EditMagazine extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state.cover);
+
+    console.log(this.state);
   };
 
   handleDownload = async () => {
@@ -218,7 +219,7 @@ class EditMagazine extends Component {
                               this.setState({ status: e.target.value })
                             }
                           >
-                            <option value="NEW_JOURNALS">New</option>
+                            <option value=""></option>
                             <option value="PUBLISHED">Published</option>
                           </Input>
                         </FormGroup>
@@ -369,7 +370,6 @@ class EditMagazine extends Component {
               </Card>
             </Col>
           </Row>
-       
         </div>
       </>
     );

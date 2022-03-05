@@ -32,6 +32,10 @@ export function getParentMagazines() {
   return http.get(apiLocal + `/journals/getParentJournals`);
 }
 
+export function getChildCategories(id) {
+  return http.get(apiLocal + `/category/allChildrenCategory/${id}`);
+}
+
 export default {
   getCategories,
   getCategoriesForMagazine,
@@ -40,4 +44,5 @@ export default {
   createOrEditCategories,
   getParentCategories,
   getParentMagazines,
+  getChildCategories,
 };

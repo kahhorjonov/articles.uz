@@ -50,4 +50,13 @@ export function getMagazinesById(id) {
   );
 }
 
-export default { createMagazine, getById, getMagazinesById };
+export function getParentMagazines() {
+  return http.get(apiLocal + "/journals/getActiveJournals");
+}
+
+export default {
+  createMagazine,
+  getById,
+  getMagazinesById,
+  getParentMagazines,
+};
