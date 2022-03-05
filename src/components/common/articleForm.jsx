@@ -26,7 +26,7 @@ class ArticleForm extends Form {
       file: [],
     },
 
-    publicOrPrivate: "",
+    publicOrPrivate: "False",
     tags: [],
 
     errors: {},
@@ -163,7 +163,6 @@ class ArticleForm extends Form {
   doSubmit = async () => {
     try {
       await articleService.addArticle(this.state).then((res) => {
-        // console.log(res);
         toast.success(res.data.message);
       });
     } catch (error) {
