@@ -13,6 +13,7 @@ import JurnalQoshish from "components/UI/jurnalQoshish";
 import AdminJurnallar from "components/UI/adminJurnallar";
 import Category from "components/UI/category";
 import Logout from "components/logout.jsx";
+import MagazineInfo from "./../components/UI/magazineInfo";
 
 var adminRoutes = [
   {
@@ -145,6 +146,15 @@ var adminRoutes = [
     icon: "nc-icon nc-button-power",
     component: Logout,
     layout: "",
+    visible: true,
+  },
+
+  {
+    path: "/magazineInfo",
+    name: "magazineInfo",
+    icon: "nc-icon nc-button-power",
+    component: MagazineInfo,
+    layout: "/admin",
     visible: true,
   },
 ];

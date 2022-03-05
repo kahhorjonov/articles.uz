@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import categoryServices from "services/getCategories";
-
 import { toast } from "react-toastify";
-
 import { Col, Row } from "reactstrap";
-
 import "styles/category.css";
+import  axios  from 'axios';
 
 class Category extends Component {
   state = {
@@ -15,6 +13,7 @@ class Category extends Component {
     activeParent: "",
     activeId: "",
     categories: [],
+    search: ''
   };
 
   componentDidMount() {
@@ -34,6 +33,19 @@ class Category extends Component {
       toast.error(ex);
     }
   };
+
+
+  // searchCategory = async (str) => {
+  //   try {
+  //     await axios.get(`http://192.168.100.27:8080/api/category/allParentCategory/${str}`)
+  //     .then((res) => {
+  //       console.log(res)
+  //       this.setState({ categories: res.data });
+  //     })
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   handleChangeActivity = async (id) => {
     try {
@@ -111,9 +123,12 @@ class Category extends Component {
           <form>
             <div class="input-group mb-3">
               <input
-                type="text"
+                type="search"
                 class="form-control"
-                placeholder="Your Email"
+                placeholder="Search..."
+                value={this.state.search}
+              
+                onChange={(e) => this.setState({search: e.target.value})}
               />
               <div class="input-group-append">
                 <span class="input-group-text   btn-info">Search</span>

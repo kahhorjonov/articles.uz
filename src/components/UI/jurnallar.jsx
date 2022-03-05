@@ -6,11 +6,14 @@ import magazineService from "services/magazineService";
 import "../../styles/homePage.css";
 import { toast } from "react-toastify";
 
+
+
 class Jurnallar extends Component {
   state = {
     magazineCategories: [],
     magazines: [],
   };
+
 
   getCategory = async () => {
     try {
@@ -23,6 +26,9 @@ class Jurnallar extends Component {
       console.log(erorr);
     }
   };
+
+
+
 
   getMagazinesById = async (id) => {
     try {
@@ -62,7 +68,7 @@ class Jurnallar extends Component {
                         e.preventDefault();
                         this.getMagazinesById(magazine.id);
                       }}
-                      className="nav-link text-black"
+                      className="nav-link text-black "
                     >
                       {magazine.name}
                     </a>
@@ -79,10 +85,13 @@ class Jurnallar extends Component {
               <div className="container p-0">
                 <div className="col-md-10 pl-0  maqola_nashir"></div>
 
-                <div className="article_rows row mx-0 mx-xl-0 pl-0">
+                <div className="article_rows row mx-0 mx-xl-0 mb-3 pl-0">
                   {magazines &&
                     magazines.map((magzin) => (
-                      <div key={magzin.id} className="col-md-4  card-articles">
+                      <div
+                        key={magzin.journals.id}
+                        className="col-md-4  card-articles"
+                      >
                         <div className="border-0">
                           <img
                             className="card-img-top"
@@ -90,12 +99,18 @@ class Jurnallar extends Component {
                             alt="Card image"
                           />
                           <div className="card-body p-0">
-                            <h4 className="card_title">
-                              <a style={{ cursor: "pointer" }}>{magzin.name}</a>
+                            <h4 className="card_title p-0">
+                              <a
+                              onClick={this.links}
+                              style={{ cursor: "pointer" }}>
+                                {magzin.journals.title}
+                              </a>
                             </h4>
-                            <p className="card_text">
-                              Maqolalar qabul qilish muddati <br />
-                              01.09.2020 gacha
+
+                            <p className="card_text text-muted">
+                              Amal qilish Mudati <br />
+                              <span>{magzin && magzin.deadline}</span>
+                              gacha
                             </p>
                           </div>
                         </div>
