@@ -6,14 +6,14 @@ import magazineService from "services/magazineService";
 import "../../styles/homePage.css";
 import { toast } from "react-toastify";
 
-
-
 class Jurnallar extends Component {
   state = {
     magazineCategories: [],
     magazines: [],
   };
 
+
+  
 
   getCategory = async () => {
     try {
@@ -26,9 +26,6 @@ class Jurnallar extends Component {
       console.log(erorr);
     }
   };
-
-
-
 
   getMagazinesById = async (id) => {
     try {
@@ -100,11 +97,9 @@ class Jurnallar extends Component {
                           />
                           <div className="card-body p-0">
                             <h4 className="card_title p-0">
-                              <a
-                              onClick={this.links}
-                              style={{ cursor: "pointer" }}>
+                              <Link to={`/admin/magazineInfo/:${magzin.journals.id}`} style={{ cursor: "pointer" }}>
                                 {magzin.journals.title}
-                              </a>
+                              </Link>
                             </h4>
 
                             <p className="card_text text-muted">
