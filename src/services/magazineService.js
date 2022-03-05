@@ -40,4 +40,8 @@ export function createMagazine(data) {
   });
 }
 
-export default { createMagazine };
+export function getById(id) {
+  return http.get(apiLocal + `/journals/getById/${id}`);
+}
+
+export default { createMagazine, getById };

@@ -49,7 +49,7 @@ class Category extends Component {
     try {
       await categoryServices.getParentCategories().then((res) => {
         console.log(res.data);
-        this.setState({ parent: res.data });   
+        this.setState({ parent: res.data });
       });
     } catch (error) {
       console.log(error);

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import magazineService from "services/magazineService";
+import axios from "axios";
 
-import cover from "routes/books.png";
+// import cover from "routes/books.png";
 import { toast } from "react-toastify";
 
 // reactstrap components
@@ -27,21 +29,55 @@ class EditMagazine extends Component {
     certificateNumber: "",
     isbn: "",
     issn: "",
-    cover: [],
+    cover: "",
     status: "",
     description: "",
+
+    base64: [],
+    magazineInfo: [],
   };
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    const magazineId = "9b6402bf-ae25-44b7-99d3-85aa15bbe384";
+    await this.getMagazinesById(magazineId);
+
+    this.state.magazineInfo && this.getImage(this.state.magazineInfo.cover.id);
+  }
+
+  getImage = async (id) => {
+    let imageBlob;
+    try {
+      imageBlob = (
+        await axios.get(
+          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          { responseType: "blob" }
+        )
+      ).data;
+    } catch (err) {
+      return null;
+    }
+    return this.setState({ cover: URL.createObjectURL(imageBlob) });
+  };
+
+  getMagazinesById = async (id) => {
+    try {
+      await magazineService.getById(id).then((res) => {
+        this.setState({ magazineInfo: res.data.object.journals });
+        this.setState({ deadline: res.data.object.deadline });
+      });
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(this.state.cover);
   };
 
   handleDownload = async () => {
-    const { id, originalName, contentType } = this.state.currentUser
-      .scientificWork.length
-      ? this.state.currentUser.scientificWork[0]
+    const { id, originalName, contentType } = this.state.magazineInfo.file
+      ? this.state.magazineInfo.file
       : undefined;
 
     if (id && originalName && contentType) {
@@ -80,6 +116,20 @@ class EditMagazine extends Component {
   };
 
   render() {
+    let {
+      title,
+      certificateNumber,
+      cover,
+      description,
+      isbn,
+      issn,
+      printedDate,
+      journalsStatus,
+    } = this.state.magazineInfo;
+
+    // console.log(this.state.magazineInfo.cover);
+    // console.log(this.state);
+
     return (
       <>
         <div className="content">
@@ -93,7 +143,7 @@ class EditMagazine extends Component {
                     alignItems: "center",
                   }}
                 >
-                  <img src={cover} alt="cover" />
+                  <img src={this.state.cover} alt="cover" />
                 </CardBody>
               </Card>
             </Col>
@@ -109,7 +159,7 @@ class EditMagazine extends Component {
                         <FormGroup>
                           <label>Title</label>
                           <Input
-                            // defaultValue={workPlace}
+                            defaultValue={title}
                             placeholder="Title Magazine"
                             type="text"
                             onChange={(e) =>
@@ -123,14 +173,23 @@ class EditMagazine extends Component {
                           <label>Deadline</label>
                           <Input
                             // disabled
-                            // defaultValue={new Date(createdAt ? createdAt : null)
-                            //   .toISOString()
-                            //   .slice(0, 10)}
+                            defaultValue={
+                              this.state.deadline && this.state.deadline
+                            }
+                            // defaultValue={new Date(deadline).toLocaleDateString(
+                            //   "uz-UZ",
+                            //   {
+                            //     year: "numeric",
+                            //     month: "2-digit",
+                            //     day: "2-digit",
+                            //   }
+                            // )}
                             placeholder="Maqola qabul qilish oxirgi sanasi"
                             type="date"
-                            onChange={(e) =>
-                              this.setState({ deadline: e.target.value })
-                            }
+                            onChange={(e) => {
+                              console.log(e.target.value);
+                              this.setState({ deadline: e.target.value });
+                            }}
                           />
                         </FormGroup>
                       </Col>
@@ -138,11 +197,8 @@ class EditMagazine extends Component {
                         <FormGroup>
                           <label>Print Day</label>
                           <Input
-                            // defaultValue={email}
-                            placeholder={`ex: ${new Date()
-                              .toISOString()
-                              .slice(0, 10)}`}
-                            type="email"
+                            defaultValue={printedDate}
+                            type="number"
                             onChange={(e) =>
                               this.setState({ printDay: e.target.value })
                             }
@@ -154,7 +210,7 @@ class EditMagazine extends Component {
                         <FormGroup>
                           <label>Status</label>
                           <Input
-                            defaultValue="NEW_JOURNALS"
+                            defaultValue={journalsStatus}
                             style={{ height: "3rem" }}
                             className="form-control"
                             type="select"
@@ -178,7 +234,7 @@ class EditMagazine extends Component {
                             placeholder="Final version of Magazine"
                             type="file"
                             onChange={(e) =>
-                              this.setState({ firstName: e.target.value })
+                              this.setState({ file: e.target.files[0] })
                             }
                           />
                         </FormGroup>
@@ -187,7 +243,7 @@ class EditMagazine extends Component {
                         <FormGroup>
                           <label>Certificate Number</label>
                           <Input
-                            // defaultValue={lastName}
+                            defaultValue={certificateNumber}
                             placeholder="ex: № FS77-54438"
                             type="text"
                             onChange={(e) =>
@@ -202,7 +258,7 @@ class EditMagazine extends Component {
                         <FormGroup>
                           <label>ISBN</label>
                           <Input
-                            // defaultValue={lastName}
+                            defaultValue={isbn}
                             placeholder="ex: 2311-6099"
                             type="text"
                             onChange={(e) =>
@@ -216,7 +272,7 @@ class EditMagazine extends Component {
                         <FormGroup>
                           <label>ISSN</label>
                           <Input
-                            // defaultValue={lastName}
+                            defaultValue={issn}
                             placeholder="ex: 2311-6099"
                             type="text"
                             onChange={(e) =>
@@ -232,11 +288,14 @@ class EditMagazine extends Component {
                         <FormGroup>
                           <label>Download Magazine</label>
                           <Button
+                            disabled={
+                              this.state.magazineInfo.file ? false : true
+                            }
                             className="m-0"
                             style={{ width: "100%", padding: "0.75rem" }}
                             onClick={() => this.handleDownload()}
                           >
-                            Ilmiy Ishlarni yuklash
+                            Jurnalni yuklash
                           </Button>
                         </FormGroup>
                       </Col>
@@ -247,7 +306,6 @@ class EditMagazine extends Component {
                           <Input
                             style={{ padding: "0" }}
                             // defaultValue={academicDegree}
-                            placeholder="Daraja"
                             type="file"
                             onChange={(e) =>
                               this.setState({
