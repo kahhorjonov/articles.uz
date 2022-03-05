@@ -2,9 +2,13 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./form";
 import articleService from "../../services/articleService";
-import { getCategories } from "../../services/getCategories";
+import {
+  getCategories,
+  getChildCategories,
+} from "../../services/getCategories";
+import magazineService from "services/magazineService";
 
-import { Card, CardBody, Input, Label, Row, Col, Toast } from "reactstrap";
+import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
 
 import { toast } from "react-toastify";
 
@@ -14,18 +18,17 @@ import "../../styles/multipleTags.scss";
 class ArticleForm extends Form {
   state = {
     data: {
-      firstName: "",
-      lastName: "",
+      // firstName: "",
+      // lastName: "",
       titleArticle: "",
       description: "",
       categoryId: "",
       file: [],
-      publicOrPrivate: "",
     },
 
+    publicOrPrivate: "",
     tags: [],
 
-    categories: [],
     errors: {},
 
     sahifaSoni: "0",
@@ -35,21 +38,33 @@ class ArticleForm extends Form {
     doi: false,
 
     price: 0,
+
+    parentCategoryId: "",
+    parentCategories: [],
+    childCategories: [],
   };
 
   schema = {
-    firstName: Joi.string().required().label("First Name"),
-    lastName: Joi.string().required().label("Last Name"),
+    // firstName: Joi.string().required().label("First Name"),
+    // lastName: Joi.string().required().label("Last Name"),
     titleArticle: Joi.string().required().label("Article Title"),
     categoryId: Joi.string().required().label("Category Id"),
     description: Joi.string().required().min(0).max(200).label("Description"),
     file: Joi.required().label("File"),
-    publicOrPrivate: Joi.required().label("publicOrPrivate"),
   };
 
+  async componentDidMount() {
+    await this.populateCategories();
+  }
+
   async populateCategories() {
-    const { data: categories } = await getCategories();
-    this.setState({ categories });
+    try {
+      await magazineService.getParentMagazines().then((res) => {
+        this.setState({ parentCategories: res.data });
+      });
+    } catch (error) {
+      toast.error(error);
+    }
   }
 
   removeTags = (indexToRemove) => {
@@ -65,18 +80,15 @@ class ArticleForm extends Form {
     }
   };
 
-  // async populateArticles() {
-  //   try {
-  //     const articleId = this.props.match.params.id;
-  //     if (articleId === "new") return;
-
-  //     // const { data: article } = await getArticles(articleId);
-  //     // this.setState({ data: this.mapToViewModel(article) });
-  //   } catch (ex) {
-  //     if (ex.response && ex.response.status === 404)
-  //       this.props.history.replace("/not-found");
-  //   }
-  // }
+  getChildCategories = async (id) => {
+    try {
+      await getChildCategories(id).then((res) =>
+        this.setState({ childCategories: res.data })
+      );
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   getPriceFromPages = async (sahifaSoni) => {
     const data = {
@@ -148,24 +160,10 @@ class ArticleForm extends Form {
     });
   };
 
-  async componentDidMount() {
-    await this.populateCategories();
-  }
-
-  // mapToViewModel(article) {
-  //   return {
-  //     id: article.id,
-  //     title: article.title,
-  //     categoryId: article.categoryId,
-  //     numberInStock: movie.numberInStock,
-  //     dailyRentalRate: movie.dailyRentalRate,
-  //   };
-  // }
-
   doSubmit = async () => {
     try {
       await articleService.addArticle(this.state).then((res) => {
-        console.log(res);
+        // console.log(res);
         toast.success(res.data.message);
       });
     } catch (error) {
@@ -182,10 +180,48 @@ class ArticleForm extends Form {
           <Col md="12">
             <Card>
               <CardBody>
-                <h1>Article Form</h1>
+                <Row
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Col sm="6" md="6" lg="6">
+                    <span style={{ fontSize: "4rem" }}>Article Form</span>
+                  </Col>
+                  <Col sm="6" md="6" lg="6">
+                    <label>Jurnalni tanlang</label>
+                    <Input
+                      sm="6"
+                      md="6"
+                      lg="6"
+                      type="select"
+                      style={{ height: "3rem" }}
+                      className="form-control"
+                      onChange={(e) => {
+                        {
+                          this.setState({
+                            parentCategoryId: e.target.value,
+                          });
+                          this.getChildCategories(e.target.value);
+                        }
+                      }}
+                    >
+                      <option value="">Jurnalni tanlang</option>
+
+                      {this.state.parentCategories &&
+                        this.state.parentCategories.map((category) => (
+                          <option key={category.id} value={category.id}>
+                            {category.title}
+                          </option>
+                        ))}
+                    </Input>
+                  </Col>
+                </Row>
+
                 <form onSubmit={this.handleSubmit}>
                   <Row>
-                    <Col lg="4">
+                    {/* <Col lg="4">
                       {this.renderInput(
                         "firstName",
                         "First Name",
@@ -195,15 +231,16 @@ class ArticleForm extends Form {
                     </Col>
                     <Col lg="4">
                       {this.renderInput("lastName", "Last Name")}
-                    </Col>
-                    <Col lg="4">
-                      {this.renderInput("titleArticle", "Title")}
-                    </Col>
+                    </Col> */}
                   </Row>
 
                   <Row>
-                    <Col lg="12">
+                    <Col lg="8">
                       {this.renderInput("description", "Description")}
+                    </Col>
+
+                    <Col lg="4">
+                      {this.renderInput("titleArticle", "Title")}
                     </Col>
                   </Row>
 
@@ -212,14 +249,15 @@ class ArticleForm extends Form {
                       {this.renderSelect(
                         "categoryId",
                         "Categories",
-                        this.state.categories
+                        this.state.childCategories
                       )}
                     </Col>
                     {/* <Col lg="3">{this.renderInput("author", "Author")}</Col> */}
                     <Col sm="4" md="4" lg="4">
                       <div>
-                        <label>PublicOrPrivate</label>
+                        <label>Public Or Private</label>
                         <Input
+                          defaultValue="false"
                           type="select"
                           style={{ height: "3rem" }}
                           className="form-control"
@@ -227,8 +265,8 @@ class ArticleForm extends Form {
                             this.setState({ publicOrPrivate: e.target.value })
                           }
                         >
-                          <option value="true">True</option>
                           <option value="false">False</option>
+                          <option value="true">True</option>
                         </Input>
                       </div>
                     </Col>
