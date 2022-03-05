@@ -295,6 +295,7 @@ class EditMagazine extends Component {
               </Card>
             </Col>
           </Row>
+       
         </div>
       </>
     );

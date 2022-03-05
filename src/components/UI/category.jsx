@@ -49,7 +49,7 @@ class Category extends Component {
     try {
       await categoryServices.getParentCategories().then((res) => {
         console.log(res.data);
-        this.setState({ parent: res.data });   
+        this.setState({ parent: res.data });
       });
     } catch (error) {
       console.log(error);
@@ -98,14 +98,29 @@ class Category extends Component {
       <div className="content">
         <h6>Category</h6>
 
-        <button
-          type="button"
-          className="btn btn-success"
-          data-toggle="modal"
-          data-target="#myModal"
-        >
-          Add+
-        </button>
+        <div className="d-flex align-items-center justify-content-between">
+          <button
+            type="button"
+            className="btn btn-success"
+            data-toggle="modal"
+            data-target="#myModal"
+          >
+            Add+
+          </button>
+
+          <form>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Your Email"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text   btn-info">Search</span>
+              </div>
+            </div>
+          </form>
+        </div>
 
         <div className="modal" id="myModal">
           <div className="modal-dialog">
@@ -132,8 +147,9 @@ class Category extends Component {
 
                     <Col lg="12">
                       <div>
+                        <label className="pt-3">Active</label>
                         <select
-                          className="form-control mt-3"
+                          className="form-control "
                           defaultValue="true"
                           onChange={(e) => {
                             console.log(e.target.value);
@@ -147,12 +163,15 @@ class Category extends Component {
                     </Col>
                     <Col lg="12">
                       <div>
+                        <label className="pt-3">Parent Category</label>
                         <select
                           onChange={(e) =>
                             this.setState({ activeParent: e.target.value })
                           }
-                          className="form-control mt-3"
+                          className="form-control"
                         >
+                          <option value=""></option>
+
                           {this.state.parent &&
                             this.state.parent.map((option) => (
                               <option key={option.id} value={option.id}>
@@ -281,7 +300,7 @@ class Category extends Component {
               <tr key={category.id}>
                 {/* <td>{category.id}</td> */}
                 <td>{category.name}</td>
-                <td>{/* {category.parent} */}</td>
+                <td>{category.parent && category.parent.name}</td>
                 <td>
                   <label className="switch">
                     <input

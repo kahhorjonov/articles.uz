@@ -40,4 +40,10 @@ export function createMagazine(data) {
   });
 }
 
-export default { createMagazine };
+export function getMagazinesById(id) {
+  return http.get(
+    `http://192.168.100.27:8080/api/journals/getCategoryJournals/${id}`
+  );
+}
+
+export default { createMagazine, getMagazinesById };
