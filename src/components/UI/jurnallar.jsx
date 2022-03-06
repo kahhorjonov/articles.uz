@@ -11,7 +11,7 @@ class Jurnallar extends Component {
     magazineCategories: [],
     magazines: [],
 
-    cover: "",
+    cover: [],
   };
 
   componentDidMount = async () => {
@@ -20,7 +20,10 @@ class Jurnallar extends Component {
     this.state.magazineCategories &&
       (await this.getMagazinesById(this.state.magazineCategories[0].id));
 
-    await this.getImage();
+    this.state.magazines.length &&
+      this.state.magazines.map(async (magazine) => {
+        await this.getImage(magazine.journals.cover.id);
+      });
   };
 
   getImage = async (id) => {
@@ -37,8 +40,9 @@ class Jurnallar extends Component {
       return null;
     }
 
-    // return URL.createObjectURL(imageBlob);
-    return this.setState({ cover: URL.createObjectURL(imageBlob) });
+    return this.setState({
+      cover: [...this.state.cover, URL.createObjectURL(imageBlob)],
+    });
   };
 
   getCategory = async () => {
@@ -66,12 +70,11 @@ class Jurnallar extends Component {
   render() {
     const { magazineCategories, magazines } = this.state;
 
-    console.log(this.state);
     return (
       <>
         <div className="content">
           <div className="row mx-0">
-            {magazineCategories ? (
+            {magazineCategories.length ? (
               magazineCategories.map((category) => (
                 <ul key={category.id} className="nav">
                   <li className="nav-item">
@@ -104,7 +107,7 @@ class Jurnallar extends Component {
 
                 <div className="article_rows row mx-0 mx-xl-0 mb-3 pl-0">
                   {magazines &&
-                    magazines.map((magazine) => (
+                    magazines.map((magazine, idx) => (
                       <div
                         key={magazine.journals.id}
                         className="col-md-4  card-articles"
@@ -112,7 +115,7 @@ class Jurnallar extends Component {
                         <div className="border-0">
                           <img
                             className="card-img-top"
-                            src={this.state.cover}
+                            src={this.state.cover[idx]}
                             alt="Card image"
                           />
                           <div className="card-body p-0">
