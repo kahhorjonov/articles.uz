@@ -3,7 +3,7 @@ import categoryServices from "services/getCategories";
 import { toast } from "react-toastify";
 import { Col, Row } from "reactstrap";
 import "styles/category.css";
-import  axios  from 'axios';
+import axios from "axios";
 
 class Category extends Component {
   state = {
@@ -13,7 +13,7 @@ class Category extends Component {
     activeParent: "",
     activeId: "",
     categories: [],
-    search: ''
+    search: "",
   };
 
   componentDidMount() {
@@ -33,7 +33,6 @@ class Category extends Component {
       toast.error(ex);
     }
   };
-
 
   // searchCategory = async (str) => {
   //   try {
@@ -60,7 +59,6 @@ class Category extends Component {
   handleGetParent = async () => {
     try {
       await categoryServices.getParentCategories().then((res) => {
-        console.log(res.data);
         this.setState({ parent: res.data });
       });
     } catch (error) {
@@ -121,16 +119,16 @@ class Category extends Component {
           </button>
 
           <form>
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
               <input
                 type="search"
-                class="form-control"
+                className="form-control"
                 placeholder="Search..."
                 value={this.state.search}
-                onChange={(e) => this.setState({search: e.target.value})}
+                onChange={(e) => this.setState({ search: e.target.value })}
               />
-              <div class="input-group-append">
-                <span class="input-group-text   btn-info">Search</span>
+              <div className="input-group-append">
+                <span className="input-group-text   btn-info">Search</span>
               </div>
             </div>
           </form>

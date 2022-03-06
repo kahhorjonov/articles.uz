@@ -1,19 +1,45 @@
 import React, { Component } from "react";
-import axios from "axios";
-import img from "../../components/profile.png";
-import { Link } from "react-router-dom";
 import magazineService from "services/magazineService";
-import "../../styles/homePage.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import "../../styles/homePage.css";
 
 class Jurnallar extends Component {
   state = {
     magazineCategories: [],
     magazines: [],
+
+    cover: "",
   };
 
+  componentDidMount = async () => {
+    await this.getCategory();
 
-  
+    this.state.magazineCategories &&
+      (await this.getMagazinesById(this.state.magazineCategories[0].id));
+
+    await this.getImage();
+  };
+
+  getImage = async (id) => {
+    let imageBlob;
+
+    try {
+      imageBlob = (
+        await axios.get(
+          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          { responseType: "blob" }
+        )
+      ).data;
+    } catch (err) {
+      return null;
+    }
+
+    // return URL.createObjectURL(imageBlob);
+    return this.setState({ cover: URL.createObjectURL(imageBlob) });
+  };
 
   getCategory = async () => {
     try {
@@ -22,8 +48,8 @@ class Jurnallar extends Component {
         .then((respons) => {
           this.setState({ magazineCategories: respons.data });
         });
-    } catch (erorr) {
-      console.log(erorr);
+    } catch (ex) {
+      console.log(ex);
     }
   };
 
@@ -37,23 +63,17 @@ class Jurnallar extends Component {
     }
   };
 
-  componentDidMount = async () => {
-    await this.getCategory();
-
-    (await this.state.magazineCategories) &&
-      this.getMagazinesById(this.state.magazineCategories[0].id);
-  };
-
   render() {
     const { magazineCategories, magazines } = this.state;
 
+    console.log(this.state);
     return (
       <>
         <div className="content">
           <div className="row mx-0">
             {magazineCategories ? (
-              magazineCategories.map((magazine) => (
-                <ul key={magazine.id} className="nav">
+              magazineCategories.map((category) => (
+                <ul key={category.id} className="nav">
                   <li className="nav-item">
                     <a
                       style={{
@@ -63,11 +83,11 @@ class Jurnallar extends Component {
                       }}
                       onClick={(e) => {
                         e.preventDefault();
-                        this.getMagazinesById(magazine.id);
+                        this.getMagazinesById(category.id);
                       }}
                       className="nav-link text-black "
                     >
-                      {magazine.name}
+                      {category.name}
                     </a>
                   </li>
                 </ul>
@@ -84,27 +104,30 @@ class Jurnallar extends Component {
 
                 <div className="article_rows row mx-0 mx-xl-0 mb-3 pl-0">
                   {magazines &&
-                    magazines.map((magzin) => (
+                    magazines.map((magazine) => (
                       <div
-                        key={magzin.journals.id}
+                        key={magazine.journals.id}
                         className="col-md-4  card-articles"
                       >
                         <div className="border-0">
                           <img
                             className="card-img-top"
-                            src={img}
+                            src={this.state.cover}
                             alt="Card image"
                           />
                           <div className="card-body p-0">
                             <h4 className="card_title p-0">
-                              <Link to={`/admin/magazineInfo/:${magzin.journals.id}`} style={{ cursor: "pointer" }}>
-                                {magzin.journals.title}
+                              <Link
+                                to={`/admin/magazineInfo/:${magazine.journals.id}`}
+                                style={{ cursor: "pointer" }}
+                              >
+                                {magazine.journals.title}
                               </Link>
                             </h4>
 
                             <p className="card_text text-muted">
                               Amal qilish Mudati <br />
-                              <span>{magzin && magzin.deadline}</span>
+                              <span>{magazine && magazine.deadline}</span>
                               gacha
                             </p>
                           </div>

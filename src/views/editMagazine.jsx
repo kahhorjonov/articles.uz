@@ -48,6 +48,7 @@ class EditMagazine extends Component {
 
   getImage = async (id) => {
     let imageBlob;
+
     try {
       imageBlob = (
         await axios.get(
@@ -58,6 +59,7 @@ class EditMagazine extends Component {
     } catch (err) {
       return null;
     }
+
     return this.setState({ cover: URL.createObjectURL(imageBlob) });
   };
 
