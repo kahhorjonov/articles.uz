@@ -127,7 +127,6 @@ class Category extends Component {
                 class="form-control"
                 placeholder="Search..."
                 value={this.state.search}
-              
                 onChange={(e) => this.setState({search: e.target.value})}
               />
               <div class="input-group-append">

@@ -1,23 +1,41 @@
 import React, { Component } from "react";
-import img from '../../components/profile.png';
+import img from "../../components/profile.png";
 import "../../styles/magazineInfo.css";
-import axios from 'axios';
+
+import axios from "axios";
+import { toast } from "react-toastify";
 class MagazineInfo extends Component {
   state = {
-      magazineInfo: []
+    userId: "",
+    magazineInfo: [],
   };
 
-
-  getMagazineInfo = async () => {
-      await axios.get(``)
+  componentDidMount() {
+    try {
+      const userId = this.props.history.location.pathname.slice(21);
+      this.setState({
+        userId,
+      });
+      this.getMagazineInfo(userId);
+    } catch (error) {
+      toast.error("Bunday jurnal mavjud emas");
+    }
   }
 
-
+  getMagazineInfo = async (id) => {
+    await axios
+      .get(`http://192.168.100.27:8080/api/journals/getById/${id}`)
+      .then((res) => {
+        // console.log(res.data.object.journals);
+        this.setState({ magazineInfo: res.data.object.journals });
+      });
+  };
 
   render() {
+    console.log(this.state.magazineInfo);
+
     return (
       <>
-    
         <div className="content">
           <div className="container magazineInfo">
             <h1>“Tibbiyot va farmakologiya” ilmiy jurnali</h1>
@@ -28,12 +46,25 @@ class MagazineInfo extends Component {
                 <img src={img} alt="" />
 
                 <h3>
-                  2013 yildan buyon chiqadi <br />
-                  ISSN:<span className="text-muted">2311-2333</span> <br />
-                  Ommaviy axborot vositalarini ro'yxatga olish to'g'risida:{" "}
+                  {this.state.magazineInfo &&
+                    new Date(
+                      this.state.magazineInfo.createdAt
+                    ).getFullYear()}{" "}
+                  yildan buyon chiqadi <br />
+                  ISBN:{" "}
+                  <span className="text-muted">
+                    {this.state.magazineInfo && this.state.magazineInfo.isbn}
+                  </span>{" "}
+                  <br />
+                  ISSN:{" "}
+                  <span className="text-muted">
+                    {this.state.magazineInfo && this.state.magazineInfo.issn}
+                  </span>{" "}
+                  <br />
+                  Ommaviy axborot vositalarini ro'yxatga olish to'g'risida:
                   <br />
                   <span className="text-muted">
-                    № FS77-54438 17.06.2013 dan
+                    № {this.state.magazineInfo.certificateNumber}
                   </span>
                 </h3>
 
@@ -47,20 +78,23 @@ class MagazineInfo extends Component {
               </div>
               <div className="col-lg-8">
                 <p>
-                  <strong>Ko'rib chiqish</strong> - nashr qilish uchun ariza
-                  topshirilgan kundan boshlab o'n kun ichida. Xalqaro tahririyat
-                  kengashi tibbiyot va farmakologiya fanlari doktori va fan
-                  nomzodlarini o'z ichiga oladi.
+                  <strong className="pr-3">Ko'rib chiqish:</strong>
+                  <span>
+                    {this.state.magazineInfo &&
+                      this.state.magazineInfo.description}
+                  </span>
                 </p>
                 <p>
-                  <strong>Maqolaning chiqish ma'lumotlari</strong> - nashr uchun
-                  to'lov kunida jurnal saytida.
+                  <strong>Jurnalning chiqarilish</strong>i maqolalar qabul
+                  qilingandan so'ng{" "}
+                  {this.state.magazineInfo &&
+                    this.state.magazineInfo.printedDate}{" "}
+                  kun ichida saytda e'lon qilinadi.
                 </p>
 
                 <p>
-                  {" "}
-                  <strong>Jurnalning chiqarilish</strong>i maqolalar qabul
-                  qilingandan so'ng 10 kun ichida saytda e'lon qilinadi.
+                  <strong>Maqolaning chiqish ma'lumotlari</strong> - nashr uchun
+                  to'lov kunida jurnal saytida.
                 </p>
                 <p>
                   <strong>Jurnalni pochta orqali jo'natish</strong>
@@ -111,6 +145,19 @@ class MagazineInfo extends Component {
                   sohasida elektron nashr etish tizimi o'zini to'liq oqlaydi, bu
                   uning har tomonlama rivojlanishini isbotlaydi.
                 </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="gernMaqola">
+            <div className="container">
+              <div className="col-lg-12">
+                <p>Jurnalning yangi soni 11.09.2020 da saytda e’lon qilinadi</p>
+                <h3>
+                  “Tibbiyot va farmakologiya” ilmiy jurnaliga maqolalar
+                  01.09.2020 gacha qabul qilinadi.
+                </h3>
+                <button className="btn btn-dark">Maqola Yuborish</button>
               </div>
             </div>
           </div>

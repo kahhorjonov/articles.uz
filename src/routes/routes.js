@@ -155,7 +155,7 @@ var adminRoutes = [
     icon: "nc-icon nc-button-power",
     component: MagazineInfo,
     layout: "/admin",
-    visible: true,
+    visible: false,
   },
 ];
 
