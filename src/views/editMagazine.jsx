@@ -20,6 +20,7 @@ import {
   Col,
   Table,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 class EditMagazine extends Component {
   state = {
@@ -379,7 +380,7 @@ class EditMagazine extends Component {
 
           <Row>
             <Col>
-              <Card>
+              <Card style={{ padding: "1rem" }}>
                 <Table>
                   <thead>
                     <tr>
@@ -394,7 +395,9 @@ class EditMagazine extends Component {
                       articles.map((article) => (
                         <tr key={article.id}>
                           <td className="col-md-3 text-center">
-                            {article.titleArticle}
+                            <Link to={`/admin/articleInfo/:${article.id}`}>
+                              {article.titleArticle}
+                            </Link>
                           </td>
                           <td className="col-md-3 text-center">
                             {article.articleStatusName}
