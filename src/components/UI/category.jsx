@@ -11,7 +11,6 @@ class Category extends Component {
   state = {
     name: "",
     active: "true",
-    parentId: "",
     activeCategoryId: "",
     activeParentCategoryId: "",
 
@@ -36,9 +35,6 @@ class Category extends Component {
     try {
       await categoryServices.getCategories().then((res) => {
         this.setState({ categories: res.data });
-        this.setState({
-          parentId: this.state.categories[0] && this.state.categories[0].id,
-        });
       });
     } catch (ex) {
       toast.error(ex);
@@ -95,7 +91,7 @@ class Category extends Component {
       await categoryServices
         .createOrEditCategories({
           name: this.state.name,
-          parentId: this.state.parentId,
+          parentId: this.state.activeParentCategoryId,
           active: this.state.active,
           id: this.state.activeCategoryId,
         })
@@ -119,6 +115,8 @@ class Category extends Component {
       currentPage,
       pageSize,
     } = this.state;
+
+    console.log(this.state);
 
     const categories = paginate(allCategories, currentPage, pageSize);
 
@@ -198,13 +196,14 @@ class Category extends Component {
                             <label className="pt-3">Parent Category</label>
                             <select
                               className="form-control"
+                              defaultValue=""
                               onChange={(e) =>
                                 this.setState({
                                   parentId: e.target.value,
                                 })
                               }
                             >
-                              <option value=""></option>
+                              <option value="">Choose one</option>
 
                               {parentCategories &&
                                 parentCategories.map((option) => (
@@ -269,7 +268,7 @@ class Category extends Component {
                             <Input
                               type="select"
                               className="form-control mt-3"
-                              defaultValue={this.state.active}
+                              defaultValue={this.state.active.toString()}
                               onChange={(e) =>
                                 this.setState({ active: e.target.value })
                               }
@@ -284,7 +283,10 @@ class Category extends Component {
                           <div>
                             <Input
                               type="select"
-                              defaultValue={this.state.activeParentId}
+                              defaultValue={
+                                this.state.activeParentCategoryId &&
+                                this.state.activeParentCategoryId.toString()
+                              }
                               onChange={(e) =>
                                 this.setState({
                                   activeParent: e.target.value,
@@ -292,6 +294,8 @@ class Category extends Component {
                               }
                               className="form-control mt-3"
                             >
+                              <option value="">Choose One</option>
+
                               {parentCategories &&
                                 parentCategories.length &&
                                 parentCategories.map((option) => (
@@ -361,16 +365,18 @@ class Category extends Component {
                           data-toggle="modal"
                           data-target="#myModalForEdit"
                           className="btn btn-warning"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.preventDefault();
+
                             this.setState({ name: category.name });
                             this.setState({ active: category.active });
                             this.setState({
-                              parent:
+                              activeParentCategoryId:
                                 category.parent &&
                                 category.parent.length &&
                                 category.parent.id,
                             });
-                            this.setState({ activeId: category.id });
+                            this.setState({ activeCategoryId: category.id });
                           }}
                         >
                           Edit
@@ -389,6 +395,7 @@ class Category extends Component {
               </tbody>
             </table>
           </div>
+
           <div className="card-footer">
             <Pagination
               itemsCount={this.state.categories && this.state.categories.length}
