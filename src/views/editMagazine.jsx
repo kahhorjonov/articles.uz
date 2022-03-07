@@ -384,7 +384,7 @@ class EditMagazine extends Component {
                       <th className="col-md-3 text-center">Title</th>
                       <th className="col-md-3 text-center">Status</th>
                       <th className="col-md-3 text-center">Public ?</th>
-                      <th className="col-md-3 text-center">File</th>
+                      <th className="col-md-3 text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>

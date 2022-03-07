@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import categoryServices from "services/getCategories";
+import Pagination from "components/common/pagination";
+import { paginate } from "utils/paginate";
 import { toast } from "react-toastify";
 import { Col, Input, Row } from "reactstrap";
-import axios from "axios";
 
 import "styles/category.css";
 
@@ -16,12 +17,19 @@ class Category extends Component {
     categories: [],
     parentCategories: [],
     search: "",
+
+    currentPage: 1,
+    pageSize: 8,
   };
 
   componentDidMount() {
     this.handleGetCategories();
     this.handleGetParent();
   }
+
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
 
   handleGetCategories = async () => {
     try {
@@ -103,7 +111,14 @@ class Category extends Component {
   };
 
   render() {
-    const { categories, parentCategories } = this.state;
+    const {
+      categories: allCategories,
+      parentCategories,
+      currentPage,
+      pageSize,
+    } = this.state;
+
+    const categories = paginate(allCategories, currentPage, pageSize);
 
     return (
       <div className="content">
@@ -119,7 +134,7 @@ class Category extends Component {
                 data-toggle="modal"
                 data-target="#myModal"
               >
-                Add+
+                Add
               </button>
 
               <form>
@@ -371,6 +386,14 @@ class Category extends Component {
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="card-footer">
+            <Pagination
+              itemsCount={this.state.categories && this.state.categories.length}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
           </div>
         </div>
       </div>
