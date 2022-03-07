@@ -117,7 +117,7 @@ class JurnalQoshish extends Component {
                               this.setState({ file: e.target.files[0] })
                             }
                             type="file"
-                            className="form-control"
+                            className="form-control p-0"
                           />
                         </div>
                       </Col>
@@ -130,7 +130,7 @@ class JurnalQoshish extends Component {
                               this.setState({ cover: e.target.files[0] })
                             }
                             type="file"
-                            className="form-control"
+                            className="form-control p-0"
                           />
                         </div>
                       </Col>

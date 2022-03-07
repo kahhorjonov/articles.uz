@@ -135,6 +135,8 @@ class EditMagazine extends Component {
       journalsStatus,
     } = this.state.magazineInfo;
 
+    console.log(this.state);
+
     const { articles } = this.state;
     // console.log(this.state.magazineInfo.cover);
 
@@ -149,9 +151,18 @@ class EditMagazine extends Component {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    height: "40rem",
                   }}
                 >
-                  <img src={this.state.cover} alt="cover" />
+                  <img
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                    }}
+                    src={this.state.cover}
+                    alt="cover"
+                  />
                 </CardBody>
               </Card>
             </Col>

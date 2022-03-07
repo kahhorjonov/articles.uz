@@ -113,11 +113,21 @@ class Jurnallar extends Component {
                         className="col-md-4  card-articles"
                       >
                         <div className="border-0">
-                          <img
-                            className="card-img-top"
-                            src={this.state.cover[idx]}
-                            alt="Card image"
-                          />
+                          <div
+                            style={{ overflow: "hidden", height: "45rem" }}
+                            className="testDiv"
+                          >
+                            <img
+                              style={{
+                                maxWidth: "100%",
+                                maxHeight: "100%",
+                                objectFit: "contain",
+                                width: "100%",
+                              }}
+                              src={this.state.cover[idx]}
+                              alt="Card image"
+                            />
+                          </div>
                           <div className="card-body p-0">
                             <h4 className="card_title p-0">
                               <Link
