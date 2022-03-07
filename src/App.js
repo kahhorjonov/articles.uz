@@ -285,6 +285,7 @@ class App extends Component {
               component={(props) => <Asosiy {...props} />}
             />
 
+
             <Route
               path="/listOfMagazines"
               exact
@@ -335,6 +336,8 @@ class App extends Component {
 
             <Redirect to="/not-found" />
           </Switch>
+        
+        
         </>
       );
   }
