@@ -113,14 +113,14 @@ var adminRoutes = [
   //   layout: "/admin",
   // },
 
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-bell-55",
-    component: Icons,
-    layout: "/admin",
-    visible: true,
-  },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Icons,
+  //   layout: "/admin",
+  //   visible: true,
+  // },
 
   {
     path: "/user-page",

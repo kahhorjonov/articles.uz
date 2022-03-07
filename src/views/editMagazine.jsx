@@ -381,18 +381,18 @@ class EditMagazine extends Component {
                 <Table>
                   <thead>
                     <tr>
-                      <th className="col-md-3">Title</th>
-                      <th className="col-md-3">Status</th>
-                      <th className="col-md-3">Public ?</th>
-                      <th className="col-md-3">File</th>
+                      <th className="col-md-3 text-center">Title</th>
+                      <th className="col-md-3 text-center">Status</th>
+                      <th className="col-md-3 text-center">Public ?</th>
+                      <th className="col-md-3 text-center">File</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="col-md-3">25/02/2022</td>
-                      <td className="col-md-3">Lorem, ipsum.</td>
-                      <td className="col-md-3">Hammasi yaxshi</td>
-                      <td className="col-md-3">
+                      <td className="col-md-3 text-center">25/02/2022</td>
+                      <td className="col-md-3 text-center">Lorem, ipsum.</td>
+                      <td className="col-md-3 text-center">Hammasi yaxshi</td>
+                      <td className="col-md-3 text-center">
                         <Button className="btn btn-danger">Delete</Button>
                       </td>
                     </tr>

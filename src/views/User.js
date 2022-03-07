@@ -38,6 +38,7 @@ class User extends Component {
     languages: "",
 
     currentUser: {},
+    photo: "",
   };
 
   async componentDidMount() {
@@ -108,6 +109,12 @@ class User extends Component {
     }
   };
 
+  onImageChange = (photo) => {
+    this.setState({
+      photo: URL.createObjectURL(photo),
+    });
+  };
+
   render() {
     const {
       firstName,
@@ -146,6 +153,7 @@ class User extends Component {
                         className="avatar border-gray"
                         src={mikeImg}
                       />
+
                       <h5 className="title">
                         {firstName} {lastName}
                       </h5>
@@ -157,6 +165,14 @@ class User extends Component {
                   </p>
 
                   <h6 className="pl-5 pt-4">ID:122112</h6>
+
+                  <Input
+                    className="p-0 col-md-8"
+                    type="file"
+                    onChange={(e) =>
+                      e.target.files[0] && this.onImageChange(e.target.files[0])
+                    }
+                  />
                 </CardBody>
                 <CardFooter>
                   <hr />
