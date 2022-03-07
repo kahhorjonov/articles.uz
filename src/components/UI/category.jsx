@@ -16,6 +16,7 @@ class Category extends Component {
     categories: [],
     parentCategories: [],
     search: "",
+   
   };
 
   componentDidMount() {
@@ -121,6 +122,8 @@ class Category extends Component {
               >
                 Add+
               </button>
+
+
 
               <form>
                 <div className="input-group mb-3">
