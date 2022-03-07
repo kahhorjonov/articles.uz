@@ -3,6 +3,7 @@ import "../../styles/jurnalarxive.css";
 import img from "../../components/profile.png";
 import { Link } from "react-router-dom";
 import Foooter from "./foooter";
+
 class JurnalArxive extends Component {
   state = {};
   render() {
@@ -175,7 +176,7 @@ class JurnalArxive extends Component {
             </div>
           </div>
         </div>
-        <Foooter/>
+        {/* <Foooter /> */}
       </>
     );
   }

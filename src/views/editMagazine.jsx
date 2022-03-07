@@ -36,13 +36,13 @@ class EditMagazine extends Component {
     status: "",
     description: "",
 
-    thisMagazineId: "0c9be012-ae13-4dca-b076-6c351fc741f2",
+    thisMagazineId: "a0e7afcc-2a2c-4d36-8493-6a27b274fb01",
     magazineInfo: [],
     articles: [],
   };
 
   async componentDidMount() {
-    const magazineId = "0c9be012-ae13-4dca-b076-6c351fc741f2";
+    const magazineId = "a0e7afcc-2a2c-4d36-8493-6a27b274fb01";
     await this.getMagazinesById(magazineId);
 
     this.state.magazineInfo && this.getImage(this.state.magazineInfo.cover.id);

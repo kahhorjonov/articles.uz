@@ -96,7 +96,7 @@ class Jurnallar extends Component {
                 </ul>
               ))
             ) : (
-              <h1>Jurnallar Yo'q</h1>
+              <h1 className="text-center">Jurnallar Yo'q</h1>
             )}
           </div>
 

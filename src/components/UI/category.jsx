@@ -11,6 +11,7 @@ class Category extends Component {
   state = {
     name: "",
     active: "true",
+    parentId: "",
     activeCategoryId: "",
     activeParentCategoryId: "",
 
@@ -89,11 +90,12 @@ class Category extends Component {
 
   submitHandler = async (e) => {
     e.preventDefault();
+
     try {
       await categoryServices
         .createOrEditCategories({
           name: this.state.name,
-          parentId: this.state.activeParentCategoryId,
+          parentId: this.state.parentId,
           active: this.state.active,
           id: this.state.activeCategoryId,
         })
@@ -198,7 +200,7 @@ class Category extends Component {
                               className="form-control"
                               onChange={(e) =>
                                 this.setState({
-                                  activeParentId: e.target.value,
+                                  parentId: e.target.value,
                                 })
                               }
                             >

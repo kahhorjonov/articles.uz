@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import img from "../../components/profile.png";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -168,6 +169,148 @@ class MagazineInfo extends Component {
                       01.09.2020 gacha qabul qilinadi.
                     </h3>
                     <button className="btn btn-dark">Maqola Yuborish</button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Archive for admin page */}
+
+              <div
+                style={{ margin: "15rem auto" }}
+                className="container arxive "
+              >
+                <h1>Jurnal arxivi</h1>
+
+                <ul style={{ margin: "3rem auto" }} className="nav nav-pills">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      data-toggle="pill"
+                      href="#home"
+                    >
+                      2020
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" data-toggle="pill" href="#menu1">
+                      2019
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" data-toggle="pill" href="#menu2">
+                      2018
+                    </a>
+                  </li>
+                </ul>
+
+                <div className="tab-content">
+                  <div className="tab-pane container active" id="home">
+                    <div className="row">
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane container fade" id="menu1">
+                    <div className="row">
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane container fade" id="menu2">
+                    <div className="row">
+                      <div className="col-lg-3">
+                        <img src={img} width="270px" alt="" />
+                        <Link
+                          style={{ fontSize: "2rem", margin: "1rem auto" }}
+                          className="text-dark"
+                          to="/admin/editMagazine"
+                        >
+                          № 9 (71) <span className="text-muted">/ 2020</span>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
