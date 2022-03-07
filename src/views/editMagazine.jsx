@@ -37,6 +37,7 @@ class EditMagazine extends Component {
 
     thisMagazineId: "0c9be012-ae13-4dca-b076-6c351fc741f2",
     magazineInfo: [],
+    articles: [],
   };
 
   async componentDidMount() {
@@ -68,6 +69,7 @@ class EditMagazine extends Component {
       await magazineService.getById(id).then((res) => {
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ deadline: res.data.object.deadline });
+        this.setState({ articles: res.data.object.articles });
       });
     } catch (error) {
       toast.error(error);
@@ -132,8 +134,8 @@ class EditMagazine extends Component {
       journalsStatus,
     } = this.state.magazineInfo;
 
+    const { articles } = this.state;
     // console.log(this.state.magazineInfo.cover);
-    // console.log(this.state);
 
     return (
       <>
@@ -388,14 +390,23 @@ class EditMagazine extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="col-md-3 text-center">25/02/2022</td>
-                      <td className="col-md-3 text-center">Lorem, ipsum.</td>
-                      <td className="col-md-3 text-center">Hammasi yaxshi</td>
-                      <td className="col-md-3 text-center">
-                        <Button className="btn btn-danger">Delete</Button>
-                      </td>
-                    </tr>
+                    {articles &&
+                      articles.map((article) => (
+                        <tr key={article.id}>
+                          <td className="col-md-3 text-center">
+                            {article.titleArticle}
+                          </td>
+                          <td className="col-md-3 text-center">
+                            {article.articleStatusName}
+                          </td>
+                          <td className="col-md-3 text-center">
+                            {article.publicPrivate.toString()}
+                          </td>
+                          <td className="col-md-3 text-center">
+                            <Button className="btn btn-danger">Delete</Button>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </Table>
               </Card>
