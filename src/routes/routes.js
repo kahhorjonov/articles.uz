@@ -14,8 +14,6 @@ import AdminJurnallar from "components/UI/adminJurnallar";
 import Category from "components/UI/category";
 import Logout from "components/logout.jsx";
 import MagazineInfo from "./../components/UI/magazineInfo";
-import JurnalArxive from './../components/UI/jurnalArxive';
-
 
 var adminRoutes = [
   {
@@ -159,16 +157,6 @@ var adminRoutes = [
     layout: "/admin",
     visible: false,
   },
-  {
-    path: "/arxive",
-    name: "arxive",
-    icon: "nc-icon nc-button-power",
-    component: JurnalArxive,
-    layout: "/admin",
-    visible: true,
-  },
-
-
 ];
 
 export default adminRoutes;
