@@ -275,9 +275,9 @@ class Category extends Component {
                               }
                               className="form-control mt-3"
                             >
-                              {this.state.parenCategories &&
-                                this.state.parenCategories.length &&
-                                this.state.parenCategories.map((option) => (
+                              {parentCategories &&
+                                parentCategories.length &&
+                                parentCategories.map((option) => (
                                   <option key={option.id} value={option.id}>
                                     {option.name}
                                   </option>
