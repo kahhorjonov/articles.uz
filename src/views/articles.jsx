@@ -5,9 +5,9 @@ import { paginate } from "utils/paginate";
 import { Link } from "react-router-dom";
 import image from "../components/profile.png";
 import articleService from "services/articleService";
+import { Input } from "reactstrap";
 
 import "../styles/navbar.css";
-import { Input } from "reactstrap";
 
 class Articles extends Component {
   state = {

@@ -376,42 +376,23 @@ class EditMagazine extends Component {
           </Row>
 
           <Row>
-            <Col sm="12" md="12" lg="12">
+            <Col>
               <Card>
                 <Table>
                   <thead>
                     <tr>
-                      <th md="3" sm="3" lg="3">
-                        Title
-                      </th>
-                      <th md="3" sm="3" lg="3">
-                        Status
-                      </th>
-                      <th md="3" sm="3" lg="3">
-                        Public ?
-                      </th>
-                      <th md="3" sm="3" lg="3">
-                        File
-                      </th>
+                      <th className="col-md-3">Title</th>
+                      <th className="col-md-3">Status</th>
+                      <th className="col-md-3">Public ?</th>
+                      <th className="col-md-3">File</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td sm="3" md="3" lg="3">
-                        25/02/2022
-                      </td>
-                      <td sm="3" md="3" lg="3">
-                        Lorem, ipsum.
-                      </td>
-                      <td sm="3" md="3" lg="3">
-                        Hammasi yaxshi
-                      </td>
-                      <td
-                        sm="3"
-                        md="3"
-                        lg="3"
-                        style={{ display: "flex", justifyContent: "end" }}
-                      >
+                      <td className="col-md-3">25/02/2022</td>
+                      <td className="col-md-3">Lorem, ipsum.</td>
+                      <td className="col-md-3">Hammasi yaxshi</td>
+                      <td className="col-md-3">
                         <Button className="btn btn-danger">Delete</Button>
                       </td>
                     </tr>
