@@ -7,7 +7,9 @@ class GetImages extends Component {
   };
 
   async componentDidMount() {
-    await this.getImage(this.props.url);
+    console.log(this.props);
+
+    await this.getImage(this.props.url ? this.props.url : "null");
   }
 
   getImage = async (id) => {
@@ -29,15 +31,17 @@ class GetImages extends Component {
 
   render() {
     return (
-      <img
-        style={{
-          maxWidth: "100%",
-          maxHeight: "100%",
-          objectFit: "contain",
-          width: "100%",
-        }}
-        src={this.state.cover}
-      />
+      <>
+        <img
+          style={{
+            maxWidth: "100%",
+            maxHeight: "100%",
+            objectFit: "contain",
+            width: "100%",
+          }}
+          src={this.state.cover}
+        />
+      </>
     );
   }
 }

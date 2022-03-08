@@ -9,6 +9,8 @@ class MagazineInfo extends Component {
   state = {
     userId: "",
     magazineInfo: [],
+
+    cover: "",
   };
 
   componentDidMount() {
@@ -29,7 +31,26 @@ class MagazineInfo extends Component {
       .then((res) => {
         // console.log(res.data.object.journals);
         this.setState({ magazineInfo: res.data.object.journals });
+        this.setState({ cover: res.data.object.journals.cover });
+        this.getImage(res.data.object.journals.cover.id);
       });
+  };
+
+  getImage = async (id) => {
+    let imageBlob;
+
+    try {
+      imageBlob = (
+        await axios.get(
+          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          { responseType: "blob" }
+        )
+      ).data;
+    } catch (err) {
+      return null;
+    }
+
+    return this.setState({ cover: URL.createObjectURL(imageBlob) });
   };
 
   render() {
@@ -46,7 +67,7 @@ class MagazineInfo extends Component {
 
                 <div className="row mr-0 ml-0">
                   <div className="col-lg-4">
-                    <img src={img} alt="" />
+                    <img src={this.state.cover && this.state.cover} alt="" />
 
                     <h3>
                       {this.state.magazineInfo &&
