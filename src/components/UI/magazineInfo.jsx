@@ -55,15 +55,18 @@ class MagazineInfo extends Component {
   };
 
   render() {
+    const { title, category } = this.state.magazineInfo;
+    console.log(this.state.magazineInfo);
+
     return (
       <>
         <div className="content">
           <div className="card">
             <div className="card-body">
               <div className="container magazineInfo">
-                <h1>“Tibbiyot va farmakologiya” ilmiy jurnali</h1>
+                <h1>“{title}” ilmiy jurnali</h1>
                 <p className="art_ilmiy">
-                  ARTICLES.UZ ilmiy jurnallari / Tibbiyot
+                  ARTICLES.UZ ilmiy jurnallari / {category && category.name}
                 </p>
 
                 <div className="row mr-0 ml-0">

@@ -53,8 +53,8 @@ var adminRoutes = [
   },
 
   {
-    path: "/jurnalQoshish",
-    name: "Jurnal Qoshish",
+    path: "/createMagazine",
+    name: "Create Magazine",
     icon: "nc-icon nc-box",
     component: JurnalQoshish,
     layout: "/admin",
