@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import magazineService from "services/magazineService";
 import axios from "axios";
+import GetImages from "utils/getImages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -10,8 +11,6 @@ class Jurnallar extends Component {
   state = {
     magazineCategories: [],
     magazines: [],
-
-    cover: [],
   };
 
   componentDidMount = async () => {
@@ -20,29 +19,10 @@ class Jurnallar extends Component {
     this.state.magazineCategories &&
       (await this.getMagazinesById(this.state.magazineCategories[0].id));
 
-    this.state.magazines.length &&
-      this.state.magazines.map(async (magazine) => {
-        await this.getImage(magazine.journals.cover.id);
-      });
-  };
-
-  getImage = async (id) => {
-    let imageBlob;
-
-    try {
-      imageBlob = (
-        await axios.get(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
-    } catch (err) {
-      return null;
-    }
-
-    return this.setState({
-      cover: [...this.state.cover, URL.createObjectURL(imageBlob)],
-    });
+    // this.state.magazines.length &&
+    //   this.state.magazines.map(async (magazine) => {
+    //     await this.getImage(magazine.journals.cover.id);
+    //   });
   };
 
   getCategory = async () => {
@@ -107,7 +87,7 @@ class Jurnallar extends Component {
 
                 <div className="article_rows row mx-0 mx-xl-0 mb-3 pl-0">
                   {magazines &&
-                    magazines.map((magazine, idx) => (
+                    magazines.map((magazine) => (
                       <div
                         key={magazine.journals.id}
                         className="col-md-4  card-articles"
@@ -117,16 +97,7 @@ class Jurnallar extends Component {
                             style={{ overflow: "hidden", height: "45rem" }}
                             className="testDiv"
                           >
-                            <img
-                              style={{
-                                maxWidth: "100%",
-                                maxHeight: "100%",
-                                objectFit: "contain",
-                                width: "100%",
-                              }}
-                              src={this.state.cover[idx]}
-                              alt="Card image"
-                            />
+                            <GetImages url={magazine.journals.cover.id} />
                           </div>
                           <div className="card-body p-0">
                             <h4 className="card_title p-0">
