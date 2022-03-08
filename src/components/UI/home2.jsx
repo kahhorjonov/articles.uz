@@ -1,7 +1,5 @@
 import React from "react";
-
 import Foooter from "./foooter";
-
 import img from "../../profile.png";
 
 import "../../../styles/home2.css";

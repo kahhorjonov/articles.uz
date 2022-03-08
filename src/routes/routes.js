@@ -10,10 +10,10 @@ import Users from "views/users";
 import UserEdit from "views/userEdit";
 import ArticleInfo from "views/articleInfo";
 import JurnalQoshish from "components/UI/jurnalQoshish";
-import AdminJurnallar from "components/UI/adminJurnallar";
 import Category from "components/UI/category";
 import Logout from "components/logout.jsx";
 import MagazineInfo from "./../components/UI/magazineInfo";
+import Jurnallar from "components/UI/jurnallar.jsx";
 
 var adminRoutes = [
   {
@@ -35,10 +35,10 @@ var adminRoutes = [
   },
 
   {
-    path: "/adminJurnallar",
+    path: "/adminMagazines",
     name: "Jurnallar",
     icon: "nc-icon nc-map-big",
-    component: AdminJurnallar,
+    component: Jurnallar,
     layout: "/admin",
     visible: true,
   },

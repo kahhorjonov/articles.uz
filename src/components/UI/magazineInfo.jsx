@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import img from "../../components/profile.png";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 import "../../styles/magazineInfo.css";
 
 class MagazineInfo extends Component {

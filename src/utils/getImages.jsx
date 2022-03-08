@@ -7,8 +7,6 @@ class GetImages extends Component {
   };
 
   async componentDidMount() {
-    console.log(this.props);
-
     await this.getImage(this.props.url ? this.props.url : "null");
   }
 

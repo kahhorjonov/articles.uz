@@ -53,84 +53,102 @@ class Jurnallar extends Component {
     return (
       <>
         <div className="content">
-          <div className="row mx-0">
-            {magazineCategories.length ? (
-              magazineCategories.map((category) => (
-                <ul key={category.id} className="nav">
-                  <li className="nav-item">
-                    <a
-                      style={{
-                        cursor: "pointer",
-                        color: "black",
-                        fontSize: "15px",
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        this.getMagazinesById(category.id);
-                      }}
-                      className="nav-link text-black "
-                    >
-                      {category.name}
-                    </a>
-                  </li>
-                </ul>
-              ))
-            ) : (
-              <h1 className="text-center">Jurnallar Yo'q</h1>
-            )}
-          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-header">
+                  <h3>Barcha maqolalar</h3>
+                </div>
+                <div className="card-body">
+                  <div className="row mx-0">
+                    {magazineCategories.length ? (
+                      magazineCategories.map((category) => (
+                        <ul key={category.id} className="nav">
+                          <li className="nav-item">
+                            <a
+                              style={{
+                                cursor: "pointer",
+                                color: "black",
+                                fontSize: "15px",
+                              }}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                this.getMagazinesById(category.id);
+                              }}
+                              className="nav-link text-black "
+                            >
+                              {category.name}
+                            </a>
+                          </li>
+                        </ul>
+                      ))
+                    ) : (
+                      <h1 className="text-center">Jurnallar Yo'q</h1>
+                    )}
+                  </div>
 
-          <div className="row ">
-            <div className="mainPages w-100">
-              <div className="container p-0">
-                <div className="col-md-10 pl-0  maqola_nashir"></div>
+                  <div className="row ">
+                    <div className="mainPages w-100">
+                      <div className="container p-0">
+                        <div className="col-md-10 pl-0  maqola_nashir"></div>
 
-                <div className="article_rows row mx-0 mx-xl-0 mb-3 pl-0">
-                  {magazines &&
-                    magazines.map((magazine) => (
-                      <div
-                        key={magazine.journals.id}
-                        className="col-md-4  card-articles"
-                      >
-                        <div className="border-0">
-                          <div
-                            style={{ overflow: "hidden", height: "45rem" }}
-                            className="testDiv"
-                          >
-                            <GetImages url={magazine.journals.cover.id} />
-                          </div>
-                          <div className="card-body p-0">
-                            <h4 className="card_title p-0">
-                              <Link
-                                to={`/admin/magazineInfo/:${magazine.journals.id}`}
-                                style={{ cursor: "pointer" }}
+                        <div className="article_rows row mx-0 mx-xl-0 mb-3 pl-0">
+                          {magazines &&
+                            magazines.map((magazine) => (
+                              <div
+                                key={magazine.journals.id}
+                                className="col-md-4  card-articles"
                               >
-                                {magazine.journals.title}
-                              </Link>
-                            </h4>
+                                <div className="border-0">
+                                  <div
+                                    style={{
+                                      overflow: "hidden",
+                                      height: "45rem",
+                                    }}
+                                    className="testDiv"
+                                  >
+                                    <GetImages
+                                      url={magazine.journals.cover.id}
+                                    />
+                                  </div>
+                                  <div className="card-body p-0">
+                                    <h4 className="card_title p-0">
+                                      <Link
+                                        to={`/admin/magazineInfo/:${magazine.journals.id}`}
+                                        style={{ cursor: "pointer" }}
+                                      >
+                                        {magazine.journals.title}
+                                      </Link>
+                                    </h4>
 
-                            <p className="card_text text-muted">
-                              Amal qilish Mudati <br />
-                              <span>{magazine && magazine.deadline}</span>
-                              gacha
-                            </p>
-                          </div>
+                                    <p className="card_text text-muted">
+                                      Maqolalar <br />
+                                      <span>
+                                        {magazine && magazine.deadline} &nbsp;
+                                      </span>
+                                      gacha qabul qilinadi
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
                         </div>
                       </div>
-                    ))}
-                </div>
-              </div>
 
-              {/* buttons */}
-              <div className="buut-ons justify-content-center d-flex">
-                <a href="">
-                  <button
-                    type="button"
-                    className="btn btn-dark btn-sm btn-outline-dark "
-                  >
-                    Barchasini ko’rish
-                  </button>
-                </a>
+                      {/* buttons */}
+                      <div className="buut-ons justify-content-center d-flex">
+                        <a href="">
+                          <button
+                            type="button"
+                            className="btn btn-dark btn-sm btn-outline-dark "
+                          >
+                            Barchasini ko’rish
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

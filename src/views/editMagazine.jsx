@@ -135,8 +135,6 @@ class EditMagazine extends Component {
       journalsStatus,
     } = this.state.magazineInfo;
 
-    console.log(this.state);
-
     const { articles } = this.state;
     // console.log(this.state.magazineInfo.cover);
 
