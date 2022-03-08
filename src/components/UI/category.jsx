@@ -116,8 +116,6 @@ class Category extends Component {
       pageSize,
     } = this.state;
 
-    console.log(this.state);
-
     const categories = paginate(allCategories, currentPage, pageSize);
 
     return (

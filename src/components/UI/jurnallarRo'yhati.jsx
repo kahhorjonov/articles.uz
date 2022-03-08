@@ -5,13 +5,13 @@ import img1 from "assets/img/damir-bosnjak.jpg";
 import img2 from "assets/img/mike.jpg";
 import img3 from "assets/img/header.jpg";
 
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-
-import "styles/jurnallarRoyhati.css";
 import { Col } from "reactstrap";
 import Listhome from "./listhome";
 import Foooter from "./foooter";
+import Carousel from "react-multi-carousel";
+
+import "react-multi-carousel/lib/styles.css";
+import "styles/jurnallarRoyhati.css";
 
 class JurnallarRoyxati extends Component {
   render() {
@@ -104,8 +104,7 @@ class JurnallarRoyxati extends Component {
                 <img className="card-img-top" src={img} alt="Card image" />
                 <div className="card-body p-0">
                   <h4 className="card_title">
-                    {" "}
-                    <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                    <Link to="#">Tibbiyot va farmakologiya</Link>
                   </h4>
                   <p className="card_text">
                     Maqolalar qabul qilish muddati <br />
@@ -120,8 +119,7 @@ class JurnallarRoyxati extends Component {
                 <img className="card-img-top" src={img} alt="Card image" />
                 <div className="card-body p-0">
                   <h4 className="card_title">
-                    {" "}
-                    <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                    <Link to="#">Tibbiyot va farmakologiya</Link>
                   </h4>
                   <p className="card_text">
                     Maqolalar qabul qilish muddati <br />
@@ -136,8 +134,7 @@ class JurnallarRoyxati extends Component {
                 <img className="card-img-top" src={img} alt="Card image" />
                 <div className="card-body p-0">
                   <h4 className="card_title">
-                    {" "}
-                    <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                    <Link to="#">Tibbiyot va farmakologiya</Link>
                   </h4>
                   <p className="card_text">
                     Maqolalar qabul qilish muddati <br />
@@ -152,8 +149,7 @@ class JurnallarRoyxati extends Component {
                 <img className="card-img-top" src={img} alt="Card image" />
                 <div className="card-body p-0">
                   <h4 className="card_title">
-                    {" "}
-                    <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                    <Link to="#">Tibbiyot va farmakologiya</Link>
                   </h4>
                   <p className="card_text">
                     Maqolalar qabul qilish muddati <br />
@@ -168,8 +164,7 @@ class JurnallarRoyxati extends Component {
                 <img className="card-img-top" src={img} alt="Card image" />
                 <div className="card-body p-0">
                   <h4 className="card_title">
-                    {" "}
-                    <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                    <Link to="#">Tibbiyot va farmakologiya</Link>
                   </h4>
                   <p className="card_text">
                     Maqolalar qabul qilish muddati <br />
@@ -184,8 +179,7 @@ class JurnallarRoyxati extends Component {
                 <img className="card-img-top" src={img} alt="Card image" />
                 <div className="card-body p-0">
                   <h4 className="card_title">
-                    {" "}
-                    <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                    <Link to="#">Tibbiyot va farmakologiya</Link>
                   </h4>
                   <p className="card_text">
                     Maqolalar qabul qilish muddati <br />
@@ -215,7 +209,7 @@ class JurnallarRoyxati extends Component {
 
               <div className="col-md-6">
                 <div className="art-tex">
-                  <p className="articles-text">
+                  <span className="articles-text">
                     Articles.uz onlayn jurnallari ilm-fanning turli sohalarida
                     Oliy o'quv yurtlari o'qituvchilari, ilmiy xodimlar va
                     mutaxassislarga qaratilgan <br />
@@ -230,7 +224,7 @@ class JurnallarRoyxati extends Component {
                       texnik tadqiqotlar sohasida keng jamoatchilik tomonidan
                       muhokama qilinadi.
                     </p>
-                  </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -281,8 +275,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                         
-                          <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                          <Link to="#">Tibbiyot va farmakologiya</Link>
                         </h4>
                         <p className="card_text">
                           Maqolalar qabul qilish muddati <br />
@@ -297,8 +290,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img1} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          
-                          <Link to="#">Sport</Link>{" "}
+                          <Link to="#">Sport</Link>
                         </h4>
                         <p className="card_text">
                           Maqolalar qabul qilish muddati <br />
@@ -313,8 +305,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img2} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          {" "}
-                          <Link to="#">Fizika</Link>{" "}
+                          <Link to="#">Fizika</Link>
                         </h4>
                         <p className="card_text">
                           Maqolalar qabul qilish muddati <br />
@@ -365,8 +356,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          {" "}
-                          <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                          <Link to="#">Tibbiyot va farmakologiya</Link>
                         </h4>
                         <p className="card_text">
                           Maqolalar qabul qilish muddati <br />
@@ -381,8 +371,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img1} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          {" "}
-                          <Link to="#">Sport</Link>{" "}
+                          <Link to="#">Sport</Link>
                         </h4>
                         <p className="card_text">
                           Maqolalar qabul qilish muddati <br />
@@ -397,8 +386,7 @@ class JurnallarRoyxati extends Component {
                       <img src={img2} width="360px" height="460px" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          {" "}
-                          <Link to="#">Fizika</Link>{" "}
+                          <Link to="#">Fizika</Link>
                         </h4>
                         <p className="card_text">
                           Maqolalar qabul qilish muddati <br />
@@ -413,7 +401,7 @@ class JurnallarRoyxati extends Component {
           </div>
         </div>
         <Listhome />
-        <Foooter/>
+        <Foooter />
       </div>
     );
   }

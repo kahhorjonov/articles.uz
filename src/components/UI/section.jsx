@@ -22,7 +22,7 @@ class Section extends React.Component {
 
               <div className="col-md-6">
                 <div className="art-tex">
-                  <p className="articles-text">
+                  <span className="articles-text">
                     Articles.uz onlayn jurnallari ilm-fanning turli sohalarida
                     Oliy o'quv yurtlari o'qituvchilari, ilmiy xodimlar va
                     mutaxassislarga qaratilgan <br />
@@ -37,7 +37,7 @@ class Section extends React.Component {
                       texnik tadqiqotlar sohasida keng jamoatchilik tomonidan
                       muhokama qilinadi.
                     </p>
-                  </p>
+                  </span>
                 </div>
               </div>
             </div>

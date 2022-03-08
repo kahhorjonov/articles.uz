@@ -5,7 +5,6 @@ import Listhome from "./listhome";
 import Foooter from "./foooter";
 import { Link } from "react-router-dom";
 
-
 import img from "../profile.png";
 
 import "../../styles/homePage.css";
@@ -30,8 +29,7 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      {" "}
-                      <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                      <Link to="#">Tibbiyot va farmakologiya</Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -46,7 +44,7 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                      <Link to="#">Tibbiyot va farmakologiya</Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -61,8 +59,7 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      {" "}
-                      <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                      <Link to="#">Tibbiyot va farmakologiya</Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -77,8 +74,7 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      {" "}
-                      <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                      <Link to="#">Tibbiyot va farmakologiya</Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -93,8 +89,7 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      {" "}
-                      <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                      <Link to="#">Tibbiyot va farmakologiya</Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -109,8 +104,7 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      {" "}
-                      <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                      <Link to="#">Tibbiyot va farmakologiya</Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
