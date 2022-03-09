@@ -18,6 +18,7 @@ import NashrShartlari from "./components/UI/nashrShartlari";
 import Aloqa from "./components/UI/aloqa";
 import NotFound from "./components/common/notFound";
 import auth from "services/authService.js";
+import MagazineInfo from "./components/UI/magazineInfo";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -87,11 +88,13 @@ class App extends Component {
               />
 
               <Redirect from="/admin" exact to="/admin/dashboard" />
+
               <ProtectedRoute
                 path="/admin"
                 component={AdminLayout}
                 // render={(props) => <AdminLayout {...props} />}
               />
+
               <Redirect to="/not-found" />
             </Switch>
           </>
@@ -286,6 +289,12 @@ class App extends Component {
               path="/"
               exact
               component={(props) => <Asosiy {...props} />}
+            />
+
+            <Route
+              path="/main/magazineInfo/:id"
+              exact
+              component={(props) => <MagazineInfo {...props} />}
             />
 
             <Route

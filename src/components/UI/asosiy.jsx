@@ -29,7 +29,9 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      <Link to="/arxive">Tibbiyot va farmakologiya</Link>
+                      <Link to="/main/magazineInfo/:88520e56-c7bd-474b-9749-c6f8245d1f23">
+                        Tibbiyot va farmakologiya
+                      </Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -44,7 +46,9 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
+                      <Link to="/main/magazineInfo/:88520e56-c7bd-474b-9749-c6f8245d1f23">
+                        Tibbiyot va farmakologiya
+                      </Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -59,7 +63,9 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
+                      <Link to="/main/magazineInfo/:88520e56-c7bd-474b-9749-c6f8245d1f23">
+                        Tibbiyot va farmakologiya
+                      </Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -74,7 +80,9 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
+                      <Link to="/main/magazineInfo/:88520e56-c7bd-474b-9749-c6f8245d1f23">
+                        Tibbiyot va farmakologiya
+                      </Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -89,7 +97,9 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
+                      <Link to="/main/magazineInfo/:88520e56-c7bd-474b-9749-c6f8245d1f23">
+                        Tibbiyot va farmakologiya
+                      </Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -104,7 +114,9 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
+                      <Link to="/main/magazineInfo/:88520e56-c7bd-474b-9749-c6f8245d1f23">
+                        Tibbiyot va farmakologiya
+                      </Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
@@ -117,6 +129,7 @@ class Asosiy extends React.Component {
           </div>
 
           {/* buttons */}
+
           <div className="buut-ons justify-content-center d-flex">
             <a href="">
               <button
@@ -128,9 +141,13 @@ class Asosiy extends React.Component {
             </a>
           </div>
         </div>
+
         <Section />
+
         <Mainhome2 />
+
         <Listhome />
+
         <Foooter />
       </>
     );

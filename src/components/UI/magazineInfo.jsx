@@ -4,7 +4,7 @@ import img from "../../components/profile.png";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import "../../styles/magazineInfo.css";
+import "styles/magazineInfo.css";
 
 class MagazineInfo extends Component {
   state = {
@@ -16,7 +16,13 @@ class MagazineInfo extends Component {
 
   componentDidMount() {
     try {
-      const userId = this.props.history.location.pathname.slice(21);
+      // const userId = this.props.history.location.pathname.slice(21);
+      const userId = this.props.location.pathname.split(":")[1]
+        ? this.props.location.pathname.split(":")[1]
+        : this.props.location.pathname.split(":")[0];
+
+      console.log(userId);
+
       this.setState({
         userId,
       });
@@ -56,7 +62,6 @@ class MagazineInfo extends Component {
 
   render() {
     const { title, category } = this.state.magazineInfo;
-    console.log(this.state.magazineInfo);
 
     return (
       <>
@@ -65,7 +70,7 @@ class MagazineInfo extends Component {
             <div className="card-body">
               <div className="container magazineInfo">
                 <h1>“{title}” ilmiy jurnali</h1>
-                <p className="art_ilmiy">
+                <p style={{ fontSize: "16px" }} className="art_ilmiy">
                   ARTICLES.UZ ilmiy jurnallari / {category && category.name}
                 </p>
 
@@ -80,25 +85,25 @@ class MagazineInfo extends Component {
                         ).getFullYear()}{" "}
                       yildan buyon chiqadi <br />
                       ISBN:{" "}
-                      <span className="text-muted">
+                      <span style={{ fontSize: "16px" }} className="text-muted">
                         {this.state.magazineInfo &&
                           this.state.magazineInfo.isbn}
                       </span>{" "}
                       <br />
                       ISSN:{" "}
-                      <span className="text-muted">
+                      <span style={{ fontSize: "16px" }} className="text-muted">
                         {this.state.magazineInfo &&
                           this.state.magazineInfo.issn}
                       </span>{" "}
                       <br />
                       Ommaviy axborot vositalarini ro'yxatga olish to'g'risida:
                       <br />
-                      <span className="text-muted">
+                      <span style={{ fontSize: "16px" }} className="text-muted">
                         № {this.state.magazineInfo.certificateNumber}
                       </span>
                     </h3>
 
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       Jurnal aloqa, axborot texnologiyalari va ommaviy
                       kommunikatsiyalar sohasida nazorat bo'yicha Federal
                       xizmati (Roskomnadzor), ro'yxatga olish raqami el
@@ -108,14 +113,14 @@ class MagazineInfo extends Component {
                     </p>
                   </div>
                   <div className="col-lg-8">
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       <strong className="pr-3">Ko'rib chiqish:</strong>
                       <span>
                         {this.state.magazineInfo &&
                           this.state.magazineInfo.description}
                       </span>
                     </p>
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       <strong>Jurnalning chiqarilish</strong>i maqolalar qabul
                       qilingandan so'ng{" "}
                       {this.state.magazineInfo &&
@@ -123,11 +128,11 @@ class MagazineInfo extends Component {
                       kun ichida saytda e'lon qilinadi.
                     </p>
 
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       <strong>Maqolaning chiqish ma'lumotlari</strong> - nashr
                       uchun to'lov kunida jurnal saytida.
                     </p>
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       <strong>Jurnalni pochta orqali jo'natish</strong>
                       Rossiya maqolalar qabul qilingandan so'ng 20 kun.
                     </p>
@@ -136,13 +141,13 @@ class MagazineInfo extends Component {
                       maqolalar quyidagilarga yuboriladi:
                     </p>
 
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       <strong>- eLIBRARY.RU:</strong>
                       ilmiy elektron kutubxona eLIBRARY.RU bir oyda bir
                       milliondan ortiq noyob foydalanuvchilarga tashrif
                       buyuradi.
                     </p>
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       <strong>- Ulrichning Periodicals Directory:</strong>
                       dunyoning eng yirik ma'lumotlar bazasi bo'lgan va barcha
                       ilmiy muassasalar tomonidan ma'lumot va axborot ishlarida
@@ -151,11 +156,11 @@ class MagazineInfo extends Component {
                     <p>
                       <strong>- GoogleScholar.</strong>
                     </p>
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       Jurnalda maqola chop etish uchun ariza berish bir necha
                       daqiqada bo'lishi mumkin.
                     </p>
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       Kimyo, biologiya va tibbiyot bilan chambarchas bog'liq
                       bo'lgan boshqa fanlarning rivojlanishi tufayli fan
                       rivojlanishning yuqori darajasiga chiqdi. Tibbiy ilmiy
@@ -165,7 +170,7 @@ class MagazineInfo extends Component {
                       tadqiqotlarini hamkasblari va barcha manfaatdor tomonlar
                       bilan baham ko'rishga yordam beradi.
                     </p>
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       Tibbiyot jurnalida ilmiy ishni nashr etish uchun
                       soddalashtirilgan ariza berish ko'plab muammolarni hal
                       qiladi. Mualliflar tadqiqot mavzusiga muvofiq ilmiy davriy
@@ -186,12 +191,12 @@ class MagazineInfo extends Component {
               <div className="gernMaqola">
                 <div className="container">
                   <div className="col-lg-12">
-                    <p>
+                    <p style={{ fontSize: "16px" }}>
                       Jurnalning yangi soni 11.09.2020 da saytda e’lon qilinadi
                     </p>
                     <h3>
-                      “Tibbiyot va farmakologiya” ilmiy jurnaliga maqolalar
-                      01.09.2020 gacha qabul qilinadi.
+                      “{title}” ilmiy jurnaliga maqolalar 01.09.2020 gacha qabul
+                      qilinadi.
                     </h3>
                     <button className="btn btn-dark">Maqola Yuborish</button>
                   </div>
