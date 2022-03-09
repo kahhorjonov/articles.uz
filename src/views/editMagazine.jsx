@@ -415,7 +415,15 @@ class EditMagazine extends Component {
                             {article.publicPrivate.toString()}
                           </td>
                           <td className="col-md-3 text-center">
-                            <Button className="btn btn-danger">Delete</Button>
+                            <label className="switch">
+                              <input
+                                // onChange={(e) =>
+                                //   this.handleChange(e, article.id)
+                                // }
+                                type="checkbox"
+                              />
+                              <span className="slider round"></span>
+                            </label>
                           </td>
                         </tr>
                       ))}
