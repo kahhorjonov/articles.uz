@@ -96,17 +96,33 @@ class JurnallarRoyxati extends Component {
             <div className="col-md-12">
               <ul className="nav navpils">
                 <li className="nav-item">
-                  <a className="nav-link" href="">
+                  <Link
+                    className="nav-link"
+                    data-toggle="pill"
+                    to=""
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.getMagazinesById(0);
+                    }}
+                  >
                     Barchasi
-                  </a>
+                  </Link>
                 </li>
 
                 {magazineCategories.length &&
                   magazineCategories.map((category) => (
                     <li key={category.id} className="nav-item">
-                      <a className="nav-link" href="">
+                      <Link
+                        className="nav-link"
+                        data-toggle="pill"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.getMagazinesById(category.id);
+                        }}
+                        to=""
+                      >
                         {category.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
               </ul>
@@ -114,21 +130,26 @@ class JurnallarRoyxati extends Component {
           </div>
 
           <div className="row mx-0 mx-sm-0 jurnal_articles">
-            {magazines.length &&
+            {magazines &&
               magazines.map((magazine) => (
                 <div key={magazine.id} className="col-md-4 ">
                   <div className="card border-0">
                     <GetImages url={magazine.cover.id} />
 
-                    {/* <img className="card-img-top" src={img} alt="Card image" /> */}
                     <div className="card-body p-0">
-                      <h4 className="card_title">
-                        <Link to="#">{magazine.title}</Link>
+                      <h4
+                        style={{ marginTop: "15px" }}
+                        className="card_title p-0"
+                      >
+                        <Link to="">{magazine.title}</Link>
                       </h4>
-                      <p className="card_text">
+                      {/* <p className="card_text">
                         Maqolalar qabul qilish muddati <br />
-                        01.09.2020 gacha
-                      </p>
+                        {new Date(magazine.deadline)
+                          .toISOString()
+                          .slice(0, 10)}{" "}
+                        gacha
+                      </p> */}
                     </div>
                   </div>
                 </div>
