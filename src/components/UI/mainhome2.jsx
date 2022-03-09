@@ -2,7 +2,7 @@ import React from "react";
 import people from "assets/img/homePage/working people.png";
 import library from "assets/img/homePage/library.png";
 
-import "../../styles/homePage.css";
+import "styles/homePage.css";
 
 class Mainhome2 extends React.Component {
   render() {

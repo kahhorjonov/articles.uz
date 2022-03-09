@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/homePage.css";
+import "styles/homePage.css";
 
 class Listhome extends React.Component {
   render() {
@@ -21,10 +21,6 @@ class Listhome extends React.Component {
                 Jurnalning bosma versiyasini 20 kun ichida yuborish
               </li>
               <li className="list-group-item">Qulay narxlar</li>
-              <li className="list-group-item">
-                Jurnallar ilmiy bazalarda indekslanadi: Ulrichning Periodicals
-                Directory, Cyberlinka, GoogleScholar
-              </li>
               <li className="list-group-item"></li>
             </ul>
           </div>

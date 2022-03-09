@@ -6,11 +6,9 @@ import Foooter from "./foooter";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getActiveMagazines } from "services/magazineService";
-
-import img from "../profile.png";
-
-import "../../styles/homePage.css";
 import GetImages from "utils/getImages";
+
+import "styles/homePage.css";
 
 class Asosiy extends React.Component {
   state = {
@@ -29,7 +27,6 @@ class Asosiy extends React.Component {
 
   render() {
     const magazines = this.state.magazines;
-    console.log(magazines[0]);
 
     return (
       <>
@@ -44,7 +41,7 @@ class Asosiy extends React.Component {
             </div>
 
             <div className="article_rows row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 pl-0">
-              {magazines.length &&
+              {magazines &&
                 magazines.map((magazine) => (
                   <div key={magazine.id} className="col-md-4 card-articles">
                     <div className="border-0">

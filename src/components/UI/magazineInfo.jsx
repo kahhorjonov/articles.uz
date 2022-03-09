@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import img from "../../components/profile.png";
+import img from "components/profile.png";
 import axios from "axios";
 import { toast } from "react-toastify";
+
+import { getMagazinesById, getYearById } from "services/magazineService";
 
 import "styles/magazineInfo.css";
 
 class MagazineInfo extends Component {
   state = {
-    userId: "",
+    magazineId: "",
     magazineInfo: [],
 
     cover: "",
@@ -17,30 +19,41 @@ class MagazineInfo extends Component {
   componentDidMount() {
     try {
       // const userId = this.props.history.location.pathname.slice(21);
-      const userId = this.props.location.pathname.split(":")[1]
+      const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
         : this.props.location.pathname.split(":")[0];
 
-      console.log(userId);
+      console.log(magazineId);
 
       this.setState({
-        userId,
+        magazineId,
       });
-      this.getMagazineInfo(userId);
+      this.getMagazineInfo(magazineId);
+      this.getYearsById(magazineId);
     } catch (error) {
       toast.error("Bunday jurnal mavjud emas");
     }
   }
 
   getMagazineInfo = async (id) => {
-    await axios
-      .get(`http://192.168.100.27:8080/api/journals/getById/${id}`)
-      .then((res) => {
+    try {
+      await getMagazinesById(id).then((res) => {
         // console.log(res.data.object.journals);
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ cover: res.data.object.journals.cover });
         this.getImage(res.data.object.journals.cover.id);
       });
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  getYearsById = async (id) => {
+    try {
+      await getYearById(id).then((res) => console.log(res));
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   getImage = async (id) => {

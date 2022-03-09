@@ -60,6 +60,10 @@ export function getParentCategories() {
   return http.get(apiLocal + "/category/allParentCategory");
 }
 
+export function getYearById(id) {
+  return http.get(apiLocal + `/journals/getYear/${id}`);
+}
+
 export function editMagazines(id, data) {
   // console.log(data);
 
@@ -87,4 +91,5 @@ export default {
   getParentMagazines,
   editMagazines,
   getActiveMagazines,
+  getYearById,
 };

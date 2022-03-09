@@ -45,8 +45,6 @@ class Jurnallar extends Component {
   render() {
     const { magazineCategories, magazines } = this.state;
 
-    console.log(magazines);
-
     return (
       <>
         <div className="content">

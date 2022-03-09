@@ -109,7 +109,7 @@ class JurnallarRoyxati extends Component {
                   </Link>
                 </li>
 
-                {magazineCategories.length &&
+                {magazineCategories &&
                   magazineCategories.map((category) => (
                     <li key={category.id} className="nav-item">
                       <Link
