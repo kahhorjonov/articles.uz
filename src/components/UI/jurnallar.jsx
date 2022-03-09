@@ -18,11 +18,6 @@ class Jurnallar extends Component {
 
     this.state.magazineCategories &&
       (await this.getMagazinesById(this.state.magazineCategories[0].id));
-
-    // this.state.magazines.length &&
-    //   this.state.magazines.map(async (magazine) => {
-    //     await this.getImage(magazine.journals.cover.id);
-    //   });
   };
 
   getCategory = async () => {

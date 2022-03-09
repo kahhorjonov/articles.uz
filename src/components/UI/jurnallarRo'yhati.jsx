@@ -3,9 +3,16 @@ import { Link } from "react-router-dom";
 import img from "routes/books.png";
 import img1 from "assets/img/damir-bosnjak.jpg";
 import img2 from "assets/img/mike.jpg";
-import img3 from "assets/img/header.jpg";
+import { toast } from "react-toastify";
+
+import {
+  getMagazinesById,
+  getParentCategories,
+} from "services/magazineService";
 
 import { Col } from "reactstrap";
+
+import GetImages from "utils/getImages";
 import Listhome from "./listhome";
 import Foooter from "./foooter";
 import Carousel from "react-multi-carousel";
@@ -14,7 +21,41 @@ import "react-multi-carousel/lib/styles.css";
 import "styles/jurnallarRoyhati.css";
 
 class JurnallarRoyxati extends Component {
+  state = {
+    magazineCategories: [],
+    magazines: [],
+  };
+
+  componentDidMount = async () => {
+    await this.getCategory();
+
+    this.state.magazineCategories &&
+      (await this.getMagazinesById(this.state.magazineCategories[0].id));
+  };
+
+  getCategory = async () => {
+    try {
+      await getParentCategories().then((respons) => {
+        this.setState({ magazineCategories: respons.data });
+      });
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  getMagazinesById = async (id) => {
+    try {
+      await getMagazinesById(id).then((res) => {
+        this.setState({ magazines: res.data });
+      });
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   render() {
+    const { magazines, magazineCategories } = this.state;
+
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
@@ -55,139 +96,43 @@ class JurnallarRoyxati extends Component {
             <div className="col-md-12">
               <ul className="nav navpils">
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link" href="">
                     Barchasi
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Tibbiyot va farmakologiya
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Psixologiya va ta'lim
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Texnik fanlar
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Filologiya va san'atshunoslik
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Ijtimoiy fanlar
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Kimyo va biologiya
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Iqtisodiyot va huquqshunoslik
-                  </a>
-                </li>
+
+                {magazineCategories.length &&
+                  magazineCategories.map((category) => (
+                    <li key={category.id} className="nav-item">
+                      <a className="nav-link" href="">
+                        {category.name}
+                      </a>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
 
           <div className="row mx-0 mx-sm-0 jurnal_articles">
-            <div className="col-md-4 ">
-              <div className="card  border-0">
-                <img className="card-img-top" src={img} alt="Card image" />
-                <div className="card-body p-0">
-                  <h4 className="card_title">
-                    <Link to="#">Tibbiyot va farmakologiya</Link>
-                  </h4>
-                  <p className="card_text">
-                    Maqolalar qabul qilish muddati <br />
-                    01.09.2020 gacha
-                  </p>
-                </div>
-              </div>
-            </div>
+            {magazines.length &&
+              magazines.map((magazine) => (
+                <div key={magazine.id} className="col-md-4 ">
+                  <div className="card border-0">
+                    <GetImages url={magazine.cover.id} />
 
-            <div className="col-md-4 ">
-              <div className="card  border-0">
-                <img className="card-img-top" src={img} alt="Card image" />
-                <div className="card-body p-0">
-                  <h4 className="card_title">
-                    <Link to="#">Tibbiyot va farmakologiya</Link>
-                  </h4>
-                  <p className="card_text">
-                    Maqolalar qabul qilish muddati <br />
-                    01.09.2020 gacha
-                  </p>
+                    {/* <img className="card-img-top" src={img} alt="Card image" /> */}
+                    <div className="card-body p-0">
+                      <h4 className="card_title">
+                        <Link to="#">{magazine.title}</Link>
+                      </h4>
+                      <p className="card_text">
+                        Maqolalar qabul qilish muddati <br />
+                        01.09.2020 gacha
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="col-md-4 ">
-              <div className="card  border-0">
-                <img className="card-img-top" src={img} alt="Card image" />
-                <div className="card-body p-0">
-                  <h4 className="card_title">
-                    <Link to="#">Tibbiyot va farmakologiya</Link>
-                  </h4>
-                  <p className="card_text">
-                    Maqolalar qabul qilish muddati <br />
-                    01.09.2020 gacha
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4 ">
-              <div className="card  border-0">
-                <img className="card-img-top" src={img} alt="Card image" />
-                <div className="card-body p-0">
-                  <h4 className="card_title">
-                    <Link to="#">Tibbiyot va farmakologiya</Link>
-                  </h4>
-                  <p className="card_text">
-                    Maqolalar qabul qilish muddati <br />
-                    01.09.2020 gacha
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4 ">
-              <div className="card  border-0">
-                <img className="card-img-top" src={img} alt="Card image" />
-                <div className="card-body p-0">
-                  <h4 className="card_title">
-                    <Link to="#">Tibbiyot va farmakologiya</Link>
-                  </h4>
-                  <p className="card_text">
-                    Maqolalar qabul qilish muddati <br />
-                    01.09.2020 gacha
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4 ">
-              <div className="card  border-0">
-                <img className="card-img-top" src={img} alt="Card image" />
-                <div className="card-body p-0">
-                  <h4 className="card_title">
-                    <Link to="#">Tibbiyot va farmakologiya</Link>
-                  </h4>
-                  <p className="card_text">
-                    Maqolalar qabul qilish muddati <br />
-                    01.09.2020 gacha
-                  </p>
-                </div>
-              </div>
-            </div>
+              ))}
           </div>
         </div>
 
@@ -198,8 +143,10 @@ class JurnallarRoyxati extends Component {
             <div className="row mx-0 mx-sm-0">
               <div className="col-md-6">
                 <div className="article-chap">
-                  <p className="jurnal-haqida">Jurnal haqida</p>
-                  <h2 className="article_uz">
+                  <p style={{ fontSize: "32px" }} className="jurnal-haqida">
+                    Jurnal haqida
+                  </p>
+                  <h2 style={{ fontSize: "32px" }} className="article_uz">
                     Articles.uz onlayn jurnallari - bu <br />
                     o’zbek tilida elektron va bosma <br />
                     shaklda chop etiladigan oylik ilmiy nashrlar.
@@ -272,7 +219,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img} width="360px" height="460px" alt="123" />
+                      <img src={img} alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Tibbiyot va farmakologiya</Link>
@@ -287,7 +234,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img1} width="360px" height="460px" alt="123" />
+                      <img src={img1} alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Sport</Link>
@@ -302,7 +249,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img2} width="360px" height="460px" alt="123" />
+                      <img src={img2} alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Fizika</Link>
@@ -353,7 +300,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img} width="360px" height="460px" alt="123" />
+                      <img src={img} alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Tibbiyot va farmakologiya</Link>
@@ -368,7 +315,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img1} width="360px" height="460px" alt="123" />
+                      <img src={img1} alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Sport</Link>
@@ -383,7 +330,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img2} width="360px" height="460px" alt="123" />
+                      <img src={img2} alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Fizika</Link>

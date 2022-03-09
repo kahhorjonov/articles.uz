@@ -45,17 +45,23 @@ export function getById(id) {
 }
 
 export function getMagazinesById(id) {
-  return http.get(
-    `http://192.168.100.27:8080/api/journals/getCategoryJournals/${id}`
-  );
+  return http.get(apiLocal + `/journals/getCategoryJournals/${id}`);
 }
 
 export function getParentMagazines() {
   return http.get(apiLocal + "/journals/getActiveJournals");
 }
 
+export function getActiveMagazines() {
+  return http.get(apiLocal + "/journals/getActiveJournals");
+}
+
+export function getParentCategories() {
+  return http.get(apiLocal + "/category/allParentCategory");
+}
+
 export function editMagazines(id, data) {
-  console.log(data);
+  // console.log(data);
 
   const object = {
     category: data.category,
@@ -80,4 +86,5 @@ export default {
   getMagazinesById,
   getParentMagazines,
   editMagazines,
+  getActiveMagazines,
 };
