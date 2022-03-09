@@ -54,9 +54,30 @@ export function getParentMagazines() {
   return http.get(apiLocal + "/journals/getActiveJournals");
 }
 
+export function editMagazines(id, data) {
+  console.log(data);
+
+  const object = {
+    category: data.category,
+    certificateNumber: data.certificateNumber,
+    title: data.title,
+    deadline: data.deadline,
+    printedDay: data.printDay,
+    file: data.file,
+    isbn: data.isbn,
+    issn: data.issn,
+    cover: data.cover,
+    status: data.status,
+    description: data.description,
+  };
+
+  return http.post(apiLocal + `/api/journals/edit/${id}`, object);
+}
+
 export default {
   createMagazine,
   getById,
   getMagazinesById,
   getParentMagazines,
+  editMagazines,
 };

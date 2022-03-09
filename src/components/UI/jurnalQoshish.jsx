@@ -16,6 +16,7 @@ import {
   CardHeader,
   FormGroup,
 } from "reactstrap";
+import axios from "axios";
 
 class JurnalQoshish extends Component {
   state = {

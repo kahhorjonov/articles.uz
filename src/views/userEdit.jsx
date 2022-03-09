@@ -433,9 +433,14 @@ class UserEdit extends Component {
                         <FormGroup>
                           <label>Daraja</label>
                           <Input
-                            defaultValue="Akademik"
+                            defaultValue={academicDegree}
                             placeholder="Daraja"
                             type="text"
+                            onChange={(e) =>
+                              this.setState({
+                                academicDegree: e.target.value,
+                              })
+                            }
                           />
                         </FormGroup>
                       </Col>

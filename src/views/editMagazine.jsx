@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import magazineService from "services/magazineService";
+import { getById, editMagazines } from "services/magazineService";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
@@ -32,7 +32,7 @@ class EditMagazine extends Component {
     certificateNumber: "",
     isbn: "",
     issn: "",
-    cover: "",
+    coverImg: "",
     status: "",
     description: "",
 
@@ -62,12 +62,12 @@ class EditMagazine extends Component {
       return null;
     }
 
-    return this.setState({ cover: URL.createObjectURL(imageBlob) });
+    return this.setState({ coverImg: URL.createObjectURL(imageBlob) });
   };
 
   getMagazinesById = async (id) => {
     try {
-      await magazineService.getById(id).then((res) => {
+      await getById(id).then((res) => {
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ deadline: res.data.object.deadline });
         this.setState({ articles: res.data.object.articles });
@@ -79,6 +79,12 @@ class EditMagazine extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      await editMagazines(this.state.thisMagazineId, this.state);
+    } catch (error) {
+      toast.error(error);
+    }
 
     console.log(this.state);
   };
@@ -158,7 +164,7 @@ class EditMagazine extends Component {
                       maxHeight: "100%",
                       objectFit: "contain",
                     }}
-                    src={this.state.cover}
+                    src={this.state.coverImg}
                     alt="cover"
                   />
                 </CardBody>
@@ -193,14 +199,6 @@ class EditMagazine extends Component {
                             defaultValue={
                               this.state.deadline && this.state.deadline
                             }
-                            // defaultValue={new Date(deadline).toLocaleDateString(
-                            //   "uz-UZ",
-                            //   {
-                            //     year: "numeric",
-                            //     month: "2-digit",
-                            //     day: "2-digit",
-                            //   }
-                            // )}
                             placeholder="Maqola qabul qilish oxirgi sanasi"
                             type="date"
                             onChange={(e) => {
@@ -322,7 +320,6 @@ class EditMagazine extends Component {
                           <label>Cover</label>
                           <Input
                             style={{ padding: "0" }}
-                            // defaultValue={academicDegree}
                             type="file"
                             onChange={(e) =>
                               this.setState({
