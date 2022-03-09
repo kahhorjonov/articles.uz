@@ -57,7 +57,7 @@ class Jurnallar extends Component {
             <div className="col-md-12">
               <div className="card">
                 <div className="card-header">
-                  <h3>Barcha maqolalar</h3>
+                  <h3>Barcha jurnallar </h3>
                 </div>
                 <div className="card-body">
                   <div className="row mx-0">
