@@ -272,7 +272,7 @@ class JurnalQoshish extends Component {
                           <option value="PUBLISHED">Published</option>
                         </Input>
                       </Col>
-                      <Col sm="1" md="1" lg="1">
+                      <Col sm="2" md="2" lg="2">
                         <label>Print Date</label>
                         <Input
                           min="0"
@@ -283,7 +283,7 @@ class JurnalQoshish extends Component {
                         />
                       </Col>
 
-                      <Col sm="4" md="4" lg="4">
+                      <Col sm="3" md="3" lg="3">
                         <label>Parent Category (optional)</label>
                         <Input
                           defaultValue=" "
