@@ -30,8 +30,8 @@ class Asosiy extends React.Component {
                   <img className="card-img-top" src={img} alt="Card image" />
                   <div className="card-body p-0">
                     <h4 className="card_title">
-                      {" "}
-                      <Link to="#">Tibbiyot va farmakologiya</Link>{" "}
+                     
+                      <Link to="/arxive">Tibbiyot va farmakologiya</Link>
                     </h4>
                     <p className="card_text">
                       Maqolalar qabul qilish muddati <br />
