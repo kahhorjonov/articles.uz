@@ -47,15 +47,31 @@ class JurnalQoshish extends Component {
     await this.populateCategories();
 
     await this.populateMagazines();
+    // console.log(this.state.categories);
   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
 
+
     try {
       await magazineService
         .createMagazine(this.state)
         .then((res) => toast.success(res.data.message));
+
+      this.setState({ title: "" });
+      this.setState({ createdDate: "" });
+      this.setState({ file: "" });
+      this.setState({ cover: "" });
+      this.setState({ deadline: "" });
+      this.setState({ categories: "" });
+      this.setState({ certificateNumber: "" });
+      this.setState({ issn: "" });
+      this.setState({ isbn: "" });
+      this.setState({ description: "" });
+      this.setState({ status: "" });
+      this.setState({ printedDate: "" });
+      this.setState({ parentCategoryId: "" });
     } catch (error) {
       console.log(error);
     }
