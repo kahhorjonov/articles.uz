@@ -94,6 +94,11 @@ class JurnalQoshish extends Component {
       isValid = false;
     }
 
+    if (file.length < 1) {
+      errors.cover = "File is not allowed to be empty";
+      isValid = false;
+    }
+
     this.setState({ errors });
     return isValid;
   };
