@@ -95,7 +95,27 @@ class JurnalQoshish extends Component {
     }
 
     if (file.length < 1) {
-      errors.cover = "File is not allowed to be empty";
+      errors.file = "File is not allowed to be empty";
+      isValid = false;
+    }
+
+    if (deadline.trim().length < 1) {
+      errors.deadline = "Deadline is not allowed to be empty";
+      isValid = false;
+    }
+
+    if (categoryId.trim().length <= 0) {
+      errors.categories = "Category is not allowed to be empty";
+      isValid = false;
+    }
+
+    if (description.trim().length <= 0) {
+      errors.description = "Description is not allowed to be empty";
+      isValid = false;
+    }
+
+    if (printedDate.trim().length <= 0) {
+      errors.printedDate = "Print Day is not allowed to be empty";
       isValid = false;
     }
 

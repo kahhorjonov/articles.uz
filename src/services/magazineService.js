@@ -66,6 +66,10 @@ export function getYearById(id) {
   return http.get(apiLocal + `/journals/getYear/${id}`);
 }
 
+export function getMagazinesByYear(year, id) {
+  return http.get(apiLocal + `/journals/getYearJournals/${year}/${id}`);
+}
+
 export function editMagazines(id, data) {
   // console.log(data);
 
@@ -94,4 +98,5 @@ export default {
   editMagazines,
   getActiveMagazines,
   getYearById,
+  getMagazinesByYear,
 };

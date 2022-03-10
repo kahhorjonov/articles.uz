@@ -4,7 +4,11 @@ import img from "components/profile.png";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { getMagazinesById, getYearById } from "services/magazineService";
+import {
+  getById,
+  getYearById,
+  getMagazinesByYear,
+} from "services/magazineService";
 
 import "styles/magazineInfo.css";
 
@@ -13,6 +17,8 @@ class MagazineInfo extends Component {
     magazineId: "",
     magazineInfo: [],
 
+    years: [],
+    magazines: [],
     cover: "",
   };
 
@@ -30,6 +36,9 @@ class MagazineInfo extends Component {
       });
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
+      if (this.state.years[0]) {
+        this.getMagazinesByYear(this.state.years[0], magazineId);
+      }
     } catch (error) {
       toast.error("Bunday jurnal mavjud emas");
     }
@@ -37,7 +46,7 @@ class MagazineInfo extends Component {
 
   getMagazineInfo = async (id) => {
     try {
-      await getMagazinesById(id).then((res) => {
+      await getById(id).then((res) => {
         // console.log(res.data.object.journals);
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ cover: res.data.object.journals.cover });
@@ -50,7 +59,19 @@ class MagazineInfo extends Component {
 
   getYearsById = async (id) => {
     try {
-      await getYearById(id).then((res) => console.log(res));
+      await getYearById(id).then((res) => {
+        this.setState({ years: res.data });
+      });
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  getMagazinesByYear = async (year, id) => {
+    try {
+      await getMagazinesByYear(year, id).then((res) =>
+        this.setState({ magazines: res.data })
+      );
     } catch (error) {
       toast.error(error);
     }
@@ -75,6 +96,8 @@ class MagazineInfo extends Component {
 
   render() {
     const { title, category } = this.state.magazineInfo;
+
+    const { years, magazines } = this.state;
 
     return (
       <>
@@ -225,25 +248,25 @@ class MagazineInfo extends Component {
                 <h1>Jurnal arxivi</h1>
 
                 <ul style={{ margin: "3rem auto" }} className="nav nav-pills">
-                  <li className="nav-item">
-                    <a
-                      className="nav-link active"
-                      data-toggle="pill"
-                      href="#home"
-                    >
-                      2020
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" data-toggle="pill" href="#menu1">
-                      2019
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" data-toggle="pill" href="#menu2">
-                      2018
-                    </a>
-                  </li>
+                  {years &&
+                    years.map((year, idx) => (
+                      <li key={idx} className="nav-item">
+                        <Link
+                          className="nav-link active"
+                          data-toggle="pill"
+                          to=""
+                          onClick={(e) => {
+                            e.preventDefault();
+                            this.getMagazinesByYear(
+                              year,
+                              this.state.magazineId
+                            );
+                          }}
+                        >
+                          {year}
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
 
                 <div className="tab-content">
@@ -260,60 +283,20 @@ class MagazineInfo extends Component {
                         </Link>
                       </div>
 
-                      <div className="col-lg-3">
-                        <img src={img} width="270px" alt="" />
-                        <Link
-                          style={{ fontSize: "2rem", margin: "1rem auto" }}
-                          className="text-dark"
-                          to="/admin/editMagazine"
-                        >
-                          № 9 (71) <span className="text-muted">/ 2020</span>
-                        </Link>
-                      </div>
-
-                      <div className="col-lg-3">
-                        <img src={img} width="270px" alt="" />
-                        <Link
-                          style={{ fontSize: "2rem", margin: "1rem auto" }}
-                          className="text-dark"
-                          to="/admin/editMagazine"
-                        >
-                          № 9 (71) <span className="text-muted">/ 2020</span>
-                        </Link>
-                      </div>
-
-                      <div className="col-lg-3">
-                        <img src={img} width="270px" alt="" />
-                        <Link
-                          style={{ fontSize: "2rem", margin: "1rem auto" }}
-                          className="text-dark"
-                          to="/admin/editMagazine"
-                        >
-                          № 9 (71) <span className="text-muted">/ 2020</span>
-                        </Link>
-                      </div>
-
-                      <div className="col-lg-3">
-                        <img src={img} width="270px" alt="" />
-                        <Link
-                          style={{ fontSize: "2rem", margin: "1rem auto" }}
-                          className="text-dark"
-                          to="/admin/editMagazine"
-                        >
-                          № 9 (71) <span className="text-muted">/ 2020</span>
-                        </Link>
-                      </div>
-
-                      <div className="col-lg-3">
-                        <img src={img} width="270px" alt="" />
-                        <Link
-                          style={{ fontSize: "2rem", margin: "1rem auto" }}
-                          className="text-dark"
-                          to="/admin/editMagazine"
-                        >
-                          № 9 (71) <span className="text-muted">/ 2020</span>
-                        </Link>
-                      </div>
+                      {magazines &&
+                        magazines.map((magazine) => (
+                          <div key={magazine.id} className="col-lg-3">
+                            <img src={img} width="270px" alt="" />
+                            <Link
+                              style={{ fontSize: "2rem", margin: "1rem auto" }}
+                              className="text-dark"
+                              to="/admin/editMagazine"
+                            >
+                              № 9 (71){" "}
+                              <span className="text-muted">/ 2020</span>
+                            </Link>
+                          </div>
+                        ))}
                     </div>
                   </div>
                   <div className="tab-pane container fade" id="menu1">

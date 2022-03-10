@@ -30,7 +30,7 @@ class JurnallarRoyxati extends Component {
     await this.getCategory();
 
     this.state.magazineCategories &&
-      (await this.getMagazinesById(this.state.magazineCategories[0].id));
+      (await this.handleGetMagazinesById(this.state.magazineCategories[0].id));
   };
 
   getCategory = async () => {
@@ -43,7 +43,7 @@ class JurnallarRoyxati extends Component {
     }
   };
 
-  getMagazinesById = async (id) => {
+  handleGetMagazinesById = async (id) => {
     try {
       await getMagazinesById(id).then((res) => {
         this.setState({ magazines: res.data });
@@ -141,7 +141,11 @@ class JurnallarRoyxati extends Component {
                         style={{ marginTop: "15px" }}
                         className="card_title p-0"
                       >
-                        <Link to="">{magazine.title}</Link>
+                        <Link
+                          to={`/listOfMagazines/magazineInfo/:${magazine.id}`}
+                        >
+                          {magazine.title}
+                        </Link>
                       </h4>
                       {/* <p className="card_text">
                         Maqolalar qabul qilish muddati <br />

@@ -298,6 +298,12 @@ class App extends Component {
             />
 
             <Route
+              path="/listOfMagazines/magazineInfo/:id"
+              exact
+              component={(props) => <MagazineInfo {...props} />}
+            />
+
+            <Route
               path="/main"
               exact
               component={(props) => <Asosiy {...props} />}
