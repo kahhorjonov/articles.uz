@@ -4,13 +4,30 @@ import Mainhome2 from "./mainhome2";
 import Listhome from "./listhome";
 import Foooter from "./foooter";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getActiveMagazines } from "services/magazineService";
+import GetImages from "utils/getImages";
 
-import img from "../profile.png";
-
-import "../../styles/homePage.css";
+import "styles/homePage.css";
 
 class Asosiy extends React.Component {
+  state = {
+    magazines: [],
+  };
+
+  componentDidMount = async () => {
+    try {
+      await getActiveMagazines().then((res) =>
+        this.setState({ magazines: res.data })
+      );
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   render() {
+    const magazines = this.state.magazines;
+
     return (
       <>
         <div className="mainPages">
@@ -24,99 +41,35 @@ class Asosiy extends React.Component {
             </div>
 
             <div className="article_rows row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 pl-0">
-              <div className="col-md-4 card-articles">
-                <div className="border-0">
-                  <img className="card-img-top" src={img} alt="Card image" />
-                  <div className="card-body p-0">
-                    <h4 className="card_title">
-                      <Link to="/arxive">Tibbiyot va farmakologiya</Link>
-                    </h4>
-                    <p className="card_text">
-                      Maqolalar qabul qilish muddati <br />
-                      01.09.2020 gacha
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {magazines &&
+                magazines.map((magazine) => (
+                  <div key={magazine.id} className="col-md-4 card-articles">
+                    <div className="border-0">
+                      <GetImages url={magazine.cover.id} />
 
-              <div className="col-md-4 card-articles">
-                <div className="border-0">
-                  <img className="card-img-top" src={img} alt="Card image" />
-                  <div className="card-body p-0">
-                    <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
-                    </h4>
-                    <p className="card_text">
-                      Maqolalar qabul qilish muddati <br />
-                      01.09.2020 gacha
-                    </p>
-                  </div>
-                </div>
-              </div>
+                      <div className="card-body p-0">
+                        <h4 className="card_title">
+                          <Link to={`/main/magazineInfo/:${magazine.id}`}>
+                            {magazine.title}
+                          </Link>
+                        </h4>
 
-              <div className="col-md-4 card-articles">
-                <div className="border-0">
-                  <img className="card-img-top" src={img} alt="Card image" />
-                  <div className="card-body p-0">
-                    <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
-                    </h4>
-                    <p className="card_text">
-                      Maqolalar qabul qilish muddati <br />
-                      01.09.2020 gacha
-                    </p>
+                        <p className="card_text">
+                          Maqolalar qabul qilish muddati <br />
+                          {new Date(magazine.deadline)
+                            .toISOString()
+                            .slice(0, 10)}{" "}
+                          gacha
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="col-md-4 card-articles">
-                <div className="border-0">
-                  <img className="card-img-top" src={img} alt="Card image" />
-                  <div className="card-body p-0">
-                    <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
-                    </h4>
-                    <p className="card_text">
-                      Maqolalar qabul qilish muddati <br />
-                      01.09.2020 gacha
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-4 card-articles">
-                <div className="border-0">
-                  <img className="card-img-top" src={img} alt="Card image" />
-                  <div className="card-body p-0">
-                    <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
-                    </h4>
-                    <p className="card_text">
-                      Maqolalar qabul qilish muddati <br />
-                      01.09.2020 gacha
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-4 card-articles">
-                <div className="border-0">
-                  <img className="card-img-top" src={img} alt="Card image" />
-                  <div className="card-body p-0">
-                    <h4 className="card_title">
-                      <Link to="#">Tibbiyot va farmakologiya</Link>
-                    </h4>
-                    <p className="card_text">
-                      Maqolalar qabul qilish muddati <br />
-                      01.09.2020 gacha
-                    </p>
-                  </div>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
 
           {/* buttons */}
+
           <div className="buut-ons justify-content-center d-flex">
             <a href="">
               <button
@@ -128,9 +81,13 @@ class Asosiy extends React.Component {
             </a>
           </div>
         </div>
+
         <Section />
+
         <Mainhome2 />
+
         <Listhome />
+
         <Foooter />
       </>
     );

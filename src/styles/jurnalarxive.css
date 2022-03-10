@@ -3,44 +3,32 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .jurnalArxive h1 {
-  font-family: SF Pro Display;
-  font-style: normal;
   font-weight: 600;
   font-size: 48px;
-  line-height: 130%;
-  padding-top: 25px;
   margin-bottom: 0;
 }
+
 .ui {
   padding-top: 80px;
 }
+
 .ui .tex {
   padding-top: 40px;
 }
+
 .ui button {
-  font-family: SF Pro Display;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 19px;
-  text-transform: uppercase;
-  width: 201px;
   background: #282828;
-  border: 1px solid #282828;
-  box-sizing: border-box;
-  padding: 20px 45px;
   margin-top: 40px;
 }
+
 .ui2 .list-group-item {
-  font-family: SF Pro Display;
-  font-style: normal;
   font-weight: 600;
-  font-size: 18px;
-  line-height: 130%;
-  border-left: none !important;
-  border-right: none !important;
-  padding: 25px 0;
+  font-size: 16px;
+  border-left: none;
+  border-right: none;
+  padding: 20px 0;
   color: black;
 }
 .ui2 .list-group a:hover {
@@ -50,37 +38,34 @@
 .ui3 {
   padding-top: 100px;
 }
+
 .ui3 h1 {
-  font-family: SF Pro Display;
-  font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 48px;
-  line-height: 130%;
 }
+
 .ui3 .nav-pills {
   padding-top: 40px;
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
-  line-height: 170%;
 }
+
 .ui3 .nav-link {
   color: #aaaaaa;
 }
+
 .ui3 .nav-pills .nav-link.active {
   background-color: transparent;
   color: black;
 }
+
 .ui3 .col-lg-3 {
-    padding-top: 60px;
+  padding-top: 60px;
 }
-.ui3 .tab-content .col-lg-3 a{
-  font-family: SF Pro Display;
-  font-style: normal;
+
+.ui3 .tab-content .col-lg-3 a {
   font-weight: 600;
   font-size: 24px;
-  line-height: 29px;
   text-decoration: none;
-  margin-top: 30px !important;
 }

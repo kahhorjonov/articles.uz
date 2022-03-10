@@ -18,11 +18,6 @@ class Jurnallar extends Component {
 
     this.state.magazineCategories &&
       (await this.getMagazinesById(this.state.magazineCategories[0].id));
-
-    // this.state.magazines.length &&
-    //   this.state.magazines.map(async (magazine) => {
-    //     await this.getImage(magazine.journals.cover.id);
-    //   });
   };
 
   getCategory = async () => {
@@ -96,7 +91,7 @@ class Jurnallar extends Component {
                           {magazines &&
                             magazines.map((magazine) => (
                               <div
-                                key={magazine.journals.id}
+                                key={magazine.id}
                                 className="col-md-4  card-articles"
                               >
                                 <div className="border-0">
@@ -108,16 +103,16 @@ class Jurnallar extends Component {
                                     className="testDiv"
                                   >
                                     <GetImages
-                                      url={magazine.journals.cover.id}
+                                      url={magazine && magazine.cover.id}
                                     />
                                   </div>
                                   <div className="card-body p-0">
                                     <h4 className="card_title p-0">
                                       <Link
-                                        to={`/admin/magazineInfo/:${magazine.journals.id}`}
+                                        to={`/admin/magazineInfo/:${magazine.id}`}
                                         style={{ cursor: "pointer" }}
                                       >
-                                        {magazine.journals.title}
+                                        {magazine.title}
                                       </Link>
                                     </h4>
 

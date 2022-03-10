@@ -16,7 +16,6 @@ import {
   CardHeader,
   FormGroup,
 } from "reactstrap";
-import axios from "axios";
 
 class JurnalQoshish extends Component {
   state = {
@@ -41,6 +40,7 @@ class JurnalQoshish extends Component {
 
     categories: [],
     parentMagazines: [],
+    errors: {},
   };
 
   async componentDidMount() {
@@ -49,33 +49,6 @@ class JurnalQoshish extends Component {
     await this.populateMagazines();
     // console.log(this.state.categories);
   }
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-
-
-    try {
-      await magazineService
-        .createMagazine(this.state)
-        .then((res) => toast.success(res.data.message));
-
-      this.setState({ title: "" });
-      this.setState({ createdDate: "" });
-      this.setState({ file: "" });
-      this.setState({ cover: "" });
-      this.setState({ deadline: "" });
-      this.setState({ categories: "" });
-      this.setState({ certificateNumber: "" });
-      this.setState({ issn: "" });
-      this.setState({ isbn: "" });
-      this.setState({ description: "" });
-      this.setState({ status: "" });
-      this.setState({ printedDate: "" });
-      this.setState({ parentCategoryId: "" });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   async populateCategories() {
     const { data: categories } = await getParentCategories();
@@ -87,7 +60,67 @@ class JurnalQoshish extends Component {
     this.setState({ parentMagazines });
   }
 
+  formValidation = () => {
+    const {
+      id,
+      parentId,
+      categoryId,
+      issn,
+      isbn,
+      deadline,
+      certificateNumber,
+      title,
+      createdDate,
+      file,
+      cover,
+      status,
+      magazineNumber,
+      description,
+      printedDate,
+      releaseNumberOfThisYear,
+      allReleasesNumber,
+      parentCategoryId,
+    } = this.state;
+
+    let isValid = true;
+    const errors = {};
+
+    if (title.trim().length < 1) {
+      errors.titleLength = "Title is not allowed to be empty";
+      isValid = false;
+    }
+
+    if (cover.length < 1) {
+      errors.cover = "Cover is not allowed to be empty";
+      isValid = false;
+    }
+
+    this.setState({ errors });
+    return isValid;
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { errors } = this.state;
+
+    const isValid = this.formValidation();
+
+    if (isValid) {
+      try {
+        await magazineService
+          .createMagazine(this.state)
+          .then((res) => toast.success(res.data.message));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    return Object.keys(errors).map((key) => toast.error(errors[key]));
+  };
+
   render() {
+    const { errors } = this.state;
+
     return (
       <>
         <div className="content">
@@ -288,7 +321,7 @@ class JurnalQoshish extends Component {
                           <option value="PUBLISHED">Published</option>
                         </Input>
                       </Col>
-                      <Col sm="1" md="1" lg="1">
+                      <Col sm="2" md="2" lg="2">
                         <label>Print Date</label>
                         <Input
                           min="0"
@@ -299,7 +332,7 @@ class JurnalQoshish extends Component {
                         />
                       </Col>
 
-                      <Col sm="4" md="4" lg="4">
+                      <Col sm="3" md="3" lg="3">
                         <label>Parent Category (optional)</label>
                         <Input
                           defaultValue=" "
@@ -348,7 +381,9 @@ class JurnalQoshish extends Component {
                       <Col sm="12" md="12" lg="12">
                         <button
                           className="btn btn-primary"
-                          onClick={(e) => this.handleSubmit(e)}
+                          onClick={(e) => {
+                            this.handleSubmit(e);
+                          }}
                         >
                           Create
                         </button>

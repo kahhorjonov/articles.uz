@@ -17,12 +17,14 @@ export function createMagazine(data) {
   bodyFormData.append("parentId", data.parentCategoryId);
   bodyFormData.append("description", data.description);
   bodyFormData.append("printedDate", data.printedDate);
+  // bodyFormData.append("cover", data.cover);
   bodyFormData.append("cover", data.cover);
   bodyFormData.append("certificateNumber", data.certificateNumber);
   bodyFormData.append("issn", data.issn);
   bodyFormData.append("isbn", data.isbn);
   bodyFormData.append("printedDate", data.printedDate);
   bodyFormData.append("categoryId", data.categoryId);
+  // bodyFormData.append("file", data.file);
   bodyFormData.append("file", data.file);
   bodyFormData.append("status", data.status);
 
@@ -45,17 +47,27 @@ export function getById(id) {
 }
 
 export function getMagazinesById(id) {
-  return http.get(
-    `http://192.168.100.27:8080/api/journals/getCategoryJournals/${id}`
-  );
+  return http.get(apiLocal + `/journals/getCategoryJournals/${id}`);
 }
 
 export function getParentMagazines() {
   return http.get(apiLocal + "/journals/getActiveJournals");
 }
 
+export function getActiveMagazines() {
+  return http.get(apiLocal + "/journals/getActiveJournals");
+}
+
+export function getParentCategories() {
+  return http.get(apiLocal + "/category/allParentCategory");
+}
+
+export function getYearById(id) {
+  return http.get(apiLocal + `/journals/getYear/${id}`);
+}
+
 export function editMagazines(id, data) {
-  console.log(data);
+  // console.log(data);
 
   const object = {
     category: data.category,
@@ -80,4 +92,6 @@ export default {
   getMagazinesById,
   getParentMagazines,
   editMagazines,
+  getActiveMagazines,
+  getYearById,
 };

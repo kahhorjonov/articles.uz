@@ -7,7 +7,7 @@ import image from "../components/profile.png";
 import articleService from "services/articleService";
 import { Input } from "reactstrap";
 
-import "../styles/navbar.css";
+import "styles/navbar.css";
 
 class Articles extends Component {
   state = {

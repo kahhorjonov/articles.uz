@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "../../styles/chopetilgan.css";
 import { Link } from "react-router-dom";
+
+import "../../styles/chopetilgan.css";
 
 class Radetish extends Component {
   state = {};

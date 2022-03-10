@@ -1,7 +1,8 @@
 import React from "react";
-import img from "../profile.png";
+import people from "assets/img/homePage/working people.png";
+import library from "assets/img/homePage/library.png";
 
-import "../../styles/homePage.css";
+import "styles/homePage.css";
 
 class Mainhome2 extends React.Component {
   render() {
@@ -10,7 +11,7 @@ class Mainhome2 extends React.Component {
         <div className="container p-0">
           <div className="img-bg">
             <div className="col-md-12">
-              <img src={img} alt="" />
+              <img src={people} alt="" />
             </div>
 
             <div className="d-flex row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
@@ -76,7 +77,7 @@ class Mainhome2 extends React.Component {
 
               <div className="col-md-6">
                 <div className="art_uz2">
-                  <img src={img} alt="" />
+                  <img src={library} alt="" />
                 </div>
               </div>
             </div>
