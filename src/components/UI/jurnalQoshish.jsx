@@ -16,7 +16,6 @@ import {
   CardHeader,
   FormGroup,
 } from "reactstrap";
-import axios from "axios";
 
 class JurnalQoshish extends Component {
   state = {
@@ -41,6 +40,7 @@ class JurnalQoshish extends Component {
 
     categories: [],
     parentMagazines: [],
+    errors: {},
   };
 
   async componentDidMount() {
@@ -48,18 +48,6 @@ class JurnalQoshish extends Component {
 
     await this.populateMagazines();
   }
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      await magazineService
-        .createMagazine(this.state)
-        .then((res) => toast.success(res.data.message));
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   async populateCategories() {
     const { data: categories } = await getParentCategories();
@@ -71,7 +59,67 @@ class JurnalQoshish extends Component {
     this.setState({ parentMagazines });
   }
 
+  formValidation = () => {
+    const {
+      id,
+      parentId,
+      categoryId,
+      issn,
+      isbn,
+      deadline,
+      certificateNumber,
+      title,
+      createdDate,
+      file,
+      cover,
+      status,
+      magazineNumber,
+      description,
+      printedDate,
+      releaseNumberOfThisYear,
+      allReleasesNumber,
+      parentCategoryId,
+    } = this.state;
+
+    let isValid = true;
+    const errors = {};
+
+    if (title.trim().length < 1) {
+      errors.titleLength = "Title is not allowed to be empty";
+      isValid = false;
+    }
+
+    if (cover.length < 1) {
+      errors.cover = "Cover is not allowed to be empty";
+      isValid = false;
+    }
+
+    this.setState({ errors });
+    return isValid;
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { errors } = this.state;
+
+    const isValid = this.formValidation();
+
+    if (isValid) {
+      try {
+        await magazineService
+          .createMagazine(this.state)
+          .then((res) => toast.success(res.data.message));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    return Object.keys(errors).map((key) => toast.error(errors[key]));
+  };
+
   render() {
+    const { errors } = this.state;
+
     return (
       <>
         <div className="content">
@@ -332,7 +380,9 @@ class JurnalQoshish extends Component {
                       <Col sm="12" md="12" lg="12">
                         <button
                           className="btn btn-primary"
-                          onClick={(e) => this.handleSubmit(e)}
+                          onClick={(e) => {
+                            this.handleSubmit(e);
+                          }}
                         >
                           Create
                         </button>

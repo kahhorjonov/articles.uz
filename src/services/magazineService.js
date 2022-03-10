@@ -17,12 +17,14 @@ export function createMagazine(data) {
   bodyFormData.append("parentId", data.parentCategoryId);
   bodyFormData.append("description", data.description);
   bodyFormData.append("printedDate", data.printedDate);
+  // bodyFormData.append("cover", data.cover);
   bodyFormData.append("cover", data.cover);
   bodyFormData.append("certificateNumber", data.certificateNumber);
   bodyFormData.append("issn", data.issn);
   bodyFormData.append("isbn", data.isbn);
   bodyFormData.append("printedDate", data.printedDate);
   bodyFormData.append("categoryId", data.categoryId);
+  // bodyFormData.append("file", data.file);
   bodyFormData.append("file", data.file);
   bodyFormData.append("status", data.status);
 
