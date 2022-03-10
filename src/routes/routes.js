@@ -1,5 +1,4 @@
 import Dashboard from "views/Dashboard.js";
-// import Notifications from "views/Notifications.js";
 import Icons from "views/Icons.js";
 import UserPage from "views/User.js";
 
@@ -12,8 +11,8 @@ import ArticleInfo from "views/articleInfo";
 import JurnalQoshish from "components/UI/jurnalQoshish";
 import Category from "components/UI/category";
 import Logout from "components/logout.jsx";
-import MagazineInfo from "./../components/UI/magazineInfo";
 import Jurnallar from "components/UI/jurnallar.jsx";
+import MagazineInfoAdmin from "components/UI/magazineInfoAdmin";
 
 var adminRoutes = [
   {
@@ -49,7 +48,7 @@ var adminRoutes = [
     icon: "nc-icon nc-ruler-pencil",
     component: EditMagazine,
     layout: "/admin",
-    visible: true,
+    visible: false,
   },
 
   {
@@ -150,10 +149,10 @@ var adminRoutes = [
   },
 
   {
-    path: "/magazineInfo",
+    path: "/magazineInformation",
     name: "magazineInfo",
     icon: "nc-icon nc-button-power",
-    component: MagazineInfo,
+    component: MagazineInfoAdmin,
     layout: "/admin",
     visible: false,
   },

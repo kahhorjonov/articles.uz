@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import GetImages from "utils/getImages";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
@@ -10,10 +11,8 @@ import {
 } from "services/magazineService";
 
 import "styles/magazineInfo.css";
-import GetImages from "utils/getImages";
-import JurnalArxive from "./jurnalArxive";
 
-class MagazineInfo extends Component {
+class MagazineInfoAdmin extends Component {
   state = {
     magazineId: "",
     magazineInfo: [],
@@ -283,7 +282,7 @@ class MagazineInfo extends Component {
                                   margin: "1rem auto",
                                 }}
                                 className="text-dark"
-                                to={`/release/:${magazine.id}`}
+                                to={`/admin/editMagazine/:${magazine.id}`}
                               >
                                 № {magazine.releaseNumberOfThisYear} (
                                 {magazine.allReleaseNumber}){" "}
@@ -301,10 +300,9 @@ class MagazineInfo extends Component {
             </div>
           </div>
         </div>
-        {/* <JurnalArxive /> */}
       </>
     );
   }
 }
 
-export default MagazineInfo;
+export default MagazineInfoAdmin;

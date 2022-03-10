@@ -19,6 +19,7 @@ import Aloqa from "./components/UI/aloqa";
 import NotFound from "./components/common/notFound";
 import auth from "services/authService.js";
 import MagazineInfo from "./components/UI/magazineInfo";
+import JurnalArxive from "./components/UI/jurnalArxive";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -313,6 +314,18 @@ class App extends Component {
               path="/listOfMagazines"
               exact
               component={(props) => <JurnallarRoyxati {...props} />}
+            />
+
+            <Route
+              path="/release/:id"
+              exact
+              component={(props) => <JurnalArxive {...props} />}
+            />
+
+            <Route
+              path="/listOfMagazines/magazineInfo/:id"
+              exact
+              component={(props) => <JurnalArxive {...props} />}
             />
 
             <Route

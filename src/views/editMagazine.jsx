@@ -42,7 +42,10 @@ class EditMagazine extends Component {
   };
 
   async componentDidMount() {
-    const magazineId = "a0e7afcc-2a2c-4d36-8493-6a27b274fb01";
+    const magazineId = this.props.location.pathname.split(":")[1]
+      ? this.props.location.pathname.split(":")[1]
+      : this.props.location.pathname.split(":")[0];
+
     await this.getMagazinesById(magazineId);
 
     this.state.magazineInfo && this.getImage(this.state.magazineInfo.cover.id);

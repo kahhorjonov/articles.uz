@@ -115,11 +115,11 @@ class JurnallarRoyxati extends Component {
                       <Link
                         className="nav-link"
                         data-toggle="pill"
+                        to=""
                         onClick={(e) => {
                           e.preventDefault();
                           this.getMagazinesById(category.id);
                         }}
-                        to=""
                       >
                         {category.name}
                       </Link>

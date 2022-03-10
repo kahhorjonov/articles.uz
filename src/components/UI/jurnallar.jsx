@@ -109,7 +109,7 @@ class Jurnallar extends Component {
                                   <div className="card-body p-0">
                                     <h4 className="card_title p-0">
                                       <Link
-                                        to={`/admin/magazineInfo/:${magazine.id}`}
+                                        to={`/admin/magazineInformation/:${magazine.id}`}
                                         style={{ cursor: "pointer" }}
                                       >
                                         {magazine.title}
@@ -119,7 +119,11 @@ class Jurnallar extends Component {
                                     <p className="card_text text-muted">
                                       Maqolalar <br />
                                       <span>
-                                        {magazine && magazine.deadline} &nbsp;
+                                        {magazine &&
+                                          new Date(magazine.deadline)
+                                            .toISOString()
+                                            .slice(0, 10)}{" "}
+                                        &nbsp;
                                       </span>
                                       gacha qabul qilinadi
                                     </p>
