@@ -8,6 +8,7 @@ import {
   getById,
   getYearById,
   getMagazinesByYear,
+  getArticles,
 } from "services/magazineService";
 
 import "styles/magazineInfo.css";
@@ -32,6 +33,7 @@ class MagazineInfoAdmin extends Component {
       this.setState({
         magazineId,
       });
+      this.getArticlesFromMagazine(magazineId);
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
       if (this.state.years[0]) {
@@ -92,6 +94,14 @@ class MagazineInfoAdmin extends Component {
     }
 
     return this.setState({ cover: URL.createObjectURL(imageBlob) });
+  };
+
+  getArticlesFromMagazine = async (id) => {
+    try {
+      await getArticles(id).then((res) => console.log(res));
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   render() {
@@ -234,7 +244,7 @@ class MagazineInfoAdmin extends Component {
                       “{title}” ilmiy jurnaliga maqolalar 01.09.2020 gacha qabul
                       qilinadi.
                     </h3>
-                    <button className="btn btn-dark">Maqola Yuborish</button>
+                    {/* <button className="btn btn-dark">Maqola Yuborish</button> */}
                   </div>
                 </div>
               </div>

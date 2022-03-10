@@ -43,7 +43,7 @@ var reviewerRoutes = [
   {
     path: "/user-page",
     name: "User Profile",
-    icon: "nc-icon nc-single-02",
+    icon: "nc-icon nc-settings-gear-65",
     component: UserPage,
     layout: "/reviewer",
     visible: true,

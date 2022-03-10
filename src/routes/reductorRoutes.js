@@ -1,10 +1,29 @@
-import Dashboard from "views/Dashboard.js";
 import UserPage from "views/User.js";
 import Articles from "views/articles";
 import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
+import Jurnallar from "components/UI/jurnallar";
+import MagazineInfoAdmin from "components/UI/magazineInfoAdmin";
 
 var reductorRoutes = [
+  {
+    path: "/magazines",
+    name: "Jurnallar",
+    icon: "nc-icon nc-map-big",
+    component: Jurnallar,
+    layout: "/reductor",
+    visible: true,
+  },
+
+  {
+    path: "/magazineInformation",
+    name: "magazineInfo",
+    icon: "nc-icon nc-button-power",
+    component: MagazineInfoAdmin,
+    layout: "/reductor",
+    visible: false,
+  },
+
   {
     path: "/articles",
     name: "Maqolalar",
@@ -22,28 +41,29 @@ var reductorRoutes = [
     layout: "/reductor",
     visible: true,
   },
-  {
-    path: "/messages",
-    name: "Xabarlar",
-    icon: "nc-icon nc-chat-33",
-    component: Dashboard,
-    layout: "/reductor",
-    visible: true,
-  },
 
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Articles,
-    layout: "/reductor",
-    visible: true,
-  },
+  // {
+  //   path: "/messages",
+  //   name: "Xabarlar",
+  //   icon: "nc-icon nc-chat-33",
+  //   component: Dashboard,
+  //   layout: "/reductor",
+  //   visible: true,
+  // },
+
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Articles,
+  //   layout: "/reductor",
+  //   visible: true,
+  // },
 
   {
     path: "/user-page",
     name: "User Profile",
-    icon: "nc-icon nc-single-02",
+    icon: "nc-icon nc-settings-gear-65",
     component: UserPage,
     layout: "/reductor",
     visible: true,

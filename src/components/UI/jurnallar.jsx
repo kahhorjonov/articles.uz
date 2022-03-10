@@ -4,16 +4,23 @@ import axios from "axios";
 import GetImages from "utils/getImages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import auth from "services/authService";
 
-import "../../styles/homePage.css";
+import "styles/homePage.css";
 
 class Jurnallar extends Component {
   state = {
     magazineCategories: [],
     magazines: [],
+
+    user: "",
   };
 
   componentDidMount = async () => {
+    const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
+
+    this.setState({ user: user.id });
+
     await this.getCategory();
 
     this.state.magazineCategories &&
@@ -109,7 +116,11 @@ class Jurnallar extends Component {
                                   <div className="card-body p-0">
                                     <h4 className="card_title p-0">
                                       <Link
-                                        to={`/admin/magazineInformation/:${magazine.id}`}
+                                        to={`/${
+                                          this.state.user === 1
+                                            ? "admin"
+                                            : "reductor"
+                                        }/magazineInformation/:${magazine.id}`}
                                         style={{ cursor: "pointer" }}
                                       >
                                         {magazine.title}
