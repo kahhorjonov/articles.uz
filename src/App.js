@@ -338,7 +338,7 @@ class App extends Component {
               path="/contact"
               exact
               component={(props) => <Aloqa {...props} />}
-            />
+            />PJu
 
             <Route
               path="/login"

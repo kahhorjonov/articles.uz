@@ -47,6 +47,7 @@ class JurnalQoshish extends Component {
     await this.populateCategories();
 
     await this.populateMagazines();
+    // console.log(this.state.categories);
   }
 
   async populateCategories() {
