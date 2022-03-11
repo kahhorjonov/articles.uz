@@ -1,9 +1,9 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./form";
-import articleService from "../../services/articleService";
+import articleService from "services/articleService";
 
-import { getChildCategories } from "../../services/getCategories";
+import { getChildCategories } from "services/getCategories";
 
 import magazineService from "services/magazineService";
 
@@ -11,8 +11,8 @@ import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
 
 import { toast } from "react-toastify";
 
-import "../../styles/articleForm.css";
-import "../../styles/multipleTags.scss";
+import "styles/articleForm.css";
+import "styles/multipleTags.scss";
 
 class ArticleForm extends Form {
   state = {

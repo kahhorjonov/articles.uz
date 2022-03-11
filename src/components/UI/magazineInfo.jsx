@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import GetImages from "utils/getImages";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
@@ -10,8 +11,6 @@ import {
 } from "services/magazineService";
 
 import "styles/magazineInfo.css";
-import GetImages from "utils/getImages";
-import JurnalArxive from "./jurnalArxive";
 
 class MagazineInfo extends Component {
   state = {
@@ -35,6 +34,7 @@ class MagazineInfo extends Component {
       });
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
+      this.getArticlesFromMagazineById(magazineId);
       if (this.state.years[0]) {
         this.getMagazinesByYear(this.state.years[0], magazineId);
       }
@@ -235,7 +235,9 @@ class MagazineInfo extends Component {
                       “{title}” ilmiy jurnaliga maqolalar 01.09.2020 gacha qabul
                       qilinadi.
                     </h3>
-                    <button className="btn btn-dark">Maqola Yuborish</button>
+                    <Link to="/login">
+                      <button className="btn btn-dark">Maqola Yuborish</button>
+                    </Link>
                   </div>
                 </div>
               </div>

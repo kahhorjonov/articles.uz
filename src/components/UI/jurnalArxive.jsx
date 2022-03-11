@@ -8,6 +8,7 @@ import {
   getById,
   getYearById,
   getMagazinesByYear,
+  getArticlesFromMagazine,
 } from "services/magazineService";
 
 import "styles/jurnalarxive.css";
@@ -34,6 +35,7 @@ class JurnalArxive extends Component {
       });
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
+      this.getArticlesFromMagazineById(magazineId);
       if (this.state.years[0]) {
         this.getMagazinesByYear(this.state.years[0], magazineId);
       }
@@ -41,6 +43,14 @@ class JurnalArxive extends Component {
       toast.error("Bunday jurnal mavjud emas");
     }
   }
+
+  getArticlesFromMagazineById = async (id) => {
+    try {
+      await getArticlesFromMagazine(id).then((res) => console.log(res));
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   getMagazineInfo = async (id) => {
     try {

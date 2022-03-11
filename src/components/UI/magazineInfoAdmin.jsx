@@ -8,7 +8,6 @@ import {
   getById,
   getYearById,
   getMagazinesByYear,
-  getArticles,
 } from "services/magazineService";
 
 import "styles/magazineInfo.css";
@@ -33,9 +32,10 @@ class MagazineInfoAdmin extends Component {
       this.setState({
         magazineId,
       });
-      this.getArticlesFromMagazine(magazineId);
+
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
+
       if (this.state.years[0]) {
         this.getMagazinesByYear(this.state.years[0], magazineId);
       }
@@ -94,14 +94,6 @@ class MagazineInfoAdmin extends Component {
     }
 
     return this.setState({ cover: URL.createObjectURL(imageBlob) });
-  };
-
-  getArticlesFromMagazine = async (id) => {
-    try {
-      await getArticles(id).then((res) => console.log(res));
-    } catch (error) {
-      toast.error(error);
-    }
   };
 
   render() {

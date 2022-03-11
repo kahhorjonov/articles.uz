@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import people from "assets/img/homePage/working people.png";
 import library from "assets/img/homePage/library.png";
 
@@ -32,11 +33,11 @@ class Mainhome2 extends React.Component {
                   qildirmoqchi bo’lgan maqolangizni bizga yuborsangiz bo’ldi!
                 </p>
                 <div className="buttonsDark">
-                  <a href="#">
+                  <Link to="/login">
                     <button type="button" className="btn btn-dark">
                       Maqola yuborish
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
