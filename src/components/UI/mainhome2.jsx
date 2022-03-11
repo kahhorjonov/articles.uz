@@ -2,28 +2,52 @@ import React from "react";
 import { Link } from "react-router-dom";
 import people from "assets/img/homePage/working people.png";
 import library from "assets/img/homePage/library.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import "styles/homePage.css";
+import CounterUp from "./counterUp";
 
 class Mainhome2 extends React.Component {
+  state = {};
+  async componentDidMount() {
+    AOS.init();
+  }
+
   render() {
+    const { data, country } = this.state;
     return (
       <>
         <div className="container p-0">
           <div className="img-bg">
             <div className="col-md-12">
-              <img src={people} alt="" />
+              <LazyLoadImage
+                src={people}
+                effect="blur"
+                delayTime="2000"
+                width="100%"
+              />
             </div>
 
             <div className="d-flex row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
-              <div className="col-md-6">
+              <div
+                className="col-md-6"
+                data-aos="fade-right"
+                data-aos-duration="5000"
+              >
                 <h1>
                   Bizning asosiy maqsadimiz ilmiy <br /> hodimlarning ish
                   unumdorligi oshirish
                 </h1>
               </div>
 
-              <div className="col-md-6">
+              <div
+                className="col-md-6"
+                data-aos="fade-left"
+                data-aos-duration="2000"
+              >
                 <p className="text-left">
                   Maqolalar chop etish uchun ilmiy jurnallar tadqiqot
                   faoliyatida samarali yordamchilardir. Ilmiy va texnologik
@@ -60,7 +84,11 @@ class Mainhome2 extends React.Component {
                   </p>
                   <div className="row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 num pt-5">
                     <div className="col-md-4">
-                      <h5 className="mb-0">20,000</h5>
+                      <h5 className="mb-0">
+                        20,000
+                 
+                      </h5>
+
                       <p>Barcha maqolalar</p>
                     </div>
                     <div className="col-md-4">
@@ -78,7 +106,7 @@ class Mainhome2 extends React.Component {
 
               <div className="col-md-6">
                 <div className="art_uz2">
-                  <img src={library} alt="" />
+                  <LazyLoadImage src={library} effect="blur" delayTime="2000" />
                 </div>
               </div>
             </div>
