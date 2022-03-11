@@ -14,6 +14,7 @@ import Category from "components/UI/category";
 import Logout from "components/logout.jsx";
 import MagazineInfo from "./../components/UI/magazineInfo";
 import Jurnallar from "components/UI/jurnallar.jsx";
+import Setting from './../components/UI/setting';
 
 var adminRoutes = [
   {
@@ -149,6 +150,14 @@ var adminRoutes = [
     visible: true,
   },
 
+  {
+    path: "/setting",
+    name: "Setting",
+    icon: "nc-icon nc-settings-gear-65",
+    component: Setting,
+    layout: "/admin",
+    visible: true,
+  },
   {
     path: "/magazineInfo",
     name: "magazineInfo",

@@ -27,9 +27,9 @@ class Foooter extends React.Component {
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Manzil:</h5>
-                <div className="d-classNameflex">
-                  <a href="">Telegram</a>
-                  <a href="" className="px-5">
+                <div className="d-flex">
+                  <a href="#">Telegram</a>
+                  <a href="#" className="px-5">
                     Facebook
                   </a>
                   <a href="">Instagram</a>
@@ -47,7 +47,7 @@ class Foooter extends React.Component {
                     </a>
                   </div>
 
-                  <div className="col-md-8">
+                  <div className="col-md-8 pr-0">
                     <ul className="nav">
                       <li className="nav-item">
                         <a className="nav-link" href="">

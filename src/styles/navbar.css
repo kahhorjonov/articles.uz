@@ -90,8 +90,6 @@ body {
 /*}*/
 
 .nav-item {
-  display: flex;
-  justify-content: space-between;
   list-style: none;
   color: #51cbce;
   padding: 0.5rem;
@@ -235,4 +233,10 @@ input:checked + .slider:before {
 .navigation .badge2 {
   height: 23px;
   border-radius: 50%;
+}
+
+@media (max-width: 1200px){
+  .navbar-collapse .links{
+     font-size: 11px;
+  }
 }

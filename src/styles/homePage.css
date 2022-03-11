@@ -427,6 +427,7 @@ body {
   color: #777777;
 }
 
+
 .hr2 {
   width: 100%;
   padding-top: 80px;
@@ -502,6 +503,15 @@ body {
 @media (max-width: 600px) {
   .home_pages {
     width: 100%;
+  }
+  .foo_nex{
+    text-align: center;
+  }
+  .endd{
+    text-align: center !important;
+  }
+  .queres .nav{
+    display: grid;
   }
 }
 
