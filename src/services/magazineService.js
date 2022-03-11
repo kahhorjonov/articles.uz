@@ -74,36 +74,28 @@ export function getArticlesFromMagazine(id) {
   return http.get(apiLocal + `/journals/getJournalInfo/${id}`);
 }
 
+export function ActionUnderArticlesFromMagazine(id, action) {
+  return http.post(
+    apiLocal + `/journals/attachArticleToJournal/${id}/${action}`
+  );
+}
+
 export function editMagazines(id, data) {
+  console.log(data);
+
   const bodyFormData = new FormData();
 
   bodyFormData.append("title", data.title);
   bodyFormData.append("deadline", data.deadline);
-  bodyFormData.append("parentId", data.parentCategoryId);
   bodyFormData.append("description", data.description);
-  bodyFormData.append("printedDate", data.printedDate);
+  bodyFormData.append("printedDate", data.printDay);
   bodyFormData.append("cover", data.cover);
   bodyFormData.append("certificateNumber", data.certificateNumber);
   bodyFormData.append("issn", data.issn);
   bodyFormData.append("isbn", data.isbn);
-  bodyFormData.append("printedDate", data.printedDate);
-  bodyFormData.append("categoryId", data.categoryId);
+  bodyFormData.append("categoryId", data.category);
   bodyFormData.append("file", data.file);
   bodyFormData.append("status", data.status);
-
-  const object = {
-    categoryId: data.category,
-    certificateNumber: data.certificateNumber,
-    title: data.title,
-    deadline: data.deadline,
-    printedDay: data.printDay,
-    file: data.file,
-    isbn: data.isbn,
-    issn: data.issn,
-    cover: data.cover,
-    status: data.status,
-    description: data.description,
-  };
 
   return axios({
     method: "post",
@@ -125,4 +117,5 @@ export default {
   getYearById,
   getMagazinesByYear,
   getArticlesFromMagazine,
+  ActionUnderArticlesFromMagazine,
 };

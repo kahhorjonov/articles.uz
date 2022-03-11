@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import { getById, editMagazines } from "services/magazineService";
-import axios from "axios";
-import { NavLink } from "react-router-dom";
+import {
+  getById,
+  editMagazines,
+  getParentCategories,
+  ActionUnderArticlesFromMagazine,
+} from "services/magazineService";
+import { Link } from "react-router-dom";
 
-// import cover from "routes/books.png";
+import axios from "axios";
+
 import { toast } from "react-toastify";
 
 // reactstrap components
@@ -20,15 +25,15 @@ import {
   Col,
   Table,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 
 class EditMagazine extends Component {
   state = {
     title: "",
     deadline: "",
-    printDay: "",
+    printDay: 0,
     category: "",
     file: [],
+    cover: [],
     certificateNumber: "",
     isbn: "",
     issn: "",
@@ -36,9 +41,10 @@ class EditMagazine extends Component {
     status: "",
     description: "",
 
-    thisMagazineId: "a0e7afcc-2a2c-4d36-8493-6a27b274fb01",
+    thisMagazineId: "",
     magazineInfo: [],
     articles: [],
+    categories: [],
   };
 
   async componentDidMount() {
@@ -46,10 +52,23 @@ class EditMagazine extends Component {
       ? this.props.location.pathname.split(":")[1]
       : this.props.location.pathname.split(":")[0];
 
+    await this.getParentCategories();
+
     await this.getMagazinesById(magazineId);
+    this.setState({ thisMagazineId: magazineId });
 
     this.state.magazineInfo && this.getImage(this.state.magazineInfo.cover.id);
   }
+
+  getParentCategories = async () => {
+    try {
+      await getParentCategories().then((res) =>
+        this.setState({ categories: res.data })
+      );
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   getImage = async (id) => {
     let imageBlob;
@@ -74,6 +93,7 @@ class EditMagazine extends Component {
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ deadline: res.data.object.deadline });
         this.setState({ articles: res.data.object.articles });
+        this.setState({ category: res.data.object.journals.category.id });
       });
     } catch (error) {
       toast.error(error);
@@ -82,8 +102,6 @@ class EditMagazine extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(this.state);
 
     try {
       await editMagazines(this.state.thisMagazineId, this.state);
@@ -134,6 +152,16 @@ class EditMagazine extends Component {
     }
   };
 
+  handleChange = async (id, action) => {
+    try {
+      await ActionUnderArticlesFromMagazine(id, action).then((res) =>
+        toast.success(res.data.message)
+      );
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   render() {
     let {
       title,
@@ -144,10 +172,12 @@ class EditMagazine extends Component {
       issn,
       printedDate,
       journalsStatus,
+      category,
     } = this.state.magazineInfo;
 
     const { articles } = this.state;
-    // console.log(this.state.magazineInfo.cover);
+
+    // console.log(articles);
 
     return (
       <>
@@ -207,7 +237,6 @@ class EditMagazine extends Component {
                             placeholder="Maqola qabul qilish oxirgi sanasi"
                             type="date"
                             onChange={(e) => {
-                              console.log(e.target.value);
                               this.setState({ deadline: e.target.value });
                             }}
                           />
@@ -334,23 +363,27 @@ class EditMagazine extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      {/* <Col className="pl-1" md="4">
+                      <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Status</label>
+                          <label>Categories</label>
                           <Input
-                            defaultValue="NEW_JOURNALS"
+                            defaultValue={category && category.id}
                             style={{ height: "3rem" }}
                             className="form-control"
                             type="select"
                             onChange={(e) =>
-                              this.setState({ status: e.target.value })
+                              this.setState({ category: e.target.value })
                             }
                           >
-                            <option value="NEW_JOURNALS">New</option>
-                            <option value="PUBLISHED">Published</option>
+                            {this.state.categories &&
+                              this.state.categories.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                  {category.name}
+                                </option>
+                              ))}
                           </Input>
                         </FormGroup>
-                      </Col> */}
+                      </Col>
                     </Row>
                     <Row>
                       <Col md="12">
@@ -419,9 +452,13 @@ class EditMagazine extends Component {
                           <td className="col-md-3 text-center">
                             <label className="switch">
                               <input
-                                // onChange={(e) =>
-                                //   this.handleChange(e, article.id)
-                                // }
+                                defaultChecked={article.journalsActive}
+                                onChange={(e) =>
+                                  this.handleChange(
+                                    article.id,
+                                    e.target.checked
+                                  )
+                                }
                                 type="checkbox"
                               />
                               <span className="slider round"></span>

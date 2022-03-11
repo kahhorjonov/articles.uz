@@ -129,8 +129,6 @@ class ArticleInfo extends Component {
   render() {
     const article = this.state.articleInfo.article;
 
-    console.log(article);
-
     const steps = this.state.articleInfo.articleAdminInfoList;
 
     return (
@@ -146,7 +144,7 @@ class ArticleInfo extends Component {
                         <label>Xulosa</label>
                         <select
                           style={{ fontSize: "1.4rem" }}
-                          defaultValue="CHECK_AND_ACCEPT"
+                          defaultValue="Qayta ishlash uchun"
                           onChange={(e) =>
                             this.setState({
                               status: e.target.value,
@@ -155,17 +153,13 @@ class ArticleInfo extends Component {
                           name="status"
                           className="custom-select"
                         >
-                          <option value="CHECK_AND_ACCEPT">Tasdiqlayman</option>
-                          <option value="CHECK_AND_CANCEL">
-                            Tasdiqlamayman
-                          </option>
-                          <option value="CHECK_AND_RECYCLE">
-                            Qayta ishlashga
-                          </option>
+                          <option value="RECYCLE">Qayta ishlash uchun</option>
+                          <option value="REJECTED">Rad etildi</option>
+                          <option value="PUBLISHED">Nashr uchun</option>
                         </select>
                       </Form>
                     </Col>
-                    <Col md="7">
+                    {/* <Col md="7">
                       <div className="form-group">
                         <label>File upload ⬆️ (optional)</label>
                         <Input
@@ -176,7 +170,7 @@ class ArticleInfo extends Component {
                           }
                         />
                       </div>
-                    </Col>
+                    </Col> */}
                   </Row>
 
                   <Row>
@@ -193,12 +187,12 @@ class ArticleInfo extends Component {
                     </Col>
                     <Col md="12">
                       <Button
-                        color="info"
-                        outline
-                        className="p-2"
+                        // color="info"
+                        // outline
+                        className="btn p-3"
                         onClick={() => this.handleEdit()}
                       >
-                        Edit
+                        Send
                       </Button>
                     </Col>
                   </Row>
