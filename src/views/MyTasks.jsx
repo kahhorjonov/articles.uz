@@ -51,11 +51,11 @@ class MyTasks extends Component {
 
   handleClick = async (text) => {
     const token = localStorage.getItem("token");
-
+    
     if (text === "yangilari") {
       this.setState({ isActive: true });
       this.newMyArticles(token);
-    } else {
+    }else {
       this.setState({ isActive: false });
       this.getAcceptedArticles(token);
     }
@@ -81,7 +81,7 @@ class MyTasks extends Component {
             <Card>
               <CardBody>
                 <div className="justify-content-between row">
-                  <div className="col-md-3">
+                  <div className="col-lg-3">
                     <ul className="nav nav-pills flex-column" role="tablist">
                       <li className="nav-item">
                         <a className="nav-link text-muted disabled" href="">
@@ -125,9 +125,23 @@ class MyTasks extends Component {
                           Tekshirishim kerak bo'lgan vazifalar
                         </a>
                       </li>
+
+                      <li className="nav-item">
+                        <a
+                          href="#"
+                          className={
+                            this.state.isActive
+                              ? "nav-link navvs "
+                              : "nav-link navvs"
+                          } 
+                          data-toggle="pill"
+                        >
+                          Tekshirilgan Maqolalarim
+                        </a>
+                      </li>
                     </ul>
                   </div>
-                  <div className="col-md-9">
+                  <div className="col-lg-9">
                     {this.state.isActive ? (
                       <div className="container-flud ml-0 mr-0 mt-4">
                         <div className="tebles">
