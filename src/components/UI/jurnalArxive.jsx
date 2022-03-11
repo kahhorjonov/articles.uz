@@ -21,6 +21,8 @@ class JurnalArxive extends Component {
     years: [],
     magazines: [],
     cover: "",
+
+    articles: [],
   };
 
   componentDidMount() {
@@ -46,7 +48,9 @@ class JurnalArxive extends Component {
 
   getArticlesFromMagazineById = async (id) => {
     try {
-      await getArticlesFromMagazine(id).then((res) => console.log(res));
+      await getArticlesFromMagazine(id).then((res) =>
+        this.setState({ articles: res.data.articleInfoForJournal })
+      );
     } catch (error) {
       toast.error(error);
     }
@@ -104,10 +108,48 @@ class JurnalArxive extends Component {
     return this.setState({ cover: URL.createObjectURL(imageBlob) });
   };
 
-  render() {
-    const { magazineInfo, cover, years, magazines } = this.state;
+  handleDownload = async (id, originalName, contentType) => {
+    if (id && originalName && contentType) {
+      try {
+        await fetch(
+          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": contentType,
+            },
+          }
+        )
+          .then((response) => response.blob())
+          .then((blob) => {
+            // Create blob link to download
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", originalName);
 
-    const { allReleasesNumber, releaseNumberOfThisYear } = magazineInfo;
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+          });
+      } catch (error) {
+        toast.error(error);
+      }
+    } else {
+      toast.error("file topilmadi");
+    }
+  };
+
+  render() {
+    const { magazineInfo, cover, years, magazines, articles } = this.state;
+
+    const { allReleasesNumber, releaseNumberOfThisYear, file } = magazineInfo;
+
+    console.log(file);
 
     return (
       <>
@@ -138,7 +180,18 @@ class JurnalArxive extends Component {
                   <b className="text-dark">Nashr etilgan sana:</b> 13.09.2020
                 </span>
               </p>
-              <button type="submit" className="btn btn-dark">
+              <button
+                type="submit"
+                className="btn btn-dark"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.handleDownload(
+                    file.id && file.id,
+                    file.id && file.originalName,
+                    file.id && file.contentType
+                  );
+                }}
+              >
                 Yuklab olish
               </button>
             </div>
@@ -148,41 +201,26 @@ class JurnalArxive extends Component {
                   JURNAL TARKIBI
                 </li>
                 {/* <hr /> */}
-                <Link to="#">
-                  <li className="list-group-item">
-                    <span>1.</span> Kirish
-                  </li>
-                </Link>
-                <Link to="#">
-                  <li className="list-group-item">
-                    <span>1.</span> Covid-19 vaksinasini yaratishda tavsiya
-                    etiladigan kimyoviy birikmalar ro’yxati
-                  </li>
-                </Link>
-                <Link to="#">
-                  <li className="list-group-item">
-                    <span>1.</span> 3. Covid-19 vaksinasini yaratishda tavsiya
-                    etiladigan kimyoviy birikmalar ro’yxati
-                  </li>
-                </Link>
-                <Link to="#">
-                  <li className="list-group-item">
-                    <span>1.</span> 4. Covid-19 vaksinasini yaratishda tavsiya
-                    etiladigan kimyoviy birikmalar ro’yxati
-                  </li>
-                </Link>
-                <Link to="#">
-                  <li className="list-group-item">
-                    <span>1.</span> 4. Covid-19 vaksinasini yaratishda tavsiya
-                    etiladigan kimyoviy birikmalar ro’yxati
-                  </li>
-                </Link>
-                <Link to="#">
-                  <li className="list-group-item">
-                    <span>1.</span> 4. Covid-19 vaksinasini yaratishda tavsiya
-                    etiladigan kimyoviy birikmalar ro’yxati
-                  </li>
-                </Link>
+
+                {articles &&
+                  articles.map((article, idx) => (
+                    <Link
+                      key={article.articleId}
+                      to=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        this.handleDownload(
+                          article.fileId,
+                          article.originalName,
+                          article.contentType
+                        );
+                      }}
+                    >
+                      <li className="list-group-item">
+                        <span>{idx + 1}. </span> {article.titleArticle}
+                      </li>
+                    </Link>
+                  ))}
               </ul>
             </div>
 
