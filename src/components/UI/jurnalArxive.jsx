@@ -149,8 +149,6 @@ class JurnalArxive extends Component {
 
     const { allReleasesNumber, releaseNumberOfThisYear, file } = magazineInfo;
 
-    console.log(file);
-
     return (
       <>
         <div className="container jurnalArxive">

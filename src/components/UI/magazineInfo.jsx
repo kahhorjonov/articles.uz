@@ -34,7 +34,6 @@ class MagazineInfo extends Component {
       });
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
-      this.getArticlesFromMagazineById(magazineId);
       if (this.state.years[0]) {
         this.getMagazinesByYear(this.state.years[0], magazineId);
       }

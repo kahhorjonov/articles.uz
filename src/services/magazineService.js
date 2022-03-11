@@ -75,10 +75,24 @@ export function getArticlesFromMagazine(id) {
 }
 
 export function editMagazines(id, data) {
-  // console.log(data);
+  const bodyFormData = new FormData();
+
+  bodyFormData.append("title", data.title);
+  bodyFormData.append("deadline", data.deadline);
+  bodyFormData.append("parentId", data.parentCategoryId);
+  bodyFormData.append("description", data.description);
+  bodyFormData.append("printedDate", data.printedDate);
+  bodyFormData.append("cover", data.cover);
+  bodyFormData.append("certificateNumber", data.certificateNumber);
+  bodyFormData.append("issn", data.issn);
+  bodyFormData.append("isbn", data.isbn);
+  bodyFormData.append("printedDate", data.printedDate);
+  bodyFormData.append("categoryId", data.categoryId);
+  bodyFormData.append("file", data.file);
+  bodyFormData.append("status", data.status);
 
   const object = {
-    category: data.category,
+    categoryId: data.category,
     certificateNumber: data.certificateNumber,
     title: data.title,
     deadline: data.deadline,
@@ -91,7 +105,14 @@ export function editMagazines(id, data) {
     description: data.description,
   };
 
-  return http.post(apiLocal + `/api/journals/edit/${id}`, object);
+  return axios({
+    method: "post",
+    url: apiLocal + `/journals/edit/${id}`,
+    data: bodyFormData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 }
 
 export default {

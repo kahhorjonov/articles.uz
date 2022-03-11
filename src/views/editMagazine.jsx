@@ -83,13 +83,15 @@ class EditMagazine extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(this.state);
+
     try {
       await editMagazines(this.state.thisMagazineId, this.state);
     } catch (error) {
       toast.error(error);
     }
 
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   handleDownload = async () => {
