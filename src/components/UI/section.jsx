@@ -1,8 +1,15 @@
 import React from "react";
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 import "../../styles/homePage.css";
 
 class Section extends React.Component {
+
+componentDidMount(){
+  AOS.init()
+}
+
   render() {
     return (
       <>
@@ -10,7 +17,7 @@ class Section extends React.Component {
           <div className="container p-0">
             <div className="row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
               <div className="col-md-6">
-                <div className="article-chap">
+                <div className="article-chap"  data-aos='fade-right' data-aos-duration='2000'>
                   <p className="jurnal-haqida">Jurnal haqida</p>
                   <h2 className="article_uz">
                     Articles.uz onlayn jurnallari - bu <br />
@@ -21,7 +28,7 @@ class Section extends React.Component {
               </div>
 
               <div className="col-md-6">
-                <div className="art-tex">
+                <div className="art-tex" data-aos='fade-left' data-aos-duration='2000'>
                   <span className="articles-text">
                     Articles.uz onlayn jurnallari ilm-fanning turli sohalarida
                     Oliy o'quv yurtlari o'qituvchilari, ilmiy xodimlar va
