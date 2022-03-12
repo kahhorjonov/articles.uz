@@ -268,11 +268,15 @@ function Header(props) {
                   <div className="d-flex pos">
                     <div>
                       <span className="text-muted pl-2">
-                        anvark87@gmail.com
+                        <a href="mailto:anvark87@gmail.com">
+                          anvark87@gmail.com
+                        </a>
                       </span>
                     </div>
                     <div className="ml-4">
-                      <span className="text-muted pl-2">(99) 833-24-11</span>
+                      <span className="text-muted pl-2 text-center">
+                        <a href="tel:+998998332411">+(998) (99)-833-24-11</a>
+                      </span>
                     </div>
                   </div>
                 </li>
