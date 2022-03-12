@@ -193,11 +193,12 @@ class Articles extends Component {
                         {articles &&
                           articles.map((article) => (
                             <li
+                            
                               key={article.id}
                               className={
                                 this.state.activeArticleId === article.id
-                                  ? "nav-item activeNav"
-                                  : "nav-item"
+                                  ? "nav-item activeNav "
+                                  : "nav-item d-flex justify-content-between"
                               }
                               onClick={() => {
                                 this.handleActive(article.id);

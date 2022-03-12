@@ -1,10 +1,7 @@
 import UserPage from "views/User.js";
 // import Icons from "views/Icons.js";
 import ArticleForm from "components/common/articleForm";
-import Chopetilgan from "components/UI/chopetilgan.jsx";
 import Chopetilganinfo from "components/UI/chopetilganInfo.jsx";
-import Tekshirish from "components/UI/tekshirish.jsx";
-import Chopetish from "components/UI/chopetish.jsx";
 import Radetish from "components/UI/radetish.jsx";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
@@ -33,33 +30,6 @@ var UserRoutes = [
     name: "Barcha maqolalarim",
     icon: "nc-icon nc-briefcase-24",
     component: BarchaMaqolalarim,
-    layout: "/user",
-    visible: true,
-  },
-
-  {
-    path: "/myPrintedArticles",
-    name: "Chop etilgan maqolalarim",
-    icon: "nc-icon nc-book-bookmark",
-    component: Chopetilgan,
-    layout: "/user",
-    visible: true,
-  },
-
-  {
-    path: "/myArticlesUnderReview",
-    name: "Tekshirish jarayonidagi maqolalarim",
-    icon: "nc-icon nc-zoom-split",
-    component: Tekshirish,
-    layout: "/user",
-    visible: true,
-  },
-
-  {
-    path: "/allowedToPrint",
-    name: "Chop etishga ruxsat berilgan maqolalarim",
-    icon: "nc-icon nc-single-copy-04",
-    component: Chopetish,
     layout: "/user",
     visible: true,
   },

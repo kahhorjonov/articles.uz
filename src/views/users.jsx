@@ -92,6 +92,7 @@ class Users extends Component {
     await userService
       .searchUser(data)
       .then((res) => {
+        console.log(res.data.object);
         this.setState({ users: res.data.object.content });
       })
       .catch((ex) => {
@@ -471,22 +472,18 @@ class Users extends Component {
                     <div className="usersTables">
                       <table className="table">
                         <thead className="theades">
-                          <tr className="col-md-12">
-                            <th className="col-md-1">№</th>
-                            <th className="col-lg-2 col-md-1">F.I.SH</th>
-                            <th className="col-lg-1 col-md-1">Telfon</th>
-                            <th className="col-lg-1 col-md-1">Email</th>
-                            <th className="col-lg-1 col-md-1">Ish joyi</th>
-                            <th className="col-lg-1 col-md-1">
-                              Ish Staji (yil)
-                            </th>
-                            <th className="col-lg-1 col-md-1">
-                              Ilmiy Darajasi
-                            </th>
-                            <th className="col-lg-1 col-md-1">Tili</th>
-                            <th className="col-lg-1 col-md-1">Categoriyasi</th>
-                            <th className="col-lg-1 col-md-1">Active</th>
-                            <th className="col-lg-1 col-md-1">Delete</th>
+                          <tr className="col-lg-12 px-0">
+                            <th className="col-lg-1 ">№</th>
+                            <th className="col-lg-2 ">F.I.SH</th>
+                            <th className="col-lg-1 ">Telfon</th>
+                            <th className="col-lg-1 ">Email</th>
+                            <th className="col-lg-1 ">Ish joyi</th>
+                            <th className="col-lg-1 ">Ish Staji (yil)</th>
+                            <th className="col-lg-1 ">Ilmiy Darajasi</th>
+                            <th className="col-lg-1 ">Tili</th>
+                            <th className="col-lg-1 ">Categoriyasi</th>
+                            <th className="col-lg-1 ">Active</th>
+                            <th className="col-lg-1 ">Delete</th>
                           </tr>
                         </thead>
                         <tbody className="tbodyes">

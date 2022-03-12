@@ -398,8 +398,29 @@ class ArticleForm extends Form {
                           placeholder={`${price} so'm`}
                         />
                       </div>
+                      <Row>
+                   
+                   <div className="hisoblash d-flex">
+                     <div className="col-lg-4">
+                       <p><b>Sahifa soni</b>: <span className="pl-3"><b>{this.state.inputFields.length}</b></span></p>
+                     </div>
+                     <div className="col-lg-4">
+                       <p><b>Chop Etilgan </b>:</p>
+                       
+                       </div>
+                       <div className="col-lg-4">
+                       <p><b>Totol</b> :</p>
+                       
+                       </div>
+                   </div>
+               
+               </Row>
                     </Col>
+
+              
                     <Col md="9">
+                      
+         
                       {this.state.inputFields.map((inputField, idx) => (
                         <div
                           key={idx}
@@ -481,6 +502,7 @@ class ArticleForm extends Form {
                       </div>
                     </Col> */}
                   </Row>
+
                   <div className="savee">{this.renderButton("Save")}</div>
                 </form>
               </CardBody>
