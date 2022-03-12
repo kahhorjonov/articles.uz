@@ -158,14 +158,14 @@ var adminRoutes = [
     visible: false,
   },
 
-  // {
-  //   path: "/setting",
-  //   name: "Setting",
-  //   icon: "nc-icon nc-settings-gear-65",
-  //   component: Setting,
-  //   layout: "/admin",
-  //   visible: true,
-  // },
+  {
+    path: "/setting",
+    name: "Setting",
+    icon: "nc-icon nc-settings-gear-65",
+    component: Setting,
+    layout: "/admin",
+    visible: true,
+  },
 ];
 
 export default adminRoutes;
