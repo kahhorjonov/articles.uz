@@ -69,11 +69,13 @@ class NavbarHome extends React.Component {
                   <div className="d-flex pos">
                     <div>
                       <span className="text-muted pl-2">
-                        ost.info10@gmail.com
+                        anvark87@gmail.com
                       </span>
                     </div>
                     <div className="ml-4">
-                      <span className="text-muted pl-2">(71) 224-20-30</span>
+                      <span className="text-muted pl-2">
+                        <a href="#">(99) 833-24-11</a>
+                      </span>
                     </div>
                   </div>
                 </li>

@@ -13,26 +13,34 @@ class Foooter extends React.Component {
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Manzil:</h5>
-                <p>Toshkent sh., Yunusobod t. 4-10-20</p>
-                <p className="pt-0">10001010</p>
+                <p>Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi, QORASUV 6-MAVZE, 1-UY, 55-XONA</p>
+               
               </div>
 
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Aloqa:</h5>
-                <p>ost.info10@gmail.com</p>
-                <p className="pt-0">(71) 224-20-30</p>
+                <p>
+                   
+                  <a href="mailto:anvark87@gmail.com">anvark87@gmail.com</a>
+                </p>
+                <p className="pt-0">
+                  <a href="tel:+9989998332411">(99) 833-24-11</a>
+                 
+                </p>
               </div>
 
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Manzil:</h5>
                 <div className="d-flex">
-                  <a href="#">Telegram</a>
+                  <a href="https://telegram.me/Uzb1511">
+                    Telegram
+                  </a>
                   <a href="#" className="px-5">
                     Facebook
                   </a>
-                  <a href="">Instagram</a>
+                  <a href="https://www.instagram.com/avto.intalim.uz/">Instagram</a>
                 </div>
               </div>
 
@@ -41,9 +49,9 @@ class Foooter extends React.Component {
                   <div className="col-md-4">
                     <h1>Savollar qoldimi?</h1>
                     <a href="">
-                      <button type="button" className="btn btn-dark">
+                      {/* <button type="button" className="btn btn-dark">
                         Xabar qoldirish
-                      </button>
+                      </button> */}
                     </a>
                   </div>
 
@@ -85,11 +93,11 @@ class Foooter extends React.Component {
 
               <div className="foo_nex justify-content-between row">
                 <div className="yerss col-lg-6">
-                  <p>© Articles.uz 2020</p>
+                  <p>© Articles.uz {new Date().getFullYear()}</p>
                 </div>
 
                 <div className="col-lg-6 endd">
-                  <p className="">OST Group</p>
+                  <p className="">NDT Team</p>
                 </div>
               </div>
             </div>
