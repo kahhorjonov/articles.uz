@@ -185,14 +185,17 @@ class ArticleForm extends Form {
     this.setState({ inputFields: values });
   };
 
-  handleSearchUsers = async (code) => {
-    try {
-      await getUsersById(code).then((res) =>
-        this.setState({ inputFields: [...this.state.IDs, res.data] })
-      );
-    } catch (error) {
-      toast.error(error);
-    }
+  handleSearchUsers = async (id, event) => {
+    // this.setState({ inputFields: newInputFields });
+
+    console.log(event.target.name);
+    // try {
+    //   await getUsersById(code).then((res) =>
+    //     this.setState({ inputFields: [...this.state.IDs, res.data] })
+    //   );
+    // } catch (error) {
+    //   toast.error(error);
+    // }
   };
 
   doSubmit = async () => {
@@ -434,10 +437,11 @@ class ArticleForm extends Form {
                           >
                             <Label>User ID</Label>
                             <Input
+                              name="id"
                               className="form-control h-100"
                               onChange={(event) => {
                                 if (event.target.value.length === 6) {
-                                  this.handleSearchUsers(event.target.value);
+                                  this.handleSearchUsers(inputField.id, event);
                                 }
                                 this.handleChangeInput(inputField.id, event);
                               }}
@@ -453,6 +457,7 @@ class ArticleForm extends Form {
                             <Label>Full Name</Label>
                             <Input
                               disabled
+                              name="fullName"
                               className="form-control h-100 "
                               // value={this.state.ID}
                               onChange={(event) =>
