@@ -313,7 +313,7 @@ class ArticleForm extends Form {
                     </Col>
                   </Row>
                   <Row>
-                    <Col sm="2" md="2" lg="2">
+                    <Col sm="3" md="3" lg="3">
                       <div>
                         <label>Sahifa soni</label>
                         <Input
@@ -326,7 +326,7 @@ class ArticleForm extends Form {
                         />
                       </div>
                     </Col>
-                    <Col sm="3" md="3" lg="3">
+                    {/* <Col sm="3" md="3" lg="3">
                       <div>
                         <Label> Chop etiladigan jurnallar soni</Label>
                         <Input
@@ -342,8 +342,8 @@ class ArticleForm extends Form {
                           }}
                         />
                       </div>
-                    </Col>
-                    <Col sm="2" md="2" lg="2">
+                    </Col> */}
+                    <Col sm="3" md="3" lg="3">
                       <Label>Bosma jurnal soni</Label>
                       <Input
                         min="0"
@@ -369,7 +369,7 @@ class ArticleForm extends Form {
                         }}
                       />
                     </Col>
-                    <Col sm="2" md="2" lg="2">
+                    <Col sm="3" md="3" lg="3">
                       <div>
                         <Label>Doi</Label>
                         <Input
@@ -394,12 +394,11 @@ class ArticleForm extends Form {
                         <Label for="exampleEmail">Narxi</Label>
                         <Input
                           disabled
-                          className="form-control h-100"
+                          className="form-control h-100 pr-0"
                           placeholder={`${price} so'm`}
                         />
                       </div>
-
-                      <div className="hisoblash  mt-5">
+                      <div className="hisoblash mt-5">
                         <p>
                           <b>Sahifa soni</b>:{" "}
                           <span className="pl-3">
@@ -415,18 +414,24 @@ class ArticleForm extends Form {
                         </p>
 
                         <p>
-                          <b>Totol: 48000</b> :
+                          <b>Total: 48000</b> :
                         </p>
                       </div>
                     </Col>
 
-                    <Col md="9">
+                    <Col md="9" className="pl-0">
                       {this.state.inputFields.map((inputField, idx) => (
                         <div
                           key={idx}
                           // className="col-sm-12 col-md-12 col-lg-12"
                         >
-                          <Col style={{ display: "inline-block" }} md="5">
+                          <Col
+                            style={{ display: "inline-block" }}
+                            sm="5"
+                            md="5"
+                            lg="5"
+                            className="pl-0"
+                          >
                             <Label>User ID</Label>
                             <Input
                               className="form-control h-100"
@@ -438,7 +443,13 @@ class ArticleForm extends Form {
                               }}
                             />
                           </Col>
-                          <Col style={{ display: "inline-block" }} md="5">
+                          <Col
+                            className="pl-0"
+                            style={{ display: "inline-block" }}
+                            sm="5"
+                            md="5"
+                            lg="5"
+                          >
                             <Label>Full Name</Label>
                             <Input
                               disabled
@@ -450,9 +461,15 @@ class ArticleForm extends Form {
                             />
                           </Col>
 
-                          <Col style={{ display: "inline-block" }} md="2">
+                          <Col
+                            style={{ display: "inline-block" }}
+                            sm="2"
+                            md="2"
+                            lg="2"
+                            className="pr-0 pl-0"
+                          >
                             <Button
-                              style={{ padding: "0.6rem 2rem" }}
+                              style={{ padding: "0.6rem 2rem", margin: "0" }}
                               disabled={inputFields.length === 1}
                               onClick={() =>
                                 this.handleRemoveFields(inputField.id)
@@ -462,7 +479,7 @@ class ArticleForm extends Form {
                             </Button>
 
                             <Button
-                              style={{ padding: "0.6rem 2rem" }}
+                              style={{ padding: "0.6rem 2rem", margin: "0" }}
                               onClick={this.handleAddFields}
                             >
                               +{/* <AddIcon /> */}
