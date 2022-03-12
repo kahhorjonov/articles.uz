@@ -22,19 +22,28 @@ class Aloqa extends Component {
                 </p>
 
                 <h4 style={{ fontWeight: "bold" }}>Telefon:</h4>
-                <p
-                  style={{ fontSize: "2rem" }}
-                  className="col-md-7 col-lg-7 col-sm-7 p-0"
+                <a
+                  style={{ textDecoration: "none", color: "black" }}
+                  href="tel:+998998332411"
                 >
-                  (71) 224-20-30
-                </p>
+                  <p
+                    style={{ fontSize: "2rem" }}
+                    className="col-md-7 col-lg-7 col-sm-7 p-0"
+                  >
+                    (99) 833-24-11
+                  </p>
+                </a>
 
                 <h4 style={{ fontWeight: "bold" }}>Email:</h4>
+                <a
+                  style={{ textDecoration: "none", color: "black" }}
+                  href="mailto:anvark87@gmail.com"
+                ></a>
                 <p
                   style={{ fontSize: "2rem" }}
                   className="col-md-7 col-lg-7 col-sm-7 p-0"
                 >
-                  ost.info10@gmail.com
+                  anvark87@gmail.com
                 </p>
 
                 <h4 style={{ fontWeight: "bold" }}>Manzil:</h4>
@@ -42,7 +51,8 @@ class Aloqa extends Component {
                   style={{ fontSize: "2rem" }}
                   className="col-md-7 col-lg-7 col-sm-7 p-0"
                 >
-                  Toshkent sh., Yunusobod t. 4-10-20 10001010
+                  Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi,
+                  QORASUV 6-MAVZE, 1-UY, 55-XONA
                 </p>
 
                 <h4 style={{ fontWeight: "bold" }}>Bizni kuzatib boring:</h4>
@@ -50,13 +60,13 @@ class Aloqa extends Component {
                   style={{ fontSize: "2rem" }}
                   className="col-md-7 col-lg-7 col-sm-7 p-0"
                 >
-                  <a style={{ color: "#5A5A5A" }} href="">
+                  <a style={{ color: "#5A5A5A" }} href="https://telegram.me/Uzb1511">
                     Telegram
                   </a>{" "}
                   <a style={{ color: "#5A5A5A" }} href="">
                     Facebook
                   </a>{" "}
-                  <a style={{ color: "#5A5A5A" }} href="">
+                  <a style={{ color: "#5A5A5A" }} href="https://www.instagram.com/avto.intalim.uz/">
                     Instagram
                   </a>
                 </p>
