@@ -22,23 +22,24 @@ var reviewerRoutes = [
     layout: "/reviewer",
     visible: true,
   },
-  {
-    path: "/messages",
-    name: "Xabarlar",
-    icon: "nc-icon nc-chat-33",
-    component: Articles,
-    layout: "/reviewer",
-    visible: true,
-  },
 
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Articles,
-    layout: "/reviewer",
-    visible: true,
-  },
+  // {
+  //   path: "/messages",
+  //   name: "Xabarlar",
+  //   icon: "nc-icon nc-chat-33",
+  //   component: Articles,
+  //   layout: "/reviewer",
+  //   visible: true,
+  // },
+
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Articles,
+  //   layout: "/reviewer",
+  //   visible: true,
+  // },
 
   {
     path: "/user-page",

@@ -2,12 +2,10 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./form";
 import articleService from "services/articleService";
-
 import { getChildCategories } from "services/getCategories";
-
 import magazineService from "services/magazineService";
 
-import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
+import { Card, CardBody, Input, Label, Row, Col, Button } from "reactstrap";
 
 import { toast } from "react-toastify";
 
@@ -41,6 +39,7 @@ class ArticleForm extends Form {
     parentCategoryId: "",
     parentCategories: [],
     childCategories: [],
+    inputFields: [{ firstName: "", lastName: "" }],
   };
 
   schema = {
@@ -159,6 +158,32 @@ class ArticleForm extends Form {
     });
   };
 
+  handleChangeInput = (id, event) => {
+    const newInputFields = this.state.inputFields.map((i) => {
+      if (id === i.id) {
+        i[event.target.name] = event.target.value;
+      }
+      return i;
+    });
+
+    this.setState({ inputFields: newInputFields });
+  };
+
+  handleAddFields = () => {
+    this.setState({
+      inputFields: [...this.state.inputFields, { firstName: "", lastName: "" }],
+    });
+  };
+
+  handleRemoveFields = (id) => {
+    const values = [...this.state.inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    this.setState({ inputFields: values });
+  };
+
   doSubmit = async () => {
     try {
       await articleService.addArticle(this.state).then((res) => {
@@ -170,6 +195,8 @@ class ArticleForm extends Form {
   };
 
   render() {
+    const { inputFields } = this.state;
+
     const price = this.state.price && this.state.price;
 
     return (
@@ -359,7 +386,56 @@ class ArticleForm extends Form {
                         />
                       </div>
                     </Col>
-                    <Col sm="9" md="9" lg="9">
+                    <Col md="9">
+                      {this.state.inputFields.map((inputField, idx) => (
+                        <div
+                          key={idx}
+                          // className="col-sm-12 col-md-12 col-lg-12"
+                        >
+                          <Col style={{ display: "inline-block" }} md="5">
+                            <Label>User ID</Label>
+                            <Input
+                              className="form-control h-100"
+                              // value={inputField.firstName}
+                              onChange={(event) =>
+                                this.handleChangeInput(inputField.id, event)
+                              }
+                            />
+                          </Col>
+                          <Col style={{ display: "inline-block" }} md="5">
+                            <Label>Full Name</Label>
+                            <Input
+                              className="form-control h-100 "
+                              // value={inputField.lastName}
+                              onChange={(event) =>
+                                this.handleChangeInput(inputField.id, event)
+                              }
+                            />
+                          </Col>
+
+                          <Col style={{ display: "inline-block" }} md="2">
+                            <Button
+                              style={{ padding: "0.6rem 2rem" }}
+                              disabled={inputFields.length === 1}
+                              onClick={() =>
+                                this.handleRemoveFields(inputField.id)
+                              }
+                            >
+                              -{/* <RemoveIcon /> */}
+                            </Button>
+
+                            <Button
+                              style={{ padding: "0.6rem 2rem" }}
+                              onClick={this.handleAddFields}
+                            >
+                              +{/* <AddIcon /> */}
+                            </Button>
+                          </Col>
+                        </div>
+                      ))}
+                    </Col>
+
+                    {/* <Col sm="9" md="9" lg="9">
                       <Label for="exampleEmail">Authors ID</Label>
                       <div className="tags-input ">
                         <ul id="tags">
@@ -387,7 +463,7 @@ class ArticleForm extends Form {
                           placeholder="Press Up Arrow to add tags"
                         />
                       </div>
-                    </Col>
+                    </Col> */}
                   </Row>
                   <div className="savee">{this.renderButton("Save")}</div>
                 </form>
