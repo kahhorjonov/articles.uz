@@ -398,29 +398,27 @@ class ArticleForm extends Form {
                           placeholder={`${price} so'm`}
                         />
                       </div>
-                      <Row>
-                   
-                   <div className="hisoblash d-flex">
-                     <div className="col-lg-4">
-                       <p><b>Sahifa soni</b>: <span className="pl-3"><b>{this.state.inputFields.length}</b></span></p>
-                     </div>
-                     <div className="col-lg-4">
-                       <p><b>Chop Etilgan </b>:</p>
-                       
-                       </div>
-                       <div className="col-lg-4">
-                       <p><b>Totol</b> :</p>
-                       
-                       </div>
-                   </div>
-               
-               </Row>
+
+                      <div className="hisoblash  mt-5">
+                        <p>
+                          <b>Sahifa soni</b>:{" "}
+                          <span className="pl-3">
+                            <b>1000$</b>
+                          </span>
+                        </p>
+                        <p><b>24x 1000</b></p>
+
+                        <p>
+                          <b>Chop Etilgan: 1000 </b>:
+                        </p>
+
+                        <p>
+                          <b>Totol: 48000</b> :
+                        </p>
+                      </div>
                     </Col>
 
-              
                     <Col md="9">
-                      
-         
                       {this.state.inputFields.map((inputField, idx) => (
                         <div
                           key={idx}
