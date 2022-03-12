@@ -35,24 +35,6 @@ var UserRoutes = [
   },
 
   {
-    path: "/rejectedArticles",
-    name: "Rad etilgan maqolalarim",
-    icon: "nc-icon nc-settings",
-    component: Radetish,
-    layout: "/user",
-    visible: true,
-  },
-
-  {
-    path: "/articleInfo",
-    name: "Article Info",
-    icon: "nc-icon nc-tile-56",
-    component: Chopetilganinfo,
-    layout: "/user",
-    visible: false,
-  },
-
-  {
     path: "/user-page",
     name: "Mening Profilim",
     icon: "nc-icon nc-settings-gear-65",

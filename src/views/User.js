@@ -179,8 +179,8 @@ class User extends Component {
                   />
                 </CardBody>
                 <CardFooter>
-                  <hr />
-                  <div className="button-container">
+                  {/* <hr /> */}
+                  {/* <div className="button-container">
                     <Row>
                       <Col className="ml-auto" lg="3" md="6" xs="6">
                         <h5>
@@ -202,7 +202,7 @@ class User extends Component {
                         </h5>
                       </Col>
                     </Row>
-                  </div>
+                  </div> */}
                 </CardFooter>
               </Card>
               <Card>
