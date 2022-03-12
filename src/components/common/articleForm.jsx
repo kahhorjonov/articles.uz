@@ -402,11 +402,11 @@ class ArticleForm extends Form {
                         <p>
                           <b>Sahifa soni</b>:{" "}
                           <span className="pl-3">
-                            <b>1000$</b>
+                            <b>{this.state.sahifaSoni.length && this.state.sahifaSoni} $</b>
                           </span>
                         </p>
                         <p>
-                          <b>24x 1000</b>
+                          <b>24x 1000: </b> <span>{this.state.sahifaSoni * 1000} so'm</span>
                         </p>
 
                         <p>
