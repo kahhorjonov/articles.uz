@@ -3,8 +3,18 @@ import UserPage from "views/User.js";
 import Articles from "views/articles";
 import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
+import Jurnallar from "components/UI/jurnallar";
 
 var reviewerRoutes = [
+  {
+    path: "/reviewerMagazines",
+    name: "Jurnallar",
+    icon: "nc-icon nc-map-big",
+    component: Jurnallar,
+    layout: "/reviewer",
+    visible: true,
+  },
+
   {
     path: "/articles",
     name: "Maqolalar",
