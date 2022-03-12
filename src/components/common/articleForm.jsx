@@ -4,6 +4,7 @@ import Form from "./form";
 import articleService from "services/articleService";
 import { getChildCategories } from "services/getCategories";
 import magazineService from "services/magazineService";
+import { getUsersById } from "services/userService";
 
 import { Card, CardBody, Input, Label, Row, Col, Button } from "reactstrap";
 
@@ -39,7 +40,7 @@ class ArticleForm extends Form {
     parentCategoryId: "",
     parentCategories: [],
     childCategories: [],
-    inputFields: [{ firstName: "", lastName: "" }],
+    inputFields: [{ ID: "" }],
   };
 
   schema = {
@@ -65,18 +66,18 @@ class ArticleForm extends Form {
     }
   }
 
-  removeTags = (indexToRemove) => {
-    this.setState({
-      tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
-    });
-  };
+  // removeTags = (indexToRemove) => {
+  //   this.setState({
+  //     tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
+  //   });
+  // };
 
-  addTags = (value) => {
-    if (value !== "") {
-      this.setState({ tags: [...this.state.tags, value] });
-      value = "";
-    }
-  };
+  // addTags = (value) => {
+  //   if (value !== "") {
+  //     this.setState({ tags: [...this.state.tags, value] });
+  //     value = "";
+  //   }
+  // };
 
   getChildCategories = async (id) => {
     try {
@@ -184,6 +185,16 @@ class ArticleForm extends Form {
     this.setState({ inputFields: values });
   };
 
+  handleSearchUsers = async (code) => {
+    try {
+      await getUsersById(code).then((res) =>
+        this.setState({ inputFields: [...this.state.IDs, res.data] })
+      );
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   doSubmit = async () => {
     try {
       await articleService.addArticle(this.state).then((res) => {
@@ -198,6 +209,8 @@ class ArticleForm extends Form {
     const { inputFields } = this.state;
 
     const price = this.state.price && this.state.price;
+
+    console.log(this.state.IDs);
 
     return (
       <div className="content">
@@ -396,17 +409,20 @@ class ArticleForm extends Form {
                             <Label>User ID</Label>
                             <Input
                               className="form-control h-100"
-                              // value={inputField.firstName}
-                              onChange={(event) =>
-                                this.handleChangeInput(inputField.id, event)
-                              }
+                              onChange={(event) => {
+                                if (event.target.value.length === 6) {
+                                  this.handleSearchUsers(event.target.value);
+                                }
+                                this.handleChangeInput(inputField.id, event);
+                              }}
                             />
                           </Col>
                           <Col style={{ display: "inline-block" }} md="5">
                             <Label>Full Name</Label>
                             <Input
+                              disabled
                               className="form-control h-100 "
-                              // value={inputField.lastName}
+                              // value={this.state.ID}
                               onChange={(event) =>
                                 this.handleChangeInput(inputField.id, event)
                               }

@@ -152,6 +152,10 @@ export async function registerReviewer(data) {
   });
 }
 
+export async function getUsersById(id) {
+  return http.get(`http://192.168.100.27:8080/api/user/getAuthorByCode/${id}`);
+}
+
 export default {
   registerReviewer,
   profileEdit,
@@ -163,4 +167,5 @@ export default {
   getStatisticsOfArticles,
   profileEditFromAdmin,
   createUser,
+  getUsersById,
 };
