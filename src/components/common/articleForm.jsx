@@ -469,20 +469,20 @@ class ArticleForm extends Form {
                             className="pr-0 pl-0"
                           >
                             <Button
-                              style={{ padding: "0.6rem 2rem", margin: "0" }}
+                              style={{ padding: "0.6rem 1.5rem", margin: "0" }}
                               disabled={inputFields.length === 1}
                               onClick={() =>
                                 this.handleRemoveFields(inputField.id)
                               }
                             >
-                              -{/* <RemoveIcon /> */}
+                              -
                             </Button>
 
                             <Button
-                              style={{ padding: "0.6rem 2rem", margin: "0" }}
+                              style={{ padding: "0.6rem 1.5rem", margin: "0" }}
                               onClick={this.handleAddFields}
                             >
-                              +{/* <AddIcon /> */}
+                              +
                             </Button>
                           </Col>
                         </div>
