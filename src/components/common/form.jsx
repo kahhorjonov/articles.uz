@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import InputGroupField from "./inputGroup";
 
 class Form extends Component {
   state = {
@@ -106,6 +107,22 @@ class Form extends Component {
 
     return (
       <Input
+        type={type}
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={(e) => this.handleChange(e)}
+        error={errors[name]}
+        autoComplete="on"
+      />
+    );
+  }
+
+  renderLoginInput(name, label, type = "text") {
+    const { data, errors } = this.state;
+
+    return (
+      <InputGroupField
         type={type}
         name={name}
         value={data[name]}
