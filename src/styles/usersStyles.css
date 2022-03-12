@@ -87,6 +87,12 @@
   height: 30px;
   /* font-size: 12px; */
 }
+.theades th{
+  font-size: 11px !important;
+}
+.theades{
+  overflow-x: scroll !important;
+}
 
 /* № */
 /* .usersTables .theades th:nth-child(1) {

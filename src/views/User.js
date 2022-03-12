@@ -122,11 +122,14 @@ class User extends Component {
       phoneNumber,
       academicDegree,
       workPlace,
+      code,
       scientificWork,
       workExperience,
       email,
       languages,
     } = this.state.currentUser;
+
+    console.log(this.state.currentUser);
 
     // console.log(scientificWork);
 
@@ -164,7 +167,7 @@ class User extends Component {
                     {`Academic Degree: ${academicDegree}`}
                   </p>
 
-                  <h6 className="p-0 m-0">ID:122112</h6>
+                  <h6 className="p-0 m-0">ID:{code}</h6>
 
                   <label>Profile Photo</label>
                   <Input
