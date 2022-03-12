@@ -41,6 +41,7 @@ class ArticleForm extends Form {
     parentCategories: [],
     childCategories: [],
     inputFields: [{ ID: "" }],
+    authors: [],
   };
 
   schema = {
@@ -186,16 +187,14 @@ class ArticleForm extends Form {
   };
 
   handleSearchUsers = async (id, event) => {
-    // this.setState({ inputFields: newInputFields });
-
-    console.log(event.target.name);
-    // try {
-    //   await getUsersById(code).then((res) =>
-    //     this.setState({ inputFields: [...this.state.IDs, res.data] })
-    //   );
-    // } catch (error) {
-    //   toast.error(error);
-    // }
+    try {
+      await getUsersById(event.target.value).then((res) => {
+        const authorsNew = new Set([...this.state.authors, res.data]);
+        this.setState({ authors: [...authorsNew] });
+      });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   doSubmit = async () => {
@@ -213,7 +212,7 @@ class ArticleForm extends Form {
 
     const price = this.state.price && this.state.price;
 
-    console.log(this.state.IDs);
+    console.log(this.state.authors);
 
     return (
       <div className="content">
@@ -403,13 +402,18 @@ class ArticleForm extends Form {
                       </div>
                       <div className="hisoblash mt-5">
                         <p>
-                          <b>Sahifa soni</b>:{" "}
+                          <b>Sahifa narxi</b>:{" "}
                           <span className="pl-3">
-                            <b>{this.state.sahifaSoni.length && this.state.sahifaSoni} $</b>
+                            <b>
+                              {this.state.sahifaSoni.length &&
+                                this.state.sahifaSoni}{" "}
+                              $
+                            </b>
                           </span>
                         </p>
                         <p>
-                          <b>24x 1000: </b> <span>{this.state.sahifaSoni * 1000} so'm</span>
+                          <b>24x 1000: </b>{" "}
+                          <span>{this.state.sahifaSoni * 1000} so'm</span>
                         </p>
 
                         <p>
@@ -459,9 +463,9 @@ class ArticleForm extends Form {
                               disabled
                               name="fullName"
                               className="form-control h-100 "
-                              // value={this.state.ID}
+                              defaultValue={this.state.authors[idx]}
                               onChange={(event) =>
-                                this.handleChangeInput(inputField.id, event)
+                                this.handleChangeInput(event)
                               }
                             />
                           </Col>

@@ -98,6 +98,7 @@ class Category extends Component {
         .then((res) => {
           toast.success(res.data.message);
           this.handleGetCategories();
+          this.handleGetParent();
           this.setState({ name: "" });
           this.setState({ active: "" });
           this.setState({ activeCategoryId: "" });
@@ -173,22 +174,22 @@ class Category extends Component {
                           </div>
                         </Col>
 
-                        <Col lg="12">
+                        {/* <Col lg="12">
                           <div>
                             <label className="pt-3">Active</label>
                             <select
                               className="form-control "
+                              defaultValue="true"
                               onChange={(e) => {
                                 console.log(e.target.value);
                                 this.setState({ active: e.target.value });
                               }}
                             >
-                              <option></option>
                               <option value="true">True</option>
                               <option value="false">False</option>
                             </select>
                           </div>
-                        </Col>
+                        </Col> */}
                         <Col lg="12">
                           <div>
                             <label className="pt-3">Parent Category</label>
@@ -197,7 +198,7 @@ class Category extends Component {
                               defaultValue=""
                               onChange={(e) =>
                                 this.setState({
-                                  parentId: e.target.value,
+                                  activeParentCategoryId: e.target.value,
                                 })
                               }
                             >
@@ -261,7 +262,8 @@ class Category extends Component {
                             />
                           </div>
                         </Col>
-                        <Col lg="12">
+
+                        {/* <Col lg="12">
                           <div>
                             <Input
                               type="select"
@@ -275,7 +277,7 @@ class Category extends Component {
                               <option value="false">False</option>
                             </Input>
                           </div>
-                        </Col>
+                        </Col> */}
 
                         <Col lg="12">
                           <div>
@@ -285,11 +287,11 @@ class Category extends Component {
                                 this.state.activeParentCategoryId &&
                                 this.state.activeParentCategoryId.toString()
                               }
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 this.setState({
-                                  activeParent: e.target.value,
-                                })
-                              }
+                                  activeParentCategoryId: e.target.value,
+                                });
+                              }}
                               className="form-control mt-3"
                             >
                               <option value="">Choose One</option>

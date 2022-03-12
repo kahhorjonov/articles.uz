@@ -56,7 +56,7 @@ export function changeUserActivity(userId, activity) {
     active: activity,
   };
 
-  console.log(activity);
+  // console.log(activity);
 
   return axios.post(apiLocal + "/user/acceptedUser", body, config);
 }
