@@ -79,14 +79,6 @@ var adminRoutes = [
     visible: true,
   },
 
-  // {
-  //   path: "/messages",
-  //   name: "Xabarlar",
-  //   icon: "nc-icon nc-chat-33",
-  //   component: Dashboard,
-  //   layout: "/admin",
-  // },
-
   {
     path: "/users",
     name: "Foydalanuvchilar",
@@ -142,7 +134,7 @@ var adminRoutes = [
 
   {
     path: "/settings",
-    name: "Setting",
+    name: "Settings",
     icon: "nc-icon nc-settings-gear-65",
     component: Setting,
     layout: "/admins",
