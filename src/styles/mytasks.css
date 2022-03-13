@@ -119,6 +119,7 @@ body {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   background-color: #51cbce !important;
+  color: white !important;
 }
 
 @media (max-width: 576px) {

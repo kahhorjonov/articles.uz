@@ -27,17 +27,16 @@ class JurnalArxive extends Component {
 
   componentDidMount() {
     try {
-      // const userId = this.props.history.location.pathname.slice(21);
       const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
         : this.props.location.pathname.split(":")[0];
 
-      this.setState({
-        magazineId,
-      });
-      this.getMagazineInfo(magazineId);
+      this.splitMagazineId();
+
       this.getYearsById(magazineId);
+
       this.getArticlesFromMagazineById(magazineId);
+
       if (this.state.years[0]) {
         this.getMagazinesByYear(this.state.years[0], magazineId);
       }
@@ -45,6 +44,18 @@ class JurnalArxive extends Component {
       toast.error("Bunday jurnal mavjud emas");
     }
   }
+
+  splitMagazineId = () => {
+    const magazineId = this.props.location.pathname.split(":")[1]
+      ? this.props.location.pathname.split(":")[1]
+      : this.props.location.pathname.split(":")[0];
+
+    this.setState({
+      magazineId,
+    });
+
+    this.getMagazineInfo(magazineId);
+  };
 
   getArticlesFromMagazineById = async (id) => {
     try {
@@ -263,7 +274,10 @@ class JurnalArxive extends Component {
                                 margin: "1rem auto",
                               }}
                               className="text-dark"
-                              to={`/admin/editMagazine/:${magazine.id}`}
+                              to={`/release/:${magazine.id}`}
+                              onClick={() => {
+                                this.splitMagazineId();
+                              }}
                             >
                               № {magazine.releaseNumberOfThisYear} (
                               {magazine.allReleaseNumber}){" "}
@@ -276,6 +290,34 @@ class JurnalArxive extends Component {
                     </div>
                   </div>
                 </div>
+
+                {/* <div className="tab-content">
+                  <div className="tab-pane container active">
+                    <div style={{ minHeight: "50rem" }} className="row">
+                      {magazines &&
+                        magazines.map((magazine) => (
+                          <div key={magazine.id} className="col-lg-3">
+                            <GetImages url={magazine.cover.id} />
+
+                            <Link
+                              style={{
+                                fontSize: "2rem",
+                                margin: "1rem auto",
+                              }}
+                              className="text-dark"
+                              to={`/admin/editMagazine/:${magazine.id}`}
+                            >
+                              № {magazine.releaseNumberOfThisYear} (
+                              {magazine.allReleaseNumber}){" "}
+                              <span className="text-muted">
+                                / {magazine.year}
+                              </span>
+                            </Link>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>

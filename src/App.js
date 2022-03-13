@@ -48,15 +48,39 @@ class App extends Component {
               />
 
               <Route
-                path="/listOfMagazines"
+                path="/main/magazineInfo/:id"
                 exact
-                component={(props) => <JurnallarRoyxati {...props} />}
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
+              <Route
+                path="/listOfMagazines/magazineInfo/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
+              <Route
+                path="/release/:id"
+                exact
+                component={(props) => <JurnalArxive {...props} />}
+              />
+
+              <Route
+                path="/listOfMagazines/magazineInfo/:id"
+                exact
+                component={(props) => <JurnalArxive {...props} />}
               />
 
               <Route
                 path="/termsOfPublication"
                 exact
                 component={(props) => <NashrShartlari {...props} />}
+              />
+
+              <Route
+                path="/listOfMagazines"
+                exact
+                component={(props) => <JurnallarRoyxati {...props} />}
               />
 
               <Route
@@ -111,30 +135,60 @@ class App extends Component {
                 exact
                 component={(props) => <Asosiy {...props} />}
               />
+
               <Route
                 path="/main"
                 exact
                 component={(props) => <Asosiy {...props} />}
               />
+
+              <Route
+                path="/main/magazineInfo/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
+              <Route
+                path="/listOfMagazines/magazineInfo/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
               <Route
                 path="/listOfMagazines"
                 exact
                 component={(props) => <JurnallarRoyxati {...props} />}
               />
+
+              <Route
+                path="/release/:id"
+                exact
+                component={(props) => <JurnalArxive {...props} />}
+              />
+
+              <Route
+                path="/listOfMagazines/magazineInfo/:id"
+                exact
+                component={(props) => <JurnalArxive {...props} />}
+              />
+
               <Route
                 path="/termsOfPublication"
                 exact
                 component={(props) => <NashrShartlari {...props} />}
               />
+
               <Route
                 path="/contact"
                 exact
                 component={(props) => <Aloqa {...props} />}
               />
+
               <Route
                 path="/login"
                 component={(props) => <LoginForm {...props} />}
               />
+
               <Route
                 path="/logout"
                 exact
@@ -176,10 +230,23 @@ class App extends Component {
                 exact
                 component={(props) => <Asosiy {...props} />}
               />
+
               <Route
                 path="/listOfMagazines"
                 exact
                 component={(props) => <JurnallarRoyxati {...props} />}
+              />
+
+              <Route
+                path="/main/magazineInfo/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
+              <Route
+                path="/listOfMagazines/magazineInfo/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
               />
 
               <Route
@@ -189,19 +256,28 @@ class App extends Component {
               />
 
               <Route
+                path="/listOfMagazines/magazineInfo/:id"
+                exact
+                component={(props) => <JurnalArxive {...props} />}
+              />
+
+              <Route
                 path="/termsOfPublication"
                 exact
                 component={(props) => <NashrShartlari {...props} />}
               />
+
               <Route
                 path="/contact"
                 exact
                 component={(props) => <Aloqa {...props} />}
               />
+
               <Route
                 path="/login"
                 component={(props) => <LoginForm {...props} />}
               />
+
               <Route
                 path="/logout"
                 exact

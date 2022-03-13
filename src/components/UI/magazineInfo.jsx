@@ -24,7 +24,6 @@ class MagazineInfo extends Component {
 
   componentDidMount() {
     try {
-      // const userId = this.props.history.location.pathname.slice(21);
       const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
         : this.props.location.pathname.split(":")[0];
@@ -34,9 +33,6 @@ class MagazineInfo extends Component {
       });
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
-      if (this.state.years[0]) {
-        this.getMagazinesByYear(this.state.years[0], magazineId);
-      }
     } catch (error) {
       toast.error("Bunday jurnal mavjud emas");
     }
@@ -45,7 +41,6 @@ class MagazineInfo extends Component {
   getMagazineInfo = async (id) => {
     try {
       await getById(id).then((res) => {
-        // console.log(res.data.object.journals);
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ cover: res.data.object.journals.cover });
         this.getImage(res.data.object.journals.cover.id);
@@ -59,6 +54,7 @@ class MagazineInfo extends Component {
     try {
       await getYearById(id).then((res) => {
         this.setState({ years: res.data });
+        this.getMagazinesByYear(res.data[0], this.state.magazineId);
       });
     } catch (error) {
       toast.error(error);
