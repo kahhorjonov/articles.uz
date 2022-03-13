@@ -4,6 +4,7 @@ import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
 import Jurnallar from "components/UI/jurnallar";
 import MagazineInfoAdmin from "components/UI/magazineInfoAdmin";
+import EditMagazine from "views/editMagazine";
 
 var reductorRoutes = [
   {
@@ -13,6 +14,15 @@ var reductorRoutes = [
     component: Jurnallar,
     layout: "/reductor",
     visible: true,
+  },
+
+  {
+    path: "/editMagazine",
+    name: "Edit Magazine",
+    icon: "nc-icon nc-ruler-pencil",
+    component: EditMagazine,
+    layout: "/reductor",
+    visible: false,
   },
 
   {

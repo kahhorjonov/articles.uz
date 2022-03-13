@@ -181,6 +181,13 @@ class App extends Component {
                 exact
                 component={(props) => <JurnallarRoyxati {...props} />}
               />
+
+              <Route
+                path="/release/:id"
+                exact
+                component={(props) => <JurnalArxive {...props} />}
+              />
+
               <Route
                 path="/termsOfPublication"
                 exact

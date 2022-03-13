@@ -4,6 +4,7 @@ import Articles from "views/articles";
 import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
 import Jurnallar from "components/UI/jurnallar";
+import MagazineInfoAdmin from "./../components/UI/magazineInfoAdmin";
 
 var reviewerRoutes = [
   {
@@ -13,6 +14,15 @@ var reviewerRoutes = [
     component: Jurnallar,
     layout: "/reviewer",
     visible: true,
+  },
+
+  {
+    path: "/magazineInformation",
+    name: "magazineInfo",
+    icon: "nc-icon nc-button-power",
+    component: MagazineInfoAdmin,
+    layout: "/reviewer",
+    visible: false,
   },
 
   {
