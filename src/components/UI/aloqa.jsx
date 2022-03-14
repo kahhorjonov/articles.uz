@@ -21,8 +21,8 @@ class Aloqa extends Component {
 
                 <h4 style={{ fontWeight: "bold" }}>Telefon:</h4>
                 <p
-                  style={{ fontSize: "2rem" }}
-                  className="col-md-7 col-lg-7 col-sm-7 p-0"
+                  style={{ textDecoration: "none", color: "black" }}
+                  href="tel:+998998332411"
                 >
                   <a style={{ color: "black" }} href="tel:+998998332411">
                     +(998) (99)-833-24-11
@@ -30,6 +30,10 @@ class Aloqa extends Component {
                 </p>
 
                 <h4 style={{ fontWeight: "bold" }}>Email:</h4>
+                <a
+                  style={{ textDecoration: "none", color: "black" }}
+                  href="mailto:anvark87@gmail.com"
+                ></a>
                 <p
                   style={{ fontSize: "2rem" }}
                   className="col-md-7 col-lg-7 col-sm-7 p-0"

@@ -58,28 +58,28 @@ class Foooter extends React.Component {
                   <div className="col-md-8 pr-0">
                     <ul className="nav">
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/main">
                           Asosiy
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/listOfMagazines">
                           Jurnallar ro’yxati
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/termsOfPublication">
                           Nashr shartlari
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/contact">
                           Biz bilan bog’lanish
                         </a>
                       </li>
 
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/login">
                           Tizimga kirish
                         </a>
                       </li>

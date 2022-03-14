@@ -127,3 +127,10 @@ body {
     display: block !important;
   }
 }
+
+@media (max-width: 400px) {
+  .row-tables .col-lg-3 button {
+    position: absolute !important;
+    right: 171px;
+  }
+}

@@ -383,20 +383,20 @@ class JurnallarRoyxati extends Component {
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Manzil:</h5>
-                <p>
-                  Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi,
-                  QORASUV 6-MAVZE, 1-UY, 55-XONA
-                </p>
+                <p>Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi, QORASUV 6-MAVZE, 1-UY, 55-XONA</p>
+               
               </div>
 
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Aloqa:</h5>
                 <p>
+                   
                   <a href="mailto:anvark87@gmail.com">anvark87@gmail.com</a>
                 </p>
                 <p className="pt-0">
                   <a href="tel:+9989998332411">(99) 833-24-11</a>
+                 
                 </p>
               </div>
 
@@ -404,13 +404,13 @@ class JurnallarRoyxati extends Component {
                 <hr className="hr1" />
                 <h5>Manzil:</h5>
                 <div className="d-flex">
-                  <a href="https://telegram.me/Uzb1511">Telegram</a>
+                  <a href="https://telegram.me/Uzb1511">
+                    Telegram
+                  </a>
                   <a href="#" className="px-5">
                     Facebook
                   </a>
-                  <a href="https://www.instagram.com/avto.intalim.uz/">
-                    Instagram
-                  </a>
+                  <a href="https://www.instagram.com/avto.intalim.uz/">Instagram</a>
                 </div>
               </div>
 
@@ -428,28 +428,28 @@ class JurnallarRoyxati extends Component {
                   <div className="col-md-8 pr-0">
                     <ul className="nav">
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/main">
                           Asosiy
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/listOfMagazines">
                           Jurnallar ro’yxati
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/termsOfPublication">
                           Nashr shartlari
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/contact">
                           Biz bilan bog’lanish
                         </a>
                       </li>
 
                       <li className="nav-item">
-                        <a className="nav-link" href="">
+                        <a className="nav-link" href="/login">
                           Tizimga kirish
                         </a>
                       </li>
