@@ -43,7 +43,7 @@ export function addArticle(data) {
   });
 }
 
-export function sendWork(articleId, status, file) {
+export function sendWork(articleId, status, file, description) {
   const userId = jwtDecode(token).sub;
 
   const bodyFormData = new FormData();
@@ -52,6 +52,7 @@ export function sendWork(articleId, status, file) {
   bodyFormData.append("status", status);
   bodyFormData.append("file", file ? file : null);
   bodyFormData.append("userId", userId);
+  bodyFormData.append("description", description);
 
   // for (var pair of bodyFormData.entries()) {
   //   console.log(pair[0] + ", " + pair[1]);
