@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Foooter from "./foooter";
 
 import "styles/nashirShartlar.css";
-import axios from "axios";
 
 class NashrShartlari extends Component {
   state = {
@@ -10,7 +10,7 @@ class NashrShartlari extends Component {
   };
 
   componentDidMount() {
-    this.getArticlPrice()
+    this.getArticlPrice();
   }
   getArticlPrice = async () => {
     try {
@@ -18,7 +18,7 @@ class NashrShartlari extends Component {
         .get(`http://192.168.100.27:8080/api/prices/getPrice`)
         .then((res) => {
           console.log(res);
-          this.setState({articlPrice: res.data})
+          this.setState({ articlPrice: res.data });
         });
     } catch (error) {
       console.log(error);
@@ -27,8 +27,14 @@ class NashrShartlari extends Component {
 
   render() {
     // console.log(this.state);
-    const {articlPrice} = this.state
-    const {bittaBosmaJunalNarxi, bittaSertifikatNarxi, chopEtishNarxi, doi, sahifaNarxi} = articlPrice
+    const { articlPrice } = this.state;
+    const {
+      bittaBosmaJunalNarxi,
+      bittaSertifikatNarxi,
+      chopEtishNarxi,
+      doi,
+      sahifaNarxi,
+    } = articlPrice;
     return (
       <>
         <div className="nashir">

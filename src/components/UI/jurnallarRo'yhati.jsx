@@ -16,9 +16,11 @@ import GetImages from "utils/getImages";
 import Listhome from "./listhome";
 import Foooter from "./foooter";
 import Carousel from "react-multi-carousel";
-
+import img11 from "assets/img/figma/im1.png";
+import img21 from "assets/img/figma/im2.png";
+import img31 from "assets/img/figma/im3.png";
+import img41 from "assets/img/figma/im4.png";
 import "react-multi-carousel/lib/styles.css";
-
 import "styles/jurnallarRoyhati.css";
 
 class JurnallarRoyxati extends Component {
@@ -208,7 +210,6 @@ class JurnallarRoyxati extends Component {
 
         <div className="maqolaQabul">
           <h1>Maqolalar qabul qilinayotgan jurnallar</h1>
-
           <div className="carousel">
             <div className="row mx-0 mx-sm-0 mt-5 mx-0">
               <div className="col-lg-4">
@@ -245,7 +246,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img} alt="123" />
+                      <img src={img11}  class="card-img-top"  alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Tibbiyot va farmakologiya</Link>
@@ -260,8 +261,8 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img1} alt="123" />
-                      <div className="card-body p-0">
+                      <img src={img21}  class="card-img-top"  alt="123" />
+                     
                         <h4 className="card_title">
                           <Link to="#">Sport</Link>
                         </h4>
@@ -269,14 +270,14 @@ class JurnallarRoyxati extends Component {
                           Maqolalar qabul qilish muddati <br />
                           01.09.2020 gacha
                         </p>
-                      </div>
+                   
                     </div>
                   </Col>
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img2} alt="123" />
-                      <div className="card-body p-0">
+                      <img src={img21} class="card-img-top h-100"  alt="123" />
+                  
                         <h4 className="card_title">
                           <Link to="#">Fizika</Link>
                         </h4>
@@ -284,7 +285,7 @@ class JurnallarRoyxati extends Component {
                           Maqolalar qabul qilish muddati <br />
                           01.09.2020 gacha
                         </p>
-                      </div>
+                   
                     </div>
                   </Col>
                 </Carousel>
@@ -326,7 +327,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img} alt="123" />
+                      <img src={img21} class="card-img-top h-100" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Tibbiyot va farmakologiya</Link>
@@ -341,7 +342,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img1} alt="123" />
+                      <img src={img11} class="card-img-top h-100" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Sport</Link>
@@ -356,10 +357,42 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img2} alt="123" />
+                      <img src={img41} class="card-img-top h-100" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
-                          <Link to="#">Fizika</Link>
+                          <Link to="#">Fizika </Link>
+                        </h4>
+                        <p className="card_text">
+                          Maqolalar qabul qilish muddati <br />
+                          01.09.2020 gacha
+                        </p>
+                      </div>
+                    </div>
+                  </Col>
+
+
+                  <Col lg="10" className="px-0 mx-0">
+                    <div className="border-0">
+                      <img src={img11} class="card-img-top h-100" alt="123" />
+                      <div className="card-body p-0">
+                        <h4 className="card_title">
+                          <Link to="#">Fizika </Link>
+                        </h4>
+                        <p className="card_text">
+                          Maqolalar qabul qilish muddati <br />
+                          01.09.2020 gacha
+                        </p>
+                      </div>
+                    </div>
+                  </Col>
+
+
+                  <Col lg="10" className="px-0 mx-0">
+                    <div className="border-0">
+                      <img src={img21} class="card-img-top h-100" alt="123" />
+                      <div className="card-body p-0">
+                        <h4 className="card_title">
+                          <Link to="#">Fizika </Link>
                         </h4>
                         <p className="card_text">
                           Maqolalar qabul qilish muddati <br />
@@ -383,20 +416,20 @@ class JurnallarRoyxati extends Component {
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Manzil:</h5>
-                <p>Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi, QORASUV 6-MAVZE, 1-UY, 55-XONA</p>
-               
+                <p>
+                  Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi,
+                  QORASUV 6-MAVZE, 1-UY, 55-XONA
+                </p>
               </div>
 
               <div className="col-md-4">
                 <hr className="hr1" />
                 <h5>Aloqa:</h5>
                 <p>
-                   
                   <a href="mailto:anvark87@gmail.com">anvark87@gmail.com</a>
                 </p>
                 <p className="pt-0">
                   <a href="tel:+9989998332411">(99) 833-24-11</a>
-                 
                 </p>
               </div>
 
@@ -404,13 +437,13 @@ class JurnallarRoyxati extends Component {
                 <hr className="hr1" />
                 <h5>Manzil:</h5>
                 <div className="d-flex">
-                  <a href="https://telegram.me/Uzb1511">
-                    Telegram
-                  </a>
+                  <a href="https://telegram.me/Uzb1511">Telegram</a>
                   <a href="#" className="px-5">
                     Facebook
                   </a>
-                  <a href="https://www.instagram.com/avto.intalim.uz/">Instagram</a>
+                  <a href="https://www.instagram.com/avto.intalim.uz/">
+                    Instagram
+                  </a>
                 </div>
               </div>
 

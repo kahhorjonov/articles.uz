@@ -6,7 +6,7 @@ import {
   sendWork,
 } from "../services/articleService";
 
-import { Card, CardBody, Row, Col } from "reactstrap";
+import { Card, CardBody, Row, Col, CardHeader } from "reactstrap";
 import { toast } from "react-toastify";
 
 import "styles/mytasks.css";
@@ -72,15 +72,16 @@ class MyTasks extends Component {
         <Row>
           <Col sm="12" md="12" lg="12">
             <Card>
+              <CardHeader>
+                <a className="nav-link text-muted disabled">
+                  <h2 className="meningvaz">Mening vazifalarim</h2>
+                </a>
+              </CardHeader>
               <CardBody>
                 <div className="justify-content-between row">
                   <div className="col-lg-3">
                     <ul className="nav nav-pills flex-column" role="tablist">
-                      <li className="nav-item">
-                        <a className="nav-link text-muted disabled">
-                          <h2 className="meningvaz">Mening vazifalarim</h2>
-                        </a>
-                      </li>
+                      <li className="nav-item"></li>
                       <li className="nav-item">
                         <a
                           className="nav-link navvs active"
@@ -122,18 +123,18 @@ class MyTasks extends Component {
                         id="home"
                       >
                         <div className="container-flud ml-0 mr-0 mt-4">
+                          <div className="tr1">
+                            <p className="p-2">Mening vazifalarim</p>
+                          </div>
                           <div className="tebles">
-                            <div className="tr1">
-                              <p className="p-2">Mening vazifalarim</p>
-                            </div>
                             <div className="row ml-0 mr-0">
-                              <div className="col-lg-5 col-sm-3 pr-0">
+                              <div className="col-lg-5 border-right col-sm-3 pr-0">
                                 <p>Maqola nomi</p>
                               </div>
-                              <div className="col-lg-3 col-sm-3 pr-0">
+                              <div className="col-lg-3 border-right col-sm-3 pr-0">
                                 <p>Yuborilgan sana</p>
                               </div>
-                              <div className="col-lg-2 col-sm-3 pr-0">
+                              <div className="col-lg-2 border-right col-sm-3 pr-0">
                                 <p>Dedline</p>
                               </div>
                               <div className="col-lg-2 col-sm-3 pr-0">
@@ -271,34 +272,13 @@ class MyTasks extends Component {
                                             });
                                           }}
                                           type="file"
-                                          className="form-control-file form-control"
+                                          className="form-control-file mx-0 w-100 form-control"
                                         />
-                                      </span>
-                                      <br />
-                                      <span className="sp">
-                                        <button
-                                          style={{
-                                            position: "absolute",
-                                            top: "90px",
-                                            left: "118px",
-                                            fontSize: "13px",
-                                            padding: "5px",
-                                          }}
-                                          type="submit"
-                                          className="btn btn-primary my-md-3 mr-sm-5 my-sm-3"
-                                          onClick={() =>
-                                            this.handleSubmit(
-                                              article.article.id
-                                            )
-                                          }
-                                        >
-                                          Submit
-                                        </button>
                                       </span>
                                     </td>
                                   </tr>
-                                  <tr className="row row-tables">
-                                    <td className="col-md-12 col-sm-12 col-lg-12 border-0">
+                                  <tr className="row row-tables mx-0">
+                                    <td className="col-md-12 col-sm-12 col-lg-9 border-0">
                                       <input
                                         placeholder="Description field (optional)"
                                         className="col-md-12 col-sm-12 col-lg-12 border-0"
@@ -310,6 +290,17 @@ class MyTasks extends Component {
                                         }
                                       />
                                     </td>
+                                    <td className="col-lg-3 p-2 border-top-0 border-bottom-0">
+                                      <button
+                                        type="submit"
+                                        className="btn btn-primary w-100"
+                                        onClick={() =>
+                                          this.handleSubmit(article.article.id)
+                                        }
+                                      >
+                                        Submit
+                                      </button>
+                                    </td>
                                   </tr>
                                 </tbody>
                               ))}
@@ -318,12 +309,29 @@ class MyTasks extends Component {
                       </div>
 
                       <div id="menu2" className="container tab-pane fade">
-                        <h3>Menu 2</h3>
-                        <p>
-                          Sed ut perspiciatis unde omnis iste natus error sit
-                          voluptatem accusantium doloremque laudantium, totam
-                          rem aperiam.
-                        </p>
+                        <hr />
+                        <table className="table table-striped">
+                          <thead>
+                            <tr className="col-lg-12">
+                              <th className="col-lg-3">Article Name</th>
+                              <th className="col-lg-3">File</th>
+                              <th className="col-lg-3">Status 1</th>
+                              <th className="col-lg-3">Status 2</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>John</td>
+                              <td>
+                                <a href="#" download="w3logo">
+                                  file
+                                </a>
+                              </td>
+                              <td>jo, nesciunt! </td>
+                              <td>john@example.com</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
