@@ -9,7 +9,7 @@ import jwtDecode from "jwt-decode";
 import firebase from "../firebase";
 import { toast } from "react-toastify";
 
-import "../styles/registerStyles.css";
+import "styles/registerStyles.css";
 
 class RegisterForm extends Form {
   state = {
