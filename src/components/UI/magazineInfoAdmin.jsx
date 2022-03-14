@@ -3,6 +3,7 @@ import GetImages from "utils/getImages";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "services/authService";
 
 import {
   getById,
@@ -20,11 +21,14 @@ class MagazineInfoAdmin extends Component {
     years: [],
     magazines: [],
     cover: "",
+    user: "",
   };
 
   componentDidMount() {
     try {
-      // const userId = this.props.history.location.pathname.slice(21);
+      const user = getCurrentUser() && getCurrentUser().roles[0].id;
+      this.setState({ user });
+
       const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
         : this.props.location.pathname.split(":")[0];
@@ -281,7 +285,11 @@ class MagazineInfoAdmin extends Component {
                                   margin: "1rem auto",
                                 }}
                                 className="text-dark"
-                                to={`/admin/editMagazine/:${magazine.id}`}
+                                to={
+                                  this.state.user === 1
+                                    ? `/admin/editMagazine/:${magazine.id}`
+                                    : `/reductor/editMagazine/:${magazine.id}`
+                                }
                               >
                                 № {magazine.releaseNumberOfThisYear} (
                                 {magazine.allReleaseNumber}){" "}
