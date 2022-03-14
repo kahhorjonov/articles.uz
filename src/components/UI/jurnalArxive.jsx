@@ -36,10 +36,6 @@ class JurnalArxive extends Component {
       this.getYearsById(magazineId);
 
       this.getArticlesFromMagazineById(magazineId);
-
-      if (this.state.years[0]) {
-        this.getMagazinesByYear(this.state.years[0], magazineId);
-      }
     } catch (error) {
       toast.error("Bunday jurnal mavjud emas");
     }
@@ -84,6 +80,7 @@ class JurnalArxive extends Component {
     try {
       await getYearById(id).then((res) => {
         this.setState({ years: res.data });
+        this.getMagazinesByYear(res.data[0], this.state.magazineId);
       });
     } catch (error) {
       toast.error(error);

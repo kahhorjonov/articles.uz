@@ -1,10 +1,10 @@
-// import Notifications from "views/Notifications.js";
 import UserPage from "views/User.js";
 import Articles from "views/articles";
 import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
 import Jurnallar from "components/UI/jurnallar";
-import MagazineInfoAdmin from "./../components/UI/magazineInfoAdmin";
+import MagazineInfo from "components/UI/magazineInfo";
+import ReviewerArchive from "components/UI/reviewerArchive";
 
 var reviewerRoutes = [
   {
@@ -18,9 +18,18 @@ var reviewerRoutes = [
 
   {
     path: "/magazineInformation",
-    name: "magazineInfo",
-    icon: "nc-icon nc-button-power",
-    component: MagazineInfoAdmin,
+    name: "Archive",
+    icon: "nc-icon nc-map-big",
+    component: MagazineInfo,
+    layout: "/reviewer",
+    visible: false,
+  },
+
+  {
+    path: "/reviewerArchive",
+    name: "Archive",
+    icon: "nc-icon nc-map-big",
+    component: ReviewerArchive,
     layout: "/reviewer",
     visible: false,
   },
@@ -42,24 +51,6 @@ var reviewerRoutes = [
     layout: "/reviewer",
     visible: true,
   },
-
-  // {
-  //   path: "/messages",
-  //   name: "Xabarlar",
-  //   icon: "nc-icon nc-chat-33",
-  //   component: Articles,
-  //   layout: "/reviewer",
-  //   visible: true,
-  // },
-
-  // {
-  //   path: "/notifications",
-  //   name: "Notifications",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Articles,
-  //   layout: "/reviewer",
-  //   visible: true,
-  // },
 
   {
     path: "/user-page",

@@ -3,6 +3,7 @@ import axios from "axios";
 import GetImages from "utils/getImages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "services/authService";
 
 import {
   getById,
@@ -20,10 +21,14 @@ class MagazineInfo extends Component {
     years: [],
     magazines: [],
     cover: "",
+    user: "",
   };
 
   componentDidMount() {
     try {
+      const user = getCurrentUser() && getCurrentUser().roles[0].id;
+      this.setState({ user });
+
       const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
         : this.props.location.pathname.split(":")[0];
@@ -31,6 +36,7 @@ class MagazineInfo extends Component {
       this.setState({
         magazineId,
       });
+
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
     } catch (error) {
@@ -280,7 +286,12 @@ class MagazineInfo extends Component {
                                   margin: "1rem auto",
                                 }}
                                 className="text-dark"
-                                to={`/release/:${magazine.id}`}
+                                to={
+                                  this.state.user === 3
+                                    ? `/reviewer/reviewerArchive/:${magazine.id}`
+                                    : `/release/:${magazine.id}`
+                                  // `/release/:${magazine.id}`
+                                }
                               >
                                 № {magazine.releaseNumberOfThisYear} (
                                 {magazine.allReleaseNumber}){" "}
