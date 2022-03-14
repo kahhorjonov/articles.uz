@@ -1,18 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Col, Input, Row, Label, Form, Table, CardBody } from "reactstrap";
 
-import "../../styles/chopetilgan.css";
+import "styles/chopetilgan.css";
 
 class BarchaMaqolalarim extends Component {
-  status = {
-
-  }
-
-  componentDidMount(){
-
-  }
-  
   render() {
     return (
       <>
@@ -30,6 +21,7 @@ class BarchaMaqolalarim extends Component {
                         <b style={{ fontSize: "17px" }}>Select:</b>{" "}
                       </Label>
                       <Input
+                        style={{ height: "unset" }}
                         className="ml-4 form-control"
                         name="select"
                         type="select"
@@ -37,6 +29,15 @@ class BarchaMaqolalarim extends Component {
                         <option value="Barcha Maqollarim">
                           Barcha Maqollarim
                         </option>
+
+                        <option value="Rad etilgan maqollarim">
+                          Rad etilgan maqollarim
+                        </option>
+
+                        <option value="Rad etilgan maqollarim">
+                          Rad etilgan maqollarim
+                        </option>
+
                         <option value="Rad etilgan maqollarim">
                           Rad etilgan maqollarim
                         </option>
