@@ -55,9 +55,9 @@ class JurnalArxive extends Component {
 
   getArticlesFromMagazineById = async (id) => {
     try {
-      await getArticlesFromMagazine(id).then((res) =>
-        this.setState({ articles: res.data.articleInfoForJournal })
-      );
+      await getArticlesFromMagazine(id).then((res) => {
+        this.setState({ articles: res.data.articleInfoForJournal });
+      });
     } catch (error) {
       toast.error(error);
     }

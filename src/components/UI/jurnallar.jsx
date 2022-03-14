@@ -10,8 +10,8 @@ import axios from "axios";
 import GetImages from "utils/getImages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import auth from "services/authService";
 import { Col, Input, Row } from "reactstrap";
+import auth from "services/authService";
 
 import "styles/homePage.css";
 
@@ -178,6 +178,8 @@ class Jurnallar extends Component {
                                             ? "admin"
                                             : this.state.user === 2
                                             ? "reductor"
+                                            : this.state.user === 4
+                                            ? "user"
                                             : "reviewer"
                                         }/magazineInformation/:${magazine.id}`}
                                         style={{ cursor: "pointer" }}

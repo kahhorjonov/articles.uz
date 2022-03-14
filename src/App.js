@@ -283,17 +283,21 @@ class App extends Component {
                 exact
                 component={(props) => <Logout {...props} />}
               />
+
               <Route
                 path="/register"
                 exact
                 component={(props) => <RegisterForm {...props} />}
               />
+
               <Route
                 path="/registerReviewer"
                 exact
                 component={ReviewerRegisterForm}
               />
+
               <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
+
               <ProtectedRoute
                 path="/reviewer"
                 component={ReviewerLayout}
@@ -322,15 +326,33 @@ class App extends Component {
               />
 
               <Route
-                path="/reviewer/release/:id"
+                path="/listOfMagazines"
+                exact
+                component={(props) => <JurnallarRoyxati {...props} />}
+              />
+
+              <Route
+                path="/main/magazineInfo/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
+              <Route
+                path="/listOfMagazines/magazineInfo/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
+              <Route
+                path="/release/:id"
                 exact
                 component={(props) => <JurnalArxive {...props} />}
               />
 
               <Route
-                path="/listOfMagazines"
+                path="/listOfMagazines/magazineInfo/:id"
                 exact
-                component={(props) => <JurnallarRoyxati {...props} />}
+                component={(props) => <JurnalArxive {...props} />}
               />
 
               <Route

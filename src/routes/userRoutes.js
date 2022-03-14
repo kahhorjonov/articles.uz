@@ -3,15 +3,35 @@ import UserPage from "views/User.js";
 import ArticleForm from "components/common/articleForm";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
+import MagazineInfo from "components/UI/magazineInfo";
+import ReviewerArchive from "components/UI/reviewerArchive";
 
 var UserRoutes = [
   {
-    path: "/jurnallar",
+    path: "/userMagazines",
     name: "Jurnallar",
     icon: "nc-icon nc-paper",
     component: Jurnallar,
     layout: "/user",
     visible: true,
+  },
+
+  {
+    path: "/magazineInformation",
+    name: "Archive",
+    icon: "nc-icon nc-map-big",
+    component: MagazineInfo,
+    layout: "/user",
+    visible: false,
+  },
+
+  {
+    path: "/userArchive",
+    name: "Archive",
+    icon: "nc-icon nc-map-big",
+    component: ReviewerArchive,
+    layout: "/user",
+    visible: false,
   },
 
   {

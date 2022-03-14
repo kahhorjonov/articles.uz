@@ -289,8 +289,9 @@ class MagazineInfo extends Component {
                                 to={
                                   this.state.user === 3
                                     ? `/reviewer/reviewerArchive/:${magazine.id}`
+                                    : this.state.user === 4
+                                    ? `/user/userArchive/:${magazine.id}`
                                     : `/release/:${magazine.id}`
-                                  // `/release/:${magazine.id}`
                                 }
                               >
                                 № {magazine.releaseNumberOfThisYear} (

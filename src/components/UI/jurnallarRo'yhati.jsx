@@ -246,7 +246,7 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img11}  class="card-img-top"  alt="123" />
+                      <img src={img11} className="card-img-top" alt="123" />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Tibbiyot va farmakologiya</Link>
@@ -261,31 +261,33 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img21}  class="card-img-top"  alt="123" />
-                     
-                        <h4 className="card_title">
-                          <Link to="#">Sport</Link>
-                        </h4>
-                        <p className="card_text">
-                          Maqolalar qabul qilish muddati <br />
-                          01.09.2020 gacha
-                        </p>
-                   
+                      <img src={img21} className="card-img-top" alt="123" />
+
+                      <h4 className="card_title">
+                        <Link to="#">Sport</Link>
+                      </h4>
+                      <p className="card_text">
+                        Maqolalar qabul qilish muddati <br />
+                        01.09.2020 gacha
+                      </p>
                     </div>
                   </Col>
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img21} class="card-img-top h-100"  alt="123" />
-                  
-                        <h4 className="card_title">
-                          <Link to="#">Fizika</Link>
-                        </h4>
-                        <p className="card_text">
-                          Maqolalar qabul qilish muddati <br />
-                          01.09.2020 gacha
-                        </p>
-                   
+                      <img
+                        src={img21}
+                        className="card-img-top h-100"
+                        alt="123"
+                      />
+
+                      <h4 className="card_title">
+                        <Link to="#">Fizika</Link>
+                      </h4>
+                      <p className="card_text">
+                        Maqolalar qabul qilish muddati <br />
+                        01.09.2020 gacha
+                      </p>
                     </div>
                   </Col>
                 </Carousel>
@@ -327,7 +329,11 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img21} class="card-img-top h-100" alt="123" />
+                      <img
+                        src={img21}
+                        className="card-img-top h-100"
+                        alt="123"
+                      />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Tibbiyot va farmakologiya</Link>
@@ -342,7 +348,11 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img11} class="card-img-top h-100" alt="123" />
+                      <img
+                        src={img11}
+                        className="card-img-top h-100"
+                        alt="123"
+                      />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Sport</Link>
@@ -357,7 +367,11 @@ class JurnallarRoyxati extends Component {
 
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img41} class="card-img-top h-100" alt="123" />
+                      <img
+                        src={img41}
+                        className="card-img-top h-100"
+                        alt="123"
+                      />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Fizika </Link>
@@ -370,10 +384,13 @@ class JurnallarRoyxati extends Component {
                     </div>
                   </Col>
 
-
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img11} class="card-img-top h-100" alt="123" />
+                      <img
+                        src={img11}
+                        className="card-img-top h-100"
+                        alt="123"
+                      />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Fizika </Link>
@@ -386,10 +403,13 @@ class JurnallarRoyxati extends Component {
                     </div>
                   </Col>
 
-
                   <Col lg="10" className="px-0 mx-0">
                     <div className="border-0">
-                      <img src={img21} class="card-img-top h-100" alt="123" />
+                      <img
+                        src={img21}
+                        className="card-img-top h-100"
+                        alt="123"
+                      />
                       <div className="card-body p-0">
                         <h4 className="card_title">
                           <Link to="#">Fizika </Link>
