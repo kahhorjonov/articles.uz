@@ -33,6 +33,7 @@
   font-weight: normal;
   font-size: 22px;
   line-height: 20px;
+  padding: 1rem;
 }
 
 .nashir .col-lg-8 h1 {
@@ -136,12 +137,12 @@
     line-height: 130%;
     text-align: center;
   }
-  .nashir .nav-item{
+  .nashir .nav-item {
     display: flex;
     justify-content: center;
-    padding-bottom:  20px;
+    padding-bottom: 20px;
   }
-  .nashir .nav-pills{
+  .nashir .nav-pills {
     margin-bottom: 20px;
   }
 }

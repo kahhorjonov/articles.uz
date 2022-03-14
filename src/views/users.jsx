@@ -50,21 +50,22 @@ class Users extends Component {
     await this.populateCategories();
     await this.handleChooseRole(null);
 
-    try {
-      const msg = firebase.messaging();
-      msg
-        .requestPermission()
-        .then(() => {
-          return msg.getToken();
-        })
-        .then((data) => {
-          this.setState({ notificationToken: data });
-        });
-    } catch (ex) {
-      toast.info(
-        "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
-      );
-    }
+    // try {
+    //   const msg = firebase.messaging();
+    //   msg
+    //     .requestPermission()
+    //     .then(() => {
+    //       return msg.getToken();
+    //     })
+    //     .then((data) => {
+    //       this.setState({ notificationToken: data });
+    //     });
+    // } catch (ex) {
+    //   toast.info(
+    //     "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
+    //   );
+    // }
+
     // await this.populateArticles();
   }
 
@@ -172,22 +173,24 @@ class Users extends Component {
       roleId: this.state.roleId,
     };
 
+    console.log(data);
+
     await userService
       .createUser(data)
       .then((res) => {
         toast.success("Yangi foydalanuvchi qo'shildi");
+
+        this.setState({ firstName: "" });
+        this.setState({ lastName: "" });
+        this.setState({ email: "" });
+        this.setState({ password: "" });
+        this.setState({ phoneNumber: "" });
+        this.setState({ roleId: null });
       })
       .catch((ex) => {
         // console.log(ex.response.data.message);
         toast.error(ex.response.data.message);
       });
-
-    this.setState({ firstName: "" });
-    this.setState({ lastName: "" });
-    this.setState({ email: "" });
-    this.setState({ password: "" });
-    this.setState({ phoneNumber: "" });
-    this.setState({ roleId: null });
   };
 
   render() {
@@ -235,11 +238,12 @@ class Users extends Component {
                                       required
                                       placeholder="Ism"
                                       type="text"
-                                      onChange={(e) =>
+                                      onChange={(e) => {
+                                        // console.log("ismi:", e.target.value);
                                         this.setState({
                                           firstName: e.target.value,
-                                        })
-                                      }
+                                        });
+                                      }}
                                     />
                                   </FormGroup>
                                 </Col>

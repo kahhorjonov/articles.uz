@@ -8,7 +8,14 @@ const InputGroupField = (props) => {
     <div>
       <InputGroup>
         <InputGroupText style={{ fontSize: "1.5rem" }}>+998</InputGroupText>
-        <Input {...rest} id={name} name={name} className="form-control" />
+        <Input
+          {...rest}
+          id={name}
+          minLength={9}
+          maxLength={9}
+          name={name}
+          className="form-control"
+        />
       </InputGroup>
       {error && <div className="alert alert-danger">{error}</div>}
     </div>

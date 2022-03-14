@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-import img from "components/profile.png";
-import "../../styles/aloqa.css";
+import "styles/aloqa.css";
 
 class Aloqa extends Component {
-  state = {};
   render() {
     return (
       <>
@@ -22,17 +20,14 @@ class Aloqa extends Component {
                 </p>
 
                 <h4 style={{ fontWeight: "bold" }}>Telefon:</h4>
-                <a
+                <p
                   style={{ textDecoration: "none", color: "black" }}
                   href="tel:+998998332411"
                 >
-                  <p
-                    style={{ fontSize: "2rem" }}
-                    className="col-md-7 col-lg-7 col-sm-7 p-0"
-                  >
-                    (99) 833-24-11
-                  </p>
-                </a>
+                  <a style={{ color: "black" }} href="tel:+998998332411">
+                    +(998) (99)-833-24-11
+                  </a>
+                </p>
 
                 <h4 style={{ fontWeight: "bold" }}>Email:</h4>
                 <a
@@ -60,13 +55,13 @@ class Aloqa extends Component {
                   style={{ fontSize: "2rem" }}
                   className="col-md-7 col-lg-7 col-sm-7 p-0"
                 >
-                  <a style={{ color: "#5A5A5A" }} href="https://telegram.me/Uzb1511">
-                    Telegram
-                  </a>{" "}
+                  <a style={{ color: "#5A5A5A" }} href="https://t.me/Uzb1511">
+                    Telegram{" "}
+                  </a>
                   <a style={{ color: "#5A5A5A" }} href="">
-                    Facebook
-                  </a>{" "}
-                  <a style={{ color: "#5A5A5A" }} href="https://www.instagram.com/avto.intalim.uz/">
+                    Facebook{" "}
+                  </a>
+                  <a style={{ color: "#5A5A5A" }} href="">
                     Instagram
                   </a>
                 </p>

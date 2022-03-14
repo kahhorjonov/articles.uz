@@ -98,6 +98,8 @@ body {
 .activeNav {
   background-color: #51cbce !important;
   color: white !important;
+  display: flex !important;
+  justify-content: space-between !important;
 }
 
 /* box4 */
@@ -235,8 +237,8 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-@media (max-width: 1200px){
-  .navbar-collapse .links{
-     font-size: 11px;
+@media (max-width: 1200px) {
+  .navbar-collapse .links {
+    font-size: 11px;
   }
 }

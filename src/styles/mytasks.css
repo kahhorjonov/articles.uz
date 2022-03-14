@@ -31,20 +31,6 @@ body {
   font-size: 13px;
   padding-left: 7px;
 }
-/* .content .nav-pills {
-  font-size: 12px;
-} */
-/* .content .nav-item:nth-child(1) {
-  font-size: 8px;
-} */
-
-/* 
-.tr2 {
-  border-bottom: 1px solid #dfe0e3;
-  height: 30px;
-  background-color: white;
-  font-size: 13px;
-} */
 
 .tr3 {
   border-bottom: 1px solid #dfe0e3;
@@ -130,67 +116,10 @@ body {
   padding: 6px;
 }
 
-/* TAbles */
-/* .table-striped {
-  font-size: 14px ;
-} */
-/* 
-.td1 {
-  width: 449px ;
-
-  padding-left: 7px ;
-}
-.td2 {
-  width: 151px ;
-
-  padding-left: 7px ;
-}
-.td3 {
-  width: 159px ;
-  padding-left: 7px ;
-}
-
-.td4 {
-  width: 46.6rem ;
-  padding-left: 7px ;
-}
-
-.td5 {
-  width: 160px ;
-} */
-/* 
-.tbs {
-  height: 46px ;
-  display: flex ;
-  background-color: #f9fafc ;
-}
-.tbs .linkk {
-  text-decoration: none ;
-}
-.bad {
-  border-radius: 7px ;
-}
-
-.tbs2 {
-  height: 46px ;
-  display: flex ;
-}
-.tbs2 .linkk {
-  text-decoration: none ;
-}
-
-.group-buttons {
-  padding-left: 15px ;
-} */
-
-.activeNav {
-  background-color: #51cbce;
-  color: white;
-}
-
-.activeNav:hover {
-  background-color: #3cbec0;
-  color: white;
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #51cbce !important;
+  color: white !important;
 }
 
 @media (max-width: 576px) {

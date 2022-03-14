@@ -79,14 +79,6 @@ var adminRoutes = [
     visible: true,
   },
 
-  // {
-  //   path: "/messages",
-  //   name: "Xabarlar",
-  //   icon: "nc-icon nc-chat-33",
-  //   component: Dashboard,
-  //   layout: "/admin",
-  // },
-
   {
     path: "/users",
     name: "Foydalanuvchilar",
@@ -141,6 +133,15 @@ var adminRoutes = [
   },
 
   {
+    path: "/settings",
+    name: "Settings",
+    icon: "nc-icon nc-settings-gear-65",
+    component: Setting,
+    layout: "/admins",
+    visible: true,
+  },
+
+  {
     path: "/logout",
     name: "Profildan chiqish",
     icon: "nc-icon nc-button-power",
@@ -156,15 +157,6 @@ var adminRoutes = [
     component: MagazineInfoAdmin,
     layout: "/admin",
     visible: false,
-  },
-
-  {
-    path: "/setting",
-    name: "Setting",
-    icon: "nc-icon nc-settings-gear-65",
-    component: Setting,
-    layout: "/admin",
-    visible: true,
   },
 ];
 

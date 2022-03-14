@@ -3,7 +3,7 @@ import articleService from "../services/articleService";
 import { Card, CardBody, Row, Col } from "reactstrap";
 import { toast } from "react-toastify";
 
-import "../styles/mytasks.css";
+import "styles/mytasks.css";
 
 class MyTasks extends Component {
   state = {
@@ -51,11 +51,11 @@ class MyTasks extends Component {
 
   handleClick = async (text) => {
     const token = localStorage.getItem("token");
-    
+
     if (text === "yangilari") {
       this.setState({ isActive: true });
       this.newMyArticles(token);
-    }else {
+    } else {
       this.setState({ isActive: false });
       this.getAcceptedArticles(token);
     }
@@ -77,24 +77,20 @@ class MyTasks extends Component {
     return (
       <div className="content">
         <Row>
-          <Col md="12">
+          <Col sm="12" md="12" lg="12">
             <Card>
               <CardBody>
                 <div className="justify-content-between row">
                   <div className="col-lg-3">
                     <ul className="nav nav-pills flex-column" role="tablist">
                       <li className="nav-item">
-                        <a className="nav-link text-muted disabled" href="">
+                        <a className="nav-link text-muted disabled">
                           <h2 className="meningvaz">Mening vazifalarim</h2>
                         </a>
                       </li>
                       <li className="nav-item">
                         <a
-                          className={
-                            this.state.isActive
-                              ? "nav-link navvs activeNav"
-                              : "nav-link navvs"
-                          }
+                          className="nav-link navvs"
                           onClick={(e) => {
                             this.handleClick("yangilari");
                             this.setState({ step: "START" });
@@ -112,30 +108,15 @@ class MyTasks extends Component {
                             this.setState({
                               step: "PREPARING_FOR_PUBLICATION",
                             });
-                            // console.log("tahrirda");
                           }}
-                          to=""
-                          className={
-                            this.state.isActive
-                              ? "nav-link navvs"
-                              : "nav-link navvs activeNav"
-                          }
+                          className="nav-link navvs"
                           data-toggle="pill"
                         >
                           Tekshirishim kerak bo'lgan vazifalar
                         </a>
                       </li>
-
                       <li className="nav-item">
-                        <a
-                          href="#"
-                          className={
-                            this.state.isActive
-                              ? "nav-link navvs "
-                              : "nav-link navvs"
-                          } 
-                          data-toggle="pill"
-                        >
+                        <a className="nav-link navvs" data-toggle="pill">
                           Tekshirilgan Maqolalarim
                         </a>
                       </li>
@@ -158,7 +139,6 @@ class MyTasks extends Component {
                             <div className="col-lg-2 col-sm-3 pr-0">
                               <p>Dedline</p>
                             </div>
-
                             <div className="col-lg-2 col-sm-3 pr-0">
                               <p>Qabul qilasizmi?</p>
                             </div>
@@ -174,7 +154,6 @@ class MyTasks extends Component {
                                   >
                                     <td className="col-md-5 pr-0">
                                       <a
-                                        href=""
                                         style={{ paddingLeft: "1.5rem" }}
                                         className="linkk"
                                       >
@@ -217,49 +196,45 @@ class MyTasks extends Component {
                                     </td>
                                   </tr>
                                 ))}
-                              <tr className="col-md-12">
+                              {/* <tr className="col-md-12">
                                 <td>
                                   <p className="pl-5 text-muted">
                                     show 20-30 of 50 items
                                   </p>
                                 </td>
-                              </tr>
+                              </tr> */}
                             </tbody>
                           </table>
                         </div>
                       </div>
                     ) : (
-                      <table className="container p-0 mt-4">
-                        <tbody className="tab-les">
-                          <tr className="m1">
-                            <td className="p-2">
-                              <p className="p-2">Mening vazifalarim</p>
-                            </td>
-                          </tr>
-                          <tr className="row row-tables1">
-                            <th className="col-lg-3 col-sm-3 ">
-                              <td className="col-md-3">
+                      <div>
+                        <table className="container p-0 mt-4">
+                          <tbody className="tab-les">
+                            <tr className="row row-tables1">
+                              <th className="col-lg-3 col-sm-3 ">
+                                {/* <td className="col-md-3"> */}
                                 <p>Maqola nomi</p>
-                              </td>
-                            </th>
-                            <th className="col-lg-3 col-sm-3 ">
-                              <td className="col-md-3">
+                                {/* </td> */}
+                              </th>
+                              <th className="col-lg-3 col-sm-3 ">
+                                {/* <td className="col-md-3"> */}
                                 <p>Maqolani Tekshirish vaqti</p>
-                              </td>
-                            </th>
-                            <th className="col-lg-3 col-sm-3 ">
-                              <td className="col-md-3">
+                                {/* </td> */}
+                              </th>
+                              <th className="col-lg-3 col-sm-3 ">
+                                {/* <td className="col-md-3"> */}
                                 <p>Xulosa</p>
-                              </td>
-                            </th>
-                            <th className="col-lg-3 col-sm-3 ">
-                              <td className="col-md-3">
+                                {/* </td> */}
+                              </th>
+                              <th className="col-lg-3 col-sm-3 ">
+                                {/* <td className="col-md-3"> */}
                                 <p>File</p>
-                              </td>
-                            </th>
-                          </tr>
-                        </tbody>
-
+                                {/* </td> */}
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
                         <table className="table table-striped table-bordered mb-0">
                           {this.state.myArticles &&
                             this.state.myArticles.map((article) => (
@@ -338,7 +313,7 @@ class MyTasks extends Component {
                               </tbody>
                             ))}
                         </table>
-                      </table>
+                      </div>
                     )}
                   </div>
                 </div>

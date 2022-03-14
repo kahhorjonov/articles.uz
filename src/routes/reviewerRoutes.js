@@ -3,8 +3,28 @@ import UserPage from "views/User.js";
 import Articles from "views/articles";
 import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
+import Jurnallar from "components/UI/jurnallar";
+import MagazineInfoAdmin from "./../components/UI/magazineInfoAdmin";
 
 var reviewerRoutes = [
+  {
+    path: "/reviewerMagazines",
+    name: "Jurnallar",
+    icon: "nc-icon nc-map-big",
+    component: Jurnallar,
+    layout: "/reviewer",
+    visible: true,
+  },
+
+  {
+    path: "/magazineInformation",
+    name: "magazineInfo",
+    icon: "nc-icon nc-button-power",
+    component: MagazineInfoAdmin,
+    layout: "/reviewer",
+    visible: false,
+  },
+
   {
     path: "/articles",
     name: "Maqolalar",

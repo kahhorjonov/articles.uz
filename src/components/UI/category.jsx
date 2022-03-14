@@ -76,7 +76,7 @@ class Category extends Component {
   handleDelete = async (id) => {
     try {
       await categoryServices.deleteCategories(id).then((res) => {
-        toast.success(res.data.message);
+        toast.info(res.data.message);
         this.handleGetCategories();
       });
     } catch (error) {
@@ -98,6 +98,7 @@ class Category extends Component {
         .then((res) => {
           toast.success(res.data.message);
           this.handleGetCategories();
+          this.handleGetParent();
           this.setState({ name: "" });
           this.setState({ active: "" });
           this.setState({ activeCategoryId: "" });
@@ -166,38 +167,21 @@ class Category extends Component {
                             <input
                               type="text"
                               className="form-control"
-                              onChange={(e) =>
-                                this.setState({ name: e.target.value })
-                              }
+                              onChange={(e) => {
+                                this.setState({ name: e.target.value });
+                              }}
                             />
                           </div>
                         </Col>
 
                         <Col lg="12">
                           <div>
-                            <label className="pt-3">Active</label>
-                            <select
-                              className="form-control "
-                              onChange={(e) => {
-                                console.log(e.target.value);
-                                this.setState({ active: e.target.value });
-                              }}
-                            >
-                              <option></option>
-                              <option value="true">True</option>
-                              <option value="false">False</option>
-                            </select>
-                          </div>
-                        </Col>
-                        <Col lg="12">
-                          <div>
                             <label className="pt-3">Parent Category</label>
                             <select
                               className="form-control"
-                              defaultValue=""
                               onChange={(e) =>
                                 this.setState({
-                                  parentId: e.target.value,
+                                  activeParentCategoryId: e.target.value,
                                 })
                               }
                             >
@@ -220,7 +204,9 @@ class Category extends Component {
                     <button
                       type="submit"
                       className="btn btn-info"
-                      onClick={(e) => this.submitHandler(e)}
+                      onClick={(e) => {
+                        this.submitHandler(e);
+                      }}
                     >
                       Submit
                     </button>
@@ -261,21 +247,6 @@ class Category extends Component {
                             />
                           </div>
                         </Col>
-                        <Col lg="12">
-                          <div>
-                            <Input
-                              type="select"
-                              className="form-control mt-3"
-                              defaultValue={this.state.active.toString()}
-                              onChange={(e) =>
-                                this.setState({ active: e.target.value })
-                              }
-                            >
-                              <option value="true">True</option>
-                              <option value="false">False</option>
-                            </Input>
-                          </div>
-                        </Col>
 
                         <Col lg="12">
                           <div>
@@ -285,11 +256,11 @@ class Category extends Component {
                                 this.state.activeParentCategoryId &&
                                 this.state.activeParentCategoryId.toString()
                               }
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 this.setState({
-                                  activeParent: e.target.value,
-                                })
-                              }
+                                  activeParentCategoryId: e.target.value,
+                                });
+                              }}
                               className="form-control mt-3"
                             >
                               <option value="">Choose One</option>

@@ -35,10 +35,6 @@ class MagazineInfoAdmin extends Component {
 
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
-
-      if (this.state.years[0]) {
-        this.getMagazinesByYear(this.state.years[0], magazineId);
-      }
     } catch (error) {
       toast.error("Bunday jurnal mavjud emas");
     }
@@ -61,6 +57,7 @@ class MagazineInfoAdmin extends Component {
     try {
       await getYearById(id).then((res) => {
         this.setState({ years: res.data });
+        this.getMagazinesByYear(res.data[0], this.state.magazineId);
       });
     } catch (error) {
       toast.error(error);
@@ -71,9 +68,9 @@ class MagazineInfoAdmin extends Component {
     try {
       this.setState({ magazines: [] });
 
-      await getMagazinesByYear(year, id).then((res) =>
-        this.setState({ magazines: res.data })
-      );
+      await getMagazinesByYear(year, id).then((res) => {
+        this.setState({ magazines: res.data });
+      });
     } catch (error) {
       toast.error(error);
     }

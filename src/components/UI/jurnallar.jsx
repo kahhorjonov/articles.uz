@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import auth from "services/authService";
 
 import "styles/homePage.css";
+import { Col, Input, Row } from "reactstrap";
 
 class Jurnallar extends Component {
   state = {
@@ -58,9 +59,36 @@ class Jurnallar extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="card">
-                <div className="card-header">
-                  <h3>Barcha jurnallar </h3>
-                </div>
+                <Row>
+                  <Col sm="6" md="6" lg="6">
+                    <div className="card-header">
+                      <h3>Barcha jurnallar </h3>
+                    </div>
+                  </Col>
+
+                  <Col
+                    sm="6"
+                    md="6"
+                    lg="6"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "right",
+                    }}
+                  >
+                    <div style={{ display: "block", paddingRight: "1.5rem" }}>
+                      <Input
+                        style={{ height: "unset" }}
+                        type="select"
+                        className="form-control"
+                      >
+                        <option>Barcha Jurnallar</option>
+                        <option>Maqola qabul qilayotkan Jurnallar</option>
+                        <option>Nashr jarayonidagi jurnallar</option>
+                      </Input>
+                    </div>
+                  </Col>
+                </Row>
                 <div className="card-body">
                   <div className="row mx-0">
                     {magazineCategories.length ? (
@@ -119,7 +147,9 @@ class Jurnallar extends Component {
                                         to={`/${
                                           this.state.user === 1
                                             ? "admin"
-                                            : "reductor"
+                                            : this.state.user === 2
+                                            ? "reductor"
+                                            : "reviewer"
                                         }/magazineInformation/:${magazine.id}`}
                                         style={{ cursor: "pointer" }}
                                       >
@@ -128,7 +158,7 @@ class Jurnallar extends Component {
                                     </h4>
 
                                     <p className="card_text text-muted">
-                                      Maqolalar <br />
+                                      {/* Maqolalar <br /> */}
                                       <span>
                                         {magazine &&
                                           new Date(magazine.deadline)
@@ -136,7 +166,7 @@ class Jurnallar extends Component {
                                             .slice(0, 10)}{" "}
                                         &nbsp;
                                       </span>
-                                      gacha qabul qilinadi
+                                      dan buyon chiqadi
                                     </p>
                                   </div>
                                 </div>
