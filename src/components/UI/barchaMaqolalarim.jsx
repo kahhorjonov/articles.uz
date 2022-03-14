@@ -2,19 +2,27 @@ import React, { Component } from "react";
 import { Col, Input, Row, Label, Form, Table, CardBody } from "reactstrap";
 import { getAllMyArticles } from "services/articleService";
 import { toast } from "react-toastify";
+import Pagination from "components/common/pagination";
+import { paginate } from "utils/paginate";
 
 import "styles/chopetilgan.css";
 
 class BarchaMaqolalarim extends Component {
   state = {
     status: "all",
-
     articles: [],
+
+    currentPage: 1,
+    pageSize: 10,
   };
 
   componentDidMount() {
     this.getAllMyArticles(this.state.status);
   }
+
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
 
   getAllMyArticles = async (status) => {
     try {
@@ -26,8 +34,46 @@ class BarchaMaqolalarim extends Component {
     }
   };
 
+  handleDownload = async (id, originalName, contentType) => {
+    if (id && originalName && contentType) {
+      try {
+        await fetch(
+          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": contentType,
+            },
+          }
+        )
+          .then((response) => response.blob())
+          .then((blob) => {
+            // Create blob link to download
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", originalName);
+
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+          });
+      } catch (error) {
+        toast.error(error);
+      }
+    } else {
+      toast.error("file topilmadi");
+    }
+  };
+
   render() {
-    console.log(this.state.articles);
+    const { articles: allArticles, currentPage, pageSize } = this.state;
+
+    const articles = paginate(allArticles, currentPage, pageSize);
 
     return (
       <>
@@ -56,6 +102,10 @@ class BarchaMaqolalarim extends Component {
 
                         <option value="REJECTED">Rad etilgan maqollarim</option>
 
+                        <option value="RECYCLE">
+                          Qayta ishlashdagi maqollarim
+                        </option>
+
                         <option value="BEGIN_CHECK">
                           Tekshirish jarayonidagi maqolalarim
                         </option>
@@ -74,27 +124,79 @@ class BarchaMaqolalarim extends Component {
                           <tr className="col-md-12">
                             <th className="col-md-2">title</th>
                             <th className="col-lg-2">Status</th>
-                            <th className="col-lg-1">Jurnal</th>
-                            <th className="col-lg-2">Orginal File</th>
-                            <th className="col-lg-2">Redactor File</th>
+                            <th className="col-lg-2">Jurnal</th>
+                            <th className="col-lg-1">Orginal File</th>
+                            <th className="col-lg-1">Redactor File</th>
                             <th className="col-lg-1">Certificate</th>
-                            <th className="col-lg-1">Author</th>
+                            <th className="col-lg-2">Authors</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>lorem</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                          </tr>
+                          {articles &&
+                            articles.map((article) => (
+                              <tr key={article.id}>
+                                <td>{article.titleArticle}</td>
+                                <td>{article.articleStatusName}</td>
+                                <td>{article.journals[0].title}</td>
+                                <td>
+                                  <a
+                                    href=""
+                                    onClick={(e) => {
+                                      e.preventDefault();
+
+                                      this.handleDownload(
+                                        article.file.id,
+                                        article.file.originalName,
+                                        article.file.contentType
+                                      );
+                                    }}
+                                  >
+                                    {article.file && article.file.originalName}
+                                  </a>
+                                </td>
+                                <td>
+                                  <a
+                                    href=""
+                                    onClick={(e) => {
+                                      e.preventDefault();
+
+                                      this.handleDownload(
+                                        article.file.id,
+                                        article.file.originalName,
+                                        article.file.contentType
+                                      );
+                                    }}
+                                  >
+                                    {article.publishedArticle &&
+                                      article.publishedArticle.originalName}
+                                  </a>
+                                </td>
+                                <td>№_FS7765461</td>
+                                <td>
+                                  {article.authors &&
+                                    article.authors.map((author, idx2) => {
+                                      if (article.authors.length - 1 !== idx2) {
+                                        return `${author.name}, `;
+                                      }
+                                      return `${author.name}`;
+                                    })}
+                                </td>
+                              </tr>
+                            ))}
                         </tbody>
                       </Table>
                     </CardBody>
                   </Row>
+                </div>
+                <div className="card-footer">
+                  <Pagination
+                    itemsCount={
+                      this.state.articles && this.state.articles.length
+                    }
+                    pageSize={pageSize}
+                    currentPage={currentPage}
+                    onPageChange={this.handlePageChange}
+                  />
                 </div>
               </div>
             </div>

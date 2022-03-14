@@ -67,18 +67,18 @@ class ArticleForm extends Form {
     }
   }
 
-  // removeTags = (indexToRemove) => {
-  //   this.setState({
-  //     tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
-  //   });
-  // };
+  removeTags = (indexToRemove) => {
+    this.setState({
+      tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
+    });
+  };
 
-  // addTags = (value) => {
-  //   if (value !== "") {
-  //     this.setState({ tags: [...this.state.tags, value] });
-  //     value = "";
-  //   }
-  // };
+  addTags = (value) => {
+    if (value !== "") {
+      this.setState({ tags: [...this.state.tags, value] });
+      value = "";
+    }
+  };
 
   getChildCategories = async (id) => {
     try {
@@ -211,8 +211,6 @@ class ArticleForm extends Form {
     const { inputFields } = this.state;
 
     const price = this.state.price && this.state.price;
-
-    console.log(this.state.authors);
 
     return (
       <div className="content">
@@ -426,7 +424,7 @@ class ArticleForm extends Form {
                       </div>
                     </Col>
 
-                    <Col md="9" className="pl-0">
+                    {/* <Col md="9" className="pl-0">
                       {this.state.inputFields.map((inputField, idx) => (
                         <div
                           key={idx}
@@ -496,9 +494,9 @@ class ArticleForm extends Form {
                           </Col>
                         </div>
                       ))}
-                    </Col>
+                    </Col> */}
 
-                    {/* <Col sm="9" md="9" lg="9">
+                    <Col sm="9" md="9" lg="9">
                       <Label for="exampleEmail">Authors ID</Label>
                       <div className="tags-input ">
                         <ul id="tags">
@@ -526,7 +524,7 @@ class ArticleForm extends Form {
                           placeholder="Press Up Arrow to add tags"
                         />
                       </div>
-                    </Col> */}
+                    </Col>
                   </Row>
 
                   <div className="savee">{this.renderButton("Save")}</div>
