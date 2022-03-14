@@ -34,7 +34,7 @@ class ArticleForm extends Form {
     jurnaldaChopEtishSoni: "0",
     bosmaJurnalSoni: "0",
     sertifikatSoni: "0",
-    doi: false,
+    doi: true,
 
     price: 0,
 
@@ -66,7 +66,6 @@ class ArticleForm extends Form {
       await axios
         .get(`http://192.168.100.27:8080/api/prices/getPrice`)
         .then((res) => {
-          console.log(res);
           this.setState({ articlePrice: res.data });
         });
     } catch (error) {
@@ -407,8 +406,8 @@ class ArticleForm extends Form {
                             this.getPriceFromDoi(e.target.value);
                           }}
                         >
-                          <option>True</option>
-                          <option>False</option>
+                          <option value="true">True</option>
+                          <option value="false">False</option>
                         </Input>
                       </div>
                     </Col>
@@ -427,7 +426,7 @@ class ArticleForm extends Form {
                       <div className="hisoblash mt-5">
                         <h6 className="pl-1">
                           Sahifa narxi
-                          <span className="pl-3 text-darck pl-2">
+                          <span className="pl-3 text-dark pl-2">
                             {sahifaNarxi} so'm
                           </span>
                         </h6>
@@ -441,9 +440,8 @@ class ArticleForm extends Form {
 
                         <h6 className="pl-1">
                           Bosma Jurnal Narxi:
-                          <span className="text-darck pl-2">
-                            {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}{" "}
-                            so'm
+                          <span className="pl-3 text-darck pl-2">
+                            {bittaBosmaJunalNarxi} so'm
                           </span>
                           <p>
                             {this.state.bosmaJurnalSoni} x{" "}
@@ -451,19 +449,27 @@ class ArticleForm extends Form {
                             {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}
                           </p>
                         </h6>
-<hr />
+                        <hr />
                         <h6 className="pl-1">
                           Sertifikat narxi:
-                          <span className="text-darck pl-2">
-                            {bittaSertifikatNarxi * this.state.sertifikatSoni}{" "}
-                            so'm
+                          <span className="pl-3 text-darck pl-2">
+                            {bittaSertifikatNarxi} so'm
                           </span>
                           <p>
                             {this.state.sertifikatSoni} x {bittaSertifikatNarxi}{" "}
                             = {bittaSertifikatNarxi * this.state.sertifikatSoni}
                           </p>
                         </h6>
-<hr />
+                        <hr />
+
+                        <h6 className="pl-1">
+                          Doi narxi:
+                          <span className="pl-3 text-darck pl-2">
+                            {doi} so'm
+                          </span>
+                          <p>{this.state.doi === true ? 10000 : 0}</p>
+                        </h6>
+                        <hr />
                         <h6 className="pl-1">
                           Total :{" "}
                           <span className="text-darck pl-2">{price} so'm</span>

@@ -16,14 +16,14 @@ var UserRoutes = [
     visible: true,
   },
 
-  {
-    path: "/magazineInformation",
-    name: "Archive",
-    icon: "nc-icon nc-map-big",
-    component: MagazineInfo,
-    layout: "/user",
-    visible: false,
-  },
+  // {
+  //   path: "/magazineInformation",
+  //   name: "Archive",
+  //   icon: "nc-icon nc-map-big",
+  //   component: MagazineInfo,
+  //   layout: "/user",
+  //   visible: false,
+  // },
 
   {
     path: "/userArchive",

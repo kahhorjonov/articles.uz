@@ -338,6 +338,12 @@ class App extends Component {
               />
 
               <Route
+                path="/user/magazineInformation/:id"
+                exact
+                component={(props) => <MagazineInfo {...props} />}
+              />
+
+              <Route
                 path="/listOfMagazines/magazineInfo/:id"
                 exact
                 component={(props) => <MagazineInfo {...props} />}
