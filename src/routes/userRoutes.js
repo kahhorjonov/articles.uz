@@ -1,5 +1,5 @@
 import UserPage from "views/User.js";
-import Icons from "views/Icons.js";
+// import Icons from "views/Icons.js";
 import ArticleForm from "components/common/articleForm";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
@@ -41,28 +41,11 @@ var UserRoutes = [
     visible: true,
   },
 
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-bell-55",
-    component: Icons,
-    layout: "/user",
-    visible: true,
-  },
-
-  //   {
-  //     path: "/articles",W
-  //     name: "Mening Profilim",
-  //     icon: "nc-icon nc-bookmark-2",
-  //     component: UserPage,
-  //     layout: "/user",
-  //   },
-
   // {
-  //   path: "/notifications",
-  //   name: "Notifications",
+  //   path: "/icons",
+  //   name: "Icons",
   //   icon: "nc-icon nc-bell-55",
-  //   component: UserPage,
+  //   component: Icons,
   //   layout: "/user",
   //   visible: true,
   // },

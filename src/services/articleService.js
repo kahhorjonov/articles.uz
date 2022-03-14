@@ -10,12 +10,8 @@ const token = localStorage.getItem("token");
 export function addArticle(data) {
   const bodyFormData = new FormData();
 
-  const token = localStorage.getItem("token");
-
   bodyFormData.append("categoryId", data.data.categoryId);
   bodyFormData.append("description", data.data.description);
-  // bodyFormData.append("firstName", data.data.firstName);
-  // bodyFormData.append("lastName", data.data.lastName);
   bodyFormData.append("authorsList", data.tags);
   bodyFormData.append("titleArticle", data.data.titleArticle);
   bodyFormData.append("publicOrPrivate", data.publicOrPrivate);
@@ -27,10 +23,6 @@ export function addArticle(data) {
   bodyFormData.append("doi", data.doi);
   bodyFormData.append("price", data.price);
   bodyFormData.append("journalsId", data.parentCategoryId);
-
-  // for (var pair of bodyFormData.entries()) {
-  //   console.log(pair[0] + ", " + pair[1]);
-  // }
 
   return axios({
     method: "post",
@@ -176,6 +168,17 @@ export function getPrice(data) {
   return axios.post("http://192.168.100.27:8080/api/prices/getPrices", data);
 }
 
+export function getAllMyArticles(status) {
+  return axios({
+    method: "post",
+    url: apiLocal + `/article/allMyArticles/${status}`,
+    data: {},
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export function myDuties() {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -237,4 +240,5 @@ export default {
   sendWork,
   addArticle,
   getPrice,
+  getAllMyArticles,
 };
