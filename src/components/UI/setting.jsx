@@ -60,102 +60,115 @@ class Setting extends Component {
       sahifaNarxi,
     } = getPrice;
 
-    console.log(this.state.sertificatNarxi);
-
     return (
       <>
         <div className="content">
-          <Row className="align-items-center">
-            <table className="table p-3 table-bordered">
-              <div className="row mx-0 p-4">
-                <div className="col-lg-2 col-sm-4">
-                  Jurnal narxi
-                  <div>
-                    <input
-                      defaultValue={bittaBosmaJunalNarxi}
-                      onChange={(e) =>
-                        this.setState({
-                          bittaBosmaJunalNarxi: e.target.value,
-                        })
-                      }
-                      type="text"
-                      className="form-control"
-                      id="usr"
-                    />
-                  </div>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-header">
+                  <h3>Narxlarni o'zgartirish</h3>
                 </div>
-                <div className="col-lg-2 col-sm-4">
-                  Sertficat narxi
-                  <div>
-                    <input
-                      type="text"
-                      onChange={(e) =>
-                        this.setState({
-                          bittaSertifikatNarxi: e.target.value,
-                        })
-                      }
-                      defaultValue={bittaSertifikatNarxi}
-                      className="form-control"
-                      id="usr"
-                    />
-                  </div>
-                </div>
+                <div className="card-body">
+                  <Row className="align-items-center">
+                    <table className="table p-3 ">
+                      <div className="row mx-0 p-4">
+                        <div className="col-lg-2 col-sm-4">
+                          Jurnal narxi
+                          <div>
+                            <input
+                              defaultValue={bittaBosmaJunalNarxi}
+                              onChange={(e) =>
+                                this.setState({
+                                  bittaBosmaJunalNarxi: e.target.value,
+                                })
+                              }
+                              type="text"
+                              className="form-control"
+                              id="usr"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-2 col-sm-4">
+                          Sertficat narxi
+                          <div>
+                            <input
+                              type="text"
+                              onChange={(e) =>
+                                this.setState({
+                                  bittaSertifikatNarxi: e.target.value,
+                                })
+                              }
+                              defaultValue={bittaSertifikatNarxi}
+                              className="form-control"
+                              id="usr"
+                            />
+                          </div>
+                        </div>
 
-                <div className="col-lg-2 col-sm-4">
-                  Doi
-                  <div>
-                    <input
-                      onChange={(e) => this.setState({ doi: e.target.value })}
-                      type="text"
-                      defaultValue={doi}
-                      className="form-control"
-                      id="usr"
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-2 col-sm-4">
-                  Saxifa narxi
-                  <div>
-                    <input
-                      onChange={(e) =>
-                        this.setState({ sahifaNarxi: e.target.value })
-                      }
-                      type="text"
-                      defaultValue={sahifaNarxi}
-                      className="form-control"
-                      id="usr"
-                    />
-                  </div>
-                </div>
+                        <div className="col-lg-2 col-sm-4">
+                          Doi
+                          <div>
+                            <input
+                              onChange={(e) =>
+                                this.setState({ doi: e.target.value })
+                              }
+                              type="text"
+                              defaultValue={doi}
+                              className="form-control"
+                              id="usr"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-2 col-sm-4">
+                          Saxifa narxi
+                          <div>
+                            <input
+                              onChange={(e) =>
+                                this.setState({ sahifaNarxi: e.target.value })
+                              }
+                              type="text"
+                              defaultValue={sahifaNarxi}
+                              className="form-control"
+                              id="usr"
+                            />
+                          </div>
+                        </div>
 
-                <div className="col-lg-2 col-sm-4">
-                  Chop etish narxi
-                  <div>
-                    <input
-                      onChange={(e) =>
-                        this.setState({ chopEtishNarxi: e.target.value })
-                      }
-                      type="text"
-                      defaultValue={chopEtishNarxi}
-                      className="form-control"
-                      id="usr"
-                    />
-                  </div>
-                </div>
+                        <div className="col-lg-2 col-sm-4">
+                          Chop etish narxi
+                          <div>
+                            <input
+                              onChange={(e) =>
+                                this.setState({
+                                  chopEtishNarxi: e.target.value,
+                                })
+                              }
+                              type="text"
+                              defaultValue={chopEtishNarxi}
+                              className="form-control"
+                              id="usr"
+                            />
+                          </div>
+                        </div>
 
-                <div className="col-lg-2 col-sm-4">
-                  Submit
-                  <button
-                  style={{height: '30px', padding: '2px'}}
-                    onClick={this.postPrise}
-                    className="btn w-100  btn-info"
-                  >
-                    Submit
-                  </button>
+                        <div className="col-lg-2 col-sm-4">
+                          Submit
+                          <button
+                            style={{ height: "30px", padding: "2px" }}
+                            onClick={this.postPrise}
+                            className="btn w-100  btn-info"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </table>
+                  </Row>
                 </div>
               </div>
-            </table>
-          </Row>
+            </div>
+          </div>
         </div>
       </>
     );

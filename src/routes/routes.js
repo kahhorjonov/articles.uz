@@ -134,8 +134,8 @@ var adminRoutes = [
 
   {
     path: "/settings",
-    name: "Settings",
-    icon: "nc-icon nc-settings-gear-65",
+    name: "Narxlar",
+    icon: "nc-icon nc-cart-simple",
     component: Setting,
     layout: "/admin",
     visible: true,

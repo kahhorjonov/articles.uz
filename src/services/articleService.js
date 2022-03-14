@@ -202,27 +202,38 @@ export function getRedactorsAndReviewers(id, role) {
 }
 
 export function editArticleByAdmin(data) {
-  const token = localStorage.getItem("token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-  // const config = {
-  //   headers: { Authorization: `Bearer ${token}` },
-  // };
+  const bodyParametrs = {
+    articleId: data.articleId,
+    description: data.description,
+    status: data.status,
+  };
 
-  const bodyFormData = new FormData();
+  return axios.post(
+    apiLocal + "/article/articleStatusAdministrator",
+    bodyParametrs,
+    config
+  );
 
-  bodyFormData.append("articleId", data.articleId);
-  bodyFormData.append("description", data.description);
-  bodyFormData.append("file", data.file);
+  // const bodyFormData = new FormData();
 
-  return axios({
-    method: "post",
-    url: apiLocal + "/article/giveStatus",
-    data: bodyFormData,
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  // bodyFormData.append("articleId", data.articleId);
+  // bodyFormData.append("description", data.description);
+  // bodyFormData.append("status", data.status);
+  // bodyFormData.append("file", data.file);
+
+  // return axios({
+  //   method: "post",
+  //   url: apiLocal + "/article/articleStatusAdministrator",
+  //   data: bodyFormData,
+  //   headers: {
+  //     // "Content-Type": "multipart/form-data",
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 }
 
 export default {

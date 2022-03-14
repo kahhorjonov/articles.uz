@@ -4,8 +4,7 @@ import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
 import articleService from "services/articleService";
 
-import "../styles/userEdit.css";
-// reactstrap components
+import "styles/userEdit.css";
 
 import {
   Button,
@@ -128,7 +127,6 @@ class ArticleInfo extends Component {
 
   render() {
     const article = this.state.articleInfo.article;
-
     const steps = this.state.articleInfo.articleAdminInfoList;
 
     return (
@@ -139,7 +137,14 @@ class ArticleInfo extends Component {
               <Card>
                 <CardBody>
                   <Row>
-                    <Col md="5">
+                    <Col>
+                      <h4
+                        style={{
+                          marginTop: "0",
+                        }}
+                      >
+                        Sms orqali xabar yuborish
+                      </h4>
                       <Form>
                         <label>Xulosa</label>
                         <select
