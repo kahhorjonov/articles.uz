@@ -10,6 +10,7 @@ class Setting extends Component {
     bittaSertifikatNarxi: "",
     doi: "",
     sahifaNarxi: "",
+    chopEtishNarxi: "",
   };
 
   componentDidMount() {
@@ -32,16 +33,13 @@ class Setting extends Component {
   postPrise = async (e) => {
     try {
       await axios
-        .post(
-          `http://192.168.100.27:8080/api/prices/editPrice
-        `,
-          {
-            bittaBosmaJunalNarxi: this.state.bittaBosmaJunalNarxi,
-            bittaSertifikatNarxi: this.state.bittaSertifikatNarxi,
-            doi: this.state.doi,
-            sahifaNarxi: this.state.sahifaNarxi,
-          }
-        )
+        .post(`http://192.168.100.27:8080/api/prices/editPrice`, {
+          bittaBosmaJunalNarxi: this.state.bittaBosmaJunalNarxi,
+          bittaSertifikatNarxi: this.state.bittaSertifikatNarxi,
+          doi: this.state.doi,
+          sahifaNarxi: this.state.sahifaNarxi,
+          chopEtishNarxi: this.state.chopEtishNarxi,
+        })
         .then((res) => {
           console.log(res.data);
         });
@@ -54,89 +52,110 @@ class Setting extends Component {
 
   render() {
     const { getPrice } = this.state;
-    const { bittaBosmaJunalNarxi, bittaSertifikatNarxi, doi, sahifaNarxi } =
-      getPrice;
+    const {
+      bittaBosmaJunalNarxi,
+      bittaSertifikatNarxi,
+      chopEtishNarxi,
+      doi,
+      sahifaNarxi,
+    } = getPrice;
 
     console.log(this.state.sertificatNarxi);
 
     return (
       <>
         <div className="content">
-          {/* {getPrice.map((price) => ( */}
           <Row className="align-items-center">
-            <div className="col-lg-2">
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-toggle="collapse"
-                data-target="#demo"
-              >
-                Narxi
-              </button>
-            </div>
+            <table className="table p-3 table-bordered">
+              <div className="row mx-0 p-4">
+                <div className="col-lg-2 col-sm-4">
+                  Jurnal narxi
+                  <div>
+                    <input
+                      defaultValue={bittaBosmaJunalNarxi}
+                      onChange={(e) =>
+                        this.setState({
+                          bittaBosmaJunalNarxi: e.target.value,
+                        })
+                      }
+                      type="text"
+                      className="form-control"
+                      id="usr"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-2 col-sm-4">
+                  Sertficat narxi
+                  <div>
+                    <input
+                      type="text"
+                      onChange={(e) =>
+                        this.setState({
+                          bittaSertifikatNarxi: e.target.value,
+                        })
+                      }
+                      defaultValue={bittaSertifikatNarxi}
+                      className="form-control"
+                      id="usr"
+                    />
+                  </div>
+                </div>
 
-            <div id="demo" className="col-lg-2 collapse">
-              <div className="d-flex algin-items-center">
-                <label className="pr-2">Jurnal Narxi:</label>
-                <input
-                  defaultValue={bittaBosmaJunalNarxi}
-                  onChange={(e) =>
-                    this.setState({ bittaBosmaJunalNarxi: e.target.value })
-                  }
-                  type="text"
-                  className="form-control"
-                  id="usr"
-                />
-              </div>
-            </div>
-            <div id="demo" className="col-lg-2 collapse">
-              <div className="d-flex algin-items-center">
-                <label className="pr-2">Sertifikat narxi:</label>
-                <input
-                  type="text"
-                  onChange={(e) =>
-                    this.setState({ bittaSertifikatNarxi: e.target.value })
-                  }
-                  defaultValue={bittaSertifikatNarxi}
-                  className="form-control"
-                  id="usr"
-                />
-              </div>
-            </div>
-            <div id="demo" className="col-lg-2 collapse">
-              <div className="d-flex algin-items-center">
-                <label className="pr-2">doi:</label>
-                <input
-                  onChange={(e) => this.setState({ doi: e.target.value })}
-                  type="text"
-                  defaultValue={doi}
-                  className="form-control"
-                  id="usr"
-                />
-              </div>
-            </div>
-            <div id="demo" className="col-lg-2 collapse">
-              <div className="d-flex algin-items-center">
-                <label className="pr-2">Sahifa Narhi:</label>
-                <input
-                  onChange={(e) =>
-                    this.setState({ sahifaNarxi: e.target.value })
-                  }
-                  type="text"
-                  defaultValue={sahifaNarxi}
-                  className="form-control"
-                  id="usr"
-                />
-              </div>
-            </div>
+                <div className="col-lg-2 col-sm-4">
+                  Doi
+                  <div>
+                    <input
+                      onChange={(e) => this.setState({ doi: e.target.value })}
+                      type="text"
+                      defaultValue={doi}
+                      className="form-control"
+                      id="usr"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-2 col-sm-4">
+                  Saxifa narxi
+                  <div>
+                    <input
+                      onChange={(e) =>
+                        this.setState({ sahifaNarxi: e.target.value })
+                      }
+                      type="text"
+                      defaultValue={sahifaNarxi}
+                      className="form-control"
+                      id="usr"
+                    />
+                  </div>
+                </div>
 
-            <div id="demo" className="col-lg-2 collapse">
-              <button onClick={this.postPrise} className="btn btn-info">
-                Submit
-              </button>
-            </div>
+                <div className="col-lg-2 col-sm-4">
+                  Chop etish narxi
+                  <div>
+                    <input
+                      onChange={(e) =>
+                        this.setState({ chopEtishNarxi: e.target.value })
+                      }
+                      type="text"
+                      defaultValue={chopEtishNarxi}
+                      className="form-control"
+                      id="usr"
+                    />
+                  </div>
+                </div>
+
+                <div className="col-lg-2 col-sm-4">
+                  Submit
+                  <button
+                  style={{height: '30px', padding: '2px'}}
+                    onClick={this.postPrise}
+                    className="btn w-100  btn-info"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </table>
           </Row>
-          {/* ))} */}
         </div>
       </>
     );

@@ -137,7 +137,7 @@ var adminRoutes = [
     name: "Settings",
     icon: "nc-icon nc-settings-gear-65",
     component: Setting,
-    layout: "/admins",
+    layout: "/admin",
     visible: true,
   },
 
