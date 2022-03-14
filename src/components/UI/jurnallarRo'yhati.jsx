@@ -103,7 +103,7 @@ class JurnallarRoyxati extends Component {
                     to=""
                     onClick={(e) => {
                       e.preventDefault();
-                      this.getMagazinesById(0);
+                      this.handleGetMagazinesById(0);
                     }}
                   >
                     Barchasi
@@ -119,7 +119,7 @@ class JurnallarRoyxati extends Component {
                         to=""
                         onClick={(e) => {
                           e.preventDefault();
-                          this.getMagazinesById(category.id);
+                          this.handleGetMagazinesById(category.id);
                         }}
                       >
                         {category.name}

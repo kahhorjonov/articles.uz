@@ -1,19 +1,34 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Col, Input, Row, Label, Form, Table, CardBody } from "reactstrap";
+import { getAllMyArticles } from "services/articleService";
+import { toast } from "react-toastify";
 
-import "../../styles/chopetilgan.css";
+import "styles/chopetilgan.css";
 
 class BarchaMaqolalarim extends Component {
-  status = {
+  state = {
+    status: "all",
 
+    articles: [],
+  };
+
+  componentDidMount() {
+    this.getAllMyArticles(this.state.status);
   }
 
-  componentDidMount(){
+  getAllMyArticles = async (status) => {
+    try {
+      await getAllMyArticles(status).then((res) =>
+        this.setState({ articles: res.data })
+      );
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
-  }
-  
   render() {
+    console.log(this.state.articles);
+
     return (
       <>
         <div className="content">
@@ -21,24 +36,32 @@ class BarchaMaqolalarim extends Component {
             <div className="col-md-12">
               <div className="card">
                 <div className="card-header">
-                  <h2 className="m-0">Barcha maqolalarim</h2>
+                  <h3>Barcha maqolalarim</h3>
                 </div>
                 <div className="card-body">
                   <Form>
                     <Col lg="5" className="w-100 pl-0 d-flex">
                       <Label>
-                        <b style={{ fontSize: "17px" }}>Select:</b>{" "}
+                        <b style={{ fontSize: "17px" }}>Tanlang:</b>{" "}
                       </Label>
                       <Input
+                        style={{ height: "unset" }}
+                        defaultValue="all"
                         className="ml-4 form-control"
                         name="select"
                         type="select"
+                        onChange={(e) => this.getAllMyArticles(e.target.value)}
                       >
-                        <option value="Barcha Maqollarim">
-                          Barcha Maqollarim
+                        <option value="all">Barcha Maqollarim</option>
+
+                        <option value="REJECTED">Rad etilgan maqollarim</option>
+
+                        <option value="BEGIN_CHECK">
+                          Tekshirish jarayonidagi maqolalarim
                         </option>
-                        <option value="Rad etilgan maqollarim">
-                          Rad etilgan maqollarim
+
+                        <option value="PUBLISHED">
+                          Chop etilgan maqolalarim
                         </option>
                       </Input>
                     </Col>
@@ -50,12 +73,12 @@ class BarchaMaqolalarim extends Component {
                         <thead>
                           <tr className="col-md-12">
                             <th className="col-md-2">title</th>
-                            <th className="col-lg-2 col-md-1">Status</th>
-                            <th className="col-lg-1 col-md-1">Jurnal</th>
-                            <th className="col-lg-2 col-md-1">Orginal File</th>
-                            <th className="col-lg-2 col-md-1">Reductor File</th>
-                            <th className="col-lg-1 col-md-1">Serficat</th>
-                            <th className="col-lg-1 col-md-1">Authhor</th>
+                            <th className="col-lg-2">Status</th>
+                            <th className="col-lg-1">Jurnal</th>
+                            <th className="col-lg-2">Orginal File</th>
+                            <th className="col-lg-2">Redactor File</th>
+                            <th className="col-lg-1">Certificate</th>
+                            <th className="col-lg-1">Author</th>
                           </tr>
                         </thead>
                         <tbody>

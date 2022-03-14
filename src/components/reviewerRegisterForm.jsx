@@ -12,7 +12,7 @@ import firebase from "../firebase";
 
 import { Card, CardBody, Row, Col } from "reactstrap";
 
-import "../styles/registerStyles.css";
+import "styles/registerStyles.css";
 
 class ReviewerRegisterForm extends Form {
   state = {

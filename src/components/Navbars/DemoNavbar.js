@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import notificationServices from "services/notificationService";
 import HomeRoutes from "homeRoutes";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "services/authService";
 
 import {
   Collapse,
@@ -25,6 +26,7 @@ function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [user, setUser] = useState();
   const [color, setColor] = useState("white");
   const sidebarToggle = useRef();
   const location = useLocation();
@@ -42,6 +44,9 @@ function Header(props) {
   };
 
   useEffect(() => {
+    const user = getCurrentUser() && getCurrentUser().roles[0].id;
+    setUser(user);
+
     token && getNotifications();
   }, []);
 
@@ -83,7 +88,10 @@ function Header(props) {
 
   const handleDeleteNotification = async (id) => {
     try {
-      await notificationServices.deleteNotification(id);
+      {
+        await notificationServices.deleteNotification(id);
+        getNotifications();
+      }
     } catch (error) {
       toast.error(error);
     }
@@ -181,9 +189,9 @@ function Header(props) {
                         <DropdownItem
                           key={notification.id}
                           tag="a"
-                          onClick={() =>
-                            handleDeleteNotification(notification.id)
-                          }
+                          onClick={() => {
+                            handleDeleteNotification(notification.id);
+                          }}
                         >
                           {notification.notificationName}
                         </DropdownItem>
@@ -191,7 +199,18 @@ function Header(props) {
                   </DropdownMenu>
                 </Dropdown>
                 <NavItem>
-                  <Link to="/admin/user-page" className="nav-link btn-rotate">
+                  <Link
+                    to={
+                      user === 1
+                        ? "/admin/user-page"
+                        : user === 2
+                        ? "/reductor/user-page"
+                        : user === 3
+                        ? "/reviewer/user-page"
+                        : "/user/user-page"
+                    }
+                    className="nav-link btn-rotate"
+                  >
                     <i className="nc-icon nc-settings-gear-65" />
                   </Link>
                 </NavItem>

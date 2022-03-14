@@ -314,35 +314,48 @@ class App extends Component {
                 exact
                 component={(props) => <Asosiy {...props} />}
               />
+
               <Route
                 path="/main"
                 exact
                 component={(props) => <Asosiy {...props} />}
               />
+
+              <Route
+                path="/reviewer/release/:id"
+                exact
+                component={(props) => <JurnalArxive {...props} />}
+              />
+
               <Route
                 path="/listOfMagazines"
                 exact
                 component={(props) => <JurnallarRoyxati {...props} />}
               />
+
               <Route
                 path="/termsOfPublication"
                 exact
                 component={(props) => <NashrShartlari {...props} />}
               />
+
               <Route
                 path="/contact"
                 exact
                 component={(props) => <Aloqa {...props} />}
               />
+
               <Route
                 path="/login"
                 component={(props) => <LoginForm {...props} />}
               />
+
               <Route
                 path="/logout"
                 exact
                 component={(props) => <Logout {...props} />}
               />
+
               <Route
                 path="/register"
                 exact

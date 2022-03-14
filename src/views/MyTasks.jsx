@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import articleService from "../services/articleService";
+import {
+  myDuties,
+  myNewArticles,
+  reviewerActionForArticle,
+  sendWork,
+} from "../services/articleService";
+
 import { Card, CardBody, Row, Col } from "reactstrap";
 import { toast } from "react-toastify";
 
@@ -11,7 +17,6 @@ class MyTasks extends Component {
     file: null,
     articles: [],
     myArticles: [],
-    isActive: true,
     description: "",
   };
 
@@ -21,7 +26,7 @@ class MyTasks extends Component {
 
   newMyArticles = async () => {
     try {
-      await articleService.myNewArticles().then((res) => {
+      await myNewArticles().then((res) => {
         this.setState({ articles: res.data });
       });
     } catch (ex) {
@@ -31,10 +36,9 @@ class MyTasks extends Component {
 
   async getAcceptedArticles() {
     try {
-      await articleService
-        .myDuties()
-         
-        .then((res) => this.setState({ myArticles: res.data.object }), );
+      await myDuties().then((res) =>
+        this.setState({ myArticles: res.data.object })
+      );
     } catch (ex) {
       toast.error(ex);
     }
@@ -42,24 +46,11 @@ class MyTasks extends Component {
 
   handleAction = async (action, id) => {
     try {
-      await articleService
-        .reviewerActionForArticle(action, id)
-        .then((res) => toast.success(res.data.message));
+      await reviewerActionForArticle(action, id).then((res) =>
+        toast.success(res.data.message)
+      );
     } catch (ex) {
-      // console.log(ex);
       toast.error(ex.response.data.message);
-    }
-  };
-
-  handleClick = async (text) => {
-    const token = localStorage.getItem("token");
-
-    if (text === "yangilari") {
-      this.setState({ isActive: true });
-      this.newMyArticles(token);
-    } else {
-      this.setState({ isActive: false });
-      this.getAcceptedArticles(token);
     }
   };
 
@@ -67,18 +58,15 @@ class MyTasks extends Component {
     try {
       const { status, file, description } = this.state;
 
-      await articleService
-        .sendWork(id, status, file, description)
-        .then((res) => toast.success(res.data.message));
+      await sendWork(id, status, file, description).then((res) =>
+        toast.success(res.data.message)
+      );
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
   };
 
   render() {
-    console.log(this.state.articles);
-    console.log(this.state.myArticles);
-
     return (
       <div className="content">
         <Row>
@@ -95,26 +83,19 @@ class MyTasks extends Component {
                       </li>
                       <li className="nav-item">
                         <a
-                          className="nav-link navvs"
-                          // onClick={(e) => {
-                          //   this.handleClick("yangilari");
-                          //   this.setState({ step: "START" });
-                          //   this.render(this.setState({ step: "START" }));
-                          // }}
+                          className="nav-link navvs active"
                           href="#home"
                           data-toggle="pill"
+                          onClick={() => this.newMyArticles()}
                         >
                           Yangi vazifalar
                         </a>
                       </li>
-                      <li className="nav-item ">
+                      <li
+                        className="nav-item"
+                        onClick={() => this.getAcceptedArticles()}
+                      >
                         <a
-                          // onClick={(e) => {
-                          //   this.handleClick("menikilar");
-                          //   this.setState({
-                          //     step: "PREPARING_FOR_PUBLICATION",
-                          //   });
-                          // }}
                           href="#menu1"
                           className="nav-link navvs"
                           data-toggle="pill"
@@ -124,7 +105,7 @@ class MyTasks extends Component {
                       </li>
                       <li className="nav-item">
                         <a
-                          className="nav-link"
+                          className="nav-link navvs"
                           href="#menu2"
                           data-toggle="pill"
                         >
@@ -133,10 +114,13 @@ class MyTasks extends Component {
                       </li>
                     </ul>
                   </div>
+
                   <div className="col-lg-9">
-                    {/* {this.state.isActive ? ( */}
-                    <div class="tab-content">
-                      <div class="tab-pane container tab-pane fade" id="home">
+                    <div className="tab-content">
+                      <div
+                        className="tab-pane container tab-pane active"
+                        id="home"
+                      >
                         <div className="container-flud ml-0 mr-0 mt-4">
                           <div className="tebles">
                             <div className="tr1">
@@ -209,20 +193,11 @@ class MyTasks extends Component {
                                       </td>
                                     </tr>
                                   ))}
-                                {/* <tr className="col-md-12">
-                                <td>
-                                  <p className="pl-5 text-muted">
-                                    show 20-30 of 50 items
-                                  </p>
-                                </td>
-                              </tr> */}
                               </tbody>
                             </table>
                           </div>
                         </div>
                       </div>
-
-                      {/* ) : ( */}
 
                       <div
                         className="tab-pane container tab-pane fade"
@@ -233,24 +208,16 @@ class MyTasks extends Component {
                             <tbody className="tab-les">
                               <tr className="row row-tables1">
                                 <th className="col-lg-3 col-sm-3 ">
-                                  {/* <td className="col-md-3"> */}
                                   <p>Maqola nomi</p>
-                                  {/* </td> */}
                                 </th>
                                 <th className="col-lg-3 col-sm-3 ">
-                                  {/* <td className="col-md-3"> */}
                                   <p>Maqolani Tekshirish vaqti</p>
-                                  {/* </td> */}
                                 </th>
                                 <th className="col-lg-3 col-sm-3 ">
-                                  {/* <td className="col-md-3"> */}
                                   <p>Xulosa</p>
-                                  {/* </td> */}
                                 </th>
                                 <th className="col-lg-3 col-sm-3 ">
-                                  {/* <td className="col-md-3"> */}
                                   <p>File</p>
-                                  {/* </td> */}
                                 </th>
                               </tr>
                             </tbody>
@@ -350,7 +317,7 @@ class MyTasks extends Component {
                         </div>
                       </div>
 
-                      <div id="menu2" class="container tab-pane fade">
+                      <div id="menu2" className="container tab-pane fade">
                         <h3>Menu 2</h3>
                         <p>
                           Sed ut perspiciatis unde omnis iste natus error sit
@@ -358,8 +325,6 @@ class MyTasks extends Component {
                           rem aperiam.
                         </p>
                       </div>
-
-                      {/* )} */}
                     </div>
                   </div>
                 </div>
