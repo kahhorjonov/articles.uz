@@ -58,6 +58,10 @@ export function getActiveMagazines() {
   return http.get(apiLocal + "/journals/getActiveJournals");
 }
 
+export function getDeadlinedMagazines() {
+  return http.get(apiLocal + "/journals/deadlineOver");
+}
+
 export function getParentCategories() {
   return http.get(apiLocal + "/category/allParentCategory");
 }

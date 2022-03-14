@@ -1,13 +1,19 @@
 import React, { Component } from "react";
-import magazineService from "services/magazineService";
+import {
+  getParentMagazines,
+  getMagazinesById,
+  getActiveMagazines,
+  getDeadlinedMagazines,
+} from "services/magazineService";
+
 import axios from "axios";
 import GetImages from "utils/getImages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "services/authService";
+import { Col, Input, Row } from "reactstrap";
 
 import "styles/homePage.css";
-import { Col, Input, Row } from "reactstrap";
 
 class Jurnallar extends Component {
   state = {
@@ -42,9 +48,27 @@ class Jurnallar extends Component {
 
   getMagazinesById = async (id) => {
     try {
-      await magazineService.getMagazinesById(id).then((res) => {
+      await getMagazinesById(id).then((res) => {
         this.setState({ magazines: res.data });
       });
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  getMagazinesBySelect = async (option) => {
+    try {
+      option == 1
+        ? await getParentMagazines().then((res) => {
+            this.setState({ magazines: res.data });
+          })
+        : option == 2
+        ? await getActiveMagazines().then((res) => {
+            this.setState({ magazines: res.data });
+          })
+        : await getDeadlinedMagazines().then((res) => {
+            this.setState({ magazines: res.data });
+          });
     } catch (error) {
       toast.error(error);
     }
@@ -81,10 +105,15 @@ class Jurnallar extends Component {
                         style={{ height: "unset" }}
                         type="select"
                         className="form-control"
+                        onChange={(e) =>
+                          this.getMagazinesBySelect(e.target.value)
+                        }
                       >
-                        <option>Barcha Jurnallar</option>
-                        <option>Maqola qabul qilayotkan Jurnallar</option>
-                        <option>Nashr jarayonidagi jurnallar</option>
+                        <option value={1}>Barcha Jurnallar</option>
+                        <option value={2}>
+                          Maqola qabul qilayotkan Jurnallar
+                        </option>
+                        <option value={3}>Nashr jarayonidagi jurnallar</option>
                       </Input>
                     </div>
                   </Col>
