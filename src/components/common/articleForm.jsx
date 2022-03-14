@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 
 import "styles/articleForm.css";
 import "styles/multipleTags.scss";
+import axios from "axios";
 
 class ArticleForm extends Form {
   state = {
@@ -42,6 +43,8 @@ class ArticleForm extends Form {
     childCategories: [],
     inputFields: [{ ID: "" }],
     authors: [],
+
+    articlePrice: [],
   };
 
   schema = {
@@ -55,7 +58,21 @@ class ArticleForm extends Form {
 
   async componentDidMount() {
     await this.populateCategories();
+    this.getArticlePrice();
   }
+
+  getArticlePrice = async () => {
+    try {
+      await axios
+        .get(`http://192.168.100.27:8080/api/prices/getPrice`)
+        .then((res) => {
+          console.log(res);
+          this.setState({ articlePrice: res.data });
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   async populateCategories() {
     try {
@@ -208,7 +225,16 @@ class ArticleForm extends Form {
   };
 
   render() {
+    const { articlePrice } = this.state;
     const { inputFields } = this.state;
+
+    const {
+      bittaBosmaJunalNarxi,
+      bittaSertifikatNarxi,
+      chopEtishNarxi,
+      doi,
+      sahifaNarxi,
+    } = articlePrice;
 
     const price = this.state.price && this.state.price;
 
@@ -399,28 +425,49 @@ class ArticleForm extends Form {
                         />
                       </div>
                       <div className="hisoblash mt-5">
-                        <p>
-                          <b>Sahifa narxi</b>:{" "}
-                          <span className="pl-3">
-                            <b>
-                              {this.state.sahifaSoni.length &&
-                                this.state.sahifaSoni}{" "}
-                              $
-                            </b>
+                        <h6 className="pl-1">
+                          Sahifa narxi
+                          <span className="pl-3 text-darck pl-2">
+                            {sahifaNarxi} so'm
                           </span>
-                        </p>
-                        <p>
-                          <b>24x 1000: </b>{" "}
-                          <span>{this.state.sahifaSoni * 1000} so'm</span>
-                        </p>
+                        </h6>
+                        <h6 className="pl-1">
+                          {this.state.sahifaSoni} X 1000=
+                          <span className="text-darck pl-2">
+                            {sahifaNarxi * this.state.sahifaSoni} so'm
+                          </span>
+                        </h6>
+                        <hr />
 
-                        <p>
-                          <b>Chop Etilgan: 1000 </b>:
-                        </p>
-
-                        <p>
-                          <b>Total: 48000</b> :
-                        </p>
+                        <h6 className="pl-1">
+                          Bosma Jurnal Narxi:
+                          <span className="text-darck pl-2">
+                            {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}{" "}
+                            so'm
+                          </span>
+                          <p>
+                            {this.state.bosmaJurnalSoni} x{" "}
+                            {bittaBosmaJunalNarxi} ={" "}
+                            {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}
+                          </p>
+                        </h6>
+<hr />
+                        <h6 className="pl-1">
+                          Sertifikat narxi:
+                          <span className="text-darck pl-2">
+                            {bittaSertifikatNarxi * this.state.sertifikatSoni}{" "}
+                            so'm
+                          </span>
+                          <p>
+                            {this.state.sertifikatSoni} x {bittaSertifikatNarxi}{" "}
+                            = {bittaSertifikatNarxi * this.state.sertifikatSoni}
+                          </p>
+                        </h6>
+<hr />
+                        <h6 className="pl-1">
+                          Total :{" "}
+                          <span className="text-darck pl-2">{price} so'm</span>
+                        </h6>
                       </div>
                     </Col>
 
