@@ -88,7 +88,10 @@ function Header(props) {
 
   const handleDeleteNotification = async (id) => {
     try {
-      await notificationServices.deleteNotification(id);
+      {
+        await notificationServices.deleteNotification(id);
+        getNotifications();
+      }
     } catch (error) {
       toast.error(error);
     }
@@ -186,9 +189,9 @@ function Header(props) {
                         <DropdownItem
                           key={notification.id}
                           tag="a"
-                          onClick={() =>
-                            handleDeleteNotification(notification.id)
-                          }
+                          onClick={() => {
+                            handleDeleteNotification(notification.id);
+                          }}
                         >
                           {notification.notificationName}
                         </DropdownItem>
