@@ -32,17 +32,34 @@ class ArticleInfo extends Component {
 
     articleId: "",
     articleInfo: "",
+
+    articleInfoAdmin: [],
+  };
+
+  getArticleInfoAdmin = async (id) => {
+    try {
+      await axios
+        .get(`http://192.168.100.27:8080/api/article/getArticleInfoAdmin/${id}`)
+        .then((res) => {
+          console.log(res.data[0]);
+          this.setState({ articleInfoAdmin: res.data[0] });
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   async componentDidMount() {
     const articleId = this.props.history.location.pathname.slice(20);
+    console.log(articleId);
     this.setState({ articleId: articleId });
 
+    this.getArticleInfoAdmin(articleId);
     await this.populateCategories();
 
     await axios
       .get(
-        `http://192.168.100.27:8080/api/article/articleInfoForAdmin/${articleId}`
+        `http://192.168.100.27:8080/api/article/getArticleInfoAdmin/${articleId}`
       )
       .then((res) => {
         // console.log(res);
@@ -127,6 +144,9 @@ class ArticleInfo extends Component {
   };
 
   render() {
+    const { articleInfoAdmin } = this.state;
+    const { status, processDate } = articleInfoAdmin;
+
     const article = this.state.articleInfo.article;
 
     const steps = this.state.articleInfo.articleAdminInfoList;
@@ -209,6 +229,10 @@ class ArticleInfo extends Component {
                       </tr>
                     </thead>
                     <tbody>
+                      <tr>
+                        <td>{status}</td>
+                        <td>{processDate}</td>
+                      </tr>
                       {/* {steps &&
                         steps.map((step) => (
                           <tr key={step.admin.id}>
