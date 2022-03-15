@@ -88,7 +88,13 @@ body {
 /*.tablis{*/
 /*  background-color: white;*/
 /*}*/
-
+.itemss .active {
+  color: black !important;
+  text-shadow: 0 0 black;
+}
+.links {
+  color: rgb(105, 101, 101) !important;
+}
 .nav-item {
   list-style: none;
   color: #51cbce;

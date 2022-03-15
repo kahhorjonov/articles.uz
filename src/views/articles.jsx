@@ -40,7 +40,6 @@ class Articles extends Component {
 
   handleActive = async (id) => {
     this.setState({ id: id });
-
     try {
       await articleService
         .getRedactorsAndReviewers(id, this.state.role)
@@ -164,7 +163,19 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Chop etilganlar
+                            Rad Etilganlar
+                          </a>
+                        </li>
+
+                        <li className="nav-item item">
+                          <a
+                            onClick={(e) => {
+                              this.handleClick("PUBLISHED");
+                            }}
+                            className="nav-link navv"
+                            data-toggle="pill"
+                          >
+                            jurnalar rad etish
                           </a>
                         </li>
                       </ul>
