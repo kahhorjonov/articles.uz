@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import GetImages from "utils/getImages";
-import axios from "axios";
+import { downloadMedia, downloadFile } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getCurrentUser } from "services/authService.js";
+import { getCurrentUser } from "services/authService";
 
 import {
   getById,
@@ -14,7 +14,7 @@ import {
 
 import "styles/jurnalarxive.css";
 
-class ReviewerArchive extends Component {
+class UserReleases extends Component {
   state = {
     magazineId: "",
     magazineInfo: [],
@@ -61,9 +61,9 @@ class ReviewerArchive extends Component {
 
   getArticlesFromMagazineById = async (id) => {
     try {
-      await getArticlesFromMagazine(id).then((res) =>
-        this.setState({ articles: res.data.articleInfoForJournal })
-      );
+      await getArticlesFromMagazine(id).then((res) => {
+        this.setState({ articles: res.data.articleInfoForJournal });
+      });
     } catch (error) {
       toast.error(error);
     }
@@ -72,7 +72,6 @@ class ReviewerArchive extends Component {
   getMagazineInfo = async (id) => {
     try {
       await getById(id).then((res) => {
-        // console.log(res.data.object.journals);
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ cover: res.data.object.journals.cover });
         this.getImage(res.data.object.journals.cover.id);
@@ -97,9 +96,9 @@ class ReviewerArchive extends Component {
     try {
       this.setState({ magazines: [] });
 
-      await getMagazinesByYear(year, id).then((res) => {
-        this.setState({ magazines: res.data });
-      });
+      await getMagazinesByYear(year, id).then((res) =>
+        this.setState({ magazines: res.data })
+      );
     } catch (error) {
       toast.error(error);
     }
@@ -109,12 +108,7 @@ class ReviewerArchive extends Component {
     let imageBlob;
 
     try {
-      imageBlob = (
-        await axios.get(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
     } catch (err) {
       return null;
     }
@@ -125,15 +119,12 @@ class ReviewerArchive extends Component {
   handleDownload = async (id, originalName, contentType) => {
     if (id && originalName && contentType) {
       try {
-        await fetch(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": contentType,
-            },
-          }
-        )
+        await downloadFile(id, {
+          method: "GET",
+          headers: {
+            "Content-Type": contentType,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
             // Create blob link to download
@@ -144,10 +135,8 @@ class ReviewerArchive extends Component {
 
             document.body.appendChild(link);
 
-            // Start download
             link.click();
 
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -160,16 +149,17 @@ class ReviewerArchive extends Component {
 
   render() {
     const { magazineInfo, cover, years, magazines, articles } = this.state;
+
     const { allReleasesNumber, releaseNumberOfThisYear, file } = magazineInfo;
 
     return (
       <>
         <div className="content">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-12 col-sm-12 col-lg-12">
               <div className="card">
                 <div className="card-header">
-                  <h3>Jurnallar</h3>
+                  <h3>Arxiv</h3>
                 </div>
                 <div className="card-body">
                   <div className="container jurnalArxive">
@@ -260,10 +250,9 @@ class ReviewerArchive extends Component {
                             {years &&
                               years.map((year, idx) => (
                                 <li key={idx} className="nav-item">
-                                  <Link
+                                  <a
                                     className="nav-link active"
                                     data-toggle="pill"
-                                    to=""
                                     onClick={(e) => {
                                       e.preventDefault();
 
@@ -274,7 +263,7 @@ class ReviewerArchive extends Component {
                                     }}
                                   >
                                     {year}
-                                  </Link>
+                                  </a>
                                 </li>
                               ))}
                           </ul>
@@ -297,10 +286,10 @@ class ReviewerArchive extends Component {
                                         }}
                                         className="text-dark"
                                         to={
-                                          this.state.user === 3
-                                            ? `/reviewer/release/:${magazine.id}`
-                                            : this.state.user === 4
+                                          this.state.user === 4
                                             ? `/user/release/:${magazine.id}`
+                                            : this.state.user === 3
+                                            ? `/reviewer/release/:${magazine.id}`
                                             : "/"
                                         }
                                         onClick={() => {
@@ -332,4 +321,4 @@ class ReviewerArchive extends Component {
   }
 }
 
-export default ReviewerArchive;
+export default UserReleases;

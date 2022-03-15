@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 
-import "../styles/articleActivation.css";
+import "styles/articleActivation.css";
 
 class ArticleActivation extends Component {
   state = {

@@ -153,12 +153,14 @@ class JurnalArxive extends Component {
       <>
         <div className="container jurnalArxive">
           <div>
-            <Link
-              style={{ color: "black" }}
-              to={`/listOfMagazines/magazineInfo/:${this.state.magazineId}`}
+            <a
+              style={{ color: "black", cursor: "pointer" }}
+              onClick={() => {
+                this.props.history.goBack();
+              }}
             >
               <b> ⬅️</b> ORTGA
-            </Link>
+            </a>
           </div>
           <br />
           <h1>

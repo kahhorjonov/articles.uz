@@ -2,8 +2,9 @@ import UserPage from "views/User.js";
 import ArticleForm from "components/common/articleForm";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
-import UserMagazineInfo from "components/UI/userMagazineInfo";
 import MagazineInfo from "components/UI/magazineInfo";
+import ReviewerArchive from "components/UI/reviewerArchive";
+import UserReleases from "./../components/UI/userReleases";
 
 var UserRoutes = [
   {
@@ -21,17 +22,26 @@ var UserRoutes = [
     icon: "nc-icon nc-map-big",
     component: MagazineInfo,
     layout: "/user",
-    visible: true,
+    visible: false,
   },
 
-  // {
-  //   path: "/userArchive",
-  //   name: "Archive",
-  //   icon: "nc-icon nc-map-big",
-  //   component: ReviewerArchive,
-  //   layout: "/user",
-  //   visible: false,
-  // },
+  {
+    path: "/release/:id",
+    name: "Magazine Releases",
+    icon: "nc-icon nc-map-big",
+    component: UserReleases,
+    layout: "/user",
+    visible: false,
+  },
+
+  {
+    path: "/userArchive/:id",
+    name: "Magazine's Archive",
+    icon: "nc-icon nc-map-big",
+    component: ReviewerArchive,
+    layout: "/user",
+    visible: false,
+  },
 
   {
     path: "/uploadArticle",

@@ -1,7 +1,6 @@
 import Asosiy from "components/UI/asosiy";
 import JurnallarRoyxati from "components/UI/jurnallarRo'yhati";
 import NashrShartlari from "components/UI/nashrShartlari";
-import LoginForm from "./components/loginForm";
 import Aloqa from "./components/UI/aloqa";
 
 var HomeRoutes = [

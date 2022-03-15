@@ -162,7 +162,7 @@ class JurnalQoshish extends Component {
                         <div>
                           <label>Title</label>
                           <input
-                            placeholder="Article Title"
+                            placeholder="Magazine Title"
                             onChange={(e) =>
                               this.setState({ title: e.target.value })
                             }
