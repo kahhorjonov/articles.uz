@@ -5,6 +5,7 @@ import articleService from "services/articleService";
 import { getChildCategories } from "services/getCategories";
 import magazineService from "services/magazineService";
 import { getUsersById } from "services/userService";
+import { getPrices } from "services/priceService";
 
 import { Card, CardBody, Input, Label, Row, Col, Button } from "reactstrap";
 
@@ -12,7 +13,6 @@ import { toast } from "react-toastify";
 
 import "styles/articleForm.css";
 import "styles/multipleTags.scss";
-import axios from "axios";
 
 class ArticleForm extends Form {
   state = {
@@ -63,11 +63,9 @@ class ArticleForm extends Form {
 
   getArticlePrice = async () => {
     try {
-      await axios
-        .get(`http://192.168.100.27:8080/api/prices/getPrice`)
-        .then((res) => {
-          this.setState({ articlePrice: res.data });
-        });
+      await getPrices().then((res) => {
+        this.setState({ articlePrice: res.data });
+      });
     } catch (error) {
       console.log(error);
     }
@@ -415,14 +413,15 @@ class ArticleForm extends Form {
 
                   <Row>
                     <Col sm="3" md="3" lg="3">
-                      <div>
+                      {/* <div>
                         <Label for="exampleEmail">Narxi</Label>
                         <Input
                           disabled
                           className="form-control h-100 pr-0"
                           placeholder={`${price} so'm`}
                         />
-                      </div>
+                      </div> */}
+
                       <div className="hisoblash mt-5">
                         <h6 className="pl-1">
                           Sahifa narxi
@@ -431,7 +430,7 @@ class ArticleForm extends Form {
                           </span>
                         </h6>
                         <h6 className="pl-1">
-                          {this.state.sahifaSoni} X 1000=
+                          {this.state.sahifaSoni} X {sahifaNarxi} =
                           <span className="text-darck pl-2">
                             {sahifaNarxi * this.state.sahifaSoni} so'm
                           </span>
@@ -467,7 +466,16 @@ class ArticleForm extends Form {
                           <span className="pl-3 text-darck pl-2">
                             {doi} so'm
                           </span>
-                          <p>{this.state.doi === true ? 10000 : 0}</p>
+                          <p>{this.state.doi == true ? doi : "0"}</p>
+                        </h6>
+                        <hr />
+
+                        <h6 className="pl-1">
+                          Chop etish narxi:
+                          <span className="pl-3 text-darck pl-2">
+                            {chopEtishNarxi} so'm
+                          </span>
+                          <p>{chopEtishNarxi}</p>
                         </h6>
                         <hr />
                         <h6 className="pl-1">

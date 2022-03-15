@@ -29,8 +29,7 @@ class JurnallarRoyxati extends Component {
   componentDidMount = async () => {
     await this.getCategory();
 
-    this.state.magazineCategories &&
-      (await this.handleGetMagazinesById(this.state.magazineCategories[0].id));
+    this.state.magazineCategories && (await this.handleGetMagazinesById(0));
   };
 
   getCategory = async () => {
@@ -39,7 +38,7 @@ class JurnallarRoyxati extends Component {
         this.setState({ magazineCategories: respons.data });
       });
     } catch (ex) {
-      console.log(ex);
+      toast.error(ex.response.data.message);
     }
   };
 

@@ -3,10 +3,8 @@ import api from "../utils/config.json";
 import axios from "axios";
 
 const { apiSwagger, apiLocal } = api;
-// http://192.168.100.27:8080/api/user/edit/{id}
 
 const apiEndpoint = apiLocal + "/user/register";
-// const apiEndpoint = apiSwagger + "/user/register";
 
 export function register(user, firebaseToken) {
   return http.post(apiEndpoint, {
@@ -105,8 +103,6 @@ export async function profileEditFromAdmin(data) {
     languages: data.languages,
   };
 
-  console.log(body);
-
   return axios.post(apiLocal + "/user/editUserFromAdmin", body, config);
 }
 
@@ -116,8 +112,6 @@ export async function registerReviewer(data) {
   // for (let i = 0; i < data.scientificWork.length; i++) {
   //   files.push(data.scientificWork[i]);
   // }
-
-  console.log(data);
 
   const bodyFormData = new FormData();
 
