@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
-import articleService from "services/articleService";
+import { downloadFile } from "services/mediaService";
 
-import "styles/userEdit.css";
+import {
+  getArticleInfoAdmin,
+  articleInfo,
+  changeActivityArticles,
+} from "services/articleService";
 
 import {
   Button,
@@ -21,103 +23,71 @@ import {
   Table,
 } from "reactstrap";
 
+import "styles/userEdit.css";
+
 class ArticleInfo extends Component {
   state = {
-    titleArticle: "",
-
     status: "CHECK_AND_ACCEPT",
     file: [],
-    description: "",
 
     articleId: "",
     articleInfo: "",
 
     articleInfoAdmin: [],
-  };
-
-  getArticleInfoAdmin = async (id) => {
-    try {
-      await axios
-        .get(`http://192.168.100.27:8080/api/article/getArticleInfoAdmin/${id}`)
-        .then((res) => {
-          console.log(res.data[0]);
-          this.setState({ articleInfoAdmin: res.data[0] });
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    steps: [],
   };
 
   async componentDidMount() {
-    const articleId = this.props.history.location.pathname.slice(20);
-    console.log(articleId);
+    const articleId = this.props.location.pathname.split(":")[1];
+    // ? this.props.location.pathname.split(":")[1]
+    // : this.props.location.pathname.split(":")[0];
+
     this.setState({ articleId: articleId });
 
     this.getArticleInfoAdmin(articleId);
-    await this.populateCategories();
-
-    await axios
-      .get(
-        `http://192.168.100.27:8080/api/article/getArticleInfoAdmin/${articleId}`
-      )
-      .then((res) => {
-        // console.log(res);
-        this.setState({ articleInfo: res.data });
-      })
-      .catch((ex) => console.log(ex));
+    this.getArticleInformations(articleId);
   }
 
-  async populateCategories() {
-    const { data: categories } = await getCategories();
-    this.setState({ categories });
-  }
-
-  changeActivityOfArticle = async (bool) => {
+  getArticleInfoAdmin = async (id) => {
     try {
-      const token = localStorage.getItem("token");
-
-      const bodyParametrs = {};
-
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-
-      return axios
-        .post(
-          `http://192.168.100.27:8080/api/articleStatus/changeActiveAndFalse/${this.state.articleId}/${bool}`,
-          bodyParametrs,
-          config
-        )
-        .then((res) => toast.success(res.data.message));
+      await getArticleInfoAdmin(id).then((res) => {
+        this.setState({ articleInfoAdmin: res.data });
+      });
     } catch (ex) {
-      toast.success(ex.data.message);
+      toast.error(ex.response.data.message);
     }
   };
 
-  handleEdit = async () => {
-    // const { status, file, description, articleId } = this.state;
-
+  getArticleInformations = async (id) => {
     try {
-      await articleService
-        .editArticleByAdmin(this.state)
-        .then((res) => toast.success(res.data.message));
+      await articleInfo(id).then((res) => {
+        this.setState({ articleInfo: res.data.article });
+        this.setState({ steps: res.data.articleAdminInfoList });
+      });
     } catch (ex) {
-      toast.error("Server bilan aloqa yo'q 🤨");
+      toast.error(ex.response.data.message);
+    }
+  };
+
+  changeActivityOfArticle = async (bool) => {
+    try {
+      await changeActivityArticles(this.state.articleId, bool).then((res) =>
+        toast.success(res.data.message)
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
   handleDownload = async (fileId, fileName, type) => {
     if (fileId && fileName && type) {
       try {
-        await fetch(
-          `http://192.168.100.27:8080/api/attachment/download/${fileId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": type,
-            },
-          }
-        )
+        await downloadFile(fileId, {
+          method: "GET",
+          headers: {
+            "Content-Type": type,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
             // Create blob link to download
@@ -144,10 +114,20 @@ class ArticleInfo extends Component {
 
   render() {
     const { articleInfoAdmin } = this.state;
-    const { status, processDate } = articleInfoAdmin;
 
-    const article = this.state.articleInfo.article;
-    const steps = this.state.articleInfo.articleAdminInfoList;
+    const article = this.state.articleInfo;
+    const steps = this.state.steps;
+
+    const {
+      titleArticle,
+      category,
+      price,
+      authors,
+      file,
+      publicPrivate,
+      user,
+      description,
+    } = article;
 
     return (
       <>
@@ -230,21 +210,21 @@ class ArticleInfo extends Component {
                     <thead>
                       <tr className="col-md-12">
                         <th className="col-md-6">Steps</th>
-                        <th className="col-md-6">Data</th>
+                        <th className="col-md-6">Date</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      {/* <tr>
                         <td>{status}</td>
                         <td>{processDate}</td>
-                      </tr>
-                      {/* {steps &&
-                        steps.map((step) => (
-                          <tr key={step.admin.id}>
+                      </tr> */}
+                      {articleInfoAdmin[0] &&
+                        articleInfoAdmin.map((step, idx) => (
+                          <tr key={idx}>
                             <td>{step.status}</td>
                             <td>{step.processDate}</td>
                           </tr>
-                        ))} */}
+                        ))}
                     </tbody>
                   </Table>
                 </CardBody>
@@ -254,7 +234,7 @@ class ArticleInfo extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Edit Article</CardTitle>
+                  <CardTitle tag="h5">Maqola Ma'lumotlari</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
@@ -266,35 +246,19 @@ class ArticleInfo extends Component {
                             disabled
                             placeholder="Title Article"
                             type="text"
-                            defaultValue={article && article.titleArticle}
+                            defaultValue={titleArticle}
                           />
                         </FormGroup>
                       </Col>
                       <Col className="px-1" md="4">
                         <FormGroup>
                           <label>Category</label>
-                          <select
+                          <Input
                             disabled
-                            defaultValue={article && article.category.name}
+                            defaultValue={category && category.name}
                             style={{ fontSize: "1.4rem" }}
                             className="custom-select"
-                            onChange={(e) => {
-                              this.setState({
-                                categoryIdForCreate: [e.target.value],
-                              });
-                              // this.handleChooseCategory(
-                              //   e.target.value
-                              // );
-                            }}
-                          >
-                            {/* <option value="null">Kategoriya</option> */}
-                            {this.state.categories &&
-                              this.state.categories.map((category) => (
-                                <option key={category.id} value={category.id}>
-                                  {category.name}
-                                </option>
-                              ))}
-                          </select>
+                          />
                         </FormGroup>
                       </Col>
                       <Col className="pl-1" md="4">
@@ -302,9 +266,7 @@ class ArticleInfo extends Component {
                           <label>Price</label>
                           <Input
                             disabled={true}
-                            placeholder={
-                              article && `${article.price.price} so'm`
-                            }
+                            placeholder={price && `${price.price} so'm`}
                             type="number"
                           />
                         </FormGroup>
@@ -316,13 +278,6 @@ class ArticleInfo extends Component {
                           <label>Authors</label>
                           <Input
                             disabled
-                            // defaultValue={
-                            //   article &&
-                            //   article.authors.map(
-                            //     (author) => author.fullName + " "
-                            //   )
-                            // }
-
                             placeholder={
                               article &&
                               article.authors.map((author, idx2) => {
@@ -332,7 +287,6 @@ class ArticleInfo extends Component {
                                 return `${author.fullname}`;
                               })
                             }
-                            // placeholder={authors && authors}
                             type="text"
                           />
                         </FormGroup>
@@ -350,9 +304,9 @@ class ArticleInfo extends Component {
                             }}
                             onClick={() =>
                               this.handleDownload(
-                                article.file && article.file.id,
-                                article.file && article.file.originalName,
-                                article.file && article.file.contentType
+                                file && file.id,
+                                file && file.originalName,
+                                file && file.contentType
                               )
                             }
                           >
@@ -366,7 +320,7 @@ class ArticleInfo extends Component {
                           <label>For Everyone?</label>
                           <Input
                             disabled
-                            defaultValue={article && article.publicPrivate}
+                            defaultValue={publicPrivate}
                             placeholder="Avtorlar"
                             type="text"
                           />
@@ -380,7 +334,7 @@ class ArticleInfo extends Component {
                           <label>FirstName (Sender)</label>
                           <Input
                             disabled
-                            defaultValue={article && article.user.firstName}
+                            defaultValue={user && user.firstName}
                             placeholder="FirsName"
                             type="text"
                           />
@@ -392,7 +346,7 @@ class ArticleInfo extends Component {
                           <label>LastName</label>
                           <Input
                             disabled
-                            defaultValue={article && article.user.lastName}
+                            defaultValue={user && user.lastName}
                             placeholder="LastName"
                             type="text"
                           />
@@ -404,7 +358,7 @@ class ArticleInfo extends Component {
                           <label>Phone</label>
                           <Input
                             disabled
-                            defaultValue={article && article.user.phoneNumber}
+                            defaultValue={user && user.phoneNumber}
                             placeholder="Number"
                             type="text"
                           />
@@ -418,7 +372,7 @@ class ArticleInfo extends Component {
                           <label>Email</label>
                           <Input
                             disabled
-                            defaultValue={article && article.user.email}
+                            defaultValue={user && user.email}
                             placeholder="Email"
                             type="text"
                           />
@@ -428,7 +382,7 @@ class ArticleInfo extends Component {
                         <FormGroup>
                           <label>Description</label>
                           <Input
-                            defaultValue={article && article.description}
+                            defaultValue={description}
                             placeholder="Country"
                             type="text"
                             disabled
@@ -438,11 +392,62 @@ class ArticleInfo extends Component {
                     </Row>
 
                     <Row>
+                      <Col sm="3" md="3" lg="3">
+                        <div>
+                          <label>Sahifa soni</label>
+                          <Input
+                            disabled
+                            className="form-control"
+                            placeholder={price && price.sahifaSoni}
+                          />
+                        </div>
+                      </Col>
+
+                      <Col sm="3" md="3" lg="3">
+                        <Label>Bosma jurnal soni</Label>
+                        <Input
+                          disabled
+                          min="0"
+                          type={"number"}
+                          className="form-control"
+                          placeholder={price && price.bosmaJurnallarSoni}
+                        />
+                      </Col>
+
+                      <Col sm="3" md="3" lg="3">
+                        <Label>Sertifikat soni</Label>
+                        <input
+                          disabled
+                          min="0"
+                          type={"number"}
+                          className="form-control"
+                          placeholder={price && price.sertifikatlarSoni}
+                        />
+                      </Col>
+
+                      <Col sm="3" md="3" lg="3">
+                        <div>
+                          <Label>Doi</Label>
+                          <Input
+                            disabled
+                            style={{ height: "3rem" }}
+                            className="form-control"
+                            type="select"
+                            placeholder={price && price.doi.toString()}
+                          >
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                          </Input>
+                        </div>
+                      </Col>
+                    </Row>
+
+                    <Row>
                       <div className="update updatess">
                         <div>
                           <label className="switch">
                             <input
-                              defaultChecked={article && article.active}
+                              defaultChecked={user && article.active}
                               type="checkbox"
                               onClick={(e) =>
                                 this.changeActivityOfArticle(e.target.checked)
@@ -460,7 +465,7 @@ class ArticleInfo extends Component {
                           </Button>
                         </div> */}
 
-                        <div>
+                        {/* <div>
                           <Button
                             color="danger"
                             outline
@@ -468,7 +473,7 @@ class ArticleInfo extends Component {
                           >
                             Delete
                           </Button>
-                        </div>
+                        </div> */}
                       </div>
                     </Row>
                   </Form>

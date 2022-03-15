@@ -35,6 +35,15 @@ var UserRoutes = [
   },
 
   {
+    path: "/articleEdit/:id",
+    name: "Edit Article",
+    icon: "nc-icon nc-map-big",
+    component: UserReleases,
+    layout: "/user",
+    visible: false,
+  },
+
+  {
     path: "/userArchive/:id",
     name: "Magazine's Archive",
     icon: "nc-icon nc-map-big",
