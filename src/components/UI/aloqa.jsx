@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
+import { YMaps, Map, TypeSelector, Placemark, FullscreenControl, ZoomControl } from "react-yandex-maps";
 import "styles/aloqa.css";
+import { Button } from "reactstrap";
 
 class Aloqa extends Component {
   render() {
@@ -9,7 +10,7 @@ class Aloqa extends Component {
         <div className="aloqa">
           <div className="container">
             <div className="row ml-0 mr-0">
-              <div className="col-lg-12 col-md-12 col-sm-12 px-0">
+              <div className="col-lg-6  px-0">
                 <h1 style={{ fontWeight: "bold" }}>Biz bilan bog'lanish</h1>
                 <p
                   style={{ fontSize: "2rem" }}
@@ -65,6 +66,27 @@ class Aloqa extends Component {
                     Instagram
                   </a>
                 </p>
+              </div>
+
+              <div className="col-lg-6 col-sm-6">
+                <div style={{ width: "600px", height: "500px" }}>
+                  <YMaps>
+                    <Map
+                      width={"100%"}
+                      height={"70vh"}
+                      defaultState={{
+                        center: [41.327845, 69.285692],
+                        zoom: 15,
+                      }}
+                    >
+                      <Placemark geometry={[41.327845, 69.285692]} />
+                      <TypeSelector options={{ float: 'right' }} />
+                      <FullscreenControl />
+                      <ZoomControl options={{ float: 'left' }} />
+                  
+                    </Map>
+                  </YMaps>
+                </div>
               </div>
             </div>
           </div>

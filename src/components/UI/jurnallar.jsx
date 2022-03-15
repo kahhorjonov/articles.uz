@@ -127,12 +127,13 @@ class Jurnallar extends Component {
                                 cursor: "pointer",
                                 color: "black",
                                 fontSize: "15px",
+
                               }}
                               onClick={(e) => {
                                 e.preventDefault();
                                 this.getMagazinesById(category.id);
                               }}
-                              className="nav-link text-black "
+                              className="nav-link text-black"
                             >
                               {category.name}
                             </a>

@@ -5,6 +5,15 @@
   box-shadow: none;
 }
 
+
+.jurnallar .nav-item .active{
+  color: black !important;
+  text-shadow: 0 0 black;
+}
+
+.jurnallar .nav-link{
+  color: rgb(105, 101, 101) !important;
+}
 .jurnallar h1 {
   font-weight: 600;
   font-size: 48px;
