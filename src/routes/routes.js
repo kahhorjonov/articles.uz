@@ -13,7 +13,7 @@ import Category from "components/UI/category";
 import Logout from "components/logout.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
 import MagazineInfoAdmin from "components/UI/magazineInfoAdmin";
-import Setting from "components/UI/setting";
+import ChangePrices from "components/UI/changePrices";
 
 var adminRoutes = [
   {
@@ -98,14 +98,6 @@ var adminRoutes = [
   },
 
   // {
-  //   path: "/notifications",
-  //   name: "Notifications",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Notification,
-  //   layout: "/admin",
-  // },
-
-  // {
   //   path: "/icons",
   //   name: "Icons",
   //   icon: "nc-icon nc-bell-55",
@@ -133,10 +125,10 @@ var adminRoutes = [
   },
 
   {
-    path: "/settings",
+    path: "/changePrices",
     name: "Narxlar",
     icon: "nc-icon nc-cart-simple",
-    component: Setting,
+    component: ChangePrices,
     layout: "/admin",
     visible: true,
   },

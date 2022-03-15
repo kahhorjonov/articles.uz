@@ -12,7 +12,7 @@ import "styles/navbar.css";
 class Articles extends Component {
   state = {
     activeArticleId: "",
-    deadline: "",
+    deadline: "7",
     articles: [],
     people: [],
     role: "777",
@@ -193,7 +193,6 @@ class Articles extends Component {
                         {articles &&
                           articles.map((article) => (
                             <li
-                            
                               key={article.id}
                               className={
                                 this.state.activeArticleId === article.id
@@ -250,20 +249,21 @@ class Articles extends Component {
                               <Input
                                 style={{ padding: "0.375rem 0.75rem" }}
                                 type="select"
+                                defaultValue="7"
                                 name="cars"
                                 className="form-control h-100 border"
                                 onChange={(e) =>
                                   this.setState({ deadline: e.target.value })
                                 }
                               >
-                                <option value={7}>Deadline</option>
-                                <option value={1}>1 kun</option>
-                                <option value={2}>2 kun</option>
-                                <option value={3}>3 kun</option>
-                                <option value={4}>4 kun</option>
-                                <option value={5}>5 kun</option>
-                                <option value={6}>6 kun</option>
-                                <option value={7}>7 kun</option>
+                                <option value="7">Deadline</option>
+                                <option value="1">1 kun</option>
+                                <option value="2">2 kun</option>
+                                <option value="3">3 kun</option>
+                                <option value="4">4 kun</option>
+                                <option value="5">5 kun</option>
+                                <option value="6">6 kun</option>
+                                <option value="7">7 kun</option>
                               </Input>
 
                               <Input
