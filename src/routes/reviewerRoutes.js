@@ -18,7 +18,7 @@ var reviewerRoutes = [
 
   {
     path: "/magazineInformation",
-    name: "Archive",
+    name: "MagazineInfo",
     icon: "nc-icon nc-map-big",
     component: MagazineInfo,
     layout: "/reviewer",

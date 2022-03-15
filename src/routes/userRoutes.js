@@ -1,10 +1,9 @@
 import UserPage from "views/User.js";
-// import Icons from "views/Icons.js";
 import ArticleForm from "components/common/articleForm";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
+import UserMagazineInfo from "components/UI/userMagazineInfo";
 import MagazineInfo from "components/UI/magazineInfo";
-import ReviewerArchive from "components/UI/reviewerArchive";
 
 var UserRoutes = [
   {
@@ -16,23 +15,23 @@ var UserRoutes = [
     visible: true,
   },
 
+  {
+    path: "/magazineInformation/:id",
+    name: "Magazine Info",
+    icon: "nc-icon nc-map-big",
+    component: MagazineInfo,
+    layout: "/user",
+    visible: true,
+  },
+
   // {
-  //   path: "/magazineInformation",
+  //   path: "/userArchive",
   //   name: "Archive",
   //   icon: "nc-icon nc-map-big",
-  //   component: MagazineInfo,
+  //   component: ReviewerArchive,
   //   layout: "/user",
   //   visible: false,
   // },
-
-  {
-    path: "/userArchive",
-    name: "Archive",
-    icon: "nc-icon nc-map-big",
-    component: ReviewerArchive,
-    layout: "/user",
-    visible: false,
-  },
 
   {
     path: "/uploadArticle",
@@ -60,15 +59,6 @@ var UserRoutes = [
     layout: "/user",
     visible: true,
   },
-
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Icons,
-  //   layout: "/user",
-  //   visible: true,
-  // },
 
   {
     path: "/logout",

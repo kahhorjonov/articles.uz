@@ -20,6 +20,7 @@ import NotFound from "./components/common/notFound";
 import auth from "services/authService.js";
 import MagazineInfo from "./components/UI/magazineInfo";
 import JurnalArxive from "./components/UI/jurnalArxive";
+import UserMagazineInfo from "components/UI/userMagazineInfo";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -333,12 +334,6 @@ class App extends Component {
 
               <Route
                 path="/main/magazineInfo/:id"
-                exact
-                component={(props) => <MagazineInfo {...props} />}
-              />
-
-              <Route
-                path="/user/magazineInformation/:id"
                 exact
                 component={(props) => <MagazineInfo {...props} />}
               />

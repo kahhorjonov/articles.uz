@@ -4,6 +4,7 @@ import auth from "../services/authService";
 
 const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
   const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
+
   return (
     <Route
       {...rest}
@@ -35,24 +36,5 @@ const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
     />
   );
 };
-
-// const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) => {
-//         console.log(props.location);
-
-//         if (!auth.getCurrentUser())
-//           return (
-//             <Redirect
-//               to={{ pathname: "/login", state: { from: props.location } }}
-//             />
-//           );
-//         return Component ? <Component {...props} /> : render(props);
-//       }}
-//     />
-//   );
-// };
 
 export default ProtectedRoute;
