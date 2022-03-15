@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { downloadFile } from "services/mediaService";
 
-import {
-  getArticleInfoAdmin,
-  articleInfo,
-  changeActivityArticles,
-} from "services/articleService";
+import { getArticlesById } from "services/articleService";
 
 import {
   Button,
@@ -20,21 +16,27 @@ import {
   Label,
   Row,
   Col,
-  Table,
 } from "reactstrap";
 
 import "styles/userEdit.css";
 
 class ArticleEdit extends Component {
   state = {
-    status: "CHECK_AND_ACCEPT",
-    file: [],
+    title: "",
+    categoryId: "",
+    price: "",
+    authors: [],
+    publicPrivate: "",
+    description: "",
+    sahifaSoni: "",
+    bosmaJurnallarSoni: "",
+    sertifikatlarSoni: "",
+    doi: "",
+    tags: [],
 
+    file: [],
     articleId: "",
     articleInfo: "",
-
-    articleInfoAdmin: [],
-    steps: [],
   };
 
   async componentDidMount() {
@@ -43,37 +45,14 @@ class ArticleEdit extends Component {
     // : this.props.location.pathname.split(":")[0];
 
     this.setState({ articleId: articleId });
-
-    this.getArticleInfoAdmin(articleId);
     this.getArticleInformations(articleId);
   }
 
-  getArticleInfoAdmin = async (id) => {
-    try {
-      await getArticleInfoAdmin(id).then((res) => {
-        this.setState({ articleInfoAdmin: res.data });
-      });
-    } catch (ex) {
-      toast.error(ex.response.data.message);
-    }
-  };
-
   getArticleInformations = async (id) => {
     try {
-      await articleInfo(id).then((res) => {
-        this.setState({ articleInfo: res.data.article });
-        this.setState({ steps: res.data.articleAdminInfoList });
+      await getArticlesById(id).then((res) => {
+        this.setState({ articleInfo: res.data });
       });
-    } catch (ex) {
-      toast.error(ex.response.data.message);
-    }
-  };
-
-  changeActivityOfArticle = async (bool) => {
-    try {
-      await changeActivityArticles(this.state.articleId, bool).then((res) =>
-        toast.success(res.data.message)
-      );
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
@@ -112,11 +91,29 @@ class ArticleEdit extends Component {
     }
   };
 
-  render() {
-    const { articleInfoAdmin } = this.state;
+  handleEdit = () => {
+    console.log(this.state);
+  };
 
+  handleDelete = () => {
+    console.log(this.state);
+  };
+
+  removeTags = (indexToRemove) => {
+    this.setState({
+      tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
+    });
+  };
+
+  addTags = (value) => {
+    if (value !== "") {
+      this.setState({ tags: [...this.state.tags, value] });
+      value = "";
+    }
+  };
+
+  render() {
     const article = this.state.articleInfo;
-    const steps = this.state.steps;
 
     const {
       titleArticle,
@@ -125,7 +122,6 @@ class ArticleEdit extends Component {
       authors,
       file,
       publicPrivate,
-      user,
       description,
     } = article;
 
@@ -136,7 +132,7 @@ class ArticleEdit extends Component {
             <Col md="12" sm="12" lg="12">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Maqola Ma'lumotlari</CardTitle>
+                  <CardTitle tag="h5">Edit Articles</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
@@ -148,6 +144,9 @@ class ArticleEdit extends Component {
                             placeholder="Title Article"
                             type="text"
                             defaultValue={titleArticle}
+                            onChange={(e) =>
+                              this.setState({ titleArticle: e.target.value })
+                            }
                           />
                         </FormGroup>
                       </Col>
@@ -158,6 +157,9 @@ class ArticleEdit extends Component {
                             defaultValue={category && category.name}
                             style={{ fontSize: "1.4rem" }}
                             className="custom-select"
+                            onChange={(e) =>
+                              this.setState({ categoryId: e.target.value })
+                            }
                           />
                         </FormGroup>
                       </Col>
@@ -165,8 +167,8 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Price</label>
                           <Input
+                            disabled
                             placeholder={price && `${price.price} so'm`}
-                            type="number"
                           />
                         </FormGroup>
                       </Col>
@@ -176,9 +178,10 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Authors</label>
                           <Input
+                            disabled
                             placeholder={
-                              article &&
-                              article.authors.map((author, idx2) => {
+                              authors &&
+                              authors.map((author, idx2) => {
                                 if (article.authors.length - 1 !== idx2) {
                                   return `${author.fullname}, `;
                                 }
@@ -218,66 +221,29 @@ class ArticleEdit extends Component {
                           <label>For Everyone?</label>
                           <Input
                             defaultValue={publicPrivate}
-                            placeholder="Avtorlar"
-                            type="text"
-                          />
+                            style={{ fontSize: "1.4rem" }}
+                            className="custom-select"
+                            type="select"
+                            onChange={(e) =>
+                              this.setState({ publicPrivate: e.target.value })
+                            }
+                          >
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                          </Input>
                         </FormGroup>
                       </Col>
                     </Row>
 
                     <Row>
-                      <Col md="4">
-                        <FormGroup>
-                          <label>FirstName (Sender)</label>
-                          <Input
-                            defaultValue={user && user.firstName}
-                            placeholder="FirsName"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-
-                      <Col md="4">
-                        <FormGroup>
-                          <label>LastName</label>
-                          <Input
-                            defaultValue={user && user.lastName}
-                            placeholder="LastName"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-
-                      <Col md="4">
-                        <FormGroup>
-                          <label>Phone</label>
-                          <Input
-                            defaultValue={user && user.phoneNumber}
-                            placeholder="Number"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col sm="6" md="6" lg="6">
-                        <FormGroup>
-                          <label>Email</label>
-                          <Input
-                            defaultValue={user && user.email}
-                            placeholder="Email"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col sm="6" md="6" lg="6">
+                      <Col sm="12" md="12" lg="12">
                         <FormGroup>
                           <label>Description</label>
                           <Input
                             defaultValue={description}
-                            placeholder="Country"
-                            type="text"
+                            onChange={(e) =>
+                              this.setState({ description: e.target.value })
+                            }
                           />
                         </FormGroup>
                       </Col>
@@ -290,6 +256,9 @@ class ArticleEdit extends Component {
                           <Input
                             className="form-control"
                             placeholder={price && price.sahifaSoni}
+                            onChange={(e) =>
+                              this.setState({ sahifaSoni: e.target.value })
+                            }
                           />
                         </div>
                       </Col>
@@ -301,6 +270,11 @@ class ArticleEdit extends Component {
                           type={"number"}
                           className="form-control"
                           placeholder={price && price.bosmaJurnallarSoni}
+                          onChange={(e) =>
+                            this.setState({
+                              bosmaJurnallarSoni: e.target.value,
+                            })
+                          }
                         />
                       </Col>
 
@@ -311,6 +285,9 @@ class ArticleEdit extends Component {
                           type={"number"}
                           className="form-control"
                           placeholder={price && price.sertifikatlarSoni}
+                          onChange={(e) =>
+                            this.setState({ sertifikatlarSoni: e.target.value })
+                          }
                         />
                       </Col>
 
@@ -322,6 +299,9 @@ class ArticleEdit extends Component {
                             className="form-control"
                             type="select"
                             placeholder={price && price.doi.toString()}
+                            onChange={(e) =>
+                              this.setState({ doi: e.target.value })
+                            }
                           >
                             <option value="true">True</option>
                             <option value="false">False</option>
@@ -331,17 +311,7 @@ class ArticleEdit extends Component {
                     </Row>
 
                     <Row>
-                      <Col sm="3" md="3" lg="3">
-                        <div>
-                          <Label>Narxi</Label>
-                          <Input
-                            className="form-control h-100 pr-0"
-                            placeholder={`${price} so'm`}
-                          />
-                        </div>
-                      </Col>
-
-                      <Col sm="9" md="9" lg="9">
+                      <Col sm="8" md="8" lg="8">
                         <Label for="exampleEmail">Authors ID</Label>
                         <div className="tags-input ">
                           <ul id="tags">
@@ -359,8 +329,6 @@ class ArticleEdit extends Component {
                               ))}
                           </ul>
                           <input
-                            className="col-sm-9 col-lg-9 col-md-9"
-                            type="text"
                             onKeyUp={(e) =>
                               e.key === "ArrowUp"
                                 ? this.addTags(e.target.value)
@@ -370,31 +338,42 @@ class ArticleEdit extends Component {
                           />
                         </div>
                       </Col>
-                    </Row>
 
-                    <Row>
-                      <div className="update updatess">
+                      <Col
+                        sm="4"
+                        md="4"
+                        lg="4"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "end",
+                        }}
+                      >
                         <div>
+                          <br />
                           <Button
-                            color="info"
-                            onClick={() => console.log("submitted")}
+                            style={{ margin: "0 1rem" }}
+                            color="success"
+                            onClick={this.handleEdit}
                           >
                             Edit
                           </Button>
                         </div>
 
                         <div>
+                          <br />
                           <Button
+                            style={{ margin: "0 1rem" }}
                             color="danger"
-                            outline
-                            onClick={() => console.log("deleted")}
+                            onClick={this.handleDelete}
                           >
                             Delete
                           </Button>
                         </div>
-                      </div>
+                      </Col>
                     </Row>
                   </Form>
+                  <br />
                 </CardBody>
               </Card>
             </Col>

@@ -92,9 +92,11 @@ export function newMyArticles(step) {
   return axios.post(apiLocal + "/article/newMyArticle", bodyParametrs, config);
 }
 
-export function myNewArticles() {
-  let articles = [];
+export function getArticlesById(id) {
+  return http.get(apiLocal + `/article/getById/${id} `);
+}
 
+export function myNewArticles() {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -252,5 +254,6 @@ export default {
   getPrice,
   getAllMyArticles,
   getArticleInfoAdmin,
+  getArticlesById,
   changeActivityArticles,
 };

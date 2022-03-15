@@ -279,8 +279,8 @@ class ArticleInfo extends Component {
                           <Input
                             disabled
                             placeholder={
-                              article &&
-                              article.authors.map((author, idx2) => {
+                              authors &&
+                              authors.map((author, idx2) => {
                                 if (article.authors.length - 1 !== idx2) {
                                   return `${author.fullname}, `;
                                 }
