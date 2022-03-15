@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { downloadMedia } from "services/mediaService";
 
 class GetImages extends Component {
   state = {
@@ -14,12 +14,7 @@ class GetImages extends Component {
     let imageBlob;
 
     try {
-      imageBlob = (
-        await axios.get(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
     } catch (err) {
       return null;
     }

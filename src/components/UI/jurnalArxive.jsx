@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import GetImages from "utils/getImages";
-import axios from "axios";
+import { downloadMedia, downloadFile } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -103,12 +103,7 @@ class JurnalArxive extends Component {
     let imageBlob;
 
     try {
-      imageBlob = (
-        await axios.get(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
     } catch (err) {
       return null;
     }
@@ -119,15 +114,12 @@ class JurnalArxive extends Component {
   handleDownload = async (id, originalName, contentType) => {
     if (id && originalName && contentType) {
       try {
-        await fetch(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": contentType,
-            },
-          }
-        )
+        await downloadFile(id, {
+          method: "GET",
+          headers: {
+            "Content-Type": contentType,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
             // Create blob link to download

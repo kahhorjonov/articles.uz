@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "../../styles/chopetilgan.css";
 import { Link } from "react-router-dom";
+
+import "styles/chopetilgan.css";
 
 class Chopetish extends Component {
   state = {};
@@ -63,7 +64,9 @@ class Chopetish extends Component {
                                 Nashr etilgan sana:<span>13.09.2020</span>
                               </h6>
                               <h5>
-                                <Link to="/user/articleInfo/:id">Maqolani ko’rish</Link>
+                                <Link to="/user/articleInfo/:id">
+                                  Maqolani ko’rish
+                                </Link>
                               </h5>
                             </div>
                           </div>

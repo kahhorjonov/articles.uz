@@ -1,7 +1,7 @@
 import http from "./httpService";
 import api from "utils/config.json";
 
-const { apiSwagger, apiLocal } = api;
+const { apiLocal } = api;
 
 export function getCategories() {
   return http.get(apiLocal + "/category/all");
@@ -9,7 +9,6 @@ export function getCategories() {
 
 export function getCategoriesForMagazine() {
   return http.get(apiLocal + "/journals/getCategoryJournals");
-  // return http.get(apiSwagger + "/category/all");
 }
 
 export function changeActivityOfCategory(id) {

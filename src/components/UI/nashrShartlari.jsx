@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Foooter from "./foooter";
+import { getPrices } from "services/priceService";
+import { toast } from "react-toastify";
 
 import "styles/nashirShartlar.css";
 
@@ -12,21 +13,18 @@ class NashrShartlari extends Component {
   componentDidMount() {
     this.getArticlPrice();
   }
+
   getArticlPrice = async () => {
     try {
-      await axios
-        .get(`http://192.168.100.27:8080/api/prices/getPrice`)
-        .then((res) => {
-          console.log(res);
-          this.setState({ articlPrice: res.data });
-        });
-    } catch (error) {
-      console.log(error);
+      await getPrices().then((res) => {
+        this.setState({ articlPrice: res.data });
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
   render() {
-    // console.log(this.state);
     const { articlPrice } = this.state;
     const {
       bittaBosmaJunalNarxi,
@@ -157,8 +155,8 @@ class NashrShartlari extends Component {
                           <span> so’m</span>
                         </li>
                         <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Maqolani nashrga qabul qilish to'g'risidagi elektron
-                          ma'lumotnoma
+                          Maqolani nashrga qabul qilish to'g'risidagi sms
+                          xabarnoma
                           <span>BEPUL</span>
                         </li>
                         <li className="list-group-item d-flex justify-content-between align-items-center">

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import "../../styles/chopetilgan.css";
+import "styles/chopetilgan.css";
 
 class Tekshirish extends Component {
-  state = {};
   render() {
     return (
       <>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import img from "../profile.png";
 import Foooter from "./foooter";
 
-import "../../styles/chopetilganinfo.css";
+import "styles/chopetilganinfo.css";
 
 class Chopetilganinfo extends Component {
   render() {

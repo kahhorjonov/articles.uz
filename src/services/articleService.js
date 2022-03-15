@@ -1,9 +1,9 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import api from "../utils/config.json";
+import api from "utils/config.json";
 import httpService from "./httpService";
 
-const { apiSwagger, apiLocal } = api;
+const { apiLocal } = api;
 
 const token = localStorage.getItem("token");
 

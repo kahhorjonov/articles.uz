@@ -1,16 +1,13 @@
 import React from "react";
-// javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 import { Switch, useLocation } from "react-router-dom";
 
-import DemoNavbar from "../components/Navbars/DemoNavbar.js";
-import Footer from "../components/Footer/Footer.js";
-import Sidebar from "../components/Sidebar/Sidebar.js";
-
-import auth from "services/authService.js";
+import DemoNavbar from "components/Navbars/DemoNavbar.js";
+import Footer from "components/Footer/Footer.js";
+import Sidebar from "components/Sidebar/Sidebar.js";
 
 import reductorRoutes from "routes/reductorRoutes";
-import ProtectedRoute from "./../components/protectedRoute";
+import ProtectedRoute from "components/protectedRoute";
 
 function Dashboard(props) {
   let ps;

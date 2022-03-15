@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-import "../../styles/homePage.css";
+import "styles/homePage.css";
 
 class NavbarHome extends React.Component {
   render() {

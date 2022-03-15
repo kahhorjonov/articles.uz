@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import img from "routes/books.png";
-import img1 from "assets/img/damir-bosnjak.jpg";
-import img2 from "assets/img/mike.jpg";
 import { toast } from "react-toastify";
 
 import {
@@ -14,12 +11,12 @@ import { Col } from "reactstrap";
 
 import GetImages from "utils/getImages";
 import Listhome from "./listhome";
-import Foooter from "./foooter";
 import Carousel from "react-multi-carousel";
 import img11 from "assets/img/figma/im1.png";
 import img21 from "assets/img/figma/im2.png";
 import img31 from "assets/img/figma/im3.png";
 import img41 from "assets/img/figma/im4.png";
+
 import "react-multi-carousel/lib/styles.css";
 import "styles/jurnallarRoyhati.css";
 

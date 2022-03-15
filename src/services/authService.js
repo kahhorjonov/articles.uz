@@ -3,12 +3,11 @@ import http from "./httpService";
 import api from "../utils/config.json";
 import axios from "axios";
 
-const { apiSwagger, apiLocal } = api;
+const { apiLocal } = api;
 
 const tokenKey = "token";
 
 const apiEndpoint = apiLocal + "/user/login";
-// const apiEndpoint = apiSwagger + "/user/login";
 
 http.setJwt(getJwt());
 

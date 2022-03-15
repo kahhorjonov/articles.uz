@@ -5,13 +5,13 @@ import {
   getActiveMagazines,
   getDeadlinedMagazines,
 } from "services/magazineService";
+import { getParentCategories } from "services/getCategories";
+import auth from "services/authService";
 
-import axios from "axios";
 import GetImages from "utils/getImages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Input, Row } from "reactstrap";
-import auth from "services/authService";
 
 import "styles/homePage.css";
 
@@ -36,13 +36,11 @@ class Jurnallar extends Component {
 
   getCategory = async () => {
     try {
-      await axios
-        .get("http://192.168.100.27:8080/api/category/allParentCategory")
-        .then((respons) => {
-          this.setState({ magazineCategories: respons.data });
-        });
+      await getParentCategories().then((res) => {
+        this.setState({ magazineCategories: res.data });
+      });
     } catch (ex) {
-      console.log(ex);
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -51,8 +49,8 @@ class Jurnallar extends Component {
       await getMagazinesById(id).then((res) => {
         this.setState({ magazines: res.data });
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
