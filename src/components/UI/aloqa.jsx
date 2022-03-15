@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { YMaps, Map, TypeSelector, Placemark, FullscreenControl, ZoomControl } from "react-yandex-maps";
+import {
+  YMaps,
+  Map,
+  TypeSelector,
+  Placemark,
+  FullscreenControl,
+  ZoomControl,
+} from "react-yandex-maps";
 import "styles/aloqa.css";
 import { Button } from "reactstrap";
 
@@ -80,10 +87,9 @@ class Aloqa extends Component {
                       }}
                     >
                       <Placemark geometry={[41.327845, 69.285692]} />
-                      <TypeSelector options={{ float: 'right' }} />
+                      <TypeSelector options={{ float: "right" }} />
                       <FullscreenControl />
-                      <ZoomControl options={{ float: 'left' }} />
-                  
+                      <ZoomControl options={{ float: "left" }} />
                     </Map>
                   </YMaps>
                 </div>
