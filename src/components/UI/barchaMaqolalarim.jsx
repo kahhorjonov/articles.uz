@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Col, Input, Row, Label, Form, Table, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
 import { getAllMyArticles } from "services/articleService";
-import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
+import { toast } from "react-toastify";
+import { Col, Input, Row, Label, Form, Table, CardBody } from "reactstrap";
 
 import "styles/chopetilgan.css";
 
@@ -135,7 +136,11 @@ class BarchaMaqolalarim extends Component {
                           {articles &&
                             articles.map((article) => (
                               <tr key={article.id}>
-                                <td>{article.titleArticle}</td>
+                                <td>
+                                  <Link to={`/user/articleEdit/:${article.id}`}>
+                                    {article.titleArticle}
+                                  </Link>
+                                </td>
                                 <td>{article.articleStatusName}</td>
                                 <td>{article.journals[0].title}</td>
                                 <td>

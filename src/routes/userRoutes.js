@@ -4,7 +4,8 @@ import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
-import UserReleases from "./../components/UI/userReleases";
+import UserReleases from "components/UI/userReleases";
+import ArticleEdit from "views/articleEdit";
 
 var UserRoutes = [
   {
@@ -38,7 +39,7 @@ var UserRoutes = [
     path: "/articleEdit/:id",
     name: "Edit Article",
     icon: "nc-icon nc-map-big",
-    component: UserReleases,
+    component: ArticleEdit,
     layout: "/user",
     visible: false,
   },
