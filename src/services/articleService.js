@@ -268,6 +268,14 @@ export function deleteArticle(id) {
   return http.delete(apiLocal + `/article/deleteArticle/${id}`);
 }
 
+export function myCheckedArticles() {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return http.get(apiLocal + "/article/myOldArticles", config);
+}
+
 export default {
   editArticleByAdmin,
   getRedactorsAndReviewers,
@@ -289,4 +297,5 @@ export default {
   changeActivityArticles,
   editArticle,
   deleteArticle,
+  myCheckedArticles,
 };

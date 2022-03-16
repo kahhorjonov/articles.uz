@@ -158,15 +158,38 @@ class Articles extends Component {
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              this.handleClick("PUBLISHED");
+                              this.handleClick("REJECTED");
                             }}
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Rad Etilganlar
+                            Rad etilganlar
                           </a>
                         </li>
 
+                        <li className="nav-item item">
+                          <a
+                            onClick={(e) => {
+                              this.handleClick("RECYCLE");
+                            }}
+                            className="nav-link navv"
+                            data-toggle="pill"
+                          >
+                           Qayta ishlashga berilganlar
+                          </a>
+                        </li>
+
+                        <li className="nav-item item">
+                          <a
+                            onClick={(e) => {
+                              this.handleClick("ACTIVEFALSE");
+                            }}
+                            className="nav-link navv"
+                            data-toggle="pill"
+                          >
+                            No Faollar
+                          </a>
+                        </li>
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
@@ -175,7 +198,7 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            jurnalar rad etish
+                            Chop etilganlar
                           </a>
                         </li>
                       </ul>

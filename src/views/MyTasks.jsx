@@ -4,6 +4,7 @@ import {
   myNewArticles,
   reviewerActionForArticle,
   sendWork,
+  myCheckedArticles,
 } from "../services/articleService";
 
 import { Card, CardBody, Row, Col, CardHeader } from "reactstrap";
@@ -18,10 +19,14 @@ class MyTasks extends Component {
     articles: [],
     myArticles: [],
     description: "",
+
+    myallArticles: [],
   };
 
   async componentDidMount() {
     await this.newMyArticles();
+
+    this.handleGetMyCheckedArticles();
   }
 
   newMyArticles = async () => {
@@ -31,6 +36,16 @@ class MyTasks extends Component {
       });
     } catch (ex) {
       toast.error(ex);
+    }
+  };
+
+  handleGetMyCheckedArticles = async () => {
+    try {
+      await myCheckedArticles().then((res) =>
+        this.setState({ myallArticles: res.data })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -104,6 +119,8 @@ class MyTasks extends Component {
   };
 
   render() {
+    const { myallArticles } = this.state;
+    console.log(this.state.myallArticles);
     return (
       <div className="content">
         <Row>
@@ -146,6 +163,7 @@ class MyTasks extends Component {
                           className="nav-link navvs"
                           href="#menu2"
                           data-toggle="pill"
+                          onClick={this.handleGetMyCheckedArticles}
                         >
                           Tekshirilgan Maqolalarim
                         </a>
@@ -369,21 +387,36 @@ class MyTasks extends Component {
                             <tr className="col-lg-12">
                               <th className="col-lg-3">Article Name</th>
                               <th className="col-lg-3">File</th>
-                              <th className="col-lg-3">Status 1</th>
-                              <th className="col-lg-3">Status 2</th>
+                              <th className="col-lg-3">File Name</th>
+                              <th className="col-lg-3">Status </th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>John</td>
-                              <td>
-                                <a href="#" download="w3logo">
-                                  file
-                                </a>
-                              </td>
-                              <td>jo, nesciunt! </td>
-                              <td>john@example.com</td>
-                            </tr>
+                            {myallArticles &&
+                              myallArticles.map((article) => (
+                                <tr key={article.id}>
+                                  <td>{article.printedJournalName}</td>
+                                  <td>
+                                    <a
+                                      style={{
+                                        cursor: "pointer",
+                                        color: "#51cbce",
+                                      }}
+                                      onClick={() =>
+                                        this.handleDownload(
+                                          article.file && article.file.id,
+                                          article.file.originalName,
+                                          article.file.contentType
+                                        )
+                                      }
+                                    >
+                                      {article.file.originalName}
+                                    </a>
+                                  </td>
+                                  <td>jo, nesciunt! </td>
+                                  <td>{article.status}</td>
+                                </tr>
+                              ))}
                           </tbody>
                         </table>
                       </div>

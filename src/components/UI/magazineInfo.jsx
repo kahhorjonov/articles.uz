@@ -97,10 +97,9 @@ class MagazineInfo extends Component {
   };
 
   render() {
-    const { title, category } = this.state.magazineInfo;
+    const { title, category, deadline } = this.state.magazineInfo;
 
     const { years, magazines } = this.state;
-
     return (
       <>
         <div className="content">
@@ -114,7 +113,10 @@ class MagazineInfo extends Component {
 
                 <div className="row mr-0 ml-0">
                   <div className="col-lg-4">
-                    <img src={this.state.cover && this.state.cover} alt="" />
+                    <img
+                      src={this.state.cover && this.state.cover}
+                      alt="failed"
+                    />
 
                     <h3>
                       {this.state.magazineInfo &&
@@ -230,11 +232,16 @@ class MagazineInfo extends Component {
                 <div className="container">
                   <div className="col-lg-12">
                     <p style={{ fontSize: "16px" }}>
-                      Jurnalning yangi soni 11.09.2020 da saytda e’lon qilinadi
+                      Jurnalning yangi soni{" "}
+                      {deadline &&
+                        new Date(deadline).toISOString().slice(0, 10)}{" "}
+                      da saytda e’lon qilinadi
                     </p>
                     <h3>
-                      “{title}” ilmiy jurnaliga maqolalar 01.09.2020 gacha qabul
-                      qilinadi.
+                      “{title}” ilmiy jurnaliga maqolalar{" "}
+                      {deadline &&
+                        new Date(deadline).toISOString().slice(0, 10)}{" "}
+                      gacha qabul qilinadi.
                     </h3>
                     <Link to="/login">
                       <button className="btn btn-dark">Maqola Yuborish</button>
