@@ -68,11 +68,11 @@ class Aloqa extends Component {
               </div>
 
               <div className="col-lg-6 col-sm-6">
-                <div style={{ width: "600px", height: "500px" }}>
+                <div>
                   <YMaps>
                     <Map
                       width={"100%"}
-                      height={"70vh"}
+                      height={"80vh"}
                       defaultState={{
                         center: [41.327845, 69.285692],
                         zoom: 15,
