@@ -237,6 +237,14 @@ export function getArticleInfoAdmin(id) {
   return http.get(apiLocal + `/article/getArticleInfoAdmin/${id}`);
 }
 
+export function myCheckedArticles() {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return http.get(apiLocal + "/article/myOldArticles", config);
+}
+
 export default {
   editArticleByAdmin,
   getRedactorsAndReviewers,
@@ -256,4 +264,5 @@ export default {
   getArticleInfoAdmin,
   getArticlesById,
   changeActivityArticles,
+  myCheckedArticles,
 };

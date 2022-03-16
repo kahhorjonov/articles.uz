@@ -1,11 +1,11 @@
 import React from "react";
 import Joi from "joi-browser";
-import Form from "./common/form";
-import auth from "../services/authService";
+import Form from "common/form";
+import auth from "services/authService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-class LoginForm extends Form {
+class RestorePassword extends Form {
   state = {
     data: {
       phoneNumber: "",
@@ -67,23 +67,20 @@ class LoginForm extends Form {
     return (
       <div className="registerForm">
         <div>
-          <h1 className="regs">Login Form</h1>
+          <h1 className="regs">Parolni tiklash</h1>
           <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderLoginInput("phoneNumber", "Telefon raqami")}
             {this.renderInput("password", "Password", "password")}
             {this.renderButton("Login")}
           </form>
-          <Link className="rever" style={{ fontSize: "2rem" }} to="/register">
-            Ro'yxatdan o'tish
+          <Link className="rever" style={{ fontSize: "2rem" }} to="/login">
+            Profilga kirish
           </Link>{" "}
           <br />
-          <div className="mt-3">
-            <Link to="#">Parolingizni unitingizmi?</Link>
-          </div>
         </div>
       </div>
     );
   }
 }
 
-export default LoginForm;
+export default RestorePassword;

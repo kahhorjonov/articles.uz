@@ -64,7 +64,7 @@ body {
 .box3 {
   background-color: #f6f7fb;
   width: 100%;
-  height: 80vh;
+
   overflow-y: scroll;
 }
 
@@ -113,7 +113,7 @@ body {
 .box4 {
   background-color: #f2f3f7;
   width: 100%;
-  height: 80vh;
+
   overflow-y: scroll;
 }
 

@@ -158,31 +158,31 @@ class Articles extends Component {
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              this.handleClick("PUBLISHED");
+                              this.handleClick("REJECTED");
                             }}
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Rad Etilganlar
+                            Rad etilganlar
                           </a>
                         </li>
 
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              this.handleClick("PUBLISHED");
+                              this.handleClick("RECYCLE");
                             }}
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            jurnalar rad etish
+                           Qayta ishlashga berilganlar
                           </a>
                         </li>
 
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
-                              this.handleClick("PUBLISHED");
+                              this.handleClick("ACTIVEFALSE");
                             }}
                             className="nav-link navv"
                             data-toggle="pill"
