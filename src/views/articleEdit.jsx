@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { downloadFile } from "services/mediaService";
 import { getUsersById } from "services/userService";
-import { getArticlesById, editArticle } from "services/articleService";
+import {
+  getArticlesById,
+  editArticle,
+  deleteArticle,
+} from "services/articleService";
 import { getParentMagazines } from "services/magazineService";
 import { getChildCategories } from "services/getCategories";
 
@@ -26,6 +30,7 @@ class ArticleEdit extends Component {
   state = {
     title: "",
     categoryId: "",
+    magazineId: "",
     price: "",
     authors: [],
     publicPrivate: false,
@@ -33,7 +38,7 @@ class ArticleEdit extends Component {
     sahifaSoni: "",
     bosmaJurnallarSoni: "",
     sertifikatlarSoni: "",
-    doi: "",
+    doi: false,
     authors: [],
     tags: [],
 
@@ -78,6 +83,12 @@ class ArticleEdit extends Component {
     this.setState({
       tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
     });
+
+    this.setState({
+      authors: [
+        ...this.state.authors.filter((_, index) => index !== indexToRemove),
+      ],
+    });
   };
 
   addTags = (value) => {
@@ -107,6 +118,8 @@ class ArticleEdit extends Component {
     try {
       await getArticlesById(id).then((res) => {
         this.setState({ articleInfo: res.data });
+        <option value={0}></option>;
+        this.setState({ magazineId: res.data.journals[0].id });
         res.data.authors.map((author) => this.addTags(author.code));
       });
     } catch (ex) {
@@ -148,11 +161,23 @@ class ArticleEdit extends Component {
   };
 
   handleEdit = async () => {
-    await editArticle(this.state).then((res) => console.log(res));
+    try {
+      await editArticle(this.state).then((res) =>
+        toast.success(res.data.message)
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
   };
 
-  handleDelete = () => {
-    console.log(this.state);
+  handleDelete = async () => {
+    try {
+      await deleteArticle(this.state.articleId).then((res) =>
+        toast.success(res.data.message)
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
   };
 
   render() {
@@ -166,6 +191,7 @@ class ArticleEdit extends Component {
       file,
       publicPrivate,
       description,
+      journals,
     } = article;
 
     return (
@@ -185,7 +211,7 @@ class ArticleEdit extends Component {
                       <span style={{ fontSize: "4rem" }}>Article Form</span>
                     </Col>
                     <Col sm="6" md="6" lg="6">
-                      <label>Jurnalni tanlang</label>
+                      <label>{journals && journals[0].name}</label>
                       <Input
                         sm="6"
                         md="6"
@@ -193,17 +219,19 @@ class ArticleEdit extends Component {
                         type="select"
                         style={{ height: "3rem" }}
                         className="form-control"
+                        defaultValue={{
+                          label: journals && journals[0].title,
+                          value: journals && journals[0].id,
+                        }}
                         onChange={(e) => {
                           {
                             this.setState({
-                              parentCategoryId: e.target.value,
+                              magazineId: e.target.value,
                             });
                             this.getChildCategories(e.target.value);
                           }
                         }}
                       >
-                        <option value="">Jurnalni tanlang</option>
-
                         {this.state.parentCategories &&
                           this.state.parentCategories.map((category) => (
                             <option key={category.id} value={category.id}>
@@ -234,8 +262,10 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Category</label>
                           <Input
-                            placeholder={category && category.name}
-                            // defaultValue={category && category.name}
+                            defaultValue={{
+                              label: category && category[0].name,
+                              value: category && category[0].id,
+                            }}
                             style={{ fontSize: "1.4rem" }}
                             className="custom-select"
                             type="select"
@@ -271,13 +301,12 @@ class ArticleEdit extends Component {
                             placeholder={
                               authors &&
                               authors.map((author, idx2) => {
-                                if (article.authors.length - 1 !== idx2) {
-                                  return `${author.fullname}, `;
+                                if (authors.length - 1 !== idx2) {
+                                  return `${author.fullname}`;
                                 }
-                                return `${author.fullname}`;
+                                return ` ${author.fullname}`;
                               })
                             }
-                            type="text"
                           />
                         </FormGroup>
                       </Col>

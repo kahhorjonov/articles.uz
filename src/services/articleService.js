@@ -252,7 +252,7 @@ export function editArticle(data) {
   bodyFormData.append("sertifikatSoni", data.sertifikatlarSoni);
   bodyFormData.append("doi", data.doi);
   bodyFormData.append("price", data.price);
-  bodyFormData.append("journalsId", data.parentCategoryId);
+  bodyFormData.append("journalsId", data.magazineId);
 
   return axios({
     method: "post",
@@ -262,6 +262,10 @@ export function editArticle(data) {
       "Content-Type": "multipart/form-data",
     },
   });
+}
+
+export function deleteArticle(id) {
+  return http.delete(apiLocal + `/article/deleteArticle/${id}`);
 }
 
 export default {
@@ -284,4 +288,5 @@ export default {
   getArticlesById,
   changeActivityArticles,
   editArticle,
+  deleteArticle,
 };

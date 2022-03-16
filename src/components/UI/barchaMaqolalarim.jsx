@@ -181,9 +181,9 @@ class BarchaMaqolalarim extends Component {
                                   {article.authors &&
                                     article.authors.map((author, idx2) => {
                                       if (article.authors.length - 1 !== idx2) {
-                                        return `${author.name}, `;
+                                        return `${author.fullname}, `;
                                       }
-                                      return `${author.name}`;
+                                      return `${author.fullname}`;
                                     })}
                                 </td>
                               </tr>
