@@ -145,7 +145,7 @@ class ArticleEdit extends Component {
                             type="text"
                             defaultValue={titleArticle}
                             onChange={(e) =>
-                              this.setState({ titleArticle: e.target.value })
+                              this.setState({ title: e.target.value })
                             }
                           />
                         </FormGroup>

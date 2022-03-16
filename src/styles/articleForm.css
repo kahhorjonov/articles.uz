@@ -1,12 +1,13 @@
 .savee button {
-  padding: 5px 10px;
+  padding: 1rem 2rem;
   font-size: 20px;
   background-color: #59c4e0;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 1.4rem;
 }
-.hisoblash{
+
+.hisoblash {
   width: 100%;
   height: auto;
   background-color: white;

@@ -6,8 +6,9 @@ import { getChildCategories } from "services/getCategories";
 import magazineService from "services/magazineService";
 import { getUsersById } from "services/userService";
 import { getPrices } from "services/priceService";
+import { me } from "services/authService";
 
-import { Card, CardBody, Input, Label, Row, Col, Button } from "reactstrap";
+import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
 
 import { toast } from "react-toastify";
 
@@ -57,6 +58,10 @@ class ArticleForm extends Form {
   };
 
   async componentDidMount() {
+    await me().then((res) =>
+      this.setState({ authors: [res.data.code.toString()] })
+    );
+
     await this.populateCategories();
     this.getArticlePrice();
   }
@@ -66,8 +71,8 @@ class ArticleForm extends Form {
       await getPrices().then((res) => {
         this.setState({ articlePrice: res.data });
       });
-    } catch (error) {
-      console.log(error);
+    } catch (ex) {
+      console.log(ex.response.data.message);
     }
   };
 
@@ -87,10 +92,33 @@ class ArticleForm extends Form {
     });
   };
 
+  // addTags = (value) => {
+  //   if (value !== "") {
+  //     this.setState({ tags: [...this.state.tags, value] });
+  //     value = "";
+  //   }
+  // };
+
   addTags = (value) => {
     if (value !== "") {
-      this.setState({ tags: [...this.state.tags, value] });
-      value = "";
+      this.handleSearchUsers(value);
+    }
+  };
+
+  handleSearchUsers = async (value) => {
+    try {
+      await getUsersById(value).then((res) => {
+        if (res.status === 200) {
+          const codes = new Set([...this.state.authors, value]);
+          this.setState({ authors: [...codes] });
+          const authorsNew = new Set([...this.state.tags, res.data.message]);
+          this.setState({ tags: [...authorsNew] });
+        } else if (res.status === 201) {
+          toast.error("Foydalanuvchi topilmadi");
+        }
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -99,8 +127,8 @@ class ArticleForm extends Form {
       await getChildCategories(id).then((res) =>
         this.setState({ childCategories: res.data })
       );
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -174,42 +202,42 @@ class ArticleForm extends Form {
     });
   };
 
-  handleChangeInput = (id, event) => {
-    const newInputFields = this.state.inputFields.map((i) => {
-      if (id === i.id) {
-        i[event.target.name] = event.target.value;
-      }
-      return i;
-    });
+  // handleChangeInput = (id, event) => {
+  //   const newInputFields = this.state.inputFields.map((i) => {
+  //     if (id === i.id) {
+  //       i[event.target.name] = event.target.value;
+  //     }
+  //     return i;
+  //   });
 
-    this.setState({ inputFields: newInputFields });
-  };
+  //   this.setState({ inputFields: newInputFields });
+  // };
 
-  handleAddFields = () => {
-    this.setState({
-      inputFields: [...this.state.inputFields, { firstName: "", lastName: "" }],
-    });
-  };
+  // handleAddFields = () => {
+  //   this.setState({
+  //     inputFields: [...this.state.inputFields, { firstName: "", lastName: "" }],
+  //   });
+  // };
 
-  handleRemoveFields = (id) => {
-    const values = [...this.state.inputFields];
-    values.splice(
-      values.findIndex((value) => value.id === id),
-      1
-    );
-    this.setState({ inputFields: values });
-  };
+  // handleRemoveFields = (id) => {
+  //   const values = [...this.state.inputFields];
+  //   values.splice(
+  //     values.findIndex((value) => value.id === id),
+  //     1
+  //   );
+  //   this.setState({ inputFields: values });
+  // };
 
-  handleSearchUsers = async (id, event) => {
-    try {
-      await getUsersById(event.target.value).then((res) => {
-        const authorsNew = new Set([...this.state.authors, res.data]);
-        this.setState({ authors: [...authorsNew] });
-      });
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+  // handleSearchUsers = async (id, event) => {
+  //   try {
+  //     await getUsersById(event.target.value).then((res) => {
+  //       const authorsNew = new Set([...this.state.authors, res.data]);
+  //       this.setState({ authors: [...authorsNew] });
+  //     });
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
 
   doSubmit = async () => {
     try {
@@ -578,7 +606,7 @@ class ArticleForm extends Form {
                           className="col-sm-9 col-lg-9 col-md-9"
                           type="text"
                           onKeyUp={(e) =>
-                            e.key === "ArrowUp"
+                            e.key === "ArrowUp" && e.target.value.length === 6
                               ? this.addTags(e.target.value)
                               : null
                           }
@@ -588,7 +616,17 @@ class ArticleForm extends Form {
                     </Col>
                   </Row>
 
-                  <div className="savee">{this.renderButton("Save")}</div>
+                  <Row>
+                    <Col
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div className="savee">{this.renderButton("Save")}</div>
+                    </Col>
+                  </Row>
                 </form>
               </CardBody>
             </Card>
