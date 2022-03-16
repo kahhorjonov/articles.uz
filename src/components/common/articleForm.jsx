@@ -1,7 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./form";
-import articleService from "services/articleService";
+import { addArticle, getPrice } from "services/articleService";
 import { getChildCategories } from "services/getCategories";
 import magazineService from "services/magazineService";
 import { getUsersById } from "services/userService";
@@ -18,8 +18,6 @@ import "styles/multipleTags.scss";
 class ArticleForm extends Form {
   state = {
     data: {
-      // firstName: "",
-      // lastName: "",
       titleArticle: "",
       description: "",
       categoryId: "",
@@ -49,8 +47,6 @@ class ArticleForm extends Form {
   };
 
   schema = {
-    // firstName: Joi.string().required().label("First Name"),
-    // lastName: Joi.string().required().label("Last Name"),
     titleArticle: Joi.string().required().label("Article Title"),
     categoryId: Joi.string().required().label("Category Id"),
     description: Joi.string().required().min(0).max(200).label("Description"),
@@ -72,7 +68,7 @@ class ArticleForm extends Form {
         this.setState({ articlePrice: res.data });
       });
     } catch (ex) {
-      console.log(ex.response.data.message);
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -81,8 +77,8 @@ class ArticleForm extends Form {
       await magazineService.getParentMagazines().then((res) => {
         this.setState({ parentCategories: res.data });
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   }
 
@@ -91,13 +87,6 @@ class ArticleForm extends Form {
       tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
     });
   };
-
-  // addTags = (value) => {
-  //   if (value !== "") {
-  //     this.setState({ tags: [...this.state.tags, value] });
-  //     value = "";
-  //   }
-  // };
 
   addTags = (value) => {
     if (value !== "") {
@@ -141,7 +130,7 @@ class ArticleForm extends Form {
       doi: this.state.doi,
     };
 
-    await articleService.getPrice(data).then((res) => {
+    await getPrice(data).then((res) => {
       this.setState({ price: res.data.object });
     });
   };
@@ -155,7 +144,7 @@ class ArticleForm extends Form {
       doi: this.state.doi,
     };
 
-    await articleService.getPrice(data).then((res) => {
+    await getPrice(data).then((res) => {
       this.setState({ price: res.data.object });
     });
   };
@@ -169,7 +158,7 @@ class ArticleForm extends Form {
       doi: this.state.doi,
     };
 
-    await articleService.getPrice(data).then((res) => {
+    await getPrice(data).then((res) => {
       this.setState({ price: res.data.object });
     });
   };
@@ -183,7 +172,7 @@ class ArticleForm extends Form {
       doi: this.state.doi,
     };
 
-    await articleService.getPrice(data).then((res) => {
+    await getPrice(data).then((res) => {
       this.setState({ price: res.data.object });
     });
   };
@@ -197,55 +186,18 @@ class ArticleForm extends Form {
       doi: doi,
     };
 
-    await articleService.getPrice(data).then((res) => {
+    await getPrice(data).then((res) => {
       this.setState({ price: res.data.object });
     });
   };
 
-  // handleChangeInput = (id, event) => {
-  //   const newInputFields = this.state.inputFields.map((i) => {
-  //     if (id === i.id) {
-  //       i[event.target.name] = event.target.value;
-  //     }
-  //     return i;
-  //   });
-
-  //   this.setState({ inputFields: newInputFields });
-  // };
-
-  // handleAddFields = () => {
-  //   this.setState({
-  //     inputFields: [...this.state.inputFields, { firstName: "", lastName: "" }],
-  //   });
-  // };
-
-  // handleRemoveFields = (id) => {
-  //   const values = [...this.state.inputFields];
-  //   values.splice(
-  //     values.findIndex((value) => value.id === id),
-  //     1
-  //   );
-  //   this.setState({ inputFields: values });
-  // };
-
-  // handleSearchUsers = async (id, event) => {
-  //   try {
-  //     await getUsersById(event.target.value).then((res) => {
-  //       const authorsNew = new Set([...this.state.authors, res.data]);
-  //       this.setState({ authors: [...authorsNew] });
-  //     });
-  //   } catch (error) {
-  //     toast.error(error);
-  //   }
-  // };
-
   doSubmit = async () => {
     try {
-      await articleService.addArticle(this.state).then((res) => {
+      await addArticle(this.state).then((res) => {
         toast.success(res.data.message);
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -310,20 +262,6 @@ class ArticleForm extends Form {
 
                 <form onSubmit={this.handleSubmit}>
                   <Row>
-                    {/* <Col lg="4">
-                      {this.renderInput(
-                        "firstName",
-                        "First Name",
-                        "text",
-                        "form-control"
-                      )}
-                    </Col>
-                    <Col lg="4">
-                      {this.renderInput("lastName", "Last Name")}
-                    </Col> */}
-                  </Row>
-
-                  <Row>
                     <Col lg="8">
                       {this.renderInput("description", "Description")}
                     </Col>
@@ -341,7 +279,6 @@ class ArticleForm extends Form {
                         this.state.childCategories
                       )}
                     </Col>
-                    {/* <Col lg="3">{this.renderInput("author", "Author")}</Col> */}
                     <Col sm="4" md="4" lg="4">
                       <div>
                         <label>Public Or Private</label>
@@ -377,23 +314,7 @@ class ArticleForm extends Form {
                         />
                       </div>
                     </Col>
-                    {/* <Col sm="3" md="3" lg="3">
-                      <div>
-                        <Label> Chop etiladigan jurnallar soni</Label>
-                        <Input
-                          min="0"
-                          type={"number"}
-                          className="form-control"
-                          placeholder="0"
-                          onChange={(e) => {
-                            this.setState({
-                              jurnaldaChopEtishSoni: e.target.value,
-                            });
-                            this.getPriceNumberOfPrints(e.target.value);
-                          }}
-                        />
-                      </div>
-                    </Col> */}
+
                     <Col sm="3" md="3" lg="3">
                       <Label>Bosma jurnal soni</Label>
                       <Input
@@ -441,15 +362,6 @@ class ArticleForm extends Form {
 
                   <Row>
                     <Col sm="3" md="3" lg="3">
-                      {/* <div>
-                        <Label for="exampleEmail">Narxi</Label>
-                        <Input
-                          disabled
-                          className="form-control h-100 pr-0"
-                          placeholder={`${price} so'm`}
-                        />
-                      </div> */}
-
                       <div className="hisoblash mt-5">
                         <h6 className="pl-1">
                           Sahifa narxi
@@ -512,78 +424,6 @@ class ArticleForm extends Form {
                         </h6>
                       </div>
                     </Col>
-
-                    {/* <Col md="9" className="pl-0">
-                      {this.state.inputFields.map((inputField, idx) => (
-                        <div
-                          key={idx}
-                          // className="col-sm-12 col-md-12 col-lg-12"
-                        >
-                          <Col
-                            style={{ display: "inline-block" }}
-                            sm="5"
-                            md="5"
-                            lg="5"
-                            className="pl-0"
-                          >
-                            <Label>User ID</Label>
-                            <Input
-                              name="id"
-                              className="form-control h-100"
-                              onChange={(event) => {
-                                if (event.target.value.length === 6) {
-                                  this.handleSearchUsers(inputField.id, event);
-                                }
-                                this.handleChangeInput(inputField.id, event);
-                              }}
-                            />
-                          </Col>
-                          <Col
-                            className="pl-0"
-                            style={{ display: "inline-block" }}
-                            sm="5"
-                            md="5"
-                            lg="5"
-                          >
-                            <Label>Full Name</Label>
-                            <Input
-                              disabled
-                              name="fullName"
-                              className="form-control h-100 "
-                              defaultValue={this.state.authors[idx]}
-                              onChange={(event) =>
-                                this.handleChangeInput(event)
-                              }
-                            />
-                          </Col>
-
-                          <Col
-                            style={{ display: "inline-block" }}
-                            sm="2"
-                            md="2"
-                            lg="2"
-                            className="pr-0 pl-0"
-                          >
-                            <Button
-                              style={{ padding: "0.6rem 1.5rem", margin: "0" }}
-                              disabled={inputFields.length === 1}
-                              onClick={() =>
-                                this.handleRemoveFields(inputField.id)
-                              }
-                            >
-                              -
-                            </Button>
-
-                            <Button
-                              style={{ padding: "0.6rem 1.5rem", margin: "0" }}
-                              onClick={this.handleAddFields}
-                            >
-                              +
-                            </Button>
-                          </Col>
-                        </div>
-                      ))}
-                    </Col> */}
 
                     <Col sm="9" md="9" lg="9">
                       <Label for="exampleEmail">Authors ID</Label>

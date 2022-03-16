@@ -12,7 +12,7 @@ export function addArticle(data) {
 
   bodyFormData.append("categoryId", data.data.categoryId);
   bodyFormData.append("description", data.data.description);
-  bodyFormData.append("authorsList", data.tags);
+  bodyFormData.append("authorsList", data.authors);
   bodyFormData.append("titleArticle", data.data.titleArticle);
   bodyFormData.append("publicOrPrivate", data.publicOrPrivate);
   bodyFormData.append("file", data.data.file);
