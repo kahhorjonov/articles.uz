@@ -178,6 +178,29 @@ class Articles extends Component {
                             jurnalar rad etish
                           </a>
                         </li>
+
+                        <li className="nav-item item">
+                          <a
+                            onClick={(e) => {
+                              this.handleClick("PUBLISHED");
+                            }}
+                            className="nav-link navv"
+                            data-toggle="pill"
+                          >
+                            No Faollar
+                          </a>
+                        </li>
+                        <li className="nav-item item">
+                          <a
+                            onClick={(e) => {
+                              this.handleClick("PUBLISHED");
+                            }}
+                            className="nav-link navv"
+                            data-toggle="pill"
+                          >
+                            Chop etilganlar
+                          </a>
+                        </li>
                       </ul>
                     </div>
 

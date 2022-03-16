@@ -10,6 +10,7 @@ import { Card, CardBody, Row, Col, CardHeader } from "reactstrap";
 import { toast } from "react-toastify";
 
 import "styles/mytasks.css";
+import axios from "axios";
 
 class MyTasks extends Component {
   state = {
@@ -18,10 +19,22 @@ class MyTasks extends Component {
     articles: [],
     myArticles: [],
     description: "",
+
+    myallArticles: [],
   };
+
+  // allArticles = async () => {
+  //   await axios
+  //     .get(`http://localhost:8080/api/article/myOldArticles`)
+  //     .then((res) => {
+  //       myallArticles: res.data;
+  //     });
+  // };
 
   async componentDidMount() {
     await this.newMyArticles();
+
+    this.allArticles();
   }
 
   newMyArticles = async () => {
@@ -369,8 +382,8 @@ class MyTasks extends Component {
                             <tr className="col-lg-12">
                               <th className="col-lg-3">Article Name</th>
                               <th className="col-lg-3">File</th>
-                              <th className="col-lg-3">Status 1</th>
-                              <th className="col-lg-3">Status 2</th>
+                              <th className="col-lg-3">File Name</th>
+                              <th className="col-lg-3">Status </th>
                             </tr>
                           </thead>
                           <tbody>
