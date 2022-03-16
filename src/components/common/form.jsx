@@ -4,6 +4,9 @@ import Input from "./input";
 import Select from "./select";
 import InputGroupField from "./inputGroup";
 
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 class Form extends Component {
   state = {
     data: {},
@@ -122,14 +125,23 @@ class Form extends Component {
     const { data, errors } = this.state;
 
     return (
-      <InputGroupField
-        type={type}
-        name={name}
+      // <InputGroupField
+      //   type={type}
+      //   name={name}
+      //   value={data[name]}
+      //   label={label}
+      //   onChange={(e) => this.handleChange(e)}
+      //   error={errors[name]}
+      //   autoComplete="on"
+      // />
+      <PhoneInput
+        // type={type}
+        // name={name}
+        // label={label}
+        country={"uz"}
         value={data[name]}
-        label={label}
+        // error={errors[name]}
         onChange={(e) => this.handleChange(e)}
-        error={errors[name]}
-        autoComplete="on"
       />
     );
   }

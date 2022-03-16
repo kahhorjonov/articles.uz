@@ -8,7 +8,6 @@ import {
   ZoomControl,
 } from "react-yandex-maps";
 import "styles/aloqa.css";
-import { Button } from "reactstrap";
 
 class Aloqa extends Component {
   render() {
@@ -39,10 +38,15 @@ class Aloqa extends Component {
 
                 <h4 style={{ fontWeight: "bold" }}>Email:</h4>
                 <a
-                  style={{ textDecoration: "none", color: "black", fontSize: "2rem" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontSize: "2rem",
+                  }}
                   href="mailto:anvark87@gmail.com"
-                >anvark87@gmail.com</a>
-           
+                >
+                  anvark87@gmail.com
+                </a>
 
                 <h4 style={{ fontWeight: "bold" }}>Manzil:</h4>
                 <p style={{ fontSize: "2rem" }}>
@@ -72,7 +76,7 @@ class Aloqa extends Component {
                   <YMaps>
                     <Map
                       width={"100%"}
-                      height={"80vh"}
+                      height={"65vh"}
                       defaultState={{
                         center: [41.327845, 69.285692],
                         zoom: 15,
