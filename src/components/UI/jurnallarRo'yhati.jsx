@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import {
   getMagazinesById,
@@ -166,7 +168,10 @@ class JurnallarRoyxati extends Component {
           <div className="container p-0">
             <div className="row mx-0 mx-sm-0">
               <div className="col-md-6">
-                <div className="article-chap">
+                <div className="article-chap"
+                data-aos="fade-right"
+                data-aos-duration="2000"
+                >
                   <p style={{ fontSize: "32px" }} className="jurnal-haqida">
                     Jurnal haqida
                   </p>
@@ -179,7 +184,8 @@ class JurnallarRoyxati extends Component {
               </div>
 
               <div className="col-md-6">
-                <div className="art-tex">
+                <div className="art-tex"  data-aos="fade-left"
+                data-aos-duration="2000">
                   <span className="articles-text">
                     Articles.uz onlayn jurnallari ilm-fanning turli sohalarida
                     Oliy o'quv yurtlari o'qituvchilari, ilmiy xodimlar va
