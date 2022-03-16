@@ -1,6 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
-import Form from "common/form";
+import Form from "components/common/form";
 import auth from "services/authService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -35,6 +35,7 @@ class RestorePassword extends Form {
       if (roleName === 3) {
         window.location = "/reviewer";
       }
+
       if (roleName === 4) {
         window.location = "/user/user-page";
       }
@@ -44,7 +45,7 @@ class RestorePassword extends Form {
   doSubmit = async () => {
     try {
       const { phoneNumber, password } = this.state.data;
-      const editedNumber = `+998${phoneNumber}`;
+      const editedNumber = `+998${phoneNumber}`.trim();
       await auth.login(editedNumber, password);
 
       this.autoRedirect();
@@ -70,7 +71,11 @@ class RestorePassword extends Form {
           <h1 className="regs">Parolni tiklash</h1>
           <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderLoginInput("phoneNumber", "Telefon raqami")}
-            {this.renderInput("password", "Password", "password")}
+            {this.renderInput(
+              "password",
+              "SMS orqali kelgan kodni kiriting",
+              "password"
+            )}
             {this.renderButton("Login")}
           </form>
           <Link className="rever" style={{ fontSize: "2rem" }} to="/login">

@@ -1,5 +1,5 @@
 import UserPage from "views/User.js";
-import Articles from "views/articles";
+// import Articles from "views/articles";
 import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
 import Jurnallar from "components/UI/jurnallar";
@@ -44,14 +44,14 @@ var reviewerRoutes = [
     visible: false,
   },
 
-  {
-    path: "/articles",
-    name: "Maqolalar",
-    icon: "nc-icon nc-bookmark-2",
-    component: Articles,
-    layout: "/reviewer",
-    visible: true,
-  },
+  // {
+  //   path: "/articles",
+  //   name: "Maqolalar",
+  //   icon: "nc-icon nc-bookmark-2",
+  //   component: Articles,
+  //   layout: "/reviewer",
+  //   visible: true,
+  // },
 
   {
     path: "/myTasks",

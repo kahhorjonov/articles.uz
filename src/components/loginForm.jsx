@@ -78,7 +78,7 @@ class LoginForm extends Form {
           </Link>{" "}
           <br />
           <div className="mt-3">
-            <Link to="#">Parolingizni unitingizmi?</Link>
+            <Link to="/restorePassword">Parolingizni unitingizmi?</Link>
           </div>
         </div>
       </div>

@@ -85,7 +85,6 @@ class ReviewerRegisterForm extends Form {
     try {
       await userService.registerReviewer(this.state.data).then((res) => {
         authService.loginWithJwt(res.data.object);
-        console.log(res);
         toast.success(res.data.message);
 
         setTimeout(() => {

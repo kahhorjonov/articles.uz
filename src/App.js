@@ -20,6 +20,7 @@ import NotFound from "./components/common/notFound";
 import auth from "services/authService.js";
 import MagazineInfo from "./components/UI/magazineInfo";
 import JurnalArxive from "./components/UI/jurnalArxive";
+import RestorePassword from "components/UI/restorePassword";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -109,6 +110,12 @@ class App extends Component {
                 path="/registerReviewer"
                 exact
                 component={ReviewerRegisterForm}
+              />
+
+              <Route
+                path="/restorePassword"
+                exact
+                component={RestorePassword}
               />
 
               <Redirect from="/admin" exact to="/admin/dashboard" />
@@ -203,7 +210,15 @@ class App extends Component {
                 exact
                 component={ReviewerRegisterForm}
               />
+
+              <Route
+                path="/restorePassword"
+                exact
+                component={RestorePassword}
+              />
+
               <Redirect from="/reductor" exact to="/reductor/myTasks" />
+
               <ProtectedRoute
                 path="/reductor"
                 component={ReductorLayout}
@@ -293,6 +308,12 @@ class App extends Component {
                 path="/registerReviewer"
                 exact
                 component={ReviewerRegisterForm}
+              />
+
+              <Route
+                path="/restorePassword"
+                exact
+                component={RestorePassword}
               />
 
               <Redirect from="/reviewer" exact to="/reviewer/myTasks" />
@@ -387,7 +408,15 @@ class App extends Component {
                 exact
                 component={ReviewerRegisterForm}
               />
+
+              <Route
+                path="/restorePassword"
+                exact
+                component={RestorePassword}
+              />
+
               <Redirect from="/user" exact to="/user/user-page" />
+
               <ProtectedRoute
                 path="/user"
                 component={UserLayout}
@@ -433,41 +462,50 @@ class App extends Component {
               exact
               component={(props) => <JurnalArxive {...props} />}
             />
+
             <Route
               path="/listOfMagazines/magazineInfo/:id"
               exact
               component={(props) => <JurnalArxive {...props} />}
             />
+
             <Route
               path="/termsOfPublication"
               exact
               component={(props) => <NashrShartlari {...props} />}
             />
+
             <Route
               path="/contact"
               exact
               component={(props) => <Aloqa {...props} />}
             />
-            PJu
+
             <Route
               path="/login"
               component={(props) => <LoginForm {...props} />}
             />
+
             <Route
               path="/logout"
               exact
               component={(props) => <Logout {...props} />}
             />
+
             <Route
               path="/register"
               exact
               component={(props) => <RegisterForm {...props} />}
             />
+
             <Route
               path="/registerReviewer"
               exact
               component={ReviewerRegisterForm}
             />
+
+            <Route path="/restorePassword" exact component={RestorePassword} />
+
             <Route path="/not-found" component={NotFound} />
             {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
             {/* <ProtectedRoute path="/admin" component={AdminPage} /> */}
