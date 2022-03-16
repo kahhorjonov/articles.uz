@@ -70,8 +70,6 @@ class RegisterForm extends Form {
   };
 
   render() {
-    console.log(this.state.notificationToken);
-
     return (
       <div className="registerForm">
         <div>
