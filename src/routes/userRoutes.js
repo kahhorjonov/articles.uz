@@ -1,10 +1,11 @@
 import UserPage from "views/User.js";
-// import Icons from "views/Icons.js";
 import ArticleForm from "components/common/articleForm";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
+import UserReleases from "components/UI/userReleases";
+import ArticleEdit from "views/articleEdit";
 
 var UserRoutes = [
   {
@@ -16,18 +17,36 @@ var UserRoutes = [
     visible: true,
   },
 
-  // {
-  //   path: "/magazineInformation",
-  //   name: "Archive",
-  //   icon: "nc-icon nc-map-big",
-  //   component: MagazineInfo,
-  //   layout: "/user",
-  //   visible: false,
-  // },
+  {
+    path: "/magazineInformation/:id",
+    name: "Magazine Info",
+    icon: "nc-icon nc-map-big",
+    component: MagazineInfo,
+    layout: "/user",
+    visible: false,
+  },
 
   {
-    path: "/userArchive",
-    name: "Archive",
+    path: "/release/:id",
+    name: "Magazine Releases",
+    icon: "nc-icon nc-map-big",
+    component: UserReleases,
+    layout: "/user",
+    visible: false,
+  },
+
+  {
+    path: "/articleEdit/:id",
+    name: "Edit Article",
+    icon: "nc-icon nc-map-big",
+    component: ArticleEdit,
+    layout: "/user",
+    visible: false,
+  },
+
+  {
+    path: "/userArchive/:id",
+    name: "Magazine's Archive",
     icon: "nc-icon nc-map-big",
     component: ReviewerArchive,
     layout: "/user",
@@ -60,15 +79,6 @@ var UserRoutes = [
     layout: "/user",
     visible: true,
   },
-
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Icons,
-  //   layout: "/user",
-  //   visible: true,
-  // },
 
   {
     path: "/logout",

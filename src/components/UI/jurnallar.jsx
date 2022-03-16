@@ -177,9 +177,11 @@ class Jurnallar extends Component {
                                             ? "admin"
                                             : this.state.user === 2
                                             ? "reductor"
+                                            : this.state.user === 3
+                                            ? "reviewer"
                                             : this.state.user === 4
                                             ? "user"
-                                            : "reviewer"
+                                            : null
                                         }/magazineInformation/:${magazine.id}`}
                                         style={{ cursor: "pointer" }}
                                       >

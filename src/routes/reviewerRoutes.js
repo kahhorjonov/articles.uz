@@ -5,6 +5,7 @@ import Logout from "components/logout";
 import Jurnallar from "components/UI/jurnallar";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
+import UserReleases from "./../components/UI/userReleases";
 
 var reviewerRoutes = [
   {
@@ -18,9 +19,18 @@ var reviewerRoutes = [
 
   {
     path: "/magazineInformation",
-    name: "Archive",
+    name: "MagazineInfo",
     icon: "nc-icon nc-map-big",
     component: MagazineInfo,
+    layout: "/reviewer",
+    visible: false,
+  },
+
+  {
+    path: "/release/:id",
+    name: "Magazine Releases",
+    icon: "nc-icon nc-map-big",
+    component: UserReleases,
     layout: "/reviewer",
     visible: false,
   },

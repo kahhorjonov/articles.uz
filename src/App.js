@@ -26,7 +26,6 @@ import "react-toastify/dist/ReactToastify.css";
 class App extends Component {
   render() {
     const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
-    // console.log(window.location.pathname);
 
     if (user && user) {
       if (user.id === 1)
@@ -333,12 +332,6 @@ class App extends Component {
 
               <Route
                 path="/main/magazineInfo/:id"
-                exact
-                component={(props) => <MagazineInfo {...props} />}
-              />
-
-              <Route
-                path="/user/magazineInformation/:id"
                 exact
                 component={(props) => <MagazineInfo {...props} />}
               />

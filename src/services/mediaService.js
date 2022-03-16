@@ -3,8 +3,6 @@ import http from "./httpService";
 
 const { apiLocal } = api;
 
-const token = localStorage.getItem("token");
-
 export function downloadMedia(id, object) {
   return http.get(apiLocal + `/attachment/download/${id}`, object);
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import api from "utils/config.json";
-import httpService from "./httpService";
+import http from "./httpService";
 
 const { apiLocal } = api;
 
@@ -92,9 +92,11 @@ export function newMyArticles(step) {
   return axios.post(apiLocal + "/article/newMyArticle", bodyParametrs, config);
 }
 
-export function myNewArticles() {
-  let articles = [];
+export function getArticlesById(id) {
+  return http.get(apiLocal + `/article/getById/${id} `);
+}
 
+export function myNewArticles() {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -128,8 +130,6 @@ export function confirmArticle(token, bool, articleId) {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  console.log(token, bool, articleId);
-
   const bodyParametrs = {
     confirm: bool,
     articleId: articleId,
@@ -161,7 +161,7 @@ export function confirmForUsers(bool, articleId, userId, deadline) {
 }
 
 export function articleInfo(id) {
-  return httpService.get(`${apiLocal} + /article/articleInfoForAdmin/${id}`);
+  return http.get(apiLocal + `/article/articleInfoForAdmin/${id}`);
 }
 
 export function getPrice(data) {
@@ -217,23 +217,24 @@ export function editArticleByAdmin(data) {
     bodyParametrs,
     config
   );
+}
 
-  // const bodyFormData = new FormData();
+export function changeActivityArticles(articleId, bool) {
+  const bodyParametrs = {};
 
-  // bodyFormData.append("articleId", data.articleId);
-  // bodyFormData.append("description", data.description);
-  // bodyFormData.append("status", data.status);
-  // bodyFormData.append("file", data.file);
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
-  // return axios({
-  //   method: "post",
-  //   url: apiLocal + "/article/articleStatusAdministrator",
-  //   data: bodyFormData,
-  //   headers: {
-  //     // "Content-Type": "multipart/form-data",
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // });
+  return http.post(
+    apiLocal + `/articleStatus/changeActiveAndFalse/${articleId}/${bool}`,
+    bodyParametrs,
+    config
+  );
+}
+
+export function getArticleInfoAdmin(id) {
+  return http.get(apiLocal + `/article/getArticleInfoAdmin/${id}`);
 }
 
 export default {
@@ -252,4 +253,7 @@ export default {
   addArticle,
   getPrice,
   getAllMyArticles,
+  getArticleInfoAdmin,
+  getArticlesById,
+  changeActivityArticles,
 };
