@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { downloadFile } from "services/mediaService";
-
-import { getArticlesById } from "services/articleService";
+import { getUsersById } from "services/userService";
+import { getArticlesById, editArticle } from "services/articleService";
+import { getParentMagazines } from "services/magazineService";
+import { getChildCategories } from "services/getCategories";
 
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
   FormGroup,
   Form,
   Input,
@@ -19,6 +20,7 @@ import {
 } from "reactstrap";
 
 import "styles/userEdit.css";
+import "styles/multipleTags.scss";
 
 class ArticleEdit extends Component {
   state = {
@@ -26,17 +28,20 @@ class ArticleEdit extends Component {
     categoryId: "",
     price: "",
     authors: [],
-    publicPrivate: "",
+    publicPrivate: false,
     description: "",
     sahifaSoni: "",
     bosmaJurnallarSoni: "",
     sertifikatlarSoni: "",
     doi: "",
+    authors: [],
     tags: [],
 
     file: [],
     articleId: "",
     articleInfo: "",
+    parentCategories: [],
+    childCategories: [],
   };
 
   async componentDidMount() {
@@ -46,12 +51,63 @@ class ArticleEdit extends Component {
 
     this.setState({ articleId: articleId });
     this.getArticleInformations(articleId);
+    await this.populateMagazines();
   }
+
+  async populateMagazines() {
+    try {
+      await getParentMagazines().then((res) => {
+        this.setState({ parentCategories: res.data });
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  }
+
+  getChildCategories = async (id) => {
+    try {
+      await getChildCategories(id).then((res) =>
+        this.setState({ childCategories: res.data })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
+
+  removeTags = (indexToRemove) => {
+    this.setState({
+      tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
+    });
+  };
+
+  addTags = (value) => {
+    if (value !== "") {
+      this.handleSearchUsers(value);
+    }
+  };
+
+  handleSearchUsers = async (value) => {
+    try {
+      await getUsersById(value).then((res) => {
+        if (res.status === 200) {
+          const codes = new Set([...this.state.authors, value]);
+          this.setState({ authors: [...codes] });
+          const authorsNew = new Set([...this.state.tags, res.data.message]);
+          this.setState({ tags: [...authorsNew] });
+        } else if (res.status === 201) {
+          toast.error("Foydalanuvchi topilmadi");
+        }
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
 
   getArticleInformations = async (id) => {
     try {
       await getArticlesById(id).then((res) => {
         this.setState({ articleInfo: res.data });
+        res.data.authors.map((author) => this.addTags(author.code));
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -91,25 +147,12 @@ class ArticleEdit extends Component {
     }
   };
 
-  handleEdit = () => {
-    console.log(this.state);
+  handleEdit = async () => {
+    await editArticle(this.state).then((res) => console.log(res));
   };
 
   handleDelete = () => {
     console.log(this.state);
-  };
-
-  removeTags = (indexToRemove) => {
-    this.setState({
-      tags: [...this.state.tags.filter((_, index) => index !== indexToRemove)],
-    });
-  };
-
-  addTags = (value) => {
-    if (value !== "") {
-      this.setState({ tags: [...this.state.tags, value] });
-      value = "";
-    }
   };
 
   render() {
@@ -132,7 +175,44 @@ class ArticleEdit extends Component {
             <Col md="12" sm="12" lg="12">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Edit Articles</CardTitle>
+                  <Row
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Col sm="6" md="6" lg="6">
+                      <span style={{ fontSize: "4rem" }}>Article Form</span>
+                    </Col>
+                    <Col sm="6" md="6" lg="6">
+                      <label>Jurnalni tanlang</label>
+                      <Input
+                        sm="6"
+                        md="6"
+                        lg="6"
+                        type="select"
+                        style={{ height: "3rem" }}
+                        className="form-control"
+                        onChange={(e) => {
+                          {
+                            this.setState({
+                              parentCategoryId: e.target.value,
+                            });
+                            this.getChildCategories(e.target.value);
+                          }
+                        }}
+                      >
+                        <option value="">Jurnalni tanlang</option>
+
+                        {this.state.parentCategories &&
+                          this.state.parentCategories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                              {category.title}
+                            </option>
+                          ))}
+                      </Input>
+                    </Col>
+                  </Row>
                 </CardHeader>
                 <CardBody>
                   <Form>
@@ -154,13 +234,22 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Category</label>
                           <Input
-                            defaultValue={category && category.name}
+                            placeholder={category && category.name}
+                            // defaultValue={category && category.name}
                             style={{ fontSize: "1.4rem" }}
                             className="custom-select"
+                            type="select"
                             onChange={(e) =>
                               this.setState({ categoryId: e.target.value })
                             }
-                          />
+                          >
+                            {this.state.childCategories &&
+                              this.state.childCategories.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                  {category.name}
+                                </option>
+                              ))}
+                          </Input>
                         </FormGroup>
                       </Col>
                       <Col md="4">
@@ -330,7 +419,7 @@ class ArticleEdit extends Component {
                           </ul>
                           <input
                             onKeyUp={(e) =>
-                              e.key === "ArrowUp"
+                              e.key === "ArrowUp" && e.target.value.length === 6
                                 ? this.addTags(e.target.value)
                                 : null
                             }
@@ -356,7 +445,7 @@ class ArticleEdit extends Component {
                             color="success"
                             onClick={this.handleEdit}
                           >
-                            Edit
+                            Submit
                           </Button>
                         </div>
 

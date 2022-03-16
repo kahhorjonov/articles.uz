@@ -237,6 +237,33 @@ export function getArticleInfoAdmin(id) {
   return http.get(apiLocal + `/article/getArticleInfoAdmin/${id}`);
 }
 
+export function editArticle(data) {
+  const bodyFormData = new FormData();
+
+  bodyFormData.append("categoryId", data.categoryId);
+  bodyFormData.append("description", data.description);
+  bodyFormData.append("authorsList", data.authors);
+  bodyFormData.append("titleArticle", data.title);
+  bodyFormData.append("publicPrivate", data.publicPrivate);
+  bodyFormData.append("file", data.file);
+  bodyFormData.append("id", data.articleId);
+  bodyFormData.append("sahifaSoni", data.sahifaSoni);
+  bodyFormData.append("bosmaJurnalSoni", data.bosmaJurnallarSoni);
+  bodyFormData.append("sertifikatSoni", data.sertifikatlarSoni);
+  bodyFormData.append("doi", data.doi);
+  bodyFormData.append("price", data.price);
+  bodyFormData.append("journalsId", data.parentCategoryId);
+
+  return axios({
+    method: "post",
+    url: apiLocal + "/article/edit",
+    data: bodyFormData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
+
 export default {
   editArticleByAdmin,
   getRedactorsAndReviewers,
@@ -256,4 +283,5 @@ export default {
   getArticleInfoAdmin,
   getArticlesById,
   changeActivityArticles,
+  editArticle,
 };

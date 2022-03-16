@@ -3,7 +3,7 @@ import Joi from "joi-browser";
 import Form from "./form";
 import { addArticle, getPrice } from "services/articleService";
 import { getChildCategories } from "services/getCategories";
-import magazineService from "services/magazineService";
+import { getParentMagazines } from "services/magazineService";
 import { getUsersById } from "services/userService";
 import { getPrices } from "services/priceService";
 import { me } from "services/authService";
@@ -54,9 +54,10 @@ class ArticleForm extends Form {
   };
 
   async componentDidMount() {
-    await me().then((res) =>
-      this.setState({ authors: [res.data.code.toString()] })
-    );
+    await me().then((res) => {
+      this.addTags(res.data.code.toString());
+      this.setState({ authors: [res.data.code.toString()] });
+    });
 
     await this.populateCategories();
     this.getArticlePrice();
@@ -74,7 +75,7 @@ class ArticleForm extends Form {
 
   async populateCategories() {
     try {
-      await magazineService.getParentMagazines().then((res) => {
+      await getParentMagazines().then((res) => {
         this.setState({ parentCategories: res.data });
       });
     } catch (ex) {
