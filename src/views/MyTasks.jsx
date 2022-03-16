@@ -192,68 +192,70 @@ class MyTasks extends Component {
 
                             <Table className="table teble-ramka">
                               <tbody>
-                                {this.state.articles &&
-                                  this.state.articles.map((article) => (
-                                    <tr
-                                      key={new Date().getTime()}
-                                      className="tbs col-md-12"
-                                      onSubmit={() => this.handleSubmit()}
-                                    >
-                                      <td className="col-md-5 pr-0">
-                                        <a
-                                          style={{
-                                            paddingLeft: "1.5rem",
-                                            cursor: "pointer",
-                                            color: "#51cbce",
-                                          }}
-                                          onClick={(e) => {
-                                            e.preventDefault();
-                                            this.handleDownload(
-                                              article.article.file.id,
-                                              article.article.file.originalName,
-                                              article.article.file.contentType
-                                            );
-                                          }}
-                                        >
-                                          {article.article.titleArticle}
-                                        </a>
-                                      </td>
-                                      <td className="col-md-3 pr-0">
-                                        <p style={{ paddingLeft: "1.5rem" }}>
-                                          {article.sendDate}
-                                        </p>
-                                      </td>
-                                      <td className="col-md-2 pr-0">
-                                        <p style={{ paddingLeft: "1.5rem" }}>
-                                          {article.deadLine} kun
-                                        </p>
-                                      </td>
-                                      <td className="col-md-2 pr-0">
-                                        <button
-                                          onClick={() =>
-                                            this.handleAction(
-                                              "I_ACCEPTED",
-                                              article.article.id
-                                            )
-                                          }
-                                          className="btn btn-success m-0 p-3"
-                                        >
-                                          HA
-                                        </button>
-                                        <button
-                                          onClick={() =>
-                                            this.handleAction(
-                                              "I_DID_NOT_ACCEPT",
-                                              article.article.id
-                                            )
-                                          }
-                                          className="btn btn-danger m-0 p-3"
-                                        >
-                                          YO'Q
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  ))}
+                                {this.state.articles
+                                  ? this.state.articles.map((article) => (
+                                      <tr
+                                        key={article.article.id}
+                                        className="tbs col-md-12"
+                                        onSubmit={() => this.handleSubmit()}
+                                      >
+                                        <td className="col-md-5 pr-0">
+                                          <a
+                                            style={{
+                                              paddingLeft: "1.5rem",
+                                              cursor: "pointer",
+                                              color: "#51cbce",
+                                            }}
+                                            onClick={(e) => {
+                                              e.preventDefault();
+                                              this.handleDownload(
+                                                article.article.file.id,
+                                                article.article.file
+                                                  .originalName,
+                                                article.article.file.contentType
+                                              );
+                                            }}
+                                          >
+                                            {article.article.titleArticle}
+                                          </a>
+                                        </td>
+                                        <td className="col-md-3 pr-0">
+                                          <p style={{ paddingLeft: "1.5rem" }}>
+                                            {article.sendDate}
+                                          </p>
+                                        </td>
+                                        <td className="col-md-2 pr-0">
+                                          <p style={{ paddingLeft: "1.5rem" }}>
+                                            {article.deadLine} kun
+                                          </p>
+                                        </td>
+                                        <td className="col-md-2 pr-0">
+                                          <button
+                                            onClick={() =>
+                                              this.handleAction(
+                                                "I_ACCEPTED",
+                                                article.article.id
+                                              )
+                                            }
+                                            className="btn btn-success m-0 p-3"
+                                          >
+                                            HA
+                                          </button>
+                                          <button
+                                            onClick={() =>
+                                              this.handleAction(
+                                                "I_DID_NOT_ACCEPT",
+                                                article.article.id
+                                              )
+                                            }
+                                            className="btn btn-danger m-0 p-3"
+                                          >
+                                            YO'Q
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    ))
+                                  : null}
                               </tbody>
                             </Table>
                           </div>
@@ -393,7 +395,7 @@ class MyTasks extends Component {
                           <tbody>
                             {myallArticles &&
                               myallArticles.map((article) => (
-                                <tr key={article.id}>
+                                <tr key={article.article.id}>
                                   <td>{article.printedJournalName}</td>
                                   <td>
                                     <a

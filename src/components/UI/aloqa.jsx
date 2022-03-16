@@ -19,10 +19,7 @@ class Aloqa extends Component {
             <div className="row ml-0 mr-0">
               <div className="col-lg-6  px-0">
                 <h1 style={{ fontWeight: "bold" }}>Biz bilan bog'lanish</h1>
-                <p
-                  style={{ fontSize: "2rem" }}
-                  className="col-md-7 col-lg-7 col-sm-7 p-0"
-                >
+                <p style={{ fontSize: "1.8rem" }}>
                   Savollaringiz yoki takliflaringiz bormi? Muammolar bormi? Biz
                   har qanday vaziyatda muloqot qilishdan mamnunmiz!
                 </p>
@@ -32,28 +29,23 @@ class Aloqa extends Component {
                   style={{ textDecoration: "none", color: "black" }}
                   href="tel:+998998332411"
                 >
-                  <a style={{ color: "black" }} href="tel:+998998332411">
+                  <a
+                    style={{ color: "black", fontSize: "19px" }}
+                    href="tel:+998998332411"
+                  >
                     +(998) (99)-833-24-11
                   </a>
                 </p>
 
                 <h4 style={{ fontWeight: "bold" }}>Email:</h4>
                 <a
-                  style={{ textDecoration: "none", color: "black" }}
+                  style={{ textDecoration: "none", color: "black", fontSize: "2rem" }}
                   href="mailto:anvark87@gmail.com"
-                ></a>
-                <p
-                  style={{ fontSize: "2rem" }}
-                  className="col-md-7 col-lg-7 col-sm-7 p-0"
-                >
-                  anvark87@gmail.com
-                </p>
+                >anvark87@gmail.com</a>
+           
 
                 <h4 style={{ fontWeight: "bold" }}>Manzil:</h4>
-                <p
-                  style={{ fontSize: "2rem" }}
-                  className="col-md-7 col-lg-7 col-sm-7 p-0"
-                >
+                <p style={{ fontSize: "2rem" }}>
                   Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi,
                   QORASUV 6-MAVZE, 1-UY, 55-XONA
                 </p>
@@ -76,11 +68,11 @@ class Aloqa extends Component {
               </div>
 
               <div className="col-lg-6 col-sm-6">
-                <div style={{ width: "600px", height: "500px" }}>
+                <div>
                   <YMaps>
                     <Map
                       width={"100%"}
-                      height={"70vh"}
+                      height={"80vh"}
                       defaultState={{
                         center: [41.327845, 69.285692],
                         zoom: 15,
