@@ -5,9 +5,11 @@ import {
   reviewerActionForArticle,
   sendWork,
   myCheckedArticles,
-} from "../services/articleService";
+} from "services/articleService";
 
-import { Card, CardBody, Row, Col, CardHeader } from "reactstrap";
+import { downloadFile } from "services/mediaService";
+
+import { Card, CardBody, Row, Col, CardHeader, Table } from "reactstrap";
 import { toast } from "react-toastify";
 
 import "styles/mytasks.css";
@@ -85,33 +87,24 @@ class MyTasks extends Component {
   handleDownload = async (fileId, fileName, type) => {
     if (fileId && fileName && type) {
       try {
-        await fetch(
-          `http://192.168.100.27:8080/api/attachment/download/${fileId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": type,
-            },
-          }
-        )
+        await downloadFile(fileId, {
+          method: "GET",
+          headers: {
+            "Content-Type": type,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", fileName);
-
             document.body.appendChild(link);
-
-            // Start download
             link.click();
-
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
-      } catch (error) {
-        toast.error(error);
+      } catch (ex) {
+        toast.error(ex.response.data.message);
       }
     } else {
       toast.error("file topilmadi");
@@ -120,7 +113,7 @@ class MyTasks extends Component {
 
   render() {
     const { myallArticles } = this.state;
-    console.log(this.state.myallArticles);
+
     return (
       <div className="content">
         <Row>
@@ -196,7 +189,8 @@ class MyTasks extends Component {
                                 <p>Qabul qilasizmi?</p>
                               </div>
                             </div>
-                            <table className="table  teble-ramka">
+
+                            <Table className="table teble-ramka">
                               <tbody>
                                 {this.state.articles &&
                                   this.state.articles.map((article) => (
@@ -207,9 +201,10 @@ class MyTasks extends Component {
                                     >
                                       <td className="col-md-5 pr-0">
                                         <a
-                                          href=""
                                           style={{
                                             paddingLeft: "1.5rem",
+                                            cursor: "pointer",
+                                            color: "#51cbce",
                                           }}
                                           onClick={(e) => {
                                             e.preventDefault();
@@ -260,7 +255,7 @@ class MyTasks extends Component {
                                     </tr>
                                   ))}
                               </tbody>
-                            </table>
+                            </Table>
                           </div>
                         </div>
                       </div>
@@ -288,6 +283,7 @@ class MyTasks extends Component {
                               </tr>
                             </tbody>
                           </table>
+
                           <table className="table table-striped table-bordered mb-0">
                             {this.state.myArticles &&
                               this.state.myArticles.map((article) => (
@@ -295,7 +291,10 @@ class MyTasks extends Component {
                                   <tr className="row row-tables ml-0 mr-0 pr-0 pl-0">
                                     <td className="col-lg-3 col-sm-3 ">
                                       <a
-                                        href=""
+                                        style={{
+                                          cursor: "pointer",
+                                          color: "#51cbce",
+                                        }}
                                         onClick={(e) => {
                                           e.preventDefault();
                                           this.handleDownload(
@@ -413,7 +412,6 @@ class MyTasks extends Component {
                                       {article.file.originalName}
                                     </a>
                                   </td>
-                                  <td>jo, nesciunt! </td>
                                   <td>{article.status}</td>
                                 </tr>
                               ))}
