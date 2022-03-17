@@ -46,7 +46,7 @@ class LoginForm extends Form {
     try {
       const { phoneNumber, password } = this.state.data;
       const editedNumber = `+998${phoneNumber}`.trim();
-      await auth.login(password);
+      await auth.login(editedNumber, password);
 
       this.autoRedirect();
 

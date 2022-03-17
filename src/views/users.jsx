@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import userService from "services/userService";
 import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
+import Pagination from "components/common/pagination";
+import { paginate } from "utils/paginate";
 
 import firebase from "../firebase";
 
@@ -43,6 +45,8 @@ class Users extends Component {
     phoneNumber: "",
     roleId: "null",
 
+    currentPage: 1,
+    pageSize: 8,
     notificationToken: "",
   };
 
@@ -68,6 +72,10 @@ class Users extends Component {
 
     // await this.populateArticles();
   }
+
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
 
   handleChangeUserActivity = async (userId, activity) => {
     await userService
@@ -194,7 +202,8 @@ class Users extends Component {
   };
 
   render() {
-    const { users } = this.state;
+    const { users: allUsers, currentPage, pageSize } = this.state;
+    const users = paginate(allUsers, currentPage, pageSize);
 
     return (
       <div className="content">
@@ -565,6 +574,14 @@ class Users extends Component {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="card-footer">
+                <Pagination
+                  itemsCount={this.state.users && this.state.users.length}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}
+                />
               </div>
             </div>
           </div>

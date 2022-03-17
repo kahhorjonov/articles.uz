@@ -64,7 +64,9 @@ class UserEdit extends Component {
       .getUserForEdit(userId)
       .then((res) => {
         this.setState({ userData: res.data.object });
-        this.getImage(res.data.object.photos[0].id);
+        this.getImage(
+          res.data.object.photos[0] && res.data.object.photos[0].id
+        );
       })
       .catch((ex) => toast.error(ex.response.data.message));
 
