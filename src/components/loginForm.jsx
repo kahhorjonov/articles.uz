@@ -4,13 +4,14 @@ import Form from "./common/form";
 import auth from "../services/authService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import "styles/login.css";
 class LoginForm extends Form {
   state = {
     data: {
       phoneNumber: "",
       password: "",
     },
+
     errors: {},
   };
 
@@ -45,7 +46,7 @@ class LoginForm extends Form {
     try {
       const { phoneNumber, password } = this.state.data;
       const editedNumber = `+998${phoneNumber}`.trim();
-      await auth.login(editedNumber, password);
+      await auth.login(password);
 
       this.autoRedirect();
 
@@ -70,7 +71,9 @@ class LoginForm extends Form {
           <h1 className="regs">Login Form</h1>
           <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderLoginInput("phoneNumber", "Telefon raqami")}
+
             {this.renderInput("password", "Password", "password")}
+
             {this.renderButton("Login")}
           </form>
           <Link className="rever" style={{ fontSize: "2rem" }} to="/register">
