@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import {
   changeUserActivity,
   deleteUser,
@@ -7,12 +9,13 @@ import {
   profileEditFromAdmin,
 } from "services/userService";
 
+import { getAllActiveLanguages } from "services/languageService";
 import { getArticlesCheckedByReviewers } from "services/articleService";
-
 import { downloadMedia } from "services/mediaService";
+import { toast } from "react-toastify";
+import Multiselect from "multiselect-react-dropdown";
 
 import noUser from "assets/img/no-user-image.gif";
-import { toast } from "react-toastify";
 
 import {
   Button,
@@ -35,7 +38,6 @@ import {
 } from "reactstrap";
 
 import "styles/userEdit.css";
-import { Link } from "react-router-dom";
 
 class UserEdit extends Component {
   state = {
@@ -64,12 +66,17 @@ class UserEdit extends Component {
     checkAndCancels: "",
     checkAndRecycles: "",
     didNotAccepteds: "",
+    selectedValues: [],
+    options: [],
+    codes: [],
     checkedArticles: [],
+    selectedValues: [],
   };
 
   async componentDidMount() {
     const userId = this.props.history.location.pathname.slice(17);
     this.setState({ userId: userId });
+    this.handleGetLanguages();
 
     await getUserForEdit(userId)
       .then((res) => {
@@ -78,6 +85,7 @@ class UserEdit extends Component {
           this.getImage(res.data.object.photos[0].id);
         }
         this.getCheckedArticles(userId);
+        this.setState({ selectedValues: res.data.object.languages });
       })
       .catch((ex) => toast.error(ex.response.data.message));
 
@@ -93,6 +101,16 @@ class UserEdit extends Component {
       })
       .catch((ex) => toast.error(ex.response.data.message));
   }
+
+  handleGetLanguages = async () => {
+    try {
+      await getAllActiveLanguages().then((res) =>
+        this.setState({ options: res.data })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
 
   getCheckedArticles = async (id) => {
     try {
@@ -136,18 +154,12 @@ class UserEdit extends Component {
         )
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", originalName);
-
             document.body.appendChild(link);
-
-            // Start download
             link.click();
-
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -156,6 +168,22 @@ class UserEdit extends Component {
     } else {
       toast.error("file topilmadi");
     }
+  };
+
+  onSelect = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues: selectedList,
+    });
+
+    this.setState({ codes: [...this.state.codes, selectedItem.id] });
+  };
+
+  onRemove = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList: selectedList });
+    this.setState({ codes: [...newCodes] });
   };
 
   handleChange = async (bool) => {
@@ -193,6 +221,7 @@ class UserEdit extends Component {
       workExperience,
       workPlace,
       passport,
+      enabled,
     } = this.state.userData;
 
     const {
@@ -203,6 +232,8 @@ class UserEdit extends Component {
       didNotAccepteds,
       checkedArticles,
     } = this.state;
+
+    console.log(this.state.codes);
 
     return (
       <>
@@ -333,7 +364,7 @@ class UserEdit extends Component {
                 </ListGroup>
 
                 <ListGroup className="listgropus">
-                  <NavLink active href="">
+                  <NavLink href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Tekshirishga olgan maqolalar</span>{" "}
                       <Badge
@@ -346,7 +377,7 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="">
+                  <NavLink href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Tekshirishga olinmagan maqolalar</span>
                       <Badge
@@ -359,7 +390,7 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="">
+                  <NavLink href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Maqulangan maqolalar</span>
                       <Badge
@@ -372,7 +403,7 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="">
+                  <NavLink href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span> Maqulanmagan maqolalar</span>
                       <Badge
@@ -385,7 +416,7 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="">
+                  <NavLink href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Qayta ishlashga bergan Maqolalar</span>
                       <Badge
@@ -481,7 +512,6 @@ class UserEdit extends Component {
                           <label>Categories</label>
                           <Input
                             defaultValue={categories ? categories[0] : "null"}
-                            placeholder="Home Address"
                             type="text"
                           />
                         </FormGroup>
@@ -568,16 +598,14 @@ class UserEdit extends Component {
                     </Row>
                     <Row>
                       <Col md="12">
-                        <FormGroup>
-                          <label>Languages</label>
-                          <Input
-                            type="textarea"
-                            defaultValue={languages}
-                            onChange={(e) =>
-                              this.setState({ languages: e.target.value })
-                            }
-                          />
-                        </FormGroup>
+                        <label>Languages</label>
+                        <Multiselect
+                          options={this.state.options} // Options to display in the dropdown
+                          selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
+                          onSelect={this.onSelect} // Function will trigger on select event
+                          onRemove={this.onRemove} // Function will trigger on remove event
+                          displayValue="name" // Property name to display in the dropdown options
+                        />
                       </Col>
                     </Row>
                     <Row>
@@ -598,7 +626,7 @@ class UserEdit extends Component {
                           <label className="switch">
                             <input
                               type="checkbox"
-                              defaultChecked={false}
+                              defaultChecked={enabled && enabled}
                               onChange={(e) =>
                                 this.handleChange(e.target.checked)
                               }
@@ -637,12 +665,7 @@ class UserEdit extends Component {
                       <Form>
                         <FormGroup>
                           <Label for="exampleDate">Boshlang'ich sana</Label>
-                          <Input
-                            id="exampleDate"
-                            name="date"
-                            placeholder="Boshlang'ich sana"
-                            type="date"
-                          />
+                          <Input placeholder="Boshlang'ich sana" type="date" />
                         </FormGroup>
                       </Form>
                     </div>
@@ -650,19 +673,14 @@ class UserEdit extends Component {
                     <div className="col-lg-4">
                       <Form>
                         <FormGroup>
-                          <Label for="exampleTime">Oxirgi sana</Label>
-                          <Input
-                            id="exampleDate"
-                            name="time"
-                            placeholder="Oxirgi sana"
-                            type="date"
-                          />
+                          <Label>Oxirgi sana</Label>
+                          <Input placeholder="Oxirgi sana" type="date" />
                         </FormGroup>
                       </Form>
                     </div>
 
                     <div className="col-lg-4 mt-2">
-                      <Label for="exampleTime">Tasdiqlash</Label> <br />
+                      <Label>Tasdiqlash</Label> <br />
                       <a href="">
                         <Button color="primary" className="mt-0">
                           Qidirish
@@ -693,10 +711,7 @@ class UserEdit extends Component {
                       checkedArticles.map((article) => (
                         <tr key={article.id}>
                           <td>
-                            <Link
-                              active
-                              to={`/admin/articleInfo/:${article.id}`}
-                            >
+                            <Link to={`/admin/articleInfo/:${article.id}`}>
                               {article.title}
                             </Link>
                           </td>

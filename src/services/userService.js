@@ -98,7 +98,7 @@ export async function profileEditFromAdmin(data) {
     // scientificWork: data.scientificWork,
     workExperience: data.workExperience,
     email: data.email,
-    languages: data.languages,
+    languages: data.codes,
   };
 
   return axios.post(apiLocal + "/user/editUserFromAdmin", body, config);
