@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import userService from "services/userService";
+import {
+  changeUserActivity,
+  deleteUser,
+  getStatisticsOfArticles,
+  getUserForEdit,
+  profileEditFromAdmin,
+} from "services/userService";
+
+import { getArticlesCheckedByReviewers } from "services/articleService";
+
 import { downloadMedia } from "services/mediaService";
 
 import noUser from "assets/img/no-user-image.gif";
@@ -26,6 +35,7 @@ import {
 } from "reactstrap";
 
 import "styles/userEdit.css";
+import { Link } from "react-router-dom";
 
 class UserEdit extends Component {
   state = {
@@ -54,24 +64,24 @@ class UserEdit extends Component {
     checkAndCancels: "",
     checkAndRecycles: "",
     didNotAccepteds: "",
+    checkedArticles: [],
   };
 
   async componentDidMount() {
     const userId = this.props.history.location.pathname.slice(17);
     this.setState({ userId: userId });
 
-    await userService
-      .getUserForEdit(userId)
+    await getUserForEdit(userId)
       .then((res) => {
         this.setState({ userData: res.data.object });
-        this.getImage(
-          res.data.object.photos[0] && res.data.object.photos[0].id
-        );
+        if (res.data.object.photos[0]) {
+          this.getImage(res.data.object.photos[0].id);
+        }
+        this.getCheckedArticles(userId);
       })
       .catch((ex) => toast.error(ex.response.data.message));
 
-    await userService
-      .getStatisticsOfArticles(userId)
+    await getStatisticsOfArticles(userId)
       .then((res) => {
         this.setState({
           accepteds: res.data.accepteds,
@@ -81,8 +91,18 @@ class UserEdit extends Component {
           didNotAccepteds: res.data.didNotAccepteds,
         });
       })
-      .catch((ex) => console.log(ex));
+      .catch((ex) => toast.error(ex.response.data.message));
   }
+
+  getCheckedArticles = async (id) => {
+    try {
+      await getArticlesCheckedByReviewers(id).then((res) =>
+        this.setState({ checkedArticles: res.data.object })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
 
   getImage = async (id) => {
     let imageBlob;
@@ -97,10 +117,66 @@ class UserEdit extends Component {
   };
 
   updateProfileByAdmin = async () => {
-    await userService
-      .profileEditFromAdmin(this.state)
+    await profileEditFromAdmin(this.state)
       .then((res) => toast.success(res.data.message))
       .catch((ex) => toast.error(ex.response.data.message));
+  };
+
+  handleDownload = async (id, originalName, contentType) => {
+    if (id && originalName && contentType) {
+      try {
+        await fetch(
+          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": contentType,
+            },
+          }
+        )
+          .then((response) => response.blob())
+          .then((blob) => {
+            // Create blob link to download
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", originalName);
+
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+          });
+      } catch (error) {
+        toast.error(error);
+      }
+    } else {
+      toast.error("file topilmadi");
+    }
+  };
+
+  handleChange = async (bool) => {
+    try {
+      await changeUserActivity(this.state.userId, bool).then((res) =>
+        toast.success(res.data.message)
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
+
+  handleDelete = async () => {
+    try {
+      await deleteUser(this.state.userId).then((res) => {
+        toast.success(res.data.message);
+        this.props.history.goBack();
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
   };
 
   render() {
@@ -116,6 +192,7 @@ class UserEdit extends Component {
       scientificWork,
       workExperience,
       workPlace,
+      passport,
     } = this.state.userData;
 
     const {
@@ -124,6 +201,7 @@ class UserEdit extends Component {
       checkAndCancels,
       checkAndRecycles,
       didNotAccepteds,
+      checkedArticles,
     } = this.state;
 
     return (
@@ -158,22 +236,23 @@ class UserEdit extends Component {
                   <hr />
                   <div className="button-container">
                     <Row>
-                      <Col className="ml-auto" lg="3" md="6" xs="6">
+                      <Col className="mx-auto" lg="6" md="6" xs="6">
                         <h5>
-                          {scientificWork ? scientificWork.length : "0"} <br />
-                          <small>Files</small>
-                        </h5>
-                      </Col>
-                      <Col className="ml-auto mr-auto" lg="4" md="6" xs="6">
-                        <h5>
-                          2GB <br />
-                          <small>Used</small>
-                        </h5>
-                      </Col>
-                      <Col className="mr-auto" lg="3">
-                        <h5>
-                          24,6$ <br />
-                          <small>Spent</small>
+                          <Button
+                            className="m-0"
+                            style={{ width: "100%", padding: "0.75rem" }}
+                            onClick={() =>
+                              this.handleDownload(
+                                passport && passport.id,
+
+                                passport && passport.originalName,
+
+                                passport && passport.contentType
+                              )
+                            }
+                          >
+                            Download Passport
+                          </Button>
                         </h5>
                       </Col>
                     </Row>
@@ -254,46 +333,66 @@ class UserEdit extends Component {
                 </ListGroup>
 
                 <ListGroup className="listgropus">
-                  <NavLink active href="#">
+                  <NavLink active href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Tekshirishga olgan maqolalar</span>{" "}
-                      <Badge className="badges_1" pill>
+                      <Badge
+                        style={{ fontSize: "100%" }}
+                        className="badges_1"
+                        pill
+                      >
                         {accepteds ? accepteds : "0"}
                       </Badge>
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="#">
+                  <NavLink active href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Tekshirishga olinmagan maqolalar</span>
-                      <Badge className="badges_1" pill>
+                      <Badge
+                        style={{ fontSize: "100%" }}
+                        className="badges_1"
+                        pill
+                      >
                         {didNotAccepteds ? didNotAccepteds : "0"}
                       </Badge>
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="#">
+                  <NavLink active href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Maqulangan maqolalar</span>
-                      <Badge className="badges_1" pill>
+                      <Badge
+                        style={{ fontSize: "100%" }}
+                        className="badges_1"
+                        pill
+                      >
                         {checkAndAccepteds ? checkAndAccepteds : "0"}
                       </Badge>
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="#">
+                  <NavLink active href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span> Maqulanmagan maqolalar</span>
-                      <Badge className="badges_1" pill>
+                      <Badge
+                        style={{ fontSize: "100%" }}
+                        className="badges_1"
+                        pill
+                      >
                         {checkAndCancels ? checkAndCancels : "0"}
                       </Badge>
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink active href="#">
+                  <NavLink active href="">
                     <ListGroupItem className="justify-content-between border-0">
                       <span>Qayta ishlashga bergan Maqolalar</span>
-                      <Badge className="badges_1" pill>
+                      <Badge
+                        style={{ fontSize: "100%" }}
+                        className="badges_1"
+                        pill
+                      >
                         {checkAndRecycles ? checkAndRecycles : "0"}
                       </Badge>
                     </ListGroupItem>
@@ -327,10 +426,9 @@ class UserEdit extends Component {
                           <label>Ro'yxatdan o'tgan sana</label>
                           <Input
                             disabled
-                            defaultValue={new Date(createdAt ? createdAt : null)
-                              .toISOString()
-                              .slice(0, 10)}
-                            placeholder="Ro'yxatdan o'tkan sana"
+                            value={new Date(
+                              createdAt && createdAt
+                            ).toLocaleDateString()}
                             type="text"
                           />
                         </FormGroup>
@@ -405,24 +503,18 @@ class UserEdit extends Component {
                         <FormGroup>
                           <label>Ilmiy Ishlarni yuklash</label>
                           <Button
-                            // disabled={
-                            //   this.state.currentUser.scientificWork
-                            //     ? false
-                            //     : true
-                            // }
                             className="m-0"
                             style={{ width: "100%", padding: "0.75rem" }}
-                            // onClick={() =>
-                            //   this.handleDownload(
-                            //     this.state.currentUser.scientificWork[0].id,
+                            onClick={() =>
+                              this.handleDownload(
+                                scientificWork && scientificWork[0].id,
 
-                            //     this.state.currentUser.scientificWork[0]
-                            //       .originalName,
+                                scientificWork &&
+                                  scientificWork[0].originalName,
 
-                            //     this.state.currentUser.scientificWork[0]
-                            //       .contentType
-                            //   )
-                            // }
+                                scientificWork && scientificWork[0].contentType
+                              )
+                            }
                           >
                             Ilmiy Ishlarni yuklash
                           </Button>
@@ -507,14 +599,23 @@ class UserEdit extends Component {
                             <input
                               type="checkbox"
                               defaultChecked={false}
-                              onChange={(e) => console.log(e.target.checked)}
+                              onChange={(e) =>
+                                this.handleChange(e.target.checked)
+                              }
                             />
                             <span className="slider round"></span>
                           </label>
                         </div>
 
                         <div>
-                          <Button color="danger" outline>
+                          <Button
+                            color="danger"
+                            outline
+                            onClick={(e) => {
+                              e.preventDefault();
+                              this.handleDelete();
+                            }}
+                          >
                             Delete
                           </Button>
                         </div>
@@ -562,7 +663,7 @@ class UserEdit extends Component {
 
                     <div className="col-lg-4 mt-2">
                       <Label for="exampleTime">Tasdiqlash</Label> <br />
-                      <a href="#">
+                      <a href="">
                         <Button color="primary" className="mt-0">
                           Qidirish
                         </Button>
@@ -588,21 +689,39 @@ class UserEdit extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <NavLink active href="#">
-                          Astranomiya asoslari
-                        </NavLink>
-                      </td>
-                      <td>25/02/2022</td>
-                      <td>Lorem, ipsum.</td>
-                      <td>Hammasi yaxshi</td>
-                      <td>
-                        <a href="#" download>
-                          File:
-                        </a>
-                      </td>
-                    </tr>
+                    {checkedArticles &&
+                      checkedArticles.map((article) => (
+                        <tr key={article.id}>
+                          <td>
+                            <Link
+                              active
+                              to={`/admin/articleInfo/:${article.id}`}
+                            >
+                              {article.title}
+                            </Link>
+                          </td>
+                          <td>
+                            {new Date(article.processDate).toLocaleDateString()}
+                          </td>
+                          <td>{article.status}</td>
+                          <td>{article.description}</td>
+                          <td>
+                            <a
+                              href=""
+                              onClick={(e) => {
+                                e.preventDefault();
+                                this.handleDownload(
+                                  article.fileId,
+                                  article.originalName,
+                                  article.contentType
+                                );
+                              }}
+                            >
+                              File
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </Table>
               </Card>

@@ -276,6 +276,10 @@ export function myCheckedArticles() {
   return http.get(apiLocal + "/article/myOldArticles", config);
 }
 
+export function getArticlesCheckedByReviewers(id) {
+  return http.get(apiLocal + `/article/reviewerCheckedArticles/${id}`);
+}
+
 export default {
   editArticleByAdmin,
   getRedactorsAndReviewers,
@@ -298,4 +302,5 @@ export default {
   editArticle,
   deleteArticle,
   myCheckedArticles,
+  getArticlesCheckedByReviewers,
 };

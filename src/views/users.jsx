@@ -81,11 +81,9 @@ class Users extends Component {
     await userService
       .changeUserActivity(userId, activity)
       .then((res) => {
-        // console.log(res);
         toast.success(res.data.message);
       })
       .catch((ex) => {
-        console.log(ex);
         toast.error(ex.res.data.message);
       });
   };
@@ -101,8 +99,7 @@ class Users extends Component {
     await userService
       .searchUser(data)
       .then((res) => {
-        console.log(res.data.object);
-        this.setState({ users: res.data.object.content });
+        this.setState({ users: res.data.object });
       })
       .catch((ex) => {
         toast.error(ex.message);
@@ -118,9 +115,9 @@ class Users extends Component {
 
     await userService
       .searchUser(data)
-      .then((res) => this.setState({ users: res.data.object.content }))
+      .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
-        console.error(ex);
+        toast.error(ex.response.data.message);
       });
   };
 
@@ -134,7 +131,7 @@ class Users extends Component {
 
     await userService
       .searchUser(data)
-      .then((res) => this.setState({ users: res.data.object.content }))
+      .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
         console.error(ex);
       });
@@ -150,7 +147,7 @@ class Users extends Component {
 
     await userService
       .searchUser(data)
-      .then((res) => this.setState({ users: res.data.object.content }))
+      .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
         console.error(ex);
       });
@@ -196,7 +193,6 @@ class Users extends Component {
         this.setState({ roleId: null });
       })
       .catch((ex) => {
-        // console.log(ex.response.data.message);
         toast.error(ex.response.data.message);
       });
   };

@@ -395,7 +395,7 @@ class MyTasks extends Component {
                           <tbody>
                             {myallArticles &&
                               myallArticles.map((article) => (
-                                <tr key={article.article.id}>
+                                <tr key={article.id}>
                                   <td>{article.printedJournalName}</td>
                                   <td>
                                     <a
