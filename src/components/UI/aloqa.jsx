@@ -72,7 +72,7 @@ class Aloqa extends Component {
                   <YMaps>
                     <Map
                       width={"100%"}
-                      height={"80vh"}
+                      height={"70vh"}
                       defaultState={{
                         center: [41.327845, 69.285692],
                         zoom: 15,
