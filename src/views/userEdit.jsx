@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import userService from "../services/userService";
+import userService from "services/userService";
+import { downloadMedia } from "services/mediaService";
 
-import "../styles/userEdit.css";
-// reactstrap components
+import noUser from "assets/img/no-user-image.gif";
+import { toast } from "react-toastify";
 
 import {
   Button,
@@ -24,9 +25,7 @@ import {
   Table,
 } from "reactstrap";
 
-import mikeImg from "../assets/img/mike.jpg";
-import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
-import { toast } from "react-toastify";
+import "styles/userEdit.css";
 
 class UserEdit extends Component {
   state = {
@@ -48,6 +47,7 @@ class UserEdit extends Component {
     workPlace: "",
     userData: {},
     articleStatistics: {},
+    photo: "",
 
     accepteds: "",
     checkAndAccepteds: "",
@@ -59,14 +59,14 @@ class UserEdit extends Component {
   async componentDidMount() {
     const userId = this.props.history.location.pathname.slice(17);
     this.setState({ userId: userId });
-    // console.log(userId);
 
     await userService
       .getUserForEdit(userId)
       .then((res) => {
         this.setState({ userData: res.data.object });
+        this.getImage(res.data.object.photos[0].id);
       })
-      .catch((ex) => console.log(ex));
+      .catch((ex) => toast.error(ex.response.data.message));
 
     await userService
       .getStatisticsOfArticles(userId)
@@ -81,6 +81,18 @@ class UserEdit extends Component {
       })
       .catch((ex) => console.log(ex));
   }
+
+  getImage = async (id) => {
+    let imageBlob;
+
+    try {
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
+    } catch (err) {
+      return null;
+    }
+
+    return this.setState({ photo: URL.createObjectURL(imageBlob) });
+  };
 
   updateProfileByAdmin = async () => {
     await userService
@@ -118,16 +130,14 @@ class UserEdit extends Component {
           <Row>
             <Col md="4">
               <Card className="card-user">
-                <div className="image">
-                  <img alt="..." src={damirBosnjak} />
-                </div>
+                <div className="image"></div>
                 <CardBody>
                   <div className="author">
-                    <a href="#" onClick={(e) => e.preventDefault()}>
+                    <a href="" onClick={(e) => e.preventDefault()}>
                       <img
-                        alt="..."
+                        alt="no photo"
                         className="avatar border-gray"
-                        src={mikeImg}
+                        src={this.state.photo ? this.state.photo : noUser}
                       />
                       <h5 className="title">
                         {firstName} {lastName}
