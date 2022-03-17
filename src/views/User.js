@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import authService from "../services/authService";
+import { me } from "services/authService";
 
-import { profileEdit } from "../services/userService";
+import { profileEdit } from "services/userService";
+import { profilePhoto, downloadMedia } from "services/mediaService";
+import { toast } from "react-toastify";
+import noUser from "assets/img/no-user-image.gif";
 
-// reactstrap components
 import {
   Button,
   Card,
@@ -16,12 +18,7 @@ import {
   Input,
   Row,
   Col,
-  ButtonToolbar,
 } from "reactstrap";
-
-import mikeImg from "../assets/img/mike.jpg";
-import damirBosnjak from "../assets/img/damir-bosnjak.jpg";
-import { toast } from "react-toastify";
 
 class User extends Component {
   state = {
@@ -46,19 +43,29 @@ class User extends Component {
   }
 
   getUserByMe = async () => {
-    await authService
-      .me()
+    await me()
       .then((res) => {
-        // console.log(res.data);
         this.setState({ currentUser: res.data });
         this.setState({ phoneNumber: res.data.phoneNumber });
+        this.getImage(res.data.photos[0].id);
       })
-      .catch((ex) => console.log(ex));
+      .catch((ex) => toast.error(ex.response.data.message));
+  };
+
+  getImage = async (id) => {
+    let imageBlob;
+
+    try {
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
+    } catch (err) {
+      return null;
+    }
+
+    return this.setState({ photo: URL.createObjectURL(imageBlob) });
   };
 
   handleSubmit = async (e) => {
-    // e.preventDefault();
-    // console.log(this.state);
+    e.preventDefault();
 
     await profileEdit(this.state)
       .then((res) => {
@@ -109,10 +116,16 @@ class User extends Component {
     }
   };
 
-  onImageChange = (photo) => {
+  onImageChange = async (photo) => {
     this.setState({
       photo: URL.createObjectURL(photo),
     });
+
+    try {
+      await profilePhoto(photo).then((res) => toast.success(res.data.message));
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
   };
 
   render() {
@@ -144,15 +157,15 @@ class User extends Component {
             <Col md="4">
               <Card className="card-user">
                 <div className="image">
-                  <img alt="..." src={damirBosnjak} />
+                  {/* <img alt="..." src={damirBosnjak} /> */}
                 </div>
                 <CardBody>
                   <div className="author">
                     <a href="" onClick={(e) => e.preventDefault()}>
                       <img
-                        alt="..."
+                        alt="no Photo"
                         className="avatar border-gray"
-                        src={mikeImg}
+                        src={this.state.photo ? this.state.photo : noUser}
                       />
 
                       <h5 className="title">
@@ -171,9 +184,11 @@ class User extends Component {
                   <Input
                     className="p-0 col-md-8"
                     type="file"
-                    onChange={(e) =>
-                      e.target.files[0] && this.onImageChange(e.target.files[0])
-                    }
+                    onChange={(e) => {
+                      e.preventDefault();
+                      e.target.files[0] &&
+                        this.onImageChange(e.target.files[0]);
+                    }}
                   />
                 </CardBody>
                 <CardFooter>

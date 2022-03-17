@@ -89,7 +89,7 @@ export function newMyArticles(step) {
     status: step,
   };
 
-  return axios.post(apiLocal + "/article/newMyArticle", bodyParametrs, config);
+  return http.post(apiLocal + "/article/newMyArticle", bodyParametrs, config);
 }
 
 export function getArticlesById(id) {
