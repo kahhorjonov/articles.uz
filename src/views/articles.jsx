@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { Link } from "react-router-dom";
-import image from "../components/profile.png";
 import articleService from "services/articleService";
 import { Input } from "reactstrap";
+
+import noUser from "assets/img/no-user-image.gif";
+import GetImages from "utils/getImages";
 
 import "styles/navbar.css";
 
@@ -34,7 +36,7 @@ class Articles extends Component {
         this.setState({ articles: res.data.object });
       });
     } catch (ex) {
-      toast.error(ex);
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -70,9 +72,8 @@ class Articles extends Component {
           toast.success(res.data.message);
           this.handleActive(this.state.activeArticleId);
         });
-      console.log(this.state.people);
     } catch (ex) {
-      toast.error(ex);
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -175,7 +176,7 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                           Qayta ishlashga berilganlar
+                            Qayta ishlashga berilganlar
                           </a>
                         </li>
 
@@ -330,9 +331,23 @@ class Articles extends Component {
                                   key={person.user.id}
                                   className="list-group-item d-flex justify-content-between align-items-center"
                                 >
-                                  <div className="images d-flex">
-                                    <div>
-                                      <img src={image} width="45" alt="" />
+                                  <div className="images d-flex align-items-center justify-content-center">
+                                    <div
+                                      style={{
+                                        width: "4.5rem",
+                                        height: "4.5rem",
+                                      }}
+                                    >
+                                      {person.user.photos[0] ? (
+                                        <GetImages
+                                          url={
+                                            person.user.photos[0] &&
+                                            person.user.photos[0].id
+                                          }
+                                        />
+                                      ) : (
+                                        <img src={noUser} />
+                                      )}
                                     </div>
                                     <div className="flex-column ">
                                       <p className="m-0 ">
@@ -344,9 +359,6 @@ class Articles extends Component {
                                         {person.user.roles[0].roleName
                                           .slice(5)
                                           .toLowerCase()}
-                                      </p>
-                                      <p className="m-0 text-muted">
-                                        3 days ago
                                       </p>
                                     </div>
                                   </div>

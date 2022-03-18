@@ -16,8 +16,8 @@ class RegisterForm extends Form {
     data: {
       password: "",
       phoneNumber: "",
-      // role: "",
     },
+
     notificationToken: "",
     errors: {},
   };
@@ -75,8 +75,10 @@ class RegisterForm extends Form {
         <div>
           <h1 className="regs">Register Form</h1>
           <form className="form-register" onSubmit={this.handleSubmit}>
-            {this.renderInput("phoneNumber", "Telefon raqami")}
+            {this.renderLoginInput("phoneNumber", "Telefon raqami")}
+
             {this.renderInput("password", "Password", "password")}
+
             {this.renderButton("Register")}
           </form>
 

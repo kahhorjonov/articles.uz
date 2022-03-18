@@ -14,6 +14,7 @@ import Logout from "components/logout.jsx";
 import Jurnallar from "components/UI/jurnallar.jsx";
 import MagazineInfoAdmin from "components/UI/magazineInfoAdmin";
 import ChangePrices from "components/UI/changePrices";
+import ReviewerActivation from "views/activationReviewers";
 
 var adminRoutes = [
   {
@@ -89,6 +90,15 @@ var adminRoutes = [
   },
 
   {
+    path: "/activationReviewers",
+    name: "Yangi Reviewerlar",
+    icon: "nc-icon nc-circle-10",
+    component: ReviewerActivation,
+    layout: "/admin",
+    visible: true,
+  },
+
+  {
     path: "/userEdit",
     name: "Foydalanuvchi",
     icon: "nc-icon nc-single-02",
@@ -97,14 +107,14 @@ var adminRoutes = [
     visible: false,
   },
 
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Icons,
-  //   layout: "/admin",
-  //   visible: true,
-  // },
+  {
+    path: "/icons",
+    name: "Icons",
+    icon: "nc-icon nc-bell-55",
+    component: Icons,
+    layout: "/admin",
+    visible: true,
+  },
 
   {
     path: "/user-page",

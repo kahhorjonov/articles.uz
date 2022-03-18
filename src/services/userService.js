@@ -27,8 +27,6 @@ export function searchUser(data) {
   return http.post(apiLocal + `/user/search`, {
     search: data.search,
     roles_id: data.roles_id,
-    page: 0,
-    size: "10",
     enabled: data.enabled,
     categoryId: data.categoryId,
   });
@@ -100,7 +98,7 @@ export async function profileEditFromAdmin(data) {
     // scientificWork: data.scientificWork,
     workExperience: data.workExperience,
     email: data.email,
-    languages: data.languages,
+    languages: data.codes,
   };
 
   return axios.post(apiLocal + "/user/editUserFromAdmin", body, config);
@@ -144,8 +142,16 @@ export async function registerReviewer(data) {
   });
 }
 
-export async function getUsersById(id) {
-  return http.get(`http://192.168.100.27:8080/api/user/getAuthorByCode/${id}`);
+export function getUsersById(id) {
+  return http.get(apiLocal + `/user/getAuthorByCode/${id}`);
+}
+
+export function getNewRegisteredUsers() {
+  return http.get(apiLocal + "/user/allNewReviewers");
+}
+
+export function acceptReviewers(id) {
+  return http.post(apiLocal + `/user/activeEdite/${id}`);
 }
 
 export default {
@@ -160,4 +166,6 @@ export default {
   profileEditFromAdmin,
   createUser,
   getUsersById,
+  getNewRegisteredUsers,
+  acceptReviewers,
 };

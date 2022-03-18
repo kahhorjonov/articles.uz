@@ -4,7 +4,9 @@ import Form from "./common/form";
 import auth from "../services/authService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import "styles/login.css";
+
 class LoginForm extends Form {
   state = {
     data: {

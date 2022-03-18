@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import userService from "services/userService";
 import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
+import Pagination from "components/common/pagination";
+import { paginate } from "utils/paginate";
 
 import firebase from "../firebase";
 
@@ -43,6 +45,8 @@ class Users extends Component {
     phoneNumber: "",
     roleId: "null",
 
+    currentPage: 1,
+    pageSize: 8,
     notificationToken: "",
   };
 
@@ -69,15 +73,17 @@ class Users extends Component {
     // await this.populateArticles();
   }
 
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
+
   handleChangeUserActivity = async (userId, activity) => {
     await userService
       .changeUserActivity(userId, activity)
       .then((res) => {
-        // console.log(res);
         toast.success(res.data.message);
       })
       .catch((ex) => {
-        console.log(ex);
         toast.error(ex.res.data.message);
       });
   };
@@ -93,8 +99,7 @@ class Users extends Component {
     await userService
       .searchUser(data)
       .then((res) => {
-        console.log(res.data.object);
-        this.setState({ users: res.data.object.content });
+        this.setState({ users: res.data.object });
       })
       .catch((ex) => {
         toast.error(ex.message);
@@ -110,9 +115,9 @@ class Users extends Component {
 
     await userService
       .searchUser(data)
-      .then((res) => this.setState({ users: res.data.object.content }))
+      .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
-        console.error(ex);
+        toast.error(ex.response.data.message);
       });
   };
 
@@ -126,7 +131,7 @@ class Users extends Component {
 
     await userService
       .searchUser(data)
-      .then((res) => this.setState({ users: res.data.object.content }))
+      .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
         console.error(ex);
       });
@@ -142,7 +147,7 @@ class Users extends Component {
 
     await userService
       .searchUser(data)
-      .then((res) => this.setState({ users: res.data.object.content }))
+      .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
         console.error(ex);
       });
@@ -188,13 +193,13 @@ class Users extends Component {
         this.setState({ roleId: null });
       })
       .catch((ex) => {
-        // console.log(ex.response.data.message);
         toast.error(ex.response.data.message);
       });
   };
 
   render() {
-    const { users } = this.state;
+    const { users: allUsers, currentPage, pageSize } = this.state;
+    const users = paginate(allUsers, currentPage, pageSize);
 
     return (
       <div className="content">
@@ -565,6 +570,14 @@ class Users extends Component {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="card-footer">
+                <Pagination
+                  itemsCount={this.state.users && this.state.users.length}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}
+                />
               </div>
             </div>
           </div>
