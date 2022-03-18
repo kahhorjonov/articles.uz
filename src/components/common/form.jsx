@@ -118,12 +118,12 @@ class Form extends Component {
     );
   }
 
-  renderLoginInput(name, label, type = "text") {
+  renderLoginInput(name, label, text = "text") {
     const { data, errors } = this.state;
 
     return (
       <InputGroupField
-        type={type}
+        type={text}
         name={name}
         value={data[name]}
         label={label}
