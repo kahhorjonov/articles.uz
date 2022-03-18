@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import userService from "services/userService";
+import { getAllActiveLanguages } from "services/languageService";
 import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
@@ -27,6 +28,7 @@ import {
 
 import "styles/usersStyles.css";
 import "react-toastify/dist/ReactToastify.css";
+import { Multiselect } from "multiselect-react-dropdown";
 
 class Users extends Component {
   state = {
@@ -48,11 +50,18 @@ class Users extends Component {
     currentPage: 1,
     pageSize: 8,
     notificationToken: "",
+
+    selectedValues: [],
+    options: [],
+    codes: [],
+    checkedArticles: [],
+    selectedValues: [],
   };
 
   async componentDidMount() {
     await this.populateCategories();
     await this.handleChooseRole(null);
+    await this.handleGetLanguages();
 
     // try {
     //   const msg = firebase.messaging();
@@ -72,6 +81,32 @@ class Users extends Component {
 
     // await this.populateArticles();
   }
+
+  handleGetLanguages = async () => {
+    try {
+      await getAllActiveLanguages().then((res) =>
+        this.setState({ options: res.data })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
+
+  onSelect = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues: selectedList,
+    });
+
+    this.setState({ codes: [...this.state.codes, selectedItem.id] });
+  };
+
+  onRemove = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList: selectedList });
+    this.setState({ codes: [...newCodes] });
+  };
 
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
@@ -117,7 +152,7 @@ class Users extends Component {
       .searchUser(data)
       .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
-        toast.error(ex.response.data.message);
+        // toast.error(ex.response.data.message);
       });
   };
 
@@ -176,9 +211,8 @@ class Users extends Component {
       password: this.state.password,
       phoneNumber: this.state.phoneNumber,
       roleId: this.state.roleId,
+      languages: this.state.codes,
     };
-
-    console.log(data);
 
     await userService
       .createUser(data)
@@ -269,7 +303,7 @@ class Users extends Component {
                                 </Col>
                               </Row>
                               <Row>
-                                <Col className="pr-className1" md="6">
+                                <Col className="pr-1" md="6">
                                   <FormGroup>
                                     <Label>Telfon</Label>
                                     <InputGroup>
@@ -312,7 +346,7 @@ class Users extends Component {
                                 </Col>
                               </Row>
                               <Row>
-                                <Col md="6" className="pr-1">
+                                <Col md="12" sm="12" lg="12">
                                   <FormGroup>
                                     <select
                                       required
@@ -384,8 +418,14 @@ class Users extends Component {
                               <Row>
                                 <Col md="12">
                                   <FormGroup>
-                                    <label>Tillar</label>
-                                    <Input required type="textarea" />
+                                    <label>Languages</label>
+                                    <Multiselect
+                                      options={this.state.options}
+                                      selectedValues={this.state.selectedValues}
+                                      onSelect={this.onSelect}
+                                      onRemove={this.onRemove}
+                                      displayValue="name"
+                                    />
                                   </FormGroup>
                                 </Col>
                               </Row>
@@ -521,7 +561,14 @@ class Users extends Component {
                                 <td>{user.workPlace}</td>
                                 <td>{user.workExperience}</td>
                                 <td>{user.academicDegree}</td>
-                                <td>{user.languages}</td>
+                                <td>
+                                  {user.languages.map((language, idx2) => {
+                                    if (user.languages.length - 1 !== idx2) {
+                                      return `${language.name}, `;
+                                    }
+                                    return `${language.name}`;
+                                  })}
+                                </td>
                                 <td>
                                   {user.categories.map((category, idx2) => {
                                     if (user.categories.length - 1 !== idx2) {

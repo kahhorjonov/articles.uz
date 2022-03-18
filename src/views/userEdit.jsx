@@ -233,8 +233,6 @@ class UserEdit extends Component {
       checkedArticles,
     } = this.state;
 
-    console.log(this.state.codes);
-
     return (
       <>
         <div className="content">

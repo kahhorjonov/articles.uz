@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { me } from "services/authService";
-
+import { getAllActiveLanguages } from "services/languageService";
 import { profileEdit } from "services/userService";
 import { profilePhoto, downloadMedia } from "services/mediaService";
 import { toast } from "react-toastify";
+import { Multiselect } from "multiselect-react-dropdown";
 import noUser from "assets/img/no-user-image.gif";
 
 import {
@@ -32,22 +33,56 @@ class User extends Component {
     scientificWork: "",
     workExperience: "",
     email: "",
-    languages: "",
 
     currentUser: {},
     photo: "",
+
+    selectedValues: [],
+    options: [],
+    codes: [],
+    checkedArticles: [],
+    selectedValues: [],
   };
 
   async componentDidMount() {
     await this.getUserByMe();
+    await this.handleGetLanguages();
   }
+
+  handleGetLanguages = async () => {
+    try {
+      await getAllActiveLanguages().then((res) =>
+        this.setState({ options: res.data })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
+
+  onSelect = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues: selectedList,
+    });
+
+    this.setState({ codes: [...this.state.codes, selectedItem.id] });
+  };
+
+  onRemove = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList: selectedList });
+    this.setState({ codes: [...newCodes] });
+  };
 
   getUserByMe = async () => {
     await me()
       .then((res) => {
         this.setState({ currentUser: res.data });
         this.setState({ phoneNumber: res.data.phoneNumber });
-        this.getImage(res.data.photos[0].id);
+        if (res.data.photos[0]) {
+          this.getImage(res.data.photos[0].id);
+        }
       })
       .catch((ex) => toast.error(ex.response.data.message));
   };
@@ -142,14 +177,6 @@ class User extends Component {
       languages,
     } = this.state.currentUser;
 
-    // console.log(scientificWork);
-
-    // const { id, contentType, fileName } = this.state.currentUser.scientificWork;
-
-    // console.log(id);
-    // console.log(contentType);
-    // console.log(fileName);
-
     return (
       <>
         <div className="content">
@@ -172,7 +199,6 @@ class User extends Component {
                         {firstName} {lastName}
                       </h5>
                     </a>
-                    {/* <p className="description">{`Username: ${username}`}</p> */}
                   </div>
                   <p className="description text-center">
                     {`Academic Degree: ${academicDegree}`}
@@ -311,9 +337,6 @@ class User extends Component {
                           <label>Ro'yxatdan o'tgan sana</label>
                           <Input
                             disabled
-                            // defaultValue={new Date(createdAt ? createdAt : null)
-                            //   .toISOString()
-                            //   .slice(0, 10)}
                             placeholder="Ro'yxatdan o'tgan sana"
                             type="text"
                             onChange={(e) =>
@@ -429,13 +452,13 @@ class User extends Component {
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <label>Tillar</label>
-                          <Input
-                            type="textarea"
-                            defaultValue={languages}
-                            onChange={(e) =>
-                              this.setState({ languages: e.target.value })
-                            }
+                          <label>Languages</label>
+                          <Multiselect
+                            options={this.state.options}
+                            selectedValues={this.state.selectedValues}
+                            onSelect={this.onSelect}
+                            onRemove={this.onRemove}
+                            displayValue="name"
                           />
                         </FormGroup>
                       </Col>

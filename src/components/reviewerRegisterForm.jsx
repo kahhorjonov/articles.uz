@@ -1,11 +1,11 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import * as userService from "../services/userService";
+import * as userService from "services/userService";
 import { Link } from "react-router-dom";
-import { getCategories } from "../services/getCategories";
+import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
-import authService from "../services/authService";
+import authService from "services/authService";
 import jwtDecode from "jwt-decode";
 import Multiselect from "multiselect-react-dropdown";
 import firebase from "../firebase";
@@ -28,7 +28,6 @@ class ReviewerRegisterForm extends Form {
       workPlace: "",
       workExperience: 0,
       academicDegree: "",
-      languages: "",
       passport: [],
       scientificWork: [],
     },
@@ -44,6 +43,9 @@ class ReviewerRegisterForm extends Form {
   };
 
   async componentDidMount() {
+    await this.populateCategories();
+    await this.handleGetLanguage();
+
     try {
       const msg = firebase.messaging();
       msg
@@ -98,7 +100,6 @@ class ReviewerRegisterForm extends Form {
     workPlace: Joi.string().required().label("WorkPlace"),
     workExperience: Joi.number().required().label("WorkExperience"),
     academicDegree: Joi.string().required().label("AcademicDegree"),
-    languages: Joi.string().required().label("Languages"),
     passport: Joi.required().label("Passport"),
     scientificWork: Joi.required().label("Qilingan ishlardan namuna"),
   };
@@ -108,25 +109,23 @@ class ReviewerRegisterForm extends Form {
     this.setState({ categories });
   }
 
-  async componentDidMount() {
-    await this.populateCategories();
-  }
-
   doSubmit = async () => {
     try {
-      await userService.registerReviewer(this.state.data).then((res) => {
-        authService.loginWithJwt(res.data.object);
-        toast.success(res.data.message);
+      await userService
+        .registerReviewer(this.state.data, this.state.codes)
+        .then((res) => {
+          authService.loginWithJwt(res.data.object);
+          toast.success(res.data.message);
 
-        setTimeout(() => {
-          const decodedToken = jwtDecode(res.data.object);
-          if (decodedToken.roles[0].roleName === "ROLE_REVIEWER") {
-            window.location = "/reviewer/myTasks";
-          } else {
-            window.location = "/user/user-page";
-          }
-        }, 1500);
-      });
+          setTimeout(() => {
+            const decodedToken = jwtDecode(res.data.object);
+            if (decodedToken.roles[0].roleName === "ROLE_REVIEWER") {
+              window.location = "/reviewer/myTasks";
+            } else {
+              window.location = "/user/user-page";
+            }
+          }, 1500);
+        });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

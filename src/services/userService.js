@@ -73,7 +73,7 @@ export async function profileEdit(data) {
     scientificWork: data.scientificWork,
     workExperience: data.workExperience,
     email: data.email,
-    languages: data.languages,
+    languages: data.codes,
   };
 
   return axios.post(apiLocal + "/user/edit", body, config);
@@ -104,13 +104,7 @@ export async function profileEditFromAdmin(data) {
   return axios.post(apiLocal + "/user/editUserFromAdmin", body, config);
 }
 
-export async function registerReviewer(data) {
-  // let files = [];
-
-  // for (let i = 0; i < data.scientificWork.length; i++) {
-  //   files.push(data.scientificWork[i]);
-  // }
-
+export async function registerReviewer(data, languages) {
   const bodyFormData = new FormData();
 
   bodyFormData.append("firstName", data.firstName);
@@ -123,18 +117,13 @@ export async function registerReviewer(data) {
   bodyFormData.append("workPlace", data.workPlace);
   bodyFormData.append("workExperience", data.workExperience);
   bodyFormData.append("academicDegree", data.academicDegree);
-  bodyFormData.append("languages", data.languages);
+  bodyFormData.append("languages", languages);
   bodyFormData.append("passport", data.passport);
   bodyFormData.append("file", data.scientificWork);
-
-  // for (var pair of bodyFormData.entries()) {
-  //   console.log(pair[0] + ", " + pair[1]);
-  // }
 
   return await axios({
     method: "post",
     url: apiLocal + "/user/registerReviewer",
-    // url: apiSwagger + "/user/registerReviewer",
     data: bodyFormData,
     headers: {
       "Content-Type": "multipart/form-data",
