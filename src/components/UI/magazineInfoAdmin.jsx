@@ -39,7 +39,7 @@ class MagazineInfoAdmin extends Component {
 
       this.getMagazineInfo(magazineId);
       this.getYearsById(magazineId);
-    } catch (error) {
+    } catch (ex) {
       toast.error("Bunday jurnal mavjud emas");
     }
   }
@@ -47,13 +47,12 @@ class MagazineInfoAdmin extends Component {
   getMagazineInfo = async (id) => {
     try {
       await getById(id).then((res) => {
-        // console.log(res.data.object.journals);
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ cover: res.data.object.journals.cover });
         this.getImage(res.data.object.journals.cover.id);
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -61,10 +60,12 @@ class MagazineInfoAdmin extends Component {
     try {
       await getYearById(id).then((res) => {
         this.setState({ years: res.data });
-        this.getMagazinesByYear(res.data[0], this.state.magazineId);
+        if (res.data[0]) {
+          this.getMagazinesByYear(res.data[0], this.state.magazineId);
+        }
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -75,8 +76,8 @@ class MagazineInfoAdmin extends Component {
       await getMagazinesByYear(year, id).then((res) => {
         this.setState({ magazines: res.data });
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -91,7 +92,7 @@ class MagazineInfoAdmin extends Component {
         )
       ).data;
     } catch (err) {
-      return null;
+      return toast.error("Fayl topilmadi");
     }
 
     return this.setState({ cover: URL.createObjectURL(imageBlob) });
@@ -99,7 +100,6 @@ class MagazineInfoAdmin extends Component {
 
   render() {
     const { title, category } = this.state.magazineInfo;
-
     const { years, magazines } = this.state;
 
     return (

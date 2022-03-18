@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import axios from "axios";
 import GetImages from "utils/getImages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "services/authService";
+import { downloadMedia } from "services/mediaService";
 
 import {
   getById,
-  getYearById,
-  getMagazinesByYear,
+  getPublishedYears,
+  getPublishedMagazinesByYear,
 } from "services/magazineService";
 
 import "styles/magazineInfo.css";
@@ -51,19 +51,21 @@ class MagazineInfo extends Component {
         this.setState({ cover: res.data.object.journals.cover });
         this.getImage(res.data.object.journals.cover.id);
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
   getYearsById = async (id) => {
     try {
-      await getYearById(id).then((res) => {
+      await getPublishedYears(id).then((res) => {
         this.setState({ years: res.data });
-        this.getMagazinesByYear(res.data[0], this.state.magazineId);
+        if (res.data[0]) {
+          this.getMagazinesByYear(res.data[0], this.state.magazineId);
+        }
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -71,11 +73,11 @@ class MagazineInfo extends Component {
     try {
       this.setState({ magazines: [] });
 
-      await getMagazinesByYear(year, id).then((res) =>
+      await getPublishedMagazinesByYear(year, id).then((res) =>
         this.setState({ magazines: res.data })
       );
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -83,14 +85,9 @@ class MagazineInfo extends Component {
     let imageBlob;
 
     try {
-      imageBlob = (
-        await axios.get(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
-    } catch (err) {
-      return null;
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
+    } catch (ex) {
+      return toast.error("Fayl topilmadi");
     }
 
     return this.setState({ cover: URL.createObjectURL(imageBlob) });

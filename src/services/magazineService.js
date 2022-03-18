@@ -1,5 +1,5 @@
 import http from "./httpService";
-import api from "../utils/config.json";
+import api from "utils/config.json";
 import axios from "axios";
 
 const token = localStorage.getItem("token");
@@ -111,6 +111,16 @@ export function editMagazines(id, data) {
   });
 }
 
+export function getPublishedYears(id) {
+  return http.get(apiLocal + `/journals/getPublishedYears/${id}`);
+}
+
+export function getPublishedMagazinesByYear(year, id) {
+  return http.get(
+    apiLocal + `/journals/getPublishedJournalsByYear/${id}/${year}`
+  );
+}
+
 export default {
   createMagazine,
   getById,
@@ -122,4 +132,6 @@ export default {
   getMagazinesByYear,
   getArticlesFromMagazine,
   ActionUnderArticlesFromMagazine,
+  getPublishedYears,
+  getPublishedMagazinesByYear,
 };

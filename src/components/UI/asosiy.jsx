@@ -20,8 +20,8 @@ class Asosiy extends React.Component {
       await getActiveMagazines().then((res) =>
         this.setState({ magazines: res.data })
       );
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
