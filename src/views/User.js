@@ -41,7 +41,6 @@ class User extends Component {
     options: [],
     codes: [],
     checkedArticles: [],
-    selectedValues: [],
   };
 
   async componentDidMount() {
@@ -83,6 +82,7 @@ class User extends Component {
         if (res.data.photos[0]) {
           this.getImage(res.data.photos[0].id);
         }
+        this.setState({ selectedValues: res.data.languages });
       })
       .catch((ex) => toast.error(ex.response.data.message));
   };
