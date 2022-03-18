@@ -35,6 +35,10 @@ export function getChildCategories(id) {
   return http.get(apiLocal + `/category/allChildrenCategory/${id}`);
 }
 
+export function getPublishedParentCategories() {
+  return http.get(apiLocal + `/category/parentCategories`);
+}
+
 export default {
   getCategories,
   getCategoriesForMagazine,
@@ -44,4 +48,5 @@ export default {
   getParentCategories,
   getParentMagazines,
   getChildCategories,
+  getPublishedParentCategories,
 };

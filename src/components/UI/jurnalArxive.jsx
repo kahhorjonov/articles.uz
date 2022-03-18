@@ -66,7 +66,6 @@ class JurnalArxive extends Component {
   getMagazineInfo = async (id) => {
     try {
       await getById(id).then((res) => {
-        // console.log(res.data.object.journals);
         this.setState({ magazineInfo: res.data.object.journals });
         this.setState({ cover: res.data.object.journals.cover });
         this.getImage(res.data.object.journals.cover.id);

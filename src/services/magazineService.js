@@ -121,6 +121,10 @@ export function getPublishedMagazinesByYear(year, id) {
   );
 }
 
+export function getPublishedParentMagazines() {
+  return http.get(apiLocal + `/journals/getPublishedParentJournals`);
+}
+
 export default {
   createMagazine,
   getById,
@@ -134,4 +138,5 @@ export default {
   ActionUnderArticlesFromMagazine,
   getPublishedYears,
   getPublishedMagazinesByYear,
+  getPublishedParentMagazines,
 };

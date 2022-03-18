@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import AOS from "aos";
 import "aos/dist/aos.css";
 
-import {
-  getMagazinesById,
-  getParentCategories,
-} from "services/magazineService";
+import { getPublishedParentMagazines } from "services/magazineService";
+import { getPublishedParentCategories } from "services/getCategories";
 
 import { Col } from "reactstrap";
 
@@ -36,8 +33,8 @@ class JurnallarRoyxati extends Component {
 
   getCategory = async () => {
     try {
-      await getParentCategories().then((respons) => {
-        this.setState({ magazineCategories: respons.data });
+      await getPublishedParentCategories().then((res) => {
+        this.setState({ magazineCategories: res.data.object });
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -46,11 +43,11 @@ class JurnallarRoyxati extends Component {
 
   handleGetMagazinesById = async (id) => {
     try {
-      await getMagazinesById(id).then((res) => {
+      await getPublishedParentMagazines(id).then((res) => {
         this.setState({ magazines: res.data });
       });
-    } catch (error) {
-      toast.error(error);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -61,17 +58,17 @@ class JurnallarRoyxati extends Component {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
         items: 2.4,
-        slidesToSlide: 2, // optional, default to 1.
+        slidesToSlide: 2,
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
         items: 2,
-        slidesToSlide: 2, // optional, default to 1.
+        slidesToSlide: 2,
       },
       mobile: {
         breakpoint: { max: 464, min: 0 },
         items: 1,
-        slidesToSlide: 1, // optional, default to 1.
+        slidesToSlide: 1,
       },
     };
 
@@ -80,7 +77,7 @@ class JurnallarRoyxati extends Component {
         onMove,
         carouselState: { currentSlide, deviceType },
       } = rest;
-      // onMove means if dragging or swiping in progress.
+
       return <button onClick={() => onClick()} />;
     };
 
@@ -98,7 +95,7 @@ class JurnallarRoyxati extends Component {
               <ul className="nav navpils">
                 <li className="nav-item">
                   <Link
-                    className="nav-link"
+                    className="nav-link active"
                     data-toggle="pill"
                     to=""
                     onClick={(e) => {
@@ -168,9 +165,10 @@ class JurnallarRoyxati extends Component {
           <div className="container p-0">
             <div className="row mx-0 mx-sm-0">
               <div className="col-md-6">
-                <div className="article-chap"
-                data-aos="fade-right"
-                data-aos-duration="2000"
+                <div
+                  className="article-chap"
+                  data-aos="fade-right"
+                  data-aos-duration="2000"
                 >
                   <p style={{ fontSize: "32px" }} className="jurnal-haqida">
                     Jurnal haqida
@@ -184,8 +182,11 @@ class JurnallarRoyxati extends Component {
               </div>
 
               <div className="col-md-6">
-                <div className="art-tex"  data-aos="fade-left"
-                data-aos-duration="2000">
+                <div
+                  className="art-tex"
+                  data-aos="fade-left"
+                  data-aos-duration="2000"
+                >
                   <span className="articles-text">
                     Articles.uz onlayn jurnallari ilm-fanning turli sohalarida
                     Oliy o'quv yurtlari o'qituvchilari, ilmiy xodimlar va
