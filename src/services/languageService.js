@@ -23,10 +23,15 @@ export function changeActivity(id, bool) {
   return http.post(apiLocal + `/language/changeActive/${id}/${bool}`);
 }
 
+export function createLanguage(name) {
+  return http.post(apiLocal + `/language/add/${name}`);
+}
+
 export default {
   getAllActiveLanguages,
   getAllLanguages,
   changeLanguage,
   deleteLanguage,
   changeActivity,
+  createLanguage,
 };

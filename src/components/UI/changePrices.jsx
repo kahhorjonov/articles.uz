@@ -7,9 +7,8 @@ import {
   getAllLanguages,
   deleteLanguage,
   changeActivity,
+  createLanguage,
 } from "services/languageService";
-
-import axios from "axios";
 
 class ChangePrices extends Component {
   state = {
@@ -36,16 +35,12 @@ class ChangePrices extends Component {
 
   createLanguage = async () => {
     try {
-      await axios
-        .post(
-          `http://192.168.100.27:8080/api/language/add/${this.state.newName}`
-        )
-        .then((res) => {
-          toast.success(res.data.message);
-          this.getLanguages();
-          this.setState({ name: "" });
-          this.setState({ newName: "" });
-        });
+      await createLanguage(this.state.newName).then((res) => {
+        toast.success(res.data.message);
+        this.getLanguages();
+        this.setState({ name: "" });
+        this.setState({ newName: "" });
+      });
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
