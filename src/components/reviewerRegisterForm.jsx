@@ -7,8 +7,9 @@ import { getCategories } from "../services/getCategories";
 import { toast } from "react-toastify";
 import authService from "../services/authService";
 import jwtDecode from "jwt-decode";
-
+import Multiselect from "multiselect-react-dropdown";
 import firebase from "../firebase";
+import { getAllActiveLanguages } from "services/languageService";
 
 import { Card, CardBody, Row, Col } from "reactstrap";
 
@@ -36,9 +37,13 @@ class ReviewerRegisterForm extends Form {
     errors: {},
 
     notificationToken: "",
+    selectedValues: [],
+    options: [],
+    codes: [],
+    checkedArticles: [],
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     try {
       const msg = firebase.messaging();
       msg
@@ -55,6 +60,32 @@ class ReviewerRegisterForm extends Form {
       );
     }
   }
+
+  handleGetLanguage = async () => {
+    try {
+      await getAllActiveLanguages().then((res) =>
+        this.setState({ options: res.data })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
+
+  onSelect = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues: selectedList,
+    });
+
+    this.setState({ codes: [...this.state.codes, selectedItem.id] });
+  };
+
+  onRemove = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList: selectedList });
+    this.setState({ codes: [...newCodes] });
+  };
 
   schema = {
     firstName: Joi.string().required().label("Ismi"),
@@ -127,7 +158,8 @@ class ReviewerRegisterForm extends Form {
                   </Row>
                   <Row>
                     <Col md="4" sm="4">
-                      {this.renderInput("phoneNumber", "Telefon raqami")}
+                      {/* {this.renderInput("phoneNumber", "Telefon raqami")} */}
+                      {this.renderLoginInput("phoneNumber", "Telefon raqami")}
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderInput("email", "Email", "email")}
@@ -160,7 +192,14 @@ class ReviewerRegisterForm extends Form {
                   </Row>
                   <Row>
                     <Col md="4" sm="4">
-                      {this.renderInput("languages", "Languages")}
+                      <label>Languages</label>
+                      <Multiselect
+                        options={this.state.options} // Options to display in the dropdown
+                        selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
+                        onSelect={this.onSelect} // Function will trigger on select event
+                        onRemove={this.onRemove} // Function will trigger on remove event
+                        displayValue="name" // Property name to display in the dropdown options
+                      />
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderPassportInput("passport", "Passport", "file")}

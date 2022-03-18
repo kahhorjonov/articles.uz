@@ -1,7 +1,7 @@
 import React from "react";
 
 const Input = (props) => {
-  const { name, label, error, ...rest } = props;
+  const { name, label, error, type, ...rest } = props;
 
   return (
     <div>

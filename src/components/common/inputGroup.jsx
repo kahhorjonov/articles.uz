@@ -5,7 +5,16 @@ const InputGroupField = (props) => {
   const { name, label, error, ...rest } = props;
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "auto !important",
+      }}
+    >
+      <label htmlFor={name}>{label}</label>
       <InputGroup>
         <InputGroupText style={{ fontSize: "1.5rem" }}>+998</InputGroupText>
         <Input
