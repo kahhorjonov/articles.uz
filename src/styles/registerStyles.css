@@ -107,7 +107,17 @@ body {
 .kirish:hover {
   color: black;
 }
-
+.app .input-group span {
+  height: 34px !important;
+  background-color: white;
+  border-right: none;
+}
+.app .input-group input {
+  height: 34px !important;
+}
+.app .input-group input:focus {
+  border-color: #dddddd;
+}
 /* 
 @media (min-width: 575px) {
   .registerForm{

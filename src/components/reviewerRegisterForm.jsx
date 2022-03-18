@@ -157,7 +157,7 @@ class ReviewerRegisterForm extends Form {
                     </Col>
                   </Row>
                   <Row>
-                    <Col md="4" sm="4">
+                    <Col md="4" sm="4" className="app">
                       {/* {this.renderInput("phoneNumber", "Telefon raqami")} */}
                       {this.renderLoginInput("phoneNumber", "Telefon raqami")}
                     </Col>
