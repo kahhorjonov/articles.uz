@@ -26,12 +26,30 @@ class ChangePrices extends Component {
     language: [],
     name: "",
     id: "",
+    newName: "",
   };
 
   componentDidMount() {
     this.getPrice();
     this.getLanguages();
   }
+
+  createLanguage = async () => {
+    try {
+      await axios
+        .post(
+          `http://192.168.100.27:8080/api/language/add/${this.state.newName}`
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          this.getLanguages();
+          this.setState({ name: "" });
+          this.setState({ newName: "" });
+        });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
 
   editLanguage = async (id, name) => {
     try {
@@ -240,6 +258,66 @@ class ChangePrices extends Component {
                       {/* ----------------------------------------- */}
 
                       <div id="home2" className="container tab-pane fade">
+                        {/* modal */}
+                        <button
+                          style={{
+                            position: "absolute",
+                            top: "0",
+                            right: "0",
+                            marginTop: "27px",
+                            marginRight: "28px",
+                          }}
+                          data-toggle="modal"
+                          data-target="#myModal2"
+                          className="btn btn-success"
+                        >
+                          Til qo'shish +
+                        </button>
+
+                        <div className="modal" id="myModal2">
+                          <div className="modal-dialog">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h4 className="modal-title">Til Qoshish</h4>
+                              </div>
+
+                              <div className="modal-body">
+                                <input
+                                  type="text"
+                                  onChange={(e) =>
+                                    this.setState({
+                                      newName: e.target.value,
+                                    })
+                                  }
+                                  className="form-control"
+                                  placeholder="Til qo'shish"
+                                />
+                              </div>
+
+                              <div className="modal-footer">
+                                <button
+                                  type="button"
+                                  className="btn btn-success mr-4"
+                                  data-dismiss="modal"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    this.createLanguage(e);
+                                  }}
+                                >
+                                  Submit
+                                </button>
+                                <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                  data-dismiss="modal"
+                                >
+                                  Close
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                         <table className="table table-hover">
                           <thead>
                             <tr className="col-lg-12">

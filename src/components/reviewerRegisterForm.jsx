@@ -212,7 +212,7 @@ class ReviewerRegisterForm extends Form {
                       )}
                     </Col>
                   </Row>
-                  <div className="bt">{this.renderButton("Register")}</div>
+                  <div className="bt mt-5">{this.renderButton("Register")}</div>
                 </CardBody>
               </form>
             </Row>
