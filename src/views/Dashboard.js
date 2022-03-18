@@ -1,11 +1,9 @@
-import axios from "axios";
 import React, { Component } from "react";
-// react plugin used to create charts
 
 import { Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-
 import { toast } from "react-toastify";
+import { getUsersInfo } from "services/userService";
 
 import {
   Card,
@@ -18,22 +16,27 @@ import {
 } from "reactstrap";
 
 Chart.register(...registerables);
-// reactstrap components
 
 class Dashboard extends Component {
   state = { data: {} };
 
   async componentDidMount() {
-    axios
-      .get("http://192.168.100.27:8080/api/user/dashboard")
-      .then((res) => {
-        // console.log(res.data.object);
-        this.setState({ data: res.data });
-      })
-      .catch((ex) => {
-        toast.error(ex.response.data.message);
-      });
+    this.getUsersInformation();
   }
+
+  getUsersInformation = async () => {
+    try {
+      await getUsersInfo()
+        .then((res) => {
+          this.setState({ data: res.data });
+        })
+        .catch((ex) => {
+          toast.error(ex.response.data.message);
+        });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
 
   render() {
     const {

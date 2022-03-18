@@ -1,5 +1,5 @@
 import http from "./httpService";
-import api from "../utils/config.json";
+import api from "utils/config.json";
 import axios from "axios";
 
 const { apiSwagger, apiLocal } = api;
@@ -143,6 +143,10 @@ export function acceptReviewers(id) {
   return http.post(apiLocal + `/user/activeEdite/${id}`);
 }
 
+export function getUsersInfo() {
+  return http.get(apiLocal + "/user/dashboard");
+}
+
 export default {
   registerReviewer,
   profileEdit,
@@ -157,4 +161,5 @@ export default {
   getUsersById,
   getNewRegisteredUsers,
   acceptReviewers,
+  getUsersInfo,
 };

@@ -76,11 +76,11 @@ class RestorePassword extends Form {
               "SMS orqali kelgan kodni kiriting",
               "password"
             )}
-            {this.renderButton("Login")}
+            {this.renderButton("Submit")}
           </form>
           <Link className="rever" style={{ fontSize: "2rem" }} to="/login">
             Profilga kirish
-          </Link>{" "}
+          </Link>
           <br />
         </div>
       </div>

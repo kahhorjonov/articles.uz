@@ -13,6 +13,8 @@ import "styles/homePage.css";
 class Asosiy extends React.Component {
   state = {
     magazines: [],
+
+    data: "",
   };
 
   componentDidMount = async () => {
