@@ -2,11 +2,20 @@ import React, { Component } from "react";
 import { Row } from "reactstrap";
 import { toast } from "react-toastify";
 import { getPrices, changePrices } from "services/priceService";
+import {
+  changeLanguage,
+  getAllLanguages,
+  deleteLanguage,
+  changeActivity,
+} from "services/languageService";
+
 import axios from "axios";
 
 class ChangePrices extends Component {
   state = {
     getPrice: [],
+    activeName: "",
+    activeId: "",
 
     bittaBosmaJunalNarxi: "",
     bittaSertifikatNarxi: "",
@@ -14,34 +23,32 @@ class ChangePrices extends Component {
     sahifaNarxi: "",
     chopEtishNarxi: "",
 
-    langeage: [],
+    language: [],
     name: "",
     id: "",
   };
 
   componentDidMount() {
     this.getPrice();
-    this.getLanguage();
+    this.getLanguages();
   }
 
-  changeEditLang = async (id, name) => {
-    await axios
-      .post(`http://192.168.100.27:8080/api/language/edit/${id}/${name}`, {
-        id: this.state.id,
-        name: this.state.name,
-      })
-      .then((res) => {
-        console.log(res);
+  editLanguage = async (id, name) => {
+    try {
+      await changeLanguage(id, name).then((res) => {
+        toast.success(res.data.message);
+        this.getLanguages();
       });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
   };
 
-  getLanguage = async () => {
+  getLanguages = async () => {
     try {
-      await axios
-        .get("http://192.168.100.27:8080/api/language/all")
-        .then((res) => {
-          this.setState({ langeage: res.data });
-        });
+      await getAllLanguages().then((res) => {
+        this.setState({ language: res.data });
+      });
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
@@ -57,14 +64,22 @@ class ChangePrices extends Component {
     }
   };
 
-  langDelate = async (id) => {
+  deleteLanguage = async (id) => {
     try {
-      await axios
-        .delete(`http://192.168.100.27:8080/api/language/delete/${id}`)
-        .then((res) => {
-          toast.info(res.data.message);
-          this.getLanguage();
-        });
+      await deleteLanguage(id).then((res) => {
+        toast.info(res.data.message);
+        this.getLanguages();
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
+
+  handleChangeActivity = async (id, bool) => {
+    try {
+      await changeActivity(id, bool).then((res) =>
+        toast.success(res.data.message)
+      );
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
@@ -87,10 +102,9 @@ class ChangePrices extends Component {
   };
 
   render() {
-    const { langeage } = this.state;
-    const { name } = this.state;
-    console.log(this.state.langeage);
+    const { language } = this.state;
     const { getPrice } = this.state;
+
     const {
       bittaBosmaJunalNarxi,
       bittaSertifikatNarxi,
@@ -211,7 +225,7 @@ class ChangePrices extends Component {
                             </div>
                           </div>
 
-                          <div className="col-lg-2 col-sm-4">
+                          <div className="col-lg-2 col-sm-4 mt-4">
                             <button
                               style={{ height: "30px", padding: "2px" }}
                               onClick={this.handleChangePrices}
@@ -230,54 +244,109 @@ class ChangePrices extends Component {
                           <thead>
                             <tr className="col-lg-12">
                               <th className="col-lg-1">№</th>
-                              <th className="col-lg-3">Name</th>
-                              <th className="col-lg-3">Active</th>
+                              <th className="col-lg-2">Name</th>
+                              <th className="col-lg-4">Active</th>
                               <th className="col-lg-2">Delate</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {langeage.map((article, index) => (
-                              <tr key={article.id}>
-                                <td>{index + 1}</td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    defaultValue={article.name}
-                                    onChange={(e) => {
-                                      this.setState({ name: e.target.value });
-                                    }}
-                                  />
-                                </td>
-                                <td>
-                                  <label className="switch">
-                                    <input
-                                      defaultChecked={article.active}
-                                      onChange={(e) =>
-                                        this.handleChange(e.target.checked)
+                            {language &&
+                              language.map((lang, index) => (
+                                <tr key={lang.id}>
+                                  <td>{index + 1}</td>
+                                  <td>{lang.name}</td>
+                                  <td>
+                                    <label className="switch">
+                                      <input
+                                        defaultChecked={lang.active}
+                                        onChange={(e) =>
+                                          this.handleChangeActivity(
+                                            lang.id,
+                                            e.target.checked
+                                          )
+                                        }
+                                        type="checkbox"
+                                      />
+                                      <span className="slider round"></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                    <button
+                                      onClick={() =>
+                                        this.deleteLanguage(lang.id)
                                       }
-                                      type="checkbox"
-                                    />
-                                    <span className="slider round"></span>
-                                  </label>
-                                </td>
-                                <td>
-                                  <button
-                                    onClick={() => this.langDelate(article.id)}
-                                    className="btn btn-danger mr-2"
-                                  >
-                                    delate
-                                  </button>
+                                      className="btn btn-danger mr-2"
+                                    >
+                                      delate
+                                    </button>
 
-                                  <button
-                                    className="btn btn-primary"
-                                    type="submit"
-                                    onClick={(e) => this.changeEditLang()}
-                                  >
-                                    Submit
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
+                                    <button
+                                      type="button"
+                                      className="btn btn-primary"
+                                      data-toggle="modal"
+                                      data-target="#myModal"
+                                      onClick={(e) => {
+                                        this.setState({ activeId: lang.id });
+                                        this.setState({
+                                          activeName: lang.name,
+                                        });
+                                      }}
+                                    >
+                                      Edit
+                                    </button>
+
+                                    <div className="modal" id="myModal">
+                                      <div className="modal-dialog">
+                                        <div className="modal-content">
+                                          <div className="modal-header">
+                                            <h4 className="modal-title">
+                                              <b>Tilni O'zgartirish</b>
+                                            </h4>
+                                          </div>
+
+                                          <div className="modal-body">
+                                            <input
+                                              type="text"
+                                              defaultValue={
+                                                this.state.activeName
+                                              }
+                                              className="form-control"
+                                              onChange={(e) => {
+                                                this.setState({
+                                                  name: e.target.value,
+                                                });
+                                              }}
+                                            />
+                                          </div>
+
+                                          <div className="modal-footer">
+                                            <button
+                                              type="button"
+                                              className="btn btn-success mr-3"
+                                              data-dismiss="modal"
+                                              onClick={(e) => {
+                                                this.editLanguage(
+                                                  this.state.activeId,
+                                                  this.state.name
+                                                );
+                                              }}
+                                            >
+                                              Submit
+                                            </button>
+                                            <button
+                                              type="button"
+                                              className="btn btn-danger"
+                                              data-dismiss="modal"
+                                            >
+                                              Close
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))}
                           </tbody>
                         </table>
                       </div>
