@@ -1,11 +1,8 @@
 import UserPage from "views/User.js";
-// import Articles from "views/articles";
 import MyTasks from "views/MyTasks";
 import Logout from "components/logout";
-import Jurnallar from "components/UI/jurnallar";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
-import UserReleases from "components/UI/userReleases";
 import UserMagazines from "components/UI/userMagazines";
 
 var reviewerRoutes = [

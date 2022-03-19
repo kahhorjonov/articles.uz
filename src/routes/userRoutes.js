@@ -3,7 +3,6 @@ import ArticleForm from "components/common/articleForm";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
-import UserReleases from "components/UI/userReleases";
 import ArticleEdit from "views/articleEdit";
 import UserMagazines from "components/UI/userMagazines";
 
@@ -26,11 +25,20 @@ var UserRoutes = [
     visible: false,
   },
 
+  // {
+  //   path: "/release/:id",
+  //   name: "Magazine Releases",
+  //   icon: "nc-icon nc-map-big",
+  //   component: UserReleases,
+  //   layout: "/user",
+  //   visible: false,
+  // },
+
   {
     path: "/release/:id",
     name: "Magazine Releases",
     icon: "nc-icon nc-map-big",
-    component: UserReleases,
+    component: ReviewerArchive,
     layout: "/user",
     visible: false,
   },
