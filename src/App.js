@@ -20,6 +20,7 @@ import NotFound from "./components/common/notFound";
 import auth from "services/authService.js";
 import MagazineInfo from "./components/UI/magazineInfo";
 import JurnalArxive from "./components/UI/jurnalArxive";
+import RestoreWithSms from "components/UI/restoreWithSms";
 import RestorePassword from "components/UI/restorePassword";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -504,7 +505,8 @@ class App extends Component {
               component={ReviewerRegisterForm}
             />
 
-            <Route path="/restorePassword" exact component={RestorePassword} />
+            <Route path="/restorePassword" exact component={RestoreWithSms} />
+            <Route path="/changePassword" exact component={RestorePassword} />
 
             <Route path="/not-found" component={NotFound} />
             {/* <Redirect from="/admin" to="/admin/dashboard" /> */}

@@ -51,6 +51,10 @@ export function getJwt() {
   return localStorage.getItem(tokenKey);
 }
 
+export function restorePassword(phone) {
+  return http.post(apiLocal + `/user/createNewPassword/${phone}`);
+}
+
 export default {
   login,
   logout,
@@ -58,4 +62,5 @@ export default {
   loginWithJwt,
   getJwt,
   me,
+  restorePassword,
 };

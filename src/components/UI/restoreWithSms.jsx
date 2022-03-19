@@ -2,22 +2,20 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "components/common/form";
 import auth from "services/authService";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
 
-class RestorePassword extends Form {
+class RestoreWithSms extends Form {
   state = {
     data: {
       phoneNumber: "",
-      password: "",
     },
     errors: {},
   };
 
   schema = {
     phoneNumber: Joi.string().required().label("PhoneNumber"),
-    password: Joi.string().required().label("Password"),
   };
 
   // autoRedirect = () => {
@@ -47,12 +45,12 @@ class RestorePassword extends Form {
     try {
       const { phoneNumber } = this.state.data;
       const editedNumber = `+998${phoneNumber}`.trim();
-      await auth.restorePassword(editedNumber);
+      await auth.restorePassword(editedNumber).then((res) => {
+        toast.success(res.data.message);
+        window.location = "/changePassword";
+      });
 
       // this.autoRedirect();
-
-      // const { state } = this.props.location;
-      // window.location = state ? state.from.pathname : "/";
     } catch (ex) {
       toast.error(ex);
     }
@@ -68,9 +66,8 @@ class RestorePassword extends Form {
 
           <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderLoginInput("phoneNumber", "Telefon raqami")}
-            {this.renderInput("password", "Password", "password")}
 
-            <Button>Send sms code</Button>
+            <Button onClick={this.doSubmit}>Send sms code</Button>
           </form>
           <Link className="rever" style={{ fontSize: "2rem" }} to="/login">
             Profilga kirish
@@ -82,4 +79,4 @@ class RestorePassword extends Form {
   }
 }
 
-export default RestorePassword;
+export default RestoreWithSms;
