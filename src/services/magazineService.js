@@ -28,10 +28,6 @@ export function createMagazine(data) {
   bodyFormData.append("file", data.file);
   bodyFormData.append("status", data.status);
 
-  // for (var pair of bodyFormData.entries()) {
-  //   console.log(pair[0] + ", " + pair[1]);
-  // }
-
   return axios({
     method: "post",
     url: apiLocal + "/journals/addJournals",
@@ -85,8 +81,6 @@ export function ActionUnderArticlesFromMagazine(id, action) {
 }
 
 export function editMagazines(id, data) {
-  console.log(data);
-
   const bodyFormData = new FormData();
 
   bodyFormData.append("title", data.title);

@@ -5,14 +5,15 @@ import Logout from "components/logout";
 import Jurnallar from "components/UI/jurnallar";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
-import UserReleases from "./../components/UI/userReleases";
+import UserReleases from "components/UI/userReleases";
+import UserMagazines from "components/UI/userMagazines";
 
 var reviewerRoutes = [
   {
     path: "/reviewerMagazines",
     name: "Jurnallar",
     icon: "nc-icon nc-map-big",
-    component: Jurnallar,
+    component: UserMagazines,
     layout: "/reviewer",
     visible: true,
   },
@@ -26,11 +27,20 @@ var reviewerRoutes = [
     visible: false,
   },
 
+  // {
+  //   path: "/release/:id",
+  //   name: "Magazine Releases",
+  //   icon: "nc-icon nc-map-big",
+  //   component: UserReleases,
+  //   layout: "/reviewer",
+  //   visible: false,
+  // },
+
   {
     path: "/release/:id",
     name: "Magazine Releases",
     icon: "nc-icon nc-map-big",
-    component: UserReleases,
+    component: ReviewerArchive,
     layout: "/reviewer",
     visible: false,
   },

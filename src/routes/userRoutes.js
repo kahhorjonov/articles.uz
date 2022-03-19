@@ -1,18 +1,18 @@
 import UserPage from "views/User.js";
 import ArticleForm from "components/common/articleForm";
 import BarchaMaqolalarim from "components/UI/barchaMaqolalarim.jsx";
-import Jurnallar from "components/UI/jurnallar.jsx";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
 import UserReleases from "components/UI/userReleases";
 import ArticleEdit from "views/articleEdit";
+import UserMagazines from "components/UI/userMagazines";
 
 var UserRoutes = [
   {
     path: "/userMagazines",
     name: "Jurnallar",
     icon: "nc-icon nc-paper",
-    component: Jurnallar,
+    component: UserMagazines,
     layout: "/user",
     visible: true,
   },

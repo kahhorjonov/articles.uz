@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import GetImages from "utils/getImages";
-import axios from "axios";
+import { downloadMedia, downloadFile } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "services/authService.js";
 
 import {
-  getById,
-  getYearById,
-  getMagazinesByYear,
+  getPublishedYears,
+  getPublishedMagazinesByYear,
   getArticlesFromMagazine,
 } from "services/magazineService";
 
@@ -18,12 +17,14 @@ class ReviewerArchive extends Component {
   state = {
     magazineId: "",
     magazineInfo: [],
-
     years: [],
     magazines: [],
     cover: "",
-
     articles: [],
+
+    fileId: "",
+    originalName: "",
+    contentType: "",
 
     user: "",
   };
@@ -37,7 +38,7 @@ class ReviewerArchive extends Component {
         ? this.props.location.pathname.split(":")[1]
         : this.props.location.pathname.split(":")[0];
 
-      this.splitMagazineId();
+      this.setState({ magazineId: magazineId });
 
       this.getYearsById(magazineId);
 
@@ -47,35 +48,13 @@ class ReviewerArchive extends Component {
     }
   }
 
-  splitMagazineId = () => {
-    const magazineId = this.props.location.pathname.split(":")[1]
-      ? this.props.location.pathname.split(":")[1]
-      : this.props.location.pathname.split(":")[0];
-
-    this.setState({
-      magazineId,
-    });
-
-    this.getMagazineInfo(magazineId);
-  };
-
   getArticlesFromMagazineById = async (id) => {
     try {
-      await getArticlesFromMagazine(id).then((res) =>
-        this.setState({ articles: res.data.articleInfoForJournal })
-      );
-    } catch (error) {
-      toast.error(error);
-    }
-  };
-
-  getMagazineInfo = async (id) => {
-    try {
-      await getById(id).then((res) => {
-        // console.log(res.data.object.journals);
-        this.setState({ magazineInfo: res.data.object.journals });
-        this.setState({ cover: res.data.object.journals.cover });
-        this.getImage(res.data.object.journals.cover.id);
+      await getArticlesFromMagazine(id).then((res) => {
+        this.setState({ articles: res.data.articleInfoForJournal });
+        this.setState({ fileId: res.data.journalId });
+        this.setState({ originalName: res.data.originalName });
+        this.setState({ contentType: res.data.contentType });
       });
     } catch (error) {
       toast.error(error);
@@ -84,7 +63,7 @@ class ReviewerArchive extends Component {
 
   getYearsById = async (id) => {
     try {
-      await getYearById(id).then((res) => {
+      await getPublishedYears(id).then((res) => {
         this.setState({ years: res.data });
         this.getMagazinesByYear(res.data[0], this.state.magazineId);
       });
@@ -97,8 +76,10 @@ class ReviewerArchive extends Component {
     try {
       this.setState({ magazines: [] });
 
-      await getMagazinesByYear(year, id).then((res) => {
+      await getPublishedMagazinesByYear(year, id).then((res) => {
         this.setState({ magazines: res.data });
+        this.setState({ magazineInfo: res.data[0] });
+        this.getImage(res.data[0].cover.id);
       });
     } catch (error) {
       toast.error(error);
@@ -109,12 +90,7 @@ class ReviewerArchive extends Component {
     let imageBlob;
 
     try {
-      imageBlob = (
-        await axios.get(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
     } catch (err) {
       return null;
     }
@@ -125,29 +101,20 @@ class ReviewerArchive extends Component {
   handleDownload = async (id, originalName, contentType) => {
     if (id && originalName && contentType) {
       try {
-        await fetch(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": contentType,
-            },
-          }
-        )
+        await downloadFile(id, {
+          method: "GET",
+          headers: {
+            "Content-Type": contentType,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", originalName);
-
             document.body.appendChild(link);
-
-            // Start download
             link.click();
-
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -159,8 +126,18 @@ class ReviewerArchive extends Component {
   };
 
   render() {
-    const { magazineInfo, cover, years, magazines, articles } = this.state;
-    const { allReleasesNumber, releaseNumberOfThisYear, file } = magazineInfo;
+    const {
+      magazineInfo,
+      cover,
+      years,
+      magazines,
+      articles,
+      fileId,
+      originalName,
+      contentType,
+    } = this.state;
+
+    const { allReleaseNumber, releaseNumberOfThisYear } = magazineInfo;
 
     return (
       <>
@@ -185,7 +162,7 @@ class ReviewerArchive extends Component {
                     </div>
                     <br />
                     <h1>
-                      № {releaseNumberOfThisYear} ({allReleasesNumber}) son
+                      № {releaseNumberOfThisYear} ({allReleaseNumber}) son
                     </h1>
 
                     <div className="row px-0 mx-0 ui">
@@ -197,7 +174,7 @@ class ReviewerArchive extends Component {
                           className="text-muted tex"
                         >
                           <b className="text-dark">Jurnal soni:</b> №{" "}
-                          {releaseNumberOfThisYear} ({allReleasesNumber})
+                          {releaseNumberOfThisYear} ({allReleaseNumber})
                         </p>
                         <p>
                           <span
@@ -214,9 +191,9 @@ class ReviewerArchive extends Component {
                           onClick={(e) => {
                             e.preventDefault();
                             this.handleDownload(
-                              file.id && file.id,
-                              file.id && file.originalName,
-                              file.id && file.contentType
+                              fileId && fileId,
+                              fileId && originalName,
+                              fileId && contentType
                             );
                           }}
                         >
@@ -244,7 +221,7 @@ class ReviewerArchive extends Component {
                                 }}
                               >
                                 <li className="list-group-item">
-                                  <span>{idx + 1}. </span>{" "}
+                                  <span>{idx + 1}. </span>
                                   {article.titleArticle}
                                 </li>
                               </Link>
@@ -304,7 +281,10 @@ class ReviewerArchive extends Component {
                                             : "/"
                                         }
                                         onClick={() => {
-                                          this.splitMagazineId();
+                                          this.getArticlesFromMagazineById(
+                                            magazine.id
+                                          );
+                                          this.getImage(magazine.cover.id);
                                         }}
                                       >
                                         № {magazine.releaseNumberOfThisYear} (

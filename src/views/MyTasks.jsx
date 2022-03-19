@@ -6,6 +6,7 @@ import {
   sendWork,
   myCheckedArticles,
 } from "services/articleService";
+import { getCurrentUser } from "services/authService";
 
 import { downloadFile } from "services/mediaService";
 
@@ -23,9 +24,12 @@ class MyTasks extends Component {
     description: "",
 
     myallArticles: [],
+    user: "",
   };
 
   async componentDidMount() {
+    const user = getCurrentUser().roles[0].id;
+
     await this.newMyArticles();
 
     this.handleGetMyCheckedArticles();
@@ -274,12 +278,15 @@ class MyTasks extends Component {
                                 <th className="col-lg-3 col-sm-3 ">
                                   <p>Maqola nomi</p>
                                 </th>
+
                                 <th className="col-lg-3 col-sm-3 ">
-                                  <p>Maqolani Tekshirish vaqti</p>
+                                  <p>Maqolani tekshirish vaqti</p>
                                 </th>
+
                                 <th className="col-lg-3 col-sm-3 ">
                                   <p>Xulosa</p>
                                 </th>
+
                                 <th className="col-lg-3 col-sm-3 ">
                                   <p>File</p>
                                 </th>
@@ -311,11 +318,15 @@ class MyTasks extends Component {
                                       </a>
                                     </td>
                                     <td className="col-lg-3 col-sm-3  d-flex align-items-center justify-content-center">
-                                      {article.article.deadLine} kun qoldi
+                                      {article.deadLine}
                                     </td>
                                     <td className="col-lg-3 col-sm-3 ">
                                       <form>
                                         <select
+                                          style={{
+                                            height: "3rem",
+                                            fontSize: "1.3rem",
+                                          }}
                                           defaultValue="CHECK_AND_ACCEPT"
                                           onChange={(e) =>
                                             this.setState({
@@ -340,6 +351,7 @@ class MyTasks extends Component {
                                     <td className="col-lg-3 col-sm-3  d-flex">
                                       <span>
                                         <input
+                                          style={{ fontSize: "1.2rem" }}
                                           onChange={(e) => {
                                             this.setState({
                                               file: e.target.files[0],

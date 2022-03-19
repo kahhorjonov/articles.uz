@@ -1,21 +1,18 @@
 import React, { Component } from "react";
-import {
-  getParentMagazines,
-  getMagazinesById,
-  getActiveMagazines,
-  getDeadlinedMagazines,
-} from "services/magazineService";
-import auth from "services/authService";
-
-import GetImages from "utils/getImages";
-import { getParentCategories } from "services/getCategories";
 import { Link } from "react-router-dom";
+
+import auth from "services/authService";
+import GetImages from "utils/getImages";
+
+import { getPublishedParentMagazines } from "services/magazineService";
+import { getPublishedParentCategories } from "services/getCategories";
+
 import { toast } from "react-toastify";
-import { Col, Input, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 import "styles/homePage.css";
 
-class Jurnallar extends Component {
+class UserMagazines extends Component {
   state = {
     magazineCategories: [],
     magazines: [],
@@ -25,7 +22,6 @@ class Jurnallar extends Component {
 
   componentDidMount = async () => {
     const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
-
     this.setState({ user: user.id });
 
     await this.getCategory();
@@ -36,8 +32,8 @@ class Jurnallar extends Component {
 
   getCategory = async () => {
     try {
-      await getParentCategories().then((res) => {
-        this.setState({ magazineCategories: res.data });
+      await getPublishedParentCategories().then((res) => {
+        this.setState({ magazineCategories: res.data.object });
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -46,29 +42,11 @@ class Jurnallar extends Component {
 
   getMagazinesById = async (id) => {
     try {
-      await getMagazinesById(id).then((res) => {
+      await getPublishedParentMagazines(id).then((res) => {
         this.setState({ magazines: res.data });
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
-    }
-  };
-
-  getMagazinesBySelect = async (option) => {
-    try {
-      option == 1
-        ? await getParentMagazines().then((res) => {
-            this.setState({ magazines: res.data });
-          })
-        : option == 2
-        ? await getActiveMagazines().then((res) => {
-            this.setState({ magazines: res.data });
-          })
-        : await getDeadlinedMagazines().then((res) => {
-            this.setState({ magazines: res.data });
-          });
-    } catch (error) {
-      toast.error(error);
     }
   };
 
@@ -85,34 +63,6 @@ class Jurnallar extends Component {
                   <Col sm="6" md="6" lg="6">
                     <div className="card-header">
                       <h3>Barcha jurnallar </h3>
-                    </div>
-                  </Col>
-
-                  <Col
-                    sm="6"
-                    md="6"
-                    lg="6"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "right",
-                    }}
-                  >
-                    <div style={{ display: "block", paddingRight: "1.5rem" }}>
-                      <Input
-                        style={{ height: "unset" }}
-                        type="select"
-                        className="form-control"
-                        onChange={(e) =>
-                          this.getMagazinesBySelect(e.target.value)
-                        }
-                      >
-                        <option value={1}>Barcha Jurnallar</option>
-                        <option value={2}>
-                          Maqola qabul qilayotkan Jurnallar
-                        </option>
-                        <option value={3}>Nashr jarayonidagi jurnallar</option>
-                      </Input>
                     </div>
                   </Col>
                 </Row>
@@ -172,15 +122,9 @@ class Jurnallar extends Component {
                                     <h4 className="card_title p-0">
                                       <Link
                                         to={`/${
-                                          this.state.user === 1
-                                            ? "admin"
-                                            : this.state.user === 2
-                                            ? "reductor"
-                                            : this.state.user === 3
+                                          this.state.user === 3
                                             ? "reviewer"
-                                            : this.state.user === 4
-                                            ? "user"
-                                            : null
+                                            : "user"
                                         }/magazineInformation/:${magazine.id}`}
                                         style={{ cursor: "pointer" }}
                                       >
@@ -189,12 +133,11 @@ class Jurnallar extends Component {
                                     </h4>
 
                                     <p className="card_text text-muted">
-                                      {/* Maqolalar <br /> */}
                                       <span>
                                         {magazine &&
-                                          new Date(magazine.deadline)
-                                            .toISOString()
-                                            .slice(0, 10)}{" "}
+                                          new Date(
+                                            magazine.deadline
+                                          ).toLocaleDateString()}
                                         &nbsp;
                                       </span>
                                       dan buyon chiqadi
@@ -206,7 +149,6 @@ class Jurnallar extends Component {
                         </div>
                       </div>
 
-                      {/* buttons */}
                       <div className="buut-ons justify-content-center d-flex">
                         <a href="">
                           <button
@@ -229,4 +171,4 @@ class Jurnallar extends Component {
   }
 }
 
-export default Jurnallar;
+export default UserMagazines;

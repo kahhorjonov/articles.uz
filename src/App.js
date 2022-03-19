@@ -22,9 +22,9 @@ import MagazineInfo from "./components/UI/magazineInfo";
 import JurnalArxive from "./components/UI/jurnalArxive";
 import RestoreWithSms from "components/UI/restoreWithSms";
 import RestorePassword from "components/UI/restorePassword";
+import ProtectedPage from "./components/protectedPage";
 
 import "react-toastify/dist/ReactToastify.css";
-import ProtectedPage from "./components/protectedPage";
 
 class App extends Component {
   render() {

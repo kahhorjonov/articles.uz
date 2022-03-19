@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 
 import {
   getById,
-  getYearById,
-  getMagazinesByYear,
+  getPublishedYears,
+  getPublishedMagazinesByYear,
   getArticlesFromMagazine,
 } from "services/magazineService";
 
@@ -17,67 +17,61 @@ class JurnalArxive extends Component {
   state = {
     magazineId: "",
     magazineInfo: [],
-
     years: [],
     magazines: [],
     cover: "",
-
     articles: [],
+
+    fileId: "",
+    originalName: "",
+    contentType: "",
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     try {
       const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
         : this.props.location.pathname.split(":")[0];
 
-      this.splitMagazineId();
+      this.setState({
+        magazineId,
+      });
 
-      this.getYearsById(magazineId);
-
-      this.getArticlesFromMagazineById(magazineId);
+      await this.getYearsById(magazineId);
+      await this.getArticlesFromMagazineById(magazineId);
     } catch (error) {
       toast.error("Bunday jurnal mavjud emas");
     }
   }
 
-  splitMagazineId = () => {
-    const magazineId = this.props.location.pathname.split(":")[1]
-      ? this.props.location.pathname.split(":")[1]
-      : this.props.location.pathname.split(":")[0];
-
-    this.setState({
-      magazineId,
-    });
-
-    this.getMagazineInfo(magazineId);
-  };
-
   getArticlesFromMagazineById = async (id) => {
     try {
       await getArticlesFromMagazine(id).then((res) => {
         this.setState({ articles: res.data.articleInfoForJournal });
+        this.setState({ fileId: res.data.journalId });
+        this.setState({ originalName: res.data.originalName });
+        this.setState({ contentType: res.data.contentType });
       });
     } catch (error) {
       toast.error(error);
     }
   };
 
-  getMagazineInfo = async (id) => {
-    try {
-      await getById(id).then((res) => {
-        this.setState({ magazineInfo: res.data.object.journals });
-        this.setState({ cover: res.data.object.journals.cover });
-        this.getImage(res.data.object.journals.cover.id);
-      });
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+  // getMagazineInfo = async (id) => {
+  //   try {
+  //     await getById(id).then((res) => {
+  //       this.setState({ magazineInfo: res.data.object.journals });
+  //       this.setState({ cover: res.data.object.journals.cover });
+  //       this.getImage(res.data.object.journals.cover.id);
+  //     });
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
 
   getYearsById = async (id) => {
     try {
-      await getYearById(id).then((res) => {
+      await getPublishedYears(id).then((res) => {
         this.setState({ years: res.data });
         this.getMagazinesByYear(res.data[0], this.state.magazineId);
       });
@@ -90,9 +84,11 @@ class JurnalArxive extends Component {
     try {
       this.setState({ magazines: [] });
 
-      await getMagazinesByYear(year, id).then((res) =>
-        this.setState({ magazines: res.data })
-      );
+      await getPublishedMagazinesByYear(year, id).then((res) => {
+        this.setState({ magazines: res.data });
+        this.setState({ magazineInfo: res.data[0] });
+        this.getImage(res.data[0].cover.id);
+      });
     } catch (error) {
       toast.error(error);
     }
@@ -121,18 +117,12 @@ class JurnalArxive extends Component {
         })
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", originalName);
-
             document.body.appendChild(link);
-
-            // Start download
             link.click();
-
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -144,9 +134,18 @@ class JurnalArxive extends Component {
   };
 
   render() {
-    const { magazineInfo, cover, years, magazines, articles } = this.state;
+    const {
+      magazineInfo,
+      cover,
+      years,
+      magazines,
+      articles,
+      fileId,
+      originalName,
+      contentType,
+    } = this.state;
 
-    const { allReleasesNumber, releaseNumberOfThisYear, file } = magazineInfo;
+    const { allReleaseNumber, releaseNumberOfThisYear } = magazineInfo;
 
     return (
       <>
@@ -163,7 +162,7 @@ class JurnalArxive extends Component {
           </div>
           <br />
           <h1>
-            № {releaseNumberOfThisYear} ({allReleasesNumber}) son
+            № {releaseNumberOfThisYear} ({allReleaseNumber}) son
           </h1>
 
           <div className="row px-0 mx-0 ui">
@@ -172,7 +171,7 @@ class JurnalArxive extends Component {
 
               <p style={{ fontSize: "16px" }} className="text-muted tex">
                 <b className="text-dark">Jurnal soni:</b> №{" "}
-                {releaseNumberOfThisYear} ({allReleasesNumber})
+                {releaseNumberOfThisYear} ({allReleaseNumber})
               </p>
               <p>
                 <span style={{ fontSize: "16px" }} className="text-muted">
@@ -185,9 +184,9 @@ class JurnalArxive extends Component {
                 onClick={(e) => {
                   e.preventDefault();
                   this.handleDownload(
-                    file.id && file.id,
-                    file.id && file.originalName,
-                    file.id && file.contentType
+                    fileId && fileId,
+                    fileId && originalName,
+                    fileId && contentType
                   );
                 }}
               >
@@ -199,7 +198,6 @@ class JurnalArxive extends Component {
                 <li style={{ listStyle: "none", fontSize: "16px" }}>
                   JURNAL TARKIBI
                 </li>
-                {/* <hr /> */}
 
                 {articles &&
                   articles.map((article, idx) => (
@@ -266,7 +264,8 @@ class JurnalArxive extends Component {
                               className="text-dark"
                               to={`/release/:${magazine.id}`}
                               onClick={() => {
-                                this.splitMagazineId();
+                                this.getArticlesFromMagazineById(magazine.id);
+                                this.getImage(magazine.cover.id);
                               }}
                             >
                               № {magazine.releaseNumberOfThisYear} (
