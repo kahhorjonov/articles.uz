@@ -24,6 +24,7 @@ import RestoreWithSms from "components/UI/restoreWithSms";
 import RestorePassword from "components/UI/restorePassword";
 
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedPage from "./components/protectedPage";
 
 class App extends Component {
   render() {
@@ -463,50 +464,44 @@ class App extends Component {
               exact
               component={(props) => <JurnalArxive {...props} />}
             />
-
             <Route
               path="/listOfMagazines/magazineInfo/:id"
               exact
               component={(props) => <JurnalArxive {...props} />}
             />
-
             <Route
               path="/termsOfPublication"
               exact
               component={(props) => <NashrShartlari {...props} />}
             />
-
             <Route
               path="/contact"
               exact
               component={(props) => <Aloqa {...props} />}
             />
-
             <Route
               path="/login"
               component={(props) => <LoginForm {...props} />}
             />
-
             <Route
               path="/logout"
               exact
               component={(props) => <Logout {...props} />}
             />
-
             <Route
               path="/register"
               exact
               component={(props) => <RegisterForm {...props} />}
             />
-
             <Route
               path="/registerReviewer"
               exact
               component={ReviewerRegisterForm}
             />
 
-            <Route path="/restorePassword" exact component={RestoreWithSms} />
-            <Route path="/changePassword" exact component={RestorePassword} />
+            <Route path="/restorePassword" component={RestoreWithSms} />
+
+            <ProtectedPage path="/changePassword" component={RestorePassword} />
 
             <Route path="/not-found" component={NotFound} />
             {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
