@@ -1,65 +1,66 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "components/common/form";
-import auth from "services/authService";
-import { Link } from "react-router-dom";
+import { changePassword, getCurrentUser } from "services/authService";
 import { toast } from "react-toastify";
-import { Button } from "reactstrap";
 
 class RestorePassword extends Form {
   state = {
     data: {
-      phoneNumber: "",
+      verificationCode: "",
       password: "",
     },
     errors: {},
   };
 
   schema = {
-    phoneNumber: Joi.string().required().label("PhoneNumber"),
+    verificationCode: Joi.string().required().label("Verification Code"),
     password: Joi.string().required().label("Password"),
   };
 
-  // autoRedirect = () => {
-  //   if (auth.getCurrentUser()) {
-  //     const token = auth.getCurrentUser();
-  //     const roleName = token.roles[0].id;
+  autoRedirect = () => {
+    if (getCurrentUser()) {
+      const token = getCurrentUser();
+      const roleName = token.roles[0].id;
 
-  //     if (roleName === 1) {
-  //       window.location = "/admin";
-  //     }
+      if (roleName === 1) {
+        window.location = "/admin";
+      }
 
-  //     if (roleName === 2) {
-  //       window.location = "/reductor";
-  //     }
+      if (roleName === 2) {
+        window.location = "/reductor";
+      }
 
-  //     if (roleName === 3) {
-  //       window.location = "/reviewer";
-  //     }
+      if (roleName === 3) {
+        window.location = "/reviewer";
+      }
 
-  //     if (roleName === 4) {
-  //       window.location = "/user/user-page";
-  //     }
-  //   }
-  // };
+      if (roleName === 4) {
+        window.location = "/user/user-page";
+      }
+    }
+  };
 
   doSubmit = async () => {
     try {
-      const { phoneNumber } = this.state.data;
-      const editedNumber = `+998${phoneNumber}`.trim();
-      await auth.restorePassword(editedNumber);
+      const { verificationCode, password } = this.state.data;
+      await changePassword(verificationCode, password).then((res) => {
+        localStorage.setItem("token", res.data.object);
+        toast.success(res.data.message);
+      });
 
-      // this.autoRedirect();
+      this.autoRedirect();
+      localStorage.removeItem("resetToken");
 
       // const { state } = this.props.location;
       // window.location = state ? state.from.pathname : "/";
     } catch (ex) {
-      toast.error(ex);
+      toast.error(ex.response.data);
     }
   };
 
   render() {
-    // this.autoRedirect();
+    this.autoRedirect();
 
     return (
       <div className="registerForm">
@@ -67,14 +68,12 @@ class RestorePassword extends Form {
           <h1 className="regs">Parolni tiklash</h1>
 
           <form className="form-register" onSubmit={this.handleSubmit}>
-            {this.renderLoginInput("phoneNumber", "Telefon raqami")}
+            {this.renderInput("verificationCode", "Verification Code")}
             {this.renderInput("password", "Password", "password")}
 
-            <Button>Send sms code</Button>
+            {this.renderButton("Submit")}
           </form>
-          <Link className="rever" style={{ fontSize: "2rem" }} to="/login">
-            Profilga kirish
-          </Link>
+
           <br />
         </div>
       </div>

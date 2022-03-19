@@ -8,6 +8,7 @@ const { apiLocal } = api;
 const tokenKey = "token";
 
 const apiEndpoint = apiLocal + "/user/login";
+const token = localStorage.getItem("token");
 
 http.setJwt(getJwt());
 
@@ -35,12 +36,10 @@ export function getCurrentUser() {
 
 export function me() {
   try {
-    const token = localStorage.getItem("token");
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
     const data = axios.get(apiLocal + "/user/me", config);
-    // const data = axios.get(apiSwagger + "/user/me", config);
     return data;
   } catch (ex) {
     return console.log("xato");
@@ -55,6 +54,22 @@ export function restorePassword(phone) {
   return http.post(apiLocal + `/user/createNewPassword/${phone}`);
 }
 
+export function changePassword(code, password) {
+  return http.post(
+    apiLocal + `/user/verifyCode`,
+    {
+      password: password,
+      code: code,
+    },
+
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("resetToken")}`,
+      },
+    }
+  );
+}
+
 export default {
   login,
   logout,
@@ -63,4 +78,5 @@ export default {
   getJwt,
   me,
   restorePassword,
+  changePassword,
 };

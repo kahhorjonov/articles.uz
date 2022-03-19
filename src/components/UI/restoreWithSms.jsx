@@ -2,7 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "components/common/form";
 import auth from "services/authService";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
 
@@ -46,7 +46,15 @@ class RestoreWithSms extends Form {
       const { phoneNumber } = this.state.data;
       const editedNumber = `+998${phoneNumber}`.trim();
       await auth.restorePassword(editedNumber).then((res) => {
+        localStorage.setItem("resetToken", res.data.object);
         toast.success(res.data.message);
+
+        // <Redirect
+        //   from="/restorePassword"
+        //   to="/changePassword"
+        //   phone={phoneNumber}
+        // />;
+
         window.location = "/changePassword";
       });
 
