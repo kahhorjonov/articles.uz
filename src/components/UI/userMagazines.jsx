@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import auth from "services/authService";
 import GetImages from "utils/getImages";
 
-import { getPublishedParentMagazines } from "services/magazineService";
+import {
+  getPublishedParentMagazines,
+  getPublishedMagazinesById,
+} from "services/magazineService";
+
 import { getPublishedParentCategories } from "services/getCategories";
 
 import { toast } from "react-toastify";
@@ -42,7 +46,7 @@ class UserMagazines extends Component {
 
   getMagazinesById = async (id) => {
     try {
-      await getPublishedParentMagazines(id).then((res) => {
+      await getPublishedMagazinesById(id).then((res) => {
         this.setState({ magazines: res.data });
       });
     } catch (ex) {

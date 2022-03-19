@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AOS from "aos";
 
-import { getPublishedParentMagazines } from "services/magazineService";
+import {
+  getPublishedParentMagazines,
+  getPublishedMagazinesById,
+} from "services/magazineService";
+
 import { getPublishedParentCategories } from "services/getCategories";
 
 import { Col } from "reactstrap";
@@ -44,7 +48,7 @@ class JurnallarRoyxati extends Component {
 
   handleGetMagazinesById = async (id) => {
     try {
-      await getPublishedParentMagazines(id).then((res) => {
+      await getPublishedMagazinesById(id).then((res) => {
         this.setState({ magazines: res.data });
       });
     } catch (ex) {
