@@ -63,9 +63,10 @@ class MyTasks extends Component {
 
   handleAction = async (action, id) => {
     try {
-      await reviewerActionForArticle(action, id).then((res) =>
-        toast.success(res.data.message)
-      );
+      await reviewerActionForArticle(action, id).then((res) => {
+        toast.success(res.data.message);
+        this.newMyArticles();
+      });
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
@@ -388,7 +389,7 @@ class MyTasks extends Component {
                             <tr className="col-lg-12">
                               <th className="col-lg-3">Article Name</th>
                               <th className="col-lg-3">File</th>
-                              <th className="col-lg-3">File Name</th>
+                              {/* <th className="col-lg-3">File Name</th> */}
                               <th className="col-lg-3">Status </th>
                             </tr>
                           </thead>
@@ -414,7 +415,7 @@ class MyTasks extends Component {
                                       {article.file.originalName}
                                     </a>
                                   </td>
-                                  <td>{article.status}</td>
+                                  <td>{article && article.status}</td>
                                 </tr>
                               ))}
                           </tbody>

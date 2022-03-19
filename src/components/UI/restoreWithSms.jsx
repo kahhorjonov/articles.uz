@@ -18,44 +18,24 @@ class RestoreWithSms extends Form {
     phoneNumber: Joi.string().required().label("PhoneNumber"),
   };
 
-  // autoRedirect = () => {
-  //   if (auth.getCurrentUser()) {
-  //     const token = auth.getCurrentUser();
-  //     const roleName = token.roles[0].id;
-
-  //     if (roleName === 1) {
-  //       window.location = "/admin";
-  //     }
-
-  //     if (roleName === 2) {
-  //       window.location = "/reductor";
-  //     }
-
-  //     if (roleName === 3) {
-  //       window.location = "/reviewer";
-  //     }
-
-  //     if (roleName === 4) {
-  //       window.location = "/user/user-page";
-  //     }
-  //   }
-  // };
-
   doSubmit = async () => {
     try {
       const { phoneNumber } = this.state.data;
       const editedNumber = `+998${phoneNumber}`.trim();
       await auth.restorePassword(editedNumber).then((res) => {
-        localStorage.setItem("resetToken", res.data.object);
+        if (localStorage.getItem("resetToken") === null) {
+          localStorage.removeItem("resetToken");
+        }
+
+        if (res.data.object) {
+          localStorage.setItem("resetToken", res.data.object);
+        }
+
         toast.success(res.data.message);
 
-        // <Redirect
-        //   from="/restorePassword"
-        //   to="/changePassword"
-        //   phone={phoneNumber}
-        // />;
-
-        window.location = "/changePassword";
+        if (localStorage.getItem("resetToken")) {
+          window.location = "/changePassword";
+        }
       });
 
       // this.autoRedirect();
@@ -65,8 +45,6 @@ class RestoreWithSms extends Form {
   };
 
   render() {
-    // this.autoRedirect();
-
     return (
       <div className="registerForm">
         <div>
@@ -77,6 +55,7 @@ class RestoreWithSms extends Form {
 
             <Button onClick={this.doSubmit}>Send sms code</Button>
           </form>
+
           <Link className="rever" style={{ fontSize: "2rem" }} to="/login">
             Profilga kirish
           </Link>
