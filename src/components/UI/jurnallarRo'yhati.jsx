@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import "aos/dist/aos.css";
+import AOS from "aos";
 
 import { getPublishedParentMagazines } from "services/magazineService";
 import { getPublishedParentCategories } from "services/getCategories";
@@ -18,6 +18,7 @@ import img41 from "assets/img/figma/im4.png";
 
 import "react-multi-carousel/lib/styles.css";
 import "styles/jurnallarRoyhati.css";
+import "aos/dist/aos.css";
 
 class JurnallarRoyxati extends Component {
   state = {
@@ -27,7 +28,7 @@ class JurnallarRoyxati extends Component {
 
   componentDidMount = async () => {
     await this.getCategory();
-
+    AOS.init();
     this.state.magazineCategories && (await this.handleGetMagazinesById(0));
   };
 
