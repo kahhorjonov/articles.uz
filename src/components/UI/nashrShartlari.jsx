@@ -326,22 +326,18 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
+                            Tiboiyot va Farmakalogiya bir-biriga chanbarchas
+                            bog'lig delectus quas numquam aliquam nisi
+                            necessitatibus, fugit fuga recusandae mollitia
+                            beatae at atque ad dolor cum vero eligendi
+                            voluptatem, doloremque commodi sapiente? Nostrum
+                            illo doloremque atque aliquam est sed. At laudantium
+                            iusto doloremque odio ab cumque quibusdam, nesciunt
+                            ducimus culpa nemo omnis quas veniam? Dolores eos
+                            eligendi dicta laborum dolorem unde ratione minus,
+                            inventore veniam iure quaerat ab, consectetur quia.
+                            Rerum distinctio reprehenderit, animi nisi accusamus
+                            veniam. Placeat, vero.
                           </div>
                         </a>
                         <hr />
@@ -360,12 +356,9 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
+                            talim tizimini tubdan islox qilish va
+                            takomilashtirish va rivojlantirish kereak elit.
+                            Blanditiis maxime obcaecati officiis, eligendi unde
                             fugit fuga recusandae mollitia beatae at atque ad
                             dolor cum vero eligendi voluptatem, doloremque
                             commodi sapiente? Nostrum illo doloremque atque
@@ -394,22 +387,16 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
+                            bugungi kundagi dunyoda texnalogiya jada suratdam,
+                            rivoj topib kelmoqda. Dolor cum vero eligendi
+                            voluptatem, doloremque commodi sapiente? Nostrum
+                            illo doloremque atque aliquam est sed. At laudantium
+                            iusto doloremque odio ab cumque quibusdam, nesciunt
+                            ducimus culpa nemo omnis quas veniam? Dolores eos
+                            eligendi dicta laborum dolorem unde ratione minus,
+                            inventore veniam iure quaerat ab, consectetur quia.
+                            Rerum distinctio reprehenderit, animi nisi accusamus
+                            veniam. Placeat, vero.
                           </div>
                         </a>
                         <hr />
@@ -428,20 +415,12 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
+                            Sa'natda va filalogiya bir qilsak aliquam est sed.
+                            At laudantium iusto doloremque odio ab cumque
+                            quibusdam, nesciunt ducimus culpa nemo omnis quas
+                            veniam? Dolores eos eligendi dicta laborum dolorem
+                            unde ratione minus, inventore veniam iure quaerat
+                            ab, consectetur quia. Rerum distinctio
                             reprehenderit, animi nisi accusamus veniam. Placeat,
                             vero.
                           </div>
@@ -462,20 +441,11 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
+                            Ijtimoiy fanlar Huquq tarix fanlari kiradi ab cumque
+                            quibusdam, nesciunt ducimus culpa nemo omnis quas
+                            veniam? Dolores eos eligendi dicta laborum dolorem
+                            unde ratione minus, inventore veniam iure quaerat
+                            ab, consectetur quia. Rerum distinctio
                             reprehenderit, animi nisi accusamus veniam. Placeat,
                             vero.
                           </div>
@@ -496,9 +466,6 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
                             sapiente accusantium debitis repellat beatae,
                             consectetur necessitatibus ducimus sit. Voluptatum
                             delectus quas numquam aliquam nisi necessitatibus,
@@ -530,14 +497,6 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
                             commodi sapiente? Nostrum illo doloremque atque
                             aliquam est sed. At laudantium iusto doloremque odio
                             ab cumque quibusdam, nesciunt ducimus culpa nemo
@@ -564,22 +523,14 @@ class NashrShartlari extends Component {
                             className="collapse"
                             data-parent="#accordion"
                           >
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Blanditiis maxime obcaecati officiis, eligendi
-                            unde enim voluptatem animi quae id atque, suscipit
+                            Blanditiis maxime obcaecati officiis, eligendi unde
+                            enim voluptatem animi quae id atque, suscipit
                             sapiente accusantium debitis repellat beatae,
                             consectetur necessitatibus ducimus sit. Voluptatum
                             delectus quas numquam aliquam nisi necessitatibus,
                             fugit fuga recusandae mollitia beatae at atque ad
                             dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
+                            commodi sapiente? vero.
                           </div>
                         </a>
                         <hr />
