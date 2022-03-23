@@ -30,4 +30,13 @@ export function profilePhoto(photo) {
   });
 }
 
-export default { downloadMedia, downloadFile, profilePhoto };
+export function counter(id) {
+  return http.post(apiLocal + `/article/viewsCountingTheArticle/${id}`);
+}
+
+export default {
+  downloadMedia,
+  downloadFile,
+  profilePhoto,
+  counter,
+};

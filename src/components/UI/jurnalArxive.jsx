@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import GetImages from "utils/getImages";
-import { downloadMedia, downloadFile } from "services/mediaService";
+import { downloadMedia, downloadFile, counter } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BsEyeFill } from "react-icons/bs";
 
 import {
-  getById,
   getPublishedYears,
   getPublishedMagazinesByYear,
   getArticlesFromMagazine,
@@ -106,7 +106,7 @@ class JurnalArxive extends Component {
     return this.setState({ cover: URL.createObjectURL(imageBlob) });
   };
 
-  handleDownload = async (id, originalName, contentType) => {
+  handleDownload = async (id, originalName, contentType, articleId) => {
     if (id && originalName && contentType) {
       try {
         await downloadFile(id, {
@@ -125,6 +125,12 @@ class JurnalArxive extends Component {
             link.click();
             link.parentNode.removeChild(link);
           });
+
+        try {
+          await counter(articleId);
+        } catch (error) {
+          toast.error(error);
+        }
       } catch (error) {
         toast.error(error);
       }
@@ -209,12 +215,17 @@ class JurnalArxive extends Component {
                         this.handleDownload(
                           article.fileId,
                           article.originalName,
-                          article.contentType
+                          article.contentType,
+                          article.articleId
                         );
                       }}
                     >
                       <li className="list-group-item">
                         <span>{idx + 1}. </span> {article.titleArticle}
+                        <p style={{ margin: "0" }}>
+                          <BsEyeFill style={{ fontSize: "2rem" }} />{" "}
+                          {article.articleViews}
+                        </p>
                       </li>
                     </Link>
                   ))}

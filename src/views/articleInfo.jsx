@@ -6,6 +6,7 @@ import {
   getArticleInfoAdmin,
   articleInfo,
   changeActivityArticles,
+  editArticleByAdmin,
 } from "services/articleService";
 
 import {
@@ -27,7 +28,7 @@ import "styles/userEdit.css";
 
 class ArticleInfo extends Component {
   state = {
-    status: "CHECK_AND_ACCEPT",
+    status: "777",
     file: [],
 
     articleId: "",
@@ -90,18 +91,12 @@ class ArticleInfo extends Component {
         })
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", fileName);
-
             document.body.appendChild(link);
-
-            // Start download
             link.click();
-
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -109,6 +104,18 @@ class ArticleInfo extends Component {
       }
     } else {
       toast.error("file topilmadi");
+    }
+  };
+
+  handleEdit = async () => {
+    try {
+      await editArticleByAdmin(this.state).then((res) => {
+        toast.success(res.data.message);
+        this.getArticleInfoAdmin(this.state.articleId);
+        this.getArticleInformations(this.state.articleId);
+      });
+    } catch (ex) {
+      toast.error("Server bilan aloqa yo'q");
     }
   };
 
@@ -158,6 +165,7 @@ class ArticleInfo extends Component {
                           name="status"
                           className="custom-select"
                         >
+                          <option value="777"></option>
                           <option value="RECYCLE">Qayta ishlash uchun</option>
                           <option value="REJECTED">Rad etildi</option>
                           <option value="PUBLISHED">Nashr uchun</option>
@@ -192,8 +200,6 @@ class ArticleInfo extends Component {
                     </Col>
                     <Col md="12">
                       <Button
-                        // color="info"
-                        // outline
                         className="btn p-3"
                         onClick={() => this.handleEdit()}
                       >

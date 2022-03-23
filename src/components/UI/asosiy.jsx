@@ -72,7 +72,7 @@ class Asosiy extends React.Component {
 
           {/* buttons */}
 
-          <div className="buut-ons justify-content-center d-flex">
+          {/* <div className="buut-ons justify-content-center d-flex">
             <a href="">
               <button
                 type="button"
@@ -81,7 +81,7 @@ class Asosiy extends React.Component {
                 Barchasini ko’rish
               </button>
             </a>
-          </div>
+          </div> */}
         </div>
 
         <Section />
