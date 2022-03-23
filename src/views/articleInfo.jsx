@@ -28,7 +28,7 @@ import "styles/userEdit.css";
 
 class ArticleInfo extends Component {
   state = {
-    status: "777",
+    status: "NULL",
     file: [],
 
     articleId: "",
@@ -165,7 +165,7 @@ class ArticleInfo extends Component {
                           name="status"
                           className="custom-select"
                         >
-                          <option value="777"></option>
+                          <option value="NULL"></option>
                           <option value="RECYCLE">Qayta ishlash uchun</option>
                           <option value="REJECTED">Rad etildi</option>
                           <option value="PUBLISHED">Nashr uchun</option>
