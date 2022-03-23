@@ -172,6 +172,7 @@ class ArticleInfo extends Component {
                         </select>
                       </Form>
                     </Col>
+
                     {/* <Col md="7">
                       <div className="form-group">
                         <label>File upload ⬆️ (optional)</label>
