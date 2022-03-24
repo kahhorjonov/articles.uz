@@ -175,6 +175,7 @@ class User extends Component {
       workExperience,
       email,
       languages,
+      createdAt,
     } = this.state.currentUser;
 
     return (
@@ -246,7 +247,7 @@ class User extends Component {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Auth</CardTitle>
+                  <CardTitle tag="h4">Autentifikatsiya</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ul className="list-unstyled team-members">
@@ -254,7 +255,7 @@ class User extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Phone Number</label>
+                            <label>Telefon raqami</label>
                             <Input
                               defaultValue={phoneNumber}
                               placeholder="telefon nomer"
@@ -314,7 +315,7 @@ class User extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Edit Profile</CardTitle>
+                  <CardTitle tag="h5">Profilni tahrirlash</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
@@ -323,8 +324,7 @@ class User extends Component {
                         <FormGroup>
                           <label>Ish joyi </label>
                           <Input
-                            defaultValue={workPlace}
-                            placeholder="Company"
+                            defaultValue={workPlace && workPlace}
                             type="text"
                             onChange={(e) =>
                               this.setState({ workPlace: e.target.value })
@@ -337,7 +337,10 @@ class User extends Component {
                           <label>Ro'yxatdan o'tgan sana</label>
                           <Input
                             disabled
-                            placeholder="Ro'yxatdan o'tgan sana"
+                            placeholder={
+                              createdAt &&
+                              new Date(createdAt).toLocaleDateString()
+                            }
                             type="text"
                             onChange={(e) =>
                               this.setState({ username: e.target.value })
@@ -362,7 +365,7 @@ class User extends Component {
                     <Row>
                       <Col className="pr-1" md="6">
                         <FormGroup>
-                          <label>First Name</label>
+                          <label>Ism</label>
                           <Input
                             defaultValue={firstName}
                             placeholder="Ismingiz"
@@ -375,7 +378,7 @@ class User extends Component {
                       </Col>
                       <Col className="pl-1" md="6">
                         <FormGroup>
-                          <label>Last Name</label>
+                          <label>Familiya</label>
                           <Input
                             defaultValue={lastName}
                             placeholder="Familiyangiz"
@@ -434,7 +437,7 @@ class User extends Component {
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Work Experience (year)</label>
+                          <label>Tajriba (yil)</label>
                           <Input
                             defaultValue={workExperience}
                             placeholder="Ish tajribangiz"
