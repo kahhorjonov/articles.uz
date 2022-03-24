@@ -264,7 +264,14 @@ class ReviewerArchive extends Component {
                               >
                                 {magazines &&
                                   magazines.map((magazine) => (
-                                    <div key={magazine.id} className="col-lg-3">
+                                    <div
+                                      style={{
+                                        width: "360px",
+                                        height: "460px",
+                                      }}
+                                      key={magazine.id}
+                                      className="col-lg-3"
+                                    >
                                       <GetImages url={magazine.cover.id} />
 
                                       <Link

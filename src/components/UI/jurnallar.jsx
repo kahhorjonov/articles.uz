@@ -153,6 +153,7 @@ class Jurnallar extends Component {
                           {magazines &&
                             magazines.map((magazine) => (
                               <div
+                                style={{ width: "360px", height: "460px" }}
                                 key={magazine.id}
                                 className="col-md-4  card-articles"
                               >
