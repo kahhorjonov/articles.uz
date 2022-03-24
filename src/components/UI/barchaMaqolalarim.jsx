@@ -14,7 +14,7 @@ class BarchaMaqolalarim extends Component {
     articles: [],
 
     currentPage: 1,
-    pageSize: 10,
+    pageSize: 8,
   };
 
   componentDidMount() {

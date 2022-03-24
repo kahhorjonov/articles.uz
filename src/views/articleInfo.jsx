@@ -189,9 +189,8 @@ class ArticleInfo extends Component {
 
                   <Row>
                     <Col md="12">
-                      <Label>description</Label>
+                      <Label>Izoh bildirish</Label>
                       <Input
-                        placeholder="description..."
                         style={{ height: "40px" }}
                         type="text"
                         onChange={(e) =>
@@ -204,7 +203,7 @@ class ArticleInfo extends Component {
                         className="btn p-3"
                         onClick={() => this.handleEdit()}
                       >
-                        Send
+                        Yuborish
                       </Button>
                     </Col>
                   </Row>
@@ -216,8 +215,8 @@ class ArticleInfo extends Component {
                   <Table>
                     <thead>
                       <tr className="col-md-12">
-                        <th className="col-md-6">Steps</th>
-                        <th className="col-md-6">Date</th>
+                        <th className="col-md-6">Amaliyotlar</th>
+                        <th className="col-md-6">Sana</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -248,10 +247,9 @@ class ArticleInfo extends Component {
                     <Row>
                       <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>Title</label>
+                          <label>Sarlavha</label>
                           <Input
                             disabled
-                            placeholder="Title Article"
                             type="text"
                             defaultValue={titleArticle}
                           />
@@ -259,7 +257,7 @@ class ArticleInfo extends Component {
                       </Col>
                       <Col className="px-1" md="4">
                         <FormGroup>
-                          <label>Category</label>
+                          <label>Kategoriya</label>
                           <Input
                             disabled
                             defaultValue={category && category.name}
@@ -270,7 +268,7 @@ class ArticleInfo extends Component {
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Price</label>
+                          <label>Narxi</label>
                           <Input
                             disabled={true}
                             placeholder={price && `${price.price} so'm`}
@@ -282,7 +280,7 @@ class ArticleInfo extends Component {
                     <Row>
                       <Col className="pr-1" md="5">
                         <FormGroup>
-                          <label>Authors</label>
+                          <label>Avtorlar</label>
                           <Input
                             disabled
                             placeholder={
@@ -324,7 +322,7 @@ class ArticleInfo extends Component {
 
                       <Col className="pl-1" md="3">
                         <FormGroup>
-                          <label>For Everyone?</label>
+                          <label>Ommaviyligi</label>
                           <Input
                             disabled
                             defaultValue={publicPrivate}
@@ -338,7 +336,7 @@ class ArticleInfo extends Component {
                     <Row>
                       <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>FirstName (Sender)</label>
+                          <label>Yuborgan avtor ismi</label>
                           <Input
                             disabled
                             defaultValue={user && user.firstName}
@@ -350,7 +348,7 @@ class ArticleInfo extends Component {
 
                       <Col className="px-1" md="4">
                         <FormGroup>
-                          <label>LastName</label>
+                          <label>Yuborgan avtor Familiyasi</label>
                           <Input
                             disabled
                             defaultValue={user && user.lastName}
@@ -362,7 +360,7 @@ class ArticleInfo extends Component {
 
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Phone</label>
+                          <label>Telefon</label>
                           <Input
                             disabled
                             defaultValue={user && user.phoneNumber}
@@ -387,11 +385,15 @@ class ArticleInfo extends Component {
                       </Col>
                       <Col className="pl-1" md="6">
                         <FormGroup>
-                          <label>Description</label>
+                          <label>Izoh</label>
                           <Input
+                            style={{
+                              overscrollBehaviorY: "none",
+                              padding: "1rem",
+                              height: "10rem",
+                            }}
+                            type="textarea"
                             defaultValue={description}
-                            placeholder="Country"
-                            type="text"
                             disabled
                           />
                         </FormGroup>
@@ -500,10 +502,10 @@ class ArticleInfo extends Component {
                     <thead>
                       <tr className="col-md-12 col-sm-12">
                         <th className="col-md-1 col-sm-1">№</th>
-                        <th className="col-md-3 col-sm-3">Person</th>
-                        <th className="col-md-3 col-sm-2">Status</th>
+                        <th className="col-md-3 col-sm-3">Foydalanuvchi</th>
+                        <th className="col-md-3 col-sm-2">Holat</th>
                         <th className="col-md-3 col-sm-3">Izoh</th>
-                        <th className="col-md-2 col-sm-3">File</th>
+                        <th className="col-md-2 col-sm-3">Fayl</th>
                       </tr>
                     </thead>
                     <tbody>

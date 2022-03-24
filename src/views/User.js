@@ -202,12 +202,12 @@ class User extends Component {
                     </a>
                   </div>
                   <p className="description text-center">
-                    {`Academic Degree: ${academicDegree}`}
+                    {`Ilmiy Daraja: ${academicDegree}`}
                   </p>
 
                   <h6 className="p-0 m-0">ID:{code}</h6>
 
-                  <label>Profile Photo</label>
+                  <label>Profil Rasmi</label>
                   <Input
                     className="p-0 col-md-8"
                     type="file"

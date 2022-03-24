@@ -263,12 +263,10 @@ class ArticleForm extends Form {
 
                 <form onSubmit={this.handleSubmit}>
                   <Row>
-                    <Col lg="8">
-                      {this.renderInput("description", "Description")}
-                    </Col>
+                    <Col lg="8">{this.renderInput("description", "Izoh")}</Col>
 
                     <Col lg="4">
-                      {this.renderInput("titleArticle", "Title")}
+                      {this.renderInput("titleArticle", "Sarlavha")}
                     </Col>
                   </Row>
 
@@ -276,13 +274,13 @@ class ArticleForm extends Form {
                     <Col md="4" lg="4">
                       {this.renderSelect(
                         "categoryId",
-                        "Categories",
+                        "Kategoriya",
                         this.state.childCategories
                       )}
                     </Col>
                     <Col sm="4" md="4" lg="4">
                       <div>
-                        <label>Public Or Private</label>
+                        <label>Ommaviylik</label>
                         <Input
                           defaultValue="false"
                           type="select"
@@ -298,7 +296,7 @@ class ArticleForm extends Form {
                       </div>
                     </Col>
                     <Col sm="4" md="4" lg="4">
-                      {this.renderFileInput("file", "File", "file")}
+                      {this.renderFileInput("file", "Fayl", "file")}
                     </Col>
                   </Row>
                   <Row>
@@ -386,7 +384,8 @@ class ArticleForm extends Form {
                           <p>
                             {this.state.bosmaJurnalSoni} x{" "}
                             {bittaBosmaJunalNarxi} ={" "}
-                            {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}
+                            {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}{" "}
+                            so'm
                           </p>
                         </h6>
                         <hr />
@@ -397,7 +396,8 @@ class ArticleForm extends Form {
                           </span>
                           <p>
                             {this.state.sertifikatSoni} x {bittaSertifikatNarxi}{" "}
-                            = {bittaSertifikatNarxi * this.state.sertifikatSoni}
+                            = {bittaSertifikatNarxi * this.state.sertifikatSoni}{" "}
+                            so'm
                           </p>
                         </h6>
                         <hr />
@@ -407,7 +407,7 @@ class ArticleForm extends Form {
                           <span className="pl-3 text-darck pl-2">
                             {doi} so'm
                           </span>
-                          <p>{this.state.doi == true ? doi : "0"}</p>
+                          <p>{this.state.doi == true ? doi : "0"} so'm</p>
                         </h6>
                         <hr />
 
@@ -416,18 +416,18 @@ class ArticleForm extends Form {
                           <span className="pl-3 text-darck pl-2">
                             {chopEtishNarxi} so'm
                           </span>
-                          <p>{chopEtishNarxi}</p>
+                          <p>{chopEtishNarxi} so'm</p>
                         </h6>
                         <hr />
                         <h6 className="pl-1">
-                          Total :{" "}
+                          Jami :{" "}
                           <span className="text-darck pl-2">{price} so'm</span>
                         </h6>
                       </div>
                     </Col>
 
                     <Col sm="9" md="9" lg="9">
-                      <Label for="exampleEmail">Authors ID</Label>
+                      <Label for="exampleEmail">Avtorlar</Label>
                       <div className="tags-input ">
                         <ul id="tags">
                           {this.state.tags &&

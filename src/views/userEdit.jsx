@@ -298,7 +298,7 @@ class UserEdit extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Phone Number</label>
+                            <label>Telefon</label>
                             <Input
                               defaultValue={phoneNumber}
                               placeholder="telefon nomer"
@@ -479,10 +479,9 @@ class UserEdit extends Component {
                     <Row>
                       <Col className="pr-1" md="6">
                         <FormGroup>
-                          <label>First Name</label>
+                          <label>Ism</label>
                           <Input
                             defaultValue={firstName}
-                            placeholder="Ism"
                             type="text"
                             onChange={(e) =>
                               this.setState({ firstName: e.target.value })
@@ -492,10 +491,9 @@ class UserEdit extends Component {
                       </Col>
                       <Col className="pl-1" md="6">
                         <FormGroup>
-                          <label>Last Name</label>
+                          <label>Familiya</label>
                           <Input
                             defaultValue={lastName}
-                            placeholder="Familiya"
                             type="text"
                             onChange={(e) =>
                               this.setState({ lastName: e.target.value })
@@ -507,7 +505,7 @@ class UserEdit extends Component {
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <label>Categories</label>
+                          <label>Kategoriya</label>
                           <Input
                             defaultValue={categories ? categories[0] : "null"}
                             type="text"
@@ -579,10 +577,9 @@ class UserEdit extends Component {
 
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Work Experience (year)</label>
+                          <label>Tajriba (yil)</label>
                           <Input
                             defaultValue={workExperience}
-                            placeholder="Ish tajribangiz"
                             min={0}
                             type="number"
                             onChange={(e) =>
@@ -596,13 +593,13 @@ class UserEdit extends Component {
                     </Row>
                     <Row>
                       <Col md="12">
-                        <label>Languages</label>
+                        <label>Tillar</label>
                         <Multiselect
                           options={this.state.options} // Options to display in the dropdown
                           selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
                           onSelect={this.onSelect} // Function will trigger on select event
                           onRemove={this.onRemove} // Function will trigger on remove event
-                          displayValue="name" // Property name to display in the dropdown options
+                          // displayValue="name" // Property name to display in the dropdown options
                         />
                       </Col>
                     </Row>
@@ -614,7 +611,7 @@ class UserEdit extends Component {
                           // type="button"
                           onClick={(e) => this.updateProfileByAdmin()}
                         >
-                          Update Profile
+                          Profilni yangilash
                         </Button>
                       </div>
                     </Row>
@@ -635,7 +632,6 @@ class UserEdit extends Component {
 
                         <div>
                           <Button
-                            color="danger"
                             outline
                             onClick={(e) => {
                               e.preventDefault();
@@ -697,11 +693,11 @@ class UserEdit extends Component {
                 <Table>
                   <thead>
                     <tr>
-                      <th>Article Name</th>
+                      <th>Sarlavha</th>
                       <th>Tekshirilgan Vaqti</th>
                       <th>Status</th>
                       <th>Xulosa</th>
-                      <th>File</th>
+                      <th>Fayl</th>
                     </tr>
                   </thead>
                   <tbody>

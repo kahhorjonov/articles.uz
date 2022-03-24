@@ -160,9 +160,8 @@ class JurnalQoshish extends Component {
                     <Row className="my-4">
                       <Col md="3" sm="3" lg="3">
                         <div>
-                          <label>Title</label>
+                          <label>Jurnal Sarlavhasi</label>
                           <input
-                            placeholder="Magazine Title"
                             onChange={(e) =>
                               this.setState({ title: e.target.value })
                             }
@@ -173,7 +172,7 @@ class JurnalQoshish extends Component {
 
                       <Col md="3" sm="3" lg="3">
                         <div>
-                          <label>Created Date</label>
+                          <label>Ro'yxatdan o'tkazilgan sana</label>
                           <input
                             onChange={(e) =>
                               this.setState({ createdDate: e.target.value })
@@ -186,7 +185,7 @@ class JurnalQoshish extends Component {
 
                       <Col md="3" sm="3" lg="3">
                         <div>
-                          <label>File</label>
+                          <label>Jurnal fayli</label>
                           <input
                             onChange={(e) =>
                               this.setState({ file: e.target.files[0] })
@@ -243,7 +242,7 @@ class JurnalQoshish extends Component {
 
                       <Col sm="3" md="3" lg="3">
                         <div>
-                          <Label>Categories</Label>
+                          <Label>Kategoriyalar</Label>
                           <Input
                             defaultValue={
                               this.state.categories[0] &&
@@ -316,7 +315,9 @@ class JurnalQoshish extends Component {
                     <Row>
                       <Col sm="5" md="5" lg="5">
                         <FormGroup>
-                          <label>Description</label>
+                          <label>
+                            Izoh ( jurnal haqidagi barcha ma'lumotlar )
+                          </label>
                           <Input
                             style={{
                               overscrollBehaviorY: "none",
@@ -332,7 +333,7 @@ class JurnalQoshish extends Component {
                       </Col>
 
                       <Col sm="2" md="2" lg="2">
-                        <label>Status</label>
+                        <label>Holati</label>
                         <Input
                           defaultValue="NEW_JOURNALS"
                           style={{ height: "3rem" }}
@@ -347,7 +348,7 @@ class JurnalQoshish extends Component {
                         </Input>
                       </Col>
                       <Col sm="2" md="2" lg="2">
-                        <label>Print Date</label>
+                        <label>Chop etilish sanasi</label>
                         <Input
                           min="0"
                           onChange={(e) =>
@@ -358,7 +359,7 @@ class JurnalQoshish extends Component {
                       </Col>
 
                       <Col sm="3" md="3" lg="3">
-                        <label>Parent Category (optional)</label>
+                        <label>Jurnalning yangi soni (ixtiyoriy)</label>
                         <Input
                           defaultValue=" "
                           style={{ height: "3rem" }}
@@ -410,7 +411,7 @@ class JurnalQoshish extends Component {
                             this.handleSubmit(e);
                           }}
                         >
-                          Create
+                          Qo'shish
                         </button>
                       </Col>
                     </Row>
