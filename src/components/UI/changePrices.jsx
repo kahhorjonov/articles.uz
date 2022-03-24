@@ -156,8 +156,11 @@ class ChangePrices extends Component {
                 </div>
                 <div className="card-body">
                   <Row className="align-items-center">
-                    <div className="table p-3  row mx-0 p-4 tab-content">
-                      <div className="tab-pane container active" id="home">
+                    <div className="table p-3 col-md-12 col-sm-12 col-lg-12 row mx-0 p-4 tab-content">
+                      <div
+                        className="col-md-12 col-sm-12 col-lg-12 tab-pane container active"
+                        id="home"
+                      >
                         <div className="row">
                           <div className="col-lg-2 col-sm-4">
                             Jurnal narxi
@@ -238,36 +241,40 @@ class ChangePrices extends Component {
                             </div>
                           </div>
 
-                          <div className="col-lg-2 col-sm-4 mt-4">
-                            <button
-                              style={{ height: "30px", padding: "2px" }}
-                              onClick={this.handleChangePrices}
-                              className="btn w-100  btn-info"
-                            >
-                              Submit
-                            </button>
+                          <div className="col-lg-2 col-sm-4">
+                            Tasdiqlash
+                            <div>
+                              <button
+                                style={{ height: "30px", padding: "2px" }}
+                                onClick={this.handleChangePrices}
+                                className="btn w-100  btn-info"
+                              >
+                                Submit
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       {/* ----------------------------------------- */}
 
-                      <div id="home2" className="container tab-pane fade">
+                      <div
+                        id="home2"
+                        className="col-sm-12 col-md-12 col-lg-12 container tab-pane fade"
+                      >
                         {/* modal */}
-                        <button
-                          style={{
-                            position: "absolute",
-                            top: "0",
-                            right: "0",
-                            marginTop: "27px",
-                            marginRight: "28px",
-                          }}
-                          data-toggle="modal"
-                          data-target="#myModal2"
-                          className="btn btn-success"
+                        <div
+                          style={{ display: "flex", justifyContent: "end" }}
+                          className="row"
                         >
-                          Til qo'shish +
-                        </button>
+                          <button
+                            data-toggle="modal"
+                            data-target="#myModal2"
+                            className="btn btn-success"
+                          >
+                            Til qo'shish +
+                          </button>
+                        </div>
 
                         <div className="modal" id="myModal2">
                           <div className="modal-dialog">
@@ -319,7 +326,7 @@ class ChangePrices extends Component {
                               <th className="col-lg-1">№</th>
                               <th className="col-lg-2">Name</th>
                               <th className="col-lg-4">Active</th>
-                              <th className="col-lg-2">Delate</th>
+                              <th className="col-lg-2">Delete</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -350,7 +357,7 @@ class ChangePrices extends Component {
                                       }
                                       className="btn btn-danger mr-2"
                                     >
-                                      delate
+                                      delete
                                     </button>
 
                                     <button

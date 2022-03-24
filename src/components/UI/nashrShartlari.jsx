@@ -55,11 +55,11 @@ class NashrShartlari extends Component {
                       Nashr narxlari
                     </a>
                   </li>
-                  <li className="nav-item pl-0">
+                  {/* <li className="nav-item pl-0">
                     <a className="nav-link" data-toggle="pill" href="#menu2">
                       Nazorat muddati
                     </a>
-                  </li>
+                  </li> */}
                   <li className="nav-item pl-0">
                     <a className="nav-link" data-toggle="pill" href="#menu3">
                       Maqola uchun talablar
@@ -194,7 +194,7 @@ class NashrShartlari extends Component {
                     </div>
                   </div>
 
-                  <div
+                  {/* <div
                     className="tab-pane container nazoratmudati fade"
                     id="menu2"
                   >
@@ -237,7 +237,7 @@ class NashrShartlari extends Component {
                         tekshirish va yangi sonini nashr qilish muddatlari
                       </p>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div
                     className="tab-pane container maqollarUchun fade"

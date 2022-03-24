@@ -107,14 +107,14 @@ var adminRoutes = [
     visible: false,
   },
 
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Icons,
-  //   layout: "/admin",
-  //   visible: true,
-  // },
+  {
+    path: "/icons",
+    name: "Icons",
+    icon: "nc-icon nc-bell-55",
+    component: Icons,
+    layout: "/admin",
+    visible: true,
+  },
 
   {
     path: "/user-page",
@@ -136,8 +136,8 @@ var adminRoutes = [
 
   {
     path: "/changePrices",
-    name: "Narxlar",
-    icon: "nc-icon nc-cart-simple",
+    name: "Sozlamalar",
+    icon: "nc-icon nc-settings",
     component: ChangePrices,
     layout: "/admin",
     visible: true,
