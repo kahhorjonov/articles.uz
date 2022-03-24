@@ -1,5 +1,5 @@
 import Dashboard from "views/Dashboard.js";
-import Icons from "views/Icons.js";
+// import Icons from "views/Icons.js";
 import UserPage from "views/User.js";
 
 import EditMagazine from "./../views/editMagazine";
@@ -28,7 +28,7 @@ var adminRoutes = [
 
   {
     path: "/category",
-    name: "Category",
+    name: "Kategoriyalar",
     icon: "nc-icon nc-bullet-list-67",
     component: Category,
     layout: "/admin",
@@ -46,7 +46,7 @@ var adminRoutes = [
 
   {
     path: "/editMagazine",
-    name: "Edit Magazine",
+    name: "Jurnallarni Tahrirlash",
     icon: "nc-icon nc-ruler-pencil",
     component: EditMagazine,
     layout: "/admin",
@@ -55,7 +55,7 @@ var adminRoutes = [
 
   {
     path: "/createMagazine",
-    name: "Create Magazine",
+    name: "Jurnal Qo'shish",
     icon: "nc-icon nc-box",
     component: JurnalQoshish,
     layout: "/admin",
@@ -107,18 +107,18 @@ var adminRoutes = [
     visible: false,
   },
 
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-bell-55",
-    component: Icons,
-    layout: "/admin",
-    visible: true,
-  },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Icons,
+  //   layout: "/admin",
+  //   visible: true,
+  // },
 
   {
     path: "/user-page",
-    name: "User Profile",
+    name: "Mening Profilim",
     icon: "nc-icon nc-settings-gear-65",
     component: UserPage,
     layout: "/admin",

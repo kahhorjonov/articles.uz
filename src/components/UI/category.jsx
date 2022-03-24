@@ -59,7 +59,7 @@ class Category extends Component {
         toast.success(res.data.message);
       });
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -69,7 +69,7 @@ class Category extends Component {
         this.setState({ parentCategories: res.data });
       });
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -80,7 +80,7 @@ class Category extends Component {
         this.handleGetCategories();
       });
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -123,7 +123,7 @@ class Category extends Component {
       <div className="content">
         <div className="card">
           <div className="card-header">
-            <h3>Category</h3>
+            <h3>Kategoriyalar</h3>
           </div>
           <div className="card-body">
             <div className="d-flex align-items-center justify-content-between">
@@ -136,7 +136,7 @@ class Category extends Component {
                 Add
               </button>
 
-              <form>
+              {/* <form>
                 <div className="input-group mb-3">
                   <input
                     type="search"
@@ -149,7 +149,7 @@ class Category extends Component {
                     <span className="input-group-text   btn-info">Search</span>
                   </div>
                 </div>
-              </form>
+              </form> */}
             </div>
             <div className="modal" id="myModal">
               <div className="modal-dialog">
@@ -303,10 +303,10 @@ class Category extends Component {
               <thead>
                 <tr>
                   {/* <th>№</th> */}
-                  <th>Category name</th>
-                  <th>Parent Category Name</th>
-                  <th>Active</th>
-                  <th className="text-center">Action</th>
+                  <th>Nomi</th>
+                  <th>Ildiz kategoriyasi</th>
+                  <th>Aktivlashtirish</th>
+                  <th className="text-center">Amallar</th>
                 </tr>
               </thead>
               <tbody>
@@ -333,7 +333,7 @@ class Category extends Component {
                           type="button"
                           data-toggle="modal"
                           data-target="#myModalForEdit"
-                          className="btn btn-warning"
+                          className="btn btn-info"
                           onClick={(e) => {
                             e.preventDefault();
 
@@ -353,7 +353,7 @@ class Category extends Component {
                         <button
                           onClick={() => this.handleDelete(category.id)}
                           type="button"
-                          className="btn btn-danger"
+                          className="btn"
                         >
                           Delete
                         </button>

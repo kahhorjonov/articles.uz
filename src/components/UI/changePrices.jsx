@@ -355,7 +355,7 @@ class ChangePrices extends Component {
                                       onClick={() =>
                                         this.deleteLanguage(lang.id)
                                       }
-                                      className="btn btn-danger mr-2"
+                                      className="btn mr-2"
                                     >
                                       delete
                                     </button>

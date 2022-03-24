@@ -306,16 +306,16 @@ class Dashboard extends Component {
                 </CardBody>
                 <CardFooter>
                   <div className="legend">
-                    <i className="fa fa-circle text-warning" /> Authors{" "}
-                    <i className="fa fa-circle text-primary" /> Reductors{" "}
-                    <i className="fa fa-circle text-danger" /> Admins{" "}
-                    <i className="fa fa-circle text-gray" /> Reviewers
+                    <i className="fa fa-circle text-warning" /> Avtorlar{" "}
+                    <i className="fa fa-circle text-primary" /> Redaktorlar{" "}
+                    <i className="fa fa-circle text-danger" /> Adminlar{" "}
+                    <i className="fa fa-circle text-gray" /> Revyuverlar
                   </div>
                   <hr />
                   <div className="stats">
                     <i className="fa fa-calendar" />
                     <span>
-                      Number of users :{" "}
+                      Foydalanuvchilar soni :{" "}
                       {numberOfUsers && numberOfUsers.toString()}
                     </span>
                   </div>
