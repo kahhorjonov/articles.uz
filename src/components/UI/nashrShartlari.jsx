@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Foooter from "./foooter";
 import { getPrices } from "services/priceService";
+import { getScientificDirections } from "services/getCategories";
 import { toast } from "react-toastify";
 
 import "styles/nashirShartlar.css";
@@ -8,11 +9,23 @@ import "styles/nashirShartlar.css";
 class NashrShartlari extends Component {
   state = {
     articlPrice: [],
+    directions: [],
   };
 
   componentDidMount() {
     this.getArticlPrice();
+    this.getScientificDirections();
   }
+
+  getScientificDirections = async () => {
+    try {
+      await getScientificDirections().then((res) =>
+        this.setState({ directions: res.data })
+      );
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  };
 
   getArticlPrice = async () => {
     try {
@@ -25,7 +38,8 @@ class NashrShartlari extends Component {
   };
 
   render() {
-    const { articlPrice } = this.state;
+    const { articlPrice, directions } = this.state;
+
     const {
       bittaBosmaJunalNarxi,
       bittaSertifikatNarxi,
@@ -33,6 +47,7 @@ class NashrShartlari extends Component {
       doi,
       sahifaNarxi,
     } = articlPrice;
+
     return (
       <>
         <div className="nashir">
@@ -55,16 +70,19 @@ class NashrShartlari extends Component {
                       Nashr narxlari
                     </a>
                   </li>
+
                   {/* <li className="nav-item pl-0">
                     <a className="nav-link" data-toggle="pill" href="#menu2">
                       Nazorat muddati
                     </a>
                   </li> */}
+
                   <li className="nav-item pl-0">
                     <a className="nav-link" data-toggle="pill" href="#menu3">
                       Maqola uchun talablar
                     </a>
                   </li>
+
                   <li className="nav-item pl-0">
                     <a className="nav-link" data-toggle="pill" href="#menu4">
                       Ilmiy yo'nalishlar
@@ -194,51 +212,6 @@ class NashrShartlari extends Component {
                     </div>
                   </div>
 
-                  {/* <div
-                    className="tab-pane container nazoratmudati fade"
-                    id="menu2"
-                  >
-                    <div className="Data">
-                      <h4 className="mt-0">Nazorat muddati</h4>
-                      <a
-                        className="datta"
-                        data-toggle="collapse"
-                        href="#collapseOne"
-                      >
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                          Jurnalni tanlang...
-                          <i id="strel" className="nc-icon nc-minimal-right" />
-                        </li>
-
-                        <div
-                          id="collapseOne"
-                          className="collapse"
-                          data-parent="#accordion"
-                        >
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Blanditiis maxime obcaecati officiis, eligendi
-                          unde enim voluptatem animi quae id atque, suscipit
-                          sapiente accusantium debitis repellat beatae,
-                          consectetur necessitatibus ducimus sit. Voluptatum
-                          delectus quas numquam aliquam nisi necessitatibus,
-                          fugit fuga recusandae mollitia beatae at atque ad
-                          dolor cum vero eligendi voluptatem, doloremque commodi
-                          sapiente? Nostrum illo doloremque atque aliquam est
-                          sed. At laudantium iusto doloremque odio ab cumque
-                          quibusdam, nesciunt ducimus culpa nemo omnis quas
-                          veniam? Dolores eos eligendi dicta laborum dolorem
-                          unde ratione minus, inventore veniam iure quaerat ab,
-                          consectetur quia. Rerum distinctio reprehenderit,
-                          animi nisi accusamus veniam. Placeat, vero.
-                        </div>
-                      </a>
-                      <p className="pp">
-                        Ilmiy jurnallarning maqolalarni qabul qilish, ularni
-                        tekshirish va yangi sonini nashr qilish muddatlari
-                      </p>
-                    </div>
-                  </div> */}
-
                   <div
                     className="tab-pane container maqollarUchun fade"
                     id="menu3"
@@ -311,229 +284,30 @@ class NashrShartlari extends Component {
                       <ul className="list-group list-group-flush">
                         <hr />
 
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Tibbiyot va farmakologiya
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
+                        {directions &&
+                          directions.map((direction, idx) => (
+                            <div key={idx}>
+                              <a
+                                className="lik"
+                                data-toggle="collapse"
+                                href={`#collapse${idx}`}
+                              >
+                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                                  {direction.title}
+                                  <i className="nc-icon nc-minimal-right" />
+                                </li>
 
-                          <div
-                            id="collapseOne"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            Tiboiyot va Farmakalogiya bir-biriga chanbarchas
-                            bog'lig delectus quas numquam aliquam nisi
-                            necessitatibus, fugit fuga recusandae mollitia
-                            beatae at atque ad dolor cum vero eligendi
-                            voluptatem, doloremque commodi sapiente? Nostrum
-                            illo doloremque atque aliquam est sed. At laudantium
-                            iusto doloremque odio ab cumque quibusdam, nesciunt
-                            ducimus culpa nemo omnis quas veniam? Dolores eos
-                            eligendi dicta laborum dolorem unde ratione minus,
-                            inventore veniam iure quaerat ab, consectetur quia.
-                            Rerum distinctio reprehenderit, animi nisi accusamus
-                            veniam. Placeat, vero.
-                          </div>
-                        </a>
-                        <hr />
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne1"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Psixologiya va ta'lim
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
-
-                          <div
-                            id="collapseOne1"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            talim tizimini tubdan islox qilish va
-                            takomilashtirish va rivojlantirish kereak elit.
-                            Blanditiis maxime obcaecati officiis, eligendi unde
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
-                          </div>
-                        </a>
-                        <hr />
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne2"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Texnik fanlar
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
-
-                          <div
-                            id="collapseOne2"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            bugungi kundagi dunyoda texnalogiya jada suratdam,
-                            rivoj topib kelmoqda. Dolor cum vero eligendi
-                            voluptatem, doloremque commodi sapiente? Nostrum
-                            illo doloremque atque aliquam est sed. At laudantium
-                            iusto doloremque odio ab cumque quibusdam, nesciunt
-                            ducimus culpa nemo omnis quas veniam? Dolores eos
-                            eligendi dicta laborum dolorem unde ratione minus,
-                            inventore veniam iure quaerat ab, consectetur quia.
-                            Rerum distinctio reprehenderit, animi nisi accusamus
-                            veniam. Placeat, vero.
-                          </div>
-                        </a>
-                        <hr />
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne3"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Filologiya va san'atshunoslik
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
-
-                          <div
-                            id="collapseOne3"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            Sa'natda va filalogiya bir qilsak aliquam est sed.
-                            At laudantium iusto doloremque odio ab cumque
-                            quibusdam, nesciunt ducimus culpa nemo omnis quas
-                            veniam? Dolores eos eligendi dicta laborum dolorem
-                            unde ratione minus, inventore veniam iure quaerat
-                            ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
-                          </div>
-                        </a>
-                        <hr />
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne4"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Ijtimoiy fanlar
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
-
-                          <div
-                            id="collapseOne4"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            Ijtimoiy fanlar Huquq tarix fanlari kiradi ab cumque
-                            quibusdam, nesciunt ducimus culpa nemo omnis quas
-                            veniam? Dolores eos eligendi dicta laborum dolorem
-                            unde ratione minus, inventore veniam iure quaerat
-                            ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
-                          </div>
-                        </a>
-                        <hr />
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne5"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Kimyo va biologiya
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
-
-                          <div
-                            id="collapseOne5"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
-                          </div>
-                        </a>
-                        <hr />
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne6"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Iqtisodiyot va huquqshunoslik
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
-
-                          <div
-                            id="collapseOne6"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            commodi sapiente? Nostrum illo doloremque atque
-                            aliquam est sed. At laudantium iusto doloremque odio
-                            ab cumque quibusdam, nesciunt ducimus culpa nemo
-                            omnis quas veniam? Dolores eos eligendi dicta
-                            laborum dolorem unde ratione minus, inventore veniam
-                            iure quaerat ab, consectetur quia. Rerum distinctio
-                            reprehenderit, animi nisi accusamus veniam. Placeat,
-                            vero.
-                          </div>
-                        </a>
-                        <hr />
-                        <a
-                          className="lik"
-                          data-toggle="collapse"
-                          href="#collapseOne7"
-                        >
-                          <li className="list-group-item d-flex justify-content-between align-items-center">
-                            Barcha turdagi maqolalar
-                            <i className="nc-icon nc-minimal-right" />
-                          </li>
-
-                          <div
-                            id="collapseOne7"
-                            className="collapse"
-                            data-parent="#accordion"
-                          >
-                            Blanditiis maxime obcaecati officiis, eligendi unde
-                            enim voluptatem animi quae id atque, suscipit
-                            sapiente accusantium debitis repellat beatae,
-                            consectetur necessitatibus ducimus sit. Voluptatum
-                            delectus quas numquam aliquam nisi necessitatibus,
-                            fugit fuga recusandae mollitia beatae at atque ad
-                            dolor cum vero eligendi voluptatem, doloremque
-                            commodi sapiente? vero.
-                          </div>
-                        </a>
-                        <hr />
+                                <div
+                                  id={`collapse${idx}`}
+                                  className="collapse"
+                                  data-parent="#accordion"
+                                >
+                                  {direction.description}
+                                </div>
+                              </a>
+                              <hr />
+                            </div>
+                          ))}
                       </ul>
                     </div>
                   </div>
