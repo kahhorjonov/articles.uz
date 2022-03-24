@@ -324,9 +324,9 @@ class ChangePrices extends Component {
                           <thead>
                             <tr className="col-lg-12">
                               <th className="col-lg-1">№</th>
-                              <th className="col-lg-2">Name</th>
-                              <th className="col-lg-4">Active</th>
-                              <th className="col-lg-2">Delete</th>
+                              <th className="col-lg-2">Nomi</th>
+                              <th className="col-lg-4">Aktivlashtirish</th>
+                              <th className="col-lg-2">O'chirish</th>
                             </tr>
                           </thead>
                           <tbody>
