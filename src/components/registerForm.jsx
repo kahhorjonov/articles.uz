@@ -77,9 +77,9 @@ class RegisterForm extends Form {
           <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderLoginInput("phoneNumber", "Telefon raqami")}
 
-            {this.renderInput("password", "Password", "password")}
+            {this.renderInput("password", "Parol", "password")}
 
-            {this.renderButton("Register")}
+            {this.renderButton("Ro'yxatdan o'tish")}
           </form>
 
           <Link

@@ -53,7 +53,7 @@ class RestoreWithSms extends Form {
           <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderLoginInput("phoneNumber", "Telefon raqami")}
 
-            <Button onClick={this.doSubmit}>Send sms code</Button>
+            <Button onClick={this.doSubmit}>Sms kodni olish</Button>
           </form>
 
           <Link className="rever" style={{ fontSize: "2rem" }} to="/login">

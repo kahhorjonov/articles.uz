@@ -138,7 +138,9 @@ class ReviewerRegisterForm extends Form {
   render() {
     return (
       <div className="registerForm">
-        <h3 style={{ textAlign: "center" }}>Reviewer Register Form</h3>
+        <h3 style={{ textAlign: "center" }}>
+          Revyuver sifatida ro'yxatdan o'tish
+        </h3>
         <div className="col-md-8 m-auto">
           <Card className="user-card card">
             <Row className="mr-0 ml-0">
@@ -164,34 +166,34 @@ class ReviewerRegisterForm extends Form {
                       {this.renderInput("email", "Email", "email")}
                     </Col>
                     <Col md="4" sm="4">
-                      {this.renderInput("password", "Password", "password")}
+                      {this.renderInput("password", "Parol", "password")}
                     </Col>
                   </Row>
                   <Row>
                     <Col md="3" sm="3">
                       {this.renderSelect(
                         "categoryIdList",
-                        "CategoryIdList",
+                        "Kategoriyalar",
                         this.state.categories
                       )}
                     </Col>
                     <Col md="3" sm="3">
-                      {this.renderInput("workPlace", "WorkPlace")}
+                      {this.renderInput("workPlace", "Ish joyi")}
                     </Col>
                     <Col md="3" sm="3">
                       {this.renderInput(
                         "workExperience",
-                        "WorkExperience",
+                        "Tajribasi (yil)",
                         "number"
                       )}
                     </Col>
                     <Col md="3" sm="3">
-                      {this.renderInput("academicDegree", "AcademicDegree")}
+                      {this.renderInput("academicDegree", "Ilmiy Darajasi")}
                     </Col>
                   </Row>
                   <Row>
                     <Col md="4" sm="4">
-                      <label>Languages</label>
+                      <label>Tillar</label>
                       <Multiselect
                         options={this.state.options} // Options to display in the dropdown
                         selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
@@ -201,17 +203,19 @@ class ReviewerRegisterForm extends Form {
                       />
                     </Col>
                     <Col md="4" sm="4">
-                      {this.renderPassportInput("passport", "Passport", "file")}
+                      {this.renderPassportInput("passport", "Pasport", "file")}
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderWorksInput(
                         "scientificWork",
-                        "Qilingan ishlardan namuna",
+                        "Qilingan ishlardan namuna *(zip, 7zip, rar)",
                         "file"
                       )}
                     </Col>
                   </Row>
-                  <div className="bt mt-5">{this.renderButton("Register")}</div>
+                  <div className="bt mt-5">
+                    {this.renderButton("Ro'yxatdan o'tish")}
+                  </div>
                 </CardBody>
               </form>
             </Row>

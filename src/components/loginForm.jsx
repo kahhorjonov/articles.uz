@@ -70,13 +70,13 @@ class LoginForm extends Form {
     return (
       <div className="registerForm">
         <div>
-          <h1 className="regs">Login Form</h1>
+          <h1 className="regs">Tizimga Kirish</h1>
           <form className="form-register" onSubmit={this.handleSubmit}>
             {this.renderLoginInput("phoneNumber", "Telefon raqami")}
 
-            {this.renderInput("password", "Password", "password")}
+            {this.renderInput("password", "Parol", "password")}
 
-            {this.renderButton("Login")}
+            {this.renderButton("Kirish")}
           </form>
           <Link className="rever" style={{ fontSize: "2rem" }} to="/register">
             Ro'yxatdan o'tish
