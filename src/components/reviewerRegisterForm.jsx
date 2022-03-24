@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import authService from "services/authService";
 import jwtDecode from "jwt-decode";
 import Multiselect from "multiselect-react-dropdown";
-import firebase from "../firebase";
+// import firebase from "../firebase";
 import { getAllActiveLanguages } from "services/languageService";
 
 import { Card, CardBody, Row, Col } from "reactstrap";
@@ -35,7 +35,7 @@ class ReviewerRegisterForm extends Form {
     categories: [],
     errors: {},
 
-    notificationToken: "",
+    // notificationToken: "",
     selectedValues: [],
     options: [],
     codes: [],
@@ -46,21 +46,21 @@ class ReviewerRegisterForm extends Form {
     await this.populateCategories();
     await this.handleGetLanguage();
 
-    try {
-      const msg = firebase.messaging();
-      msg
-        .requestPermission()
-        .then(() => {
-          return msg.getToken();
-        })
-        .then((data) => {
-          this.setState({ notificationToken: data });
-        });
-    } catch (ex) {
-      toast.info(
-        "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
-      );
-    }
+    // try {
+    //   const msg = firebase.messaging();
+    //   msg
+    //     .requestPermission()
+    //     .then(() => {
+    //       return msg.getToken();
+    //     })
+    //     .then((data) => {
+    //       this.setState({ notificationToken: data });
+    //     });
+    // } catch (ex) {
+    //   toast.info(
+    //     "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
+    //   );
+    // }
   }
 
   handleGetLanguage = async () => {

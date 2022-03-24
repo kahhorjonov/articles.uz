@@ -14,11 +14,15 @@ http.setJwt(getJwt());
 
 export async function login(phoneNumber, password) {
   const { data: jwt } = await http.post(apiEndpoint, { phoneNumber, password });
-  localStorage.setItem(tokenKey, jwt);
+  if (jwt) {
+    localStorage.setItem(tokenKey, jwt);
+  }
 }
 
 export function loginWithJwt(jwt) {
-  localStorage.setItem(tokenKey, jwt);
+  if (jwt) {
+    localStorage.setItem(tokenKey, jwt);
+  }
 }
 
 export function logout() {

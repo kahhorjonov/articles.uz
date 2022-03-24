@@ -6,7 +6,7 @@ import * as userService from "../services/userService";
 import auth from "../services/authService";
 import jwtDecode from "jwt-decode";
 
-import firebase from "../firebase";
+// import firebase from "../firebase";
 import { toast } from "react-toastify";
 
 import "styles/registerStyles.css";
@@ -18,27 +18,27 @@ class RegisterForm extends Form {
       phoneNumber: "",
     },
 
-    notificationToken: "",
+    // notificationToken: "",
     errors: {},
   };
 
-  componentDidMount() {
-    try {
-      const msg = firebase.messaging();
-      msg
-        .requestPermission()
-        .then(() => {
-          return msg.getToken();
-        })
-        .then((data) => {
-          this.setState({ notificationToken: data });
-        });
-    } catch (ex) {
-      toast.info(
-        "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
-      );
-    }
-  }
+  // componentDidMount() {
+  //   try {
+  //     const msg = firebase.messaging();
+  //     msg
+  //       .requestPermission()
+  //       .then(() => {
+  //         return msg.getToken();
+  //       })
+  //       .then((data) => {
+  //         this.setState({ notificationToken: data });
+  //       });
+  //   } catch (ex) {
+  //     toast.info(
+  //       "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
+  //     );
+  //   }
+  // }
 
   schema = {
     phoneNumber: Joi.string().required().label("Telefon raqami"),
@@ -48,10 +48,16 @@ class RegisterForm extends Form {
 
   doSubmit = async () => {
     try {
-      const response = await userService.register(
-        this.state.data,
-        this.state.notificationToken
-      );
+      const { phoneNumber, password } = this.state.data;
+      const newNumber = `+998${phoneNumber}`;
+      const response = await userService
+        .register(
+          newNumber,
+          password
+          // this.state.notificationToken
+        )
+        .then((res) => toast.info(res.message));
+
       auth.loginWithJwt(response.data);
       // auth.loginWithJwt(response.headers["x-auth-token"]);
       const decodedToken = jwtDecode(response.data);

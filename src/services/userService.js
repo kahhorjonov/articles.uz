@@ -6,11 +6,11 @@ const { apiSwagger, apiLocal } = api;
 
 const apiEndpoint = apiLocal + "/user/register";
 
-export function register(user, firebaseToken) {
+export function register(phone, password) {
   return http.post(apiEndpoint, {
-    phoneNumber: user.phoneNumber,
-    password: user.password,
-    firebaseToken: firebaseToken,
+    phoneNumber: phone,
+    password: password,
+    // firebaseToken: firebaseToken,
     // name: user.name,
   });
 }
