@@ -187,9 +187,9 @@ class NashrShartlari extends Component {
                           Respublikasi)
                           <span>80 000 so’m</span>
                         </li>
-                        <li className="list-group-item disable">
+                        {/* <li className="list-group-item disable">
                           Qo'shimcha xizmatlar narxi:
-                        </li>
+                        </li> */}
                         <li className="list-group-item d-flex justify-content-between align-items-center">
                           Matnni tuzatish
                           <span>{sahifaNarxi} so’m / 1 sahifasi</span>

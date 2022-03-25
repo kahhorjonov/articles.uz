@@ -135,11 +135,7 @@ class JurnallarRoyxati extends Component {
           <div className="row mx-0 mx-sm-0 jurnal_articles">
             {magazines &&
               magazines.map((magazine) => (
-                <div
-                  style={{ width: "360px", height: "460px" }}
-                  key={magazine.id}
-                  className="col-md-4 "
-                >
+                <div key={magazine.id} className="col-md-4 ">
                   <div className="card border-0">
                     <GetImages url={magazine.cover.id} />
 

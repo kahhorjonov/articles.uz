@@ -432,17 +432,55 @@ class UserEdit extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Edit Profile</CardTitle>
+                  <CardTitle tag="h5">Tahrirlash</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
-                      <Col className="pr-1" md="5">
+                      <Col md="6">
+                        <FormGroup>
+                          <label>Ism</label>
+                          <Input
+                            defaultValue={firstName}
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ firstName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md="6">
+                        <FormGroup>
+                          <label>Familiya</label>
+                          <Input
+                            defaultValue={lastName}
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ lastName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col md="12">
+                        <FormGroup>
+                          <label>Kategoriya</label>
+                          <Input
+                            defaultValue={categories ? categories[0] : "null"}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col md="5">
                         <FormGroup>
                           <label>Ish joyi</label>
                           <Input
                             defaultValue={workPlace}
-                            placeholder="Company"
                             type="text"
                             onChange={(e) =>
                               this.setState({ workPlace: e.target.value })
@@ -450,7 +488,7 @@ class UserEdit extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="px-1" md="3">
+                      <Col md="3">
                         <FormGroup>
                           <label>Ro'yxatdan o'tgan sana</label>
                           <Input
@@ -462,7 +500,7 @@ class UserEdit extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label htmlFor="exampleInputEmail1">Email</label>
                           <Input
@@ -476,43 +514,7 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
-                      <Col className="pr-1" md="6">
-                        <FormGroup>
-                          <label>Ism</label>
-                          <Input
-                            defaultValue={firstName}
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ firstName: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="6">
-                        <FormGroup>
-                          <label>Familiya</label>
-                          <Input
-                            defaultValue={lastName}
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ lastName: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>Kategoriya</label>
-                          <Input
-                            defaultValue={categories ? categories[0] : "null"}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+
                     <Row>
                       {/* <Col className="pr-1" md="4">
                         <FormGroup>
@@ -525,7 +527,7 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col> */}
 
-                      <Col className="pr-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label>Ilmiy Ishlarni yuklash</label>
                           <Button
@@ -559,7 +561,7 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col> */}
 
-                      <Col className="px-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label>Daraja</label>
                           <Input
@@ -575,7 +577,7 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col>
 
-                      <Col className="pl-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label>Tajriba (yil)</label>
                           <Input
@@ -599,7 +601,7 @@ class UserEdit extends Component {
                           selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
                           onSelect={this.onSelect} // Function will trigger on select event
                           onRemove={this.onRemove} // Function will trigger on remove event
-                          // displayValue="name" // Property name to display in the dropdown options
+                          displayValue="name" // Property name to display in the dropdown options
                         />
                       </Col>
                     </Row>

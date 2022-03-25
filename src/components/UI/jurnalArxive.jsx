@@ -264,11 +264,7 @@ class JurnalArxive extends Component {
                     <div style={{ minHeight: "50rem" }} className="row">
                       {magazines &&
                         magazines.map((magazine) => (
-                          <div
-                            style={{ width: "360px", height: "460px" }}
-                            key={magazine.id}
-                            className="col-lg-3"
-                          >
+                          <div key={magazine.id} className="col-lg-3">
                             <GetImages url={magazine.cover.id} />
 
                             <Link

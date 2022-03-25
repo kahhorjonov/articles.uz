@@ -45,11 +45,7 @@ class Asosiy extends React.Component {
             <div className="article_rows row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 pl-0">
               {magazines &&
                 magazines.map((magazine) => (
-                  <div
-                    style={{ width: "360px", height: "460px" }}
-                    key={magazine.id}
-                    className="col-md-4 card-articles"
-                  >
+                  <div key={magazine.id} className="col-md-4 card-articles">
                     <div className="border-0">
                       <GetImages url={magazine.cover.id} />
 

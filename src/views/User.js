@@ -320,6 +320,34 @@ class User extends Component {
                 <CardBody>
                   <Form>
                     <Row>
+                      <Col className="pr-1" md="6">
+                        <FormGroup>
+                          <label>Ism</label>
+                          <Input
+                            defaultValue={firstName}
+                            placeholder="Ismingiz"
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ firstName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pl-1" md="6">
+                        <FormGroup>
+                          <label>Familiya</label>
+                          <Input
+                            defaultValue={lastName}
+                            placeholder="Familiyangiz"
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ lastName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
                       <Col className="pr-1" md="5">
                         <FormGroup>
                           <label>Ish joyi </label>
@@ -357,34 +385,6 @@ class User extends Component {
                             type="email"
                             onChange={(e) =>
                               this.setState({ email: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="pr-1" md="6">
-                        <FormGroup>
-                          <label>Ism</label>
-                          <Input
-                            defaultValue={firstName}
-                            placeholder="Ismingiz"
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ firstName: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="6">
-                        <FormGroup>
-                          <label>Familiya</label>
-                          <Input
-                            defaultValue={lastName}
-                            placeholder="Familiyangiz"
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ lastName: e.target.value })
                             }
                           />
                         </FormGroup>
