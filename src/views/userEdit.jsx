@@ -8,14 +8,13 @@ import {
   getUserForEdit,
   profileEditFromAdmin,
 } from "services/userService";
+import Multiselect from "multiselect-react-dropdown";
+import noUser from "assets/img/no-user-image.gif";
 
 import { getAllActiveLanguages } from "services/languageService";
 import { getArticlesCheckedByReviewers } from "services/articleService";
 import { downloadMedia } from "services/mediaService";
 import { toast } from "react-toastify";
-import Multiselect from "multiselect-react-dropdown";
-
-import noUser from "assets/img/no-user-image.gif";
 
 import {
   Button,
@@ -66,11 +65,16 @@ class UserEdit extends Component {
     checkAndCancels: "",
     checkAndRecycles: "",
     didNotAccepteds: "",
+
     selectedValues: [],
     options: [],
     codes: [],
+
+    selectedValues2: [],
+    options2: [],
+    codes2: [],
+
     checkedArticles: [],
-    selectedValues: [],
   };
 
   async componentDidMount() {
@@ -86,6 +90,7 @@ class UserEdit extends Component {
         }
         this.getCheckedArticles(userId);
         this.setState({ selectedValues: res.data.object.languages });
+        this.setState({ selectedValues2: res.data.object.categories });
       })
       .catch((ex) => toast.error(ex.response.data.message));
 
@@ -100,7 +105,21 @@ class UserEdit extends Component {
         });
       })
       .catch((ex) => toast.error(ex.response.data.message));
+
+    this.handleFillDefaultIds();
   }
+
+  handleFillDefaultIds = () => {
+    this.state.selectedValues &&
+      this.state.selectedValues.map((language) =>
+        this.setState({ codes: [...this.state.codes, language.id] })
+      );
+
+    this.state.selectedValues2 &&
+      this.state.selectedValues2.map((category) =>
+        this.setState({ codes2: [...this.state.codes2, category.id] })
+      );
+  };
 
   handleGetLanguages = async () => {
     try {
@@ -184,6 +203,22 @@ class UserEdit extends Component {
     );
     this.setState({ selectedList: selectedList });
     this.setState({ codes: [...newCodes] });
+  };
+
+  onSelect2 = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues2: selectedList,
+    });
+
+    this.setState({ codes2: [...this.state.codes2, selectedItem.id] });
+  };
+
+  onRemove2 = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes2.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList2: selectedList });
+    this.setState({ codes2: [...newCodes] });
   };
 
   handleChange = async (bool) => {
@@ -463,7 +498,7 @@ class UserEdit extends Component {
                       </Col>
                     </Row>
 
-                    <Row>
+                    {/* <Row>
                       <Col md="12">
                         <FormGroup>
                           <label>Kategoriya</label>
@@ -473,7 +508,7 @@ class UserEdit extends Component {
                           />
                         </FormGroup>
                       </Col>
-                    </Row>
+                    </Row> */}
 
                     <Row>
                       <Col md="5">
@@ -593,6 +628,20 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
+
+                    <Row>
+                      <Col md="12">
+                        <label>Kategoriya</label>
+                        <Multiselect
+                          options={this.state.options2} // Options to display in the dropdown
+                          selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
+                          onSelect={this.onSelect2} // Function will trigger on select event
+                          onRemove={this.onRemove2} // Function will trigger on remove event
+                          displayValue="name" // Property name to display in the dropdown options
+                        />
+                      </Col>
+                    </Row>
+
                     <Row>
                       <Col md="12">
                         <label>Tillar</label>
@@ -605,6 +654,7 @@ class UserEdit extends Component {
                         />
                       </Col>
                     </Row>
+
                     <Row>
                       <div className="update ml-auto mr-auto">
                         <Button

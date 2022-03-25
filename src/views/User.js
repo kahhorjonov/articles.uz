@@ -40,19 +40,36 @@ class User extends Component {
     selectedValues: [],
     options: [],
     codes: [],
-    checkedArticles: [],
+
+    selectedValues2: [],
+    // options2: [],
+    // codes2: [],
   };
 
   async componentDidMount() {
     await this.getUserByMe();
     await this.handleGetLanguages();
+
+    this.handleFillDefaultIds();
   }
+
+  handleFillDefaultIds = async () => {
+    this.state.selectedValues &&
+      this.state.selectedValues.map((language) =>
+        this.setState({ codes: [...this.state.codes, language.id] })
+      );
+
+    // this.state.selectedValues2 &&
+    //   this.state.selectedValues2.map((category) =>
+    //     this.setState({ codes2: [...this.state.codes2, category.id] })
+    //   );
+  };
 
   handleGetLanguages = async () => {
     try {
-      await getAllActiveLanguages().then((res) =>
-        this.setState({ options: res.data })
-      );
+      await getAllActiveLanguages().then((res) => {
+        this.setState({ options: res.data });
+      });
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
@@ -83,6 +100,7 @@ class User extends Component {
           this.getImage(res.data.photos[0].id);
         }
         this.setState({ selectedValues: res.data.languages });
+        this.setState({ selectedValues2: res.data.categories });
       })
       .catch((ex) => toast.error(ex.response.data.message));
   };
@@ -98,6 +116,22 @@ class User extends Component {
 
     return this.setState({ photo: URL.createObjectURL(imageBlob) });
   };
+
+  // onSelect2 = (selectedList, selectedItem) => {
+  //   this.setState({
+  //     selectedValues2: selectedList,
+  //   });
+
+  //   this.setState({ codes2: [...this.state.codes2, selectedItem.id] });
+  // };
+
+  // onRemove2 = (selectedList, removedItem) => {
+  //   const newCodes = new Set(
+  //     this.state.codes2.filter((id) => id !== removedItem.id)
+  //   );
+  //   this.setState({ selectedList2: selectedList });
+  //   this.setState({ codes2: [...newCodes] });
+  // };
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -452,6 +486,7 @@ class User extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
+
                     <Row>
                       <Col md="12">
                         <FormGroup>
@@ -466,6 +501,21 @@ class User extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
+
+                    <Row>
+                      <Col md="12">
+                        <label>Kategoriya</label>
+                        <Multiselect
+                          disable
+                          // options={this.state.options2} // Options to display in the dropdown
+                          selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
+                          // onSelect={this.onSelect2} // Function will trigger on select event
+                          // onRemove={this.onRemove2} // Function will trigger on remove event
+                          displayValue="name" // Property name to display in the dropdown options
+                        />
+                      </Col>
+                    </Row>
+
                     <Row>
                       <div className="update ml-auto mr-auto">
                         <Button

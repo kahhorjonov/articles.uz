@@ -6,6 +6,8 @@ const { apiSwagger, apiLocal } = api;
 
 const apiEndpoint = apiLocal + "/user/register";
 
+const token = localStorage.getItem("token");
+
 export function register(phone, password) {
   return http.post(apiEndpoint, {
     phoneNumber: phone,
@@ -41,8 +43,6 @@ export function deleteUser(userId) {
 }
 
 export function changeUserActivity(userId, activity) {
-  const token = localStorage.getItem("token");
-
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -56,8 +56,6 @@ export function changeUserActivity(userId, activity) {
 }
 
 export async function profileEdit(data) {
-  const token = localStorage.getItem("token");
-
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -74,14 +72,13 @@ export async function profileEdit(data) {
     workExperience: data.workExperience,
     email: data.email,
     languages: data.codes,
+    // categoryIdList: data.codes2,
   };
 
   return axios.post(apiLocal + "/user/edit", body, config);
 }
 
 export async function profileEditFromAdmin(data) {
-  const token = localStorage.getItem("token");
-
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -99,21 +96,22 @@ export async function profileEditFromAdmin(data) {
     workExperience: data.workExperience,
     email: data.email,
     languages: data.codes,
+    categoryIdList: data.codes2,
   };
 
   return axios.post(apiLocal + "/user/editUserFromAdmin", body, config);
 }
 
-export async function registerReviewer(data, languages) {
+export async function registerReviewer(data, languages, categories) {
   const bodyFormData = new FormData();
 
   bodyFormData.append("firstName", data.firstName);
   bodyFormData.append("lastName", data.lastName);
   bodyFormData.append("fathersName", data.fatherName);
   bodyFormData.append("email", data.email);
-  bodyFormData.append("phoneNumber", data.phoneNumber);
+  bodyFormData.append("phoneNumber", `+998${data.phoneNumber}`);
   bodyFormData.append("password", data.password);
-  bodyFormData.append("categoryIdList", data.categoryIdList);
+  bodyFormData.append("categoryIdList", categories);
   bodyFormData.append("workPlace", data.workPlace);
   bodyFormData.append("workExperience", data.workExperience);
   bodyFormData.append("academicDegree", data.academicDegree);

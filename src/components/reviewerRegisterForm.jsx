@@ -10,7 +10,6 @@ import jwtDecode from "jwt-decode";
 import Multiselect from "multiselect-react-dropdown";
 // import firebase from "../firebase";
 import { getAllActiveLanguages } from "services/languageService";
-
 import { Card, CardBody, Row, Col } from "reactstrap";
 
 import "styles/registerStyles.css";
@@ -24,7 +23,7 @@ class ReviewerRegisterForm extends Form {
       email: "",
       phoneNumber: "",
       password: "",
-      categoryIdList: "",
+      // categoryIdList: "",
       workPlace: "",
       workExperience: 0,
       academicDegree: "",
@@ -32,14 +31,17 @@ class ReviewerRegisterForm extends Form {
       scientificWork: [],
     },
 
-    categories: [],
+    // categories: [],
     errors: {},
 
     // notificationToken: "",
     selectedValues: [],
     options: [],
     codes: [],
-    checkedArticles: [],
+
+    selectedValues2: [],
+    options2: [],
+    codes2: [],
   };
 
   async componentDidMount() {
@@ -96,7 +98,7 @@ class ReviewerRegisterForm extends Form {
     email: Joi.string().email().required().label("Email"),
     phoneNumber: Joi.string().required().label("Telefon raqami"),
     password: Joi.string().min(5).required().label("Password"),
-    categoryIdList: Joi.string().required().label("CategoryIdList"),
+    // categoryIdList: Joi.string().required().label("CategoryIdList"),
     workPlace: Joi.string().required().label("WorkPlace"),
     workExperience: Joi.number().required().label("WorkExperience"),
     academicDegree: Joi.string().required().label("AcademicDegree"),
@@ -106,13 +108,29 @@ class ReviewerRegisterForm extends Form {
 
   async populateCategories() {
     const { data: categories } = await getCategories();
-    this.setState({ categories });
+    this.setState({ options2: categories });
   }
+
+  onSelect2 = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues2: selectedList,
+    });
+
+    this.setState({ codes2: [...this.state.codes2, selectedItem.id] });
+  };
+
+  onRemove2 = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes2.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList2: selectedList });
+    this.setState({ codes2: [...newCodes] });
+  };
 
   doSubmit = async () => {
     try {
       await userService
-        .registerReviewer(this.state.data, this.state.codes)
+        .registerReviewer(this.state.data, this.state.codes, this.state.codes2)
         .then((res) => {
           authService.loginWithJwt(res.data.object);
           toast.success(res.data.message);
@@ -132,6 +150,7 @@ class ReviewerRegisterForm extends Form {
         errors.username = ex.response.data;
         this.setState({ errors });
       }
+      toast.info(ex.response.data.message);
     }
   };
 
@@ -169,25 +188,32 @@ class ReviewerRegisterForm extends Form {
                       {this.renderInput("password", "Parol", "password")}
                     </Col>
                   </Row>
+
                   <Row>
-                    <Col md="3" sm="3">
-                      {this.renderSelect(
-                        "categoryIdList",
-                        "Kategoriyalar",
-                        this.state.categories
-                      )}
+                    <Col md="12">
+                      <label>Kategoriya</label>
+                      <Multiselect
+                        options={this.state.options2} // Options to display in the dropdown
+                        selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
+                        onSelect={this.onSelect2} // Function will trigger on select event
+                        onRemove={this.onRemove2} // Function will trigger on remove event
+                        displayValue="name" // Property name to display in the dropdown options
+                      />
                     </Col>
-                    <Col md="3" sm="3">
+                  </Row>
+
+                  <Row>
+                    <Col md="4" sm="4">
                       {this.renderInput("workPlace", "Ish joyi")}
                     </Col>
-                    <Col md="3" sm="3">
+                    <Col md="4" sm="4">
                       {this.renderInput(
                         "workExperience",
                         "Tajribasi (yil)",
                         "number"
                       )}
                     </Col>
-                    <Col md="3" sm="3">
+                    <Col md="4" sm="4">
                       {this.renderInput("academicDegree", "Ilmiy Darajasi")}
                     </Col>
                   </Row>
@@ -195,6 +221,7 @@ class ReviewerRegisterForm extends Form {
                     <Col md="4" sm="4">
                       <label>Tillar</label>
                       <Multiselect
+                        id="search_input2"
                         options={this.state.options} // Options to display in the dropdown
                         selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
                         onSelect={this.onSelect} // Function will trigger on select event
