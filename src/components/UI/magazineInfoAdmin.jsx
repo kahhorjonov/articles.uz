@@ -277,7 +277,17 @@ class MagazineInfoAdmin extends Component {
                         {magazines &&
                           magazines.map((magazine) => (
                             <div key={magazine.id} className="col-lg-3">
-                              <GetImages url={magazine.cover.id} />
+                              <Link
+                                to={
+                                  this.state.user === 1
+                                    ? `/admin/editMagazine/:${magazine.id}`
+                                    : `/reductor/editMagazine/:${magazine.id}`
+                                }
+                              >
+                                <div className="boxShadow">
+                                  <GetImages url={magazine.cover.id} />
+                                </div>
+                              </Link>
 
                               <Link
                                 style={{

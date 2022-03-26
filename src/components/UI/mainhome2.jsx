@@ -43,6 +43,7 @@ class Mainhome2 extends React.Component {
       numberOfUsers,
       numberAllArticles,
     } = this.state.data;
+
     const ilmiyXodimlar =
       numberOfRedactors &&
       numberOfReviewers &&
@@ -121,7 +122,9 @@ class Mainhome2 extends React.Component {
                       <p>Barcha maqolalar</p>
                     </div>
                     <div className="col-md-4">
-                      <h5 className="mb-0">{numberOfUsers && numberOfUsers}</h5>
+                      <h5 className="mb-0">
+                        {numberOfUsers ? numberOfUsers : 0}
+                      </h5>
                       <p>Mualliflar</p>
                     </div>
 

@@ -132,16 +132,53 @@ class JurnallarRoyxati extends Component {
             </div>
           </div>
 
-          <div className="row mx-0 mx-sm-0 jurnal_articles">
+          <div className="article_rows row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 pl-0">
+            {magazines &&
+              magazines.map((magazine) => (
+                <div key={magazine.id} className="col-md-4 card-articles">
+                  <div className="border-0">
+                    <Link to={`/listOfMagazines/magazineInfo/:${magazine.id}`}>
+                      <div className="boxShadow">
+                        <GetImages url={magazine.cover.id} />
+                      </div>
+                    </Link>
+
+                    <div className="card-body p-0">
+                      <h4 className="card_title">
+                        <Link
+                          to={`/listOfMagazines/magazineInfo/:${magazine.id}`}
+                        >
+                          {magazine.title}
+                        </Link>
+                      </h4>
+
+                      <p className="card_text">
+                        Maqolalar qabul qilish muddati <br />
+                        {new Date(magazine.deadline)
+                          .toISOString()
+                          .slice(0, 10)}{" "}
+                        gacha
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+
+          {/* <div className="row mx-0 mx-sm-0 jurnal_articles">
             {magazines &&
               magazines.map((magazine) => (
                 <div key={magazine.id} className="col-md-4 ">
                   <div className="card border-0">
-                    <GetImages url={magazine.cover.id} />
+                    <Link to={`/main/magazineInfo/:${magazine.id}`}>
+                      <div className="boxShadow">
+                        <GetImages url={magazine.cover.id} />
+                      </div>
+                    </Link>
 
                     <div className="card-body p-0">
                       <h4
-                        style={{ marginTop: "15px" }}
+                        // style={{ marginTop: "15px" }}
                         className="card_title p-0"
                       >
                         <Link
@@ -150,18 +187,11 @@ class JurnallarRoyxati extends Component {
                           {magazine.title}
                         </Link>
                       </h4>
-                      {/* <p className="card_text">
-                        Maqolalar qabul qilish muddati <br />
-                        {new Date(magazine.deadline)
-                          .toISOString()
-                          .slice(0, 10)}{" "}
-                        gacha
-                      </p> */}
                     </div>
                   </div>
                 </div>
               ))}
-          </div>
+          </div> */}
         </div>
 
         {/* gren sections */}

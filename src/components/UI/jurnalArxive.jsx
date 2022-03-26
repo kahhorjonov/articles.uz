@@ -265,7 +265,11 @@ class JurnalArxive extends Component {
                       {magazines &&
                         magazines.map((magazine) => (
                           <div key={magazine.id} className="col-lg-3">
-                            <GetImages url={magazine.cover.id} />
+                            <Link to={`/release/:${magazine.id}`}>
+                              <div className="boxShadow">
+                                <GetImages url={magazine.cover.id} />
+                              </div>
+                            </Link>
 
                             <Link
                               style={{

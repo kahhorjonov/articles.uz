@@ -265,7 +265,19 @@ class ReviewerArchive extends Component {
                                 {magazines &&
                                   magazines.map((magazine) => (
                                     <div key={magazine.id} className="col-lg-3">
-                                      <GetImages url={magazine.cover.id} />
+                                      <Link
+                                        to={
+                                          this.state.user === 3
+                                            ? `/reviewer/release/:${magazine.id}`
+                                            : this.state.user === 4
+                                            ? `/user/release/:${magazine.id}`
+                                            : "/"
+                                        }
+                                      >
+                                        <div className="boxShadow">
+                                          <GetImages url={magazine.cover.id} />
+                                        </div>
+                                      </Link>
 
                                       <Link
                                         style={{

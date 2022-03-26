@@ -157,15 +157,24 @@ class Jurnallar extends Component {
                                 className="col-md-4  card-articles"
                               >
                                 <div className="border-0">
-                                  <div
-                                    style={{
-                                      overflow: "hidden",
-                                    }}
-                                    className="testDiv"
-                                  >
-                                    <GetImages
-                                      url={magazine && magazine.cover.id}
-                                    />
+                                  <div className="testDiv">
+                                    <Link
+                                      to={`/${
+                                        this.state.user === 1
+                                          ? "admin"
+                                          : this.state.user === 2
+                                          ? "reductor"
+                                          : this.state.user === 3
+                                          ? "reviewer"
+                                          : this.state.user === 4
+                                          ? "user"
+                                          : null
+                                      }/magazineInformation/:${magazine.id}`}
+                                    >
+                                      <div className="boxShadow">
+                                        <GetImages url={magazine.cover.id} />
+                                      </div>
+                                    </Link>
                                   </div>
                                   <div className="card-body p-0">
                                     <h4 className="card_title p-0">

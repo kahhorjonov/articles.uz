@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { Link } from "react-router-dom";
-import articleService from "services/articleService";
 import { Input } from "reactstrap";
+import articleService from "services/articleService";
 
 import noUser from "assets/img/no-user-image.gif";
 import GetImages from "utils/getImages";
@@ -24,7 +24,7 @@ class Articles extends Component {
     categories: [],
 
     currentPage: 1,
-    pageSize: 10,
+    pageSize: 9,
 
     currentPage2: 1,
     pageSize2: 5,
@@ -122,17 +122,7 @@ class Articles extends Component {
                             Yangi qabul qilinganlar
                           </a>
                         </li>
-                        <li className="nav-item item">
-                          <a
-                            onClick={(e) => {
-                              this.handleClick("PREPARING_FOR_PUBLICATION");
-                            }}
-                            className="nav-link navv"
-                            data-toggle="pill"
-                          >
-                            Tahrirda
-                          </a>
-                        </li>
+
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
@@ -144,6 +134,19 @@ class Articles extends Component {
                             Taqrizda
                           </a>
                         </li>
+
+                        <li className="nav-item item">
+                          <a
+                            onClick={(e) => {
+                              this.handleClick("PREPARING_FOR_PUBLICATION");
+                            }}
+                            className="nav-link navv"
+                            data-toggle="pill"
+                          >
+                            Tahrirda
+                          </a>
+                        </li>
+
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
@@ -153,18 +156,6 @@ class Articles extends Component {
                             data-toggle="pill"
                           >
                             Chop etishda
-                          </a>
-                        </li>
-
-                        <li className="nav-item item">
-                          <a
-                            onClick={(e) => {
-                              this.handleClick("REJECTED");
-                            }}
-                            className="nav-link navv"
-                            data-toggle="pill"
-                          >
-                            Rad etilganlar
                           </a>
                         </li>
 
@@ -191,6 +182,19 @@ class Articles extends Component {
                             No Faollar
                           </a>
                         </li>
+
+                        <li className="nav-item item">
+                          <a
+                            onClick={(e) => {
+                              this.handleClick("REJECTED");
+                            }}
+                            className="nav-link navv"
+                            data-toggle="pill"
+                          >
+                            Rad etilganlar
+                          </a>
+                        </li>
+
                         <li className="nav-item item">
                           <a
                             onClick={(e) => {
@@ -256,9 +260,7 @@ class Articles extends Component {
                             </li>
                           ))}
                       </ul>
-                      <div
-                        style={{ position: "absolute", bottom: 0, right: 10 }}
-                      >
+                      <div style={{ display: "flex", justifyContent: "end" }}>
                         <Pagination
                           itemsCount={
                             this.state.articles && this.state.articles.length
@@ -368,7 +370,6 @@ class Articles extends Component {
                                       <input
                                         checked={person.confirm}
                                         onChange={(e) => {
-                                          console.log(e.target.checked);
                                           this.handleSubmit(
                                             e.target.checked,
                                             person.user.id
@@ -384,9 +385,7 @@ class Articles extends Component {
                           </ul>
                         </div>
                       </div>
-                      <div
-                        style={{ position: "absolute", bottom: 0, right: 10 }}
-                      >
+                      <div style={{ display: "flex", justifyContent: "end" }}>
                         <Pagination
                           itemsCount={this.state.people.length}
                           pageSize={pageSize2}

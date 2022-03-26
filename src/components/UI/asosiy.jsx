@@ -47,7 +47,11 @@ class Asosiy extends React.Component {
                 magazines.map((magazine) => (
                   <div key={magazine.id} className="col-md-4 card-articles">
                     <div className="border-0">
-                      <GetImages url={magazine.cover.id} />
+                      <Link to={`/main/magazineInfo/:${magazine.id}`}>
+                        <div className="boxShadow">
+                          <GetImages url={magazine.cover.id} />
+                        </div>
+                      </Link>
 
                       <div className="card-body p-0">
                         <h4 className="card_title">
