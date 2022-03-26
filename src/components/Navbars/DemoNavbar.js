@@ -264,7 +264,7 @@ function Header(props) {
                   </Link>
                 </li>
 
-                <li className="nav-item ">
+                {/* <li className="nav-item ">
                   <div className="d-flex pos">
                     <div>
                       <span className="text-muted pl-2">
@@ -279,7 +279,7 @@ function Header(props) {
                       </span>
                     </div>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </div>
           </nav>

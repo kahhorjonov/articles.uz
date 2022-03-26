@@ -1,8 +1,9 @@
 import React from "react";
 
-import { BsInstagram, BsTelegram, BsFacebook } from "react-icons/bs";
+import { BsTelegram, BsFacebook } from "react-icons/bs";
 
 import { FaInstagramSquare } from "react-icons/fa";
+import instagram from "assets/img/icons8-instagram.svg";
 
 import "styles/homePage.css";
 
@@ -37,13 +38,25 @@ class Foooter extends React.Component {
               <div className="col-md-4 col-sm-3 col-lg-4">
                 <hr className="hr1 col-md-4 col-sm-4 col-lg-4" />
                 <h5>Manzil:</h5>
-                <div className="d-flex">
-                  <a href="https://telegram.me/Uzb1511">
+                <div className="d-flex align-items-center">
+                  <a
+                    style={{ paddingRight: "1rem" }}
+                    href="https://telegram.me/Uzb1511"
+                  >
                     <BsTelegram size={25} style={{ color: "	#0088cc" }} />
                   </a>
-                  <a href="#" className="px-5">
+                  {/* <a href="#" className="px-5">
                     <FaInstagramSquare size={25} className="instagramLogo" />
+                  </a> */}
+
+                  <a style={{ paddingRight: "1rem" }}>
+                    <img
+                      style={{ width: "35px", height: "35px" }}
+                      src={instagram}
+                    />
+                    {/* <FaInstagramSquare size={25} className="instagramLogo" /> */}
                   </a>
+
                   <a href="https://www.instagram.com/avto.intalim.uz/">
                     <BsFacebook size={25} style={{ color: "#3b5998" }} />
                   </a>
