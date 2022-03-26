@@ -10,10 +10,15 @@
   padding: 0;
   box-sizing: inherit;
   user-select: none;
+  scroll-behavior: smooth;
 }
 
 html {
   font-size: 62.5%;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -1088,4 +1093,35 @@ body {
   .footer .foo_nex {
     text-align: center;
   }
+}
+
+.instagramLogo {
+  color: #fff;
+
+  /* background: -moz-linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  ); */
+
+  /* background: -webkit-linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  ); */
+
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
 }
