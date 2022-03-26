@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userService from "../services/userService";
-import auth from "../services/authService";
+import auth, { loginWithJwt } from "../services/authService";
 import jwtDecode from "jwt-decode";
 
 // import firebase from "../firebase";
@@ -50,22 +50,26 @@ class RegisterForm extends Form {
     try {
       const { phoneNumber, password } = this.state.data;
       const newNumber = `+998${phoneNumber}`;
-      const response = await userService
+      await userService
         .register(
           newNumber,
           password
           // this.state.notificationToken
         )
-        .then((res) => toast.info(res.message));
+        .then((res) => {
+          loginWithJwt(res.data);
+          toast.info(res.message);
+          console.log(res.data);
 
-      auth.loginWithJwt(response.data);
+          const decodedToken = jwtDecode(res.data);
+          if (decodedToken.roles[0].roleName === "ROLE_REVIEWER") {
+            window.location = "/reviewerPage";
+          } else {
+            window.location = "/user/user-page";
+          }
+        });
+
       // auth.loginWithJwt(response.headers["x-auth-token"]);
-      const decodedToken = jwtDecode(response.data);
-      if (decodedToken.roles[0].roleName === "ROLE_REVIEWER") {
-        window.location = "/reviewerPage";
-      } else {
-        window.location = "/user/user-page";
-      }
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
