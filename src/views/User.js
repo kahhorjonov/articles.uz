@@ -210,7 +210,10 @@ class User extends Component {
       email,
       languages,
       createdAt,
+      fatherName,
     } = this.state.currentUser;
+
+    console.log(this.state.currentUser);
 
     return (
       <>
@@ -354,12 +357,11 @@ class User extends Component {
                 <CardBody>
                   <Form>
                     <Row>
-                      <Col className="pr-1" md="6">
+                      <Col sm="4" md="4" lg="4">
                         <FormGroup>
                           <label>Ism</label>
                           <Input
                             defaultValue={firstName}
-                            placeholder="Ismingiz"
                             type="text"
                             onChange={(e) =>
                               this.setState({ firstName: e.target.value })
@@ -367,12 +369,11 @@ class User extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="6">
+                      <Col sm="4" md="4" lg="4">
                         <FormGroup>
                           <label>Familiya</label>
                           <Input
                             defaultValue={lastName}
-                            placeholder="Familiyangiz"
                             type="text"
                             onChange={(e) =>
                               this.setState({ lastName: e.target.value })
@@ -380,9 +381,22 @@ class User extends Component {
                           />
                         </FormGroup>
                       </Col>
+
+                      <Col sm="4" md="4" lg="4">
+                        <FormGroup>
+                          <label>Otasining Ismi</label>
+                          <Input
+                            defaultValue={fatherName}
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ fatherName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
                     </Row>
                     <Row>
-                      <Col className="pr-1" md="5">
+                      <Col md="5">
                         <FormGroup>
                           <label>Ish joyi </label>
                           <Input
@@ -394,7 +408,7 @@ class User extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="px-1" md="3">
+                      <Col md="3">
                         <FormGroup>
                           <label>Ro'yxatdan o'tgan sana</label>
                           <Input
@@ -410,7 +424,7 @@ class User extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label htmlFor="exampleInputEmail1">Email</label>
                           <Input
@@ -437,7 +451,7 @@ class User extends Component {
                       </Col>
                     </Row> */}
                     <Row>
-                      <Col className="pr-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label>Ilmiy Ishlarni yuklash</label>
                           <Button
@@ -454,7 +468,7 @@ class User extends Component {
                           </Button>
                         </FormGroup>
                       </Col>
-                      <Col className="px-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label>Daraja</label>
                           <Input
@@ -469,7 +483,7 @@ class User extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label>Tajriba (yil)</label>
                           <Input

@@ -8,7 +8,7 @@ import { getUsersById } from "services/userService";
 import { getPrices } from "services/priceService";
 import { me } from "services/authService";
 
-import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
+import { Card, CardBody, Input, Label, Row, Col, FormGroup } from "reactstrap";
 
 import { toast } from "react-toastify";
 
@@ -19,10 +19,10 @@ class ArticleForm extends Form {
   state = {
     data: {
       titleArticle: "",
-      description: "",
       categoryId: "",
       file: [],
     },
+    description: "",
 
     publicOrPrivate: "False",
     tags: [],
@@ -49,7 +49,7 @@ class ArticleForm extends Form {
   schema = {
     titleArticle: Joi.string().required().label("Article Title"),
     categoryId: Joi.string().required().label("Category Id"),
-    description: Joi.string().required().min(0).max(200).label("Description"),
+    // description: Joi.string().required().min(0).max(200).label("Description"),
     file: Joi.required().label("File"),
   };
 
@@ -263,22 +263,21 @@ class ArticleForm extends Form {
 
                 <form onSubmit={this.handleSubmit}>
                   <Row>
-                    <Col lg="8">{this.renderInput("description", "Izoh")}</Col>
-
-                    <Col lg="4">
+                    <Col md="6" lg="6" sm="6">
                       {this.renderInput("titleArticle", "Sarlavha")}
                     </Col>
-                  </Row>
 
-                  <Row>
-                    <Col md="4" lg="4">
+                    <Col md="6" lg="6" sm="6">
                       {this.renderSelect(
                         "categoryId",
                         "Kategoriya",
                         this.state.childCategories
                       )}
                     </Col>
-                    <Col sm="4" md="4" lg="4">
+                  </Row>
+
+                  <Row>
+                    <Col sm="6" md="6" lg="6">
                       <div>
                         <label>Ommaviylik</label>
                         <Input
@@ -290,15 +289,17 @@ class ArticleForm extends Form {
                             this.setState({ publicOrPrivate: e.target.value })
                           }
                         >
-                          <option value="false">False</option>
-                          <option value="true">True</option>
+                          <option value="false">Yo'q</option>
+                          <option value="true">Ha</option>
                         </Input>
                       </div>
                     </Col>
-                    <Col sm="4" md="4" lg="4">
+
+                    <Col sm="6" md="6" lg="6">
                       {this.renderFileInput("file", "Fayl", "file")}
                     </Col>
                   </Row>
+
                   <Row>
                     <Col sm="3" md="3" lg="3">
                       <div>
@@ -328,6 +329,7 @@ class ArticleForm extends Form {
                         }}
                       />
                     </Col>
+
                     <Col sm="3" md="3" lg="3">
                       <Label>Sertifikat soni</Label>
                       <input
@@ -340,6 +342,7 @@ class ArticleForm extends Form {
                         }}
                       />
                     </Col>
+
                     <Col sm="3" md="3" lg="3">
                       <div>
                         <Label>Doi</Label>
@@ -427,6 +430,25 @@ class ArticleForm extends Form {
                     </Col>
 
                     <Col sm="9" md="9" lg="9">
+                      {/* {this.renderInput("description", "Izoh")} */}
+
+                      <FormGroup>
+                        <label>
+                          Izoh ( jurnal haqidagi barcha ma'lumotlar )
+                        </label>
+                        <Input
+                          style={{
+                            overscrollBehaviorY: "none",
+                            padding: "1rem",
+                            height: "10rem",
+                          }}
+                          type="textarea"
+                          onChange={(e) =>
+                            this.setState({ description: e.target.value })
+                          }
+                        />
+                      </FormGroup>
+
                       <Label for="exampleEmail">Avtorlar</Label>
                       <div className="tags-input ">
                         <ul id="tags">

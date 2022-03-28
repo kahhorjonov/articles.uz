@@ -11,7 +11,7 @@ export function addArticle(data) {
   const bodyFormData = new FormData();
 
   bodyFormData.append("categoryId", data.data.categoryId);
-  bodyFormData.append("description", data.data.description);
+  bodyFormData.append("description", data.description);
   bodyFormData.append("authorsList", data.authors);
   bodyFormData.append("titleArticle", data.data.titleArticle);
   bodyFormData.append("publicOrPrivate", data.publicOrPrivate);
