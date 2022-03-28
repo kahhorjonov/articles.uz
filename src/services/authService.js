@@ -34,6 +34,23 @@ export async function login(phoneNumber, password) {
   }
 }
 
+export async function getCheckedToken() {
+  const jwt = localStorage.getItem("token");
+  const parsedJwt = parseJwt(jwt);
+
+  if (jwt) {
+    if (parsedJwt.exp * 1000 < Date.now()) {
+      toast.info("Foydalanish vaqti tugadi");
+      localStorage.removeItem("token");
+      setTimeout(() => {
+        window.location = "/";
+      }, 2500);
+    } else {
+      return jwt;
+    }
+  }
+}
+
 export function loginWithJwt(jwt) {
   const parsedJwt = parseJwt(localStorage.getItem("token"));
 
@@ -104,6 +121,7 @@ export function changePassword(code, password) {
 }
 
 export default {
+  getCheckedToken,
   login,
   logout,
   getCurrentUser,

@@ -1,12 +1,13 @@
 import http from "./httpService";
 import api from "utils/config.json";
 import axios from "axios";
+import { getCheckedToken } from "./authService";
 
 const { apiSwagger, apiLocal } = api;
 
 const apiEndpoint = apiLocal + "/user/register";
 
-const token = localStorage.getItem("token");
+const token = getCheckedToken();
 
 export function register(phone, password) {
   return http.post(apiEndpoint, {
