@@ -4,6 +4,7 @@ import notificationServices from "services/notificationService";
 import HomeRoutes from "homeRoutes";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "services/authService";
+import LanguageSelect from "components/Navbars/languageSelect";
 
 import {
   Collapse,
@@ -20,6 +21,8 @@ import {
   InputGroup,
   InputGroupText,
   Input,
+  Row,
+  Col,
 } from "reactstrap";
 
 function Header(props) {
@@ -224,7 +227,9 @@ function Header(props) {
     return (
       <>
         <div className="container home_pages p-0">
-          <div className="col-md-12 rel"></div>
+          {/* <div className="col-sm-3 col-md-2 col-lg-1 rel">
+            <LanguageSelect />
+          </div> */}
           <nav className="navbar navbar-expand-md mb-0">
             <NavLink className="navbar-brand brands" to="/">
               <h1
@@ -255,6 +260,10 @@ function Header(props) {
                     </li>
                   );
                 })}
+
+                <li className="nav-item">
+                  <LanguageSelect />
+                </li>
 
                 <li className="nav-item">
                   <Link to="/login">

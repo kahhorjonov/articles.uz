@@ -1,11 +1,19 @@
 import React from "react";
 import AOS from "aos";
-import "aos/dist/aos.css";
+import ru from "translations/ru";
 
+import "aos/dist/aos.css";
 import "styles/homePage.css";
 
 class Section extends React.Component {
+  state = {
+    lang: "",
+  };
+
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang: lang });
+
     AOS.init();
   }
 
@@ -21,11 +29,16 @@ class Section extends React.Component {
                   data-aos="fade-right"
                   data-aos-duration="2000"
                 >
-                  <p className="jurnal-haqida">Jurnal haqida</p>
+                  <p className="jurnal-haqida">
+                    {this.state.lang === "ru"
+                      ? ru.main_pAbout
+                      : "Jurnal haqida"}
+                  </p>
+
                   <h2 className="article_uz">
-                    Articles.uz onlayn jurnallari - bu <br />
-                    o’zbek tilida elektron va bosma <br />
-                    shaklda chop etiladigan oylik ilmiy nashrlar.
+                    {this.state.lang === "ru"
+                      ? ru.main_aboutText
+                      : "Articles.uz onlayn jurnallari - bu o’zbek tilida elektron va bosma shaklda chop etiladigan oylik ilmiy nashrlar."}
                   </h2>
                 </div>
               </div>
@@ -37,19 +50,13 @@ class Section extends React.Component {
                   data-aos-duration="2000"
                 >
                   <span className="articles-text">
-                    Articles.uz onlayn jurnallari ilm-fanning turli sohalarida
-                    Oliy o'quv yurtlari o'qituvchilari, ilmiy xodimlar va
-                    mutaxassislarga qaratilgan <br />
+                    {this.state.lang === "ru"
+                      ? ru.main_aboutText2
+                      : "Articles.uz onlayn jurnallari ilm-fanning turli sohalarida Oliy o'quv yurtlari o'qituvchilari, ilmiy xodimlar va mutaxassislarga qaratilgan"}
                     <p className="pt-5">
-                      Tadqiqot faoliyati barcha ilmiy yo'nalishlarda jadal
-                      rivojlanmoqda. Muayyan muammolarga yangi echimlar, fikrlar
-                      va yondashuvlar mavjud. Bu jarayon ilmiy jamoatchilikka
-                      xosdir. Tadqiqot natijalariga ko'ra ilmiy jurnallarda chop
-                      etish zarur. Ushbu turdagi nashrlar butun dunyodagi
-                      olimlar uchun axborot manbai va aloqa vositasidir. Uning
-                      mazmuni yangi faktlar, ularni tushunish va gumanitar va
-                      texnik tadqiqotlar sohasida keng jamoatchilik tomonidan
-                      muhokama qilinadi.
+                      {this.state.lang === "ru"
+                        ? ru.main_aboutText3
+                        : "Tadqiqot faoliyati barcha ilmiy yo'nalishlarda jadal rivojlanmoqda. Muayyan muammolarga yangi echimlar, fikrlar va yondashuvlar mavjud. Bu jarayon ilmiy jamoatchilikka xosdir. Tadqiqot natijalariga ko'ra ilmiy jurnallarda chop etish zarur. Ushbu turdagi nashrlar butun dunyodagi olimlar uchun axborot manbai va aloqa vositasidir. Uning mazmuni yangi faktlar, ularni tushunish va gumanitar va texnik tadqiqotlar sohasida keng jamoatchilik tomonidan muhokama qilinadi."}
                     </p>
                   </span>
                 </div>

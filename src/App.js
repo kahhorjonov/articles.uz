@@ -23,6 +23,7 @@ import JurnalArxive from "./components/UI/jurnalArxive";
 import RestoreWithSms from "components/UI/restoreWithSms";
 import RestorePassword from "components/UI/restorePassword";
 import ProtectedPage from "./components/protectedPage";
+import LanguageSelect from "components/Navbars/languageSelect";
 
 import "react-toastify/dist/ReactToastify.css";
 

@@ -1,32 +1,44 @@
 import React from "react";
-
 import { BsTelegram, BsFacebook } from "react-icons/bs";
-
-import { FaInstagramSquare } from "react-icons/fa";
 import instagram from "assets/img/icons8-instagram.svg";
+import ru from "translations/ru";
 
 import "styles/homePage.css";
 
 class Foooter extends React.Component {
+  state = {
+    lang: "",
+  };
+
+  componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang: lang });
+  }
+
   render() {
     return (
       <>
         <div className="footer">
           <div className="container">
-            <h1>Biz bilan bog’lanish</h1>
+            <h1>
+              {this.state.lang === "ru"
+                ? ru.main_boglanish
+                : "Biz bilan bog’lanish"}
+            </h1>
             <div className="row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
               <div className="col-md-4 col-sm-4 col-lg-4">
                 <hr className="hr1 col-md-4 col-sm-4 col-lg-4" />
-                <h5>Manzil:</h5>
+                <h5>{this.state.lang === "ru" ? ru.adres : "Manzil :"}</h5>
                 <p>
-                  Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi,
-                  QORASUV 6-MAVZE, 1-UY, 55-XONA
+                  {this.state.lang === "ru"
+                    ? ru.main_adres
+                    : "Toshkent shahri, Mirzo Ulug'bek tumani, QORASUV 6-MAVZE, 1-UY, 55-XONA"}
                 </p>
               </div>
 
               <div className="col-md-4 col-sm-3 col-lg-4">
                 <hr className="hr1 col-md-4 col-sm-4 col-lg-4" />
-                <h5>Aloqa:</h5>
+                <h5>{this.state.lang === "ru" ? ru.aloqa : "Aloqa :"}</h5>
                 <p>
                   <a href="mailto:anvark87@gmail.com">anvark87@gmail.com</a>
                 </p>
@@ -37,7 +49,11 @@ class Foooter extends React.Component {
 
               <div className="col-md-4 col-sm-3 col-lg-4">
                 <hr className="hr1 col-md-4 col-sm-4 col-lg-4" />
-                <h5>Manzil:</h5>
+                <h5>
+                  {this.state.lang === "ru"
+                    ? ru.tarmoqlar
+                    : "Ijtimoiy tarmoqlar :"}
+                </h5>
                 <div className="d-flex align-items-center">
                   <a
                     style={{ paddingRight: "1rem" }}
@@ -45,6 +61,7 @@ class Foooter extends React.Component {
                   >
                     <BsTelegram size={25} style={{ color: "	#0088cc" }} />
                   </a>
+
                   {/* <a href="#" className="px-5">
                     <FaInstagramSquare size={25} className="instagramLogo" />
                   </a> */}
@@ -66,40 +83,52 @@ class Foooter extends React.Component {
               <div className="queres">
                 <div className="row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
                   <div className="col-md-4">
-                    <h1>Savollar qoldimi?</h1>
-                    <a href="">
-                      {/* <button type="button" className="btn btn-dark">
+                    <h1>
+                      {this.state.lang === "ru"
+                        ? ru.main_savollar
+                        : "Savollar qoldimi?"}
+                    </h1>
+                    {/* <a href="">
+                      <button type="button" className="btn btn-dark">
                         Xabar qoldirish
-                      </button> */}
-                    </a>
+                      </button>
+                    </a> */}
                   </div>
 
                   <div className="col-md-8 pr-0">
                     <ul className="nav">
                       <li className="nav-item">
                         <a className="nav-link" href="/main">
-                          Asosiy
+                          {this.state.lang === "ru" ? ru.nav_asosiy : "Asosiy"}
                         </a>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="/listOfMagazines">
-                          Jurnallar ro’yxati
+                          {this.state.lang === "ru"
+                            ? ru.nav_jurnallar
+                            : "Jurnallar ro’yxati"}
                         </a>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="/termsOfPublication">
-                          Nashr shartlari
+                          {this.state.lang === "ru"
+                            ? ru.nav_shartlar
+                            : "Nashr shartlari"}
                         </a>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="/contact">
-                          Biz bilan bog’lanish
+                          {this.state.lang === "ru"
+                            ? ru.main_boglanish
+                            : "Biz bilan bog’lanish"}
                         </a>
                       </li>
 
                       <li className="nav-item">
                         <a className="nav-link" href="/login">
-                          Tizimga kirish
+                          {this.state.lang === "ru"
+                            ? ru.nav_kirish
+                            : "Tizimga kirish"}
                         </a>
                       </li>
                     </ul>

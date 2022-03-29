@@ -3,10 +3,10 @@ import AOS from "aos";
 import { Link } from "react-router-dom";
 import people from "assets/img/homePage/working people.png";
 import library from "assets/img/homePage/library.png";
-import CounterUp from "./counterUp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getUsersInfo } from "services/userService";
 import { toast } from "react-toastify";
+import ru from "translations/ru";
 
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "styles/homePage.css";
@@ -15,9 +15,14 @@ import "aos/dist/aos.css";
 class Mainhome2 extends React.Component {
   state = {
     data: [],
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     AOS.init();
     this.getUsersInformation();
   }
@@ -71,8 +76,9 @@ class Mainhome2 extends React.Component {
                 data-aos-duration="5000"
               >
                 <h1>
-                  Bizning asosiy maqsadimiz ilmiy <br /> hodimlarning ish
-                  unumdorligi oshirish
+                  {this.state.lang === "ru"
+                    ? ru.main_maqsadimiz
+                    : "Bizning asosiy maqsadimiz - ilmiy hodimlarning ish unumdorligi oshirish"}
                 </h1>
               </div>
 
@@ -82,17 +88,16 @@ class Mainhome2 extends React.Component {
                 data-aos-duration="2000"
               >
                 <p className="text-left">
-                  Maqolalar chop etish uchun ilmiy jurnallar tadqiqot
-                  faoliyatida samarali yordamchilardir. Ilmiy va texnologik
-                  taraqqiyot materiallarni nashrga etkazish usullarini
-                  soddalashtirdi. Endi ishni nashr qilish uchun siz nashriyotga
-                  borishingiz, uzoq vaqt kutishingiz shart emas. Shunchaki nashr
-                  qildirmoqchi bo’lgan maqolangizni bizga yuborsangiz bo’ldi!
+                  {this.state.lang === "ru"
+                    ? ru.main_maqsadimiz2
+                    : " Maqolalar chop etish uchun ilmiy jurnallar tadqiqot faoliyatida samarali yordamchilardir. Ilmiy va texnologik taraqqiyot materiallarni nashrga etkazish usullarini soddalashtirdi. Endi ishni nashr qilish uchun siz nashriyotga borishingiz, uzoq vaqt kutishingiz shart emas. Shunchaki nashr qildirmoqchi bo’lgan maqolangizni bizga yuborsangiz bo’ldi!"}
                 </p>
                 <div className="buttonsDark">
                   <Link to="/login">
                     <button type="button" className="btn btn-dark">
-                      Maqola yuborish
+                      {this.state.lang === "ru"
+                        ? ru.nav_yuklash
+                        : "Maqola yuborish"}
                     </button>
                   </Link>
                 </div>
@@ -108,10 +113,9 @@ class Mainhome2 extends React.Component {
                 <div className="art_uz">
                   <h1>Articles.uz</h1>
                   <p>
-                    Ushbu onlayn jurnal o’z faoliyati davomida ilmiy
-                    tadqiqotchilarning, pedagog o’qituvchilarning ko’plab ilmiy
-                    maqolalaridan tashkil topgan elektron bazani shakllantirib
-                    kelmoqda va plagiat maqolalarning oldi olinmoqda.
+                    {this.state.lang === "ru"
+                      ? ru.main_statistics
+                      : "Ushbu onlayn jurnal o’z faoliyati davomida ilmiy tadqiqotchilarning, pedagog o’qituvchilarning ko’plab ilmiy maqolalaridan tashkil topgan elektron bazani shakllantirib kelmoqda va plagiat maqolalarning oldi olinmoqda."}
                   </p>
                   <div className="row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 num pt-5">
                     <div className="col-md-4">
@@ -119,20 +123,32 @@ class Mainhome2 extends React.Component {
                         {numberAllArticles ? numberAllArticles : 0}
                       </h5>
 
-                      <p>Barcha maqolalar</p>
+                      <p>
+                        {this.state.lang === "ru"
+                          ? ru.main_allArticles
+                          : "Barcha maqolalar"}
+                      </p>
                     </div>
                     <div className="col-md-4">
                       <h5 className="mb-0">
                         {numberOfUsers ? numberOfUsers : 0}
                       </h5>
-                      <p>Mualliflar</p>
+                      <p>
+                        {this.state.lang === "ru"
+                          ? ru.main_avtorlar
+                          : "Mualliflar"}
+                      </p>
                     </div>
 
                     <div className="col-md-4">
                       <h5 className="mb-0">
                         {ilmiyXodimlar ? ilmiyXodimlar : 0}
                       </h5>
-                      <p>Ilmiy hodimlar</p>
+                      <p>
+                        {this.state.lang === "ru"
+                          ? ru.main_xodimlar
+                          : "Ilmiy hodimlar"}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -146,8 +162,6 @@ class Mainhome2 extends React.Component {
             </div>
           </div>
         </div>
-
-        {/* bizning mualif eng qulay... */}
       </>
     );
   }
