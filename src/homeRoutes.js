@@ -2,6 +2,7 @@ import Asosiy from "components/UI/asosiy";
 import JurnallarRoyxati from "components/UI/jurnallarRo'yhati";
 import NashrShartlari from "components/UI/nashrShartlari";
 import Aloqa from "./components/UI/aloqa";
+import ru from "translations/ru";
 
 var HomeRoutes = [
   {

@@ -4,6 +4,7 @@ import Form from "./common/form";
 import auth from "../services/authService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import ru from "translations/ru";
 
 import "styles/login.css";
 
@@ -14,8 +15,14 @@ class LoginForm extends Form {
       password: "",
     },
 
+    lang: "",
     errors: {},
   };
+
+  componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+  }
 
   schema = {
     phoneNumber: Joi.string().required().label("PhoneNumber"),
@@ -70,20 +77,35 @@ class LoginForm extends Form {
     return (
       <div className="registerForm">
         <div>
-          <h1 className="regs">Tizimga Kirish</h1>
+          <h1 className="regs">
+            {this.state.lang === "ru" ? ru.login_h2 : "Tizimga Kirish"}
+          </h1>
           <form className="form-register" onSubmit={this.handleSubmit}>
-            {this.renderLoginInput("phoneNumber", "Telefon raqami")}
+            {this.renderLoginInput(
+              "phoneNumber",
+              this.state.lang === "ru" ? ru.login_tel : "Telefon raqami"
+            )}
 
-            {this.renderInput("password", "Parol", "password")}
+            {this.renderInput(
+              "password",
+              this.state.lang === "ru" ? ru.login_password : "Parol",
+              "password"
+            )}
 
-            {this.renderButton("Kirish")}
+            {this.renderButton(
+              this.state.lang === "ru" ? ru.nav_kirish : "Kirish"
+            )}
           </form>
           <Link className="rever" style={{ fontSize: "2rem" }} to="/register">
-            Ro'yxatdan o'tish
-          </Link>{" "}
+            {this.state.lang === "ru" ? ru.login_register : "Ro'yxatdan o'tish"}
+          </Link>
           <br />
           <div className="mt-3">
-            <Link to="/restorePassword">Parolingizni unitingizmi?</Link>
+            <Link to="/restorePassword">
+              {this.state.lang === "ru"
+                ? ru.login_restore
+                : "Parolingizni unutdingizmi?"}
+            </Link>
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import Multiselect from "multiselect-react-dropdown";
 // import firebase from "../firebase";
 import { getAllActiveLanguages } from "services/languageService";
 import { Card, CardBody, Row, Col } from "reactstrap";
+import ru from "translations/ru";
 
 import "styles/registerStyles.css";
 
@@ -32,6 +33,7 @@ class ReviewerRegisterForm extends Form {
     },
 
     // categories: [],
+
     errors: {},
 
     // notificationToken: "",
@@ -45,6 +47,9 @@ class ReviewerRegisterForm extends Form {
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     await this.populateCategories();
     await this.handleGetLanguage();
 
@@ -158,7 +163,9 @@ class ReviewerRegisterForm extends Form {
     return (
       <div className="registerForm">
         <h3 style={{ textAlign: "center" }}>
-          Revyuver sifatida ro'yxatdan o'tish
+          {this.state.lang === "ru"
+            ? ru.register_2
+            : "Revyuver sifatida ro'yxatdan o'tish"}
         </h3>
         <div className="col-md-8 m-auto">
           <Card className="user-card card">
@@ -167,31 +174,55 @@ class ReviewerRegisterForm extends Form {
                 <CardBody style={{ textAlign: "center" }}>
                   <Row>
                     <Col md="4" sm="6" lg="4">
-                      {this.renderInput("firstName", "Ismi")}
+                      {this.renderInput(
+                        "firstName",
+                        this.state.lang === "ru" ? ru.reviewerRegister_1 : "Ism"
+                      )}
                     </Col>
                     <Col md="4" sm="6" lg="4">
-                      {this.renderInput("lastName", "Familiyasi")}
+                      {this.renderInput(
+                        "lastName",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_2
+                          : "Familiya"
+                      )}
                     </Col>
                     <Col md="4" lg="4">
-                      {this.renderInput("fatherName", "Sharifi")}
+                      {this.renderInput(
+                        "fatherName",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_3
+                          : "Otasining Ismi"
+                      )}
                     </Col>
                   </Row>
                   <Row>
                     <Col md="4" sm="4" className="app">
                       {/* {this.renderInput("phoneNumber", "Telefon raqami")} */}
-                      {this.renderLoginInput("phoneNumber", "Telefon raqami")}
+                      {this.renderLoginInput(
+                        "phoneNumber",
+                        this.state.lang === "ru" ? ru.login_tel : "Telefon"
+                      )}
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderInput("email", "Email", "email")}
                     </Col>
                     <Col md="4" sm="4">
-                      {this.renderInput("password", "Parol", "password")}
+                      {this.renderInput(
+                        "password",
+                        this.state.lang === "ru" ? ru.login_password : "Parol",
+                        "password"
+                      )}
                     </Col>
                   </Row>
 
                   <Row>
                     <Col md="12">
-                      <label>Kategoriya</label>
+                      <label>
+                        {this.state.lang === "ru"
+                          ? ru.kategoriya
+                          : "Kategoriya"}
+                      </label>
                       <Multiselect
                         options={this.state.options2} // Options to display in the dropdown
                         selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
@@ -204,22 +235,36 @@ class ReviewerRegisterForm extends Form {
 
                   <Row>
                     <Col md="4" sm="4">
-                      {this.renderInput("workPlace", "Ish joyi")}
+                      {this.renderInput(
+                        "workPlace",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_4
+                          : "Ish joyi"
+                      )}
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderInput(
                         "workExperience",
-                        "Tajribasi (yil)",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_5
+                          : "Tajribasi (yil)",
                         "number"
                       )}
                     </Col>
                     <Col md="4" sm="4">
-                      {this.renderInput("academicDegree", "Ilmiy Darajasi")}
+                      {this.renderInput(
+                        "academicDegree",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_6
+                          : "Ilmiy Darajasi"
+                      )}
                     </Col>
                   </Row>
                   <Row>
                     <Col md="4" sm="4">
-                      <label>Tillar</label>
+                      <label>
+                        {this.state.lang === "ru" ? ru.tillar : "Tillar"}
+                      </label>
                       <Multiselect
                         id="search_input2"
                         options={this.state.options} // Options to display in the dropdown
@@ -230,18 +275,30 @@ class ReviewerRegisterForm extends Form {
                       />
                     </Col>
                     <Col md="4" sm="4">
-                      {this.renderPassportInput("passport", "Pasport", "file")}
+                      {this.renderPassportInput(
+                        "passport",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_7
+                          : "Pasport",
+                        "file"
+                      )}
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderWorksInput(
                         "scientificWork",
-                        "Qilingan ishlardan namuna *(zip, 7zip, rar)",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_8
+                          : "Образец выполненной работы * (zip, 7zip, rar)",
                         "file"
                       )}
                     </Col>
                   </Row>
                   <div className="bt mt-5">
-                    {this.renderButton("Ro'yxatdan o'tish")}
+                    {this.renderButton(
+                      this.state.lang === "ru"
+                        ? ru.login_register
+                        : "Ro'yxatdan o'tish"
+                    )}
                   </div>
                 </CardBody>
               </form>
@@ -249,9 +306,11 @@ class ReviewerRegisterForm extends Form {
           </Card>
         </div>
 
-        <h3>Akkauntingiz bormi?</h3>
+        <h3>
+          {this.state.lang === "ru" ? ru.register_3 : "Akkauntingiz bormi?"}
+        </h3>
         <Link style={{ fontSize: "2rem" }} to="/login">
-          Profilga kirish
+          {this.state.lang === "ru" ? ru.login_h2 : "Profilga kirish"}
         </Link>
       </div>
     );

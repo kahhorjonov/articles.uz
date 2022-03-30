@@ -66,7 +66,10 @@ class Foooter extends React.Component {
                     <FaInstagramSquare size={25} className="instagramLogo" />
                   </a> */}
 
-                  <a style={{ paddingRight: "1rem" }}>
+                  <a
+                    href="https://www.instagram.com/avto.intalim.uz/"
+                    style={{ paddingRight: "1rem" }}
+                  >
                     <img
                       style={{ width: "35px", height: "35px" }}
                       src={instagram}

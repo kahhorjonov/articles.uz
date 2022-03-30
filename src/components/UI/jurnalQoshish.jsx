@@ -158,7 +158,7 @@ class JurnalQoshish extends Component {
                 <CardBody>
                   <form>
                     <Row className="my-4">
-                      <Col md="3" sm="3" lg="3">
+                      <Col md="4" sm="4" lg="4">
                         <div>
                           <label>Jurnal Sarlavhasi</label>
                           <input
@@ -170,7 +170,32 @@ class JurnalQoshish extends Component {
                         </div>
                       </Col>
 
-                      <Col md="3" sm="3" lg="3">
+                      <Col sm="4" md="4" lg="4">
+                        <Label>Kategoriyalar</Label>
+                        <Input
+                          defaultValue={
+                            this.state.categories[0] &&
+                            this.state.categories[0].id
+                          }
+                          onChange={(e) =>
+                            this.setState({ categoryId: e.target.value })
+                          }
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          type="select"
+                        >
+                          <option value={null}></option>
+
+                          {this.state.categories &&
+                            this.state.categories.map((option) => (
+                              <option key={option.id} value={option.id}>
+                                {option.name}
+                              </option>
+                            ))}
+                        </Input>
+                      </Col>
+
+                      {/* <Col md="3" sm="3" lg="3">
                         <div>
                           <label>Ro'yxatdan o'tkazilgan sana</label>
                           <input
@@ -181,33 +206,41 @@ class JurnalQoshish extends Component {
                             className="form-control"
                           />
                         </div>
+                      </Col> */}
+
+                      <Col sm="4" md="4" lg="4">
+                        <label>Jurnalning yangi soni (ixtiyoriy)</label>
+                        <Input
+                          defaultValue=" "
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          type="select"
+                          onChange={(e) =>
+                            this.setState({ parentCategoryId: e.target.value })
+                          }
+                        >
+                          <option value=""></option>
+
+                          {this.state.parentMagazines &&
+                            this.state.parentMagazines.map((option) => (
+                              <option key={option.id} value={option.id}>
+                                {option.title}
+                              </option>
+                            ))}
+                        </Input>
                       </Col>
 
-                      <Col md="3" sm="3" lg="3">
+                      {/* <Col md="3" sm="3" lg="3">
                         <div>
                           <label>Jurnal fayli</label>
-                          <input
-                            onChange={(e) =>
+                          <input4                            onChange={(e) =>
                               this.setState({ file: e.target.files[0] })
                             }
                             type="file"
                             className="form-control p-0"
                           />
                         </div>
-                      </Col>
-
-                      <Col md="3" sm="3" lg="3">
-                        <div>
-                          <label>Jurnal muqovasi</label>
-                          <input
-                            onChange={(e) =>
-                              this.setState({ cover: e.target.files[0] })
-                            }
-                            type="file"
-                            className="form-control p-0"
-                          />
-                        </div>
-                      </Col>
+                      </Col> */}
                     </Row>
 
                     <Row className="my-4">
@@ -242,33 +275,6 @@ class JurnalQoshish extends Component {
 
                       <Col sm="3" md="3" lg="3">
                         <div>
-                          <Label>Kategoriyalar</Label>
-                          <Input
-                            defaultValue={
-                              this.state.categories[0] &&
-                              this.state.categories[0].id
-                            }
-                            onChange={(e) =>
-                              this.setState({ categoryId: e.target.value })
-                            }
-                            style={{ height: "3rem" }}
-                            className="form-control"
-                            type="select"
-                          >
-                            <option value={null}></option>
-
-                            {this.state.categories &&
-                              this.state.categories.map((option) => (
-                                <option key={option.id} value={option.id}>
-                                  {option.name}
-                                </option>
-                              ))}
-                          </Input>
-                        </div>
-                      </Col>
-
-                      <Col sm="2" md="2" lg="2">
-                        <div>
                           <Label>Sertifikat raqami</Label>
                           <input
                             placeholder="ex: № FS77-54438"
@@ -283,7 +289,7 @@ class JurnalQoshish extends Component {
                         </div>
                       </Col>
 
-                      <Col sm="2" md="2" lg="2">
+                      <Col sm="3" md="3" lg="3">
                         <div>
                           <Label>ISBN</Label>
                           <input
@@ -297,7 +303,7 @@ class JurnalQoshish extends Component {
                         </div>
                       </Col>
 
-                      <Col sm="2" md="2" lg="2">
+                      <Col sm="3" md="3" lg="3">
                         <div>
                           <Label>ISSN</Label>
                           <input
@@ -313,7 +319,7 @@ class JurnalQoshish extends Component {
                     </Row>
 
                     <Row>
-                      <Col sm="5" md="5" lg="5">
+                      <Col sm="7" md="7" lg="7">
                         <FormGroup>
                           <label>
                             Izoh ( jurnal haqidagi barcha ma'lumotlar )
@@ -332,6 +338,7 @@ class JurnalQoshish extends Component {
                         </FormGroup>
                       </Col>
 
+                      {/* 
                       <Col sm="2" md="2" lg="2">
                         <label>Holati</label>
                         <Input
@@ -346,38 +353,30 @@ class JurnalQoshish extends Component {
                           <option value="NEW_JOURNALS">New</option>
                           <option value="PUBLISHED">Published</option>
                         </Input>
-                      </Col>
-                      <Col sm="2" md="2" lg="2">
-                        <label>Chop etilish sanasi</label>
-                        <Input
-                          min="0"
-                          onChange={(e) =>
-                            this.setState({ printedDate: e.target.value })
-                          }
-                          type="number"
-                        />
-                      </Col>
-
-                      <Col sm="3" md="3" lg="3">
-                        <label>Jurnalning yangi soni (ixtiyoriy)</label>
-                        <Input
-                          defaultValue=" "
-                          style={{ height: "3rem" }}
-                          className="form-control"
-                          type="select"
-                          onChange={(e) =>
-                            this.setState({ parentCategoryId: e.target.value })
-                          }
-                        >
-                          <option value=""></option>
-
-                          {this.state.parentMagazines &&
-                            this.state.parentMagazines.map((option) => (
-                              <option key={option.id} value={option.id}>
-                                {option.title}
-                              </option>
-                            ))}
-                        </Input>
+                      </Col> */}
+                      <Col sm="5" md="5" lg="5">
+                        <div>
+                          <label>Chop etilish sanasi</label>
+                          <Input
+                            min="0"
+                            onChange={(e) =>
+                              this.setState({ printedDate: e.target.value })
+                            }
+                            type="number"
+                          />
+                        </div>
+                        {/* <Col md="3" sm="3" lg="3"> */}
+                        <div>
+                          <label>Jurnal muqovasi</label>
+                          <input
+                            onChange={(e) =>
+                              this.setState({ cover: e.target.files[0] })
+                            }
+                            type="file"
+                            className="form-control p-0"
+                          />
+                        </div>
+                        {/* </Col> */}
                       </Col>
 
                       {/* <Col sm="2" md="2" lg="2">

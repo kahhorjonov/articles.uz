@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userService from "../services/userService";
-import auth, { loginWithJwt } from "../services/authService";
+import { loginWithJwt } from "../services/authService";
 import jwtDecode from "jwt-decode";
+import ru from "translations/ru";
 
 // import firebase from "../firebase";
 import { toast } from "react-toastify";
@@ -19,8 +20,14 @@ class RegisterForm extends Form {
     },
 
     // notificationToken: "",
+    lang: "",
     errors: {},
   };
+
+  componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+  }
 
   // componentDidMount() {
   //   try {
@@ -83,13 +90,25 @@ class RegisterForm extends Form {
     return (
       <div className="registerForm">
         <div>
-          <h1 className="regs">Register Form</h1>
+          <h1 className="regs">
+            {this.state.lang === "ru" ? ru.register_h1 : "Ro'yxatdan o'tish"}
+          </h1>
+
           <form className="form-register" onSubmit={this.handleSubmit}>
-            {this.renderLoginInput("phoneNumber", "Telefon raqami")}
+            {this.renderLoginInput(
+              "phoneNumber",
+              this.state.lang === "ru" ? ru.login_tel : "Telefon raqami"
+            )}
 
-            {this.renderInput("password", "Parol", "password")}
+            {this.renderInput(
+              "password",
+              this.state.lang === "ru" ? ru.login_password : "Parol",
+              "password"
+            )}
 
-            {this.renderButton("Ro'yxatdan o'tish")}
+            {this.renderButton(
+              this.state.lang === "ru" ? ru.register : "Ro'yxatdan o'tish"
+            )}
           </form>
 
           <Link
@@ -97,12 +116,17 @@ class RegisterForm extends Form {
             to="/registerReviewer"
             className="rever"
           >
-            Reviewer sifatida ro'yxatdan o'tish
+            {this.state.lang === "ru"
+              ? ru.register_2
+              : "Taqrizchi sifatida ro'yxatdan o'tish"}
           </Link>
 
-          <h3 className="yes">Akkauntingiz bormi?</h3>
+          <h3 className="yes">
+            {this.state.lang === "ru" ? ru.register_3 : "Akkauntingiz bormi?"}
+          </h3>
+
           <Link style={{ fontSize: "2rem" }} to="/login" className="kirish">
-            Profilga kirish
+            {this.state.lang === "ru" ? ru.login_h2 : "Profilga kirish"}
             {/* <FontAwesomeIcon icon={faArrowRight} style={{ color: "black" }} /> */}
           </Link>
         </div>

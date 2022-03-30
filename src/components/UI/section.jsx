@@ -56,7 +56,7 @@ class Section extends React.Component {
                     <p className="pt-5">
                       {this.state.lang === "ru"
                         ? ru.main_aboutText3
-                        : "Tadqiqot faoliyati barcha ilmiy yo'nalishlarda jadal rivojlanmoqda. Muayyan muammolarga yangi echimlar, fikrlar va yondashuvlar mavjud. Bu jarayon ilmiy jamoatchilikka xosdir. Tadqiqot natijalariga ko'ra ilmiy jurnallarda chop etish zarur. Ushbu turdagi nashrlar butun dunyodagi olimlar uchun axborot manbai va aloqa vositasidir. Uning mazmuni yangi faktlar, ularni tushunish va gumanitar va texnik tadqiqotlar sohasida keng jamoatchilik tomonidan muhokama qilinadi."}
+                        : "Tadqiqot faoliyati barcha ilmiy yo'nalishlarda jadal rivojlanmoqda. Muayyan muammolarga yangi yechimlar, fikrlar va yondashuvlar mavjud va bu jarayon ilmiy jamoatchilikka xosdir. Ushbu turdagi nashrlar butun dunyodagi olimlar uchun axborot manbai va aloqa vositasidir. Uning mazmuni yangi faktlar, ularni tushunish,gumanitar va texnik tadqiqotlar sohasida keng jamoatchilik tomonidan muhokama qilinadi."}
                     </p>
                   </span>
                 </div>

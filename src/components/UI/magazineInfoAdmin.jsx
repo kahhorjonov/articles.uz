@@ -100,7 +100,7 @@ class MagazineInfoAdmin extends Component {
 
   render() {
     const { title, category } = this.state.magazineInfo;
-    const { years, magazines } = this.state;
+    const { years, magazines, magazineId } = this.state;
 
     return (
       <>
@@ -115,7 +115,15 @@ class MagazineInfoAdmin extends Component {
 
                 <div className="row mr-0 ml-0">
                   <div className="col-lg-4">
-                    <img src={this.state.cover && this.state.cover} alt="" />
+                    <Link
+                      to={
+                        this.state.user === 1
+                          ? `/admin/editMagazine/:${magazineId}`
+                          : `/reductor/editMagazine/:${magazineId}`
+                      }
+                    >
+                      <img src={this.state.cover && this.state.cover} alt="" />
+                    </Link>
 
                     <h3>
                       {this.state.magazineInfo &&

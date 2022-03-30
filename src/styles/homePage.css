@@ -210,9 +210,11 @@ body {
   background: #f7f7f7;
   margin-bottom: 100px;
 }
+
 .article-chap {
   padding-top: 100px;
 }
+
 .jurnal-haqida {
   font-style: normal;
   font-weight: 600;
@@ -220,13 +222,14 @@ body {
   line-height: 100%;
   color: #777777;
 }
+
 .article_uz {
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
   line-height: 120%;
   color: #000000;
-  padding-top: 89px;
+  padding-top: 50px;
 }
 
 .art-tex {

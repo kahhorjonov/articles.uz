@@ -97,6 +97,7 @@ class MagazineInfo extends Component {
     const { title, category, deadline } = this.state.magazineInfo;
 
     const { years, magazines } = this.state;
+
     return (
       <>
         <div className="content">
