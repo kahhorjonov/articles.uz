@@ -137,6 +137,24 @@ const ru = {
   restore_1: "Получить код",
   restore_2: "СМС код",
   restore_3: "Подтвердить",
+
+  // admin
+  admin_1: "Новые статьи",
+  admin_2: "Опубликованные статьи",
+  admin_3: "Готовые к публикации статьи",
+  admin_4: "В переработке",
+  admin_5: "Отклоненный",
+  admin_6: "Статистика пользователей",
+
+  admin_rev: "Рецензенты",
+  admin_red: "Редакторы",
+  admin_admin: "Админы",
+  admin_NumUsers: "Количество пользователей",
+  admin_grafik: "График доходов",
+  admin_kirim: "Доход",
+  admin_chiqim: "Расход",
+  admin_foyda: "Прибыль",
+  admin_kategoriyalar: "Категории",
 };
 
 export default ru;

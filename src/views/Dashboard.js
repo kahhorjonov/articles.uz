@@ -4,6 +4,7 @@ import { Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import { toast } from "react-toastify";
 import { getUsersInfo } from "services/userService";
+import ru from "translations/ru";
 
 import {
   Card,
@@ -18,9 +19,15 @@ import {
 Chart.register(...registerables);
 
 class Dashboard extends Component {
-  state = { data: {} };
+  state = {
+    data: {},
+    lang: "",
+  };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     this.getUsersInformation();
   }
 
@@ -112,12 +119,18 @@ class Dashboard extends Component {
                     </Col>
                     <Col md="4" sm="4" lg="4" xs="4">
                       {/* <CardTitle tag="p">Umumiy maqolalar</CardTitle> */}
-                      <p className="card-category">Umumiy maqolalar soni</p>
+                      <p className="card-category">
+                        {this.state.lang === "ru"
+                          ? ru.main_allArticles
+                          : "Umumiy maqolalar"}
+                      </p>
                     </Col>
                     <Col md="4" sm="4" lg="4" xs="4">
                       {/* <CardTitle tag="p">Yangi qo'shilgan maqolalar</CardTitle> */}
                       <p className="card-category">
-                        Yangi qo'shilgan maqolalar
+                        {this.state.lang === "ru"
+                          ? ru.admin_1
+                          : "Yangi maqolalar"}
                       </p>
                     </Col>
                   </Row>
@@ -152,11 +165,19 @@ class Dashboard extends Component {
                       </div>
                     </Col>
                     <Col md="4" xs="4">
-                      <p className="card-category">Nashr qilingan maqolalar</p>
+                      <p className="card-category">
+                        {this.state.lang === "ru"
+                          ? ru.admin_2
+                          : "Nashr qilingan maqolalar"}
+                      </p>
                     </Col>
 
                     <Col md="4" xs="4">
-                      <p className="card-category">Nashrga tayyor maqolalar</p>
+                      <p className="card-category">
+                        {this.state.lang === "ru"
+                          ? ru.admin_3
+                          : "Nashrga tayyor maqolalar"}
+                      </p>
                     </Col>
                   </Row>
                 </CardBody>
@@ -197,11 +218,19 @@ class Dashboard extends Component {
                       </div>
                     </Col>
                     <Col md="4" xs="4">
-                      <p className="card-category">Qayta ishlashdagilar</p>
+                      <p className="card-category">
+                        {this.state.lang === "ru"
+                          ? ru.admin_4
+                          : "Qayta ishlashdagilar"}
+                      </p>
                     </Col>
 
                     <Col md="4" xs="4">
-                      <p className="card-category">Qaytarilgan maqolalar</p>
+                      <p className="card-category">
+                        {this.state.lang === "ru"
+                          ? ru.admin_5
+                          : "Qaytarilgan maqolalar"}
+                      </p>
                     </Col>
                   </Row>
                 </CardBody>
@@ -233,14 +262,22 @@ class Dashboard extends Component {
             <Col md="4">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h5">Foydalanuvchilar Statistikasi</CardTitle>
+                  <CardTitle tag="h5">
+                    {this.state.lang === "ru"
+                      ? ru.admin_6
+                      : "Foydalanuvchilar Statistikasi"}
+                  </CardTitle>
                   {/* <p className="card-category">Last Campaign Performance</p> */}
                 </CardHeader>
                 <CardBody style={{ height: "266px" }}>
                   <Pie
                     // data={variables.dashboardUserStatistics}
                     data={{
-                      labels: ["Authors", "Reviewers", "Reductors", "Admins"],
+                      labels:
+                        this.state.lang === "ru"
+                          ? ["Авторы", "Рецензенты", "Редакторы", "Админы"]
+                          : ["Authors", "Reviewers", "Reductors", "Admins"],
+
                       datasets: [
                         {
                           label: "Users",
@@ -306,17 +343,23 @@ class Dashboard extends Component {
                 </CardBody>
                 <CardFooter>
                   <div className="legend">
-                    <i className="fa fa-circle text-warning" /> Avtorlar{" "}
-                    <i className="fa fa-circle text-primary" /> Redaktorlar{" "}
-                    <i className="fa fa-circle text-danger" /> Adminlar{" "}
-                    <i className="fa fa-circle text-gray" /> Revyuverlar
+                    <i className="fa fa-circle text-warning" />{" "}
+                    {this.state.lang === "ru" ? ru.main_avtorlar : "Avtorlar"}{" "}
+                    <i className="fa fa-circle text-danger" />{" "}
+                    {this.state.lang === "ru" ? ru.admin_red : "Tahrirchilar"}{" "}
+                    <i className="fa fa-circle text-primary" />{" "}
+                    {this.state.lang === "ru" ? ru.admin_rev : "Taqrizchilar"}{" "}
+                    <i className="fa fa-circle text-gray" />{" "}
+                    {this.state.lang === "ru" ? ru.admin_admin : "Adminlar"}
                   </div>
                   <hr />
                   <div className="stats">
                     <i className="fa fa-calendar" />
                     <span>
-                      Foydalanuvchilar soni :{" "}
-                      {numberOfUsers && numberOfUsers.toString()}
+                      {this.state.lang === "ru"
+                        ? ru.admin_NumUsers
+                        : "Foydalanuvchilar soni"}{" "}
+                      : {numberOfUsers && numberOfUsers.toString()}
                     </span>
                   </div>
                 </CardFooter>
@@ -325,7 +368,11 @@ class Dashboard extends Component {
             <Col md="8">
               <Card className="card-chart">
                 <CardHeader>
-                  <CardTitle tag="h5">O'sish grafigi</CardTitle>
+                  <CardTitle tag="h5">
+                    {this.state.lang === "ru"
+                      ? ru.admin_grafik
+                      : "Foyda grafigi"}
+                  </CardTitle>
                   {/* <p className="card-category">Avtorlar va Maqolalar</p> */}
                 </CardHeader>
                 <CardBody>
@@ -364,7 +411,8 @@ class Dashboard extends Component {
 
                       datasets: [
                         {
-                          label: "Kirimlar",
+                          label:
+                            this.state.lang === "ru" ? ru.admin_kirim : "Kirim",
                           fill: true,
                           data: [
                             1400000, 1600000, 1900000, 1000000, 3500000,
@@ -382,7 +430,10 @@ class Dashboard extends Component {
                         },
 
                         {
-                          label: "Chiqimlar",
+                          label:
+                            this.state.lang === "ru"
+                              ? ru.admin_chiqim
+                              : "Chiqim",
                           data: [
                             1500000, 1200000, 1800000, 2000000, 2500000,
                             2000000, 1800000,
@@ -409,11 +460,15 @@ class Dashboard extends Component {
                 </CardBody>
                 <CardFooter>
                   <div className="chart-legend">
-                    <i className="fa fa-circle text-info" /> Kirimlar{" "}
-                    <i className="fa fa-circle text-warning" /> Chiqimlar{" "}
-                    <i className="fa fa-circle text-success" /> Foyda : 8 000
-                    000
+                    <i className="fa fa-circle text-info" />{" "}
+                    {this.state.lang === "ru" ? ru.admin_kirim : "Kirim"}{" "}
+                    <i className="fa fa-circle text-warning" />{" "}
+                    {this.state.lang === "ru" ? ru.admin_chiqim : "Chiqimlar"}{" "}
+                    <i className="fa fa-circle text-success" />{" "}
+                    {this.state.lang === "ru" ? ru.admin_foyda : "Foyda"} : 8
+                    000 000
                   </div>
+
                   {/* <hr /> */}
                   {/* <div className="card-stats">
                     <i className="fa fa-check" /> Data information certified

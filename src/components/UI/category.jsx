@@ -4,6 +4,7 @@ import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { toast } from "react-toastify";
 import { Col, Input, Row } from "reactstrap";
+import ru from "translations/ru";
 
 import "styles/category.css";
 
@@ -20,9 +21,14 @@ class Category extends Component {
 
     currentPage: 1,
     pageSize: 8,
+
+    lang: "",
   };
 
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     this.handleGetCategories();
     this.handleGetParent();
   }
@@ -115,6 +121,7 @@ class Category extends Component {
       parentCategories,
       currentPage,
       pageSize,
+      lang,
     } = this.state;
 
     const categories = paginate(allCategories, currentPage, pageSize);
@@ -123,7 +130,11 @@ class Category extends Component {
       <div className="content">
         <div className="card">
           <div className="card-header">
-            <h3>Kategoriyalar</h3>
+            <h3>
+              {this.state.lang === "ru"
+                ? ru.admin_kategoriyalar
+                : "Kategoriyalar"}
+            </h3>
           </div>
           <div className="card-body">
             <div className="d-flex align-items-center justify-content-between">
