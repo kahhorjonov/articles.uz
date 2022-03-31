@@ -4,6 +4,7 @@ import { downloadMedia, downloadFile, counter } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BsEyeFill } from "react-icons/bs";
+import ru from "translations/ru";
 
 import {
   getPublishedYears,
@@ -25,9 +26,14 @@ class JurnalArxive extends Component {
     fileId: "",
     originalName: "",
     contentType: "",
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     try {
       const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
@@ -149,6 +155,7 @@ class JurnalArxive extends Component {
       fileId,
       originalName,
       contentType,
+      lang,
     } = this.state;
 
     const { allReleaseNumber, releaseNumberOfThisYear } = magazineInfo;
@@ -163,12 +170,13 @@ class JurnalArxive extends Component {
                 this.props.history.goBack();
               }}
             >
-              <b> ⬅️</b> ORTGA
+              <b> ⬅️</b>
+              {lang === "ru" ? ru.back : "Ortga"}
             </a>
           </div>
           <br />
           <h1>
-            № {releaseNumberOfThisYear} ({allReleaseNumber}) son
+            № {releaseNumberOfThisYear} ({allReleaseNumber})
           </h1>
 
           <div className="row px-0 mx-0 ui">
@@ -176,12 +184,15 @@ class JurnalArxive extends Component {
               <img src={cover} width="360px" alt="" />
 
               <p style={{ fontSize: "16px" }} className="text-muted tex">
-                <b className="text-dark">Jurnal soni:</b> №{" "}
-                {releaseNumberOfThisYear} ({allReleaseNumber})
+                <b className="text-dark">№ {releaseNumberOfThisYear}</b> (
+                {allReleaseNumber})
               </p>
               <p>
                 <span style={{ fontSize: "16px" }} className="text-muted">
-                  <b className="text-dark">Nashr etilgan sana:</b> 13.09.2020
+                  <b className="text-dark">
+                    {lang === "ru" ? ru.printDate : "Nashr etilgan sana:"}
+                  </b>{" "}
+                  13.09.2020
                 </span>
               </p>
               <button
@@ -196,13 +207,13 @@ class JurnalArxive extends Component {
                   );
                 }}
               >
-                Yuklab olish
+                {lang === "ru" ? ru.download : "Yuklab olish"}
               </button>
             </div>
             <div className="col-lg-8 ui2">
               <ul className="list-group list-group-flush">
                 <li style={{ listStyle: "none", fontSize: "16px" }}>
-                  JURNAL TARKIBI
+                  {lang === "ru" ? ru.main_allArticles : "Maqolalar"}
                 </li>
 
                 {articles &&
@@ -234,7 +245,7 @@ class JurnalArxive extends Component {
 
             <div className="col-lg-12 ui3 px-0">
               <div className="arxive px-0">
-                <h2>Jurnal arxivi</h2>
+                <h2>{lang === "ru" ? ru.jurnal_arxiv : "Jurnal arxivi"}</h2>
 
                 <ul className="nav nav-pills">
                   {years &&
@@ -265,7 +276,13 @@ class JurnalArxive extends Component {
                       {magazines &&
                         magazines.map((magazine) => (
                           <div key={magazine.id} className="col-lg-3">
-                            <Link to={`/release/:${magazine.id}`}>
+                            <Link
+                              to={`/release/:${magazine.id}`}
+                              onClick={() => {
+                                this.getArticlesFromMagazineById(magazine.id);
+                                this.getImage(magazine.cover.id);
+                              }}
+                            >
                               <div className="boxShadow">
                                 <GetImages url={magazine.cover.id} />
                               </div>

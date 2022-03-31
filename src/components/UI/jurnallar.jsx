@@ -12,6 +12,7 @@ import { getParentCategories } from "services/getCategories";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Input, Row } from "reactstrap";
+import ru from "translations/ru";
 
 import "styles/homePage.css";
 
@@ -21,9 +22,13 @@ class Jurnallar extends Component {
     magazines: [],
 
     user: "",
+    lang: "",
   };
 
   componentDidMount = async () => {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
 
     this.setState({ user: user.id });
@@ -73,7 +78,7 @@ class Jurnallar extends Component {
   };
 
   render() {
-    const { magazineCategories, magazines } = this.state;
+    const { magazineCategories, magazines, lang } = this.state;
 
     return (
       <>
@@ -84,7 +89,9 @@ class Jurnallar extends Component {
                 <Row>
                   <Col sm="6" md="6" lg="6">
                     <div className="card-header">
-                      <h3>Barcha jurnallar </h3>
+                      <h3>
+                        {lang === "ru" ? ru.jurnallar_h1 : "Barcha jurnallar"}
+                      </h3>
                     </div>
                   </Col>
 
@@ -107,11 +114,21 @@ class Jurnallar extends Component {
                           this.getMagazinesBySelect(e.target.value)
                         }
                       >
-                        <option value={1}>Barcha Jurnallar</option>
-                        <option value={2}>
-                          Maqola qabul qilayotkan Jurnallar
+                        <option value={1}>
+                          {lang === "ru" ? ru.jurnallar_h1 : "Barcha jurnallar"}
                         </option>
-                        <option value={3}>Nashr jarayonidagi jurnallar</option>
+
+                        <option value={2}>
+                          {lang === "ru"
+                            ? ru.jurnallar_option
+                            : "Maqola qabul qilayotkan jurnallar"}
+                        </option>
+
+                        <option value={3}>
+                          {lang === "ru"
+                            ? ru.jurnallar_option1
+                            : "Nashr jarayonidagi jurnallar"}
+                        </option>
                       </Input>
                     </div>
                   </Col>
@@ -198,14 +215,24 @@ class Jurnallar extends Component {
 
                                     <p className="card_text text-muted">
                                       {/* Maqolalar <br /> */}
-                                      <span>
-                                        {magazine &&
-                                          new Date(magazine.deadline)
-                                            .toISOString()
-                                            .slice(0, 10)}{" "}
-                                        &nbsp;
-                                      </span>
-                                      dan buyon chiqadi
+
+                                      {this.state.lang === "ru" ? (
+                                        <span>
+                                          Выходит с{" "}
+                                          {magazine &&
+                                            new Date(
+                                              magazine.deadline
+                                            ).toLocaleDateString()}
+                                        </span>
+                                      ) : (
+                                        <span>
+                                          {magazine &&
+                                            new Date(
+                                              magazine.deadline
+                                            ).toLocaleDateString()}{" "}
+                                          dan buyon chiqadi
+                                        </span>
+                                      )}
                                     </p>
                                   </div>
                                 </div>
@@ -215,7 +242,7 @@ class Jurnallar extends Component {
                       </div>
 
                       {/* buttons */}
-                      <div className="buut-ons justify-content-center d-flex">
+                      {/* <div className="buut-ons justify-content-center d-flex">
                         <a href="">
                           <button
                             type="button"
@@ -224,7 +251,7 @@ class Jurnallar extends Component {
                             Barchasini ko’rish
                           </button>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

@@ -5,6 +5,7 @@ import {
 } from "services/getCategories";
 import magazineService from "services/magazineService";
 import { toast } from "react-toastify";
+import ru from "translations/ru";
 
 import {
   Row,
@@ -41,9 +42,14 @@ class JurnalQoshish extends Component {
     categories: [],
     parentMagazines: [],
     errors: {},
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     await this.populateCategories();
 
     await this.populateMagazines();
@@ -144,7 +150,7 @@ class JurnalQoshish extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, lang } = this.state;
 
     return (
       <>
@@ -153,14 +159,18 @@ class JurnalQoshish extends Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <h3 className="mr-0">Jurnal Qo'shish</h3>
+                  <h3 className="mr-0">
+                    {lang === "ru" ? ru.jurnal_qoshish : "Jurnal Qo'shish"}
+                  </h3>
                 </CardHeader>
                 <CardBody>
                   <form>
                     <Row className="my-4">
                       <Col md="4" sm="4" lg="4">
                         <div>
-                          <label>Jurnal Sarlavhasi</label>
+                          <label>
+                            {lang === "ru" ? ru.jurnal_title : "Sarlavha"}
+                          </label>
                           <input
                             onChange={(e) =>
                               this.setState({ title: e.target.value })
@@ -171,7 +181,11 @@ class JurnalQoshish extends Component {
                       </Col>
 
                       <Col sm="4" md="4" lg="4">
-                        <Label>Kategoriyalar</Label>
+                        <Label>
+                          {lang === "ru"
+                            ? ru.admin_kategoriyalar
+                            : "Kategoriyalar"}
+                        </Label>
                         <Input
                           defaultValue={
                             this.state.categories[0] &&
@@ -209,7 +223,11 @@ class JurnalQoshish extends Component {
                       </Col> */}
 
                       <Col sm="4" md="4" lg="4">
-                        <label>Jurnalning yangi soni (ixtiyoriy)</label>
+                        <label>
+                          {lang === "ru"
+                            ? ru.nav_jurnallar
+                            : "Jurnallar (yangi soni uchun)"}
+                        </label>
                         <Input
                           defaultValue=" "
                           style={{ height: "3rem" }}
@@ -246,7 +264,11 @@ class JurnalQoshish extends Component {
                     <Row className="my-4">
                       <Col sm="3" md="3" lg="3">
                         <div>
-                          <label>Maqola qabul qilish oxirgi sanasi</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.main_deadline
+                              : "Maqola qabul qilish oxirgi sanasi"}
+                          </label>
                           <input
                             onChange={(e) =>
                               this.setState({ deadline: e.target.value })
@@ -275,7 +297,11 @@ class JurnalQoshish extends Component {
 
                       <Col sm="3" md="3" lg="3">
                         <div>
-                          <Label>Sertifikat raqami</Label>
+                          <Label>
+                            {lang === "ru"
+                              ? ru.jurnal_sertifikat
+                              : "Sertifikat raqami"}
+                          </Label>
                           <input
                             placeholder="ex: № FS77-54438"
                             onChange={(e) =>
@@ -322,7 +348,9 @@ class JurnalQoshish extends Component {
                       <Col sm="7" md="7" lg="7">
                         <FormGroup>
                           <label>
-                            Izoh ( jurnal haqidagi barcha ma'lumotlar )
+                            {lang === "ru"
+                              ? ru.jurnal_description
+                              : "Jurnal haqida ma'lumot"}
                           </label>
                           <Input
                             style={{
@@ -356,7 +384,11 @@ class JurnalQoshish extends Component {
                       </Col> */}
                       <Col sm="5" md="5" lg="5">
                         <div>
-                          <label>Chop etilish sanasi</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.jurnal_printDays
+                              : "Tekshirish vaqti"}
+                          </label>
                           <Input
                             min="0"
                             onChange={(e) =>
@@ -367,7 +399,9 @@ class JurnalQoshish extends Component {
                         </div>
                         {/* <Col md="3" sm="3" lg="3"> */}
                         <div>
-                          <label>Jurnal muqovasi</label>
+                          <label>
+                            {lang === "ru" ? ru.jurnal_cover : "Muqova"}
+                          </label>
                           <input
                             onChange={(e) =>
                               this.setState({ cover: e.target.files[0] })
@@ -410,7 +444,7 @@ class JurnalQoshish extends Component {
                             this.handleSubmit(e);
                           }}
                         >
-                          Qo'shish
+                          {lang === "ru" ? ru.admin_add : "Tasdiqlash"}
                         </button>
                       </Col>
                     </Row>

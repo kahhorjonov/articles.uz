@@ -144,7 +144,7 @@ class Category extends Component {
                 data-toggle="modal"
                 data-target="#myModal"
               >
-                Add
+                {this.state.lang === "ru" ? ru.admin_add : "Qo'shish"}
               </button>
 
               {/* <form>
@@ -166,7 +166,11 @@ class Category extends Component {
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h4 className="modal-title">Modal Heading</h4>
+                    <h4 className="modal-title">
+                      {this.state.lang === "ru"
+                        ? ru.admin_add_cat
+                        : "Kategoriya Qo'shish"}
+                    </h4>
                   </div>
 
                   <div className="modal-body">
@@ -174,7 +178,11 @@ class Category extends Component {
                       <Row>
                         <Col lg="12">
                           <div>
-                            <label>Name</label>
+                            <label>
+                              {this.state.lang === "ru"
+                                ? ru.admin_type
+                                : "Turi"}
+                            </label>
                             <input
                               type="text"
                               className="form-control"
@@ -187,16 +195,25 @@ class Category extends Component {
 
                         <Col lg="12">
                           <div>
-                            <label className="pt-3">Parent Category</label>
+                            <label className="pt-3">
+                              {this.state.lang === "ru"
+                                ? ru.admin_root_cat
+                                : "Ildiz kategoriya"}
+                            </label>
                             <select
                               className="form-control"
+                              style={{ height: "auto" }}
                               onChange={(e) =>
                                 this.setState({
                                   activeParentCategoryId: e.target.value,
                                 })
                               }
                             >
-                              <option value="">Choose one</option>
+                              <option value="">
+                                {this.state.lang === "ru"
+                                  ? ru.admin_root_option
+                                  : "Birini tanlang"}
+                              </option>
 
                               {parentCategories &&
                                 parentCategories.map((option) => (
@@ -219,14 +236,10 @@ class Category extends Component {
                         this.submitHandler(e);
                       }}
                     >
-                      Submit
+                      {this.state.lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
                     </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      data-dismiss="modal"
-                    >
-                      Close
+                    <button type="button" className="btn" data-dismiss="modal">
+                      {this.state.lang === "ru" ? ru.admin_close : "Yopish"}
                     </button>
                   </div>
                 </div>
@@ -239,7 +252,11 @@ class Category extends Component {
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h4 className="modal-title">Modal Heading</h4>
+                    <h4 className="modal-title">
+                      {this.state.lang === "ru"
+                        ? ru.admin_edit_cat
+                        : "Tahrirlash"}
+                    </h4>
                   </div>
 
                   <div className="modal-body">
@@ -247,7 +264,11 @@ class Category extends Component {
                       <Row>
                         <Col lg="12">
                           <div>
-                            <label>Name</label>
+                            <label>
+                              {this.state.lang === "ru"
+                                ? ru.admin_type
+                                : "Turi"}
+                            </label>
                             <input
                               defaultValue={this.state.name}
                               type="text"
@@ -259,10 +280,16 @@ class Category extends Component {
                           </div>
                         </Col>
 
-                        <Col lg="12">
+                        <Col lg="12" className="mt-3">
                           <div>
+                            <label>
+                              {this.state.lang === "ru"
+                                ? ru.admin_root_cat
+                                : "Ildiz kategoriya"}
+                            </label>
                             <Input
                               type="select"
+                              style={{ height: "auto", marginTop: "0" }}
                               defaultValue={
                                 this.state.activeParentCategoryId &&
                                 this.state.activeParentCategoryId.toString()
@@ -272,9 +299,13 @@ class Category extends Component {
                                   activeParentCategoryId: e.target.value,
                                 });
                               }}
-                              className="form-control mt-3"
+                              className="form-control"
                             >
-                              <option value="">Choose One</option>
+                              <option value="">
+                                {this.state.lang === "ru"
+                                  ? ru.admin_root_option
+                                  : "Birini tanlang"}
+                              </option>
 
                               {parentCategories &&
                                 parentCategories.length &&
@@ -296,14 +327,10 @@ class Category extends Component {
                       className="btn btn-info"
                       onClick={(e) => this.submitHandler(e)}
                     >
-                      Submit
+                      {this.state.lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
                     </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      data-dismiss="modal"
-                    >
-                      Close
+                    <button type="button" className="btn" data-dismiss="modal">
+                      {this.state.lang === "ru" ? ru.admin_close : "Yopish"}
                     </button>
                   </div>
                 </div>
@@ -314,10 +341,20 @@ class Category extends Component {
               <thead>
                 <tr>
                   {/* <th>№</th> */}
-                  <th>Nomi</th>
-                  <th>Ildiz kategoriyasi</th>
-                  <th>Aktivlashtirish</th>
-                  <th className="text-center">Amallar</th>
+                  <th> {this.state.lang === "ru" ? ru.admin_type : "Turi"}</th>
+                  <th>
+                    {this.state.lang === "ru"
+                      ? ru.admin_root_cat
+                      : "Ildiz kategoriya"}
+                  </th>
+                  <th>
+                    {this.state.lang === "ru"
+                      ? ru.admin_activate
+                      : "Aktivlashtirish"}
+                  </th>
+                  <th className="text-center">
+                    {this.state.lang === "ru" ? ru.admin_actions : "Amallar"}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -359,14 +396,18 @@ class Category extends Component {
                             this.setState({ activeCategoryId: category.id });
                           }}
                         >
-                          Edit
+                          {this.state.lang === "ru"
+                            ? ru.admin_edit
+                            : "Tahrirlash"}
                         </button>
                         <button
                           onClick={() => this.handleDelete(category.id)}
                           type="button"
                           className="btn"
                         >
-                          Delete
+                          {this.state.lang === "ru"
+                            ? ru.admin_edit
+                            : "O'chirish"}
                         </button>
                       </div>
                     </td>

@@ -313,16 +313,82 @@ class NashrShartlari extends Component {
                         <br />
                         <br />
                         3.{" "}
-                        {this.state.lang === "ru"
-                          ? ru.talablar_3
-                          : "Matn, formulalar va jadvallarni yozish uchun Windows uchun Microsoft Word muharriri ishlatilishi kerak. Matn yozishdan oldin quyidagi matn muharriri parametrlarini sozlang: sahifa formati:A4( 210x297 mm), 2 sm gacha bo'lgan joylar; Times New Roman shrifti, o'lchami 14; satr oralig'i – 1,5; kenglik bo'yicha hizalama; 1 sm xatboshi; varaqning yo'nalishi – kitob. Maqolada ishlatiladigan tasvirlar format bo'lishi kerak: jpg, gif, bmp, MS Wordda yaratilgan tasvirlar qabul qilinmaydi. Barcha chizmalar va jadvallar raqamlangan bo'lishi kerak va nomlar yoki chizilgan imzolar bilan jihozlangan bo'lishi kerak va matn mazmunida (hujjatning oxirida emas) talab qilinadigan matnda joylashgan bo'lishi kerak."}
-                        <br />
+                        {this.state.lang === "ru" ? (
+                          ru.talablar_3
+                        ) : (
+                          <span>
+                            "Matn, formulalar va jadvallarni yozish uchun
+                            Windows uchun Microsoft Word muharriri ishlatilishi
+                            kerak.
+                            <br />
+                            Matn yozishdan oldin quyidagi matn muharriri
+                            parametrlarini sozlang:
+                            <br />
+                            <ul style={{ marginLeft: "2rem" }}>
+                              <li>
+                                sahifa formati:A4( 210x297 mm), 2 sm gacha
+                                bo'lgan joylar; Times New Roman shrifti,
+                                o'lchami 14;
+                              </li>
+
+                              <li>
+                                satr oralig'i – 1,5; kenglik bo'yicha hizalama;
+                                1 sm xatboshi;
+                              </li>
+
+                              <li>varaqning yo'nalishi – kitob.</li>
+
+                              <li>
+                                Maqolada ishlatiladigan tasvirlar format
+                                bo'lishi kerak: jpg, gif, bmp, MS Wordda
+                                yaratilgan tasvirlar qabul qilinmaydi.
+                              </li>
+
+                              <li>
+                                Barcha chizmalar va jadvallar raqamlangan
+                                bo'lishi kerak va nomlar yoki chizilgan imzolar
+                                bilan jihozlangan bo'lishi kerak va matn
+                                mazmunida (hujjatning oxirida emas) talab
+                                qilinadigan matnda joylashgan bo'lishi kerak.
+                              </li>
+                            </ul>
+                          </span>
+                        )}
                         <br />
                         4.{" "}
-                        {this.state.lang === "ru"
-                          ? ru.talablar_5
-                          : "Sarlavha rus tilida: (kichik, qalin harflar bilan, satrning markazida hizalanish) maqolaning nomi; keyingi satrda (shrift qalin kursiv, o'ng tomondagi hizalama) – maqolaning muallifi to'liq nomi; keyingi satrda (kursiv shrift, o'ng tomondagi hizalama) – ilmiy daraja, ilmiy unvon, lavozim, universitet nomi, mamlakat, shahar; keyingi qatorda (kursiv shrifti, o'ng tomondagi hizalama) – kontaktlar uchun elektron pochta. Agar bir nechta maqola muallifi bo'lsa, unda har bir muallif uchun ma'lumot takrorlanadi."}
-                        <br />
+                        {this.state.lang === "ru" ? (
+                          ru.talablar_5
+                        ) : (
+                          <span>
+                            Sarlavha :
+                            <br />
+                            <ul style={{ marginLeft: "2rem" }}>
+                              <li>
+                                kichik, qalin harflar bilan, satrning markazida
+                                hizalanish maqolaning nomi;
+                              </li>
+
+                              <li>
+                                keyingi satrda (shrift qalin kursiv, o'ng
+                                tomondagi hizalama) – maqolaning muallifi to'liq
+                                nomi;
+                              </li>
+
+                              <li>
+                                keyingi satrda (kursiv shrift, o'ng tomondagi
+                                hizalama) – ilmiy daraja, ilmiy unvon, lavozim,
+                                universitet nomi, mamlakat, shahar;
+                              </li>
+
+                              <li>
+                                keyingi qatorda (kursiv shrifti, o'ng tomondagi
+                                hizalama) – kontaktlar uchun elektron pochta.
+                                Agar bir nechta maqola muallifi bo'lsa, unda har
+                                bir muallif uchun ma'lumot takrorlanadi.
+                              </li>
+                            </ul>
+                          </span>
+                        )}
                         <br />
                         5.{" "}
                         {this.state.lang === "ru"

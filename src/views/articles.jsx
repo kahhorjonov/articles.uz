@@ -8,6 +8,9 @@ import articleService from "services/articleService";
 
 import noUser from "assets/img/no-user-image.gif";
 import GetImages from "utils/getImages";
+import ru from "translations/ru";
+
+import { BsSearch } from "react-icons/bs";
 
 import "styles/navbar.css";
 
@@ -28,7 +31,14 @@ class Articles extends Component {
 
     currentPage2: 1,
     pageSize2: 5,
+
+    lang: "",
   };
+
+  componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+  }
 
   handleGetArticles = async (step) => {
     try {
@@ -93,6 +103,7 @@ class Articles extends Component {
       currentPage2,
       pageSize2,
       people: allPeople,
+      lang,
     } = this.state;
 
     const articles = paginate(allArticles, currentPage, pageSize);
@@ -105,7 +116,7 @@ class Articles extends Component {
             <div className="col-md-12">
               <div className="card">
                 <div className="card-header">
-                  <h3>Barcha maqolalar</h3>
+                  <h3>{lang === "ru" ? ru.maqolalar : "Barcha maqolalar"}</h3>
                 </div>
                 <div className="card-body">
                   <div className="d-flex justify-content-end">
@@ -119,7 +130,9 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Yangi qabul qilinganlar
+                            {lang === "ru"
+                              ? ru.maqolalar_yangi
+                              : "Yangi qabul qilinganlar"}
                           </a>
                         </li>
 
@@ -131,7 +144,7 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Taqrizda
+                            {lang === "ru" ? ru.maqolalar_taqrizda : "Taqrizda"}
                           </a>
                         </li>
 
@@ -143,7 +156,7 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Tahrirda
+                            {lang === "ru" ? ru.maqolalar_tahrirda : "Tahrirda"}
                           </a>
                         </li>
 
@@ -155,7 +168,9 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Chop etishda
+                            {lang === "ru"
+                              ? ru.maqolalar_nashr_jarayonida
+                              : "Chop etishda"}
                           </a>
                         </li>
 
@@ -167,7 +182,9 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Qayta ishlashga berilganlar
+                            {lang === "ru"
+                              ? ru.maqolalar_qayta_ishlash
+                              : "Qayta ishlashga berilganlar"}
                           </a>
                         </li>
 
@@ -179,7 +196,9 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            No Faollar
+                            {lang === "ru"
+                              ? ru.maqolalar_no_faol
+                              : " No Faollar"}
                           </a>
                         </li>
 
@@ -191,7 +210,9 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Rad etilganlar
+                            {lang === "ru"
+                              ? ru.maqolalar_rad_etilgan
+                              : "Rad etilganlar"}
                           </a>
                         </li>
 
@@ -203,7 +224,7 @@ class Articles extends Component {
                             className="nav-link navv"
                             data-toggle="pill"
                           >
-                            Chop etilganlar
+                            {lang === "ru" ? ru.published : " Chop etilganlar"}
                           </a>
                         </li>
                       </ul>
@@ -215,14 +236,14 @@ class Articles extends Component {
                           <input
                             type="text"
                             className="form-control heightImportant"
-                            placeholder="Search"
+                            placeholder={lang === "ru" ? ru.search : "Search"}
                           />
                           <div className="input-group-append">
                             <button
-                              className="btn btn-primary p-2 m-0"
+                              className="btn btn-primary px-3 p-2 m-0"
                               type="submit"
                             >
-                              Go
+                              <BsSearch />
                             </button>
                           </div>
                         </div>
@@ -255,7 +276,7 @@ class Articles extends Component {
                                 }
                                 to={`/admin/articleInfo/:${article.id}`}
                               >
-                                Batafsil...
+                                {lang === "ru" ? ru.batafsil : "Batafsil..."}
                               </Link>
                             </li>
                           ))}
@@ -278,7 +299,7 @@ class Articles extends Component {
                           <div className="input-group">
                             <Input
                               style={{ padding: "0.375rem 0.75rem" }}
-                              placeholder="Search"
+                              placeholder={lang === "ru" ? ru.search : "Search"}
                               className="border"
                             />
 
@@ -294,13 +315,27 @@ class Articles extends Component {
                                 }
                               >
                                 <option value="7">Deadline</option>
-                                <option value="1">1 kun</option>
-                                <option value="2">2 kun</option>
-                                <option value="3">3 kun</option>
-                                <option value="4">4 kun</option>
-                                <option value="5">5 kun</option>
-                                <option value="6">6 kun</option>
-                                <option value="7">7 kun</option>
+                                <option value="1">
+                                  1 {lang === "ru" ? ru.kun : "Kun"}
+                                </option>
+                                <option value="2">
+                                  2 {lang === "ru" ? ru.kun : "Kun"}
+                                </option>
+                                <option value="3">
+                                  3 {lang === "ru" ? ru.kun : "Kun"}
+                                </option>
+                                <option value="4">
+                                  4 {lang === "ru" ? ru.kun : "Kun"}
+                                </option>
+                                <option value="5">
+                                  5 {lang === "ru" ? ru.kun : "Kun"}
+                                </option>
+                                <option value="6">
+                                  6 {lang === "ru" ? ru.kun : "Kun"}
+                                </option>
+                                <option value="7">
+                                  7 {lang === "ru" ? ru.kun : "Kun"}
+                                </option>
                               </Input>
 
                               <Input
@@ -314,8 +349,12 @@ class Articles extends Component {
                                 }}
                               >
                                 <option value={777}>Auto</option>
-                                <option value={3}>Reviewer</option>
-                                <option value={2}>Reductor</option>
+                                <option value={3}>
+                                  {lang === "ru" ? ru.admin_rev : "Taqrizchi"}
+                                </option>
+                                <option value={2}>
+                                  {lang === "ru" ? ru.admin_red : "Tahrirchi"}
+                                </option>
                               </Input>
 
                               <div className="dropdown-menu">

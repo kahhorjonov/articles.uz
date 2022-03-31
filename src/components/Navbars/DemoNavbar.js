@@ -217,6 +217,8 @@ function Header(props) {
                     <i className="nc-icon nc-settings-gear-65" />
                   </Link>
                 </NavItem>
+
+                <LanguageSelect />
               </Nav>
             </Collapse>
           </Container>
