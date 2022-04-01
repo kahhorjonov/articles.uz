@@ -192,7 +192,9 @@ class MagazineInfo extends Component {
                         {this.state.magazineInfo &&
                           this.state.magazineInfo.printedDate}{" "}
                       </strong>
-                      kun ichida saytda e'lon qilinadi.
+                      {lang === "ru"
+                        ? ru.jurnal_kun
+                        : "kun ichida saytda e'lon qilinadi."}
                     </p>
 
                     <p style={{ fontSize: "16px" }}>

@@ -10,7 +10,9 @@ const ru = {
   ilmiy_jurnal: "научный журнал",
   jurnal: "Журнал",
   jurnal1: "Выпуск журнала",
-  jurnal2: "после получения статей",
+  jurnal2: "после получения статей в течение",
+  jurnal_kun: "дней будет опубликован на сайте.",
+  jurnal_chop: "журнал будет опубликован на сайте:",
   jurnal3: (
     <span>
       <strong>Информация о публикации статьи</strong> будет предоставлена ​​по
@@ -94,6 +96,7 @@ const ru = {
 
   login_h2: "Войти в систему",
   login_tel: "Телефон",
+  login: "Логин",
   login_password: "Пароль",
   login_register: "Регистрация",
   login_restore: "Забыли пароль?",
@@ -253,6 +256,7 @@ const ru = {
   tillar: "Языки",
   reviewerRegister_7: "Паспорт",
   reviewerRegister_8: "Образец выполненной работы *(zip, 7zip, rar)",
+  reviewerRegister_9: "Образец выполненной работы",
 
   restore_h1: "Восстановить пароль",
   restore_1: "Получить код",
@@ -326,6 +330,35 @@ const ru = {
   //
   users: "Пользователи",
   rol: "Роль пользователя",
+
+  // article-info
+  info_sms: "Отправить сообщение через SMS",
+  description: "Описание",
+  send: "Отправить",
+  data: "Дата",
+  info_article: "Информация о статье",
+  price: "Цена",
+  authors: "Авторы",
+  author_name: "Имя отправителя",
+  author_name2: "Фамилия отправителя",
+  sahifa_soni: "Число страниц",
+  jurnal_soni: "Количество печатных журналов",
+  sertificat_soni: "Количество сертификатов",
+  file: "Файл",
+  create: "Создать",
+  activity: "Активность",
+  on: "Акт.",
+  off: "Деак.",
+  fish: "Ф.И.О",
+  workplace: "Место работы",
+  edit: "Редактирование",
+  downloadPassport: "Скачать паспорт",
+  info_user: "Статистика пользователя",
+  user_checked: "Рассмотренные статьи",
+  user_noChecked: "Непроверенные статьи",
+  user_published: "Опубликованные статьи",
+  register_date: "Дата регистрации",
+  
 };
 
 export default ru;

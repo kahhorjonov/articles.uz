@@ -201,7 +201,9 @@ class MagazineInfoAdmin extends Component {
                         {this.state.magazineInfo &&
                           this.state.magazineInfo.printedDate}{" "}
                       </strong>
-                      kun ichida saytda e'lon qilinadi.
+                      {lang === "ru"
+                        ? ru.jurnal_kun
+                        : "kun ichida saytda e'lon qilinadi."}
                     </p>
 
                     <p style={{ fontSize: "16px" }}>
@@ -301,10 +303,10 @@ class MagazineInfoAdmin extends Component {
                 <div className="container">
                   <div className="col-lg-12">
                     <p style={{ fontSize: "16px" }}>
-                      Jurnalning yangi soni{" "}
-                      {deadline &&
-                        new Date(deadline).toISOString().slice(0, 10)}{" "}
-                      da saytda e’lon qilinadi
+                      {lang === "ru"
+                        ? ru.jurnal_chop
+                        : "Jurnalning yangi soni saytda e’lon qilinadi:"}{" "}
+                      {deadline && new Date(deadline).toLocaleDateString()}
                     </p>
 
                     <h3>

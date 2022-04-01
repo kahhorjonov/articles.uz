@@ -475,7 +475,9 @@ class Users extends Component {
                                     color="primary"
                                     onClick={() => this.createUser()}
                                   >
-                                    Create Profile
+                                    {lang === "ru"
+                                      ? ru.create
+                                      : "Create Profile"}
                                   </Button>
                                 </div>
                               </Row>
@@ -500,11 +502,23 @@ class Users extends Component {
                                 this.handleChooseRole(e.target.value);
                               }}
                             >
-                              <option value="null">Foydalanuvchi roli</option>
-                              <option value="1">Adminstrator</option>
-                              <option value="2">Reductor</option>
-                              <option value="3">Reviewer</option>
-                              <option value="4">User</option>
+                              <option value="null">
+                                {lang === "ru" ? ru.rol : "Foydalanuvchi roli"}
+                              </option>
+                              <option value="1">
+                                {lang === "ru"
+                                  ? ru.admin_admin
+                                  : "Adminstrator"}
+                              </option>
+                              <option value="2">
+                                {lang === "ru" ? ru.admin_red : "Tahrirchilar"}
+                              </option>
+                              <option value="3">
+                                {lang === "ru" ? ru.admin_rev : "Tahrirchi"}
+                              </option>
+                              <option value="4">
+                                {lang === "ru" ? ru.authors : "Mualliflar"}
+                              </option>
                             </select>
                           </div>
                           <div className="sle col-lg-3 col-md-6 col-sm-12 pr-0">
@@ -516,7 +530,9 @@ class Users extends Component {
                                 this.handleChooseCategory(e.target.value);
                               }}
                             >
-                              <option value="null">Kategoriya</option>
+                              <option value="null">
+                                {lang === "ru" ? ru.kategoriya : "Kategoriya"}
+                              </option>
                               {this.state.categories &&
                                 this.state.categories.map((category) => (
                                   <option key={category.id} value={category.id}>
@@ -534,9 +550,15 @@ class Users extends Component {
                                 this.handleChooseActivity(e.target.value);
                               }}
                             >
-                              <option value="true">Activity</option>
-                              <option value="true">True</option>
-                              <option value="false">False</option>
+                              <option value="true">
+                                {lang === "ru" ? ru.activity : "Activity"}
+                              </option>
+                              <option value="true">
+                                {lang === "ru" ? ru.on : "Faol"}
+                              </option>
+                              <option value="false">
+                                {lang === "ru" ? ru.off : "No faol"}
+                              </option>
                             </select>
                           </div>
                           <div className="sle col-lg-3 col-md-6 col-sm-12 pr-0">
@@ -544,7 +566,9 @@ class Users extends Component {
                             <input
                               type="text"
                               className="form-control p-2 ins"
-                              placeholder="Qidiruv..."
+                              placeholder={
+                                lang === "ru" ? ru.search : "Izlash..."
+                              }
                               onChange={(e) => {
                                 this.handleChange(e.target.value);
                                 this.setState({ text: e.target.value });
@@ -562,16 +586,38 @@ class Users extends Component {
                         <thead className="theades">
                           <tr className="col-lg-12 px-0">
                             <th className="col-lg-1 ">№</th>
-                            <th className="col-lg-2 ">F.I.SH</th>
-                            <th className="col-lg-1 ">Telfon</th>
+                            <th className="col-lg-2 ">
+                              {lang === "ru" ? ru.fish : "F.I.SH"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.login_tel : "Telefon"}
+                            </th>
                             <th className="col-lg-1 ">Email</th>
-                            <th className="col-lg-1 ">Ish joyi</th>
-                            <th className="col-lg-1 ">Ish Staji (yil)</th>
-                            <th className="col-lg-1 ">Ilmiy Darajasi</th>
-                            <th className="col-lg-1 ">Tili</th>
-                            <th className="col-lg-1 ">Categoriyasi</th>
-                            <th className="col-lg-1 ">Active</th>
-                            <th className="col-lg-1 ">Delete</th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.workplace : "Ish joyi"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru"
+                                ? ru.reviewerRegister_5
+                                : "Tajriba (yil)"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru"
+                                ? ru.reviewerRegister_6
+                                : "Ilmiy Darajasi"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.tillar : "Tili"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.kategoriya : "Kategoriyasi"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.activity : "Faollik"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.admin_delete : "Delete"}
+                            </th>
                           </tr>
                         </thead>
                         <tbody className="tbodyes">

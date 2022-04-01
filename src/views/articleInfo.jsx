@@ -23,6 +23,7 @@ import {
   Col,
   Table,
 } from "reactstrap";
+import ru from "translations/ru";
 
 import "styles/userEdit.css";
 
@@ -36,9 +37,14 @@ class ArticleInfo extends Component {
 
     articleInfoAdmin: [],
     steps: [],
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     const articleId = this.props.location.pathname.split(":")[1];
     // ? this.props.location.pathname.split(":")[1]
     // : this.props.location.pathname.split(":")[0];
@@ -120,7 +126,7 @@ class ArticleInfo extends Component {
   };
 
   render() {
-    const { articleInfoAdmin } = this.state;
+    const { articleInfoAdmin, lang } = this.state;
 
     const article = this.state.articleInfo;
     const steps = this.state.steps;
@@ -150,10 +156,14 @@ class ArticleInfo extends Component {
                           marginTop: "0",
                         }}
                       >
-                        Sms orqali xabar yuborish
+                        {lang === "ru"
+                          ? ru.info_sms
+                          : "Sms orqali xabar yuborish"}
                       </h4>
                       <Form>
-                        <label>Xulosa</label>
+                        <label>
+                          {lang === "ru" ? ru.jurnal_status : "Status"}
+                        </label>
                         <select
                           style={{ fontSize: "1.4rem" }}
                           defaultValue="Qayta ishlash uchun"
@@ -166,9 +176,21 @@ class ArticleInfo extends Component {
                           className="custom-select"
                         >
                           <option value="NULL"></option>
-                          <option value="RECYCLE">Qayta ishlash uchun</option>
-                          <option value="REJECTED">Rad etildi</option>
-                          <option value="PUBLISHED">Nashr uchun</option>
+                          <option value="RECYCLE">
+                            {lang === "ru"
+                              ? ru.maqolalar_qayta_ishlash
+                              : "Qayta ishlash uchun"}
+                          </option>
+                          <option value="REJECTED">
+                            {lang === "ru"
+                              ? ru.maqolalar_rad_etilgan
+                              : "Rad etildi"}
+                          </option>
+                          <option value="PUBLISHED">
+                            {lang === "ru"
+                              ? ru.maqolalar_nashr_jarayonida
+                              : "Nashr uchun"}
+                          </option>
                         </select>
                       </Form>
                     </Col>
@@ -189,7 +211,9 @@ class ArticleInfo extends Component {
 
                   <Row>
                     <Col md="12">
-                      <Label>Izoh bildirish</Label>
+                      <Label>
+                        {lang === "ru" ? ru.description : "Izoh bildirish"}
+                      </Label>
                       <Input
                         style={{ height: "40px" }}
                         type="text"
@@ -203,7 +227,7 @@ class ArticleInfo extends Component {
                         className="btn p-3"
                         onClick={() => this.handleEdit()}
                       >
-                        Yuborish
+                        {lang === "ru" ? ru.send : "Yuborish"}
                       </Button>
                     </Col>
                   </Row>
@@ -215,8 +239,12 @@ class ArticleInfo extends Component {
                   <Table>
                     <thead>
                       <tr className="col-md-12">
-                        <th className="col-md-6">Amaliyotlar</th>
-                        <th className="col-md-6">Sana</th>
+                        <th className="col-md-6">
+                          {lang === "ru" ? ru.admin_actions : "Amaliyotlar"}
+                        </th>
+                        <th className="col-md-6">
+                          {lang === "ru" ? ru.data : "Sana"}
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -240,14 +268,18 @@ class ArticleInfo extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Maqola Ma'lumotlari</CardTitle>
+                  <CardTitle tag="h5">
+                    {lang === "ru" ? ru.info_article : " Maqola Ma'lumotlari"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
                       <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>Sarlavha</label>
+                          <label>
+                            {lang === "ru" ? ru.jurnal_title : "Sarlavha"}
+                          </label>
                           <Input
                             disabled
                             type="text"
@@ -257,7 +289,9 @@ class ArticleInfo extends Component {
                       </Col>
                       <Col className="px-1" md="4">
                         <FormGroup>
-                          <label>Kategoriya</label>
+                          <label>
+                            {lang === "ru" ? ru.kategoriya : "Kategoriya"}
+                          </label>
                           <Input
                             disabled
                             defaultValue={category && category.name}
@@ -268,7 +302,7 @@ class ArticleInfo extends Component {
                       </Col>
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Narxi</label>
+                          <label>{lang === "ru" ? ru.price : "Narxi"}</label>
                           <Input
                             disabled={true}
                             placeholder={price && `${price.price} so'm`}
@@ -280,7 +314,9 @@ class ArticleInfo extends Component {
                     <Row>
                       <Col className="pr-1" md="5">
                         <FormGroup>
-                          <label>Avtorlar</label>
+                          <label>
+                            {lang === "ru" ? ru.authors : "Mualliflar"}
+                          </label>
                           <Input
                             disabled
                             placeholder={
@@ -299,7 +335,9 @@ class ArticleInfo extends Component {
 
                       <Col className="px-1" md="4">
                         <FormGroup>
-                          <label>Ilmiy Ishlarni yuklash</label>
+                          <label>
+                            {lang === "ru" ? ru.download : "Yuklash"}
+                          </label>
                           <Button
                             className="m-0"
                             style={{
@@ -315,14 +353,16 @@ class ArticleInfo extends Component {
                               )
                             }
                           >
-                            Ilmiy Ishlarni yuklash
+                            {lang === "ru" ? ru.download : "Yuklash"}
                           </Button>
                         </FormGroup>
                       </Col>
 
                       <Col className="pl-1" md="3">
                         <FormGroup>
-                          <label>Ommaviyligi</label>
+                          <label>
+                            {lang === "ru" ? ru.jurnal_public : "Ommaviyligi"}
+                          </label>
                           <Input
                             disabled
                             defaultValue={publicPrivate}
@@ -336,11 +376,12 @@ class ArticleInfo extends Component {
                     <Row>
                       <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>Yuborgan avtor ismi</label>
+                          <label>
+                            {lang === "ru" ? ru.author_name : "Yuboruvchi ismi"}
+                          </label>
                           <Input
                             disabled
                             defaultValue={user && user.firstName}
-                            placeholder="FirsName"
                             type="text"
                           />
                         </FormGroup>
@@ -348,11 +389,14 @@ class ArticleInfo extends Component {
 
                       <Col className="px-1" md="4">
                         <FormGroup>
-                          <label>Yuborgan avtor Familiyasi</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.author_name
+                              : "Yuboruvchi familiyasi"}
+                          </label>
                           <Input
                             disabled
                             defaultValue={user && user.lastName}
-                            placeholder="LastName"
                             type="text"
                           />
                         </FormGroup>
@@ -360,11 +404,12 @@ class ArticleInfo extends Component {
 
                       <Col className="pl-1" md="4">
                         <FormGroup>
-                          <label>Telefon</label>
+                          <label>
+                            {lang === "ru" ? ru.login_tel : "Telefon"}
+                          </label>
                           <Input
                             disabled
                             defaultValue={user && user.phoneNumber}
-                            placeholder="Number"
                             type="text"
                           />
                         </FormGroup>
@@ -378,14 +423,16 @@ class ArticleInfo extends Component {
                           <Input
                             disabled
                             defaultValue={user && user.email}
-                            placeholder="Email"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
+
                       <Col className="pl-1" md="6">
                         <FormGroup>
-                          <label>Izoh</label>
+                          <label>
+                            {lang === "ru" ? ru.description : "Izoh"}
+                          </label>
                           <Input
                             style={{
                               overscrollBehaviorY: "none",
@@ -403,7 +450,9 @@ class ArticleInfo extends Component {
                     <Row>
                       <Col sm="3" md="3" lg="3">
                         <div>
-                          <label>Sahifa soni</label>
+                          <label>
+                            {lang === "ru" ? ru.sahifa_soni : "Sahifa soni"}
+                          </label>
                           <Input
                             disabled
                             className="form-control"
@@ -413,7 +462,9 @@ class ArticleInfo extends Component {
                       </Col>
 
                       <Col sm="3" md="3" lg="3">
-                        <Label>Bosma jurnal soni</Label>
+                        <Label>
+                          {lang === "ru" ? ru.jurnal_soni : "Bosma jurnal soni"}
+                        </Label>
                         <Input
                           disabled
                           min="0"
@@ -424,7 +475,11 @@ class ArticleInfo extends Component {
                       </Col>
 
                       <Col sm="3" md="3" lg="3">
-                        <Label>Sertifikat soni</Label>
+                        <Label>
+                          {lang === "ru"
+                            ? ru.sertificat_soni
+                            : "Sertifikat soni"}
+                        </Label>
                         <input
                           disabled
                           min="0"
@@ -495,17 +550,27 @@ class ArticleInfo extends Component {
             <Col md="12">
               <Card>
                 <CardHeader className="text-center">
-                  <CardTitle tag="h4">Actions</CardTitle>
+                  <CardTitle tag="h4">
+                    {lang === "ru" ? ru.admin_actions : "Actions"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table hover>
                     <thead>
                       <tr className="col-md-12 col-sm-12">
                         <th className="col-md-1 col-sm-1">№</th>
-                        <th className="col-md-3 col-sm-3">Foydalanuvchi</th>
-                        <th className="col-md-3 col-sm-2">Holat</th>
-                        <th className="col-md-3 col-sm-3">Izoh</th>
-                        <th className="col-md-2 col-sm-3">Fayl</th>
+                        <th className="col-md-3 col-sm-3">
+                          {lang === "ru" ? ru.users : "Foydalanuvchi"}
+                        </th>
+                        <th className="col-md-3 col-sm-2">
+                          {lang === "ru" ? ru.jurnal_status : "Holat"}
+                        </th>
+                        <th className="col-md-3 col-sm-3">
+                          {lang === "ru" ? ru.description : "Izoh"}
+                        </th>
+                        <th className="col-md-2 col-sm-3">
+                          {lang === "ru" ? ru.file : "Fayl"}
+                        </th>
                       </tr>
                     </thead>
                     <tbody>

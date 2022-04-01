@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ru from "translations/ru";
 
 import {
   changeUserActivity,
@@ -75,9 +76,14 @@ class UserEdit extends Component {
     codes2: [],
 
     checkedArticles: [],
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     const userId = this.props.history.location.pathname.slice(17);
     this.setState({ userId: userId });
     this.handleGetLanguages();
@@ -266,6 +272,7 @@ class UserEdit extends Component {
       checkAndRecycles,
       didNotAccepteds,
       checkedArticles,
+      lang,
     } = this.state;
 
     return (
@@ -288,11 +295,12 @@ class UserEdit extends Component {
                       </h5>
                     </a>
                     <p className="description">
-                      tel: {phoneNumber ? phoneNumber : "nomalum"}
+                      {lang === "ru" ? ru.login_tel : "Telefon"}:{" "}
+                      {phoneNumber ? phoneNumber : "nomalum"}
                     </p>
                   </div>
                   <p className="description text-center">
-                    Academic Degree:{" "}
+                    {lang === "ru" ? ru.reviewerRegister_6 : "Ilmiy Darajasi "}:{" "}
                     {academicDegree ? academicDegree : " mavjud emas"}
                   </p>
                 </CardBody>
@@ -315,7 +323,9 @@ class UserEdit extends Component {
                               )
                             }
                           >
-                            Download Passport
+                            {lang === "ru"
+                              ? ru.downloadPassport
+                              : "Pasportni yuklash"}
                           </Button>
                         </h5>
                       </Col>
@@ -325,7 +335,9 @@ class UserEdit extends Component {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Auth</CardTitle>
+                  <CardTitle tag="h4">
+                    {lang === "ru" ? ru.admin_edit : "Tahrirlash"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ul className="list-unstyled team-members">
@@ -333,7 +345,9 @@ class UserEdit extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Telefon</label>
+                            <label>
+                              {lang === "ru" ? ru.login_tel : "Telefon"}:{" "}
+                            </label>
                             <Input
                               defaultValue={phoneNumber}
                               placeholder="telefon nomer"
@@ -352,9 +366,12 @@ class UserEdit extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Parol</label>
+                            <label>
+                              {this.state.lang === "ru"
+                                ? ru.login_password
+                                : "Parol"}
+                            </label>
                             <Input
-                              placeholder="parol"
                               type="text"
                               onChange={(e) =>
                                 this.setState({
@@ -392,14 +409,22 @@ class UserEdit extends Component {
               <Card>
                 <ListGroup className="listgropus">
                   <ListGroupItem className="justify-content-between">
-                    <b className="pl-3">Foydalanuvchi statistikasi</b>
+                    <b className="pl-3">
+                      {lang === "ru"
+                        ? ru.info_user
+                        : "Foydalanuvchi statistikasi"}
+                    </b>
                   </ListGroupItem>
                 </ListGroup>
 
                 <ListGroup className="listgropus">
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Tekshirishga olgan maqolalar</span>{" "}
+                      <span>
+                        {lang === "ru"
+                          ? ru.user_checked
+                          : "Tekshirishga olgan maqolalar"}
+                      </span>{" "}
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -410,9 +435,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Tekshirishga olinmagan maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.user_noChecked
+                          : "Tekshirishga olinmagan maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -423,9 +452,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Maqulangan maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.user_published
+                          : "Chop etilgan maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -436,9 +469,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span> Maqulanmagan maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.maqolalar_rad_etilgan
+                          : "Maqulanmagan maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -449,9 +486,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Qayta ishlashga bergan Maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.admin_4
+                          : "Qayta ishlashga bergan Maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -467,14 +508,18 @@ class UserEdit extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Tahrirlash</CardTitle>
+                  <CardTitle tag="h5">
+                    {lang === "ru" ? ru.edit : "Tahrirlash"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
                       <Col md="6">
                         <FormGroup>
-                          <label>Ism</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_1 : "Ism"}
+                          </label>
                           <Input
                             defaultValue={firstName}
                             type="text"
@@ -486,7 +531,9 @@ class UserEdit extends Component {
                       </Col>
                       <Col md="6">
                         <FormGroup>
-                          <label>Familiya</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_2 : "Familiya"}
+                          </label>
                           <Input
                             defaultValue={lastName}
                             type="text"
@@ -513,7 +560,9 @@ class UserEdit extends Component {
                     <Row>
                       <Col md="5">
                         <FormGroup>
-                          <label>Ish joyi</label>
+                          <label>
+                            {lang === "ru" ? ru.workplace : "Ish joyi"}
+                          </label>
                           <Input
                             defaultValue={workPlace}
                             type="text"
@@ -525,7 +574,11 @@ class UserEdit extends Component {
                       </Col>
                       <Col md="3">
                         <FormGroup>
-                          <label>Ro'yxatdan o'tgan sana</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.register_date
+                              : "Ro'yxatdan o'tgan sana"}
+                          </label>
                           <Input
                             disabled
                             value={new Date(
@@ -564,7 +617,9 @@ class UserEdit extends Component {
 
                       <Col md="4">
                         <FormGroup>
-                          <label>Ilmiy Ishlarni yuklash</label>
+                          <label>
+                            {lang === "ru" ? ru.download : "Yuklab olish"}
+                          </label>
                           <Button
                             className="m-0"
                             style={{ width: "100%", padding: "0.75rem" }}
@@ -579,7 +634,9 @@ class UserEdit extends Component {
                               )
                             }
                           >
-                            Ilmiy Ishlarni yuklash
+                            {lang === "ru"
+                              ? ru.reviewerRegister_9
+                              : "Ilmiy ishlardan namuna"}
                           </Button>
                         </FormGroup>
                       </Col>
@@ -598,7 +655,9 @@ class UserEdit extends Component {
 
                       <Col md="4">
                         <FormGroup>
-                          <label>Daraja</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_6 : "Daraja"}
+                          </label>
                           <Input
                             defaultValue={academicDegree}
                             placeholder="Daraja"
@@ -614,7 +673,11 @@ class UserEdit extends Component {
 
                       <Col md="4">
                         <FormGroup>
-                          <label>Tajriba (yil)</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.reviewerRegister_5
+                              : "Tajriba (yil)"}
+                          </label>
                           <Input
                             defaultValue={workExperience}
                             min={0}
@@ -631,7 +694,9 @@ class UserEdit extends Component {
 
                     <Row>
                       <Col md="12">
-                        <label>Kategoriya</label>
+                        <label>
+                          {lang === "ru" ? ru.kategoriya : "Kategoriya"}
+                        </label>
                         <Multiselect
                           options={this.state.options2} // Options to display in the dropdown
                           selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
@@ -644,7 +709,7 @@ class UserEdit extends Component {
 
                     <Row>
                       <Col md="12">
-                        <label>Tillar</label>
+                        <label>{lang === "ru" ? ru.tillar : "Tillar"}</label>
                         <Multiselect
                           options={this.state.options} // Options to display in the dropdown
                           selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
@@ -663,7 +728,7 @@ class UserEdit extends Component {
                           // type="button"
                           onClick={(e) => this.updateProfileByAdmin()}
                         >
-                          Profilni yangilash
+                          {lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
                         </Button>
                       </div>
                     </Row>
@@ -690,7 +755,7 @@ class UserEdit extends Component {
                               this.handleDelete();
                             }}
                           >
-                            Delete
+                            {lang === "ru" ? ru.admin_delete : "Удалить"}
                           </Button>
                         </div>
                       </div>
