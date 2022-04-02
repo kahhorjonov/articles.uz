@@ -15,6 +15,7 @@ import Jurnallar from "components/UI/jurnallar.jsx";
 import MagazineInfoAdmin from "components/UI/magazineInfoAdmin";
 import ChangePrices from "components/UI/changePrices";
 import ReviewerActivation from "views/activationReviewers";
+import ru from "translations/ru";
 
 var adminRoutes = [
   {
@@ -28,7 +29,10 @@ var adminRoutes = [
 
   {
     path: "/category",
-    name: "Kategoriyalar",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.admin_kategoriyalar
+        : "Kategoriyalar",
     icon: "nc-icon nc-bullet-list-67",
     component: Category,
     layout: "/admin",
@@ -37,7 +41,8 @@ var adminRoutes = [
 
   {
     path: "/adminMagazines",
-    name: "Jurnallar",
+    name:
+      localStorage.getItem("lang") === "ru" ? ru.nav_jurnallar : "Jurnallar",
     icon: "nc-icon nc-map-big",
     component: Jurnallar,
     layout: "/admin",
@@ -55,7 +60,10 @@ var adminRoutes = [
 
   {
     path: "/createMagazine",
-    name: "Jurnal Qo'shish",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.jurnal_qoshish
+        : "Jurnal Qo'shish",
     icon: "nc-icon nc-box",
     component: JurnalQoshish,
     layout: "/admin",
@@ -64,7 +72,10 @@ var adminRoutes = [
 
   {
     path: "/activationArticles",
-    name: "Maqolalarni aktivlashtirish",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.jurnal_aktivlashtirish
+        : "Maqolalarni aktivlashtirish",
     icon: "nc-icon nc-book-bookmark",
     component: ArticleActivation,
     layout: "/admin",
@@ -73,7 +84,7 @@ var adminRoutes = [
 
   {
     path: "/articles",
-    name: "Maqolalar",
+    name: localStorage.getItem("lang") === "ru" ? ru.maqolalar : "Maqolalar",
     icon: "nc-icon nc-bookmark-2",
     component: Articles,
     layout: "/admin",
@@ -82,7 +93,7 @@ var adminRoutes = [
 
   {
     path: "/users",
-    name: "Foydalanuvchilar",
+    name: localStorage.getItem("lang") === "ru" ? ru.users : "Foydalanuvchilar",
     icon: "nc-icon nc-single-02",
     component: Users,
     layout: "/admin",
@@ -91,7 +102,10 @@ var adminRoutes = [
 
   {
     path: "/activationReviewers",
-    name: "Yangi Reviewerlar",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.activation_rev
+        : "Taqrizchilarni aktivlashtirish",
     icon: "nc-icon nc-circle-10",
     component: ReviewerActivation,
     layout: "/admin",

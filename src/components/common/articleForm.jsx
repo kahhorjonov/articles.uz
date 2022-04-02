@@ -7,6 +7,7 @@ import { getActiveMagazines } from "services/magazineService";
 import { getUsersById } from "services/userService";
 import { getPrices } from "services/priceService";
 import { me } from "services/authService";
+import ru from "translations/ru";
 
 import { Card, CardBody, Input, Label, Row, Col, FormGroup } from "reactstrap";
 
@@ -44,6 +45,8 @@ class ArticleForm extends Form {
     authors: [],
 
     articlePrice: [],
+
+    lang: "",
   };
 
   schema = {
@@ -54,6 +57,9 @@ class ArticleForm extends Form {
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     await this.populateCategories();
     this.getArticlePrice();
 
@@ -203,8 +209,7 @@ class ArticleForm extends Form {
   };
 
   render() {
-    const { articlePrice } = this.state;
-    const { inputFields } = this.state;
+    const { articlePrice, inputFields, lang } = this.state;
 
     const {
       bittaBosmaJunalNarxi,
@@ -229,10 +234,12 @@ class ArticleForm extends Form {
                   }}
                 >
                   <Col sm="6" md="6" lg="6">
-                    <span style={{ fontSize: "4rem" }}>Article Form</span>
+                    <span style={{ fontSize: "4rem" }}>
+                      {lang === "ru" ? ru.nav_yuklash : "Ariza berish"}
+                    </span>
                   </Col>
                   <Col sm="6" md="6" lg="6">
-                    <label>Jurnalni tanlang</label>
+                    {/* <label>Jurnalni tanlang</label> */}
                     <Input
                       sm="6"
                       md="6"
@@ -249,7 +256,9 @@ class ArticleForm extends Form {
                         }
                       }}
                     >
-                      <option value="">Jurnalni tanlang</option>
+                      <option value="">
+                        {lang === "ru" ? ru.mag_option : "Jurnalni tanlang"}
+                      </option>
 
                       {this.state.parentCategories &&
                         this.state.parentCategories.map((category) => (
@@ -264,13 +273,16 @@ class ArticleForm extends Form {
                 <form onSubmit={this.handleSubmit}>
                   <Row>
                     <Col md="6" lg="6" sm="6">
-                      {this.renderInput("titleArticle", "Sarlavha")}
+                      {this.renderInput(
+                        "titleArticle",
+                        lang === "ru" ? ru.jurnal_title : "Sarlavha"
+                      )}
                     </Col>
 
                     <Col md="6" lg="6" sm="6">
                       {this.renderSelect(
                         "categoryId",
-                        "Kategoriya",
+                        lang === "ru" ? ru.kategoriya : "Kategoriya",
                         this.state.childCategories
                       )}
                     </Col>
@@ -279,7 +291,9 @@ class ArticleForm extends Form {
                   <Row>
                     <Col sm="6" md="6" lg="6">
                       <div>
-                        <label>Ommaviylik</label>
+                        <label>
+                          {lang === "ru" ? ru.jurnal_public : "Ommaviyligi"}
+                        </label>
                         <Input
                           defaultValue="false"
                           type="select"
@@ -289,21 +303,31 @@ class ArticleForm extends Form {
                             this.setState({ publicOrPrivate: e.target.value })
                           }
                         >
-                          <option value="false">Yo'q</option>
-                          <option value="true">Ha</option>
+                          <option value="false">
+                            {lang === "ru" ? "Нет" : "Yo'q"}
+                          </option>
+                          <option value="true">
+                            {lang === "ru" ? "Да" : "Ha"}
+                          </option>
                         </Input>
                       </div>
                     </Col>
 
                     <Col sm="6" md="6" lg="6">
-                      {this.renderFileInput("file", "Fayl", "file")}
+                      {this.renderFileInput(
+                        "file",
+                        lang === "ru" ? ru.file : "Fayl",
+                        "file"
+                      )}
                     </Col>
                   </Row>
 
                   <Row>
                     <Col sm="3" md="3" lg="3">
                       <div>
-                        <label>Sahifa soni</label>
+                        <label>
+                          {lang === "ru" ? ru.sahifa_soni : "Sahifa soni"}
+                        </label>
                         <Input
                           className="form-control"
                           placeholder="0"
@@ -316,7 +340,9 @@ class ArticleForm extends Form {
                     </Col>
 
                     <Col sm="3" md="3" lg="3">
-                      <Label>Bosma jurnal soni</Label>
+                      <Label>
+                        {lang === "ru" ? ru.jurnal_soni : "Bosma jurnal soni"}
+                      </Label>
                       <Input
                         min="0"
                         type={"number"}
@@ -331,7 +357,9 @@ class ArticleForm extends Form {
                     </Col>
 
                     <Col sm="3" md="3" lg="3">
-                      <Label>Sertifikat soni</Label>
+                      <Label>
+                        {lang === "ru" ? ru.sertificat_soni : "Sertifikat soni"}
+                      </Label>
                       <input
                         min="0"
                         type={"number"}
@@ -366,65 +394,81 @@ class ArticleForm extends Form {
                     <Col sm="3" md="3" lg="3">
                       <div className="hisoblash mt-5">
                         <h6 className="pl-1">
-                          Sahifa narxi
+                          {lang === "ru" ? ru.pagePrice : "Saxifa narxi"}
                           <span className="pl-3 text-dark pl-2">
-                            {sahifaNarxi} so'm
+                            {sahifaNarxi} {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                         </h6>
                         <h6 className="pl-1">
                           {this.state.sahifaSoni} X {sahifaNarxi} =
                           <span className="text-darck pl-2">
-                            {sahifaNarxi * this.state.sahifaSoni} so'm
+                            {sahifaNarxi * this.state.sahifaSoni}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                         </h6>
                         <hr />
 
                         <h6 className="pl-1">
-                          Bosma Jurnal Narxi:
+                          {lang === "ru"
+                            ? ru.printPrice2
+                            : "Bosma Jurnal Narxi"}
+                          :
                           <span className="pl-3 text-darck pl-2">
-                            {bittaBosmaJunalNarxi} so'm
+                            {bittaBosmaJunalNarxi}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                           <p>
                             {this.state.bosmaJurnalSoni} x{" "}
                             {bittaBosmaJunalNarxi} ={" "}
                             {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}{" "}
-                            so'm
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </p>
                         </h6>
                         <hr />
                         <h6 className="pl-1">
-                          Sertifikat narxi:
+                          {lang === "ru"
+                            ? ru.sertificatePrice
+                            : "Sertfikat narxi"}
+                          :
                           <span className="pl-3 text-darck pl-2">
-                            {bittaSertifikatNarxi} so'm
+                            {bittaSertifikatNarxi}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                           <p>
                             {this.state.sertifikatSoni} x {bittaSertifikatNarxi}{" "}
                             = {bittaSertifikatNarxi * this.state.sertifikatSoni}{" "}
-                            so'm
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </p>
                         </h6>
                         <hr />
 
                         <h6 className="pl-1">
-                          Doi narxi:
+                          {lang === "ru" ? ru.doiPrice : "Doi narxi"}:
                           <span className="pl-3 text-darck pl-2">
-                            {doi} so'm
+                            {doi} {lang === "ru" ? ru.sum : "so'm"}
                           </span>
-                          <p>{this.state.doi == true ? doi : "0"} so'm</p>
+                          <p>
+                            {this.state.doi == true ? doi : "0"}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
+                          </p>
                         </h6>
                         <hr />
 
                         <h6 className="pl-1">
-                          Chop etish narxi:
+                          {lang === "ru" ? ru.printPrice : "Chop etish narxi"}:
                           <span className="pl-3 text-darck pl-2">
-                            {chopEtishNarxi} so'm
+                            {chopEtishNarxi} {lang === "ru" ? ru.sum : "so'm"}
                           </span>
-                          <p>{chopEtishNarxi} so'm</p>
+                          <p>
+                            {chopEtishNarxi} {lang === "ru" ? ru.sum : "so'm"}
+                          </p>
                         </h6>
                         <hr />
                         <h6 className="pl-1">
-                          Jami :{" "}
-                          <span className="text-darck pl-2">{price} so'm</span>
+                          {lang === "ru" ? ru.all : "Jami"} :{" "}
+                          <span className="text-darck pl-2">
+                            {price} {lang === "ru" ? ru.sum : "so'm"}
+                          </span>
                         </h6>
                       </div>
                     </Col>
@@ -434,7 +478,9 @@ class ArticleForm extends Form {
 
                       <FormGroup>
                         <label>
-                          Izoh ( jurnal haqidagi barcha ma'lumotlar )
+                          {lang === "ru"
+                            ? ru.description
+                            : "Izoh ( jurnal haqidagi barcha ma'lumotlar )"}
                         </label>
                         <Input
                           style={{
@@ -449,7 +495,9 @@ class ArticleForm extends Form {
                         />
                       </FormGroup>
 
-                      <Label for="exampleEmail">Avtorlar</Label>
+                      <Label for="exampleEmail">
+                        {lang === "ru" ? ru.authors : "Mualliflar"}
+                      </Label>
                       <div className="tags-input ">
                         <ul id="tags">
                           {this.state.tags &&
@@ -473,7 +521,11 @@ class ArticleForm extends Form {
                               ? this.addTags(e.target.value)
                               : null
                           }
-                          placeholder="Press Up Arrow to add tags"
+                          placeholder={
+                            lang === "ru"
+                              ? ru.hint
+                              : "Muallif qo'shish uchun yuqori strelkani bosing"
+                          }
                         />
                       </div>
                     </Col>
@@ -487,7 +539,11 @@ class ArticleForm extends Form {
                         justifyContent: "center",
                       }}
                     >
-                      <div className="savee">{this.renderButton("Save")}</div>
+                      <div className="savee">
+                        {this.renderButton(
+                          lang === "ru" ? ru.restore_3 : "Tasdiqlash"
+                        )}
+                      </div>
                     </Col>
                   </Row>
                 </form>

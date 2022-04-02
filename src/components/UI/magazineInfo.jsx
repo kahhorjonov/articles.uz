@@ -291,7 +291,7 @@ class MagazineInfo extends Component {
                 </div>
               </div>
 
-              <div className="gernMaqola">
+              {/* <div className="gernMaqola">
                 <div className="container">
                   <div className="col-lg-12">
                     <p style={{ fontSize: "16px" }}>
@@ -316,7 +316,7 @@ class MagazineInfo extends Component {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Archive for admin page */}
 

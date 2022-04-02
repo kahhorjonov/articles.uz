@@ -6,6 +6,10 @@ const ru = {
   nav_aloqa: "Контакты",
   nav_kirish: "Войти",
 
+  sidebar_tasks: "Мои задачи",
+  sidebar_profile: "Профиль",
+  sidebar_exit: "Выйти",
+
   ilmiy_jurnallar: "научные журналы",
   ilmiy_jurnal: "научный журнал",
   jurnal: "Журнал",
@@ -268,7 +272,7 @@ const ru = {
   admin_2: "Опубликованные",
   admin_3: "Готовые к публикации",
   admin_4: "В переработке",
-  admin_5: "Отклоненный",
+  admin_5: "Отклоненные",
   admin_6: "Статистика пользователей",
 
   admin_rev: "Рецензенты",
@@ -310,18 +314,18 @@ const ru = {
   jurnal_cover: "Обложка",
   jurnal_description: "Описание журнала",
   jurnal_public: "Общедоступный",
-  published: "Опубликовано",
+  published: "Опубликованные",
   jurnal_qoshish: "Добавить журнал",
   jurnal_aktivlashtirish: "Активация статей",
 
   // maqolalar
   maqolalar: "Все статьи",
-  maqolalar_yangi: "Недавно принято",
-  maqolalar_taqrizda: "В обзоре",
+  maqolalar_yangi: "Новые статьи",
+  maqolalar_taqrizda: "Рецензированные",
   maqolalar_tahrirda: "В процессе редактирования",
   maqolalar_nashr_jarayonida: "В процессе печати",
-  maqolalar_qayta_ishlash: "Отдано на обработку",
-  maqolalar_no_faol: "Не активеные",
+  maqolalar_qayta_ishlash: "Отданные на переработку",
+  maqolalar_no_faol: "Не активные",
   maqolalar_rad_etilgan: "Отклоненные",
   search: "Искать",
   kun: "День",
@@ -358,7 +362,47 @@ const ru = {
   user_noChecked: "Непроверенные статьи",
   user_published: "Опубликованные статьи",
   register_date: "Дата регистрации",
-  
+
+  //
+  checkedDate: "Дата проверки",
+  xulosa: "Заключение",
+  activation_rev: "Активировать рецензентов",
+  copyPassport: "Копия паспорта",
+  foto: "Фото профиля",
+  changePrice: "Изменить цены",
+  changeLang: "Изменить языкы",
+  magazinePrice: "Цена журнала",
+  sertificatePrice: "Цена сертификата",
+  pagePrice: "Цена страницы",
+  printPrice: "Цена распечатки",
+  doiPrice: "Цена doi",
+  addLang: "Добавить язык",
+  noMagazines: "Журналы Нет",
+
+  //
+  mag_option: "Выберите один",
+  all: "Общий",
+  printPrice2: "Цена журнала для печати",
+  hint: "Нажмите стрелку вверх, чтобы добавить автора",
+  allMyArticles: "Все мои статьи",
+  select: "Выберите",
+  magazine: "Журнал",
+  originalFile: "файл автора",
+  red_file: "редактированный файл",
+
+  //
+  my_tasks: "Мои задачи",
+  new_tasks: "Новые задачи",
+  toBeChecked: "Нужно проверить",
+  checked: "Проверенные статьи",
+  sendDate: "Дата отправки",
+  recieve: "Принимаете?",
+  dnya: "дня",
+  dney: "дней",
+
+  accept: "Принимаю",
+  accepted: "Одобряю",
+  not_accepted: "Не Одобряю",
 };
 
 export default ru;

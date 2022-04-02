@@ -4,6 +4,7 @@ import { downloadMedia, downloadFile } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "services/authService.js";
+import ru from "translations/ru";
 
 import {
   getPublishedYears,
@@ -27,9 +28,13 @@ class ReviewerArchive extends Component {
     contentType: "",
 
     user: "",
+    lang: "",
   };
 
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     try {
       const user = getCurrentUser() && getCurrentUser().roles[0];
       this.setState({ user: user.id });
@@ -135,6 +140,7 @@ class ReviewerArchive extends Component {
       fileId,
       originalName,
       contentType,
+      lang,
     } = this.state;
 
     const { allReleaseNumber, releaseNumberOfThisYear } = magazineInfo;
@@ -145,9 +151,9 @@ class ReviewerArchive extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="card">
-                <div className="card-header">
+                {/* <div className="card-header">
                   <h3>Jurnallar</h3>
-                </div>
+                </div> */}
                 <div className="card-body">
                   <div className="container jurnalArxive">
                     <div>
@@ -157,7 +163,7 @@ class ReviewerArchive extends Component {
                           this.props.history.goBack();
                         }}
                       >
-                        <b> ⬅️</b> ORTGA
+                        <b> ⬅️</b> {lang === "ru" ? ru.back : "Ortga"}
                       </a>
                     </div>
                     <br />
@@ -181,7 +187,11 @@ class ReviewerArchive extends Component {
                             style={{ fontSize: "16px" }}
                             className="text-muted"
                           >
-                            <b className="text-dark">Nashr etilgan sana:</b>{" "}
+                            <b className="text-dark">
+                              {lang === "ru"
+                                ? ru.printDate
+                                : "Nashr etilgan sana:"}
+                            </b>{" "}
                             13.09.2020
                           </span>
                         </p>
@@ -197,13 +207,13 @@ class ReviewerArchive extends Component {
                             );
                           }}
                         >
-                          Yuklab olish
+                          {lang === "ru" ? ru.download : "Yuklab olish"}
                         </button>
                       </div>
                       <div className="col-lg-8 ui2">
                         <ul className="list-group list-group-flush">
                           <li style={{ listStyle: "none", fontSize: "16px" }}>
-                            JURNAL TARKIBI
+                            {lang === "ru" ? ru.main_allArticles : "Maqolalar"}
                           </li>
 
                           {articles &&
@@ -231,7 +241,9 @@ class ReviewerArchive extends Component {
 
                       <div className="col-lg-12 ui3 px-0">
                         <div className="arxive px-0">
-                          <h2>Jurnal arxivi</h2>
+                          <h2>
+                            {lang === "ru" ? ru.jurnal_arxiv : "Jurnal arxivi"}
+                          </h2>
 
                           <ul className="nav nav-pills">
                             {years &&

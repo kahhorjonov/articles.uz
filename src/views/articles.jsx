@@ -319,22 +319,22 @@ class Articles extends Component {
                                   1 {lang === "ru" ? ru.kun : "Kun"}
                                 </option>
                                 <option value="2">
-                                  2 {lang === "ru" ? ru.kun : "Kun"}
+                                  2 {lang === "ru" ? ru.dnya : "Kun"}
                                 </option>
                                 <option value="3">
-                                  3 {lang === "ru" ? ru.kun : "Kun"}
+                                  3 {lang === "ru" ? ru.dnya : "Kun"}
                                 </option>
                                 <option value="4">
-                                  4 {lang === "ru" ? ru.kun : "Kun"}
+                                  4 {lang === "ru" ? ru.dnya : "Kun"}
                                 </option>
                                 <option value="5">
-                                  5 {lang === "ru" ? ru.kun : "Kun"}
+                                  5 {lang === "ru" ? ru.dney : "Kun"}
                                 </option>
                                 <option value="6">
-                                  6 {lang === "ru" ? ru.kun : "Kun"}
+                                  6 {lang === "ru" ? ru.dney : "Kun"}
                                 </option>
                                 <option value="7">
-                                  7 {lang === "ru" ? ru.kun : "Kun"}
+                                  7 {lang === "ru" ? ru.dney : "Kun"}
                                 </option>
                               </Input>
 
@@ -358,8 +358,12 @@ class Articles extends Component {
                               </Input>
 
                               <div className="dropdown-menu">
-                                <a className="dropdown-item">Redactor</a>
-                                <a className="dropdown-item">Reviewer</a>
+                                <a className="dropdown-item">
+                                  {lang === "ru" ? ru.admin_red : "Tahrirchi"}
+                                </a>
+                                <a className="dropdown-item">
+                                  {lang === "ru" ? ru.admin_rev : "Taqrizchi"}
+                                </a>
                               </div>
                             </div>
                           </div>

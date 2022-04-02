@@ -4,11 +4,13 @@ import Logout from "components/logout";
 import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
 import UserMagazines from "components/UI/userMagazines";
+import ru from "translations/ru";
 
 var reviewerRoutes = [
   {
     path: "/reviewerMagazines",
-    name: "Jurnallar",
+    name:
+      localStorage.getItem("lang") === "ru" ? ru.nav_jurnallar : "Jurnallar",
     icon: "nc-icon nc-map-big",
     component: UserMagazines,
     layout: "/reviewer",
@@ -62,7 +64,8 @@ var reviewerRoutes = [
 
   {
     path: "/myTasks",
-    name: "Mening vazifalarim",
+    name:
+      localStorage.getItem("lang") === "ru" ? ru.sidebar_tasks : "Vazifalarim",
     icon: "nc-icon nc-briefcase-24",
     component: MyTasks,
     layout: "/reviewer",
@@ -71,7 +74,7 @@ var reviewerRoutes = [
 
   {
     path: "/user-page",
-    name: "User Profile",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_profile : "Profil",
     icon: "nc-icon nc-settings-gear-65",
     component: UserPage,
     layout: "/reviewer",
@@ -80,7 +83,7 @@ var reviewerRoutes = [
 
   {
     path: "/logout",
-    name: "Profildan chiqish",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_exit : "Chiqish",
     icon: "nc-icon nc-button-power",
     component: Logout,
     layout: "",

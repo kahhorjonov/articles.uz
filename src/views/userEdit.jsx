@@ -764,7 +764,7 @@ class UserEdit extends Component {
                 </CardBody>
               </Card>
 
-              <Card>
+              {/* <Card>
                 <CardBody>
                   <div className="row">
                     <b className="pl-4 py-3">
@@ -800,7 +800,7 @@ class UserEdit extends Component {
                     </div>
                   </div>
                 </CardBody>
-              </Card>
+              </Card> */}
             </Col>
           </Row>
 
@@ -810,11 +810,13 @@ class UserEdit extends Component {
                 <Table>
                   <thead>
                     <tr>
-                      <th>Sarlavha</th>
-                      <th>Tekshirilgan Vaqti</th>
-                      <th>Status</th>
-                      <th>Xulosa</th>
-                      <th>Fayl</th>
+                      <th>{lang === "ru" ? ru.jurnal_title : "Sarlavha"}</th>
+                      <th>
+                        {lang === "ru" ? ru.checkedDate : "Tekshirilgan Vaqti"}
+                      </th>
+                      <th>{lang === "ru" ? ru.jurnal_status : "Status"}</th>
+                      <th>{lang === "ru" ? ru.xulosa : "Xulosa"}</th>
+                      <th>{lang === "ru" ? ru.file : "Fayl"}</th>
                     </tr>
                   </thead>
                   <tbody>

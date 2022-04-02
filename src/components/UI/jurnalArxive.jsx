@@ -170,8 +170,7 @@ class JurnalArxive extends Component {
                 this.props.history.goBack();
               }}
             >
-              <b> ⬅️</b>
-              {lang === "ru" ? ru.back : "Ortga"}
+              <b> ⬅️</b> {lang === "ru" ? ru.back : "Ortga"}
             </a>
           </div>
           <br />

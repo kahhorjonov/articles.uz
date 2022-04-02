@@ -6,6 +6,7 @@ import { profilePhoto, downloadMedia } from "services/mediaService";
 import { toast } from "react-toastify";
 import { Multiselect } from "multiselect-react-dropdown";
 import noUser from "assets/img/no-user-image.gif";
+import ru from "translations/ru";
 
 import {
   Button,
@@ -44,9 +45,14 @@ class User extends Component {
     selectedValues2: [],
     // options2: [],
     // codes2: [],
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     await this.getUserByMe();
     await this.handleGetLanguages();
 
@@ -163,7 +169,6 @@ class User extends Component {
         )
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
@@ -171,10 +176,8 @@ class User extends Component {
 
             document.body.appendChild(link);
 
-            // Start download
             link.click();
 
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -198,6 +201,8 @@ class User extends Component {
   };
 
   render() {
+    const { lang } = this.state;
+
     const {
       firstName,
       lastName,
@@ -212,8 +217,6 @@ class User extends Component {
       createdAt,
       fatherName,
     } = this.state.currentUser;
-
-    console.log(this.state.currentUser);
 
     return (
       <>
@@ -239,12 +242,14 @@ class User extends Component {
                     </a>
                   </div>
                   <p className="description text-center">
-                    {`Ilmiy Daraja: ${academicDegree}`}
+                    {`${
+                      lang === "ru" ? ru.reviewerRegister_6 : "Ilmiy Daraja"
+                    }: ${academicDegree}`}
                   </p>
 
                   <h6 className="p-0 m-0">ID:{code}</h6>
 
-                  <label>Profil Rasmi</label>
+                  <label>{lang === "ru" ? ru.foto : "Profil Rasmi"}</label>
                   <Input
                     className="p-0 col-md-8"
                     type="file"
@@ -284,7 +289,9 @@ class User extends Component {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Autentifikatsiya</CardTitle>
+                  <CardTitle tag="h4">
+                    {lang === "ru" ? ru.admin_edit : "Autentifikatsiya"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ul className="list-unstyled team-members">
@@ -292,10 +299,11 @@ class User extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Telefon raqami</label>
+                            <label>
+                              {lang === "ru" ? ru.admin_edit : "Telefon raqami"}
+                            </label>
                             <Input
                               defaultValue={phoneNumber}
-                              placeholder="telefon nomer"
                               type="text"
                               onChange={(e) =>
                                 this.setState({
@@ -311,10 +319,14 @@ class User extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Parol</label>
+                            <label>
+                              {lang === "ru" ? ru.login_password : "Parol"}
+                            </label>
                             <Input
-                              placeholder="parol"
                               type="text"
+                              placeholder={
+                                lang === "ru" ? ru.login_password : "Parol"
+                              }
                               onChange={(e) =>
                                 this.setState({
                                   password: e.target.value,
@@ -352,14 +364,18 @@ class User extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Profilni tahrirlash</CardTitle>
+                  <CardTitle tag="h5">
+                    {lang === "ru" ? ru.edit : "Tahrirlash"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
                       <Col sm="4" md="4" lg="4">
                         <FormGroup>
-                          <label>Ism</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_1 : "Ism"}
+                          </label>
                           <Input
                             defaultValue={firstName}
                             type="text"
@@ -371,7 +387,9 @@ class User extends Component {
                       </Col>
                       <Col sm="4" md="4" lg="4">
                         <FormGroup>
-                          <label>Familiya</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_2 : "Familiya"}
+                          </label>
                           <Input
                             defaultValue={lastName}
                             type="text"
@@ -384,7 +402,11 @@ class User extends Component {
 
                       <Col sm="4" md="4" lg="4">
                         <FormGroup>
-                          <label>Otasining Ismi</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.reviewerRegister_3
+                              : "Otasining Ismi"}
+                          </label>
                           <Input
                             defaultValue={fatherName}
                             type="text"
@@ -398,7 +420,9 @@ class User extends Component {
                     <Row>
                       <Col md="5">
                         <FormGroup>
-                          <label>Ish joyi </label>
+                          <label>
+                            {lang === "ru" ? ru.workplace : "Ish joyi"}
+                          </label>
                           <Input
                             defaultValue={workPlace && workPlace}
                             type="text"
@@ -410,7 +434,11 @@ class User extends Component {
                       </Col>
                       <Col md="3">
                         <FormGroup>
-                          <label>Ro'yxatdan o'tgan sana</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.register_date
+                              : "Ro'yxatdan o'tgan sana"}
+                          </label>
                           <Input
                             disabled
                             placeholder={
@@ -453,7 +481,9 @@ class User extends Component {
                     <Row>
                       <Col md="4">
                         <FormGroup>
-                          <label>Ilmiy Ishlarni yuklash</label>
+                          <label>
+                            {lang === "ru" ? ru.download : "Yuklab olish"}
+                          </label>
                           <Button
                             disabled={
                               this.state.currentUser.scientificWork !== 0
@@ -470,7 +500,9 @@ class User extends Component {
                       </Col>
                       <Col md="4">
                         <FormGroup>
-                          <label>Daraja</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_6 : "Daraja"}
+                          </label>
                           <Input
                             defaultValue={academicDegree}
                             placeholder="Daraja"
@@ -485,7 +517,11 @@ class User extends Component {
                       </Col>
                       <Col md="4">
                         <FormGroup>
-                          <label>Tajriba (yil)</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.reviewerRegister_5
+                              : "Tajriba (yil)"}
+                          </label>
                           <Input
                             defaultValue={workExperience}
                             placeholder="Ish tajribangiz"
@@ -504,7 +540,7 @@ class User extends Component {
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <label>Languages</label>
+                          <label>{lang === "ru" ? ru.tillar : "Tillar"}</label>
                           <Multiselect
                             options={this.state.options}
                             selectedValues={this.state.selectedValues}
@@ -518,7 +554,9 @@ class User extends Component {
 
                     <Row>
                       <Col md="12">
-                        <label>Kategoriya</label>
+                        <label>
+                          {lang === "ru" ? ru.kategoriya : "Kategoriya"}
+                        </label>
                         <Multiselect
                           disable
                           // options={this.state.options2} // Options to display in the dropdown
@@ -538,7 +576,7 @@ class User extends Component {
                           // type="button"
                           onClick={(e) => this.handleSubmit(e)}
                         >
-                          Update Profile
+                          {lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
                         </Button>
                       </div>
                     </Row>

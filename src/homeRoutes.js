@@ -7,7 +7,7 @@ import ru from "translations/ru";
 var HomeRoutes = [
   {
     path: "/main",
-    name: "Asosiy",
+    name: localStorage.getItem("lang") === "ru" ? ru.nav_asosiy : "Asosiy",
     icon: "nc-icon nc-bank",
     component: Asosiy,
     layout: "/",
@@ -16,7 +16,10 @@ var HomeRoutes = [
 
   {
     path: "/listOfMagazines",
-    name: "Jurnallar Ro'yhati",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.nav_jurnallar
+        : "Jurnallar Ro'yhati",
     icon: "nc-icon nc-bank",
     component: JurnallarRoyxati,
     layout: "/",
@@ -25,7 +28,10 @@ var HomeRoutes = [
 
   {
     path: "/login",
-    name: "Maqola yuborish",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.nav_yuklash
+        : "Maqola yuborish",
     icon: "nc-icon nc-bank",
     component: JurnallarRoyxati,
     layout: "/",
@@ -34,7 +40,10 @@ var HomeRoutes = [
 
   {
     path: "/termsOfPublication",
-    name: "Nashr Shartlari",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.nav_shartlar
+        : "Nashr Shartlari",
     icon: "nc-icon nc-bank",
     component: NashrShartlari,
     layout: "/",
@@ -43,7 +52,7 @@ var HomeRoutes = [
 
   {
     path: "/contact",
-    name: "Aloqa",
+    name: localStorage.getItem("lang") === "ru" ? ru.nav_aloqa : "Aloqa",
     icon: "nc-icon nc-bank",
     component: Aloqa,
     layout: "/",
