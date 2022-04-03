@@ -494,7 +494,9 @@ class User extends Component {
                             style={{ width: "100%", padding: "0.75rem" }}
                             onClick={() => this.handleDownload()}
                           >
-                            Ilmiy Ishlarni yuklash
+                            {lang === "ru"
+                              ? ru.reviewerRegister_9
+                              : "Ilmiy ishlardan namuna"}
                           </Button>
                         </FormGroup>
                       </Col>

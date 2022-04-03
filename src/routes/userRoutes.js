@@ -5,11 +5,13 @@ import MagazineInfo from "components/UI/magazineInfo";
 import ReviewerArchive from "components/UI/reviewerArchive";
 import ArticleEdit from "views/articleEdit";
 import UserMagazines from "components/UI/userMagazines";
+import ru from "translations/ru";
 
 var UserRoutes = [
   {
     path: "/userMagazines",
-    name: "Jurnallar",
+    name:
+      localStorage.getItem("lang") === "ru" ? ru.nav_jurnallar : "Jurnallar",
     icon: "nc-icon nc-paper",
     component: UserMagazines,
     layout: "/user",
@@ -63,7 +65,7 @@ var UserRoutes = [
 
   {
     path: "/uploadArticle",
-    name: "Maqola Yuklash",
+    name: localStorage.getItem("lang") ? ru.nav_yuklash : "Maqola Yuklash",
     icon: "nc-icon nc-cloud-upload-94",
     component: ArticleForm,
     layout: "/user",
@@ -72,7 +74,9 @@ var UserRoutes = [
 
   {
     path: "/allArticles",
-    name: "Barcha maqolalarim",
+    name: localStorage.getItem("lang")
+      ? ru.allMyArticles
+      : "Barcha maqolalarim",
     icon: "nc-icon nc-briefcase-24",
     component: BarchaMaqolalarim,
     layout: "/user",
@@ -81,7 +85,7 @@ var UserRoutes = [
 
   {
     path: "/user-page",
-    name: "Mening Profilim",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_profile : "Profil",
     icon: "nc-icon nc-settings-gear-65",
     component: UserPage,
     layout: "/user",
@@ -90,7 +94,7 @@ var UserRoutes = [
 
   {
     path: "/logout",
-    name: "Profildan chiqish",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_exit : "Chiqish",
     icon: "nc-icon nc-button-power",
     component: "",
     layout: "",

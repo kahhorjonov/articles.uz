@@ -132,7 +132,7 @@ var adminRoutes = [
 
   {
     path: "/user-page",
-    name: "Mening Profilim",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_profile : "Profil",
     icon: "nc-icon nc-settings-gear-65",
     component: UserPage,
     layout: "/admin",
@@ -150,7 +150,7 @@ var adminRoutes = [
 
   {
     path: "/changePrices",
-    name: "Sozlamalar",
+    name: localStorage.getItem("lang") === "ru" ? ru.settings : "Sozlamalar",
     icon: "nc-icon nc-settings",
     component: ChangePrices,
     layout: "/admin",
@@ -159,7 +159,7 @@ var adminRoutes = [
 
   {
     path: "/logout",
-    name: "Profildan chiqish",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_exit : "Chiqish",
     icon: "nc-icon nc-button-power",
     component: Logout,
     layout: "",

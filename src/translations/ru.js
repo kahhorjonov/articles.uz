@@ -403,6 +403,7 @@ const ru = {
   accept: "Принимаю",
   accepted: "Одобряю",
   not_accepted: "Не Одобряю",
+  settings: "Настройки",
 };
 
 export default ru;
