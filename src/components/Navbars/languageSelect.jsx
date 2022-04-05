@@ -13,6 +13,7 @@ class LanguageSelect extends Component {
       <select
         style={{
           fontSize: "1.4rem",
+          width: "12%",
         }}
         className="custom-select"
         onChange={this.handleChange}
