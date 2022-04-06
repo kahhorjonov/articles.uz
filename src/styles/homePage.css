@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  /* user-select: none; */
+  user-select: none;
   scroll-behavior: smooth;
 }
 
@@ -28,10 +28,8 @@ body {
 }
 
 .buttons {
-  /* height: 40px; */
   border: 1px solid #282828;
   box-sizing: border-box;
-  /* font-size: 15px; */
 }
 
 .royxat {
@@ -52,6 +50,7 @@ body {
 
 .boxShadow {
   border-radius: 3px;
+
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
@@ -84,7 +83,6 @@ body {
   font-style: normal;
   font-weight: normal;
   line-height: 170%;
-  /* color: #4f4f4f; */
   flex: none;
   order: 2;
   flex-grow: 0;
@@ -896,6 +894,7 @@ body {
 .foo_nex .OST {
   text-align: end;
 }
+
 .foo_nex p {
   font-style: normal;
   font-weight: normal;
@@ -906,18 +905,22 @@ body {
 .foo_nex {
   width: 100%;
 }
+
 .foo_nex .endd {
   text-align: end;
 }
+
 /* Media */
 
 @media (max-width: 776px) {
   .navbar .navbar-nav {
     margin: 0 auto;
   }
+
   .hrr {
     display: block;
   }
+
   .maqola_nashir h1 {
     text-align: center;
 
@@ -928,6 +931,7 @@ body {
     text-align: center;
     color: #000000;
   }
+
   .maqola_nashir p {
     font-style: normal;
     font-weight: normal;
@@ -942,20 +946,24 @@ body {
     align-content: center;
     align-items: center;
   }
+
   .article-chap {
-    /* text-align: center; */
     padding: 0 19px;
   }
+
   .art-tex {
     padding: 0 19px;
     width: 100%;
   }
+
   .num {
     text-align: center;
   }
+
   .footer .hr1 {
     display: block;
   }
+
   .home_pages {
     width: 100%;
   }

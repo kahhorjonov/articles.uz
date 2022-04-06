@@ -5,13 +5,12 @@
   box-shadow: none;
 }
 
-
-.jurnallar .nav-item .active{
+.jurnallar .nav-item .active {
   color: black !important;
   text-shadow: 0 0 black;
 }
 
-.jurnallar .nav-link{
+.jurnallar .nav-link {
   color: rgb(105, 101, 101) !important;
 }
 .jurnallar h1 {
@@ -38,7 +37,6 @@
 }
 
 .jurnallar .nav-link:hover {
-
   color: #000000;
 }
 
@@ -164,14 +162,12 @@
   }
 }
 
-/* footer  */
-
-
 .footer {
   background-color: #f7f7f7;
   width: 100%;
   height: auto;
 }
+
 .footer h1 {
   font-style: normal;
   font-weight: bold;
@@ -181,9 +177,11 @@
   text-align: left;
   padding-top: 100px;
 }
+
 .footer .row {
   padding-top: 60px;
 }
+
 .footer h5 {
   font-style: normal;
   font-weight: normal;
@@ -192,6 +190,7 @@
   color: #282828;
   padding-top: 25px;
 }
+
 .footer p {
   font-style: normal;
   font-weight: normal;
@@ -200,6 +199,7 @@
   color: #777777;
   padding-top: 15px;
 }
+
 .footer a {
   font-style: normal;
   font-weight: normal;
@@ -208,6 +208,7 @@
   color: #777777;
   text-decoration: none;
 }
+
 .footer a:hover {
   color: #777777;
 }
@@ -219,6 +220,7 @@
 .footer .queres {
   padding-top: 80px;
 }
+
 .queres {
   width: 100%;
 }
@@ -243,9 +245,11 @@
 
   color: #ffffff;
 }
+
 .queres .nav {
   padding-top: 108px;
 }
+
 .queres .nav-link {
   font-style: normal;
   font-weight: normal;
@@ -253,7 +257,6 @@
   line-height: 170%;
   color: #777777;
 }
-
 
 .hr2 {
   width: 100%;
@@ -263,6 +266,7 @@
 .foo_nex .OST {
   text-align: end;
 }
+
 .foo_nex p {
   font-style: normal;
   font-weight: normal;
@@ -273,9 +277,7 @@
 .foo_nex {
   width: 100%;
 }
+
 .foo_nex .endd {
   text-align: end;
 }
-
-/* @media (max-width: 350px) {
-} */

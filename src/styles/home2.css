@@ -19,6 +19,7 @@ body {
   color: #5a5a5a;
   padding-top: 15px;
 }
+
 .jurnalRoyxat .col-lg-8 p {
   font-style: normal;
   font-weight: normal;
@@ -26,6 +27,7 @@ body {
   line-height: 140%;
   margin-bottom: 0;
 }
+
 .jurnalRoyxat .col-lg-4 h3 {
   margin-top: 40px;
 
@@ -38,6 +40,7 @@ body {
 .jurnalRoyxat .row {
   margin-top: 80px;
 }
+
 .jurnalRoyxat .col-lg-4 img {
   width: auto;
   height: 460px;
@@ -58,6 +61,7 @@ body {
   margin-top: 100px;
   margin-bottom: 100px;
 }
+
 .gernMaqola .container p {
   padding-top: 100px;
 
@@ -67,6 +71,7 @@ body {
   line-height: 100%;
   color: #777777;
 }
+
 .gernMaqola .container h3 {
   font-style: normal;
   font-weight: bold;
@@ -74,6 +79,7 @@ body {
   line-height: 120%;
   padding-top: 15px;
 }
+
 .gernMaqola .container button {
   flex-direction: row;
   align-items: center;
@@ -89,9 +95,11 @@ body {
 .jurnalArxiv {
   margin-bottom: 100px;
 }
+
 .jurnalArxiv .nav-item {
   padding-bottom: 60px !important;
 }
+
 .jurnalArxiv .nav-link {
   width: 215px;
   height: 59px;
@@ -102,6 +110,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .nav-pills .navLincks.active {
   background-color: black !important;
 
@@ -118,12 +127,14 @@ body {
   padding-left: 0;
   padding-right: 50px !important;
 }
+
 .numberss .nav-link {
   width: 44px;
   border: none;
   padding: 0;
   text-align: left;
 }
+
 .numberss .nav-pills .nav-link {
   color: #777777;
 }
@@ -215,7 +226,3 @@ body {
 
   color: #282828;
 }
-
-
-
-
