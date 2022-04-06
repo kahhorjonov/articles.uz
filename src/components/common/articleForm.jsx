@@ -14,7 +14,7 @@ import { Card, CardBody, Input, Label, Row, Col, FormGroup } from "reactstrap";
 import { toast } from "react-toastify";
 
 import "styles/articleForm.css";
-import "styles/multipleTags.scss";
+import "styles/multipleTags.css";
 
 class ArticleForm extends Form {
   state = {
