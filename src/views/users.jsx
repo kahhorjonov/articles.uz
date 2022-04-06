@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { Multiselect } from "multiselect-react-dropdown";
-import firebase from "../firebase";
 import ru from "translations/ru";
 
 import {

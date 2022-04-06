@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import authService from "services/authService";
 import jwtDecode from "jwt-decode";
 import Multiselect from "multiselect-react-dropdown";
-// import firebase from "../firebase";
 import { getAllActiveLanguages } from "services/languageService";
 import { Card, CardBody, Row, Col } from "reactstrap";
 import ru from "translations/ru";
