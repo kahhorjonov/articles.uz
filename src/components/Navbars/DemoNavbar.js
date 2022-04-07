@@ -229,8 +229,12 @@ function Header(props) {
     return (
       <>
         <div
-          className="container home_pages p-0"
-          style={{ display: "flex", justifyContent: "end", padding: "1rem" }}
+          className="home_pages"
+          style={{
+            display: "flex",
+            justifyContent: "end",
+            padding: "2rem 2rem 0 0",
+          }}
         >
           <LanguageSelect />
         </div>
