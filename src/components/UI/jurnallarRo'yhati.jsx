@@ -5,6 +5,7 @@ import AOS from "aos";
 import ru from "translations/ru";
 import Section from "./section";
 import Foooter from "./foooter";
+import { getActiveMagazines } from "services/magazineService";
 
 import {
   getPublishedParentMagazines,
@@ -13,7 +14,7 @@ import {
 
 import { getPublishedParentCategories } from "services/getCategories";
 
-import { Col } from "reactstrap";
+import { Col, Button } from "reactstrap";
 
 import GetImages from "utils/getImages";
 import Listhome from "./listhome";
@@ -31,6 +32,8 @@ class JurnallarRoyxati extends Component {
   state = {
     magazineCategories: [],
     magazines: [],
+    carouselMagazines: [],
+    loading: true,
 
     lang: "",
   };
@@ -42,6 +45,15 @@ class JurnallarRoyxati extends Component {
     await this.getCategory();
     AOS.init();
     this.state.magazineCategories && (await this.handleGetMagazinesById(0));
+
+    try {
+      await getActiveMagazines().then((res) => {
+        this.setState({ carouselMagazines: res.data });
+        this.setState({ loading: false });
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
   };
 
   getCategory = async () => {
@@ -65,7 +77,7 @@ class JurnallarRoyxati extends Component {
   };
 
   render() {
-    const { magazines, magazineCategories } = this.state;
+    const { magazines, magazineCategories, carouselMagazines } = this.state;
 
     const responsive = {
       desktop: {
@@ -85,13 +97,22 @@ class JurnallarRoyxati extends Component {
       },
     };
 
-    const CustomRightArrow = ({ onClick, ...rest }) => {
+    const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
       const {
-        onMove,
-        carouselState: { currentSlide, deviceType },
+        carouselState: { currentSlide },
       } = rest;
-
-      return <button onClick={() => onClick()} />;
+      return (
+        <div className="carousel-button-group">
+          <Button
+            className={currentSlide === 0 ? "disable" : ""}
+            onClick={() => previous()}
+          />
+          <Button onClick={() => next()} />
+          <Button onClick={() => goToSlide(currentSlide + 1)}>
+            Go to any slide
+          </Button>
+        </div>
+      );
     };
 
     return (
@@ -238,9 +259,10 @@ class JurnallarRoyxati extends Component {
 
               <div className="col-lg-8 colap">
                 <Carousel
-                  swipeable={false}
-                  draggable={false}
-                  // customRightArrow={<CustomRightArrow />}
+                  swipeable={true}
+                  draggable={true}
+                  customButtonGroup={<ButtonGroup />}
+                  // customRightArrow={<ButtonGroup />}
                   showDots={false}
                   responsive={responsive}
                   ssr={true} // means to render carousel on server-side.
@@ -256,52 +278,35 @@ class JurnallarRoyxati extends Component {
                   dotListClass="custom-dot-list-style"
                   itemClass="carousel-item-padding-10-px"
                 >
-                  <Col lg="10" className="px-0 mx-0">
-                    <div className="border-0">
-                      <img src={img11} className="card-img-top" alt="123" />
-                      <div className="card-body p-0">
-                        <h4 className="card_title">
-                          <Link to="#">Tibbiyot va farmakologiya</Link>
-                        </h4>
-                        <p className="card_text">
-                          Maqolalar qabul qilish muddati <br />
-                          01.09.2020
-                        </p>
-                      </div>
-                    </div>
-                  </Col>
+                  {carouselMagazines &&
+                    carouselMagazines.map((magazine) => (
+                      <Col lg="10" className="px-0 mx-0">
+                        <div className="border-0">
+                          <Link to={`/main/magazineInfo/:${magazine.id}`}>
+                            <div className="boxShadow">
+                              <GetImages url={magazine.cover.id} />
+                            </div>
+                          </Link>
 
-                  <Col lg="10" className="px-0 mx-0">
-                    <div className="border-0">
-                      <img src={img21} className="card-img-top" alt="123" />
-
-                      <h4 className="card_title">
-                        <Link to="#">Sport</Link>
-                      </h4>
-                      <p className="card_text">
-                        Maqolalar qabul qilish muddati <br />
-                        01.09.2020
-                      </p>
-                    </div>
-                  </Col>
-
-                  <Col lg="10" className="px-0 mx-0">
-                    <div className="border-0">
-                      <img
-                        src={img21}
-                        className="card-img-top h-100"
-                        alt="123"
-                      />
-
-                      <h4 className="card_title">
-                        <Link to="#">Fizika</Link>
-                      </h4>
-                      <p className="card_text">
-                        Maqolalar qabul qilish muddati <br />
-                        01.09.2020
-                      </p>
-                    </div>
-                  </Col>
+                          <div className="card-body p-0">
+                            <h4 className="card_title">
+                              <Link to={`/main/magazineInfo/:${magazine.id}`}>
+                                {magazine.title}
+                              </Link>
+                            </h4>
+                            <p className="card_text">
+                              {this.state.lang === "ru"
+                                ? ru.main_deadline
+                                : "Maqolalar qabul qilish muddati"}
+                              <br />
+                              {new Date(magazine.deadline)
+                                .toISOString()
+                                .slice(0, 10)}
+                            </p>
+                          </div>
+                        </div>
+                      </Col>
+                    ))}
                 </Carousel>
               </div>
             </div>
