@@ -233,7 +233,7 @@ function Header(props) {
           style={{
             display: "flex",
             justifyContent: "end",
-            padding: "2rem 2rem 0 0",
+            padding: "1rem 1rem 0 0",
           }}
         >
           <LanguageSelect />
