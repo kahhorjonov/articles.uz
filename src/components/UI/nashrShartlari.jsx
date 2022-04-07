@@ -425,7 +425,11 @@ class NashrShartlari extends Component {
                     id="menu4"
                   >
                     <div className="colapss" id="accordion">
-                      <h4 className="mt-0">Ilmiy yo’nalishlar</h4>
+                      <h4 className="mt-0">
+                        {this.state.lang === "ru"
+                          ? ru.shartlar_yonalishlar
+                          : "Ilmiy yo'nalishlar"}
+                      </h4>
 
                       <ul className="list-group list-group-flush">
                         <hr />
