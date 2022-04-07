@@ -165,11 +165,11 @@ class MagazineInfo extends Component {
                       </span>
                     </h3>
 
-                    <p style={{ fontSize: "16px" }}>
+                    {/* <p style={{ fontSize: "16px" }}>
                       {lang === "ru"
                         ? ru.jurnal9
                         : "Jurnal aloqa, axborot texnologiyalari va ommaviy kommunikatsiyalar sohasida nazorat bo'yicha Federal xizmati (Roskomnadzor), ro'yxatga olish raqami el №FS77-64808 02.02.2016 Bu haqda `RIA Novosti` axborot agentligi xabar berdi.» Bosh muharrir-Konorev Marat Ruslanovich."}
-                    </p>
+                    </p> */}
                   </div>
                   <div className="col-lg-8">
                     <p style={{ fontSize: "16px" }}>

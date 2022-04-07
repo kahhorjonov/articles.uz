@@ -138,11 +138,11 @@ class Aloqa extends Component {
                       width={"100%"}
                       height={"65vh"}
                       defaultState={{
-                        center: [41.327845, 69.285692],
+                        center: [41.319014, 69.351063],
                         zoom: 15,
                       }}
                     >
-                      <Placemark geometry={[41.327845, 69.285692]} />
+                      <Placemark geometry={[41.319014, 69.351063]} />
                       <TypeSelector options={{ float: "right" }} />
                       <FullscreenControl />
                       <ZoomControl options={{ float: "left" }} />
