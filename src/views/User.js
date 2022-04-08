@@ -144,6 +144,7 @@ class User extends Component {
 
     await profileEdit(this.state)
       .then((res) => {
+        console.log(res);
         toast.success(res.data.message);
         this.getUserByMe();
       })

@@ -34,7 +34,7 @@ export async function login(phoneNumber, password) {
   }
 }
 
-export async function getCheckedToken() {
+export function getCheckedToken() {
   const jwt = localStorage.getItem("token");
   const parsedJwt = parseJwt(jwt);
 
