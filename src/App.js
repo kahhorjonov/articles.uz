@@ -123,11 +123,7 @@ class App extends Component {
 
               <Redirect from="/admin" exact to="/admin/dashboard" />
 
-              <ProtectedRoute
-                path="/admin"
-                component={AdminLayout}
-                // render={(props) => <AdminLayout {...props} />}
-              />
+              <ProtectedRoute path="/admin" component={AdminLayout} />
 
               <Redirect to="/not-found" />
             </Switch>
@@ -420,11 +416,7 @@ class App extends Component {
 
               <Redirect from="/user" exact to="/user/user-page" />
 
-              <ProtectedRoute
-                path="/user"
-                component={UserLayout}
-                // render={(props) => <UserLayout {...props} />}
-              />
+              <ProtectedRoute path="/user" component={UserLayout} />
               <Redirect to="/not-found" />
             </Switch>
           </>
@@ -517,11 +509,13 @@ class App extends Component {
             <ProtectedPage path="/changePassword" component={RestorePassword} />
 
             <Route path="/not-found" component={NotFound} />
+
             {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
             {/* <ProtectedRoute path="/admin" component={AdminPage} /> */}
             {/* <ProtectedRoute path="/reductor" component={ReductorPage} /> */}
             {/* <ProtectedRoute path="/reviewer" component={ReviewerPage} /> */}
             {/* <ProtectedRoute path="/user" component={UserPage} /> */}
+
             <Redirect to="/not-found" />
             <Redirect from="/" to="/main" />
           </Switch>

@@ -113,8 +113,6 @@ class EditMagazine extends Component {
     } catch (error) {
       toast.error(error);
     }
-
-    // console.log(this.state);
   };
 
   handleDownload = async () => {
@@ -135,7 +133,6 @@ class EditMagazine extends Component {
         )
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
@@ -143,10 +140,8 @@ class EditMagazine extends Component {
 
             document.body.appendChild(link);
 
-            // Start download
             link.click();
 
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -171,7 +166,6 @@ class EditMagazine extends Component {
     let {
       title,
       certificateNumber,
-      cover,
       description,
       isbn,
       issn,
@@ -181,8 +175,6 @@ class EditMagazine extends Component {
     } = this.state.magazineInfo;
 
     const { articles, lang } = this.state;
-
-    // console.log(articles);
 
     return (
       <>
