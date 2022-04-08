@@ -28,7 +28,7 @@ class Listhome extends React.Component {
               <li className="list-group-item">
                 {this.state.lang === "ru"
                   ? ru.main_tekshirish
-                  : "main_tekshirish"}
+                  : "Ko‘rib chiqish 10 kun ichida"}
               </li>
               <li className="list-group-item">
                 {this.state.lang === "ru"

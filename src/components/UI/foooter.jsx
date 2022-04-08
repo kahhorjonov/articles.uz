@@ -23,7 +23,7 @@ class Foooter extends React.Component {
             <h1>
               {this.state.lang === "ru"
                 ? ru.main_boglanish
-                : "Biz bilan bog’lanish"}
+                : "Biz bilan bog‘lanish"}
             </h1>
             <div className="row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
               <div className="col-md-4 col-sm-4 col-lg-4">
@@ -32,7 +32,7 @@ class Foooter extends React.Component {
                 <p>
                   {this.state.lang === "ru"
                     ? ru.main_adres
-                    : "Toshkent shahri, Mirzo Ulug'bek tumani, QORASUV 6-MAVZE, 1-UY, 55-XONA"}
+                    : "Toshkent shahri, Mirzo Ulug‘bek tumani, QORASUV 6-MAVZE, 1-UY, 55-XONA"}
                 </p>
               </div>
 
@@ -123,7 +123,7 @@ class Foooter extends React.Component {
                         <a className="nav-link" href="/contact">
                           {this.state.lang === "ru"
                             ? ru.main_boglanish
-                            : "Biz bilan bog’lanish"}
+                            : "Biz bilan bog‘lanish"}
                         </a>
                       </li>
 
