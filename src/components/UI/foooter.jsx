@@ -109,7 +109,7 @@ class Foooter extends React.Component {
                         <a className="nav-link" href="/listOfMagazines">
                           {this.state.lang === "ru"
                             ? ru.nav_jurnallar
-                            : "Jurnallar ro’yxati"}
+                            : "Jurnallar ro‘yxati"}
                         </a>
                       </li>
                       <li className="nav-item">

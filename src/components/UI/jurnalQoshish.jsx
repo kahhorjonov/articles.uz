@@ -101,10 +101,10 @@ class JurnalQoshish extends Component {
       isValid = false;
     }
 
-    if (file.length < 1) {
-      errors.file = "File is not allowed to be empty";
-      isValid = false;
-    }
+    // if (file.length < 1) {
+    //   errors.file = "File is not allowed to be empty";
+    //   isValid = false;
+    // }
 
     if (deadline.trim().length < 1) {
       errors.deadline = "Deadline is not allowed to be empty";
@@ -143,7 +143,7 @@ class JurnalQoshish extends Component {
           .createMagazine(this.state)
           .then((res) => toast.success(res.data.message));
       } catch (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
       }
     }
     return Object.keys(errors).map((key) => toast.error(errors[key]));

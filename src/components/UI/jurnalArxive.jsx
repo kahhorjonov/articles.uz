@@ -3,7 +3,7 @@ import GetImages from "utils/getImages";
 import { downloadMedia, downloadFile, counter } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BsEyeFill } from "react-icons/bs";
+import { BsEyeFill, BsDownload } from "react-icons/bs";
 import ru from "translations/ru";
 
 import {
@@ -217,27 +217,42 @@ class JurnalArxive extends Component {
 
                 {articles &&
                   articles.map((article, idx) => (
-                    <Link
-                      key={article.articleId}
-                      to=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        this.handleDownload(
-                          article.fileId,
-                          article.originalName,
-                          article.contentType,
-                          article.articleId
-                        );
-                      }}
-                    >
-                      <li className="list-group-item">
-                        <span>{idx + 1}. </span> {article.titleArticle}
-                        <p style={{ margin: "0" }}>
+                    <div key={article.articleId}>
+                      <li
+                        style={{ padding: "10px 0" }}
+                        className="list-group-item"
+                      >
+                        <span
+                          style={{ display: "block", paddingBottom: "10px" }}
+                        >
+                          <Link
+                            style={{ color: "black" }}
+                            to={`/article/${article.articleId}`}
+                          >
+                            {idx + 1}. {article.titleArticle}
+                          </Link>
+                        </span>
+
+                        <span style={{ margin: "0", paddingRight: "1rem" }}>
                           <BsEyeFill style={{ fontSize: "2rem" }} />{" "}
                           {article.articleViews}
-                        </p>
+                        </span>
+                        <span>
+                          <BsDownload
+                            style={{ cursor: "pointer" }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              this.handleDownload(
+                                article.fileId,
+                                article.originalName,
+                                article.contentType,
+                                article.articleId
+                              );
+                            }}
+                          />
+                        </span>
                       </li>
-                    </Link>
+                    </div>
                   ))}
               </ul>
             </div>
