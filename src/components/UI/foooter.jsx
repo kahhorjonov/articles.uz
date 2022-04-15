@@ -102,26 +102,42 @@ class Foooter extends React.Component {
                   <div className="col-md-8 pr-0">
                     <ul className="nav">
                       <li className="nav-item">
-                        <Link className="nav-link" to="/main">
+                        <Link
+                          className="nav-link"
+                          to="/main"
+                          onClick={() => window.scroll(0, 0)}
+                        >
                           {this.state.lang === "ru" ? ru.nav_asosiy : "Asosiy"}
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/listOfMagazines">
+                        <Link
+                          className="nav-link"
+                          to="/listOfMagazines"
+                          onClick={() => window.scroll(0, 0)}
+                        >
                           {this.state.lang === "ru"
                             ? ru.nav_jurnallar
                             : "Jurnallar ro‘yxati"}
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/termsOfPublication">
+                        <Link
+                          className="nav-link"
+                          to="/termsOfPublication"
+                          onClick={() => window.scroll(0, 0)}
+                        >
                           {this.state.lang === "ru"
                             ? ru.nav_shartlar
                             : "Nashr shartlari"}
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/contact">
+                        <Link
+                          className="nav-link"
+                          to="/contact"
+                          onClick={() => window.scroll(0, 0)}
+                        >
                           {this.state.lang === "ru"
                             ? ru.main_boglanish
                             : "Biz bilan bog‘lanish"}
@@ -129,7 +145,11 @@ class Foooter extends React.Component {
                       </li>
 
                       <li className="nav-item">
-                        <Link className="nav-link" to="/login">
+                        <Link
+                          className="nav-link"
+                          to="/login"
+                          onClick={() => window.scroll(0, 0)}
+                        >
                           {this.state.lang === "ru"
                             ? ru.nav_kirish
                             : "Tizimga kirish"}
