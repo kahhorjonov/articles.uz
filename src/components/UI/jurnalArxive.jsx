@@ -227,7 +227,14 @@ class JurnalArxive extends Component {
                         >
                           <Link
                             style={{ color: "black" }}
-                            to={`/article/${article.articleId}`}
+                            onClick={() => {
+                              window.open(
+                                `http://192.168.100.27:8080/api/article/readArticle/${article.articleId}`
+                              );
+                            }}
+
+                            // `http://192.168.100.27:8080/api/article/readArticle/${article.articleId}`
+                            // to={}
                           >
                             {idx + 1}. {article.titleArticle}
                           </Link>

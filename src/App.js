@@ -23,7 +23,6 @@ import JurnalArxive from "./components/UI/jurnalArxive";
 import RestoreWithSms from "components/UI/restoreWithSms";
 import RestorePassword from "components/UI/restorePassword";
 import ProtectedPage from "./components/protectedPage";
-import Reading from "views/reading";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -437,12 +436,6 @@ class App extends Component {
               path="/main/magazineInfo/:id"
               exact
               component={(props) => <MagazineInfo {...props} />}
-            />
-
-            <Route
-              path="/article/:id"
-              exact
-              component={(props) => <Reading {...props} />}
             />
 
             <Route
