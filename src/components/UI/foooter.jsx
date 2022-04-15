@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { BsTelegram, BsFacebook } from "react-icons/bs";
 import instagram from "assets/img/icons8-instagram.svg";
 import ru from "translations/ru";
@@ -101,38 +102,38 @@ class Foooter extends React.Component {
                   <div className="col-md-8 pr-0">
                     <ul className="nav">
                       <li className="nav-item">
-                        <a className="nav-link" href="/main">
+                        <Link className="nav-link" to="/main">
                           {this.state.lang === "ru" ? ru.nav_asosiy : "Asosiy"}
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="/listOfMagazines">
+                        <Link className="nav-link" to="/listOfMagazines">
                           {this.state.lang === "ru"
                             ? ru.nav_jurnallar
                             : "Jurnallar ro‘yxati"}
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="/termsOfPublication">
+                        <Link className="nav-link" to="/termsOfPublication">
                           {this.state.lang === "ru"
                             ? ru.nav_shartlar
                             : "Nashr shartlari"}
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="/contact">
+                        <Link className="nav-link" to="/contact">
                           {this.state.lang === "ru"
                             ? ru.main_boglanish
                             : "Biz bilan bog‘lanish"}
-                        </a>
+                        </Link>
                       </li>
 
                       <li className="nav-item">
-                        <a className="nav-link" href="/login">
+                        <Link className="nav-link" to="/login">
                           {this.state.lang === "ru"
                             ? ru.nav_kirish
                             : "Tizimga kirish"}
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
