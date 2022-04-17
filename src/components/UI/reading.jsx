@@ -1,21 +1,12 @@
 import React, { Component } from "react";
+import PDFReader from "components/PDFReader";
 
-class Reading extends Component {
-  state = {
-    articleId: "",
-  };
-
-  componentDidMount() {
-    const articleId = this.props.location.pathname.split(":")[1]
-      ? this.props.location.pathname.split(":")[1]
-      : this.props.location.pathname.split(":")[0];
-
-    this.setState({ articleId });
-  }
-
+export default class Reading extends Component {
   render() {
-    return <div className="container">{this.state.articleId}</div>;
+    return (
+      <div className="container">
+        <PDFReader />
+      </div>
+    );
   }
 }
-
-export default Reading;
