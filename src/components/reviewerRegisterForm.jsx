@@ -164,7 +164,7 @@ class ReviewerRegisterForm extends Form {
         <h3 style={{ textAlign: "center" }}>
           {this.state.lang === "ru"
             ? ru.register_2
-            : "Revyuver sifatida ro'yxatdan o'tish"}
+            : "Taqrizchi sifatida ro'yxatdan o'tish"}
         </h3>
         <div className="col-md-8 m-auto">
           <Card className="user-card card">
