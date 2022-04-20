@@ -111,7 +111,7 @@ const ControlPanel = (props) => {
         />
       </div>
 
-      <div className="mx-3">
+      {/* <div className="mx-3">
         <a
           onClick={() => {
             axios.get(
@@ -121,7 +121,7 @@ const ControlPanel = (props) => {
         >
           <FaFileDownload />
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };
