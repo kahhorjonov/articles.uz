@@ -1,5 +1,6 @@
 import React from "react";
 import { BeatLoader } from "react-spinners";
+import "styles/pdfReaderStyles.css";
 
 const Loader = ({ isLoading }) => {
   if (!isLoading) return null;

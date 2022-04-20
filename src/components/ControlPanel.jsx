@@ -1,8 +1,26 @@
-import React from "react";
-import PDFPrinter from "./PDFPrinter";
+import React, { useState } from "react";
+import axios from "axios";
+import {
+  FaFileDownload,
+  FaFastBackward,
+  FaBackward,
+  FaForward,
+  FaFastForward,
+  FaSearchMinus,
+  FaSearchPlus,
+} from "react-icons/fa";
+import "styles/pdfReaderStyles.css";
 
 const ControlPanel = (props) => {
   const { file, pageNumber, numPages, setPageNumber, scale, setScale } = props;
+
+  const articleId = window.location.pathname.split(":")[1]
+    ? window.location.pathname.split(":")[1]
+    : window.location.pathname.split(":")[0];
+
+  const [pdfFile, setPdfFile] = useState(
+    `http://192.168.100.27:8080/api/article/readArticle/${articleId}`
+  );
 
   const isFirstPage = pageNumber === 1;
   const isLastPage = pageNumber === numPages;
@@ -45,14 +63,16 @@ const ControlPanel = (props) => {
   return (
     <div className="control-panel m-3 p-3 d-flex align-items-baseline justify-content-between">
       <div className="d-flex justify-content-between align-items-baseline">
-        <i
+        <FaFastBackward
           className={`fas fa-fast-backward mx-3 ${firstPageClass}`}
           onClick={goToFirstPage}
         />
-        <i
+
+        <FaBackward
           className={`fas fa-backward mx-3 ${firstPageClass}`}
           onClick={goToPreviousPage}
         />
+
         <span>
           Page{" "}
           <input
@@ -66,33 +86,41 @@ const ControlPanel = (props) => {
           />{" "}
           of {numPages}
         </span>
-        <i
+
+        <FaForward
           className={`fas fa-forward mx-3 ${lastPageClass}`}
           onClick={goToNextPage}
         />
-        <i
+
+        <FaFastForward
           className={`fas fa-fast-forward mx-3 ${lastPageClass}`}
           onClick={goToLastPage}
         />
       </div>
       <div className="d-flex justify-content-between align-items-baseline">
-        <i
+        <FaSearchMinus
           className={`fas fa-search-minus mx-3 ${zoomOutClass}`}
           onClick={zoomOut}
         />
+
         <span>{(scale * 100).toFixed()}%</span>
-        <i
+
+        <FaSearchPlus
           className={`fas fa-search-plus mx-3 ${zoomInClass}`}
           onClick={zoomIn}
         />
       </div>
+
       <div className="mx-3">
-        <a href="/assets/docs/file-sample.pdf" download={true} title="download">
-          <i className="fas fa-file-download clickable" />
+        <a
+          onClick={() => {
+            axios.get(
+              "http://192.168.100.27:8080/api/attachment/download/8ca15804-ff55-4286-8b97-e0383dd72b9c"
+            );
+          }}
+        >
+          <FaFileDownload />
         </a>
-      </div>
-      <div className="mx-3">
-        <PDFPrinter file={file} />
       </div>
     </div>
   );

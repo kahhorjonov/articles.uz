@@ -93,6 +93,11 @@ class Category extends Component {
   submitHandler = async (e) => {
     e.preventDefault();
 
+    this.setState({ name: "" });
+    this.setState({ active: "" });
+    this.setState({ activeCategoryId: "" });
+    this.setState({ activeParentCategoryId: "" });
+
     try {
       await categoryServices
         .createOrEditCategories({
@@ -105,10 +110,6 @@ class Category extends Component {
           toast.success(res.data.message);
           this.handleGetCategories();
           this.handleGetParent();
-          this.setState({ name: "" });
-          this.setState({ active: "" });
-          this.setState({ activeCategoryId: "" });
-          this.setState({ activeParentCategoryId: "" });
         });
     } catch (ex) {
       toast.error(ex.response.data.message);

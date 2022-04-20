@@ -65,7 +65,8 @@ var UserRoutes = [
 
   {
     path: "/uploadArticle",
-    name: localStorage.getItem("lang") ? ru.nav_yuklash : "Maqola Yuklash",
+    name:
+      localStorage.getItem("lang") === "ru" ? ru.nav_yuklash : "Maqola Yuklash",
     icon: "nc-icon nc-cloud-upload-94",
     component: ArticleForm,
     layout: "/user",
@@ -74,9 +75,10 @@ var UserRoutes = [
 
   {
     path: "/allArticles",
-    name: localStorage.getItem("lang")
-      ? ru.allMyArticles
-      : "Barcha maqolalarim",
+    name:
+      localStorage.getItem("lang") === "ru"
+        ? ru.allMyArticles
+        : "Barcha maqolalarim",
     icon: "nc-icon nc-briefcase-24",
     component: BarchaMaqolalarim,
     layout: "/user",

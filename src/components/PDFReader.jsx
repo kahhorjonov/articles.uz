@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Loader from "./Loader";
 import { Document, Page, pdfjs } from "react-pdf";
 import ControlPanel from "./ControlPanel";
-import axios from "axios";
+import "styles/pdfReaderStyles.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const PDFReader = () => {
+const PDFReader = (props) => {
   const [scale, setScale] = useState(1.0);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [file, setFile] = useState(
-    "http://192.168.100.27:8080/api/article/readArticle/26d615a3-bbe0-4276-9fb4-05bc371c5485"
-  );
 
-  useEffect(() => {
-    axios
-      .get(
-        `http://192.168.100.27:8080/api/attachment/download/26d615a3-bbe0-4276-9fb4-05bc371c5485`
-      )
-      .then((res) => console.log(res));
-  }, []);
+  const articleId = window.location.pathname.split(":")[1]
+    ? window.location.pathname.split(":")[1]
+    : window.location.pathname.split(":")[0];
+
+  const [file, setFile] = useState(
+    `http://192.168.100.27:8080/api/article/readArticle/${articleId}`
+  );
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -28,7 +25,7 @@ const PDFReader = () => {
   }
 
   return (
-    <div className="container">
+    <div className="AppReader">
       <Loader isLoading={isLoading} />
       <section
         id="pdf-section"
@@ -48,8 +45,6 @@ const PDFReader = () => {
           numPages={numPages}
           pageNumber={pageNumber}
           setPageNumber={setPageNumber}
-          // file="/assets/docs/sample.pdf"
-          // file="/assets/docs/file-sample.pdf"
           file={file && file}
         />
       </section>

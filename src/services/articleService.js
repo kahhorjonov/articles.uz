@@ -23,6 +23,7 @@ export function addArticle(data) {
   bodyFormData.append("doi", data.doi);
   bodyFormData.append("price", data.price);
   bodyFormData.append("journalsId", data.parentCategoryId);
+  bodyFormData.append("languageId", data.language);
 
   return axios({
     method: "post",
@@ -52,7 +53,7 @@ export function sendWork(articleId, status, file, description) {
 
   return axios({
     method: "post",
-    url: "http://192.168.100.27:8080/api/article/givenStatus",
+    url: apiLocal + "/article/givenStatus",
     data: bodyFormData,
     headers: {
       "Content-Type": "multipart/form-data",

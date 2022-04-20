@@ -6,6 +6,7 @@ import { getChildCategories } from "services/getCategories";
 import { getActiveMagazines } from "services/magazineService";
 import { getUsersById } from "services/userService";
 import { getPrices } from "services/priceService";
+import { getAllActiveLanguages } from "services/languageService";
 import { me } from "services/authService";
 import ru from "translations/ru";
 
@@ -47,6 +48,8 @@ class ArticleForm extends Form {
     articlePrice: [],
 
     lang: "",
+    langs: [],
+    language: "",
   };
 
   schema = {
@@ -62,6 +65,8 @@ class ArticleForm extends Form {
 
     await this.populateCategories();
     this.getArticlePrice();
+
+    await this.populateLanguages();
 
     await me().then((res) => {
       this.addTags(res.data.code.toString());
@@ -83,6 +88,17 @@ class ArticleForm extends Form {
     try {
       await getActiveMagazines().then((res) => {
         this.setState({ parentCategories: res.data });
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  }
+
+  async populateLanguages() {
+    try {
+      await getAllActiveLanguages().then((res) => {
+        this.setState({ langs: res.data });
+        this.setState({ language: res.data[0].id });
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -209,7 +225,7 @@ class ArticleForm extends Form {
   };
 
   render() {
-    const { articlePrice, inputFields, lang } = this.state;
+    const { articlePrice, inputFields, lang, langs } = this.state;
 
     const {
       bittaBosmaJunalNarxi,
@@ -289,11 +305,12 @@ class ArticleForm extends Form {
                   </Row>
 
                   <Row>
-                    <Col sm="6" md="6" lg="6">
+                    <Col sm="3" md="3" lg="3">
                       <div>
                         <label>
                           {lang === "ru" ? ru.jurnal_public : "Ommaviyligi"}
                         </label>
+
                         <Input
                           defaultValue="false"
                           type="select"
@@ -309,6 +326,29 @@ class ArticleForm extends Form {
                           <option value="true">
                             {lang === "ru" ? "Да" : "Ha"}
                           </option>
+                        </Input>
+                      </div>
+                    </Col>
+
+                    <Col sm="3" md="3" lg="3">
+                      <div>
+                        <label>{lang === "ru" ? ru.tillar : "Tili"}</label>
+
+                        <Input
+                          defaultValue={langs.length && langs[0].id}
+                          type="select"
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          onChange={(e) =>
+                            this.setState({ language: e.target.value })
+                          }
+                        >
+                          {langs &&
+                            langs.map((lang) => (
+                              <option key={lang.id} value={lang.id}>
+                                {lang.name}
+                              </option>
+                            ))}
                         </Input>
                       </div>
                     </Col>
@@ -498,6 +538,7 @@ class ArticleForm extends Form {
                       <Label for="exampleEmail">
                         {lang === "ru" ? ru.authors : "Mualliflar"}
                       </Label>
+
                       <div className="tags-input ">
                         <ul id="tags">
                           {this.state.tags &&
