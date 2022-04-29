@@ -794,10 +794,10 @@ body {
   line-height: 100%;
   color: #000000;
   text-align: left;
-  padding-top: 100px;
+  padding-top: 20px !important;
 }
 .footer .row {
-  padding-top: 60px;
+  padding-top: 0px !important;
 }
 .footer h5 {
   font-style: normal;
@@ -832,7 +832,7 @@ body {
 }
 
 .footer .queres {
-  padding-top: 80px;
+  padding-top: 0px !important;
 }
 .queres {
   width: 100%;
@@ -859,7 +859,7 @@ body {
   color: #ffffff;
 }
 .queres .nav {
-  padding-top: 108px;
+  padding-top: 37px !important;
 }
 .queres .nav-link {
   font-style: normal;
@@ -871,7 +871,7 @@ body {
 
 .hr2 {
   width: 100%;
-  padding-top: 80px;
+  padding-top: 0px !important;
 }
 
 .foo_nex .OST {

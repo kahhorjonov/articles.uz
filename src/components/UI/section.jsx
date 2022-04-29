@@ -30,9 +30,6 @@ class Section extends React.Component {
                   data-aos-duration="1000"
                   data-aos-offset="1000"
                   data-aos-anchor="#example-anchor"
-                  
-                  
-             
                 >
                   <p className="jurnal-haqida">
                     {this.state.lang === "ru"
@@ -55,7 +52,6 @@ class Section extends React.Component {
                   data-aos-duration="1000"
                   data-aos-offset="1000"
                   data-aos-anchor="#example-anchor"
-                 
                 >
                   <span className="articles-text">
                     {this.state.lang === "ru"
