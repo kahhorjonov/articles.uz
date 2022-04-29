@@ -87,10 +87,10 @@
   height: 30px;
   /* font-size: 12px; */
 }
-.theades th{
+.theades th {
   font-size: 11px !important;
 }
-.theades{
+.theades {
   overflow-x: scroll !important;
 }
 

@@ -13,6 +13,7 @@ import { getPublishedParentCategories } from "services/getCategories";
 
 import { toast } from "react-toastify";
 import { Col, Row } from "reactstrap";
+import ru from "translations/ru";
 
 import "styles/homePage.css";
 
@@ -22,9 +23,13 @@ class UserMagazines extends Component {
     magazines: [],
 
     user: "",
+    lang: "",
   };
 
   componentDidMount = async () => {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     const user = auth.getCurrentUser() && auth.getCurrentUser().roles[0];
     this.setState({ user: user.id });
 
@@ -55,7 +60,7 @@ class UserMagazines extends Component {
   };
 
   render() {
-    const { magazineCategories, magazines } = this.state;
+    const { magazineCategories, magazines, lang } = this.state;
 
     return (
       <>
@@ -66,7 +71,9 @@ class UserMagazines extends Component {
                 <Row>
                   <Col sm="6" md="6" lg="6">
                     <div className="card-header">
-                      <h3>Barcha jurnallar </h3>
+                      <h3>
+                        {lang === "ru" ? ru.jurnallar_h1 : "Barcha jurnallar"}
+                      </h3>
                     </div>
                   </Col>
                 </Row>
@@ -94,7 +101,9 @@ class UserMagazines extends Component {
                         </ul>
                       ))
                     ) : (
-                      <h1 className="text-center">Jurnallar Yo'q</h1>
+                      <h1 className="text-center">
+                        {lang === "ru" ? ru.noMagazines : "Jurnallar Yo'q"}
+                      </h1>
                     )}
                   </div>
 
@@ -118,9 +127,17 @@ class UserMagazines extends Component {
                                     }}
                                     className="testDiv"
                                   >
-                                    <GetImages
-                                      url={magazine && magazine.cover.id}
-                                    />
+                                    <Link
+                                      to={`/${
+                                        this.state.user === 3
+                                          ? "reviewer"
+                                          : "user"
+                                      }/magazineInformation/:${magazine.id}`}
+                                    >
+                                      <GetImages
+                                        url={magazine && magazine.cover.id}
+                                      />
+                                    </Link>
                                   </div>
                                   <div className="card-body p-0">
                                     <h4 className="card_title p-0">
@@ -136,7 +153,7 @@ class UserMagazines extends Component {
                                       </Link>
                                     </h4>
 
-                                    <p className="card_text text-muted">
+                                    {/* <p className="card_text text-muted">
                                       <span>
                                         {magazine &&
                                           new Date(
@@ -145,7 +162,7 @@ class UserMagazines extends Component {
                                         &nbsp;
                                       </span>
                                       dan buyon chiqadi
-                                    </p>
+                                    </p> */}
                                   </div>
                                 </div>
                               </div>
@@ -153,6 +170,7 @@ class UserMagazines extends Component {
                         </div>
                       </div>
 
+                      {/* 
                       <div className="buut-ons justify-content-center d-flex">
                         <a href="">
                           <button
@@ -162,7 +180,7 @@ class UserMagazines extends Component {
                             Barchasini ko’rish
                           </button>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

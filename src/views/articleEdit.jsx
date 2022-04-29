@@ -24,7 +24,7 @@ import {
 } from "reactstrap";
 
 import "styles/userEdit.css";
-import "styles/multipleTags.scss";
+import "styles/multipleTags.css";
 
 class ArticleEdit extends Component {
   state = {

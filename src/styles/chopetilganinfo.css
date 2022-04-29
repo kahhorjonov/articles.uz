@@ -1,12 +1,15 @@
 .covid19 .container {
   margin-top: 48px;
 }
+
 .covid19 a:hover {
   text-decoration: none;
 }
+
 .covid19 a {
   color: black;
 }
+
 .covid19 h1 {
   font-style: normal;
   font-weight: 600;

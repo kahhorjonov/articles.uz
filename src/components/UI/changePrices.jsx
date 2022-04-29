@@ -9,6 +9,7 @@ import {
   changeActivity,
   createLanguage,
 } from "services/languageService";
+import ru from "translations/ru";
 
 class ChangePrices extends Component {
   state = {
@@ -26,9 +27,14 @@ class ChangePrices extends Component {
     name: "",
     id: "",
     newName: "",
+
+    lang: "",
   };
 
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     this.getPrice();
     this.getLanguages();
   }
@@ -116,8 +122,7 @@ class ChangePrices extends Component {
   };
 
   render() {
-    const { language } = this.state;
-    const { getPrice } = this.state;
+    const { language, getPrice, lang } = this.state;
 
     const {
       bittaBosmaJunalNarxi,
@@ -141,7 +146,9 @@ class ChangePrices extends Component {
                         data-toggle="pill"
                         href="#home"
                       >
-                        Narxlarni o'zgartirish
+                        {lang === "ru"
+                          ? ru.changePrice
+                          : "Narxlarni o'zgartirish"}
                       </a>
                     </li>
                     <li className="nav-item">
@@ -150,18 +157,21 @@ class ChangePrices extends Component {
                         data-toggle="pill"
                         href="#home2"
                       >
-                        Tilni Ozgartirish
+                        {lang === "ru" ? ru.changeLang : "Tilni Ozgartirish"}
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div className="card-body">
                   <Row className="align-items-center">
-                    <div className="table p-3  row mx-0 p-4 tab-content">
-                      <div className="tab-pane container active" id="home">
+                    <div className="table p-3 col-md-12 col-sm-12 col-lg-12 row mx-0 p-4 tab-content">
+                      <div
+                        className="col-md-12 col-sm-12 col-lg-12 tab-pane container active"
+                        id="home"
+                      >
                         <div className="row">
                           <div className="col-lg-2 col-sm-4">
-                            Jurnal narxi
+                            {lang === "ru" ? ru.magazinePrice : "Jurnal narxi"}
                             <div>
                               <input
                                 defaultValue={bittaBosmaJunalNarxi}
@@ -177,7 +187,9 @@ class ChangePrices extends Component {
                             </div>
                           </div>
                           <div className="col-lg-2 col-sm-4">
-                            Sertficat narxi
+                            {lang === "ru"
+                              ? ru.sertificatePrice
+                              : "Sertfikat narxi"}
                             <div>
                               <input
                                 type="text"
@@ -208,7 +220,7 @@ class ChangePrices extends Component {
                             </div>
                           </div>
                           <div className="col-lg-2 col-sm-4">
-                            Saxifa narxi
+                            {lang === "ru" ? ru.pagePrice : "Saxifa narxi"}
                             <div>
                               <input
                                 onChange={(e) =>
@@ -223,7 +235,7 @@ class ChangePrices extends Component {
                           </div>
 
                           <div className="col-lg-2 col-sm-4">
-                            Chop etish narxi
+                            {lang === "ru" ? ru.printPrice : "Chop etish narxi"}
                             <div>
                               <input
                                 onChange={(e) =>
@@ -239,42 +251,49 @@ class ChangePrices extends Component {
                             </div>
                           </div>
 
-                          <div className="col-lg-2 col-sm-4 mt-4">
-                            <button
-                              style={{ height: "30px", padding: "2px" }}
-                              onClick={this.handleChangePrices}
-                              className="btn w-100  btn-info"
-                            >
-                              Submit
-                            </button>
+                          <div className="col-lg-2 col-sm-4">
+                            {lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
+                            <div>
+                              <button
+                                style={{ height: "30px", padding: "2px" }}
+                                onClick={this.handleChangePrices}
+                                className="btn w-100  btn-info"
+                              >
+                                {lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       {/* ----------------------------------------- */}
 
-                      <div id="home2" className="container tab-pane fade">
+                      <div
+                        id="home2"
+                        className="col-sm-12 col-md-12 col-lg-12 container tab-pane fade"
+                      >
                         {/* modal */}
-                        <button
-                          style={{
-                            position: "absolute",
-                            top: "0",
-                            right: "0",
-                            marginTop: "27px",
-                            marginRight: "28px",
-                          }}
-                          data-toggle="modal"
-                          data-target="#myModal2"
-                          className="btn btn-success"
+                        <div
+                          style={{ display: "flex", justifyContent: "end" }}
+                          className="row"
                         >
-                          Til qo'shish +
-                        </button>
+                          <button
+                            data-toggle="modal"
+                            data-target="#myModal2"
+                            className="btn btn-success"
+                          >
+                            {lang === "ru" ? ru.addLang : "Til qo'shish"} +
+                          </button>
+                        </div>
 
                         <div className="modal" id="myModal2">
                           <div className="modal-dialog">
                             <div className="modal-content">
                               <div className="modal-header">
-                                <h4 className="modal-title">Til Qoshish</h4>
+                                <h4 className="modal-title">
+                                  {lang === "ru" ? ru.addLang : "Til qo'shish"}{" "}
+                                  +
+                                </h4>
                               </div>
 
                               <div className="modal-body">
@@ -286,7 +305,6 @@ class ChangePrices extends Component {
                                     })
                                   }
                                   className="form-control"
-                                  placeholder="Til qo'shish"
                                 />
                               </div>
 
@@ -300,14 +318,14 @@ class ChangePrices extends Component {
                                     this.createLanguage(e);
                                   }}
                                 >
-                                  Submit
+                                  {lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
                                 </button>
                                 <button
                                   type="button"
-                                  className="btn btn-danger"
+                                  className="btn"
                                   data-dismiss="modal"
                                 >
-                                  Close
+                                  {lang === "ru" ? ru.admin_close : "Yopish"}
                                 </button>
                               </div>
                             </div>
@@ -318,9 +336,17 @@ class ChangePrices extends Component {
                           <thead>
                             <tr className="col-lg-12">
                               <th className="col-lg-1">№</th>
-                              <th className="col-lg-2">Name</th>
-                              <th className="col-lg-4">Active</th>
-                              <th className="col-lg-2">Delate</th>
+                              <th className="col-lg-2">
+                                {lang === "ru" ? ru.tillar : "Tillar"}
+                              </th>
+                              <th className="col-lg-4">
+                                {lang === "ru"
+                                  ? ru.admin_activate
+                                  : "Aktivlashtirish"}
+                              </th>
+                              <th className="col-lg-2">
+                                {lang === "ru" ? ru.admin_actions : "Amallar"}
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -346,17 +372,8 @@ class ChangePrices extends Component {
                                   </td>
                                   <td>
                                     <button
-                                      onClick={() =>
-                                        this.deleteLanguage(lang.id)
-                                      }
-                                      className="btn btn-danger mr-2"
-                                    >
-                                      delate
-                                    </button>
-
-                                    <button
                                       type="button"
-                                      className="btn btn-primary"
+                                      className="btn btn-primary mr-2"
                                       data-toggle="modal"
                                       data-target="#myModal"
                                       onClick={(e) => {
@@ -366,7 +383,24 @@ class ChangePrices extends Component {
                                         });
                                       }}
                                     >
-                                      Edit
+                                      {/* {lang === "ru"
+                                        ? ru.admin_edit
+                                        : "Tahrirlash"} */}
+
+                                      {lang === "ru"
+                                        ? ru.admin_actions
+                                        : "Tahrirlash"}
+                                    </button>
+
+                                    <button
+                                      onClick={() =>
+                                        this.deleteLanguage(lang.id)
+                                      }
+                                      className="btn"
+                                    >
+                                      {lang === "ru"
+                                        ? ru.admin_delete
+                                        : "O'chirish"}
                                     </button>
 
                                     <div className="modal" id="myModal">
@@ -374,7 +408,9 @@ class ChangePrices extends Component {
                                         <div className="modal-content">
                                           <div className="modal-header">
                                             <h4 className="modal-title">
-                                              <b>Tilni O'zgartirish</b>
+                                              {lang === "ru"
+                                                ? ru.admin_edit
+                                                : "Tilni O'zgartirish"}
                                             </h4>
                                           </div>
 
@@ -405,14 +441,18 @@ class ChangePrices extends Component {
                                                 );
                                               }}
                                             >
-                                              Submit
+                                              {lang === "ru"
+                                                ? ru.restore_3
+                                                : "Tasdiqlash"}
                                             </button>
                                             <button
                                               type="button"
                                               className="btn btn-danger"
                                               data-dismiss="modal"
                                             >
-                                              Close
+                                              {lang === "ru"
+                                                ? ru.restore_3
+                                                : "Yopish"}
                                             </button>
                                           </div>
                                         </div>

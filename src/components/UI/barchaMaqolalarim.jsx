@@ -5,6 +5,7 @@ import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { toast } from "react-toastify";
 import { Col, Input, Row, Label, Form, Table, CardBody } from "reactstrap";
+import ru from "translations/ru";
 
 import "styles/chopetilgan.css";
 
@@ -14,10 +15,15 @@ class BarchaMaqolalarim extends Component {
     articles: [],
 
     currentPage: 1,
-    pageSize: 10,
+    pageSize: 8,
+
+    lang: "",
   };
 
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     this.getAllMyArticles(this.state.status);
   }
 
@@ -72,7 +78,7 @@ class BarchaMaqolalarim extends Component {
   };
 
   render() {
-    const { articles: allArticles, currentPage, pageSize } = this.state;
+    const { articles: allArticles, currentPage, pageSize, lang } = this.state;
 
     const articles = paginate(allArticles, currentPage, pageSize);
 
@@ -83,13 +89,17 @@ class BarchaMaqolalarim extends Component {
             <div className="col-md-12">
               <div className="card">
                 <div className="card-header">
-                  <h3>Barcha maqolalarim</h3>
+                  <h3>
+                    {lang === "ru" ? ru.allMyArticles : "Barcha maqolalarim"}
+                  </h3>
                 </div>
                 <div className="card-body">
                   <Form>
                     <Col lg="5" className="w-100 pl-0 d-flex">
                       <Label>
-                        <b style={{ fontSize: "17px" }}>Tanlang:</b>{" "}
+                        <b style={{ fontSize: "17px" }}>
+                          {lang === "ru" ? ru.select : "Tanlang"}:
+                        </b>{" "}
                       </Label>
                       <Input
                         style={{ height: "unset" }}
@@ -99,20 +109,34 @@ class BarchaMaqolalarim extends Component {
                         type="select"
                         onChange={(e) => this.getAllMyArticles(e.target.value)}
                       >
-                        <option value="all">Barcha Maqollarim</option>
+                        <option value="all">
+                          {lang === "ru"
+                            ? ru.allMyArticles
+                            : "Barcha maqolalarim"}
+                        </option>
 
-                        <option value="REJECTED">Rad etilgan maqollarim</option>
+                        <option value="REJECTED">
+                          {lang === "ru"
+                            ? ru.maqolalar_rad_etilgan
+                            : "Rad etilgan maqollarim"}
+                        </option>
 
                         <option value="RECYCLE">
-                          Qayta ishlashdagi maqollarim
+                          {lang === "ru"
+                            ? ru.maqolalar_qayta_ishlash
+                            : "Qayta ishlashdagi maqollarim"}
                         </option>
 
                         <option value="BEGIN_CHECK">
-                          Tekshirish jarayonidagi maqolalarim
+                          {lang === "ru"
+                            ? ru.maqolalar_taqrizda
+                            : "Tekshirish jarayonidagi maqolalarim"}
                         </option>
 
                         <option value="PUBLISHED">
-                          Chop etilgan maqolalarim
+                          {lang === "ru"
+                            ? ru.user_published
+                            : "Chop etilgan maqolalarim"}
                         </option>
                       </Input>
                     </Col>
@@ -123,13 +147,33 @@ class BarchaMaqolalarim extends Component {
                       <Table>
                         <thead>
                           <tr className="col-md-12">
-                            <th className="col-md-2">title</th>
-                            <th className="col-lg-2">Status</th>
-                            <th className="col-lg-2">Jurnal</th>
-                            <th className="col-lg-1">Orginal File</th>
-                            <th className="col-lg-1">Redactor File</th>
-                            <th className="col-lg-1">Certificate</th>
-                            <th className="col-lg-2">Authors</th>
+                            <th className="col-md-2">
+                              {lang === "ru" ? ru.jurnal_title : "Sarlavha"}
+                            </th>
+                            <th className="col-lg-2">
+                              {lang === "ru" ? ru.jurnal_status : "Sarlavha"}
+                            </th>
+                            <th className="col-lg-2">
+                              {lang === "ru" ? ru.magazine : "Jurnal"}
+                            </th>
+                            <th className="col-lg-1">
+                              {lang === "ru"
+                                ? ru.originalFile
+                                : "Muallif fayli"}
+                            </th>
+                            <th className="col-lg-1">
+                              {lang === "ru"
+                                ? ru.red_file
+                                : "Tahrirlangan fayl"}
+                            </th>
+                            <th className="col-lg-1">
+                              {lang === "ru"
+                                ? ru.jurnal_sertifikat
+                                : "Sertifikat"}
+                            </th>
+                            <th className="col-lg-2">
+                              {lang === "ru" ? ru.authors : "Авторы"}
+                            </th>
                           </tr>
                         </thead>
                         <tbody>

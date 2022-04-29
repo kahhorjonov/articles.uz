@@ -23,6 +23,7 @@ import JurnalArxive from "./components/UI/jurnalArxive";
 import RestoreWithSms from "components/UI/restoreWithSms";
 import RestorePassword from "components/UI/restorePassword";
 import ProtectedPage from "./components/protectedPage";
+import Reading from "components/UI/reading";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -122,11 +123,7 @@ class App extends Component {
 
               <Redirect from="/admin" exact to="/admin/dashboard" />
 
-              <ProtectedRoute
-                path="/admin"
-                component={AdminLayout}
-                // render={(props) => <AdminLayout {...props} />}
-              />
+              <ProtectedRoute path="/admin" component={AdminLayout} />
 
               <Redirect to="/not-found" />
             </Switch>
@@ -419,11 +416,7 @@ class App extends Component {
 
               <Redirect from="/user" exact to="/user/user-page" />
 
-              <ProtectedRoute
-                path="/user"
-                component={UserLayout}
-                // render={(props) => <UserLayout {...props} />}
-              />
+              <ProtectedRoute path="/user" component={UserLayout} />
               <Redirect to="/not-found" />
             </Switch>
           </>
@@ -439,60 +432,78 @@ class App extends Component {
               exact
               component={(props) => <Asosiy {...props} />}
             />
+
             <Route
               path="/main/magazineInfo/:id"
               exact
               component={(props) => <MagazineInfo {...props} />}
             />
+
+            <Route
+              path="/article/:id"
+              exact
+              component={(props) => <Reading {...props} />}
+            />
+
             <Route
               path="/listOfMagazines/magazineInfo/:id"
               exact
               component={(props) => <MagazineInfo {...props} />}
             />
+
             <Route
               path="/main"
               exact
               component={(props) => <Asosiy {...props} />}
             />
+
             <Route
               path="/listOfMagazines"
               exact
               component={(props) => <JurnallarRoyxati {...props} />}
             />
+
             <Route
               path="/release/:id"
               exact
               component={(props) => <JurnalArxive {...props} />}
             />
+
             <Route
               path="/listOfMagazines/magazineInfo/:id"
               exact
               component={(props) => <JurnalArxive {...props} />}
             />
+
             <Route
               path="/termsOfPublication"
               exact
               component={(props) => <NashrShartlari {...props} />}
             />
+
             <Route
               path="/contact"
               exact
               component={(props) => <Aloqa {...props} />}
             />
+
             <Route
               path="/login"
               component={(props) => <LoginForm {...props} />}
             />
+
             <Route
               path="/logout"
               exact
               component={(props) => <Logout {...props} />}
             />
+
             <Route
               path="/register"
               exact
               component={(props) => <RegisterForm {...props} />}
             />
+
             <Route
               path="/registerReviewer"
               exact
@@ -504,12 +515,15 @@ class App extends Component {
             <ProtectedPage path="/changePassword" component={RestorePassword} />
 
             <Route path="/not-found" component={NotFound} />
+
             {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
             {/* <ProtectedRoute path="/admin" component={AdminPage} /> */}
             {/* <ProtectedRoute path="/reductor" component={ReductorPage} /> */}
             {/* <ProtectedRoute path="/reviewer" component={ReviewerPage} /> */}
             {/* <ProtectedRoute path="/user" component={UserPage} /> */}
+
             <Redirect to="/not-found" />
+            <Redirect from="/" to="/main" />
           </Switch>
         </>
       );

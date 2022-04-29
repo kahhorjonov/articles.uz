@@ -3,7 +3,8 @@ import GetImages from "utils/getImages";
 import { downloadMedia, downloadFile, counter } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { BsEyeFill, BsDownload } from "react-icons/bs";
+import ru from "translations/ru";
 
 import {
   getPublishedYears,
@@ -25,9 +26,14 @@ class JurnalArxive extends Component {
     fileId: "",
     originalName: "",
     contentType: "",
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     try {
       const magazineId = this.props.location.pathname.split(":")[1]
         ? this.props.location.pathname.split(":")[1]
@@ -149,6 +155,7 @@ class JurnalArxive extends Component {
       fileId,
       originalName,
       contentType,
+      lang,
     } = this.state;
 
     const { allReleaseNumber, releaseNumberOfThisYear } = magazineInfo;
@@ -163,12 +170,12 @@ class JurnalArxive extends Component {
                 this.props.history.goBack();
               }}
             >
-              <b> ⬅️</b> ORTGA
+              <b> ⬅️</b> {lang === "ru" ? ru.back : "Ortga"}
             </a>
           </div>
           <br />
           <h1>
-            № {releaseNumberOfThisYear} ({allReleaseNumber}) son
+            № {releaseNumberOfThisYear} ({allReleaseNumber})
           </h1>
 
           <div className="row px-0 mx-0 ui">
@@ -176,12 +183,15 @@ class JurnalArxive extends Component {
               <img src={cover} width="360px" alt="" />
 
               <p style={{ fontSize: "16px" }} className="text-muted tex">
-                <b className="text-dark">Jurnal soni:</b> №{" "}
-                {releaseNumberOfThisYear} ({allReleaseNumber})
+                <b className="text-dark">№ {releaseNumberOfThisYear}</b> (
+                {allReleaseNumber})
               </p>
               <p>
                 <span style={{ fontSize: "16px" }} className="text-muted">
-                  <b className="text-dark">Nashr etilgan sana:</b> 13.09.2020
+                  <b className="text-dark">
+                    {lang === "ru" ? ru.printDate : "Nashr etilgan sana:"}
+                  </b>{" "}
+                  13.09.2020
                 </span>
               </p>
               <button
@@ -196,45 +206,67 @@ class JurnalArxive extends Component {
                   );
                 }}
               >
-                Yuklab olish
+                {lang === "ru" ? ru.download : "Yuklab olish"}
               </button>
             </div>
             <div className="col-lg-8 ui2">
               <ul className="list-group list-group-flush">
                 <li style={{ listStyle: "none", fontSize: "16px" }}>
-                  JURNAL TARKIBI
+                  {lang === "ru" ? ru.main_allArticles : "Maqolalar"}
                 </li>
 
                 {articles &&
                   articles.map((article, idx) => (
-                    <Link
-                      key={article.articleId}
-                      to=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        this.handleDownload(
-                          article.fileId,
-                          article.originalName,
-                          article.contentType,
-                          article.articleId
-                        );
-                      }}
-                    >
-                      <li className="list-group-item">
-                        <span>{idx + 1}. </span> {article.titleArticle}
-                        <p style={{ margin: "0" }}>
-                          {/* <BsEyeFill style={{ fontSize: "2rem" }} />
-                          {article.articleViews} */}
-                        </p>
+                    <div key={article.articleId}>
+                      <li
+                        style={{ padding: "10px 0" }}
+                        className="list-group-item"
+                      >
+                        <span
+                          style={{ display: "block", paddingBottom: "10px" }}
+                        >
+                          <Link
+                            style={{ color: "black" }}
+                            // onClick={() => {
+                            //   window.open(
+                            //     `http://192.168.100.27:8080/api/article/readArticle/${article.articleId}`
+                            //   );
+                            // }}
+
+                            // `http://192.168.100.27:8080/api/article/readArticle/${article.articleId}`
+                            to={`/article/:${article.articleId}`}
+                          >
+                            {idx + 1}. {article.titleArticle}
+                          </Link>
+                        </span>
+
+                        <span style={{ margin: "0", paddingRight: "1rem" }}>
+                          <BsEyeFill style={{ fontSize: "2rem" }} />{" "}
+                          {article.articleViews}
+                        </span>
+                        <span>
+                          <BsDownload
+                            style={{ cursor: "pointer" }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              this.handleDownload(
+                                article.fileId,
+                                article.originalName,
+                                article.contentType,
+                                article.articleId
+                              );
+                            }}
+                          />
+                        </span>
                       </li>
-                    </Link>
+                    </div>
                   ))}
               </ul>
             </div>
 
             <div className="col-lg-12 ui3 px-0">
               <div className="arxive px-0">
-                <h2>Jurnal arxivi</h2>
+                <h2>{lang === "ru" ? ru.jurnal_arxiv : "Jurnal arxivi"}</h2>
 
                 <ul className="nav nav-pills">
                   {years &&
@@ -265,7 +297,17 @@ class JurnalArxive extends Component {
                       {magazines &&
                         magazines.map((magazine) => (
                           <div key={magazine.id} className="col-lg-3">
-                            <GetImages url={magazine.cover.id} />
+                            <Link
+                              to={`/release/:${magazine.id}`}
+                              onClick={() => {
+                                this.getArticlesFromMagazineById(magazine.id);
+                                this.getImage(magazine.cover.id);
+                              }}
+                            >
+                              <div className="boxShadow">
+                                <GetImages url={magazine.cover.id} />
+                              </div>
+                            </Link>
 
                             <Link
                               style={{

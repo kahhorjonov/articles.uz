@@ -10,10 +10,15 @@
   padding: 0;
   box-sizing: inherit;
   user-select: none;
+  scroll-behavior: smooth;
 }
 
 html {
   font-size: 62.5%;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -23,10 +28,8 @@ body {
 }
 
 .buttons {
-  /* height: 40px; */
   border: 1px solid #282828;
   box-sizing: border-box;
-  /* font-size: 15px; */
 }
 
 .royxat {
@@ -39,14 +42,31 @@ body {
   display: flex;
   justify-content: end;
 }
+
 .navbar .brands h1 {
   font-size: 15px;
   font-weight: bolder;
 }
+
+.boxShadow {
+  border-radius: 3px;
+
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
 .card-articles .card-body h4 a {
   text-decoration: none;
   color: black;
 }
+
+.boxShadow:hover {
+  border-radius: 3px;
+  transform: scale(1.01);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+  transition: all 0.15s linear;
+}
+
 .navbar-nav .nav-link {
   font-style: normal;
   font-weight: normal;
@@ -58,11 +78,11 @@ body {
 .itemss {
   padding: 7px 16px;
 }
+
 .links {
   font-style: normal;
   font-weight: normal;
   line-height: 170%;
-  /* color: #4f4f4f; */
   flex: none;
   order: 2;
   flex-grow: 0;
@@ -111,9 +131,6 @@ body {
     display: none;
   }
 }
-*/
-
-/*************** mainPages *************** */
 
 .maqola_nashir {
   margin-top: 100px;
@@ -160,7 +177,6 @@ body {
   font-weight: normal;
   font-size: 18px;
   line-height: 160%;
-  /* color: #5a5a5a; */
   padding-top: 15px;
 }
 .card-articles {
@@ -180,17 +196,17 @@ body {
   line-height: 19px;
 }
 
-/* section -----------------------------*/
-
 .sections {
   width: 100%;
   height: auto;
   background: #f7f7f7;
   margin-bottom: 100px;
 }
+
 .article-chap {
   padding-top: 100px;
 }
+
 .jurnal-haqida {
   font-style: normal;
   font-weight: 600;
@@ -198,13 +214,14 @@ body {
   line-height: 100%;
   color: #777777;
 }
+
 .article_uz {
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
   line-height: 120%;
   color: #000000;
-  padding-top: 89px;
+  padding-top: 50px;
 }
 
 .art-tex {
@@ -219,10 +236,7 @@ body {
   font-size: 18px;
   line-height: 170%;
   color: #282828;
-  /* text-align: left; */
 }
-
-/* bg -------- */
 
 .img-bg img {
   width: 100%;
@@ -263,8 +277,6 @@ body {
   color: #ffffff;
 }
 
-/* bgGren2 */
-
 .bgGren2 {
   width: 100%;
   height: auto;
@@ -289,7 +301,6 @@ body {
   font-weight: normal;
   font-size: 18px;
   line-height: 140%;
-  /* color: #282828; */
 }
 .num h5 {
   font-style: normal;
@@ -303,7 +314,6 @@ body {
   font-weight: normal;
   font-size: 15px;
   line-height: 130%;
-  /* color: #777777; */
 }
 .art_uz2 {
   padding-top: 100px;
@@ -314,8 +324,6 @@ body {
   height: 400px;
   margin-left: auto;
 }
-
-/** bizning mualif eng qulay...--------------*/
 
 .mualif h2 {
   font-style: normal;
@@ -338,8 +346,6 @@ body {
   padding: 20px;
 }
 
-/* footer --------- */
-
 .footer {
   background-color: #f7f7f7;
   width: 100%;
@@ -426,7 +432,6 @@ body {
   line-height: 170%;
   color: #777777;
 }
-
 
 .hr2 {
   width: 100%;
@@ -537,6 +542,114 @@ body {
   color: #777777;
 }
 
+.hr2 {
+  width: 100%;
+  padding-top: 80px;
+}
+
+.foo_nex .OST {
+  text-align: end;
+}
+.foo_nex p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 170%;
+}
+
+.foo_nex {
+  width: 100%;
+}
+.foo_nex .endd {
+  text-align: end;
+}
+
+.footer {
+  background-color: #f7f7f7;
+  width: 100%;
+  height: auto;
+}
+.footer h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 100%;
+  color: #000000;
+  text-align: left;
+  padding-top: 100px;
+}
+.footer .row {
+  padding-top: 60px;
+}
+.footer h5 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 100%;
+  color: #282828;
+  padding-top: 25px;
+}
+.footer p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 100%;
+  color: #777777;
+  padding-top: 15px;
+}
+.footer a {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 100%;
+  color: #777777;
+  text-decoration: none;
+}
+.footer a:hover {
+  color: #777777;
+}
+
+.footer .hr1 {
+  width: 310px;
+}
+
+.footer .queres {
+  padding-top: 80px;
+}
+.queres {
+  width: 100%;
+}
+
+.queres h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 60px;
+  color: #000000;
+}
+
+.queres a button {
+  margin-top: 40px;
+  width: 241px;
+  height: 60px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 20px;
+
+  color: #ffffff;
+}
+.queres .nav {
+  padding-top: 108px;
+}
+.queres .nav-link {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 170%;
+  color: #777777;
+}
 
 .hr2 {
   width: 100%;
@@ -647,7 +760,6 @@ body {
   color: #777777;
 }
 
-
 .hr2 {
   width: 100%;
   padding-top: 80px;
@@ -757,7 +869,6 @@ body {
   color: #777777;
 }
 
-
 .hr2 {
   width: 100%;
   padding-top: 80px;
@@ -766,6 +877,7 @@ body {
 .foo_nex .OST {
   text-align: end;
 }
+
 .foo_nex p {
   font-style: normal;
   font-weight: normal;
@@ -776,128 +888,20 @@ body {
 .foo_nex {
   width: 100%;
 }
+
 .foo_nex .endd {
   text-align: end;
 }
-
-.footer {
-  background-color: #f7f7f7;
-  width: 100%;
-  height: auto;
-}
-.footer h1 {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 100%;
-  color: #000000;
-  text-align: left;
-  padding-top: 100px;
-}
-.footer .row {
-  padding-top: 60px;
-}
-.footer h5 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 100%;
-  color: #282828;
-  padding-top: 25px;
-}
-.footer p {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 100%;
-  color: #777777;
-  padding-top: 15px;
-}
-.footer a {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 100%;
-  color: #777777;
-  text-decoration: none;
-}
-.footer a:hover {
-  color: #777777;
-}
-
-.footer .hr1 {
-  width: 310px;
-}
-
-.footer .queres {
-  padding-top: 80px;
-}
-.queres {
-  width: 100%;
-}
-
-.queres h1 {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 60px;
-  color: #000000;
-}
-
-.queres a button {
-  margin-top: 40px;
-  width: 241px;
-  height: 60px;
-
-  font-style: normal;
-  font-weight: 600;
-  font-size: 17px;
-  line-height: 20px;
-
-  color: #ffffff;
-}
-.queres .nav {
-  padding-top: 108px;
-}
-.queres .nav-link {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 170%;
-  color: #777777;
-}
-
-
-.hr2 {
-  width: 100%;
-  padding-top: 80px;
-}
-
-.foo_nex .OST {
-  text-align: end;
-}
-.foo_nex p {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 170%;
-}
-
-.foo_nex {
-  width: 100%;
-}
-.foo_nex .endd {
-  text-align: end;
-}
-/* Media */
 
 @media (max-width: 776px) {
   .navbar .navbar-nav {
     margin: 0 auto;
   }
+
   .hrr {
     display: block;
   }
+
   .maqola_nashir h1 {
     text-align: center;
 
@@ -908,6 +912,7 @@ body {
     text-align: center;
     color: #000000;
   }
+
   .maqola_nashir p {
     font-style: normal;
     font-weight: normal;
@@ -922,20 +927,24 @@ body {
     align-content: center;
     align-items: center;
   }
+
   .article-chap {
-    /* text-align: center; */
     padding: 0 19px;
   }
+
   .art-tex {
     padding: 0 19px;
     width: 100%;
   }
+
   .num {
     text-align: center;
   }
+
   .footer .hr1 {
     display: block;
   }
+
   .home_pages {
     width: 100%;
   }
@@ -944,13 +953,13 @@ body {
   .home_pages {
     width: 100%;
   }
-  .foo_nex{
+  .foo_nex {
     text-align: center;
   }
-  .endd{
+  .endd {
     text-align: center !important;
   }
-  .queres .nav{
+  .queres .nav {
     display: grid;
   }
 }
@@ -1050,7 +1059,6 @@ body {
     padding: 0 30px;
   }
 
- 
   .mualif .list-group-item {
     font-style: normal;
     font-weight: normal;
@@ -1074,7 +1082,7 @@ body {
   .footer .foo_nex .endd {
     text-align: center;
   }
-  .footer .foo_nex{
-   text-align: center;
+  .footer .foo_nex {
+    text-align: center;
   }
 }

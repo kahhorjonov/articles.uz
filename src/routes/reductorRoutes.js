@@ -5,11 +5,13 @@ import Logout from "components/logout";
 import Jurnallar from "components/UI/jurnallar";
 import MagazineInfoAdmin from "components/UI/magazineInfoAdmin";
 import EditMagazine from "views/editMagazine";
+import ru from "translations/ru";
 
 var reductorRoutes = [
   {
     path: "/magazines",
-    name: "Jurnallar",
+    name:
+      localStorage.getItem("lang") === "ru" ? ru.nav_jurnallar : "Jurnallar",
     icon: "nc-icon nc-map-big",
     component: Jurnallar,
     layout: "/reductor",
@@ -36,7 +38,7 @@ var reductorRoutes = [
 
   {
     path: "/articles",
-    name: "Maqolalar",
+    name: localStorage.getItem("lang") === "ru" ? ru.maqolalar : "Maqolalar",
     icon: "nc-icon nc-bookmark-2",
     component: Articles,
     layout: "/reductor",
@@ -45,7 +47,8 @@ var reductorRoutes = [
 
   {
     path: "/myTasks",
-    name: "Mening vazifalarim",
+    name:
+      localStorage.getItem("lang") === "ru" ? ru.sidebar_tasks : "Vazifalarim",
     icon: "nc-icon nc-briefcase-24",
     component: MyTasks,
     layout: "/reductor",
@@ -72,7 +75,7 @@ var reductorRoutes = [
 
   {
     path: "/user-page",
-    name: "User Profile",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_profile : "Profil",
     icon: "nc-icon nc-settings-gear-65",
     component: UserPage,
     layout: "/reductor",
@@ -88,7 +91,7 @@ var reductorRoutes = [
   // },
   {
     path: "/logout",
-    name: "Profildan chiqish",
+    name: localStorage.getItem("lang") === "ru" ? ru.sidebar_exit : "Chiqish",
     icon: "nc-icon nc-button-power",
     component: Logout,
     layout: "",

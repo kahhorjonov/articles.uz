@@ -11,7 +11,7 @@ export function addArticle(data) {
   const bodyFormData = new FormData();
 
   bodyFormData.append("categoryId", data.data.categoryId);
-  bodyFormData.append("description", data.data.description);
+  bodyFormData.append("description", data.description);
   bodyFormData.append("authorsList", data.authors);
   bodyFormData.append("titleArticle", data.data.titleArticle);
   bodyFormData.append("publicOrPrivate", data.publicOrPrivate);
@@ -23,6 +23,7 @@ export function addArticle(data) {
   bodyFormData.append("doi", data.doi);
   bodyFormData.append("price", data.price);
   bodyFormData.append("journalsId", data.parentCategoryId);
+  bodyFormData.append("languageId", data.language);
 
   return axios({
     method: "post",
@@ -52,7 +53,7 @@ export function sendWork(articleId, status, file, description) {
 
   return axios({
     method: "post",
-    url: "http://192.168.100.27:8080/api/article/givenStatus",
+    url: apiLocal + "/article/givenStatus",
     data: bodyFormData,
     headers: {
       "Content-Type": "multipart/form-data",
@@ -211,6 +212,8 @@ export function editArticleByAdmin(data) {
     description: data.description,
     status: data.status,
   };
+
+  console.log(bodyParametrs);
 
   return axios.post(
     apiLocal + "/article/articleStatusAdministrator",

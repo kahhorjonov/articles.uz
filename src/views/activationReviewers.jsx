@@ -4,6 +4,7 @@ import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { toast } from "react-toastify";
 import { getNewRegisteredUsers, acceptReviewers } from "services/userService";
+import ru from "translations/ru";
 
 import "styles/articleActivation.css";
 
@@ -13,9 +14,14 @@ class ReviewerActivation extends Component {
 
     currentPage: 1,
     pageSize: 7,
+
+    lang: "",
   };
 
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     this.getUsers();
   }
 
@@ -75,7 +81,7 @@ class ReviewerActivation extends Component {
   };
 
   render() {
-    const { currentPage, pageSize, users: allUsers } = this.state;
+    const { currentPage, pageSize, users: allUsers, lang } = this.state;
 
     const users = paginate(allUsers, currentPage, pageSize);
 
@@ -85,7 +91,11 @@ class ReviewerActivation extends Component {
           <div className="col-md-12">
             <div className="card">
               <div className="card-header">
-                <h3>Reviewerlarni aktivlashtirish</h3>
+                <h3>
+                  {lang === "ru"
+                    ? ru.activation_rev
+                    : "Taqrizchilarni aktivlashtirish"}
+                </h3>
               </div>
               <div className="card-body">
                 {users.map((user) => (
@@ -109,7 +119,7 @@ class ReviewerActivation extends Component {
 
                       <div className="col-lg-3 col-md-6 col-sm-6 ">
                         <h5 className="bg-success text-center w-75 ml-auto mr-auto text-white p-1">
-                          Passport Nusxasi
+                          {lang === "ru" ? ru.copyPassport : "Pasport Nusxasi"}
                         </h5>
                         <div className="text-center">
                           <a
@@ -124,14 +134,16 @@ class ReviewerActivation extends Component {
                               )
                             }
                           >
-                            Download ⬇️
+                            {lang === "ru" ? ru.download : "Yuklab olish"} ⬇️
                           </a>
                         </div>
                       </div>
 
                       <div className="col-lg-3 col-md-6 col-sm-6">
                         <h5 className="bg-success text-center w-75 ml-auto mr-auto text-white p-1">
-                          Ilmiy Ishlari
+                          {lang === "ru"
+                            ? ru.reviewerRegister_9
+                            : "Ilmiy Ishlari"}
                         </h5>
                         <div className="text-center">
                           <a
@@ -149,7 +161,7 @@ class ReviewerActivation extends Component {
                               )
                             }
                           >
-                            Download ⬇️
+                            {lang === "ru" ? ru.download : "Yuklab olish"} ⬇️
                           </a>
                         </div>
                       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ru from "translations/ru";
 
 import {
   changeUserActivity,
@@ -8,14 +9,13 @@ import {
   getUserForEdit,
   profileEditFromAdmin,
 } from "services/userService";
+import Multiselect from "multiselect-react-dropdown";
+import noUser from "assets/img/no-user-image.gif";
 
 import { getAllActiveLanguages } from "services/languageService";
 import { getArticlesCheckedByReviewers } from "services/articleService";
 import { downloadMedia } from "services/mediaService";
 import { toast } from "react-toastify";
-import Multiselect from "multiselect-react-dropdown";
-
-import noUser from "assets/img/no-user-image.gif";
 
 import {
   Button,
@@ -27,7 +27,6 @@ import {
   FormGroup,
   Form,
   Input,
-  Label,
   Row,
   Col,
   ListGroup,
@@ -66,14 +65,24 @@ class UserEdit extends Component {
     checkAndCancels: "",
     checkAndRecycles: "",
     didNotAccepteds: "",
+
     selectedValues: [],
     options: [],
     codes: [],
+
+    selectedValues2: [],
+    options2: [],
+    codes2: [],
+
     checkedArticles: [],
-    selectedValues: [],
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     const userId = this.props.history.location.pathname.slice(17);
     this.setState({ userId: userId });
     this.handleGetLanguages();
@@ -86,6 +95,7 @@ class UserEdit extends Component {
         }
         this.getCheckedArticles(userId);
         this.setState({ selectedValues: res.data.object.languages });
+        this.setState({ selectedValues2: res.data.object.categories });
       })
       .catch((ex) => toast.error(ex.response.data.message));
 
@@ -100,7 +110,21 @@ class UserEdit extends Component {
         });
       })
       .catch((ex) => toast.error(ex.response.data.message));
+
+    this.handleFillDefaultIds();
   }
+
+  handleFillDefaultIds = () => {
+    this.state.selectedValues &&
+      this.state.selectedValues.map((language) =>
+        this.setState({ codes: [...this.state.codes, language.id] })
+      );
+
+    this.state.selectedValues2 &&
+      this.state.selectedValues2.map((category) =>
+        this.setState({ codes2: [...this.state.codes2, category.id] })
+      );
+  };
 
   handleGetLanguages = async () => {
     try {
@@ -186,6 +210,22 @@ class UserEdit extends Component {
     this.setState({ codes: [...newCodes] });
   };
 
+  onSelect2 = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues2: selectedList,
+    });
+
+    this.setState({ codes2: [...this.state.codes2, selectedItem.id] });
+  };
+
+  onRemove2 = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes2.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList2: selectedList });
+    this.setState({ codes2: [...newCodes] });
+  };
+
   handleChange = async (bool) => {
     try {
       await changeUserActivity(this.state.userId, bool).then((res) =>
@@ -212,10 +252,8 @@ class UserEdit extends Component {
       firstName,
       lastName,
       academicDegree,
-      categories,
       createdAt,
       email,
-      languages,
       phoneNumber,
       scientificWork,
       workExperience,
@@ -231,6 +269,7 @@ class UserEdit extends Component {
       checkAndRecycles,
       didNotAccepteds,
       checkedArticles,
+      lang,
     } = this.state;
 
     return (
@@ -253,11 +292,12 @@ class UserEdit extends Component {
                       </h5>
                     </a>
                     <p className="description">
-                      tel: {phoneNumber ? phoneNumber : "nomalum"}
+                      {lang === "ru" ? ru.login_tel : "Telefon"}:{" "}
+                      {phoneNumber ? phoneNumber : "nomalum"}
                     </p>
                   </div>
                   <p className="description text-center">
-                    Academic Degree:{" "}
+                    {lang === "ru" ? ru.reviewerRegister_6 : "Ilmiy Darajasi "}:{" "}
                     {academicDegree ? academicDegree : " mavjud emas"}
                   </p>
                 </CardBody>
@@ -280,7 +320,9 @@ class UserEdit extends Component {
                               )
                             }
                           >
-                            Download Passport
+                            {lang === "ru"
+                              ? ru.downloadPassport
+                              : "Pasportni yuklash"}
                           </Button>
                         </h5>
                       </Col>
@@ -290,7 +332,9 @@ class UserEdit extends Component {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Auth</CardTitle>
+                  <CardTitle tag="h4">
+                    {lang === "ru" ? ru.admin_edit : "Tahrirlash"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <ul className="list-unstyled team-members">
@@ -298,7 +342,9 @@ class UserEdit extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Phone Number</label>
+                            <label>
+                              {lang === "ru" ? ru.login_tel : "Telefon"}:{" "}
+                            </label>
                             <Input
                               defaultValue={phoneNumber}
                               placeholder="telefon nomer"
@@ -317,9 +363,12 @@ class UserEdit extends Component {
                       <Row>
                         <Col md="12" xs="12">
                           <FormGroup>
-                            <label>Parol</label>
+                            <label>
+                              {this.state.lang === "ru"
+                                ? ru.login_password
+                                : "Parol"}
+                            </label>
                             <Input
-                              placeholder="parol"
                               type="text"
                               onChange={(e) =>
                                 this.setState({
@@ -357,14 +406,22 @@ class UserEdit extends Component {
               <Card>
                 <ListGroup className="listgropus">
                   <ListGroupItem className="justify-content-between">
-                    <b className="pl-3">Foydalanuvchi statistikasi</b>
+                    <b className="pl-3">
+                      {lang === "ru"
+                        ? ru.info_user
+                        : "Foydalanuvchi statistikasi"}
+                    </b>
                   </ListGroupItem>
                 </ListGroup>
 
                 <ListGroup className="listgropus">
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Tekshirishga olgan maqolalar</span>{" "}
+                      <span>
+                        {lang === "ru"
+                          ? ru.user_checked
+                          : "Tekshirishga olgan maqolalar"}
+                      </span>{" "}
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -375,9 +432,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Tekshirishga olinmagan maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.user_noChecked
+                          : "Tekshirishga olinmagan maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -388,9 +449,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Maqulangan maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.user_published
+                          : "Chop etilgan maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -401,9 +466,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span> Maqulanmagan maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.maqolalar_rad_etilgan
+                          : "Maqulanmagan maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -414,9 +483,13 @@ class UserEdit extends Component {
                     </ListGroupItem>
                   </NavLink>
 
-                  <NavLink href="">
+                  <NavLink>
                     <ListGroupItem className="justify-content-between border-0">
-                      <span>Qayta ishlashga bergan Maqolalar</span>
+                      <span>
+                        {lang === "ru"
+                          ? ru.admin_4
+                          : "Qayta ishlashga bergan Maqolalar"}
+                      </span>
                       <Badge
                         style={{ fontSize: "100%" }}
                         className="badges_1"
@@ -432,17 +505,63 @@ class UserEdit extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Edit Profile</CardTitle>
+                  <CardTitle tag="h5">
+                    {lang === "ru" ? ru.edit : "Tahrirlash"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
-                      <Col className="pr-1" md="5">
+                      <Col md="6">
                         <FormGroup>
-                          <label>Ish joyi</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_1 : "Ism"}
+                          </label>
+                          <Input
+                            defaultValue={firstName}
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ firstName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md="6">
+                        <FormGroup>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_2 : "Familiya"}
+                          </label>
+                          <Input
+                            defaultValue={lastName}
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ lastName: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    {/* <Row>
+                      <Col md="12">
+                        <FormGroup>
+                          <label>Kategoriya</label>
+                          <Input
+                            defaultValue={categories ? categories[0] : "null"}
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row> */}
+
+                    <Row>
+                      <Col md="5">
+                        <FormGroup>
+                          <label>
+                            {lang === "ru" ? ru.workplace : "Ish joyi"}
+                          </label>
                           <Input
                             defaultValue={workPlace}
-                            placeholder="Company"
                             type="text"
                             onChange={(e) =>
                               this.setState({ workPlace: e.target.value })
@@ -450,9 +569,13 @@ class UserEdit extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="px-1" md="3">
+                      <Col md="3">
                         <FormGroup>
-                          <label>Ro'yxatdan o'tgan sana</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.register_date
+                              : "Ro'yxatdan o'tgan sana"}
+                          </label>
                           <Input
                             disabled
                             value={new Date(
@@ -462,7 +585,7 @@ class UserEdit extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1" md="4">
+                      <Col md="4">
                         <FormGroup>
                           <label htmlFor="exampleInputEmail1">Email</label>
                           <Input
@@ -476,45 +599,7 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
-                      <Col className="pr-1" md="6">
-                        <FormGroup>
-                          <label>First Name</label>
-                          <Input
-                            defaultValue={firstName}
-                            placeholder="Ism"
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ firstName: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="6">
-                        <FormGroup>
-                          <label>Last Name</label>
-                          <Input
-                            defaultValue={lastName}
-                            placeholder="Familiya"
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ lastName: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>Categories</label>
-                          <Input
-                            defaultValue={categories ? categories[0] : "null"}
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+
                     <Row>
                       {/* <Col className="pr-1" md="4">
                         <FormGroup>
@@ -527,9 +612,11 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col> */}
 
-                      <Col className="pr-1" md="4">
+                      <Col md="4">
                         <FormGroup>
-                          <label>Ilmiy Ishlarni yuklash</label>
+                          <label>
+                            {lang === "ru" ? ru.download : "Yuklab olish"}
+                          </label>
                           <Button
                             className="m-0"
                             style={{ width: "100%", padding: "0.75rem" }}
@@ -544,7 +631,9 @@ class UserEdit extends Component {
                               )
                             }
                           >
-                            Ilmiy Ishlarni yuklash
+                            {lang === "ru"
+                              ? ru.reviewerRegister_9
+                              : "Ilmiy ishlardan namuna"}
                           </Button>
                         </FormGroup>
                       </Col>
@@ -561,9 +650,11 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col> */}
 
-                      <Col className="px-1" md="4">
+                      <Col md="4">
                         <FormGroup>
-                          <label>Daraja</label>
+                          <label>
+                            {lang === "ru" ? ru.reviewerRegister_6 : "Daraja"}
+                          </label>
                           <Input
                             defaultValue={academicDegree}
                             placeholder="Daraja"
@@ -577,12 +668,15 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col>
 
-                      <Col className="pl-1" md="4">
+                      <Col md="4">
                         <FormGroup>
-                          <label>Work Experience (year)</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.reviewerRegister_5
+                              : "Tajriba (yil)"}
+                          </label>
                           <Input
                             defaultValue={workExperience}
-                            placeholder="Ish tajribangiz"
                             min={0}
                             type="number"
                             onChange={(e) =>
@@ -594,9 +688,25 @@ class UserEdit extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
+
                     <Row>
                       <Col md="12">
-                        <label>Languages</label>
+                        <label>
+                          {lang === "ru" ? ru.kategoriya : "Kategoriya"}
+                        </label>
+                        <Multiselect
+                          options={this.state.options2} // Options to display in the dropdown
+                          selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
+                          onSelect={this.onSelect2} // Function will trigger on select event
+                          onRemove={this.onRemove2} // Function will trigger on remove event
+                          displayValue="name" // Property name to display in the dropdown options
+                        />
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col md="12">
+                        <label>{lang === "ru" ? ru.tillar : "Tillar"}</label>
                         <Multiselect
                           options={this.state.options} // Options to display in the dropdown
                           selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
@@ -606,6 +716,7 @@ class UserEdit extends Component {
                         />
                       </Col>
                     </Row>
+
                     <Row>
                       <div className="update ml-auto mr-auto">
                         <Button
@@ -614,7 +725,7 @@ class UserEdit extends Component {
                           // type="button"
                           onClick={(e) => this.updateProfileByAdmin()}
                         >
-                          Update Profile
+                          {lang === "ru" ? ru.restore_3 : "Tasdiqlash"}
                         </Button>
                       </div>
                     </Row>
@@ -635,14 +746,13 @@ class UserEdit extends Component {
 
                         <div>
                           <Button
-                            color="danger"
                             outline
                             onClick={(e) => {
                               e.preventDefault();
                               this.handleDelete();
                             }}
                           >
-                            Delete
+                            {lang === "ru" ? ru.admin_delete : "Удалить"}
                           </Button>
                         </div>
                       </div>
@@ -651,7 +761,7 @@ class UserEdit extends Component {
                 </CardBody>
               </Card>
 
-              <Card>
+              {/* <Card>
                 <CardBody>
                   <div className="row">
                     <b className="pl-4 py-3">
@@ -687,7 +797,7 @@ class UserEdit extends Component {
                     </div>
                   </div>
                 </CardBody>
-              </Card>
+              </Card> */}
             </Col>
           </Row>
 
@@ -697,11 +807,13 @@ class UserEdit extends Component {
                 <Table>
                   <thead>
                     <tr>
-                      <th>Article Name</th>
-                      <th>Tekshirilgan Vaqti</th>
-                      <th>Status</th>
-                      <th>Xulosa</th>
-                      <th>File</th>
+                      <th>{lang === "ru" ? ru.jurnal_title : "Sarlavha"}</th>
+                      <th>
+                        {lang === "ru" ? ru.checkedDate : "Tekshirilgan Vaqti"}
+                      </th>
+                      <th>{lang === "ru" ? ru.jurnal_status : "Status"}</th>
+                      <th>{lang === "ru" ? ru.xulosa : "Xulosa"}</th>
+                      <th>{lang === "ru" ? ru.file : "Fayl"}</th>
                     </tr>
                   </thead>
                   <tbody>

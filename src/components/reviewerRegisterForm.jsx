@@ -8,10 +8,9 @@ import { toast } from "react-toastify";
 import authService from "services/authService";
 import jwtDecode from "jwt-decode";
 import Multiselect from "multiselect-react-dropdown";
-import firebase from "../firebase";
 import { getAllActiveLanguages } from "services/languageService";
-
 import { Card, CardBody, Row, Col } from "reactstrap";
+import ru from "translations/ru";
 
 import "styles/registerStyles.css";
 
@@ -24,7 +23,7 @@ class ReviewerRegisterForm extends Form {
       email: "",
       phoneNumber: "",
       password: "",
-      categoryIdList: "",
+      // categoryIdList: "",
       workPlace: "",
       workExperience: 0,
       academicDegree: "",
@@ -32,35 +31,42 @@ class ReviewerRegisterForm extends Form {
       scientificWork: [],
     },
 
-    categories: [],
+    // categories: [],
+
     errors: {},
 
-    notificationToken: "",
+    // notificationToken: "",
     selectedValues: [],
     options: [],
     codes: [],
-    checkedArticles: [],
+
+    selectedValues2: [],
+    options2: [],
+    codes2: [],
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     await this.populateCategories();
     await this.handleGetLanguage();
 
-    try {
-      const msg = firebase.messaging();
-      msg
-        .requestPermission()
-        .then(() => {
-          return msg.getToken();
-        })
-        .then((data) => {
-          this.setState({ notificationToken: data });
-        });
-    } catch (ex) {
-      toast.info(
-        "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
-      );
-    }
+    // try {
+    //   const msg = firebase.messaging();
+    //   msg
+    //     .requestPermission()
+    //     .then(() => {
+    //       return msg.getToken();
+    //     })
+    //     .then((data) => {
+    //       this.setState({ notificationToken: data });
+    //     });
+    // } catch (ex) {
+    //   toast.info(
+    //     "Iltimos sizga xabar jo'natishimiz uchun brauzer xabarnomasiga ruxsat bering!"
+    //   );
+    // }
   }
 
   handleGetLanguage = async () => {
@@ -96,7 +102,7 @@ class ReviewerRegisterForm extends Form {
     email: Joi.string().email().required().label("Email"),
     phoneNumber: Joi.string().required().label("Telefon raqami"),
     password: Joi.string().min(5).required().label("Password"),
-    categoryIdList: Joi.string().required().label("CategoryIdList"),
+    // categoryIdList: Joi.string().required().label("CategoryIdList"),
     workPlace: Joi.string().required().label("WorkPlace"),
     workExperience: Joi.number().required().label("WorkExperience"),
     academicDegree: Joi.string().required().label("AcademicDegree"),
@@ -106,13 +112,29 @@ class ReviewerRegisterForm extends Form {
 
   async populateCategories() {
     const { data: categories } = await getCategories();
-    this.setState({ categories });
+    this.setState({ options2: categories });
   }
+
+  onSelect2 = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValues2: selectedList,
+    });
+
+    this.setState({ codes2: [...this.state.codes2, selectedItem.id] });
+  };
+
+  onRemove2 = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codes2.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedList2: selectedList });
+    this.setState({ codes2: [...newCodes] });
+  };
 
   doSubmit = async () => {
     try {
       await userService
-        .registerReviewer(this.state.data, this.state.codes)
+        .registerReviewer(this.state.data, this.state.codes, this.state.codes2)
         .then((res) => {
           authService.loginWithJwt(res.data.object);
           toast.success(res.data.message);
@@ -132,13 +154,18 @@ class ReviewerRegisterForm extends Form {
         errors.username = ex.response.data;
         this.setState({ errors });
       }
+      toast.info(ex.response.data.message);
     }
   };
 
   render() {
     return (
       <div className="registerForm">
-        <h3 style={{ textAlign: "center" }}>Reviewer Register Form</h3>
+        <h3 style={{ textAlign: "center" }}>
+          {this.state.lang === "ru"
+            ? ru.register_2
+            : "Taqrizchi sifatida ro'yxatdan o'tish"}
+        </h3>
         <div className="col-md-8 m-auto">
           <Card className="user-card card">
             <Row className="mr-0 ml-0">
@@ -146,53 +173,99 @@ class ReviewerRegisterForm extends Form {
                 <CardBody style={{ textAlign: "center" }}>
                   <Row>
                     <Col md="4" sm="6" lg="4">
-                      {this.renderInput("firstName", "Ismi")}
+                      {this.renderInput(
+                        "firstName",
+                        this.state.lang === "ru" ? ru.reviewerRegister_1 : "Ism"
+                      )}
                     </Col>
                     <Col md="4" sm="6" lg="4">
-                      {this.renderInput("lastName", "Familiyasi")}
+                      {this.renderInput(
+                        "lastName",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_2
+                          : "Familiya"
+                      )}
                     </Col>
                     <Col md="4" lg="4">
-                      {this.renderInput("fatherName", "Sharifi")}
+                      {this.renderInput(
+                        "fatherName",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_3
+                          : "Otasining Ismi"
+                      )}
                     </Col>
                   </Row>
                   <Row>
                     <Col md="4" sm="4" className="app">
                       {/* {this.renderInput("phoneNumber", "Telefon raqami")} */}
-                      {this.renderLoginInput("phoneNumber", "Telefon raqami")}
+                      {this.renderLoginInput(
+                        "phoneNumber",
+                        this.state.lang === "ru" ? ru.login_tel : "Telefon"
+                      )}
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderInput("email", "Email", "email")}
                     </Col>
                     <Col md="4" sm="4">
-                      {this.renderInput("password", "Password", "password")}
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="3" sm="3">
-                      {this.renderSelect(
-                        "categoryIdList",
-                        "CategoryIdList",
-                        this.state.categories
+                      {this.renderInput(
+                        "password",
+                        this.state.lang === "ru" ? ru.login_password : "Parol",
+                        "password"
                       )}
                     </Col>
-                    <Col md="3" sm="3">
-                      {this.renderInput("workPlace", "WorkPlace")}
+                  </Row>
+
+                  <Row>
+                    <Col md="12">
+                      <label>
+                        {this.state.lang === "ru"
+                          ? ru.kategoriya
+                          : "Kategoriya"}
+                      </label>
+                      <Multiselect
+                        options={this.state.options2} // Options to display in the dropdown
+                        selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
+                        onSelect={this.onSelect2} // Function will trigger on select event
+                        onRemove={this.onRemove2} // Function will trigger on remove event
+                        displayValue="name" // Property name to display in the dropdown options
+                      />
                     </Col>
-                    <Col md="3" sm="3">
+                  </Row>
+
+                  <Row>
+                    <Col md="4" sm="4">
+                      {this.renderInput(
+                        "workPlace",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_4
+                          : "Ish joyi"
+                      )}
+                    </Col>
+                    <Col md="4" sm="4">
                       {this.renderInput(
                         "workExperience",
-                        "WorkExperience",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_5
+                          : "Tajribasi (yil)",
                         "number"
                       )}
                     </Col>
-                    <Col md="3" sm="3">
-                      {this.renderInput("academicDegree", "AcademicDegree")}
+                    <Col md="4" sm="4">
+                      {this.renderInput(
+                        "academicDegree",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_6
+                          : "Ilmiy Darajasi"
+                      )}
                     </Col>
                   </Row>
                   <Row>
                     <Col md="4" sm="4">
-                      <label>Languages</label>
+                      <label>
+                        {this.state.lang === "ru" ? ru.tillar : "Tillar"}
+                      </label>
                       <Multiselect
+                        id="search_input2"
                         options={this.state.options} // Options to display in the dropdown
                         selectedValues={this.state.selectedValues} // Preselected value to persist in dropdown
                         onSelect={this.onSelect} // Function will trigger on select event
@@ -201,26 +274,42 @@ class ReviewerRegisterForm extends Form {
                       />
                     </Col>
                     <Col md="4" sm="4">
-                      {this.renderPassportInput("passport", "Passport", "file")}
+                      {this.renderPassportInput(
+                        "passport",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_7
+                          : "Pasport",
+                        "file"
+                      )}
                     </Col>
                     <Col md="4" sm="4">
                       {this.renderWorksInput(
                         "scientificWork",
-                        "Qilingan ishlardan namuna",
+                        this.state.lang === "ru"
+                          ? ru.reviewerRegister_8
+                          : "Образец выполненной работы * (zip, 7zip, rar)",
                         "file"
                       )}
                     </Col>
                   </Row>
-                  <div className="bt mt-5">{this.renderButton("Register")}</div>
+                  <div className="bt mt-5">
+                    {this.renderButton(
+                      this.state.lang === "ru"
+                        ? ru.login_register
+                        : "Ro'yxatdan o'tish"
+                    )}
+                  </div>
                 </CardBody>
               </form>
             </Row>
           </Card>
         </div>
 
-        <h3>Akkauntingiz bormi?</h3>
+        <h3>
+          {this.state.lang === "ru" ? ru.register_3 : "Akkauntingiz bormi?"}
+        </h3>
         <Link style={{ fontSize: "2rem" }} to="/login">
-          Profilga kirish
+          {this.state.lang === "ru" ? ru.login_h2 : "Profilga kirish"}
         </Link>
       </div>
     );

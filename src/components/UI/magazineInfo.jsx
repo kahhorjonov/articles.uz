@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "services/authService";
 import { downloadMedia } from "services/mediaService";
+import ru from "translations/ru";
 
 import {
   getById,
@@ -22,9 +23,14 @@ class MagazineInfo extends Component {
     magazines: [],
     cover: "",
     user: "",
+
+    lang: "",
   };
 
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     try {
       const user = getCurrentUser() && getCurrentUser().roles[0].id;
       this.setState({ user });
@@ -96,16 +102,22 @@ class MagazineInfo extends Component {
   render() {
     const { title, category, deadline } = this.state.magazineInfo;
 
-    const { years, magazines } = this.state;
+    const { years, magazines, lang } = this.state;
+
     return (
       <>
         <div className="content">
           <div className="card">
             <div className="card-body">
               <div className="container magazineInfo">
-                <h1>“{title}” ilmiy jurnali</h1>
+                <h1>
+                  “{title}” {lang === "ru" ? ru.ilmiy_jurnal : "ilmiy jurnali"}
+                </h1>
                 <p style={{ fontSize: "16px" }} className="art_ilmiy">
-                  ARTICLES.UZ ilmiy jurnallari / {category && category.name}
+                  ARTICLES.UZ{"  "}
+                  {lang === "ru"
+                    ? ru.ilmiy_jurnallar
+                    : " Ilmiy jurnallar"} / {category && category.name}
                 </p>
 
                 <div className="row mr-0 ml-0">
@@ -116,11 +128,22 @@ class MagazineInfo extends Component {
                     />
 
                     <h3>
-                      {this.state.magazineInfo &&
-                        new Date(
-                          this.state.magazineInfo.createdAt
-                        ).getFullYear()}{" "}
-                      yildan buyon chiqadi <br />
+                      {this.state.lang === "ru" ? (
+                        <span>
+                          Выходит с{" "}
+                          {new Date(
+                            this.state.magazineInfo.createdAt
+                          ).getFullYear()}
+                        </span>
+                      ) : (
+                        <span>
+                          {new Date(
+                            this.state.magazineInfo.createdAt
+                          ).getFullYear()}{" "}
+                          dan buyon chiqadi
+                        </span>
+                      )}
+                      <br />
                       ISBN:{" "}
                       <span style={{ fontSize: "16px" }} className="text-muted">
                         {this.state.magazineInfo &&
@@ -133,71 +156,113 @@ class MagazineInfo extends Component {
                           this.state.magazineInfo.issn}
                       </span>{" "}
                       <br />
-                      Ommaviy axborot vositalarini ro'yxatga olish to'g'risida:
+                      {lang === "ru"
+                        ? ru.jurnal8
+                        : "Ommaviy axborot vositalarini ro'yxatga olish to'g'risida:"}
                       <br />
                       <span style={{ fontSize: "16px" }} className="text-muted">
                         № {this.state.magazineInfo.certificateNumber}
                       </span>
                     </h3>
 
-                    <p style={{ fontSize: "16px" }}>
-                      Jurnal aloqa, axborot texnologiyalari va ommaviy
-                      kommunikatsiyalar sohasida nazorat bo'yicha Federal
-                      xizmati (Roskomnadzor), ro'yxatga olish raqami el
-                      №FS77-64808 02.02.2016 Bu haqda "RIA Novosti" axborot
-                      agentligi xabar berdi.» Bosh muharrir-Konorev Marat
-                      Ruslanovich.
-                    </p>
+                    {/* <p style={{ fontSize: "16px" }}>
+                      {lang === "ru"
+                        ? ru.jurnal9
+                        : "Jurnal aloqa, axborot texnologiyalari va ommaviy kommunikatsiyalar sohasida nazorat bo'yicha Federal xizmati (Roskomnadzor), ro'yxatga olish raqami el №FS77-64808 02.02.2016 Bu haqda `RIA Novosti` axborot agentligi xabar berdi.» Bosh muharrir-Konorev Marat Ruslanovich."}
+                    </p> */}
                   </div>
                   <div className="col-lg-8">
                     <p style={{ fontSize: "16px" }}>
-                      <strong className="pr-3">Ko'rib chiqish:</strong>
+                      <strong className="pr-3">
+                        {lang === "ru" ? ru.jurnal : "Jurnal : "}{" "}
+                      </strong>
                       <span>
                         {this.state.magazineInfo &&
                           this.state.magazineInfo.description}
                       </span>
                     </p>
                     <p style={{ fontSize: "16px" }}>
-                      <strong>Jurnalning chiqarilish</strong>i maqolalar qabul
-                      qilingandan so'ng{" "}
-                      {this.state.magazineInfo &&
-                        this.state.magazineInfo.printedDate}{" "}
-                      kun ichida saytda e'lon qilinadi.
+                      <strong>
+                        {lang === "ru" ? ru.jurnal1 : "Jurnalning chiqarilishi"}
+                      </strong>{" "}
+                      {lang === "ru"
+                        ? ru.jurnal2
+                        : "maqolalar qabul qilingandan so'ng"}{" "}
+                      <strong>
+                        {this.state.magazineInfo &&
+                          this.state.magazineInfo.printedDate}{" "}
+                      </strong>
+                      {lang === "ru"
+                        ? ru.jurnal_kun
+                        : "kun ichida saytda e'lon qilinadi."}
                     </p>
 
                     <p style={{ fontSize: "16px" }}>
-                      <strong>Maqolaning chiqish ma'lumotlari</strong> - nashr
-                      uchun to'lov kunida jurnal saytida.
+                      {lang === "ru" ? (
+                        ru.jurnal3
+                      ) : (
+                        <span>
+                          <strong>
+                            Maqolaning chiqish haqidagi ma'lumotlari
+                          </strong>{" "}
+                          sms tarzida yetkaziladi.
+                        </span>
+                      )}
                     </p>
-                    <p style={{ fontSize: "16px" }}>
+
+                    {/* <p style={{ fontSize: "16px" }}>
                       <strong>Jurnalni pochta orqali jo'natish</strong>
                       Rossiya maqolalar qabul qilingandan so'ng 20 kun.
-                    </p>
-                    <p>
-                      <strong>Ilmiy bazalar</strong>- 15 kundan so'ng, barcha
-                      maqolalar quyidagilarga yuboriladi:
+                    </p> */}
+
+                    <p style={{ fontSize: "16px" }}>
+                      {lang === "ru" ? (
+                        ru.jurnal4
+                      ) : (
+                        <span>
+                          <strong>Ilmiy bazalar </strong> 15 kundan so'ng,
+                          barcha maqolalar quyidagilarga yuboriladi:
+                        </span>
+                      )}
                     </p>
 
                     <p style={{ fontSize: "16px" }}>
-                      <strong>- eLIBRARY.RU:</strong>
-                      ilmiy elektron kutubxona eLIBRARY.RU bir oyda bir
-                      milliondan ortiq noyob foydalanuvchilarga tashrif
-                      buyuradi.
+                      {lang === "ru" ? (
+                        ru.jurnal5
+                      ) : (
+                        <span>
+                          <strong> - eLIBRARY.RU: </strong>
+                          ilmiy elektron kutubxona bir oyda bir milliondan ortiq
+                          noyob foydalanuvchilarga tashrif buyuradi.
+                        </span>
+                      )}
                     </p>
+
                     <p style={{ fontSize: "16px" }}>
-                      <strong>- Ulrichning Periodicals Directory:</strong>
-                      dunyoning eng yirik ma'lumotlar bazasi bo'lgan va barcha
-                      ilmiy muassasalar tomonidan ma'lumot va axborot ishlarida
-                      foydalaniladigan davriy nashrlarning xalqaro katalogi.
+                      {lang === "ru" ? (
+                        ru.jurnal6
+                      ) : (
+                        <span>
+                          <strong> - Ulrich's Periodicals Directory :</strong>{" "}
+                          международный каталог периодических изданий, который
+                          является крупнейшей в мире базой данных и используется
+                          всеми академическими учреждениями для информации и
+                          информационной работы.
+                        </span>
+                      )}
                     </p>
-                    <p>
+
+                    <p style={{ fontSize: "16px" }}>
                       <strong>- GoogleScholar.</strong>
                     </p>
+
                     <p style={{ fontSize: "16px" }}>
-                      Jurnalda maqola chop etish uchun ariza berish bir necha
-                      daqiqada bo'lishi mumkin.
+                      {lang === "ru"
+                        ? ru.jurnal7
+                        : "Jurnalda maqola chop etish uchun ariza berish bir necha daqiqada amalga oshiriladi"}
                     </p>
-                    <p style={{ fontSize: "16px" }}>
+
+                    {/* <p style={{ fontSize: "16px" }}>
                       Kimyo, biologiya va tibbiyot bilan chambarchas bog'liq
                       bo'lgan boshqa fanlarning rivojlanishi tufayli fan
                       rivojlanishning yuqori darajasiga chiqdi. Tibbiy ilmiy
@@ -207,6 +272,7 @@ class MagazineInfo extends Component {
                       tadqiqotlarini hamkasblari va barcha manfaatdor tomonlar
                       bilan baham ko'rishga yordam beradi.
                     </p>
+
                     <p style={{ fontSize: "16px" }}>
                       Tibbiyot jurnalida ilmiy ishni nashr etish uchun
                       soddalashtirilgan ariza berish ko'plab muammolarni hal
@@ -220,12 +286,12 @@ class MagazineInfo extends Component {
                       Nashrlarning, shu jumladan, tibbiyot sohasida elektron
                       nashr etish tizimi o'zini to'liq oqlaydi, bu uning har
                       tomonlama rivojlanishini isbotlaydi.
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
 
-              <div className="gernMaqola">
+              {/* <div className="gernMaqola">
                 <div className="container">
                   <div className="col-lg-12">
                     <p style={{ fontSize: "16px" }}>
@@ -234,24 +300,29 @@ class MagazineInfo extends Component {
                         new Date(deadline).toISOString().slice(0, 10)}{" "}
                       da saytda e’lon qilinadi
                     </p>
+
                     <h3>
-                      “{title}” ilmiy jurnaliga maqolalar{" "}
-                      {deadline &&
-                        new Date(deadline).toISOString().slice(0, 10)}{" "}
-                      gacha qabul qilinadi.
+                      “{title}”{" "}
+                      {lang === "ru"
+                        ? ru.main_deadline
+                        : "ilmiy jurnaliga maqolalar qabul qilish oxirgi sanasi"}{" "}
+                      {deadline && new Date(deadline).toLocaleDateString()}{" "}
                     </h3>
+
                     <Link to="/login">
-                      <button className="btn btn-dark">Maqola Yuborish</button>
+                      <button className="btn btn-dark">
+                        {lang === "ru" ? ru.nav_yuklash : "Maqola Yuborish"}
+                      </button>
                     </Link>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Archive for admin page */}
 
               <div className="col-lg-12 ui3 px-0">
                 <div className="container arxive">
-                  <h2>Jurnal arxivi</h2>
+                  <h2>{lang === "ru" ? ru.jurnal_arxiv : "Jurnal arxivi"}</h2>
 
                   <ul className="nav nav-pills">
                     {years &&
@@ -282,7 +353,19 @@ class MagazineInfo extends Component {
                         {magazines &&
                           magazines.map((magazine) => (
                             <div key={magazine.id} className="col-lg-3">
-                              <GetImages url={magazine.cover.id} />
+                              <Link
+                                to={
+                                  this.state.user === 3
+                                    ? `/reviewer/reviewerArchive/:${magazine.id}`
+                                    : this.state.user === 4
+                                    ? `/user/userArchive/:${magazine.id}`
+                                    : `/release/:${magazine.id}`
+                                }
+                              >
+                                <div className="boxShadow">
+                                  <GetImages url={magazine.cover.id} />
+                                </div>
+                              </Link>
 
                               <Link
                                 style={{

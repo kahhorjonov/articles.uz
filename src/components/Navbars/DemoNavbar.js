@@ -4,6 +4,8 @@ import notificationServices from "services/notificationService";
 import HomeRoutes from "homeRoutes";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "services/authService";
+import LanguageSelect from "components/Navbars/languageSelect";
+import ru from "translations/ru";
 
 import {
   Collapse,
@@ -32,6 +34,7 @@ function Header(props) {
   const location = useLocation();
 
   const token = localStorage.getItem("token");
+  const language = localStorage.getItem("lang");
 
   const getNotifications = async () => {
     try {
@@ -39,7 +42,7 @@ function Header(props) {
         .getNotifications()
         .then((res) => setNotifications(res.data));
     } catch (ex) {
-      console.log(ex);
+      toast.error(ex.response.data.message);
     }
   };
 
@@ -214,6 +217,8 @@ function Header(props) {
                     <i className="nc-icon nc-settings-gear-65" />
                   </Link>
                 </NavItem>
+
+                <LanguageSelect />
               </Nav>
             </Collapse>
           </Container>
@@ -223,8 +228,21 @@ function Header(props) {
   } else
     return (
       <>
+        <div
+          className="home_pages"
+          style={{
+            display: "flex",
+            justifyContent: "end",
+            padding: "1rem 1rem 0 0",
+          }}
+        >
+          <LanguageSelect />
+        </div>
+
         <div className="container home_pages p-0">
-          <div className="col-md-12 rel"></div>
+          {/* <div className="col-sm-3 col-md-2 col-lg-1 rel">
+            <LanguageSelect />
+          </div> */}
           <nav className="navbar navbar-expand-md mb-0">
             <NavLink className="navbar-brand brands" to="/">
               <h1
@@ -256,15 +274,19 @@ function Header(props) {
                   );
                 })}
 
+                {/* <li className="nav-item">
+                  <LanguageSelect />
+                </li> */}
+
                 <li className="nav-item">
                   <Link to="/login">
                     <button className="btn border btn-light buttons">
-                      Tizimga kirish
+                      {language === "ru" ? ru.nav_kirish : "Tizimga kirish"}
                     </button>
                   </Link>
                 </li>
 
-                <li className="nav-item ">
+                {/* <li className="nav-item ">
                   <div className="d-flex pos">
                     <div>
                       <span className="text-muted pl-2">
@@ -279,7 +301,7 @@ function Header(props) {
                       </span>
                     </div>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </div>
           </nav>

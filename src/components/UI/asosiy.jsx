@@ -7,21 +7,29 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getActiveMagazines } from "services/magazineService";
 import GetImages from "utils/getImages";
+import { BeatLoader } from "react-spinners";
+import ru from "translations/ru";
 
 import "styles/homePage.css";
 
 class Asosiy extends React.Component {
   state = {
     magazines: [],
-
+    loading: true,
     data: "",
+
+    lang: "",
   };
 
   componentDidMount = async () => {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang: lang });
+
     try {
-      await getActiveMagazines().then((res) =>
-        this.setState({ magazines: res.data })
-      );
+      await getActiveMagazines().then((res) => {
+        this.setState({ magazines: res.data });
+        this.setState({ loading: false });
+      });
     } catch (ex) {
       toast.error(ex.response.data.message);
     }
@@ -36,37 +44,54 @@ class Asosiy extends React.Component {
           <div className="container">
             <div className="col-md-10 pl-0  maqola_nashir">
               <h1>
-                Maqolalar nashr qilish uchun <br />
-                Articles.uz ilmiy onlayn jurnallari
+                {this.state.lang === "ru"
+                  ? ru.main_h1
+                  : "Maqolalar nashr qilish uchun Articles.uz ilmiy onlayn jurnallari"}
               </h1>
-              <p>Quyida maqolalar qabul qilinayotgan jurnallar ro’yxati</p>
+              <p>
+                {this.state.lang === "ru"
+                  ? ru.main_p
+                  : "Quyida maqolalar qabul qilinayotgan jurnallar ro’yxati"}
+              </p>
             </div>
 
             <div className="article_rows row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 pl-0">
-              {magazines &&
-                magazines.map((magazine) => (
-                  <div key={magazine.id} className="col-md-4 card-articles">
-                    <div className="border-0">
-                      <GetImages url={magazine.cover.id} />
-
-                      <div className="card-body p-0">
-                        <h4 className="card_title">
+              {this.state.loading ? (
+                <BeatLoader size={40} loading={this.state.loading} />
+              ) : (
+                <>
+                  {magazines &&
+                    magazines.map((magazine) => (
+                      <div key={magazine.id} className="col-md-4 card-articles">
+                        <div className="border-0">
                           <Link to={`/main/magazineInfo/:${magazine.id}`}>
-                            {magazine.title}
+                            <div className="boxShadow">
+                              <GetImages url={magazine.cover.id} />
+                            </div>
                           </Link>
-                        </h4>
 
-                        <p className="card_text">
-                          Maqolalar qabul qilish muddati <br />
-                          {new Date(magazine.deadline)
-                            .toISOString()
-                            .slice(0, 10)}{" "}
-                          gacha
-                        </p>
+                          <div className="card-body p-0">
+                            <h4 className="card_title">
+                              <Link to={`/main/magazineInfo/:${magazine.id}`}>
+                                {magazine.title}
+                              </Link>
+                            </h4>
+
+                            <p className="card_text">
+                              {this.state.lang === "ru"
+                                ? ru.main_deadline
+                                : "Maqolalar qabul qilish muddati"}
+                              <br />
+                              {new Date(magazine.deadline)
+                                .toISOString()
+                                .slice(0, 10)}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    ))}
+                </>
+              )}
             </div>
           </div>
 

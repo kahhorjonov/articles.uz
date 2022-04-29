@@ -7,11 +7,23 @@ import {
   FullscreenControl,
   ZoomControl,
 } from "react-yandex-maps";
+import ru from "translations/ru";
+
+import { BsTelegram, BsFacebook } from "react-icons/bs";
+import instagram from "assets/img/icons8-instagram.svg";
 
 import "styles/aloqa.css";
 
-
 class Aloqa extends Component {
+  state = {
+    lang: "",
+  };
+
+  componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang: lang });
+  }
+
   render() {
     return (
       <>
@@ -19,13 +31,20 @@ class Aloqa extends Component {
           <div className="container">
             <div className="row ml-0 mr-0">
               <div className="col-lg-6  px-0">
-                <h1 style={{ fontWeight: "bold" }}>Biz bilan bog'lanish</h1>
+                <h1 style={{ fontWeight: "bold" }}>
+                  {this.state.lang === "ru"
+                    ? ru.main_boglanish
+                    : "Biz bilan bog'lanish"}
+                </h1>
                 <p style={{ fontSize: "1.8rem" }}>
-                  Savollaringiz yoki takliflaringiz bormi? Muammolar bormi? Biz
-                  har qanday vaziyatda muloqot qilishdan mamnunmiz!
+                  {this.state.lang === "ru"
+                    ? ru.aloqa_1
+                    : "Savollaringiz yoki takliflaringiz bormi? Muammolar bormi? Biz har qanday vaziyatda muloqot qilishdan mamnunmiz!"}
                 </p>
 
-                <h4 style={{ fontWeight: "bold" }}>Telefon:</h4>
+                <h4 style={{ fontWeight: "bold" }}>
+                  {this.state.lang === "ru" ? ru.login_tel : "Telefon"}
+                </h4>
                 <p
                   style={{ textDecoration: "none", color: "black" }}
                   href="tel:+998998332411"
@@ -38,7 +57,7 @@ class Aloqa extends Component {
                   </a>
                 </p>
 
-                <h4 style={{ fontWeight: "bold" }}>Email:</h4>
+                <h4 style={{ fontWeight: "bold" }}>Email :</h4>
                 <a
                   style={{
                     textDecoration: "none",
@@ -50,14 +69,53 @@ class Aloqa extends Component {
                   anvark87@gmail.com
                 </a>
 
-                <h4 style={{ fontWeight: "bold" }}>Manzil:</h4>
-                <p style={{ fontSize: "2rem" }}>
-                  Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi,
-                  QORASUV 6-MAVZE, 1-UY, 55-XONA
+                <h4 style={{ fontWeight: "bold" }}>
+                  {this.state.lang === "ru" ? ru.adres : "Manzil"}
+                </h4>
+                <p
+                  className="col-sm-10 col-md-10 col-lg-10 px-0"
+                  style={{ fontSize: "2rem" }}
+                >
+                  {this.state.lang === "ru"
+                    ? ru.main_adres
+                    : "Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi, QORASUV 6-MAVZE, 1-UY, 55-XONA"}
                 </p>
 
-                <h4 style={{ fontWeight: "bold" }}>Bizni kuzatib boring:</h4>
-                <p
+                <h4 style={{ fontWeight: "bold" }}>
+                  {this.state.lang === "ru"
+                    ? ru.tarmoqlar
+                    : "Ijtimoiy tarmoqlar:"}
+                </h4>
+
+                <div className="d-flex align-items-center">
+                  <a
+                    style={{ paddingRight: "1rem" }}
+                    href="https://telegram.me/Uzb1511"
+                  >
+                    <BsTelegram size={25} style={{ color: "	#0088cc" }} />
+                  </a>
+
+                  {/* <a href="#" className="px-5">
+                    <FaInstagramSquare size={25} className="instagramLogo" />
+                  </a> */}
+
+                  <a
+                    href="https://www.instagram.com/avto.intalim.uz/"
+                    style={{ paddingRight: "1rem" }}
+                  >
+                    <img
+                      style={{ width: "35px", height: "35px" }}
+                      src={instagram}
+                    />
+                    {/* <FaInstagramSquare size={25} className="instagramLogo" /> */}
+                  </a>
+
+                  <a href="https://www.instagram.com/avto.intalim.uz/">
+                    <BsFacebook size={25} style={{ color: "#3b5998" }} />
+                  </a>
+                </div>
+
+                {/* <p
                   style={{ fontSize: "2rem" }}
                   className="col-md-7 col-lg-7 col-sm-7 p-0"
                 >
@@ -70,7 +128,7 @@ class Aloqa extends Component {
                   <a style={{ color: "#5A5A5A" }} href="">
                     Instagram
                   </a>
-                </p>
+                </p> */}
               </div>
 
               <div className="col-lg-6 col-sm-6">
@@ -80,11 +138,11 @@ class Aloqa extends Component {
                       width={"100%"}
                       height={"65vh"}
                       defaultState={{
-                        center: [41.327845, 69.285692],
+                        center: [41.319014, 69.351063],
                         zoom: 15,
                       }}
                     >
-                      <Placemark geometry={[41.327845, 69.285692]} />
+                      <Placemark geometry={[41.319014, 69.351063]} />
                       <TypeSelector options={{ float: "right" }} />
                       <FullscreenControl />
                       <ZoomControl options={{ float: "left" }} />

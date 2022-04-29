@@ -6,23 +6,25 @@ import { getChildCategories } from "services/getCategories";
 import { getActiveMagazines } from "services/magazineService";
 import { getUsersById } from "services/userService";
 import { getPrices } from "services/priceService";
+import { getAllActiveLanguages } from "services/languageService";
 import { me } from "services/authService";
+import ru from "translations/ru";
 
-import { Card, CardBody, Input, Label, Row, Col } from "reactstrap";
+import { Card, CardBody, Input, Label, Row, Col, FormGroup } from "reactstrap";
 
 import { toast } from "react-toastify";
 
 import "styles/articleForm.css";
-import "styles/multipleTags.scss";
+import "styles/multipleTags.css";
 
 class ArticleForm extends Form {
   state = {
     data: {
       titleArticle: "",
-      description: "",
       categoryId: "",
       file: [],
     },
+    description: "",
 
     publicOrPrivate: "False",
     tags: [],
@@ -44,18 +46,27 @@ class ArticleForm extends Form {
     authors: [],
 
     articlePrice: [],
+
+    lang: "",
+    langs: [],
+    language: "",
   };
 
   schema = {
     titleArticle: Joi.string().required().label("Article Title"),
     categoryId: Joi.string().required().label("Category Id"),
-    description: Joi.string().required().min(0).max(200).label("Description"),
+    // description: Joi.string().required().min(0).max(200).label("Description"),
     file: Joi.required().label("File"),
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     await this.populateCategories();
     this.getArticlePrice();
+
+    await this.populateLanguages();
 
     await me().then((res) => {
       this.addTags(res.data.code.toString());
@@ -77,6 +88,17 @@ class ArticleForm extends Form {
     try {
       await getActiveMagazines().then((res) => {
         this.setState({ parentCategories: res.data });
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+    }
+  }
+
+  async populateLanguages() {
+    try {
+      await getAllActiveLanguages().then((res) => {
+        this.setState({ langs: res.data });
+        this.setState({ language: res.data[0].id });
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -203,8 +225,7 @@ class ArticleForm extends Form {
   };
 
   render() {
-    const { articlePrice } = this.state;
-    const { inputFields } = this.state;
+    const { articlePrice, inputFields, lang, langs } = this.state;
 
     const {
       bittaBosmaJunalNarxi,
@@ -229,10 +250,12 @@ class ArticleForm extends Form {
                   }}
                 >
                   <Col sm="6" md="6" lg="6">
-                    <span style={{ fontSize: "4rem" }}>Article Form</span>
+                    <span style={{ fontSize: "4rem" }}>
+                      {lang === "ru" ? ru.nav_yuklash : "Ariza berish"}
+                    </span>
                   </Col>
                   <Col sm="6" md="6" lg="6">
-                    <label>Jurnalni tanlang</label>
+                    {/* <label>Jurnalni tanlang</label> */}
                     <Input
                       sm="6"
                       md="6"
@@ -249,7 +272,9 @@ class ArticleForm extends Form {
                         }
                       }}
                     >
-                      <option value="">Jurnalni tanlang</option>
+                      <option value="">
+                        {lang === "ru" ? ru.mag_option : "Jurnalni tanlang"}
+                      </option>
 
                       {this.state.parentCategories &&
                         this.state.parentCategories.map((category) => (
@@ -263,26 +288,29 @@ class ArticleForm extends Form {
 
                 <form onSubmit={this.handleSubmit}>
                   <Row>
-                    <Col lg="8">
-                      {this.renderInput("description", "Description")}
+                    <Col md="6" lg="6" sm="6">
+                      {this.renderInput(
+                        "titleArticle",
+                        lang === "ru" ? ru.jurnal_title : "Sarlavha"
+                      )}
                     </Col>
 
-                    <Col lg="4">
-                      {this.renderInput("titleArticle", "Title")}
+                    <Col md="6" lg="6" sm="6">
+                      {this.renderSelect(
+                        "categoryId",
+                        lang === "ru" ? ru.kategoriya : "Kategoriya",
+                        this.state.childCategories
+                      )}
                     </Col>
                   </Row>
 
                   <Row>
-                    <Col md="4" lg="4">
-                      {this.renderSelect(
-                        "categoryId",
-                        "Categories",
-                        this.state.childCategories
-                      )}
-                    </Col>
-                    <Col sm="4" md="4" lg="4">
+                    <Col sm="3" md="3" lg="3">
                       <div>
-                        <label>Public Or Private</label>
+                        <label>
+                          {lang === "ru" ? ru.jurnal_public : "Ommaviyligi"}
+                        </label>
+
                         <Input
                           defaultValue="false"
                           type="select"
@@ -292,19 +320,54 @@ class ArticleForm extends Form {
                             this.setState({ publicOrPrivate: e.target.value })
                           }
                         >
-                          <option value="false">False</option>
-                          <option value="true">True</option>
+                          <option value="false">
+                            {lang === "ru" ? "Нет" : "Yo'q"}
+                          </option>
+                          <option value="true">
+                            {lang === "ru" ? "Да" : "Ha"}
+                          </option>
                         </Input>
                       </div>
                     </Col>
-                    <Col sm="4" md="4" lg="4">
-                      {this.renderFileInput("file", "File", "file")}
+
+                    <Col sm="3" md="3" lg="3">
+                      <div>
+                        <label>{lang === "ru" ? ru.tillar : "Tili"}</label>
+
+                        <Input
+                          defaultValue={langs.length && langs[0].id}
+                          type="select"
+                          style={{ height: "3rem" }}
+                          className="form-control"
+                          onChange={(e) =>
+                            this.setState({ language: e.target.value })
+                          }
+                        >
+                          {langs &&
+                            langs.map((lang) => (
+                              <option key={lang.id} value={lang.id}>
+                                {lang.name}
+                              </option>
+                            ))}
+                        </Input>
+                      </div>
+                    </Col>
+
+                    <Col sm="6" md="6" lg="6">
+                      {this.renderFileInput(
+                        "file",
+                        lang === "ru" ? ru.file : "Fayl",
+                        "file"
+                      )}
                     </Col>
                   </Row>
+
                   <Row>
                     <Col sm="3" md="3" lg="3">
                       <div>
-                        <label>Sahifa soni</label>
+                        <label>
+                          {lang === "ru" ? ru.sahifa_soni : "Sahifa soni"}
+                        </label>
                         <Input
                           className="form-control"
                           placeholder="0"
@@ -317,7 +380,9 @@ class ArticleForm extends Form {
                     </Col>
 
                     <Col sm="3" md="3" lg="3">
-                      <Label>Bosma jurnal soni</Label>
+                      <Label>
+                        {lang === "ru" ? ru.jurnal_soni : "Bosma jurnal soni"}
+                      </Label>
                       <Input
                         min="0"
                         type={"number"}
@@ -330,8 +395,11 @@ class ArticleForm extends Form {
                         }}
                       />
                     </Col>
+
                     <Col sm="3" md="3" lg="3">
-                      <Label>Sertifikat soni</Label>
+                      <Label>
+                        {lang === "ru" ? ru.sertificat_soni : "Sertifikat soni"}
+                      </Label>
                       <input
                         min="0"
                         type={"number"}
@@ -342,6 +410,7 @@ class ArticleForm extends Form {
                         }}
                       />
                     </Col>
+
                     <Col sm="3" md="3" lg="3">
                       <div>
                         <Label>Doi</Label>
@@ -365,69 +434,111 @@ class ArticleForm extends Form {
                     <Col sm="3" md="3" lg="3">
                       <div className="hisoblash mt-5">
                         <h6 className="pl-1">
-                          Sahifa narxi
+                          {lang === "ru" ? ru.pagePrice : "Saxifa narxi"}
                           <span className="pl-3 text-dark pl-2">
-                            {sahifaNarxi} so'm
+                            {sahifaNarxi} {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                         </h6>
                         <h6 className="pl-1">
                           {this.state.sahifaSoni} X {sahifaNarxi} =
                           <span className="text-darck pl-2">
-                            {sahifaNarxi * this.state.sahifaSoni} so'm
+                            {sahifaNarxi * this.state.sahifaSoni}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                         </h6>
                         <hr />
 
                         <h6 className="pl-1">
-                          Bosma Jurnal Narxi:
+                          {lang === "ru"
+                            ? ru.printPrice2
+                            : "Bosma Jurnal Narxi"}
+                          :
                           <span className="pl-3 text-darck pl-2">
-                            {bittaBosmaJunalNarxi} so'm
+                            {bittaBosmaJunalNarxi}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                           <p>
                             {this.state.bosmaJurnalSoni} x{" "}
                             {bittaBosmaJunalNarxi} ={" "}
-                            {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}
+                            {bittaBosmaJunalNarxi * this.state.bosmaJurnalSoni}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </p>
                         </h6>
                         <hr />
                         <h6 className="pl-1">
-                          Sertifikat narxi:
+                          {lang === "ru"
+                            ? ru.sertificatePrice
+                            : "Sertfikat narxi"}
+                          :
                           <span className="pl-3 text-darck pl-2">
-                            {bittaSertifikatNarxi} so'm
+                            {bittaSertifikatNarxi}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </span>
                           <p>
                             {this.state.sertifikatSoni} x {bittaSertifikatNarxi}{" "}
-                            = {bittaSertifikatNarxi * this.state.sertifikatSoni}
+                            = {bittaSertifikatNarxi * this.state.sertifikatSoni}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
                           </p>
                         </h6>
                         <hr />
 
                         <h6 className="pl-1">
-                          Doi narxi:
+                          {lang === "ru" ? ru.doiPrice : "Doi narxi"}:
                           <span className="pl-3 text-darck pl-2">
-                            {doi} so'm
+                            {doi} {lang === "ru" ? ru.sum : "so'm"}
                           </span>
-                          <p>{this.state.doi == true ? doi : "0"}</p>
+                          <p>
+                            {this.state.doi == true ? doi : "0"}{" "}
+                            {lang === "ru" ? ru.sum : "so'm"}
+                          </p>
                         </h6>
                         <hr />
 
                         <h6 className="pl-1">
-                          Chop etish narxi:
+                          {lang === "ru" ? ru.printPrice : "Chop etish narxi"}:
                           <span className="pl-3 text-darck pl-2">
-                            {chopEtishNarxi} so'm
+                            {chopEtishNarxi} {lang === "ru" ? ru.sum : "so'm"}
                           </span>
-                          <p>{chopEtishNarxi}</p>
+                          <p>
+                            {chopEtishNarxi} {lang === "ru" ? ru.sum : "so'm"}
+                          </p>
                         </h6>
                         <hr />
                         <h6 className="pl-1">
-                          Total :{" "}
-                          <span className="text-darck pl-2">{price} so'm</span>
+                          {lang === "ru" ? ru.all : "Jami"} :{" "}
+                          <span className="text-darck pl-2">
+                            {price} {lang === "ru" ? ru.sum : "so'm"}
+                          </span>
                         </h6>
                       </div>
                     </Col>
 
                     <Col sm="9" md="9" lg="9">
-                      <Label for="exampleEmail">Authors ID</Label>
+                      {/* {this.renderInput("description", "Izoh")} */}
+
+                      <FormGroup>
+                        <label>
+                          {lang === "ru"
+                            ? ru.description
+                            : "Izoh ( jurnal haqidagi barcha ma'lumotlar )"}
+                        </label>
+                        <Input
+                          style={{
+                            overscrollBehaviorY: "none",
+                            padding: "1rem",
+                            height: "10rem",
+                          }}
+                          type="textarea"
+                          onChange={(e) =>
+                            this.setState({ description: e.target.value })
+                          }
+                        />
+                      </FormGroup>
+
+                      <Label for="exampleEmail">
+                        {lang === "ru" ? ru.authors : "Mualliflar"}
+                      </Label>
+
                       <div className="tags-input ">
                         <ul id="tags">
                           {this.state.tags &&
@@ -451,7 +562,11 @@ class ArticleForm extends Form {
                               ? this.addTags(e.target.value)
                               : null
                           }
-                          placeholder="Press Up Arrow to add tags"
+                          placeholder={
+                            lang === "ru"
+                              ? ru.hint
+                              : "Muallif qo'shish uchun yuqori strelkani bosing"
+                          }
                         />
                       </div>
                     </Col>
@@ -465,7 +580,11 @@ class ArticleForm extends Form {
                         justifyContent: "center",
                       }}
                     >
-                      <div className="savee">{this.renderButton("Save")}</div>
+                      <div className="savee">
+                        {this.renderButton(
+                          lang === "ru" ? ru.restore_3 : "Tasdiqlash"
+                        )}
+                      </div>
                     </Col>
                   </Row>
                 </form>

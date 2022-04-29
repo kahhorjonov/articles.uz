@@ -3,6 +3,7 @@ import ArticleService from "../services/articleService";
 import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
+import ru from "translations/ru";
 
 import "styles/articleActivation.css";
 
@@ -11,9 +12,14 @@ class ArticleActivation extends Component {
     articles: [],
     currentPage: 1,
     pageSize: 7,
+
+    lang: "",
   };
 
   componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     this.getArticles();
   }
 
@@ -41,18 +47,12 @@ class ArticleActivation extends Component {
         )
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", fileName);
-
             document.body.appendChild(link);
-
-            // Start download
             link.click();
-
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -91,7 +91,7 @@ class ArticleActivation extends Component {
   };
 
   render() {
-    const { currentPage, pageSize, articles: allArticles } = this.state;
+    const { currentPage, pageSize, articles: allArticles, lang } = this.state;
 
     const articles = paginate(allArticles, currentPage, pageSize);
 
@@ -101,7 +101,11 @@ class ArticleActivation extends Component {
           <div className="col-md-12">
             <div className="card">
               <div className="card-header">
-                <h3>Maqolalarni aktivlashtirish</h3>
+                <h3>
+                  {lang === "ru"
+                    ? ru.jurnal_aktivlashtirish
+                    : "Maqolalarni aktivlashtirish"}
+                </h3>
               </div>
               <div className="card-body">
                 {articles.map((article) => (
@@ -110,9 +114,7 @@ class ArticleActivation extends Component {
                       <div className="col-lg-3 col-md-6 col-sm-6 ">
                         <p>{article.titleArticle}</p>
                         <p className="text-muted">
-                          {new Date(article.createdAt)
-                            .toISOString()
-                            .slice(0, 10)}
+                          {new Date(article.createdAt).toLocaleDateString()}
                         </p>
                       </div>
 
@@ -148,7 +150,7 @@ class ArticleActivation extends Component {
                               )
                             }
                           >
-                            Download ⬇️
+                            {lang === "ru" ? ru.download : "Yuklab olish"} ⬇️
                           </a>
                         </div>
                       </div>

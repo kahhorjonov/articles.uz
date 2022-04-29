@@ -6,8 +6,8 @@ import { getCategories } from "services/getCategories";
 import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
-
-import firebase from "../firebase";
+import { Multiselect } from "multiselect-react-dropdown";
+import ru from "translations/ru";
 
 import {
   Button,
@@ -28,7 +28,6 @@ import {
 
 import "styles/usersStyles.css";
 import "react-toastify/dist/ReactToastify.css";
-import { Multiselect } from "multiselect-react-dropdown";
 
 class Users extends Component {
   state = {
@@ -48,7 +47,7 @@ class Users extends Component {
     roleId: "null",
 
     currentPage: 1,
-    pageSize: 8,
+    pageSize: 7,
     notificationToken: "",
 
     selectedValues: [],
@@ -56,9 +55,14 @@ class Users extends Component {
     codes: [],
     checkedArticles: [],
     selectedValues: [],
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     await this.populateCategories();
     await this.handleChooseRole(null);
     await this.handleGetLanguages();
@@ -232,7 +236,7 @@ class Users extends Component {
   };
 
   render() {
-    const { users: allUsers, currentPage, pageSize } = this.state;
+    const { users: allUsers, currentPage, pageSize, lang } = this.state;
     const users = paginate(allUsers, currentPage, pageSize);
 
     return (
@@ -243,7 +247,7 @@ class Users extends Component {
               <div className="card-body">
                 <div className="row oquvchilar justify-content-between">
                   <div className="col-md-6">
-                    <h2>Foydalanuvchilar</h2>
+                    <h2>{lang === "ru" ? ru.users : "Foydalanuvchilar"}</h2>
                   </div>
                   <div className="col-md-6 endt">
                     <button
@@ -252,7 +256,7 @@ class Users extends Component {
                       data-target="#myModal"
                       className="btn btn-success btSucses"
                     >
-                      + Yangi foydalanuvchi qo'shish
+                      {lang === "ru" ? ru.admin_add : "Qo'shish"}
                     </button>
                   </div>
                   <div className="modal" id="myModal">
@@ -262,23 +266,20 @@ class Users extends Component {
                           className="card-user m-0"
                           style={{ borderRadius: "10px" }}
                         >
-                          <CardHeader>
-                            <CardTitle tag="h5">
-                              Foydalanuvchi Qo'shish
-                            </CardTitle>
-                          </CardHeader>
                           <CardBody>
                             <Form>
                               <Row>
                                 <Col className="pr-1" md="6">
                                   <FormGroup>
-                                    <Label>Ism</Label>
+                                    <Label>
+                                      {lang === "ru"
+                                        ? ru.reviewerRegister_1
+                                        : "Ism"}
+                                    </Label>
                                     <Input
                                       required
-                                      placeholder="Ism"
                                       type="text"
                                       onChange={(e) => {
-                                        // console.log("ismi:", e.target.value);
                                         this.setState({
                                           firstName: e.target.value,
                                         });
@@ -288,7 +289,11 @@ class Users extends Component {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                   <FormGroup>
-                                    <Label>Familiya</Label>
+                                    <Label>
+                                      {lang === "ru"
+                                        ? ru.reviewerRegister_2
+                                        : "Familiya"}
+                                    </Label>
                                     <Input
                                       required
                                       onChange={(e) =>
@@ -296,7 +301,6 @@ class Users extends Component {
                                           lastName: e.target.value,
                                         })
                                       }
-                                      placeholder="Familiya"
                                       type="text"
                                     />
                                   </FormGroup>
@@ -305,7 +309,11 @@ class Users extends Component {
                               <Row>
                                 <Col className="pr-1" md="6">
                                   <FormGroup>
-                                    <Label>Telfon</Label>
+                                    <Label>
+                                      {lang === "ru"
+                                        ? ru.login_tel
+                                        : " Telefon"}
+                                    </Label>
                                     <InputGroup>
                                       <InputGroupText
                                         style={{ fontSize: "1.4rem" }}
@@ -321,7 +329,6 @@ class Users extends Component {
                                               "+998" + e.target.value,
                                           })
                                         }
-                                        placeholder="Telfon"
                                         type="tel"
                                         maxLength={9}
                                         minLength={9}
@@ -358,7 +365,11 @@ class Users extends Component {
                                         });
                                       }}
                                     >
-                                      <option value="null">Kategoriya</option>
+                                      <option value="null">
+                                        {lang === "ru"
+                                          ? ru.kategoriya
+                                          : "Kategoriya"}
+                                      </option>
                                       {this.state.categories &&
                                         this.state.categories.map(
                                           (category) => (
@@ -377,7 +388,11 @@ class Users extends Component {
                               <Row>
                                 <Col className="pr-1" md="5">
                                   <FormGroup>
-                                    <label>Type</label>
+                                    <label>
+                                      {lang === "ru"
+                                        ? ru.rol
+                                        : "Foydalanuvchi roli"}
+                                    </label>
                                     <select
                                       required
                                       onChange={(e) =>
@@ -389,21 +404,42 @@ class Users extends Component {
                                       className="custom-select"
                                     >
                                       <option value="null">
-                                        Foydalanuvchi roli
+                                        {lang === "ru"
+                                          ? ru.rol
+                                          : "Foydalanuvchi roli"}
                                       </option>
-                                      <option value="1">Adminstrator</option>
-                                      <option value="2">Reductor</option>
-                                      <option value="3">Reviewer</option>
-                                      <option value="4">User</option>
+                                      <option value="1">
+                                        {lang === "ru"
+                                          ? ru.admin_admin
+                                          : "Adminstrator"}
+                                      </option>
+                                      <option value="2">
+                                        {lang === "ru"
+                                          ? ru.admin_red
+                                          : "Tahrirchi"}
+                                      </option>
+                                      <option value="3">
+                                        {lang === "ru"
+                                          ? ru.admin_rev
+                                          : "Taqrizchi"}
+                                      </option>
+                                      <option value="4">
+                                        {lang === "ru"
+                                          ? ru.users
+                                          : "Mualliflar"}
+                                      </option>
                                     </select>
                                   </FormGroup>
                                 </Col>
                                 <Col className="pl-1" md="7">
                                   <FormGroup>
-                                    <label>Parol</label>
+                                    <label>
+                                      {lang === "ru"
+                                        ? ru.login_password
+                                        : "Parol"}
+                                    </label>
                                     <Input
                                       required
-                                      placeholder="Parol"
                                       type="text"
                                       onChange={(e) =>
                                         this.setState({
@@ -418,7 +454,9 @@ class Users extends Component {
                               <Row>
                                 <Col md="12">
                                   <FormGroup>
-                                    <label>Languages</label>
+                                    <label>
+                                      {lang === "ru" ? ru.tillar : " Languages"}
+                                    </label>
                                     <Multiselect
                                       options={this.state.options}
                                       selectedValues={this.state.selectedValues}
@@ -436,7 +474,9 @@ class Users extends Component {
                                     color="primary"
                                     onClick={() => this.createUser()}
                                   >
-                                    Create Profile
+                                    {lang === "ru"
+                                      ? ru.create
+                                      : "Create Profile"}
                                   </Button>
                                 </div>
                               </Row>
@@ -461,11 +501,23 @@ class Users extends Component {
                                 this.handleChooseRole(e.target.value);
                               }}
                             >
-                              <option value="null">Foydalanuvchi roli</option>
-                              <option value="1">Adminstrator</option>
-                              <option value="2">Reductor</option>
-                              <option value="3">Reviewer</option>
-                              <option value="4">User</option>
+                              <option value="null">
+                                {lang === "ru" ? ru.rol : "Foydalanuvchi roli"}
+                              </option>
+                              <option value="1">
+                                {lang === "ru"
+                                  ? ru.admin_admin
+                                  : "Adminstrator"}
+                              </option>
+                              <option value="2">
+                                {lang === "ru" ? ru.admin_red : "Tahrirchilar"}
+                              </option>
+                              <option value="3">
+                                {lang === "ru" ? ru.admin_rev : "Tahrirchi"}
+                              </option>
+                              <option value="4">
+                                {lang === "ru" ? ru.authors : "Mualliflar"}
+                              </option>
                             </select>
                           </div>
                           <div className="sle col-lg-3 col-md-6 col-sm-12 pr-0">
@@ -477,7 +529,9 @@ class Users extends Component {
                                 this.handleChooseCategory(e.target.value);
                               }}
                             >
-                              <option value="null">Kategoriya</option>
+                              <option value="null">
+                                {lang === "ru" ? ru.kategoriya : "Kategoriya"}
+                              </option>
                               {this.state.categories &&
                                 this.state.categories.map((category) => (
                                   <option key={category.id} value={category.id}>
@@ -495,9 +549,15 @@ class Users extends Component {
                                 this.handleChooseActivity(e.target.value);
                               }}
                             >
-                              <option value="true">Activity</option>
-                              <option value="true">True</option>
-                              <option value="false">False</option>
+                              <option value="true">
+                                {lang === "ru" ? ru.activity : "Activity"}
+                              </option>
+                              <option value="true">
+                                {lang === "ru" ? ru.on : "Faol"}
+                              </option>
+                              <option value="false">
+                                {lang === "ru" ? ru.off : "No faol"}
+                              </option>
                             </select>
                           </div>
                           <div className="sle col-lg-3 col-md-6 col-sm-12 pr-0">
@@ -505,7 +565,9 @@ class Users extends Component {
                             <input
                               type="text"
                               className="form-control p-2 ins"
-                              placeholder="Qidiruv..."
+                              placeholder={
+                                lang === "ru" ? ru.search : "Izlash..."
+                              }
                               onChange={(e) => {
                                 this.handleChange(e.target.value);
                                 this.setState({ text: e.target.value });
@@ -523,16 +585,38 @@ class Users extends Component {
                         <thead className="theades">
                           <tr className="col-lg-12 px-0">
                             <th className="col-lg-1 ">№</th>
-                            <th className="col-lg-2 ">F.I.SH</th>
-                            <th className="col-lg-1 ">Telfon</th>
+                            <th className="col-lg-2 ">
+                              {lang === "ru" ? ru.fish : "F.I.SH"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.login_tel : "Telefon"}
+                            </th>
                             <th className="col-lg-1 ">Email</th>
-                            <th className="col-lg-1 ">Ish joyi</th>
-                            <th className="col-lg-1 ">Ish Staji (yil)</th>
-                            <th className="col-lg-1 ">Ilmiy Darajasi</th>
-                            <th className="col-lg-1 ">Tili</th>
-                            <th className="col-lg-1 ">Categoriyasi</th>
-                            <th className="col-lg-1 ">Active</th>
-                            <th className="col-lg-1 ">Delete</th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.workplace : "Ish joyi"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru"
+                                ? ru.reviewerRegister_5
+                                : "Tajriba (yil)"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru"
+                                ? ru.reviewerRegister_6
+                                : "Ilmiy Darajasi"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.tillar : "Tili"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.kategoriya : "Kategoriyasi"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.activity : "Faollik"}
+                            </th>
+                            <th className="col-lg-1 ">
+                              {lang === "ru" ? ru.admin_delete : "Delete"}
+                            </th>
                           </tr>
                         </thead>
                         <tbody className="tbodyes">

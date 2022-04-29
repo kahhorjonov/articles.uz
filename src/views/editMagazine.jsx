@@ -5,11 +5,11 @@ import {
   getParentCategories,
   ActionUnderArticlesFromMagazine,
 } from "services/magazineService";
+
 import { Link } from "react-router-dom";
-
-import axios from "axios";
-
 import { toast } from "react-toastify";
+import axios from "axios";
+import ru from "translations/ru";
 
 // reactstrap components
 import {
@@ -45,9 +45,14 @@ class EditMagazine extends Component {
     magazineInfo: [],
     articles: [],
     categories: [],
+
+    lang: "",
   };
 
   async componentDidMount() {
+    const lang = localStorage.getItem("lang");
+    this.setState({ lang });
+
     const magazineId = this.props.location.pathname.split(":")[1]
       ? this.props.location.pathname.split(":")[1]
       : this.props.location.pathname.split(":")[0];
@@ -108,8 +113,6 @@ class EditMagazine extends Component {
     } catch (error) {
       toast.error(error);
     }
-
-    // console.log(this.state);
   };
 
   handleDownload = async () => {
@@ -130,7 +133,6 @@ class EditMagazine extends Component {
         )
           .then((response) => response.blob())
           .then((blob) => {
-            // Create blob link to download
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement("a");
             link.href = url;
@@ -138,10 +140,8 @@ class EditMagazine extends Component {
 
             document.body.appendChild(link);
 
-            // Start download
             link.click();
 
-            // Clean up and remove the link
             link.parentNode.removeChild(link);
           });
       } catch (error) {
@@ -166,7 +166,6 @@ class EditMagazine extends Component {
     let {
       title,
       certificateNumber,
-      cover,
       description,
       isbn,
       issn,
@@ -175,9 +174,7 @@ class EditMagazine extends Component {
       category,
     } = this.state.magazineInfo;
 
-    const { articles } = this.state;
-
-    // console.log(articles);
+    const { articles, lang } = this.state;
 
     return (
       <>
@@ -208,14 +205,20 @@ class EditMagazine extends Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Edit Magazine</CardTitle>
+                  <CardTitle tag="h5">
+                    {lang === "ru"
+                      ? ru.jurnal_edit + ""
+                      : "Jurnalni tahrirlash"}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Form>
                     <Row>
-                      <Col className="pr-1" md="3">
+                      <Col md="3">
                         <FormGroup>
-                          <label>Title</label>
+                          <label>
+                            {lang === "ru" ? ru.jurnal_title : "Sarlavha"}
+                          </label>
                           <Input
                             defaultValue={title}
                             placeholder="Title Magazine"
@@ -226,7 +229,7 @@ class EditMagazine extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="px-1" md="3">
+                      <Col md="3">
                         <FormGroup>
                           <label>Deadline</label>
                           <Input
@@ -242,9 +245,13 @@ class EditMagazine extends Component {
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-1 pr-1" md="3">
+                      <Col md="3">
                         <FormGroup>
-                          <label>Print Day</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.jurnal_printDays
+                              : "Tekshirish vaqti"}
+                          </label>
                           <Input
                             defaultValue={printedDate}
                             type="number"
@@ -255,9 +262,11 @@ class EditMagazine extends Component {
                         </FormGroup>
                       </Col>
 
-                      <Col className="pl-1" md="3">
+                      <Col md="3">
                         <FormGroup>
-                          <label>Status</label>
+                          <label>
+                            {lang === "ru" ? ru.jurnal_status : "Status"}
+                          </label>
                           <Input
                             defaultValue={journalsStatus}
                             style={{ height: "3rem" }}
@@ -268,104 +277,19 @@ class EditMagazine extends Component {
                             }
                           >
                             <option value=""></option>
-                            <option value="PUBLISHED">Published</option>
+                            <option value="PUBLISHED">
+                              {lang === "ru" ? ru.published : "Nashr qilish"}
+                            </option>
                           </Input>
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="pr-1" md="3">
+                      <Col sm="3" md="3" lg="3">
                         <FormGroup>
-                          <label>Pdf file of Magazine</label>
-                          <Input
-                            style={{ padding: "0" }}
-                            // defaultValue={firstName}
-                            placeholder="Final version of Magazine"
-                            type="file"
-                            onChange={(e) =>
-                              this.setState({ file: e.target.files[0] })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1 pr-1" md="3">
-                        <FormGroup>
-                          <label>Certificate Number</label>
-                          <Input
-                            defaultValue={certificateNumber}
-                            placeholder="ex: № FS77-54438"
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({
-                                certificateNumber: e.target.value,
-                              })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="3">
-                        <FormGroup>
-                          <label>ISBN</label>
-                          <Input
-                            defaultValue={isbn}
-                            placeholder="ex: 2311-6099"
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ isbn: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-
-                      <Col className="pl-1" md="3">
-                        <FormGroup>
-                          <label>ISSN</label>
-                          <Input
-                            defaultValue={issn}
-                            placeholder="ex: 2311-6099"
-                            type="text"
-                            onChange={(e) =>
-                              this.setState({ issn: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col className="pr-1" md="4">
-                        <FormGroup>
-                          <label>Download Magazine</label>
-                          <Button
-                            disabled={
-                              this.state.magazineInfo.file ? false : true
-                            }
-                            className="m-0"
-                            style={{ width: "100%", padding: "0.75rem" }}
-                            onClick={() => this.handleDownload()}
-                          >
-                            Jurnalni yuklash
-                          </Button>
-                        </FormGroup>
-                      </Col>
-
-                      <Col className="px-1" md="4">
-                        <FormGroup>
-                          <label>Cover</label>
-                          <Input
-                            style={{ padding: "0" }}
-                            type="file"
-                            onChange={(e) =>
-                              this.setState({
-                                cover: e.target.files[0],
-                              })
-                            }
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="4">
-                        <FormGroup>
-                          <label>Categories</label>
+                          <label>
+                            {lang === "ru" ? ru.kategoriya : "Kategoriya"}
+                          </label>
                           <Input
                             defaultValue={category && category.id}
                             style={{ height: "3rem" }}
@@ -384,11 +308,117 @@ class EditMagazine extends Component {
                           </Input>
                         </FormGroup>
                       </Col>
+                      <Col md="3">
+                        <FormGroup>
+                          <label>
+                            {lang === "ru"
+                              ? ru.jurnal_sertifikat
+                              : "Sertifikat raqami"}
+                          </label>
+                          <Input
+                            defaultValue={certificateNumber}
+                            placeholder="ex: № FS77-54438"
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({
+                                certificateNumber: e.target.value,
+                              })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col md="3">
+                        <FormGroup>
+                          <label>ISBN</label>
+                          <Input
+                            defaultValue={isbn}
+                            placeholder="ex: 2311-6099"
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ isbn: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col md="3">
+                        <FormGroup>
+                          <label>ISSN</label>
+                          <Input
+                            defaultValue={issn}
+                            placeholder="ex: 2311-6099"
+                            type="text"
+                            onChange={(e) =>
+                              this.setState({ issn: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col md="4">
+                        <FormGroup>
+                          <label>
+                            {lang === "ru" ? ru.download : "Yuklab olish"}
+                          </label>
+                          <Button
+                            disabled={
+                              this.state.magazineInfo.file ? false : true
+                            }
+                            className="m-0"
+                            style={{ width: "100%", padding: "0.75rem" }}
+                            onClick={() => this.handleDownload()}
+                          >
+                            Jurnalni yuklash
+                          </Button>
+                        </FormGroup>
+                      </Col>
+
+                      <Col md="4">
+                        <FormGroup>
+                          <label>
+                            {lang === "ru" ? ru.jurnal_cover : "Muqova"}
+                          </label>
+                          <Input
+                            style={{ padding: "0" }}
+                            type="file"
+                            onChange={(e) =>
+                              this.setState({
+                                cover: e.target.files[0],
+                              })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
+
+                      <Col md="4">
+                        <FormGroup>
+                          <label>
+                            {lang === "ru"
+                              ? ru.jurnal_final
+                              : "Yakuniy versiya"}
+                          </label>
+                          <Input
+                            style={{ padding: "0" }}
+                            // defaultValue={firstName}
+                            placeholder="Final version of Magazine"
+                            type="file"
+                            onChange={(e) =>
+                              this.setState({ file: e.target.files[0] })
+                            }
+                          />
+                        </FormGroup>
+                      </Col>
                     </Row>
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <label>Description</label>
+                          <label>
+                            {lang === "ru"
+                              ? ru.jurnal_description
+                              : "Jurnal haqida ma'lumot"}
+                          </label>
                           <Input
                             style={{
                               overscrollBehaviorY: "none",
@@ -396,7 +426,7 @@ class EditMagazine extends Component {
                               height: "10rem",
                             }}
                             type="textarea"
-                            // defaultValue={languages}
+                            defaultValue={description}
                             onChange={(e) =>
                               this.setState({ description: e.target.value })
                             }
@@ -412,7 +442,7 @@ class EditMagazine extends Component {
                           // type="button"
                           onClick={(e) => this.handleSubmit(e)}
                         >
-                          Update Profile
+                          {lang === "ru" ? ru.jurnal_edit : "Tahrirlash"}
                         </Button>
                       </div>
                     </Row>
@@ -428,10 +458,18 @@ class EditMagazine extends Component {
                 <Table>
                   <thead>
                     <tr>
-                      <th className="col-md-3 text-center">Title</th>
-                      <th className="col-md-3 text-center">Status</th>
-                      <th className="col-md-3 text-center">Public ?</th>
-                      <th className="col-md-3 text-center">Action</th>
+                      <th className="col-md-3 text-center">
+                        {lang === "ru" ? ru.jurnal_title : "Sarlavha"}
+                      </th>
+                      <th className="col-md-3 text-center">
+                        {lang === "ru" ? ru.jurnal_status : "Status"}
+                      </th>
+                      <th className="col-md-3 text-center">
+                        {lang === "ru" ? ru.jurnal_public : "Ommaviylik"}
+                      </th>
+                      <th className="col-md-3 text-center">
+                        {lang === "ru" ? ru.admin_actions : "Amaliyotlar"}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
