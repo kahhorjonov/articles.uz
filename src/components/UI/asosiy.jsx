@@ -55,7 +55,7 @@ class Asosiy extends React.Component {
               </p>
             </div>
 
-            <div className="article_rows row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0 pl-0">
+            <div className="article_rows row mx-0 mx-lg-0 mx-md-0 pl-0">
               {this.state.loading ? (
                 <BeatLoader size={40} loading={this.state.loading} />
               ) : (

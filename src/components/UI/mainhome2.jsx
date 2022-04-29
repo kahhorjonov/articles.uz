@@ -71,9 +71,12 @@ class Mainhome2 extends React.Component {
 
             <div className="d-flex row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
               <div
-                className="col-md-6"
+                className="col-md-6 p-0"
                 data-aos="fade-right"
-                data-aos-duration="5000"
+                data-aos-duration="1000"
+                data-aos-offset="1000"
+                data-aos-anchor="#example-anchor"
+            
               >
                 <h1>
                   {this.state.lang === "ru"
@@ -83,9 +86,11 @@ class Mainhome2 extends React.Component {
               </div>
 
               <div
-                className="col-md-6"
+                className="col-md-6 p-0"
                 data-aos="fade-left"
-                data-aos-duration="2000"
+                data-aos-duration="1000"
+                data-aos-offset="1000"
+                data-aos-anchor="#example-anchor"      
               >
                 <p className="text-left">
                   {this.state.lang === "ru"
