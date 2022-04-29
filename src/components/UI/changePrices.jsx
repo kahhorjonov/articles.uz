@@ -79,7 +79,8 @@ class ChangePrices extends Component {
 
   deleteLanguage = async (id) => {
     try {
-      await deleteLanguage(id).then((res) => {
+      await deleteLanguage(id)
+      .then((res) => {
         toast.info(res.data.message);
         this.getLanguages();
       });

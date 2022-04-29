@@ -7,7 +7,9 @@ import {
   FullscreenControl,
   ZoomControl,
 } from "react-yandex-maps";
+
 import "styles/aloqa.css";
+
 
 class Aloqa extends Component {
   render() {

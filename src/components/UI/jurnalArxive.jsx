@@ -3,7 +3,7 @@ import GetImages from "utils/getImages";
 import { downloadMedia, downloadFile, counter } from "services/mediaService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BsEyeFill } from "react-icons/bs";
+
 
 import {
   getPublishedYears,
@@ -223,8 +223,8 @@ class JurnalArxive extends Component {
                       <li className="list-group-item">
                         <span>{idx + 1}. </span> {article.titleArticle}
                         <p style={{ margin: "0" }}>
-                          <BsEyeFill style={{ fontSize: "2rem" }} />{" "}
-                          {article.articleViews}
+                          {/* <BsEyeFill style={{ fontSize: "2rem" }} />
+                          {article.articleViews} */}
                         </p>
                       </li>
                     </Link>

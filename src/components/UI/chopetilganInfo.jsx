@@ -24,7 +24,7 @@ class Chopetilganinfo extends Component {
                         ORTGA / Chop etilgan maqolalarim
                       </Link>
                       <h1>
-                        Covid-19 vaksinasini yaratishda tavsiya <br />{" "}
+                        Covid-19 vaksinasini yaratishda tavsiya <br />
                         etiladigan kimyoviy birikmalar ro’yxati
                       </h1>
                       <p style={{ padding: "2rem 7rem", color: "#aaa" }}>
