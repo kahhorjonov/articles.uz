@@ -1,4 +1,4 @@
 {
-  "apiLocal": "http://188.130.162.5:10003/api",
+  "apiLocal": "http://68.183.2.121:8085/api",
   "apiLocal2": "https://awertiu.herokuapp.com/api"
 }
