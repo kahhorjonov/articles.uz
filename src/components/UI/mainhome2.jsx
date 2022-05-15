@@ -23,8 +23,8 @@ class Mainhome2 extends React.Component {
     const lang = localStorage.getItem("lang");
     this.setState({ lang });
 
-    AOS.init();
     this.getUsersInformation();
+    AOS.init({});
   }
 
   getUsersInformation = async () => {
@@ -69,43 +69,50 @@ class Mainhome2 extends React.Component {
               />
             </div>
 
-            <div className="d-flex row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
-              <div
-                className="col-md-6 p-0"
-                data-aos="fade-right"
-                data-aos-duration="1000"
-                data-aos-offset="1000"
-                data-aos-anchor="#example-anchor"
-            
-              >
-                <h1>
-                  {this.state.lang === "ru"
-                    ? ru.main_maqsadimiz
-                    : "Bizning asosiy maqsadimiz - ilmiy hodimlarning ish unumdorligi oshirish"}
-                </h1>
-              </div>
-
-              <div
-                className="col-md-6 p-0"
-                data-aos="fade-left"
-                data-aos-duration="1000"
-                data-aos-offset="1000"
-                data-aos-anchor="#example-anchor"      
-              >
-                <p className="text-left">
-                  {this.state.lang === "ru"
-                    ? ru.main_maqsadimiz2
-                    : " Maqolalar chop etish uchun ilmiy jurnallar tadqiqot faoliyatida samarali yordamchilardir. Ilmiy va texnologik taraqqiyot materiallarni nashrga etkazish usullarini soddalashtirdi. Endi ishni nashr qilish uchun siz nashriyotga borishingiz, uzoq vaqt kutishingiz shart emas. Shunchaki nashr qildirmoqchi bo’lgan maqolangizni bizga yuborsangiz bo’ldi!"}
-                </p>
-                <div className="buttonsDark">
-                  <Link to="/login">
-                    <button type="button" className="btn btn-dark">
-                      {this.state.lang === "ru"
-                        ? ru.nav_yuklash
-                        : "Maqola yuborish"}
-                    </button>
-                  </Link>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div className="d-flex row mr-0 ml-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
+                <div
+                  className="col-md-6"
+                  data-aos="fade-right"
+                  data-aos-duration="1000"
+                  // data-aos-offset="1000"
+                  data-aos-anchor="#example-anchor"
+                >
+                  <h1 className="p-4">
+                    {this.state.lang === "ru"
+                      ? ru.main_maqsadimiz
+                      : "Bizning asosiy maqsadimiz - ilmiy hodimlarning ish unumdorligi oshirish"}
+                  </h1>
                 </div>
+                <div
+                  className="col-md-6"
+                  data-aos="fade-left"
+                  data-aos-duration="1000"
+                  // data-aos-offset="1000"
+                  data-aos-anchor="#example-anchor"
+                >
+                  <p className="text-left p-2">
+                    {this.state.lang === "ru"
+                      ? ru.main_maqsadimiz2
+                      : " Maqolalar chop etish uchun ilmiy jurnallar tadqiqot faoliyatida samarali yordamchilardir. Ilmiy va texnologik taraqqiyot materiallarni nashrga etkazish usullarini soddalashtirdi. Endi ishni nashr qilish uchun siz nashriyotga borishingiz, uzoq vaqt kutishingiz shart emas. Shunchaki nashr qildirmoqchi bo’lgan maqolangizni bizga yuborsangiz bo’ldi!"}
+                  </p>
+                </div>
+              </div>
+              <div className="buttonsDark">
+                <Link to="/login">
+                  <button type="button" className="btn btn-dark">
+                    {this.state.lang === "ru"
+                      ? ru.nav_yuklash
+                      : "Maqola yuborish"}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

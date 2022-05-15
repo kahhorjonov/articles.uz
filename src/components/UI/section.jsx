@@ -2,8 +2,8 @@ import React from "react";
 import AOS from "aos";
 import ru from "translations/ru";
 
-import "aos/dist/aos.css";
 import "styles/homePage.css";
+import "aos/dist/aos.css";
 
 class Section extends React.Component {
   state = {
@@ -14,7 +14,7 @@ class Section extends React.Component {
     const lang = localStorage.getItem("lang");
     this.setState({ lang: lang });
 
-    AOS.init();
+    AOS.init({});
   }
 
   render() {
@@ -23,15 +23,15 @@ class Section extends React.Component {
         <div className="sections">
           <div className="container p-0">
             <div className="row mx-0 mx-lg-0 mx-md-0">
-              <div className="col-md-6 p-0">
+              <div className="col-md-6 pr-3">
                 <div
                   className="article-chap"
                   data-aos="fade-right"
-                  data-aos-duration="1000"
+                  data-aos-duration="1200"
                   data-aos-offset="1000"
                   data-aos-anchor="#example-anchor"
                 >
-                  <p className="jurnal-haqida">
+                  <p className="jurnal-haqida mt-3">
                     {this.state.lang === "ru"
                       ? ru.main_pAbout
                       : "Jurnal haqida"}
@@ -45,11 +45,11 @@ class Section extends React.Component {
                 </div>
               </div>
 
-              <div className="col-md-6 p-0">
+              <div className="col-md-6 pl-3">
                 <div
                   className="art-tex"
                   data-aos="fade-left"
-                  data-aos-duration="1000"
+                  data-aos-duration="1200"
                   data-aos-offset="1000"
                   data-aos-anchor="#example-anchor"
                 >
