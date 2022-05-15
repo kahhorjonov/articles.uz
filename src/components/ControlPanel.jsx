@@ -19,7 +19,7 @@ const ControlPanel = (props) => {
     : window.location.pathname.split(":")[0];
 
   const [pdfFile, setPdfFile] = useState(
-    `http://192.168.100.27:8080/api/article/readArticle/${articleId}`
+    `http://159.65.221.248:8081/api/article/readArticle/${articleId}`
   );
 
   const isFirstPage = pageNumber === 1;

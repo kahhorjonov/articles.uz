@@ -7,7 +7,6 @@ import "styles/chopetilganinfo.css";
 
 class Chopetilganinfo extends Component {
   render() {
-    console.log(this.props);
     return (
       <>
         <div className="content">

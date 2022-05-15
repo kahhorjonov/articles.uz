@@ -121,10 +121,10 @@ class App extends Component {
                 component={RestorePassword}
               />
 
-              <Redirect from="/admin" exact to="/admin/dashboard" />
-
               <ProtectedRoute path="/admin" component={AdminLayout} />
 
+              <Redirect from="/admin" exact to="/admin/dashboard" />
+              <Redirect from="/" to="/main" />
               <Redirect to="/not-found" />
             </Switch>
           </>
@@ -522,8 +522,8 @@ class App extends Component {
             {/* <ProtectedRoute path="/reviewer" component={ReviewerPage} /> */}
             {/* <ProtectedRoute path="/user" component={UserPage} /> */}
 
-            <Redirect to="/not-found" />
             <Redirect from="/" to="/main" />
+            <Redirect to="/not-found" />
           </Switch>
         </>
       );

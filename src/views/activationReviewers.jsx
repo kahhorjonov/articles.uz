@@ -39,7 +39,7 @@ class ReviewerActivation extends Component {
     if (fileId && fileName && type) {
       try {
         await fetch(
-          `http://192.168.100.27:8080/api/attachment/download/${fileId}`,
+          `http://159.65.221.248:8081/api/attachment/download/${fileId}`,
           {
             method: "GET",
             headers: {

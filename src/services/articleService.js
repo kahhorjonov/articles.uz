@@ -166,7 +166,7 @@ export function articleInfo(id) {
 }
 
 export function getPrice(data) {
-  return axios.post("http://192.168.100.27:8080/api/prices/getPrices", data);
+  return axios.post(apiLocal + "/prices/getPrices", data);
 }
 
 export function getAllMyArticles(status) {
@@ -187,11 +187,7 @@ export function myDuties() {
 
   const bodyParametrs = {};
 
-  return axios.post(
-    "http://192.168.100.27:8080/api/article/myDuties",
-    bodyParametrs,
-    config
-  );
+  return axios.post(apiLocal + "/article/myDuties", bodyParametrs, config);
 }
 
 export function getRedactorsAndReviewers(id, role) {

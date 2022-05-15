@@ -168,7 +168,7 @@ class UserEdit extends Component {
     if (id && originalName && contentType) {
       try {
         await fetch(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          `http://159.65.221.248:8081/api/attachment/download/${id}`,
           {
             method: "GET",
             headers: {

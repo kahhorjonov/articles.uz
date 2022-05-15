@@ -16,7 +16,7 @@ const PDFReader = (props) => {
     : window.location.pathname.split(":")[0];
 
   const [file, setFile] = useState(
-    `http://192.168.100.27:8080/api/article/readArticle/${articleId}`
+    `http://159.65.221.248:8081/api/article/readArticle/${articleId}`
   );
 
   function onDocumentLoadSuccess({ numPages }) {

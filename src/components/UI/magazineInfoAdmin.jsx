@@ -93,7 +93,7 @@ class MagazineInfoAdmin extends Component {
     try {
       imageBlob = (
         await axios.get(
-          `http://192.168.100.27:8080/api/attachment/download/${id}`,
+          `http://159.65.221.248:8081/api/attachment/download/${id}`,
           { responseType: "blob" }
         )
       ).data;
