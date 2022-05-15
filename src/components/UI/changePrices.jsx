@@ -85,8 +85,7 @@ class ChangePrices extends Component {
 
   deleteLanguage = async (id) => {
     try {
-      await deleteLanguage(id)
-      .then((res) => {
+      await deleteLanguage(id).then((res) => {
         toast.info(res.data.message);
         this.getLanguages();
       });
@@ -220,7 +219,9 @@ class ChangePrices extends Component {
                             </div>
                           </div>
                           <div className="col-lg-2 col-sm-4">
-                            {lang === "ru" ? ru.pagePrice : "Saxifa narxi"}
+                            {localStorage.getItem("lang") === "ru"
+                              ? ru.pagePrice
+                              : "Saxifa narxi"}
                             <div>
                               <input
                                 onChange={(e) =>
@@ -235,7 +236,9 @@ class ChangePrices extends Component {
                           </div>
 
                           <div className="col-lg-2 col-sm-4">
-                            {lang === "ru" ? ru.printPrice : "Chop etish narxi"}
+                            {localStorage.getItem("lang") === "ru"
+                              ? ru.printPrice
+                              : "Chop etish narxi"}
                             <div>
                               <input
                                 onChange={(e) =>
@@ -387,7 +390,7 @@ class ChangePrices extends Component {
                                         ? ru.admin_edit
                                         : "Tahrirlash"} */}
 
-                                      {lang === "ru"
+                                      {localStorage.getItem("lang") === "ru"
                                         ? ru.admin_actions
                                         : "Tahrirlash"}
                                     </button>
@@ -398,7 +401,7 @@ class ChangePrices extends Component {
                                       }
                                       className="btn"
                                     >
-                                      {lang === "ru"
+                                      {localStorage.getItem("lang") === "ru"
                                         ? ru.admin_delete
                                         : "O'chirish"}
                                     </button>

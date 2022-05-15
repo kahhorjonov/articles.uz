@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Loader from "./Loader";
 import { Document, Page, pdfjs } from "react-pdf";
 import ControlPanel from "./ControlPanel";
+
 import "styles/pdfReaderStyles.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 

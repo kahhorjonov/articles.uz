@@ -12,7 +12,7 @@ function Footer(props) {
             <nav className="footer-nav">
               <ul>
                 <li>
-                  <a href="https://t.me/kahhorjonov" target="_blank">
+                  <a href="https://telegram.me/Uzb1511" target="_blank">
                     Next Developers Team
                   </a>
                 </li>

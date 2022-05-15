@@ -121,10 +121,10 @@ class App extends Component {
                 component={RestorePassword}
               />
 
+              <Redirect from="/admin" exact to="/admin/dashboard" />
+
               <ProtectedRoute path="/admin" component={AdminLayout} />
 
-              <Redirect from="/admin" exact to="/admin/dashboard" />
-              <Redirect from="/" to="/main" />
               <Redirect to="/not-found" />
             </Switch>
           </>

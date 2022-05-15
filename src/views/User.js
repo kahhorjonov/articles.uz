@@ -508,7 +508,6 @@ class User extends Component {
                           </label>
                           <Input
                             defaultValue={academicDegree}
-                            placeholder="Daraja"
                             type="text"
                             onChange={(e) =>
                               this.setState({
@@ -527,7 +526,6 @@ class User extends Component {
                           </label>
                           <Input
                             defaultValue={workExperience}
-                            placeholder="Ish tajribangiz"
                             min={0}
                             type="number"
                             onChange={(e) =>
