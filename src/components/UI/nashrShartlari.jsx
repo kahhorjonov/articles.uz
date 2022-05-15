@@ -223,11 +223,9 @@ class NashrShartlari extends Component {
                         <li className="list-group-item d-flex justify-content-between align-items-center">
                           {this.state.lang === "ru"
                             ? ru.nashr_4
-                            : "SMS-уведомление о публикации статьи"}
+                            : "Maqolani nashrga qabul qilish to'g'risidagi sms xabarnoma"}
                           <span>
-                            {this.state.lang === "ru"
-                              ? ru.bepul
-                              : "Maqolani nashrga qabul qilish to'g'risidagi sms xabarnoma"}
+                            {this.state.lang === "ru" ? ru.bepul : "bepul"}
                           </span>
                         </li>
                         <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -255,8 +253,8 @@ class NashrShartlari extends Component {
                             : "Matnni tahrirlash"}
                           <span>
                             {sahifaNarxi}
-                            {this.state.lang === "ru" ? ru.sum : "so’m"} / 1
-                            {this.state.lang === "ru" ? ru.nashr_8 : "sahifa"}
+                            {this.state.lang === "ru" ? ru.sum : " so’m"} / 1
+                            {this.state.lang === "ru" ? ru.nashr_8 : " sahifa"}
                           </span>
                         </li>
                         {/* <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -275,7 +273,7 @@ class NashrShartlari extends Component {
                             {this.state.lang === "ru" ? ru.nashr_8 : "sahifa"}
                           </span>
                         </li> */}
-                        <li className="list-group-item d-flex justify-content-between align-items-center">
+                        <li className="list-group-item d-flex justify-content-between align-items-center pr-1">
                           {this.state.lang === "ru"
                             ? ru.nashr_9
                             : "Maqolaning nomi, muallifning ismi, regaliy, ish joyi, annotatsiya va kalit so'zlarni tarjima qilish"}

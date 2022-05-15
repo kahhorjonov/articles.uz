@@ -218,7 +218,7 @@ body {
 .article_uz {
   font-style: normal;
   font-weight: bold;
-  font-size: 36px;
+  font-size: 34px;
   line-height: 120%;
   color: #000000;
   padding-top: 50px;
@@ -1009,7 +1009,7 @@ body {
   .sections .article_uz {
     font-style: normal;
     font-weight: bold;
-    font-size: 32px;
+    /* font-size: 32px; */
     line-height: 120%;
     padding-top: 20px;
   }

@@ -28,7 +28,7 @@ class Section extends React.Component {
                   className="article-chap"
                   data-aos="fade-right"
                   data-aos-duration="1200"
-                  data-aos-offset="1000"
+                  // data-aos-offset="1000"
                   data-aos-anchor="#example-anchor"
                 >
                   <p className="jurnal-haqida mt-3">
@@ -37,11 +37,11 @@ class Section extends React.Component {
                       : "Jurnal haqida"}
                   </p>
 
-                  <h2 className="article_uz">
+                  <h3 className="article_uz">
                     {this.state.lang === "ru"
                       ? ru.main_aboutText
-                      : "Articles.uz onlayn jurnallari - bu o’zbek tilida elektron va bosma shaklda chop etiladigan oylik ilmiy nashrlar."}
-                  </h2>
+                      : "Articles.uz onlayn jurnallari - bu elektron va bosma shaklda chop etiladigan oylik ilmiy nashrlar."}
+                  </h3>
                 </div>
               </div>
 
@@ -50,7 +50,7 @@ class Section extends React.Component {
                   className="art-tex"
                   data-aos="fade-left"
                   data-aos-duration="1200"
-                  data-aos-offset="1000"
+                  // data-aos-offset="1000"
                   data-aos-anchor="#example-anchor"
                 >
                   <span className="articles-text">

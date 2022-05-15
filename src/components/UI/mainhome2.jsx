@@ -101,7 +101,7 @@ class Mainhome2 extends React.Component {
                   <p className="text-left p-2">
                     {this.state.lang === "ru"
                       ? ru.main_maqsadimiz2
-                      : " Maqolalar chop etish uchun ilmiy jurnallar tadqiqot faoliyatida samarali yordamchilardir. Ilmiy va texnologik taraqqiyot materiallarni nashrga etkazish usullarini soddalashtirdi. Endi ishni nashr qilish uchun siz nashriyotga borishingiz, uzoq vaqt kutishingiz shart emas. Shunchaki nashr qildirmoqchi bo’lgan maqolangizni bizga yuborsangiz bo’ldi!"}
+                      : " Maqolalar chop etish uchun ilmiy jurnallar tadqiqot faoliyatida samarali yordamchilardir. Ilmiy va texnologik taraqqiyot materiallarni nashrga yetkazish usullarini soddalashtirdi. Endi ishni nashr qilish uchun siz nashriyotga borishingiz, uzoq vaqt kutishingiz shart emas. Shunchaki nashr qilmoqchi bo’lgan maqolangizni bizga yuborsangiz bo’ldi!"}
                   </p>
                 </div>
               </div>

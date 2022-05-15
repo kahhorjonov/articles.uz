@@ -19,10 +19,10 @@ import { Col, Button } from "reactstrap";
 import GetImages from "utils/getImages";
 import Listhome from "./listhome";
 import Carousel from "react-multi-carousel";
-import img11 from "assets/img/figma/im1.png";
-import img21 from "assets/img/figma/im2.png";
-import img31 from "assets/img/figma/im3.png";
-import img41 from "assets/img/figma/im4.png";
+// import img11 from "assets/img/figma/im1.png";
+// import img21 from "assets/img/figma/im2.png";
+// import img31 from "assets/img/figma/im3.png";
+// import img41 from "assets/img/figma/im4.png";
 
 import "react-multi-carousel/lib/styles.css";
 import "styles/jurnallarRoyhati.css";
@@ -237,7 +237,7 @@ class JurnallarRoyxati extends Component {
           <h1>
             {this.state.lang === "ru"
               ? ru.jurnallar_art_rec
-              : "Maqolalar qabul qilinayotgan jurnallar"}
+              : "Maqolalar qabul qilayotgan jurnallar"}
           </h1>
 
           <div className="carousel">
@@ -246,7 +246,7 @@ class JurnallarRoyxati extends Component {
                 <h4>
                   {this.state.lang === "ru"
                     ? ru.jurnallar_rec
-                    : "Maqolalar qabul qilinuchi barcha jurnallar"}
+                    : "Maqolalar qabul qiluvchi barcha jurnallar"}
                 </h4>
 
                 {/* <p className="text-muted">
