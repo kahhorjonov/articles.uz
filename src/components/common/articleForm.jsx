@@ -225,7 +225,7 @@ class ArticleForm extends Form {
   };
 
   render() {
-    const { articlePrice, inputFields, lang, langs } = this.state;
+    const { articlePrice, inputFields, lang, langs, tags } = this.state;
 
     const {
       bittaBosmaJunalNarxi,
@@ -464,7 +464,9 @@ class ArticleForm extends Form {
                             {lang === "ru" ? ru.sum : "so'm"}
                           </p>
                         </h6>
+
                         <hr />
+
                         <h6 className="pl-1">
                           {lang === "ru"
                             ? ru.sertificatePrice
@@ -522,6 +524,7 @@ class ArticleForm extends Form {
                             ? ru.description
                             : "Izoh ( jurnal haqidagi barcha ma'lumotlar )"}
                         </label>
+
                         <Input
                           style={{
                             overscrollBehaviorY: "none",

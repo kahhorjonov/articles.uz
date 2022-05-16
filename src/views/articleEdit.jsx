@@ -123,7 +123,7 @@ class ArticleEdit extends Component {
         res.data.authors.map((author) => this.addTags(author.code));
       });
     } catch (ex) {
-      toast.error(ex.response.data.message);
+      toast.error(ex);
     }
   };
 
@@ -262,13 +262,15 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Category</label>
                           <Input
-                            defaultValue={{
-                              label: category && category[0].name,
-                              value: category && category[0].id,
-                            }}
+                            // defaultValue={{
+                            //   label: category && category[0].name,
+                            //   value: category && category[0].id,
+                            // }}
+
+                            defaultValue={category && category.name}
                             style={{ fontSize: "1.4rem" }}
                             className="custom-select"
-                            type="select"
+                            // type="select"
                             onChange={(e) =>
                               this.setState({ categoryId: e.target.value })
                             }
@@ -429,7 +431,7 @@ class ArticleEdit extends Component {
                     </Row>
 
                     <Row>
-                      <Col sm="8" md="8" lg="8">
+                      <Col sm="12" md="12" lg="12">
                         <Label for="exampleEmail">Authors ID</Label>
                         <div className="tags-input ">
                           <ul id="tags">
@@ -457,7 +459,7 @@ class ArticleEdit extends Component {
                         </div>
                       </Col>
 
-                      <Col
+                      {/* <Col
                         sm="4"
                         md="4"
                         lg="4"
@@ -488,7 +490,7 @@ class ArticleEdit extends Component {
                             Delete
                           </Button>
                         </div>
-                      </Col>
+                      </Col> */}
                     </Row>
                   </Form>
                   <br />
