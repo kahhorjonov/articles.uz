@@ -4,8 +4,9 @@ import { Nav } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import logo from "../../logo.svg";
-import AticleLogo from "assets/img/Logo 3.png";
+// import logo from "../../logo.svg";
+// import AticleLogo from "assets/img/Logo 3.png";
+import ArticlesLogo from "assets/img/Logo 5.png";
 
 function Sidebar(props) {
   let ps;
@@ -44,7 +45,11 @@ function Sidebar(props) {
           }}
           className="logo-img"
         >
-          <img style={{ maxWidth: "50%" }} src={AticleLogo} alt="react-logo" />
+          <img
+            style={{ maxWidth: "50%" }}
+            src={ArticlesLogo}
+            alt="react-logo"
+          />
         </div>
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>

@@ -208,7 +208,7 @@ class ArticleEdit extends Component {
                     }}
                   >
                     <Col sm="6" md="6" lg="6">
-                      <span style={{ fontSize: "4rem" }}>Article Form</span>
+                      <span style={{ fontSize: "4rem" }}>Article Info</span>
                     </Col>
                     <Col sm="6" md="6" lg="6">
                       <label>{journals && journals[0].name}</label>
@@ -216,28 +216,26 @@ class ArticleEdit extends Component {
                         sm="6"
                         md="6"
                         lg="6"
-                        type="select"
+                        placeholder={journals && journals[0].title}
                         style={{ height: "3rem" }}
                         className="form-control"
-                        defaultValue={{
-                          label: journals && journals[0].title,
-                          value: journals && journals[0].id,
-                        }}
-                        onChange={(e) => {
-                          {
-                            this.setState({
-                              magazineId: e.target.value,
-                            });
-                            this.getChildCategories(e.target.value);
-                          }
-                        }}
+                        disabled
+
+                        // onChange={(e) => {
+                        //   {
+                        //     this.setState({
+                        //       magazineId: e.target.value,
+                        //     });
+                        //     this.getChildCategories(e.target.value);
+                        //   }
+                        // }}
                       >
-                        {this.state.parentCategories &&
+                        {/* {this.state.parentCategories &&
                           this.state.parentCategories.map((category) => (
                             <option key={category.id} value={category.id}>
                               {category.title}
                             </option>
-                          ))}
+                          ))} */}
                       </Input>
                     </Col>
                   </Row>
@@ -249,12 +247,12 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Title</label>
                           <Input
-                            placeholder="Title Article"
+                            disabled
+                            placeholder={titleArticle}
                             type="text"
-                            defaultValue={titleArticle}
-                            onChange={(e) =>
-                              this.setState({ title: e.target.value })
-                            }
+                            // onChange={(e) =>
+                            //   this.setState({ title: e.target.value })
+                            // }
                           />
                         </FormGroup>
                       </Col>
@@ -262,25 +260,24 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Category</label>
                           <Input
+                            placeholder={category && category.name}
                             // defaultValue={{
                             //   label: category && category[0].name,
                             //   value: category && category[0].id,
                             // }}
-
-                            defaultValue={category && category.name}
+                            disabled
                             style={{ fontSize: "1.4rem" }}
                             className="custom-select"
-                            // type="select"
-                            onChange={(e) =>
-                              this.setState({ categoryId: e.target.value })
-                            }
+                            // onChange={(e) =>
+                            //   this.setState({ categoryId: e.target.value })
+                            // }
                           >
-                            {this.state.childCategories &&
+                            {/* {this.state.childCategories &&
                               this.state.childCategories.map((category) => (
                                 <option key={category.id} value={category.id}>
                                   {category.name}
                                 </option>
-                              ))}
+                              ))} */}
                           </Input>
                         </FormGroup>
                       </Col>
@@ -340,7 +337,8 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>For Everyone?</label>
                           <Input
-                            defaultValue={publicPrivate}
+                            disabled
+                            value={publicPrivate}
                             style={{ fontSize: "1.4rem" }}
                             className="custom-select"
                             type="select"
@@ -360,10 +358,11 @@ class ArticleEdit extends Component {
                         <FormGroup>
                           <label>Description</label>
                           <Input
-                            defaultValue={description}
-                            onChange={(e) =>
-                              this.setState({ description: e.target.value })
-                            }
+                            disabled
+                            placeholder={description}
+                            // onChange={(e) =>
+                            //   this.setState({ description: e.target.value })
+                            // }
                           />
                         </FormGroup>
                       </Col>
@@ -374,11 +373,12 @@ class ArticleEdit extends Component {
                         <div>
                           <label>Sahifa soni</label>
                           <Input
+                            disabled
                             className="form-control"
                             placeholder={price && price.sahifaSoni}
-                            onChange={(e) =>
-                              this.setState({ sahifaSoni: e.target.value })
-                            }
+                            // onChange={(e) =>
+                            //   this.setState({ sahifaSoni: e.target.value })
+                            // }
                           />
                         </div>
                       </Col>
@@ -387,20 +387,22 @@ class ArticleEdit extends Component {
                         <Label>Bosma jurnal soni</Label>
                         <Input
                           min="0"
+                          disabled
                           type={"number"}
                           className="form-control"
                           placeholder={price && price.bosmaJurnallarSoni}
-                          onChange={(e) =>
-                            this.setState({
-                              bosmaJurnallarSoni: e.target.value,
-                            })
-                          }
+                          // onChange={(e) =>
+                          //   this.setState({
+                          //     bosmaJurnallarSoni: e.target.value,
+                          //   })
+                          // }
                         />
                       </Col>
 
                       <Col sm="3" md="3" lg="3">
                         <Label>Sertifikat soni</Label>
                         <input
+                          disabled
                           min="0"
                           type={"number"}
                           className="form-control"
@@ -415,6 +417,7 @@ class ArticleEdit extends Component {
                         <div>
                           <Label>Doi</Label>
                           <Input
+                            disabled
                             style={{ height: "3rem" }}
                             className="form-control"
                             type="select"
@@ -449,6 +452,7 @@ class ArticleEdit extends Component {
                               ))}
                           </ul>
                           <input
+                            disabled
                             onKeyUp={(e) =>
                               e.key === "ArrowUp" && e.target.value.length === 6
                                 ? this.addTags(e.target.value)
