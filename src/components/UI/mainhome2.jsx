@@ -15,7 +15,6 @@ import "aos/dist/aos.css";
 class Mainhome2 extends React.Component {
   state = {
     data: [],
-
     lang: "",
   };
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "utils/config.json";
 import {
-  FaFileDownload,
   FaFastBackward,
   FaBackward,
   FaForward,
@@ -11,6 +10,8 @@ import {
 } from "react-icons/fa";
 import "styles/pdfReaderStyles.css";
 
+const { apiLocal } = api;
+
 const ControlPanel = (props) => {
   const { file, pageNumber, numPages, setPageNumber, scale, setScale } = props;
 
@@ -19,7 +20,7 @@ const ControlPanel = (props) => {
     : window.location.pathname.split(":")[0];
 
   const [pdfFile, setPdfFile] = useState(
-    `http://159.65.221.248:8081/api/article/readArticle/${articleId}`
+    apiLocal + `/article/readArticle/${articleId}`
   );
 
   const isFirstPage = pageNumber === 1;

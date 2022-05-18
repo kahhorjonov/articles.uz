@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Loader from "./Loader";
 import { Document, Page, pdfjs } from "react-pdf";
-import ControlPanel from "./ControlPanel";
-
 import "styles/pdfReaderStyles.css";
+import Loader from "./Loader";
+import ControlPanel from "./ControlPanel";
+import api from "utils/config.json";
+const { apiLocal } = api;
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PDFReader = (props) => {
@@ -17,7 +19,7 @@ const PDFReader = (props) => {
     : window.location.pathname.split(":")[0];
 
   const [file, setFile] = useState(
-    `http://159.65.221.248:8081/api/article/readArticle/${articleId}`
+    apiLocal + `/article/readArticle/${articleId}`
   );
 
   function onDocumentLoadSuccess({ numPages }) {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getAllMyArticles } from "services/articleService";
+import { downloadFile } from "services/mediaService";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { toast } from "react-toastify";
@@ -43,16 +44,15 @@ class BarchaMaqolalarim extends Component {
 
   handleDownload = async (id, originalName, contentType) => {
     if (id && originalName && contentType) {
+      const object = {
+        method: "GET",
+        headers: {
+          "Content-Type": contentType,
+        },
+      };
+
       try {
-        await fetch(
-          `http://159.65.221.248:8081/api/attachment/download/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": contentType,
-            },
-          }
-        )
+        await downloadFile(id, object)
           .then((response) => response.blob())
           .then((blob) => {
             // Create blob link to download

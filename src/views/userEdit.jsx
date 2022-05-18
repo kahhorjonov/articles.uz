@@ -14,7 +14,7 @@ import noUser from "assets/img/no-user-image.gif";
 
 import { getAllActiveLanguages } from "services/languageService";
 import { getArticlesCheckedByReviewers } from "services/articleService";
-import { downloadMedia } from "services/mediaService";
+import { downloadMedia, downloadFile } from "services/mediaService";
 import { toast } from "react-toastify";
 
 import {
@@ -167,15 +167,12 @@ class UserEdit extends Component {
   handleDownload = async (id, originalName, contentType) => {
     if (id && originalName && contentType) {
       try {
-        await fetch(
-          `http://159.65.221.248:8081/api/attachment/download/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": contentType,
-            },
-          }
-        )
+        await downloadFile(id, {
+          method: "GET",
+          headers: {
+            "Content-Type": contentType,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
             const url = window.URL.createObjectURL(new Blob([blob]));

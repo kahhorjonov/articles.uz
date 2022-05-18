@@ -19,10 +19,6 @@ import { Col, Button } from "reactstrap";
 import GetImages from "utils/getImages";
 import Listhome from "./listhome";
 import Carousel from "react-multi-carousel";
-// import img11 from "assets/img/figma/im1.png";
-// import img21 from "assets/img/figma/im2.png";
-// import img31 from "assets/img/figma/im3.png";
-// import img41 from "assets/img/figma/im4.png";
 
 import "react-multi-carousel/lib/styles.css";
 import "styles/jurnallarRoyhati.css";

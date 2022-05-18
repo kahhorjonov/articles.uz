@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "services/authService";
+import { downloadMedia } from "services/mediaService";
 import ru from "translations/ru";
 
 import {
@@ -89,14 +90,10 @@ class MagazineInfoAdmin extends Component {
 
   getImage = async (id) => {
     let imageBlob;
+    const obj = { responseType: "blob" };
 
     try {
-      imageBlob = (
-        await axios.get(
-          `http://159.65.221.248:8081/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
+      imageBlob = (await downloadMedia(id, obj)).data;
     } catch (err) {
       return toast.error("Fayl topilmadi");
     }

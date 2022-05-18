@@ -68,35 +68,54 @@ class JurnalQoshish extends Component {
 
   formValidation = () => {
     const {
-      id,
-      parentId,
       categoryId,
       issn,
       isbn,
       deadline,
       certificateNumber,
       title,
-      createdDate,
-      file,
       cover,
-      status,
-      magazineNumber,
       description,
       printedDate,
-      releaseNumberOfThisYear,
-      allReleasesNumber,
-      parentCategoryId,
     } = this.state;
 
     let isValid = true;
-    const errors = {};
+    let errors = {};
 
     if (title.trim().length < 1) {
       errors.titleLength = "Title is not allowed to be empty";
       isValid = false;
     }
-
-    if (cover.length < 1) {
+    if (deadline.trim().length < 1) {
+      errors.deadline = "Deadline is not allowed to be empty";
+      isValid = false;
+    }
+    if (categoryId.trim().length < 1) {
+      errors.categories = "Category is not allowed to be empty";
+      isValid = false;
+    }
+    if (description.trim().length < 1) {
+      errors.description = "Description is not allowed to be empty";
+      isValid = false;
+    }
+    if (certificateNumber.trim().length < 1) {
+      errors.certificateNumber =
+        "Certificate number is not allowed to be empty";
+      isValid = false;
+    }
+    if (printedDate.trim().length < 1) {
+      errors.printedDate = "Print Day is not allowed to be empty";
+      isValid = false;
+    }
+    if (issn.trim().length < 1) {
+      errors.issn = "issn is not allowed to be empty";
+      isValid = false;
+    }
+    if (isbn.trim().length < 1) {
+      errors.isbn = "isbn is not allowed to be empty";
+      isValid = false;
+    }
+    if (cover.length === 0) {
       errors.cover = "Cover is not allowed to be empty";
       isValid = false;
     }
@@ -106,27 +125,7 @@ class JurnalQoshish extends Component {
     //   isValid = false;
     // }
 
-    if (deadline.trim().length < 1) {
-      errors.deadline = "Deadline is not allowed to be empty";
-      isValid = false;
-    }
-
-    if (categoryId.trim().length <= 0) {
-      errors.categories = "Category is not allowed to be empty";
-      isValid = false;
-    }
-
-    if (description.trim().length <= 0) {
-      errors.description = "Description is not allowed to be empty";
-      isValid = false;
-    }
-
-    if (printedDate.trim().length <= 0) {
-      errors.printedDate = "Print Day is not allowed to be empty";
-      isValid = false;
-    }
-
-    this.setState({ errors });
+    this.setState({ errors: errors });
     return isValid;
   };
 
@@ -134,23 +133,44 @@ class JurnalQoshish extends Component {
     e.preventDefault();
 
     const { errors } = this.state;
+    // const isValid = await ;
 
-    const isValid = this.formValidation();
-
-    if (isValid) {
+    if (this.formValidation()) {
       try {
-        await magazineService
-          .createMagazine(this.state)
-          .then((res) => toast.success(res.data.message));
+        await magazineService.createMagazine(this.state).then((res) => {
+          toast.success(res.data.message);
+          this.setState({ title: "" });
+          this.setState({ categoryId: "" });
+          this.setState({ parentCategoryId: "" });
+          this.setState({ deadline: "" });
+          this.setState({ certificateNumber: "" });
+          this.setState({ isbn: "" });
+          this.setState({ issn: "" });
+          this.setState({ description: "" });
+          this.setState({ printedDate: "" });
+          this.setState({ cover: [] });
+        });
       } catch (error) {
         toast.error(error.response.data.message);
       }
+    } else {
+      return Object.keys(errors).map((key) => toast.error(errors[key]));
     }
-    return Object.keys(errors).map((key) => toast.error(errors[key]));
   };
 
   render() {
-    const { errors, lang } = this.state;
+    const {
+      lang,
+      title,
+      categoryId,
+      parentCategoryId,
+      deadline,
+      certificateNumber,
+      isbn,
+      issn,
+      description,
+      printedDate,
+    } = this.state;
 
     return (
       <>
@@ -172,6 +192,7 @@ class JurnalQoshish extends Component {
                             {lang === "ru" ? ru.jurnal_title : "Sarlavha"}
                           </label>
                           <input
+                            value={title}
                             onChange={(e) =>
                               this.setState({ title: e.target.value })
                             }
@@ -187,10 +208,7 @@ class JurnalQoshish extends Component {
                             : "Kategoriyalar"}
                         </Label>
                         <Input
-                          defaultValue={
-                            this.state.categories[0] &&
-                            this.state.categories[0].id
-                          }
+                          value={categoryId}
                           onChange={(e) =>
                             this.setState({ categoryId: e.target.value })
                           }
@@ -229,7 +247,7 @@ class JurnalQoshish extends Component {
                             : "Jurnallar (yangi soni uchun)"}
                         </label>
                         <Input
-                          defaultValue=" "
+                          value={parentCategoryId}
                           style={{ height: "3rem" }}
                           className="form-control"
                           type="select"
@@ -270,6 +288,7 @@ class JurnalQoshish extends Component {
                               : "Maqola qabul qilish oxirgi sanasi"}
                           </label>
                           <input
+                            value={deadline}
                             onChange={(e) =>
                               this.setState({ deadline: e.target.value })
                             }
@@ -303,6 +322,7 @@ class JurnalQoshish extends Component {
                               : "Sertifikat raqami"}
                           </Label>
                           <input
+                            value={certificateNumber}
                             placeholder="ex: № FS77-54438"
                             onChange={(e) =>
                               this.setState({
@@ -319,6 +339,7 @@ class JurnalQoshish extends Component {
                         <div>
                           <Label>ISBN</Label>
                           <input
+                            value={isbn}
                             onChange={(e) =>
                               this.setState({ isbn: e.target.value })
                             }
@@ -333,6 +354,7 @@ class JurnalQoshish extends Component {
                         <div>
                           <Label>ISSN</Label>
                           <input
+                            value={issn}
                             onChange={(e) =>
                               this.setState({ issn: e.target.value })
                             }
@@ -353,6 +375,7 @@ class JurnalQoshish extends Component {
                               : "Jurnal haqida ma'lumot"}
                           </label>
                           <Input
+                            value={description}
                             style={{
                               overscrollBehaviorY: "none",
                               padding: "1rem",
@@ -390,6 +413,7 @@ class JurnalQoshish extends Component {
                               : "Tekshirish vaqti"}
                           </label>
                           <Input
+                            value={printedDate}
                             min="0"
                             onChange={(e) =>
                               this.setState({ printedDate: e.target.value })

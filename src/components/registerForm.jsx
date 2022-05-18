@@ -66,7 +66,6 @@ class RegisterForm extends Form {
         .then((res) => {
           loginWithJwt(res.data);
           toast.info(res.message);
-          console.log(res.data);
 
           const decodedToken = jwtDecode(res.data);
           if (decodedToken.roles[0].roleName === "ROLE_REVIEWER") {

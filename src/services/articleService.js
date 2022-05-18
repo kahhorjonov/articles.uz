@@ -209,8 +209,6 @@ export function editArticleByAdmin(data) {
     status: data.status,
   };
 
-  console.log(bodyParametrs);
-
   return axios.post(
     apiLocal + "/article/articleStatusAdministrator",
     bodyParametrs,

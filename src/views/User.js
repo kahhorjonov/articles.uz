@@ -3,6 +3,7 @@ import { me } from "services/authService";
 import { getAllActiveLanguages } from "services/languageService";
 import { profileEdit } from "services/userService";
 import { profilePhoto, downloadMedia } from "services/mediaService";
+import { downloadFile } from "services/mediaService";
 import { toast } from "react-toastify";
 import { Multiselect } from "multiselect-react-dropdown";
 import noUser from "assets/img/no-user-image.gif";
@@ -159,15 +160,12 @@ class User extends Component {
 
     if (id && originalName && contentType) {
       try {
-        await fetch(
-          `http://159.65.221.248:8081/api/attachment/download/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": contentType,
-            },
-          }
-        )
+        await downloadFile(id, {
+          method: "GET",
+          headers: {
+            "Content-Type": contentType,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
             const url = window.URL.createObjectURL(new Blob([blob]));

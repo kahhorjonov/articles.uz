@@ -5,6 +5,7 @@ import {
   getParentCategories,
   ActionUnderArticlesFromMagazine,
 } from "services/magazineService";
+import { downloadFile, downloadMedia } from "services/mediaService";
 
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -79,12 +80,7 @@ class EditMagazine extends Component {
     let imageBlob;
 
     try {
-      imageBlob = (
-        await axios.get(
-          `http://159.65.221.248:8081/api/attachment/download/${id}`,
-          { responseType: "blob" }
-        )
-      ).data;
+      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
     } catch (err) {
       return null;
     }
@@ -122,15 +118,12 @@ class EditMagazine extends Component {
 
     if (id && originalName && contentType) {
       try {
-        await fetch(
-          `http://159.65.221.248:8081/api/attachment/download/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": contentType,
-            },
-          }
-        )
+        await downloadFile(id, {
+          method: "GET",
+          headers: {
+            "Content-Type": contentType,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
             const url = window.URL.createObjectURL(new Blob([blob]));

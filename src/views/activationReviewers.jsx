@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
 import { toast } from "react-toastify";
+import { downloadFile } from "services/mediaService";
 import { getNewRegisteredUsers, acceptReviewers } from "services/userService";
 import ru from "translations/ru";
 
@@ -38,15 +39,12 @@ class ReviewerActivation extends Component {
   handleDownload = async (fileId, fileName, type) => {
     if (fileId && fileName && type) {
       try {
-        await fetch(
-          `http://159.65.221.248:8081/api/attachment/download/${fileId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": type,
-            },
-          }
-        )
+        await downloadFile(fileId, {
+          method: "GET",
+          headers: {
+            "Content-Type": type,
+          },
+        })
           .then((response) => response.blob())
           .then((blob) => {
             const url = window.URL.createObjectURL(new Blob([blob]));
