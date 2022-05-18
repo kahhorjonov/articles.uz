@@ -513,7 +513,7 @@ class Users extends Component {
                                 {lang === "ru" ? ru.admin_red : "Tahrirchilar"}
                               </option>
                               <option value="3">
-                                {lang === "ru" ? ru.admin_rev : "Tahrirchi"}
+                                {lang === "ru" ? ru.admin_rev : "Taqrizchilar"}
                               </option>
                               <option value="4">
                                 {lang === "ru" ? ru.authors : "Mualliflar"}
