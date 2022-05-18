@@ -319,4 +319,4 @@ class JurnallarRoyxati extends Component {
   }
 }
 
-export default JurnallarRoyxati;
+export default React.memo(JurnallarRoyxati);

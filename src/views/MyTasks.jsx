@@ -497,4 +497,4 @@ class MyTasks extends Component {
   }
 }
 
-export default MyTasks;
+export default React.memo(MyTasks);

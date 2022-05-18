@@ -625,4 +625,4 @@ class ArticleInfo extends Component {
   }
 }
 
-export default ArticleInfo;
+export default React.memo(ArticleInfo);

@@ -432,4 +432,4 @@ class Category extends Component {
   }
 }
 
-export default Category;
+export default React.memo(Category);

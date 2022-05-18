@@ -37,4 +37,4 @@ const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
   );
 };
 
-export default ProtectedRoute;
+export default React.memo(ProtectedRoute);

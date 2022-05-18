@@ -200,4 +200,4 @@ class ReviewerActivation extends Component {
   }
 }
 
-export default ReviewerActivation;
+export default React.memo(ReviewerActivation);

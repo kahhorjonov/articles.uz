@@ -402,4 +402,4 @@ class MagazineInfoAdmin extends Component {
   }
 }
 
-export default MagazineInfoAdmin;
+export default React.memo(MagazineInfoAdmin);

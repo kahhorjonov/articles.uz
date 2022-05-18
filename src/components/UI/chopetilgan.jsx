@@ -142,4 +142,4 @@ class Chopetilgan extends Component {
   }
 }
 
-export default Chopetilgan;
+export default React.memo(Chopetilgan);

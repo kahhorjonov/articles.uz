@@ -169,4 +169,4 @@ class Radetish extends Component {
   }
 }
 
-export default Radetish;
+export default React.memo(Radetish);

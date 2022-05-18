@@ -178,4 +178,4 @@ class Mainhome2 extends React.Component {
     );
   }
 }
-export default Mainhome2;
+export default React.memo(Mainhome2);

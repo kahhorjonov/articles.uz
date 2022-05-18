@@ -66,4 +66,4 @@ class GetImages extends Component {
   }
 }
 
-export default GetImages;
+export default React.memo(GetImages);

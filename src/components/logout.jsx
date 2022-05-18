@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import auth from "../services/authService";
 
 class Logout extends Component {
@@ -12,4 +12,4 @@ class Logout extends Component {
   }
 }
 
-export default Logout;
+export default React.memo(Logout);

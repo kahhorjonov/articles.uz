@@ -316,4 +316,4 @@ class ReviewerRegisterForm extends Form {
   }
 }
 
-export default ReviewerRegisterForm;
+export default React.memo(ReviewerRegisterForm);

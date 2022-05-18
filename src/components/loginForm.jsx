@@ -113,4 +113,4 @@ class LoginForm extends Form {
   }
 }
 
-export default LoginForm;
+export default React.memo(LoginForm);

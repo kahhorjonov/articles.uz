@@ -158,4 +158,4 @@ class Aloqa extends Component {
   }
 }
 
-export default Aloqa;
+export default React.memo(Aloqa);

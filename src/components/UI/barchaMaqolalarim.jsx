@@ -256,4 +256,4 @@ class BarchaMaqolalarim extends Component {
   }
 }
 
-export default BarchaMaqolalarim;
+export default React.memo(BarchaMaqolalarim);

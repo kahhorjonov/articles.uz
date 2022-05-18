@@ -507,7 +507,7 @@ class Users extends Component {
                               <option value="1">
                                 {lang === "ru"
                                   ? ru.admin_admin
-                                  : "Adminstrator"}
+                                  : "Adminstrator"} 
                               </option>
                               <option value="2">
                                 {lang === "ru" ? ru.admin_red : "Tahrirchilar"}

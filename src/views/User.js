@@ -592,4 +592,4 @@ class User extends Component {
   }
 }
 
-export default User;
+export default React.memo(User);

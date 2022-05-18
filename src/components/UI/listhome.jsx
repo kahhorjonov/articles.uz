@@ -46,4 +46,4 @@ class Listhome extends React.Component {
     );
   }
 }
-export default Listhome;
+export default React.memo(Listhome);

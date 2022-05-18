@@ -459,4 +459,4 @@ class JurnalQoshish extends Component {
   }
 }
 
-export default JurnalQoshish;
+export default React.memo(JurnalQoshish);

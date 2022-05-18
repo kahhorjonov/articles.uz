@@ -88,4 +88,4 @@ class NavbarHome extends React.Component {
     );
   }
 }
-export default NavbarHome;
+export default React.memo(NavbarHome);

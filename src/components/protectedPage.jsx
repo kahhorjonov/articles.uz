@@ -27,4 +27,4 @@ const ProtectedPage = ({ path, component: Component, render, ...rest }) => {
   );
 };
 
-export default ProtectedPage;
+export default React.memo(ProtectedPage);

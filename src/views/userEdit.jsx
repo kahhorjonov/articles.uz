@@ -858,4 +858,4 @@ class UserEdit extends Component {
   }
 }
 
-export default UserEdit;
+export default React.memo(UserEdit);

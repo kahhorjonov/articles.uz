@@ -508,4 +508,4 @@ class ArticleEdit extends Component {
   }
 }
 
-export default ArticleEdit;
+export default React.memo(ArticleEdit);

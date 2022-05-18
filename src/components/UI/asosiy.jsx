@@ -120,4 +120,4 @@ class Asosiy extends React.Component {
     );
   }
 }
-export default Asosiy;
+export default React.memo(Asosiy);

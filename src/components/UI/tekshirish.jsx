@@ -116,4 +116,4 @@ class Tekshirish extends Component {
   }
 }
 
-export default Tekshirish;
+export default React.memo(Tekshirish);

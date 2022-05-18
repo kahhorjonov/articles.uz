@@ -72,4 +72,4 @@ class Section extends React.Component {
     );
   }
 }
-export default Section;
+export default React.memo(Section);

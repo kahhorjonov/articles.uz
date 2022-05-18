@@ -264,4 +264,4 @@ class Jurnallar extends Component {
   }
 }
 
-export default Jurnallar;
+export default React.memo(Jurnallar);

@@ -370,4 +370,4 @@ class JurnalArxive extends Component {
   }
 }
 
-export default JurnalArxive;
+export default React.memo(JurnalArxive);

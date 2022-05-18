@@ -403,4 +403,4 @@ class MagazineInfo extends Component {
   }
 }
 
-export default MagazineInfo;
+export default React.memo(MagazineInfo);

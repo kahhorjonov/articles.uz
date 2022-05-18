@@ -185,4 +185,4 @@ class ArticleActivation extends Component {
   }
 }
 
-export default ArticleActivation;
+export default React.memo(ArticleActivation);

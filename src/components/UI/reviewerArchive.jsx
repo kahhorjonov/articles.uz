@@ -336,4 +336,4 @@ class ReviewerArchive extends Component {
   }
 }
 
-export default ReviewerArchive;
+export default React.memo(ReviewerArchive);

@@ -515,4 +515,4 @@ class EditMagazine extends Component {
   }
 }
 
-export default EditMagazine;
+export default React.memo(EditMagazine);

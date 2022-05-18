@@ -9,4 +9,4 @@ function CounterUp() {
   );
 }
 
-export default CounterUp;
+export default React.memo(CounterUp);

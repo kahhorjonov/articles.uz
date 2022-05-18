@@ -193,4 +193,4 @@ class UserMagazines extends Component {
   }
 }
 
-export default UserMagazines;
+export default React.memo(UserMagazines);

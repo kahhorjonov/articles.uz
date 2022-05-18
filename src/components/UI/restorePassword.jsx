@@ -101,4 +101,4 @@ class RestorePassword extends Form {
   }
 }
 
-export default RestorePassword;
+export default React.memo(RestorePassword);

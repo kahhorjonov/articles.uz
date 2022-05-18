@@ -471,4 +471,4 @@ class NashrShartlari extends Component {
   }
 }
 
-export default NashrShartlari;
+export default React.memo(NashrShartlari);

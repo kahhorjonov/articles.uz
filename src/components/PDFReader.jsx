@@ -53,4 +53,4 @@ const PDFReader = (props) => {
   );
 };
 
-export default PDFReader;
+export default React.memo(PDFReader);

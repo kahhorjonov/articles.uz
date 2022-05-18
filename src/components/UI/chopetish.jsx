@@ -169,4 +169,4 @@ class Chopetish extends Component {
   }
 }
 
-export default Chopetish;
+export default React.memo(Chopetish);

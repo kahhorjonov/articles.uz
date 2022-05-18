@@ -479,4 +479,4 @@ class ChangePrices extends Component {
   }
 }
 
-export default ChangePrices;
+export default React.memo(ChangePrices);

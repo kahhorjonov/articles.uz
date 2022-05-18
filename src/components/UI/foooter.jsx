@@ -179,4 +179,4 @@ class Foooter extends React.Component {
     );
   }
 }
-export default Foooter;
+export default React.memo(Foooter);

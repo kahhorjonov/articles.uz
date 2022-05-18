@@ -81,4 +81,4 @@ class RestoreWithSms extends Form {
   }
 }
 
-export default RestoreWithSms;
+export default React.memo(RestoreWithSms);

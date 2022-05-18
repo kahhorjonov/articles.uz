@@ -600,4 +600,4 @@ class ArticleForm extends Form {
   }
 }
 
-export default ArticleForm;
+export default React.memo(ArticleForm);
