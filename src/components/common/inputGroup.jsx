@@ -12,18 +12,22 @@ const InputGroupField = (props) => {
         justifyContent: "center",
         alignItems: "center",
         height: "auto !important",
+        padding: 0,
       }}
     >
       <label htmlFor={name}>{label}</label>
-      <InputGroup>
-        <InputGroupText style={{ fontSize: "1.5rem" }}>+998</InputGroupText>
+      <InputGroup style={{ padding: "0" }}>
+        <InputGroupText style={{ fontSize: "1.5rem", padding: "0" }}>
+          +998
+        </InputGroupText>
         <Input
           {...rest}
           id={name}
           minLength={9}
           maxLength={9}
           name={name}
-          className="form-control"
+          className="form-control p-0"
+          style={{ padding: "0" }}
         />
       </InputGroup>
       {error && <div className="alert alert-danger">{error}</div>}
