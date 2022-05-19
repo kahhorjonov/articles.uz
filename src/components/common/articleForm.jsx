@@ -39,6 +39,7 @@ class ArticleForm extends Form {
 
     price: 0,
 
+    activeCategoryTitle: "",
     parentCategoryId: "",
     parentCategories: [],
     childCategories: [],
@@ -218,6 +219,10 @@ class ArticleForm extends Form {
     try {
       await addArticle(this.state).then((res) => {
         toast.success(res.data.message);
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -225,7 +230,14 @@ class ArticleForm extends Form {
   };
 
   render() {
-    const { articlePrice, inputFields, lang, langs, tags } = this.state;
+    const {
+      articlePrice,
+      lang,
+      langs,
+      tags,
+      activeCategoryTitle,
+      parentCategoryId,
+    } = this.state;
 
     const {
       bittaBosmaJunalNarxi,
@@ -263,6 +275,10 @@ class ArticleForm extends Form {
                       type="select"
                       style={{ height: "3rem" }}
                       className="form-control"
+                      // value={{
+                      //   value: parentCategoryId,
+                      //   label: activeCategoryTitle,
+                      // }}
                       onChange={(e) => {
                         {
                           this.setState({

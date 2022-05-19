@@ -17,7 +17,7 @@ import { getPublishedParentCategories } from "services/getCategories";
 import { Col, Button } from "reactstrap";
 
 import GetImages from "utils/getImages";
-import Listhome from "./listhome";
+// import Listhome from "./listhome";
 import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
@@ -275,8 +275,8 @@ class JurnallarRoyxati extends Component {
                   itemClass="carousel-item-padding-10-px"
                 >
                   {carouselMagazines &&
-                    carouselMagazines.map((magazine) => (
-                      <Col lg="10" className="px-0 mx-0">
+                    carouselMagazines.map((magazine, idx) => (
+                      <Col key={idx} lg="10" className="px-0 mx-0">
                         <div className="border-0">
                           <Link to={`/main/magazineInfo/:${magazine.id}`}>
                             <div className="boxShadow">
