@@ -71,10 +71,6 @@ class UserEdit extends Component {
     options: [],
     codes: [],
 
-    selectedValues2: [],
-    options2: [],
-    codes2: [],
-
     selectedValuesCat: [],
     optionsCat: [],
     codesCat: [],
@@ -102,7 +98,7 @@ class UserEdit extends Component {
         }
         this.getCheckedArticles(userId);
         this.setState({ selectedValues: res.data.object.languages });
-        this.setState({ selectedValues2: res.data.object.categories });
+        this.setState({ selectedValuesCat: res.data.object.categories });
       })
       .catch((ex) => toast.error(ex.response.data.message));
 
@@ -127,9 +123,9 @@ class UserEdit extends Component {
         this.setState({ codes: [...this.state.codes, language.id] })
       );
 
-    this.state.selectedValues2 &&
-      this.state.selectedValues2.map((category) =>
-        this.setState({ codes2: [...this.state.codes2, category.id] })
+    this.state.selectedValuesCat &&
+      this.state.selectedValuesCat.map((category) =>
+        this.setState({ codesCat: [...this.state.codesCat, category.id] })
       );
   };
 

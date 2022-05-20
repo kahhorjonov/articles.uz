@@ -118,7 +118,7 @@ class Articles extends Component {
                 <div className="card-header">
                   <h3>{lang === "ru" ? ru.maqolalar : "Barcha maqolalar"}</h3>
                 </div>
-                <div className="card-body">
+                <div style={{ overflow: "auto" }} className="card-body">
                   <div className="d-flex justify-content-end">
                     <div className="col-md-3 p-0 box2">
                       <ul className="nav nav-pills flex-column" role="tablist">

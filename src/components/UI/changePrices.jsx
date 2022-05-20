@@ -121,7 +121,7 @@ class ChangePrices extends Component {
   };
 
   render() {
-    const { language, getPrice, lang } = this.state;
+    const { language, getPrice, lang, newName } = this.state;
 
     const {
       bittaBosmaJunalNarxi,
@@ -301,6 +301,7 @@ class ChangePrices extends Component {
 
                               <div className="modal-body">
                                 <input
+                                  value={newName}
                                   type="text"
                                   onChange={(e) =>
                                     this.setState({
