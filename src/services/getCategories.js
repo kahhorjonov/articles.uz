@@ -43,6 +43,10 @@ export function getScientificDirections() {
   return http.get(apiLocal + `/journals/getJournalsCategories`);
 }
 
+export function getAllChildCategories() {
+  return http.get(apiLocal + `/category/allChildrnCategory`);
+}
+
 export default {
   getCategories,
   getCategoriesForMagazine,
@@ -54,4 +58,5 @@ export default {
   getChildCategories,
   getPublishedParentCategories,
   getScientificDirections,
+  getAllChildCategories,
 };

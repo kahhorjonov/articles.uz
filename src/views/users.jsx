@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import userService from "services/userService";
 import { getAllActiveLanguages } from "services/languageService";
-import { getCategories } from "services/getCategories";
+import { getCategories, getAllChildCategories } from "services/getCategories";
 import { toast } from "react-toastify";
 import Pagination from "components/common/pagination";
 import { paginate } from "utils/paginate";
@@ -54,7 +54,11 @@ class Users extends Component {
     options: [],
     codes: [],
     checkedArticles: [],
-    selectedValues: [],
+
+    selectedValuesCat: [],
+    optionsCat: [],
+    codesCat: [],
+    checkedArticlesCat: [],
 
     lang: "",
   };
@@ -66,6 +70,7 @@ class Users extends Component {
     await this.populateCategories();
     await this.handleChooseRole(null);
     await this.handleGetLanguages();
+    await this.populateChildCategories();
 
     // try {
     //   const msg = firebase.messaging();
@@ -112,6 +117,22 @@ class Users extends Component {
     this.setState({ codes: [...newCodes] });
   };
 
+  onSelectCat = (selectedList, selectedItem) => {
+    this.setState({
+      selectedValuesCat: selectedList,
+    });
+
+    this.setState({ codesCat: [...this.state.codesCat, selectedItem.id] });
+  };
+
+  onRemoveCat = (selectedList, removedItem) => {
+    const newCodes = new Set(
+      this.state.codesCat.filter((id) => id !== removedItem.id)
+    );
+    this.setState({ selectedListCat: selectedList });
+    this.setState({ codesCat: [...newCodes] });
+  };
+
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
@@ -156,7 +177,7 @@ class Users extends Component {
       .searchUser(data)
       .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
-        // toast.error(ex.response.data.message);
+        toast.error(ex.response.data.message);
       });
   };
 
@@ -172,7 +193,7 @@ class Users extends Component {
       .searchUser(data)
       .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
-        console.error(ex);
+        toast.error(ex.response.data.message);
       });
   };
 
@@ -188,7 +209,7 @@ class Users extends Component {
       .searchUser(data)
       .then((res) => this.setState({ users: res.data.object }))
       .catch((ex) => {
-        console.error(ex);
+        toast.error(ex.response.data.message);
       });
   };
 
@@ -203,12 +224,17 @@ class Users extends Component {
 
   async populateCategories() {
     const { data: categories } = await getCategories();
-    this.setState({ categories });
+    this.setState({ optionsCat: categories });
+  }
+
+  async populateChildCategories() {
+    const { data: categories } = await getAllChildCategories();
+    this.setState({ optionsCat: categories });
   }
 
   createUser = async () => {
     const data = {
-      categoryId: this.state.categoryIdForCreate,
+      categoryId: this.state.codesCat,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
@@ -241,6 +267,8 @@ class Users extends Component {
       lastName,
       phoneNumber,
       email,
+      optionsCat,
+      selectedValuesCat,
     } = this.state;
 
     const users = paginate(allUsers, currentPage, pageSize);
@@ -366,7 +394,19 @@ class Users extends Component {
                               <Row>
                                 <Col md="12" sm="12" lg="12">
                                   <FormGroup>
-                                    <select
+                                    <label>
+                                      {lang === "ru"
+                                        ? ru.kategoriya
+                                        : "Kategoriya"}
+                                    </label>
+                                    <Multiselect
+                                      options={optionsCat}
+                                      selectedValues={selectedValuesCat}
+                                      onSelect={this.onSelectCat}
+                                      onRemove={this.onRemoveCat}
+                                      displayValue="name"
+                                    />
+                                    {/* <select
                                       required
                                       style={{ fontSize: "1.4rem" }}
                                       className="custom-select"
@@ -392,7 +432,7 @@ class Users extends Component {
                                             </option>
                                           )
                                         )}
-                                    </select>
+                                    </select> */}
                                   </FormGroup>
                                 </Col>
                               </Row>
@@ -578,7 +618,7 @@ class Users extends Component {
                             {/* <div className="input-group mb-3 input-group-sm"> */}
                             <input
                               type="text"
-                              className="form-control p-2 ins"
+                              className="form-control ins"
                               placeholder={
                                 lang === "ru" ? ru.search : "Izlash..."
                               }

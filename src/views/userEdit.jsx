@@ -13,6 +13,7 @@ import Multiselect from "multiselect-react-dropdown";
 import noUser from "assets/img/no-user-image.gif";
 
 import { getAllActiveLanguages } from "services/languageService";
+import { getAllChildCategories } from "services/getCategories";
 import { getArticlesCheckedByReviewers } from "services/articleService";
 import { downloadMedia, downloadFile } from "services/mediaService";
 import { toast } from "react-toastify";
@@ -74,6 +75,11 @@ class UserEdit extends Component {
     options2: [],
     codes2: [],
 
+    selectedValuesCat: [],
+    optionsCat: [],
+    codesCat: [],
+    checkedArticlesCat: [],
+
     checkedArticles: [],
 
     lang: "",
@@ -86,6 +92,7 @@ class UserEdit extends Component {
     const userId = this.props.history.location.pathname.slice(17);
     this.setState({ userId: userId });
     this.handleGetLanguages();
+    this.populateChildCategories();
 
     await getUserForEdit(userId)
       .then((res) => {
@@ -135,6 +142,11 @@ class UserEdit extends Component {
       toast.error(ex.response.data.message);
     }
   };
+
+  async populateChildCategories() {
+    const { data: categories } = await getAllChildCategories();
+    this.setState({ optionsCat: categories });
+  }
 
   getCheckedArticles = async (id) => {
     try {
@@ -207,20 +219,20 @@ class UserEdit extends Component {
     this.setState({ codes: [...newCodes] });
   };
 
-  onSelect2 = (selectedList, selectedItem) => {
+  onSelectCat = (selectedList, selectedItem) => {
     this.setState({
-      selectedValues2: selectedList,
+      selectedValuesCat: selectedList,
     });
 
-    this.setState({ codes2: [...this.state.codes2, selectedItem.id] });
+    this.setState({ codesCat: [...this.state.codesCat, selectedItem.id] });
   };
 
-  onRemove2 = (selectedList, removedItem) => {
+  onRemoveCat = (selectedList, removedItem) => {
     const newCodes = new Set(
-      this.state.codes2.filter((id) => id !== removedItem.id)
+      this.state.codesCat.filter((id) => id !== removedItem.id)
     );
-    this.setState({ selectedList2: selectedList });
-    this.setState({ codes2: [...newCodes] });
+    this.setState({ selectedListCat: selectedList });
+    this.setState({ codesCat: [...newCodes] });
   };
 
   handleChange = async (bool) => {
@@ -267,6 +279,8 @@ class UserEdit extends Component {
       didNotAccepteds,
       checkedArticles,
       lang,
+      optionsCat,
+      selectedValuesCat,
     } = this.state;
 
     return (
@@ -692,11 +706,11 @@ class UserEdit extends Component {
                           {lang === "ru" ? ru.kategoriya : "Kategoriya"}
                         </label>
                         <Multiselect
-                          options={this.state.options2} // Options to display in the dropdown
-                          selectedValues={this.state.selectedValues2} // Preselected value to persist in dropdown
-                          onSelect={this.onSelect2} // Function will trigger on select event
-                          onRemove={this.onRemove2} // Function will trigger on remove event
-                          displayValue="name" // Property name to display in the dropdown options
+                          options={optionsCat}
+                          selectedValues={selectedValuesCat}
+                          onSelect={this.onSelectCat}
+                          onRemove={this.onRemoveCat}
+                          displayValue="name"
                         />
                       </Col>
                     </Row>
