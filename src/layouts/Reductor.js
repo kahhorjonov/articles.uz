@@ -35,8 +35,14 @@ function Dashboard(props) {
   const handleActiveClick = (color) => {
     setActiveColor(color);
   };
+
   const handleBgClick = (color) => {
     setBackgroundColor(color);
+  };
+
+  window.onbeforeunload = function () {
+    localStorage.removeItem("token");
+    return "";
   };
 
   return (
