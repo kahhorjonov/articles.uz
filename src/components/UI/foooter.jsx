@@ -29,7 +29,7 @@ class Foooter extends React.Component {
             <div className="row ml-0 mr-0 ml-xl-0 mr-xl-0 ml-lg-0 mr-lg-0 mr-md-0 ml-md-0">
               <div className="col-md-4 col-sm-4 col-lg-4">
                 <hr className="hr1 col-md-4 col-sm-4 col-lg-4" />
-                <h5>{this.state.lang === "ru" ? ru.adres : "Manzil :"}</h5>
+                <h5>{this.state.lang === "ru" ? ru.adres : "Manzil:"}</h5>
                 <p>
                   {this.state.lang === "ru"
                     ? ru.main_adres
@@ -39,7 +39,7 @@ class Foooter extends React.Component {
 
               <div className="col-md-4 col-sm-3 col-lg-4">
                 <hr className="hr1 col-md-4 col-sm-4 col-lg-4" />
-                <h5>{this.state.lang === "ru" ? ru.aloqa : "Aloqa :"}</h5>
+                <h5>{this.state.lang === "ru" ? ru.aloqa : "Aloqa:"}</h5>
                 <p>
                   <a href="mailto:anvark87@gmail.com">anvark87@gmail.com</a>
                 </p>
@@ -53,7 +53,7 @@ class Foooter extends React.Component {
                 <h5>
                   {this.state.lang === "ru"
                     ? ru.tarmoqlar
-                    : "Ijtimoiy tarmoqlar :"}
+                    : "Ijtimoiy tarmoqlar:"}
                 </h5>
                 <div className="d-flex align-items-center">
                   <a

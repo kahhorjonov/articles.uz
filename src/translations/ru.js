@@ -86,10 +86,10 @@ const ru = {
   main_narxlar: "Выгодные цены",
 
   main_boglanish: "Связаться с нами",
-  adres: "Адрес :",
+  adres: "Адрес:",
   main_adres: "г. Ташкент, Мирзо-Улугбекский район, КАРАСУВ 6, 1-ДОМ, 55 кв",
-  aloqa: "Контакты :",
-  tarmoqlar: "Соц. Сети :",
+  aloqa: "Контакты:",
+  tarmoqlar: "Соц. Сети:",
   main_savollar: "Есть вопросы?",
 
   // Jurnallar ro'yxati
