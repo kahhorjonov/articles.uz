@@ -222,13 +222,9 @@ class Users extends Component {
       .createUser(data)
       .then((res) => {
         toast.success("Yangi foydalanuvchi qo'shildi");
-
-        this.setState({ firstName: "" });
-        this.setState({ lastName: "" });
-        this.setState({ email: "" });
-        this.setState({ password: "" });
-        this.setState({ phoneNumber: "" });
-        this.setState({ roleId: null });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       })
       .catch((ex) => {
         toast.error(ex.response.data.message);
@@ -236,7 +232,17 @@ class Users extends Component {
   };
 
   render() {
-    const { users: allUsers, currentPage, pageSize, lang } = this.state;
+    const {
+      users: allUsers,
+      currentPage,
+      pageSize,
+      lang,
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+    } = this.state;
+
     const users = paginate(allUsers, currentPage, pageSize);
 
     return (
@@ -277,6 +283,7 @@ class Users extends Component {
                                         : "Ism"}
                                     </Label>
                                     <Input
+                                      value={firstName}
                                       required
                                       type="text"
                                       onChange={(e) => {
@@ -295,6 +302,7 @@ class Users extends Component {
                                         : "Familiya"}
                                     </Label>
                                     <Input
+                                      value={lastName}
                                       required
                                       onChange={(e) =>
                                         this.setState({
@@ -322,6 +330,8 @@ class Users extends Component {
                                         +998
                                       </InputGroupText>
                                       <Input
+                                        value={phoneNumber.slice(3)}
+                                        style={{ padding: "0 10px" }}
                                         required
                                         onChange={(e) =>
                                           this.setState({
@@ -340,6 +350,7 @@ class Users extends Component {
                                   <FormGroup>
                                     <label>Email</label>
                                     <Input
+                                      value={email}
                                       required
                                       placeholder="Email"
                                       type="email"
@@ -487,7 +498,10 @@ class Users extends Component {
                     </div>
                   </div>
 
-                  <div className="guruxlar col-md-12 pt-3">
+                  <div
+                    style={{ overflowX: "auto" }}
+                    className="guruxlar col-md-12 pt-3"
+                  >
                     <hr />
                     <div className="selctlar">
                       <form className="d-flex col-md-12">

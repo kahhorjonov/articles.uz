@@ -93,11 +93,6 @@ class Category extends Component {
   submitHandler = async (e) => {
     e.preventDefault();
 
-    this.setState({ name: "" });
-    this.setState({ active: "" });
-    this.setState({ activeCategoryId: "" });
-    this.setState({ activeParentCategoryId: "" });
-
     try {
       await categoryServices
         .createOrEditCategories({
@@ -108,6 +103,12 @@ class Category extends Component {
         })
         .then((res) => {
           toast.success(res.data.message);
+
+          this.setState({ name: "" });
+          this.setState({ active: "" });
+          this.setState({ activeCategoryId: "" });
+          this.setState({ activeParentCategoryId: "" });
+
           this.handleGetCategories();
           this.handleGetParent();
         });
@@ -123,6 +124,8 @@ class Category extends Component {
       currentPage,
       pageSize,
       lang,
+      name,
+      activeParentCategoryId,
     } = this.state;
 
     const categories = paginate(allCategories, currentPage, pageSize);
@@ -185,6 +188,7 @@ class Category extends Component {
                                 : "Turi"}
                             </label>
                             <input
+                              value={name}
                               type="text"
                               className="form-control"
                               onChange={(e) => {
@@ -202,6 +206,7 @@ class Category extends Component {
                                 : "Ildiz kategoriya"}
                             </label>
                             <select
+                              value={activeParentCategoryId}
                               className="form-control"
                               style={{ height: "auto" }}
                               onChange={(e) =>

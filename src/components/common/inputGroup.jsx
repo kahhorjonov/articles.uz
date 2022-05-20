@@ -26,8 +26,7 @@ const InputGroupField = (props) => {
           minLength={9}
           maxLength={9}
           name={name}
-          className="form-control p-0"
-          style={{ padding: "0" }}
+          className="form-control"
         />
       </InputGroup>
       {error && <div className="alert alert-danger">{error}</div>}
