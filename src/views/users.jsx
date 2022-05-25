@@ -358,7 +358,6 @@ class Users extends Component {
                                         +998
                                       </InputGroupText>
                                       <Input
-                                        value={phoneNumber.slice(3)}
                                         style={{ padding: "0 10px" }}
                                         required
                                         onChange={(e) =>

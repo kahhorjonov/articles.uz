@@ -44,10 +44,10 @@ function Dashboard(props) {
     setBackgroundColor(color);
   };
 
-  window.onbeforeunload = function () {
-    localStorage.removeItem("token");
-    return "";
-  };
+  // window.onbeforeunload = function () {
+  //   localStorage.removeItem("token");
+  //   return "";
+  // };
 
   return (
     <div className="wrapper">

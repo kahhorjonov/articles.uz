@@ -105,9 +105,11 @@ class EditMagazine extends Component {
     e.preventDefault();
 
     try {
-      await editMagazines(this.state.thisMagazineId, this.state);
-    } catch (error) {
-      toast.error(error);
+      await editMagazines(this.state.thisMagazineId, this.state).then((res) => {
+        toast.success(res.data.message);
+      });
+    } catch (ex) {
+      toast.error(ex.response.data.message);
     }
   };
 
