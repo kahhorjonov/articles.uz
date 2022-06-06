@@ -1,6 +1,6 @@
 {
   "apiLocal1": "http://188.130.162.5:10003/api",
-  "apiLocal3": "http://159.65.221.248:8081/api",
+  "apiLocal": "http://159.65.221.248:8081/api",
   "apiLocal2": "http://192.168.100.27:8081/api",
-  "apiLocal": "http://192.168.100.40:8081/api"
+  "apiLocal3": "http://192.168.100.40:8081/api"
 }
