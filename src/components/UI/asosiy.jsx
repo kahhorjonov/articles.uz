@@ -66,7 +66,8 @@ class Asosiy extends React.Component {
                         <div className="border-0">
                           <Link to={`/main/magazineInfo/:${magazine.id}`}>
                             <div className="boxShadow">
-                              <GetImages url={magazine.cover.id} />
+                              {/* <GetImages url={magazine.cover.id} /> */}
+                              <GetImages url={magazine.coverId} />
                             </div>
                           </Link>
 

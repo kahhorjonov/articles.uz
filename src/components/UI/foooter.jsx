@@ -33,7 +33,7 @@ class Foooter extends React.Component {
                 <p>
                   {this.state.lang === "ru"
                     ? ru.main_adres
-                    : "Toshkent shahri, Mirzo Ulug‘bek tumani, QORASUV 6-MAVZE, 1-UY, 55-XONA"}
+                    : "Toshkent sh, Uchtepa tumani, Chilozor 12 mavze, 50 uy 26 xonadon"}
                 </p>
               </div>
 

@@ -167,9 +167,9 @@ class JurnallarRoyxati extends Component {
                 <div key={magazine.id} className="col-md-4 card-articles">
                   <div className="border-0">
                     <Link to={`/listOfMagazines/magazineInfo/:${magazine.id}`}>
-                      <div className="boxShadow">
+                      {/* <div className="boxShadow">
                         <GetImages url={magazine.cover.id} />
-                      </div>
+                      </div> */}
                     </Link>
 
                     <div className="card-body p-0">
@@ -280,7 +280,7 @@ class JurnallarRoyxati extends Component {
                         <div className="border-0">
                           <Link to={`/main/magazineInfo/:${magazine.id}`}>
                             <div className="boxShadow">
-                              <GetImages url={magazine.cover.id} />
+                              <GetImages url={magazine.coverId} />
                             </div>
                           </Link>
 

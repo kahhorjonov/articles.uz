@@ -54,8 +54,8 @@ class MagazineInfo extends Component {
     try {
       await getById(id).then((res) => {
         this.setState({ magazineInfo: res.data.object.journals });
-        this.setState({ cover: res.data.object.journals.cover });
-        this.getImage(res.data.object.journals.cover.id);
+        this.setState({ cover: res.data.object.journals.cover.id });
+        // this.getImage(res.data.object.journals.cover.id);
       });
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -87,22 +87,22 @@ class MagazineInfo extends Component {
     }
   };
 
-  getImage = async (id) => {
-    let imageBlob;
+  // getImage = async (id) => {
+  //   let imageBlob;
 
-    try {
-      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
-    } catch (ex) {
-      return toast.error("Fayl topilmadi");
-    }
+  //   try {
+  //     imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
+  //   } catch (ex) {
+  //     return toast.error("Fayl topilmadi");
+  //   }
 
-    return this.setState({ cover: URL.createObjectURL(imageBlob) });
-  };
+  //   return this.setState({ cover: URL.createObjectURL(imageBlob) });
+  // };
 
   render() {
     const { title, category, deadline } = this.state.magazineInfo;
 
-    const { years, magazines, lang } = this.state;
+    const { years, magazines, lang, cover } = this.state;
 
     return (
       <>
@@ -122,10 +122,11 @@ class MagazineInfo extends Component {
 
                 <div className="row mr-0 ml-0">
                   <div className="col-lg-4">
-                    <img
+                    <GetImages url={cover && cover} />
+                    {/* <img
                       src={this.state.cover && this.state.cover}
                       alt="failed"
-                    />
+                    /> */}
 
                     <h3>
                       {this.state.lang === "ru" ? (
@@ -291,9 +292,9 @@ class MagazineInfo extends Component {
                 </div>
               </div>
 
-              {/* <div className="gernMaqola">
+              <div className="gernMaqola">
                 <div className="container">
-                  <div className="col-lg-12">
+                  {/* <div className="col-lg-12">
                     <p style={{ fontSize: "16px" }}>
                       Jurnalning yangi soni{" "}
                       {deadline &&
@@ -314,16 +315,14 @@ class MagazineInfo extends Component {
                         {lang === "ru" ? ru.nav_yuklash : "Maqola Yuborish"}
                       </button>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
-              </div> */}
+              </div>
 
               {/* Archive for admin page */}
 
               <div className="col-lg-12 ui3 px-0">
                 <div className="container arxive">
-                  <h2>{lang === "ru" ? ru.jurnal_arxiv : "Jurnal arxivi"}</h2>
-
                   <ul className="nav nav-pills">
                     {years &&
                       years.map((year, idx) => (
@@ -349,6 +348,9 @@ class MagazineInfo extends Component {
 
                   <div className="tab-content">
                     <div className="tab-pane container active">
+                      <h2 style={{ paddingTop: "5rem" }}>
+                        {lang === "ru" ? ru.jurnal_arxiv : "Jurnal arxivi"}
+                      </h2>
                       <div style={{ minHeight: "50rem" }} className="row">
                         {magazines &&
                           magazines.map((magazine) => (

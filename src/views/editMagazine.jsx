@@ -6,6 +6,7 @@ import {
   ActionUnderArticlesFromMagazine,
 } from "services/magazineService";
 import { downloadFile, downloadMedia } from "services/mediaService";
+import GetImages from "utils/getImages";
 
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -63,7 +64,9 @@ class EditMagazine extends Component {
     await this.getMagazinesById(magazineId);
     this.setState({ thisMagazineId: magazineId });
 
-    this.state.magazineInfo && this.getImage(this.state.magazineInfo.cover.id);
+    this.state.magazineInfo &&
+      this.setState({ coverImg: this.state.magazineInfo.cover.id });
+    // this.getImage(this.state.magazineInfo.cover.id);
   }
 
   getParentCategories = async () => {
@@ -76,17 +79,17 @@ class EditMagazine extends Component {
     }
   };
 
-  getImage = async (id) => {
-    let imageBlob;
+  // getImage = async (id) => {
+  //   let imageBlob;
 
-    try {
-      imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
-    } catch (err) {
-      return null;
-    }
+  //   try {
+  //     imageBlob = (await downloadMedia(id, { responseType: "blob" })).data;
+  //   } catch (err) {
+  //     return null;
+  //   }
 
-    return this.setState({ coverImg: URL.createObjectURL(imageBlob) });
-  };
+  //   return this.setState({ coverImg: URL.createObjectURL(imageBlob) });
+  // };
 
   getMagazinesById = async (id) => {
     try {
@@ -169,7 +172,7 @@ class EditMagazine extends Component {
       category,
     } = this.state.magazineInfo;
 
-    const { articles, lang } = this.state;
+    const { articles, lang, coverImg } = this.state;
 
     return (
       <>
@@ -185,15 +188,17 @@ class EditMagazine extends Component {
                     height: "40rem",
                   }}
                 >
-                  <img
+                  <GetImages url={coverImg} />
+                  {/* <img
                     style={{
                       maxWidth: "100%",
                       maxHeight: "100%",
                       objectFit: "contain",
                     }}
-                    src={this.state.coverImg}
+                    // src={this.state.coverImg}
+                    src={coverImg && coverImg}
                     alt="cover"
-                  />
+                  /> */}
                 </CardBody>
               </Card>
             </Col>

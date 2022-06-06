@@ -78,7 +78,7 @@ class Aloqa extends Component {
                 >
                   {this.state.lang === "ru"
                     ? ru.main_adres
-                    : "Toshkent shahri, Mirzo Ulug'bek tumani, Ulug'bek shaharchasi, QORASUV 6-MAVZE, 1-UY, 55-XONA"}
+                    : "Toshkent sh, Uchtepa tumani, Chilozor 12 mavze, 50 uy 26 xonadon"}
                 </p>
 
                 <h4 style={{ fontWeight: "bold" }}>
@@ -138,11 +138,11 @@ class Aloqa extends Component {
                       width={"100%"}
                       height={"65vh"}
                       defaultState={{
-                        center: [41.319014, 69.351063],
+                        center: [41.279804, 69.183446],
                         zoom: 15,
                       }}
                     >
-                      <Placemark geometry={[41.319014, 69.351063]} />
+                      <Placemark geometry={[41.279804, 69.183446]} />
                       <TypeSelector options={{ float: "right" }} />
                       <FullscreenControl />
                       <ZoomControl options={{ float: "left" }} />
